@@ -93,8 +93,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nationalrat Seat Projector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+  
 
   :root{
     --paper:#EEEFE9;
@@ -142,29 +144,28 @@
     background:var(--card);
     border:1px solid var(--rule);
     border-radius:2px;
-    padding:20px 20px 22px;
+    padding:14px 20px 14px;
   }
   .panel h2{
     font-family:'Source Serif 4', serif; font-weight:600; font-size:18px;
-    margin:0 0 4px;
+    margin:0 0 6px;
     text-align:center;
   }
   .panel .sub{color:var(--ink-soft); font-size:12.5px; margin:0 0 16px;}
 
   .party-row{
-    padding:10px 0;
+    padding:5px 0;
     border-bottom:1px solid var(--rule);
   }
   .party-row:last-of-type{border-bottom:none;}
   .party-row .top-line{
     display:grid;
-    grid-template-columns: 14px 1fr 64px;
+    grid-template-columns: 14px minmax(110px,170px) minmax(0,1fr) 64px;
     align-items:center;
     gap:10px;
   }
   .party-row .slider-line{
-    margin-top:8px;
-    padding-left:24px;
+    min-width:0;
   }
   input[type="range"]{
     -webkit-appearance:none;
@@ -209,26 +210,27 @@
   }
   .swatch{width:12px; height:12px; border-radius:50%; margin-top:1px;}
   .party-name{font-size:14px; font-weight:500;}
-  .party-name small{display:block; color:var(--ink-soft); font-weight:400; font-size:11.5px; margin-top:1px;}
+  .party-name{line-height:1.2;}
+  .party-name small{display:block; color:var(--ink-soft); font-weight:400; font-size:11.5px; margin-top:0;}
   .pct-input{
     width:64px; text-align:right;
     font-family:'IBM Plex Mono', monospace; font-size:14px;
     border:1px solid var(--rule); border-radius:2px;
-    padding:5px 6px; background:#fff; color:var(--ink);
+    padding:3px 6px; background:#fff; color:var(--ink);
   }
   .pct-input:focus{outline:2px solid var(--red); outline-offset:1px;}
 
   .sum-line{
     display:flex; justify-content:space-between; align-items:center;
-    margin-top:14px; padding-top:14px; border-top:1px solid var(--ink);
+    margin-top:8px; padding-top:8px; border-top:1px solid var(--ink);
     font-family:'IBM Plex Mono', monospace; font-size:12.5px;
   }
   .sum-line span.warn{color:var(--red);}
 
-  .btnrow{display:flex; gap:10px; margin-top:16px;}
+  .btnrow{display:flex; gap:10px; margin-top:10px;}
   button{
     font-family:'IBM Plex Sans', sans-serif; font-weight:600; font-size:13px;
-    padding:10px 14px; border-radius:2px; cursor:pointer;
+    padding:7px 14px; border-radius:2px; cursor:pointer;
     border:1px solid var(--ink); background:var(--ink); color:var(--paper);
   }
   button.secondary{background:transparent; color:var(--ink); border:1px solid var(--rule);}
@@ -249,7 +251,7 @@
 
   .result-panel h2{margin-bottom:16px;}
   .hemicycle-wrap{margin-bottom:20px;}
-  svg#hemi{display:block; width:100%; max-width:700px; height:auto; margin:0 auto;}
+  svg#hemi{display:block; width:100%; max-width:650px; height:auto; margin:0 auto;}
   .hemi-caption{display:flex; justify-content:center; gap:18px; flex-wrap:wrap; padding:10px 0 4px; font-size:12px; color:var(--ink-soft);}
   .legend-dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle;}
 
@@ -278,7 +280,7 @@
     margin-top:18px; background:var(--card); border:1px solid var(--rule); padding:16px 18px;
   }
   .coalition h2{font-family:'Source Serif 4', serif; font-weight:600; font-size:16px; margin:0 0 10px; text-align:center;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+  .chip-row{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:12px;}
   .chip{
     padding:6px 12px; border-radius:14px; font-size:12.5px; font-weight:600; cursor:pointer;
     border:1.5px solid var(--rule); background:#fff; color:var(--ink-soft);
@@ -297,9 +299,17 @@
     padding-top:18px; border-top:1px solid var(--rule);
   }
   .map-subheading:first-of-type{margin-top:0; padding-top:0; border-top:none;}
+  .map-toggle{display:flex; justify-content:center; margin:4px 0 16px;}
+  .map-toggle-btn{
+    background:transparent; color:var(--ink-soft);
+    border:1px solid var(--rule); padding:8px 16px; border-radius:0;
+  }
+  .map-toggle-btn:first-child{border-radius:2px 0 0 2px;}
+  .map-toggle-btn:last-child{border-radius:0 2px 2px 0; border-left:none;}
+  .map-toggle-btn.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .map-toggle-btn:focus-visible{outline:2px solid var(--red); outline-offset:2px;}
   .map-attribution{text-align:center; font-size:11px; color:var(--ink-soft); margin:20px 0 0;}
   .map-wrap{max-width:700px; margin:0 auto; position:relative;}
-  #regionMapWrap{max-width:793px;}
   svg.geo-map{display:block; width:100%; height:auto;}
   .geo-map path{stroke:var(--card); stroke-width:1.1; cursor:pointer;}
   #regionMap path{stroke-width:0.4;}
@@ -324,8 +334,8 @@
   }
   .seat-icon{width:6px; height:6px; border-radius:50%; flex-shrink:0;}
 
-  #regionMap{cursor:grab; touch-action:none;}
-  #regionMap.grabbing{cursor:grabbing;}
+  #regionMap, #stateMap{cursor:grab; touch-action:none;}
+  #regionMap.grabbing, #stateMap.grabbing{cursor:grabbing;}
   .map-filter-row{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:10px;}
   .map-filter-chip{
     padding:5px 10px; border-radius:14px; font-size:11.5px; font-weight:600; cursor:pointer;
@@ -388,13 +398,13 @@
 </style>
 </head>
 <body>
+
+
 <div class="wrap">
 
   <header>
     <div>
-      <div class="mark">NATIONALRAT · 183 SEATS · 2024 BASELINE</div>
       <h1>National Council seat projector</h1>
-      <p>Enter a national vote share for each party. The tool applies a uniform national swing to the actual 29 September 2024 result, then reproduces Austria's real allocation rule — the 4% threshold followed by the D'Hondt method — to project seats.</p>
     </div>
   </header>
 
@@ -438,29 +448,37 @@
           <div class="bar-fill" id="coalitionBarFill"></div>
           <div class="bar-majority-line"></div>
         </div>
-        <div class="coalition-result" id="coalitionResult">Select parties above to test whether that combination would hold a majority.</div>
+        <div class="coalition-result" id="coalitionResult"></div>
       </div>
 
       <div class="panel">
         <h2>Projected maps</h2>
 
-        <h3 class="map-subheading">State results</h3>
+        <div class="map-toggle" role="tablist" aria-label="Map view">
+          <button type="button" class="map-toggle-btn active" id="toggleState" role="tab" aria-selected="true" data-view="state">State results</button>
+          <button type="button" class="map-toggle-btn" id="toggleRegion" role="tab" aria-selected="false" data-view="region">Local seat results</button>
+        </div>
+
         <div class="map-wrap" id="stateMapWrap">
           <div class="map-filter-row" id="stateMapFilter"></div>
+          <div class="map-zoom-controls">
+            <button type="button" class="map-zoom-btn" id="stateZoomIn" aria-label="Zoom in">+</button>
+            <button type="button" class="map-zoom-btn" id="stateZoomOut" aria-label="Zoom out">–</button>
+            <button type="button" class="map-zoom-btn" id="stateZoomReset" aria-label="Reset zoom">⟲</button>
+          </div>
           <svg id="stateMap" class="geo-map" viewBox="-450 -235 900 470" xmlns="http://www.w3.org/2000/svg"></svg>
           <div class="map-tooltip" id="stateMapTooltip"></div>
           <div class="map-legend" id="stateMapLegend"></div>
         </div>
 
-        <h3 class="map-subheading">Local seat results</h3>
-        <div class="map-wrap" id="regionMapWrap">
+        <div class="map-wrap" id="regionMapWrap" hidden>
           <div class="map-filter-row" id="regionMapFilter"></div>
           <div class="map-zoom-controls">
             <button type="button" class="map-zoom-btn" id="regionZoomIn" aria-label="Zoom in">+</button>
             <button type="button" class="map-zoom-btn" id="regionZoomOut" aria-label="Zoom out">–</button>
             <button type="button" class="map-zoom-btn" id="regionZoomReset" aria-label="Reset zoom">⟲</button>
           </div>
-          <svg id="regionMap" class="geo-map" viewBox="-510 -235 1020 470" xmlns="http://www.w3.org/2000/svg"></svg>
+          <svg id="regionMap" class="geo-map" viewBox="-450 -235 900 470" xmlns="http://www.w3.org/2000/svg"></svg>
           <div class="map-tooltip" id="regionMapTooltip"></div>
           <div class="map-legend" id="regionMapLegend"></div>
         </div>
@@ -470,6 +488,10 @@
 
   </div>
 
+
+  <footer class="note">
+    <strong>Sources.</strong> Baseline vote totals for the 29 September 2024 National Council election, nationally, by state and by regional constituency, come from the certified result published by the Austrian Federal Ministry of the Interior (BMI). The number of seats per state follows the apportionment set out in the Federal Ministry of the Interior's ordinance BGBl. II 2023/180. Map outlines are derived from the official composition of the constituencies (BMI) and OpenStreetMap-based district boundaries from the ginseng666/GeoJSON-TopoJSON-Austria project (CC-BY-SA, OpenStreetMap contributors).
+  </footer>
 
 </div>
 
@@ -559,6 +581,22 @@ const REGIONS = [
 {gkz:"G9G000",name:"Wien Nord",stateIdx:9,votes:{FPO:48206,OVP:29016,SPO:50396,NEOS:15582,GRUNE:12648,BIER:4266,KPO:5206}},
 ];
 
+// Uniform swing needs each unit's total vote, to turn a national change in percentage
+// points into a vote change there. States carry their real totals; a region's total
+// (which the data doesn't list) is estimated from its state's total in proportion to the
+// tracked-party votes. Looked up by the unit's `votes` object.
+const UNIT_TOTALS = new WeakMap();
+STATES.forEach(st => {
+  UNIT_TOTALS.set(st.votes, st.total);
+  st.trackedVotes = Object.values(st.votes).reduce((a,b)=>a+b, 0);
+});
+REGIONS.forEach(r => {
+  const st = STATES[r.stateIdx - 1];
+  const tracked = Object.values(r.votes).reduce((a,b)=>a+b, 0);
+  r.total = st.total * tracked / st.trackedVotes;
+  UNIT_TOTALS.set(r.votes, r.total);
+});
+
 function dhondt(entries, seatsTotal){
   // entries: [{id, votes}], returns {id: seats}
   const seats = {}; entries.forEach(e => seats[e.id] = 0);
@@ -584,11 +622,10 @@ function splitByStage(norm, nationalSeats){
 
   parties.forEach(p=>{
     if(!(p.id in STATES[0].votes)) return;
-    const swingRatio = (norm[p.id]/100) / (p.pct2024/100 || 1);
     REGIONS.forEach(region=>{
       if(!(p.id in region.votes)) return;
       const state = STATES[region.stateIdx - 1];
-      const scaledVotes = region.votes[p.id] * swingRatio;
+      const scaledVotes = swungVotes(region.votes, p.id, norm);
       localSeats[p.id] += Math.floor(scaledVotes / state.quota);
     });
   });
@@ -596,10 +633,9 @@ function splitByStage(norm, nationalSeats){
   const combinedStateSeats = {};
   parties.forEach(p=>{
     if(!(p.id in STATES[0].votes)) { combinedStateSeats[p.id] = 0; return; }
-    const swingRatio = (norm[p.id]/100) / (p.pct2024/100 || 1);
     let total = 0;
     STATES.forEach(s=>{
-      const scaledVotes = s.votes[p.id] * swingRatio;
+      const scaledVotes = swungVotes(s.votes, p.id, norm);
       total += Math.floor(scaledVotes / s.quota);
     });
     combinedStateSeats[p.id] = total;
@@ -625,10 +661,10 @@ function buildInputs(){
       <div class="top-line">
         <span class="swatch" style="background:${p.color}"></span>
         <span class="party-name">${p.name}<small>${p.full}</small></span>
-        <input class="pct-input" data-id="${p.id}" type="number" step="0.1" min="0" max="100" value="${p.pct2024.toFixed(1)}">
-      </div>
-      <div class="slider-line">
-        <input class="pct-slider" data-id="${p.id}" type="range" step="0.1" min="0" max="50" value="${p.pct2024.toFixed(1)}" style="--slider-color:${p.color}">
+        <div class="slider-line">
+          <input class="pct-slider" data-id="${p.id}" type="range" step="0.1" min="0" max="50" value="${p.pct2024.toFixed(1)}" style="--slider-color:${p.color}">
+        </div>
+        <input class="pct-input" data-id="${p.id}" data-exact="${p.pct2024}" type="number" step="0.1" min="0" max="100" value="${p.pct2024.toFixed(1)}">
       </div>
     `;
     wrap.appendChild(row);
@@ -645,6 +681,7 @@ function buildInputs(){
 
   wrap.querySelectorAll('.pct-input').forEach(inp=>{
     inp.addEventListener('input', ()=>{
+      inp.dataset.edited = '1';
       const id = inp.dataset.id;
       const maxAllowed = Math.max(0, 100 - otherPartiesTotal(id));
       let v = parseFloat(inp.value) || 0;
@@ -662,6 +699,7 @@ function buildInputs(){
       let v = parseFloat(slider.value);
       if(v > maxAllowed){ v = maxAllowed; slider.value = v.toFixed(1); }
       const numInput = wrap.querySelector(`.pct-input[data-id="${id}"]`);
+      numInput.dataset.edited = '1';
       numInput.value = slider.value;
       updateSum();
       project();
@@ -673,7 +711,13 @@ function buildInputs(){
 function currentShares(){
   const inputs = document.querySelectorAll('.pct-input');
   const shares = {};
-  inputs.forEach(inp => shares[inp.dataset.id] = parseFloat(inp.value) || 0);
+  // Until a party's box is edited, use its exact 2024 share rather than the one-decimal
+  // figure on screen, so the default view reproduces the real result.
+  inputs.forEach(inp => {
+    shares[inp.dataset.id] = (inp.dataset.exact && !inp.dataset.edited)
+      ? parseFloat(inp.dataset.exact)
+      : (parseFloat(inp.value) || 0);
+  });
   return shares;
 }
 
@@ -682,20 +726,16 @@ function updateSum(){
   const sum = Object.values(shares).reduce((a,b)=>a+b,0);
   const el = document.getElementById('sumPct');
   el.textContent = sum.toFixed(2) + '%';
-  el.parentElement.querySelector('span.warn')?.classList.remove('warn');
-  if(Math.abs(sum-100) > 0.05){ el.classList.add('warn'); } else { el.classList.remove('warn'); }
 }
 
 // Would this party win a direct mandate (Grundmandat) in any of the 39 regions under
 // the current projected vote shares? A direct mandate lets a party into the federal
 // D'Hondt round even if it stays below the 4% national threshold.
 function hasDirectMandate(partyId, norm){
-  const party = parties.find(p => p.id === partyId);
-  const swingRatio = (norm[partyId]/100) / (party.pct2024/100 || 1);
   for(const region of REGIONS){
     if(!(partyId in region.votes)) continue;
     const state = STATES[region.stateIdx - 1];
-    const scaled = region.votes[partyId] * swingRatio;
+    const scaled = swungVotes(region.votes, partyId, norm);
     if(Math.floor(scaled / state.quota) >= 1) return true;
   }
   return false;
@@ -703,11 +743,22 @@ function hasDirectMandate(partyId, norm){
 
 // Returns the swung vote count for a party given a votes object (state.votes or
 // region.votes) and the current projected national shares.
+const TAPER_START = 0.2; // fraction of a party's 2024 national share below which the swing tapers to zero
+
 function swungVotes(votesObj, partyId, norm){
   if(!(partyId in votesObj)) return 0;
   const party = parties.find(p => p.id === partyId);
-  const swingRatio = (norm[partyId]/100) / (party.pct2024/100 || 1);
-  return votesObj[partyId] * swingRatio;
+  // uniform swing: the party's national change in percentage points is applied to its
+  // share in every state and region, then converted to votes (floored at zero)
+  const total = UNIT_TOTALS.get(votesObj);
+  const ratio = norm[partyId] / party.pct2024;   // new national share vs 2024
+  // Taper: once a party's national share falls below 20% of its 2024 share, the swing
+  // result at that point is scaled down in proportion, so every unit reaches exactly 0
+  // as the national input reaches 0 (and the curve is continuous at the 20% mark).
+  const at = Math.min(ratio, TAPER_START);
+  const swingPts = at * party.pct2024 - party.pct2024;
+  const base = Math.max(0, votesObj[partyId] + swingPts/100 * total);
+  return ratio < TAPER_START ? base * (ratio / TAPER_START) : Math.max(0, votesObj[partyId] + (norm[partyId] - party.pct2024)/100 * total);
 }
 
 function leadingParty(votesObj, norm){
@@ -792,48 +843,60 @@ function showMapTooltip(mapPrefix, evt, unitKey, unitName, votesObj, norm, pathE
   tooltip.style.display = 'block';
 }
 
-// --- Local seat map: pan & zoom ---
-const REGION_VIEWBOX_DEFAULT = {x:-510, y:-235, w:1020, h:470};
-let regionViewBox = {...REGION_VIEWBOX_DEFAULT};
-const REGION_MIN_W = 60;   // most zoomed in
-const REGION_MAX_W = 1020;  // fully zoomed out (default)
+// --- Map pan & zoom (state and local maps; each keeps its own view) ---
+// Both maps use the same coordinate system, so they share one view: the zoom level and
+// position carry over when switching between them.
+const MAP_VIEWS = {
+  state:  {def:{x:-450, y:-235, w:900, h:470}},
+  region: {def:{x:-450, y:-235, w:900, h:470}},
+};
+const sharedMapVB = {...MAP_VIEWS.state.def};
+Object.values(MAP_VIEWS).forEach(v => { v.vb = sharedMapVB; });
+const MAP_MIN_ZOOM = 60/1020;  // most zoomed in, as a fraction of the default width
 
-function applyRegionViewBox(){
-  document.getElementById('regionMap').setAttribute('viewBox',
-    `${regionViewBox.x} ${regionViewBox.y} ${regionViewBox.w} ${regionViewBox.h}`);
+function applyMapViewBox(){
+  const vb = sharedMapVB;
+  ['state','region'].forEach(prefix=>{
+    document.getElementById(prefix + 'Map').setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  });
 }
 
-function regionScreenToSVG(svg, clientX, clientY){
-  const rect = svg.getBoundingClientRect();
+function mapScreenToSVG(prefix, clientX, clientY){
+  const vb = MAP_VIEWS[prefix].vb;
+  const rect = document.getElementById(prefix + 'Map').getBoundingClientRect();
   const px = (clientX - rect.left) / rect.width;
   const py = (clientY - rect.top) / rect.height;
-  return { x: regionViewBox.x + px * regionViewBox.w, y: regionViewBox.y + py * regionViewBox.h };
+  return { x: vb.x + px * vb.w, y: vb.y + py * vb.h };
 }
 
-function regionZoomBy(factor, centerX, centerY){
-  const newW = Math.min(REGION_MAX_W, Math.max(REGION_MIN_W, regionViewBox.w * factor));
-  const actualFactor = newW / regionViewBox.w;
-  const newH = regionViewBox.h * actualFactor;
-  regionViewBox.x = centerX - (centerX - regionViewBox.x) * actualFactor;
-  regionViewBox.y = centerY - (centerY - regionViewBox.y) * actualFactor;
-  regionViewBox.w = newW;
-  regionViewBox.h = newH;
-  applyRegionViewBox();
+function mapZoomBy(prefix, factor, centerX, centerY){
+  const view = MAP_VIEWS[prefix], vb = view.vb;
+  const newW = Math.min(view.def.w, Math.max(view.def.w * MAP_MIN_ZOOM, vb.w * factor));
+  const actualFactor = newW / vb.w;
+  vb.x = centerX - (centerX - vb.x) * actualFactor;
+  vb.y = centerY - (centerY - vb.y) * actualFactor;
+  vb.w = newW;
+  vb.h = vb.h * actualFactor;
+  // fully zoomed out: snap back to the default framing
+  if(newW >= view.def.w - 0.01) Object.assign(vb, view.def);
+  applyMapViewBox();
 }
 
-function setupRegionMapZoomPan(){
-  const svg = document.getElementById('regionMap');
+function setupMapZoomPan(prefix){
+  const svg = document.getElementById(prefix + 'Map');
+  const view = MAP_VIEWS[prefix];
 
   svg.addEventListener('wheel', (evt)=>{
     evt.preventDefault();
-    const cursor = regionScreenToSVG(svg, evt.clientX, evt.clientY);
-    const factor = evt.deltaY < 0 ? 0.88 : (1/0.88);
-    regionZoomBy(factor, cursor.x, cursor.y);
+    const cursor = mapScreenToSVG(prefix, evt.clientX, evt.clientY);
+    mapZoomBy(prefix, evt.deltaY < 0 ? 0.88 : (1/0.88), cursor.x, cursor.y);
   }, {passive:false});
 
+  // Taps are resolved here rather than by click listeners on each path, because the
+  // svg captures the pointer for drag-panning, which can redirect the click event.
   let drag = null;
   svg.addEventListener('pointerdown', (evt)=>{
-    drag = {startX:evt.clientX, startY:evt.clientY, startVB:{...regionViewBox}, moved:false};
+    drag = {startX:evt.clientX, startY:evt.clientY, startVB:{...view.vb}, moved:false};
     svg.setPointerCapture(evt.pointerId);
     svg.classList.add('grabbing');
   });
@@ -843,9 +906,9 @@ function setupRegionMapZoomPan(){
     const dy = evt.clientY - drag.startY;
     if(Math.abs(dx) > 3 || Math.abs(dy) > 3) drag.moved = true;
     const rect = svg.getBoundingClientRect();
-    regionViewBox.x = drag.startVB.x - dx * (drag.startVB.w / rect.width);
-    regionViewBox.y = drag.startVB.y - dy * (drag.startVB.h / rect.height);
-    applyRegionViewBox();
+    view.vb.x = drag.startVB.x - dx * (drag.startVB.w / rect.width);
+    view.vb.y = drag.startVB.y - dy * (drag.startVB.h / rect.height);
+    applyMapViewBox();
   });
   svg.addEventListener('pointerup', (evt)=>{
     const wasDrag = drag && drag.moved;
@@ -856,26 +919,20 @@ function setupRegionMapZoomPan(){
     if(target && target.tagName === 'path' && typeof target._tooltipHandler === 'function'){
       target._tooltipHandler(evt);
     } else {
-      dismissMapSelection('region');
+      dismissMapSelection(prefix);
     }
   });
 
-  document.getElementById('regionZoomIn').addEventListener('click', ()=>{
-    regionZoomBy(0.7, regionViewBox.x + regionViewBox.w/2, regionViewBox.y + regionViewBox.h/2);
+  const centre = () => ({x: view.vb.x + view.vb.w/2, y: view.vb.y + view.vb.h/2});
+  document.getElementById(prefix + 'ZoomIn').addEventListener('click', ()=>{
+    const c = centre(); mapZoomBy(prefix, 0.7, c.x, c.y);
   });
-  document.getElementById('regionZoomOut').addEventListener('click', ()=>{
-    regionZoomBy(1/0.7, regionViewBox.x + regionViewBox.w/2, regionViewBox.y + regionViewBox.h/2);
+  document.getElementById(prefix + 'ZoomOut').addEventListener('click', ()=>{
+    const c = centre(); mapZoomBy(prefix, 1/0.7, c.x, c.y);
   });
-  document.getElementById('regionZoomReset').addEventListener('click', ()=>{
-    regionViewBox = {...REGION_VIEWBOX_DEFAULT};
-    applyRegionViewBox();
-  });
-}
-
-function setupStateMapBackgroundDismiss(){
-  const svg = document.getElementById('stateMap');
-  svg.addEventListener('click', (evt) => {
-    if(evt.target === svg) dismissMapSelection('state');
+  document.getElementById(prefix + 'ZoomReset').addEventListener('click', ()=>{
+    Object.assign(view.vb, view.def);
+    applyMapViewBox();
   });
 }
 
@@ -924,10 +981,13 @@ function renderMapFilterChips(prefix){
   });
 }
 
+// The party view is shared: choosing a party (or "Leading party") on one map applies to
+// both, so it is still in place after switching between them.
 function setMapFilter(prefix, partyId){
-  mapFilters[prefix] = partyId;
-  if(prefix === 'state') drawStateMap(lastNorm, lastQualifyingIds);
-  else drawRegionMap(lastNorm);
+  mapFilters.state = partyId;
+  mapFilters.region = partyId;
+  drawStateMap(lastNorm, lastQualifyingIds);
+  drawRegionMap(lastNorm);
 }
 
 function drawStateMap(norm, qualifyingIds){
@@ -966,10 +1026,10 @@ function drawStateMap(norm, qualifyingIds){
     path.setAttribute('fill', fill);
     path.setAttribute('data-key', s.name);
     path.dataset.baseFill = fill;
-    path.addEventListener('click', (evt) => {
+    path._tooltipHandler = (evt) => {
       const seatsWon = seatsWonHere(s.votes, s.quota, norm, qualifyingIds);
       showMapTooltip('state', evt, s.name, s.nameEn, s.votes, norm, path, fill, seatsWon);
-    });
+    };
     svg.appendChild(path);
   });
 
@@ -1230,7 +1290,7 @@ function updateCoalitionResult(){
   const el = document.getElementById('coalitionResult');
   const fill = document.getElementById('coalitionBarFill');
   if(selectedCoalition.size===0 || !lastSeatResult){
-    el.textContent = 'Select parties above to test whether that combination would hold a majority.';
+    el.textContent = '';
     el.className = 'coalition-result';
     fill.innerHTML = '';
     fill.style.width = '0%';
@@ -1276,21 +1336,41 @@ function setupOutsideClickDismiss(){
   document.addEventListener('click', (evt)=>{
     ['state','region'].forEach(prefix=>{
       const wrap = document.getElementById(prefix + 'MapWrap');
+      if(evt.target.closest('.map-toggle')) return; // switching views keeps selections
       if(wrap.contains(evt.target)) return; // click landed inside this map; its own handlers deal with it
       dismissMapSelection(prefix);
     });
   });
 }
 
+function setupMapToggle(){
+  const btns = document.querySelectorAll('.map-toggle-btn');
+  btns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const view = btn.dataset.view;
+      btns.forEach(b=>{
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      ['state','region'].forEach(prefix=>{
+        const show = prefix === view;
+        document.getElementById(prefix + 'MapWrap').hidden = !show;
+      });
+    });
+  });
+}
+
 buildInputs();
 project();
-setupRegionMapZoomPan();
-setupStateMapBackgroundDismiss();
+setupMapToggle();
+setupMapZoomPan('state');
+setupMapZoomPan('region');
 setupOutsideClickDismiss();
 </script>
+
 </body>
 </html>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
