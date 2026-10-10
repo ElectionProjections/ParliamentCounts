@@ -1,99 +1,103 @@
 <div id="nav-shield">
     <a href="index.html" class="nav-logo">
-        <img src="profile pic.png" alt="Parliament Counts">
-        <span>Parliament Counts</span>
+        <span class="logo-mark"><img src="profile pic.png" alt=""></span>
+        <span class="logo-name">Parliament <em>Counts</em></span>
     </a>
 
-```
-<ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="australia.html">Australia</a></li>
-    <li><a href="austria.html">Austria</a></li>
-    <li><a href="bangladesh.html">Bangladesh</a></li>
-    <li><a href="botswana.html">Botswana</a></li>
+    <a href="about.html" class="nav-about">About</a>
 
-    <!-- CANADA DROPDOWN MENU -->
-    <li class="dropdown">
-        <a href="canada.html" class="dropbtn">Canada <span class="arrow">▼</span></a>
-        <div class="dropdown-content">
-            <a href="quebec.html">Quebec</a>
-        </div>
-    </li>
+    <!-- Mobile menu toggle (no JavaScript needed) -->
+    <input type="checkbox" id="nav-toggle" aria-label="Toggle navigation menu">
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true">
+        <span></span><span></span><span></span>
+    </label>
 
-    <li><a href="czechia.html">Czechia</a></li>
+    <ul class="nav-links">
+        <li><a href="australia.html">Australia</a></li>
+        <li><a href="austria.html">Austria</a></li>
+        <li><a href="bangladesh.html">Bangladesh</a></li>
+        <li><a href="botswana.html">Botswana</a></li>
 
-    <!-- DENMARK DROPDOWN MENU -->
-    <li class="dropdown">
-        <a href="denmark.html" class="dropbtn">Denmark <span class="arrow">▼</span></a>
-        <div class="dropdown-content">
-            <a href="faroe.html">Faroe</a>
-            <a href="greenland.html">Greenland</a>
-        </div>
-    </li>
+        <!-- CANADA DROPDOWN MENU -->
+        <li class="dropdown">
+            <a href="canada.html" class="dropbtn">Canada <span class="arrow">▾</span></a>
+            <div class="dropdown-content">
+                <a href="quebec.html">Quebec</a>
+            </div>
+        </li>
 
-    <li><a href="finland.html">Finland</a></li>
-    <li><a href="france.html">France</a></li>
-    <li><a href="germany.html">Germany</a></li>
-    <li><a href="greece.html">Greece</a></li>
-    <li><a href="hungary.html">Hungary</a></li>
-    <li><a href="iceland.html">Iceland</a></li>
-    <li><a href="india.html">India</a></li>
-    <li><a href="indonesia.html">Indonesia</a></li>
-    <li><a href="ireland.html">Ireland</a></li>
-    <li><a href="israel.html">Israel</a></li>
-    <li><a href="italy.html">Italy</a></li>
-    <li><a href="japan.html">Japan</a></li>
-    <li><a href="lithuania.html">Lithuania</a></li>
-    <li><a href="luxembourg.html">Luxembourg</a></li>
-    <li><a href="mexico.html">Mexico</a></li>
+        <li><a href="czechia.html">Czechia</a></li>
 
-    <!-- MALAYSIA DROPDOWN MENU -->
-    <li class="dropdown">
-        <a href="malaysia.html" class="dropbtn">Malaysia <span class="arrow">▼</span></a>
-        <div class="dropdown-content">
-            <a href="johor.html">Johor</a>
-            <a href="malacca.html">Malacca</a>
-            <a href="negeri-sembilan.html">Negeri Sembilan</a>
-            <a href="sarawak.html">Sarawak</a>
-            <a href="selangor.html">Selangor</a>
-        </div>
-    </li>
+        <!-- DENMARK DROPDOWN MENU -->
+        <li class="dropdown">
+            <a href="denmark.html" class="dropbtn">Denmark <span class="arrow">▾</span></a>
+            <div class="dropdown-content">
+                <a href="faroe.html">Faroe</a>
+                <a href="greenland.html">Greenland</a>
+            </div>
+        </li>
 
-    <li><a href="netherlands.html">Netherlands</a></li>
-    <li><a href="new-zealand.html">New Zealand</a></li>
-    <li><a href="norway.html">Norway</a></li>
-    <li><a href="pakistan.html">Pakistan</a></li>
-    <li><a href="poland.html">Poland</a></li>
-    <li><a href="portugal.html">Portugal</a></li>
-    <li><a href="romania.html">Romania</a></li>
-    <li><a href="singapore.html">Singapore</a></li>
-    <li><a href="slovakia.html">Slovakia</a></li>
-    <li><a href="slovenia.html">Slovenia</a></li>
-    <li><a href="south-africa.html">South Africa</a></li>
-    <li><a href="south-korea.html">South Korea</a></li>
-    <li><a href="spain.html">Spain</a></li>
-    <li><a href="sri-lanka.html">Sri Lanka</a></li>
-    <li><a href="sweden.html">Sweden</a></li>
-    <li><a href="switzerland.html">Switzerland</a></li>
-    <li><a href="taiwan.html">Taiwan</a></li>
-    <li><a href="thailand.html">Thailand</a></li>
-    <li><a href="turkey.html">Turkey</a></li>
+        <li><a href="finland.html">Finland</a></li>
+        <li><a href="france.html">France</a></li>
+        <li><a href="germany.html">Germany</a></li>
+        <li><a href="greece.html">Greece</a></li>
+        <li><a href="hungary.html">Hungary</a></li>
+        <li><a href="iceland.html">Iceland</a></li>
+        <li><a href="india.html">India</a></li>
+        <li><a href="indonesia.html">Indonesia</a></li>
+        <li><a href="ireland.html">Ireland</a></li>
+        <li><a href="israel.html">Israel</a></li>
+        <li><a href="italy.html">Italy</a></li>
+        <li><a href="japan.html">Japan</a></li>
+        <li><a href="lithuania.html">Lithuania</a></li>
+        <li><a href="luxembourg.html">Luxembourg</a></li>
+        <li><a href="mexico.html">Mexico</a></li>
 
-    <!-- UK DROPDOWN MENU -->
-    <li class="dropdown">
-        <a href="uk.html" class="dropbtn">UK <span class="arrow">▼</span></a>
-        <div class="dropdown-content">
-            <a href="northern-ireland.html">Northern Ireland</a>
-            <a href="scotland.html">Scotland</a>
-            <a href="scottish-councils.html">Scottish Councils</a>
-            <a href="wales.html">Wales</a>
-        </div>
-    </li>
+        <!-- MALAYSIA DROPDOWN MENU -->
+        <li class="dropdown">
+            <a href="malaysia.html" class="dropbtn">Malaysia <span class="arrow">▾</span></a>
+            <div class="dropdown-content">
+                <a href="johor.html">Johor</a>
+                <a href="malacca.html">Malacca</a>
+                <a href="negeri-sembilan.html">Negeri Sembilan</a>
+                <a href="sarawak.html">Sarawak</a>
+                <a href="selangor.html">Selangor</a>
+            </div>
+        </li>
 
-    <li><a href="usa.html">USA</a></li>
-</ul>
-```
+        <li><a href="netherlands.html">Netherlands</a></li>
+        <li><a href="new-zealand.html">New Zealand</a></li>
+        <li><a href="norway.html">Norway</a></li>
+        <li><a href="pakistan.html">Pakistan</a></li>
+        <li><a href="poland.html">Poland</a></li>
+        <li><a href="portugal.html">Portugal</a></li>
+        <li><a href="romania.html">Romania</a></li>
+        <li><a href="singapore.html">Singapore</a></li>
+        <li><a href="slovakia.html">Slovakia</a></li>
+        <li><a href="slovenia.html">Slovenia</a></li>
+        <li><a href="south-africa.html">South Africa</a></li>
+        <li><a href="south-korea.html">South Korea</a></li>
+        <li><a href="spain.html">Spain</a></li>
+        <li><a href="sri-lanka.html">Sri Lanka</a></li>
+        <li><a href="sweden.html">Sweden</a></li>
+        <li><a href="switzerland.html">Switzerland</a></li>
+        <li><a href="taiwan.html">Taiwan</a></li>
+        <li><a href="thailand.html">Thailand</a></li>
+        <li><a href="turkey.html">Turkey</a></li>
 
+        <!-- UK DROPDOWN MENU -->
+        <li class="dropdown">
+            <a href="uk.html" class="dropbtn">UK <span class="arrow">▾</span></a>
+            <div class="dropdown-content">
+                <a href="northern-ireland.html">Northern Ireland</a>
+                <a href="scotland.html">Scotland</a>
+                <a href="scottish-councils.html">Scottish Councils</a>
+                <a href="wales.html">Wales</a>
+            </div>
+        </li>
+
+        <li><a href="usa.html">USA</a></li>
+    </ul>
 </div>
 
 <style>
@@ -111,6 +115,13 @@
     }
 
     #nav-shield {
+        --nav-bg: #1c2128;
+        --nav-bg-2: #24292f;
+        --nav-text: #adbac7;
+        --nav-text-hi: #ffffff;
+        --nav-accent: #539bf5;
+        --nav-border: #444c56;
+
         position: relative !important;
         top: 0 !important;
         float: none !important;
@@ -121,6 +132,8 @@
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+        row-gap: 12px !important;
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
@@ -128,11 +141,14 @@
         max-height: none !important;
         overflow: visible !important;
         margin: 0 !important;
-        padding: 18px 15px 14px 15px !important;
+        padding: 14px 24px 16px 24px !important;
         box-sizing: border-box !important;
         text-align: left !important;
-        background-color: #24292f !important;
+        background: linear-gradient(180deg, var(--nav-bg-2) 0%, var(--nav-bg) 100%) !important;
+        border-bottom: 3px solid var(--nav-accent) !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
         line-height: 1.5 !important;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
     }
 
     .navbar {
@@ -146,35 +162,97 @@
         flex: 0 0 auto !important;
         display: flex !important;
         align-items: center !important;
-        gap: 10px !important;
-        color: white !important;
-        font-weight: bold !important;
+        gap: 14px !important;
+        color: var(--nav-text-hi) !important;
         text-decoration: none !important;
-        font-size: 1.2rem !important;
         text-align: left !important;
-        margin: 0 30px 0 0 !important;
+        margin: 0 40px 0 0 !important;
         white-space: nowrap !important;
-        line-height: 1.5 !important;
+        line-height: 1.2 !important;
         padding: 0 !important;
     }
 
-    #nav-shield .nav-logo img {
-        width: 32px !important;
-        height: 32px !important;
-        object-fit: contain !important;
-        display: block !important;
+    /* Logo sits in a framed tile, so any image shape looks tidy */
+    #nav-shield .logo-mark {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+        width: 46px !important;
+        height: 46px !important;
+        box-sizing: border-box !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 13px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
     }
 
+    #nav-shield .logo-mark img {
+        width: 30px !important;
+        height: 30px !important;
+        object-fit: contain !important;
+        display: block !important;
+        border-radius: 6px !important;
+    }
+
+    #nav-shield .nav-logo:hover .logo-mark,
+    #nav-shield .nav-logo:focus-visible .logo-mark {
+        border-color: var(--nav-accent) !important;
+        box-shadow: 0 0 0 3px rgba(83, 155, 245, 0.25), 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+        transform: scale(1.05) !important;
+    }
+
+    /* Two-tone wordmark */
+    #nav-shield .logo-name {
+        font-size: 1.4rem !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.015em !important;
+        color: var(--nav-text-hi) !important;
+    }
+
+    #nav-shield .logo-name em {
+        font-style: normal !important;
+        font-weight: 800 !important;
+        color: var(--nav-accent) !important;
+    }
+
+    /* ---- About button (top right) ---- */
+    #nav-shield .nav-about {
+        margin-left: auto !important;
+        display: inline-block !important;
+        color: var(--nav-text-hi) !important;
+        text-decoration: none !important;
+        font-size: 0.92rem !important;
+        font-weight: 600 !important;
+        line-height: 1.5 !important;
+        padding: 7px 18px !important;
+        border: 1px solid var(--nav-border) !important;
+        border-radius: 999px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        transition: background-color 0.18s ease, border-color 0.18s ease !important;
+    }
+
+    #nav-shield .nav-about:hover,
+    #nav-shield .nav-about:focus-visible,
+    #nav-shield .nav-about[aria-current="page"] {
+        background: rgba(83, 155, 245, 0.22) !important;
+        border-color: var(--nav-accent) !important;
+        outline: none !important;
+    }
+
+    /* ---- Link list ---- */
     #nav-shield .nav-links {
         display: flex !important;
-        flex: 1 1 auto !important;
+        flex: 1 1 100% !important;
         flex-wrap: wrap !important;
         flex-direction: row !important;
         align-items: center !important;
         list-style: none !important;
         margin: 0 !important;
-        padding: 0 !important;
-        gap: 10px 20px !important;
+        padding: 12px 0 0 0 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        gap: 4px 2px !important;
         text-align: left !important;
         overflow: visible !important;
         height: auto !important;
@@ -192,73 +270,232 @@
 
     #nav-shield .nav-links li a {
         display: inline-block !important;
-        color: #adbac7 !important;
+        color: var(--nav-text) !important;
         text-decoration: none !important;
+        font-size: 0.9rem !important;
         line-height: 1.5 !important;
-        padding: 0 !important;
+        padding: 5px 11px !important;
         margin: 0 !important;
+        border-radius: 999px !important;
+        transition: background-color 0.18s ease, color 0.18s ease !important;
     }
 
-    #nav-shield .nav-links li a:hover {
-        color: white !important;
+    #nav-shield .nav-links li a:hover,
+    #nav-shield .nav-links li a:focus-visible {
+        color: var(--nav-text-hi) !important;
+        background-color: rgba(255, 255, 255, 0.09) !important;
+        outline: none !important;
     }
 
+    #nav-shield .nav-links li a:focus-visible {
+        box-shadow: 0 0 0 2px var(--nav-accent) !important;
+    }
+
+    /* Current page */
+    #nav-shield .nav-links a[aria-current="page"] {
+        color: var(--nav-text-hi) !important;
+        background-color: rgba(83, 155, 245, 0.22) !important;
+        font-weight: 600 !important;
+    }
+
+    /* ---- Dropdowns ---- */
     #nav-shield .dropdown {
         position: relative !important;
         display: inline-block !important;
     }
 
     #nav-shield .dropdown .arrow {
-        font-size: 0.65rem;
-        margin-left: 4px;
-        vertical-align: middle;
+        font-size: 0.75rem;
+        margin-left: 2px;
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+
+    #nav-shield .dropdown:hover .arrow,
+    #nav-shield .dropdown:focus-within .arrow {
+        transform: rotate(180deg);
     }
 
     #nav-shield .dropdown-content {
-        display: none !important;
+        display: block !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateY(-6px) !important;
+        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s !important;
+
         position: absolute !important;
-        background-color: #24292f !important;
-        min-width: 170px !important;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3) !important;
+        background-color: var(--nav-bg-2) !important;
+        min-width: 180px !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
         z-index: 99999 !important;
-        border-radius: 4px !important;
-        border: 1px solid #444c56 !important;
-        padding: 0 !important;
+        border-radius: 10px !important;
+        border: 1px solid var(--nav-border) !important;
+        padding: 6px !important;
         left: 0 !important;
         top: 100% !important;
-        margin-top: 4px !important;
+        margin-top: 6px !important;
+    }
+
+    /* Flipped by the script below if the menu would run off-screen */
+    #nav-shield .dropdown-content.align-right {
+        left: auto !important;
+        right: 0 !important;
     }
 
     /* Invisible hover-bridge preventing the menu from snapping shut */
     #nav-shield .dropdown-content::before {
         content: "" !important;
         position: absolute !important;
-        top: -10px !important;
+        top: -12px !important;
         left: 0 !important;
         width: 100% !important;
-        height: 10px !important;
+        height: 12px !important;
         background: transparent !important;
     }
 
     #nav-shield .dropdown-content a {
-        color: #adbac7 !important;
-        padding: 10px 16px !important;
+        color: var(--nav-text) !important;
+        padding: 8px 12px !important;
         text-decoration: none !important;
         display: block !important;
         text-align: left !important;
-        font-size: 0.9rem !important;
+        font-size: 0.88rem !important;
         width: 100% !important;
         box-sizing: border-box !important;
         white-space: nowrap !important;
+        border-radius: 6px !important;
     }
 
-    #nav-shield .dropdown-content a:hover {
-        background-color: #2d333b !important;
-        color: white !important;
+    #nav-shield .dropdown-content a:hover,
+    #nav-shield .dropdown-content a:focus-visible {
+        background-color: rgba(83, 155, 245, 0.18) !important;
+        color: var(--nav-text-hi) !important;
     }
 
     #nav-shield .dropdown:hover .dropdown-content,
     #nav-shield .dropdown:focus-within .dropdown-content {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+    }
+
+    /* ---- Mobile menu button (hidden on desktop) ---- */
+    #nav-shield #nav-toggle {
+        position: absolute !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    #nav-shield .nav-burger {
+        display: none !important;
+        margin-left: auto !important;
+        padding: 10px 8px !important;
+        cursor: pointer !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+
+    #nav-shield .nav-burger span {
         display: block !important;
+        width: 24px !important;
+        height: 2px !important;
+        background: var(--nav-text-hi) !important;
+        border-radius: 2px !important;
+        transition: transform 0.2s ease, opacity 0.2s ease !important;
+    }
+
+    #nav-shield #nav-toggle:focus-visible + .nav-burger {
+        outline: 2px solid var(--nav-accent) !important;
+        border-radius: 6px !important;
+    }
+
+    #nav-shield #nav-toggle:checked + .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+    #nav-shield #nav-toggle:checked + .nav-burger span:nth-child(2) { opacity: 0 !important; }
+    #nav-shield #nav-toggle:checked + .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+
+    @media (max-width: 860px) {
+        #nav-shield { padding: 10px 16px 12px 16px !important; }
+
+        #nav-shield .nav-logo { margin-right: 0 !important; gap: 10px !important; }
+        #nav-shield .logo-mark { width: 40px !important; height: 40px !important; }
+        #nav-shield .logo-mark img { width: 26px !important; height: 26px !important; }
+        #nav-shield .logo-name { font-size: 1.15rem !important; }
+
+        #nav-shield .nav-burger { display: flex !important; margin-left: 8px !important; }
+
+        #nav-shield .nav-links {
+            display: none !important;
+            flex: 1 1 100% !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            margin-top: 10px !important;
+            gap: 2px !important;
+            max-height: 70vh !important;
+            overflow-y: auto !important;
+        }
+
+        #nav-shield #nav-toggle:checked ~ .nav-links { display: flex !important; }
+
+        #nav-shield .nav-links li { display: block !important; }
+
+        #nav-shield .nav-links li a {
+            display: block !important;
+            padding: 10px 12px !important;
+            border-radius: 8px !important;
+        }
+
+        /* Sub-menus simply appear inline, indented, on mobile */
+        #nav-shield .dropdown { display: block !important; }
+        #nav-shield .dropdown .arrow { display: none !important; }
+
+        #nav-shield .dropdown-content,
+        #nav-shield .dropdown-content.align-right {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: none !important;
+            position: static !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-left: 2px solid var(--nav-border) !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            margin: 0 0 4px 16px !important;
+            padding: 0 !important;
+            min-width: 0 !important;
+        }
+
+        #nav-shield .dropdown-content::before { display: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #nav-shield *, #nav-shield *::before { transition: none !important; }
     }
 </style>
+
+<script>
+    (function () {
+        var shield = document.getElementById('nav-shield');
+        if (!shield) return;
+
+        // Highlight the link for the page you're on
+        var here = location.pathname.split('/').pop() || 'index.html';
+        shield.querySelectorAll('.nav-links a, .nav-about').forEach(function (a) {
+            if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page');
+        });
+
+        // Keep dropdowns on-screen when their parent sits near the right edge
+        shield.querySelectorAll('.dropdown').forEach(function (dd) {
+            var menu = dd.querySelector('.dropdown-content');
+            function check() {
+                menu.classList.remove('align-right');
+                var r = dd.getBoundingClientRect();
+                if (r.left + menu.offsetWidth > document.documentElement.clientWidth - 8) {
+                    menu.classList.add('align-right');
+                }
+            }
+            dd.addEventListener('mouseenter', check);
+            dd.addEventListener('focusin', check);
+        });
+    })();
+</script>
