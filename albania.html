@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albania Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albania Seat Projector</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a control column beside the live result (hemicycle, table), then a full-width coalition bar, then the map beside a county list. */
+:root {
+  --bg: #f2f3f5;
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --ink: #14181f;
+  --ink-2: #4b5462;
+  --ink-3: #6f7886;
+  --line: #dde0e6;
+  --line-2: #eceef2;
+  --focus: #14181f;
+  --track: #e6e9ee;
+  --up: #17803d;
+  --down: #c62828;
+
+  --c-PS: #d42b5a;
+  --c-PD: #1f5fbf;
+  --c-NISMA: #11917f;
+  --c-PSD: #e08a00;
+  --c-PM: #6aa12a;
+  --c-LB: #7a2e98;
+  --c-KEA: #3aaee0;
+  --c-DZH: #8a6e4b;
+  --c-AKSH: #8b1e3f;
+  --c-LA: #4b5563;
+  --c-ADR: #b89600;
+  --c-OTH: #8c93a0;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101318; --surface: #181c23; --surface-2: #1d222b; --ink: #eef0f4; --ink-2: #b3bac6; --ink-3: #8c95a4;
+    --line: #2b313c; --line-2: #232832; --focus: #eef0f4; --track: #2a303b; --up: #4ade80; --down: #ff7b7b;
+    --c-PS: #f0507d; --c-PD: #5c98ee; --c-NISMA: #3ccdb9; --c-PSD: #ffa826; --c-PM: #92cf4e;
+    --c-LB: #b26ad0; --c-KEA: #6ccbf3; --c-DZH: #b5976a; --c-AKSH: #d9658a; --c-LA: #9ca3af; --c-ADR: #e6c84a; --c-OTH: #a2a9b5;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101318; --surface: #181c23; --surface-2: #1d222b; --ink: #eef0f4; --ink-2: #b3bac6; --ink-3: #8c95a4;
+  --line: #2b313c; --line-2: #232832; --focus: #eef0f4; --track: #2a303b; --up: #4ade80; --down: #ff7b7b;
+  --c-PS: #f0507d; --c-PD: #5c98ee; --c-NISMA: #3ccdb9; --c-PSD: #ffa826; --c-PM: #92cf4e;
+  --c-LB: #b26ad0; --c-KEA: #6ccbf3; --c-DZH: #b5976a; --c-AKSH: #d9658a; --c-LA: #9ca3af; --c-ADR: #e6c84a; --c-OTH: #a2a9b5;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45; padding-inline: 16px; padding-block: 24px 48px; }
+.wrap { max-width: 860px; margin-inline: auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.08; font-weight: 700; }
+h2 { font-size: 19px; font-weight: 700; line-height: 1.2; }
+p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.num { font-variant-numeric: tabular-nums; }
+
+header.top { display: flex; flex-direction: column; gap: 8px; max-width: 760px; }
+.lede { color: var(--ink-2); font-size: 16px; max-width: 64ch; }
+.kicker { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; min-width: 0; }
+.card-head { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 4px 12px; margin-bottom: 14px; text-align: center; }
+.card-head h2 { grid-column: 2; }
+.card-head .btn { grid-column: 3; grid-row: 1; justify-self: end; }
+.card-head .sub { grid-column: 1 / -1; }
+@media (max-width: 520px) {
+  .card-head { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .card-head h2, .card-head .btn, .card-head .sub { grid-column: 1; grid-row: auto; justify-self: center; }
+}
+.sub { color: var(--ink-3); font-size: 13px; }
+
+.layout { display: flex; flex-direction: column; gap: 20px; }
+
+/* Inputs */
+.prow { padding-block: 4px; border-top: 1px solid var(--line-2); display: grid; gap: 1px; line-height: 1.3; }
+.prow:first-of-type { border-top: 0; }
+.phead { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.sw { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.pshort { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+.pname { color: var(--ink-3); font-size: 12.5px; white-space: nowrap; flex: none; }
+.swing { margin-left: auto; font-size: 12px; color: var(--ink-2); flex: none; }
+.pctrl { display: grid; grid-template-columns: minmax(0, 1fr) 68px; gap: 10px; align-items: center; }
+.prow.auto .pctrl { opacity: .5; }
+.prow.auto input { cursor: not-allowed; }
+.prow.auto input[type=number] { background: transparent; border-style: dashed; color: var(--ink-3); }
+.prow.auto input[type=range] { accent-color: var(--ink-3); }
+.locktag { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink-3); flex: none; }
+.locktag svg { width: 12px; height: 12px; }
+input[type=range] { width: 100%; accent-color: var(--ink); margin: 0; }
+input[type=number] { width: 68px; font-size: 13px; line-height: 1.2; padding: 2px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-2); text-align: right; font-variant-numeric: tabular-nums; }
+.total { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--line); font-weight: 600; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; font-weight: 500; }
+.btn:hover { background: var(--surface-2); }
+
+/* Hemicycle */
+.hemi { width: 100%; height: auto; display: block; max-width: 650px; margin-inline: auto; }
+.seat { transition: fill .25s; }
+.hc-big { font-family: var(--font-display); font-weight: 700; font-size: 58px; fill: var(--ink); }
+.hc-cap { font-size: 14px; fill: var(--ink-2); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center; margin-top: 8px; font-size: 13px; }
+.legend { }
+#mlegend { margin-top: 14px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Table */
+.tablewrap { overflow-x: auto; }
+.restable { margin-top: 22px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--line-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+th { font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+td.party { display: flex; align-items: center; gap: 8px; white-space: normal; }
+tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid var(--line); }
+td.dim { color: var(--ink-3); }
+td.chg { color: var(--ink-3); font-weight: 600; }
+td.chg.up { color: var(--up); }
+td.chg.down { color: var(--down); }
+td.strong { font-weight: 700; }
+
+/* Coalition */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; font-size: 13.5px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 500; }
+.chip .n { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.chip[aria-pressed="true"] .n { color: inherit; opacity: .8; }
+.chip:disabled { opacity: .4; cursor: not-allowed; }
+.cbar-wrap { position: relative; padding-top: 22px; padding-bottom: 22px; }
+.cbar { height: 34px; border-radius: 8px; background: var(--track); display: flex; overflow: hidden; }
+.seg { height: 100%; border-right: 2px solid var(--surface); transition: width .3s; }
+.seg:last-child { border-right: 0; }
+.mark { position: absolute; top: 22px; bottom: 22px; width: 0; border-left: 2px dashed var(--ink); }
+.mark-l { position: absolute; top: -18px; left: 0; transform: translateX(-50%); font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--ink); }
+.scale { position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); }
+.csum { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.csum .big { font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1; }
+.csum .verdict { font-weight: 600; }
+
+/* Map */
+.mapview { justify-content: center; margin-bottom: 12px; }
+.mapview .chip { padding: 4px 9px; font-size: 13px; }
+.scalebar { display: inline-flex; align-items: center; gap: 8px; }
+.scalebar i { display: block; width: 140px; height: 10px; border-radius: 5px; }
+.mapgrid { display: flex; flex-direction: column; gap: 24px; }
+.stage { position: relative; min-height: 200px; }
+.mapsvg { display: block; width: min(100%, 300px); height: auto; margin-inline: auto; }
+.county { stroke: var(--surface); stroke-width: 1.3; stroke-linejoin: round; cursor: pointer; transition: fill .25s; }
+.county.sel { filter: brightness(0.8); }
+.county { outline: none; -webkit-tap-highlight-color: transparent; }
+.county:focus-visible { stroke: var(--ink); stroke-width: 2.4; }
+.tip { position: absolute; z-index: 5; width: 270px; max-width: calc(100% - 4px); background: var(--surface); border: 1px solid var(--ink); border-radius: 8px; padding: 8px 10px; box-shadow: 0 8px 28px rgba(0,0,0,.22); }
+.tip-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.tip-h strong { font-family: var(--font-display); font-size: 16px; }
+.tip-h .sub { flex: 1; }
+.x { border: 0; background: transparent; font-size: 20px; line-height: 1; padding: 2px 6px; color: var(--ink-2); border-radius: 6px; }
+.trow { display: grid; grid-template-columns: 88px 44px minmax(0, 1fr); gap: 6px; align-items: center; padding-block: 2px; border-top: 1px solid var(--line-2); font-size: 12.5px; }
+.trow:first-of-type { border-top: 0; }
+.trow .nm { display: flex; align-items: center; gap: 6px; font-weight: 500; min-width: 0; white-space: nowrap; }
+.trow .pc { text-align: right; font-variant-numeric: tabular-nums; }
+.trow .pc small { color: var(--ink-3); margin-left: 4px; font-size: 11px; }
+.trow.out { color: var(--ink-3); }
+.dots { display: flex; flex-wrap: wrap; gap: 2px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.dots.sm .dot { width: 8px; height: 8px; }
+.foot { font-size: 11.5px; color: var(--ink-3); margin-top: 8px; }
+@media (max-width: 700px) { .tip { position: static; width: auto; margin-top: 12px; } }
+
+
+.srcnote { font-size: 12.5px; color: var(--ink-3); max-width: 78ch; }
+.srcnote a { color: var(--ink-2); text-underline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) { .seat, .seg, .county { transition: none; } }
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <h1>Albania Seat Projector</h1>
+  </header>
+
+  <div class="layout">
+    <section class="card" aria-labelledby="in-h">
+      <div class="card-head">
+        <h2 id="in-h">National vote share</h2>
+        <button class="btn" id="reset" type="button">Reset to 2025</button>
+      </div>
+      <div id="inputs"></div>
+      <div class="total"><span>Total</span><span class="num" id="total">100.0%</span></div>
+    </section>
+
+    <section class="card" aria-labelledby="pr-h">
+      <div class="card-head">
+        <h2 id="pr-h">Projected results</h2>
+      </div>
+      <svg class="hemi" id="hemi" viewBox="0 -8 620 340" role="img" aria-label="Hemicycle of projected seats"></svg>
+      <div class="legend" id="hlegend"></div>
+      <div class="tablewrap restable">
+        <table id="results">
+          <thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" id="cocard" aria-labelledby="co-h">
+    <div class="card-head">
+      <h2 id="co-h">Coalition builder</h2>
+      <button class="btn" id="cclear" type="button">Clear</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Parties in the coalition"></div>
+    <div class="cbar-wrap">
+      <div class="cbar" id="cbar" role="img" aria-label="Seats held by the selected parties"></div>
+      <div class="mark" id="cmark"><span class="mark-l">71 for majority</span></div>
+      <div class="scale"><span>0</span><span>140</span></div>
+    </div>
+    <div class="csum" aria-live="polite"><span class="big num" id="csum-n">0</span><span class="sub">of 140 seats</span><span class="verdict" id="csum-v"></span></div>
+  </section>
+
+  <section class="card" id="mapcard" aria-labelledby="mp-h">
+    <div class="card-head">
+      <h2 id="mp-h">Projected results map</h2>
+    </div>
+    <div class="chips mapview" id="mapview" role="group" aria-label="Map view"></div>
+    <div class="mapgrid">
+      <div>
+        <div class="stage" id="stage">
+          <svg class="mapsvg" id="map" viewBox="0 0 10 10" role="group" aria-label="Map of Albania's 12 counties"></svg>
+          <div class="tip" id="tip" role="dialog" aria-label="County result" hidden></div>
+        </div>
+        <div class="legend" id="mlegend"></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="srcnote"><strong>Sources.</strong> County results are the official Central Election Commission (KQZ) vote counts for the 2025 election
+        (<a href="https://a2news.com/english/shqiperia/politike/kqz-miraton-rezultatet-e-zgjedhjeve-per-qarqet-tirane-durres--i1148854" target="_blank" rel="noopener">A2 News</a>). Kukës is derived by subtracting the other 11 counties from the national totals, and matches the
+        <a href="https://en.wikipedia.org/wiki/2025_Albanian_parliamentary_election" target="_blank" rel="noopener">county table of the 2025 election article</a> to within 0.01 points. County outlines are
+        <a href="https://www.geoboundaries.org/" target="_blank" rel="noopener">geoBoundaries</a> (gbOpen, simplified, CC BY 4.0).</p>
+</main>
+
+<script>
+/* Albania seat projection engine.
+   Baseline: 2025 county vote counts (12 counties, 11 lists that stood in every county).
+   Swing: each list's national share minus its 2025 national share is added to that list in
+   every county (universal national swing). Shares cannot go below zero and each county is
+   rescaled to 100%. A list whose national share falls under 20% of its 2025 share is tapered
+   so that it reaches exactly 0% in every county when its national share reaches 0%.
+   Lists under 1% nationally are excluded. Each of the 12 counties fills its seats with D'Hondt. */
+(function (root) {
+  'use strict';
+
+  var MAIN = ['PS', 'PD', 'NISMA', 'PSD', 'PM', 'LB', 'KEA', 'DZH'];   // lists with their own slider
+  var MINOR = ['AKSH', 'LA', 'ADR'];                                    // small lists driven by the "Others" slider
+  var IDS = MAIN.concat(MINOR);
+  var THRESHOLD = 1.0;   // national threshold, percent of valid votes
+  var TAPER = 0.2;       // taper point, as a fraction of a list's 2025 national share
+
+  // County vote counts to county shares (percent). Counts are exact, so no rounding is involved.
+  function prepare(raw) {
+    return raw.counties.map(function (c) {
+      var total = 0, share = {};
+      IDS.forEach(function (id) { total += c.votes[id]; });
+      IDS.forEach(function (id) { share[id] = c.votes[id] * 100 / total; });
+      return { key: c.key, name: c.name, seats: c.seats, share: share };
+    });
+  }
+
+  // The 2025 national shares for all 11 lists. The three small lists share the "Others" figure
+  // in proportion to their 2025 votes, so zero swing returns exactly the 2025 result.
+  function baseFull(raw) {
+    var b = {};
+    MAIN.forEach(function (id) { b[id] = raw.base[id]; });
+    MINOR.forEach(function (id) { b[id] = raw.base.OTH * raw.minorWeights[id]; });
+    return b;
+  }
+
+  // Slider shares (percent, with OTH) to national shares for all 11 lists.
+  function expand(slider, weights) {
+    var o = {};
+    MAIN.forEach(function (id) { o[id] = slider[id]; });
+    MINOR.forEach(function (id) { o[id] = slider.OTH * weights[id]; });
+    return o;
+  }
+
+  // D'Hondt: divide each eligible list's votes by 1..seats, take the largest quotients.
+  function dhondt(shares, seats, eligible) {
+    var q = [];
+    IDS.forEach(function (id, k) {
+      if (!eligible[id]) return;
+      var v = shares[id];
+      if (!(v > 0)) return;
+      for (var d = 1; d <= seats; d++) q.push({ id: id, q: v / d, v: v, k: k });
+    });
+    q.sort(function (a, b) { return b.q - a.q || b.v - a.v || a.k - b.k; });
+    var out = {};
+    IDS.forEach(function (id) { out[id] = 0; });
+    for (var i = 0; i < seats && i < q.length; i++) out[q[i].id]++;
+    return out;
+  }
+
+  // One list in one county: v = its 2025 county share, B = its 2025 national share, I = its national share now.
+  function adjusted(v, B, I) {
+    var T = TAPER * B;
+    if (I >= T) return Math.max(0, v + I - B);
+    var vT = Math.max(0, v + T - B);   // where plain swing stands at the taper point
+    return T > 0 ? vT * (I / T) : 0;   // then falls in a straight line to 0 at I = 0
+  }
+
+  // base, input: national shares (percent) for the 11 lists. counties: from prepare().
+  function project(base, counties, input) {
+    var eligible = {};
+    IDS.forEach(function (id) { eligible[id] = input[id] >= THRESHOLD; });
+    var inSum = 0;
+    IDS.forEach(function (id) { inSum += input[id]; });
+    var total = {};
+    IDS.forEach(function (id) { total[id] = 0; });
+    var out = counties.map(function (c) {
+      var raw = {}, sum = 0, share = {};
+      IDS.forEach(function (id) { raw[id] = adjusted(c.share[id], base[id], input[id]); sum += raw[id]; });
+      if (sum > 1e-12) IDS.forEach(function (id) { share[id] = raw[id] * 100 / sum; });
+      else IDS.forEach(function (id) { share[id] = input[id] * 100 / inSum; });   // nothing left in this county: use the national mix
+      var alloc = dhondt(share, c.seats, eligible);
+      IDS.forEach(function (id) { total[id] += alloc[id]; });
+      return { key: c.key, name: c.name, seats: c.seats, share: share, alloc: alloc };
+    });
+    return { counties: out, total: total, eligible: eligible };
+  }
+
+  // Set one slider (hundredths of a percent). The sliders may not total more than 100.00%,
+  // so the value is clamped to what the others leave free.
+  function setShare(cur, id, vC) {
+    var keys = Object.keys(cur), others = 0, out = {};
+    keys.forEach(function (p) { out[p] = cur[p]; if (p !== id) others += cur[p]; });
+    out[id] = Math.max(0, Math.min(10000 - others, Math.round(vC)));
+    return out;
+  }
+
+  // Slider shares (hundredths of a percent) can total less than 100%. Scale them to 100% (percent
+  // output) before swing is worked out. With nothing entered, fall back to the 2025 shares.
+  function normalise(cents, fallback) {
+    var keys = Object.keys(cents), t = 0, out = {};
+    keys.forEach(function (id) { t += cents[id]; });
+    keys.forEach(function (id) { out[id] = t > 0 ? cents[id] * 100 / t : fallback[id]; });
+    return out;
+  }
+
+  var api = {
+    MAIN: MAIN, MINOR: MINOR, IDS: IDS, THRESHOLD: THRESHOLD, TAPER: TAPER,
+    prepare: prepare, baseFull: baseFull, expand: expand, dhondt: dhondt, adjusted: adjusted,
+    project: project, setShare: setShare, normalise: normalise
+  };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.AlbaniaEngine = api;
+})(typeof window !== 'undefined' ? window : this);
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var E = window.AlbaniaEngine;
+  var DATA = {
+ "valid": 1607347,
+ "national": {
+  "PS": 856177,
+  "PD": 529354,
+  "NISMA": 64264,
+  "PSD": 49890,
+  "PM": 48995,
+  "LB": 24616,
+  "KEA": 20863,
+  "DZH": 6019,
+  "AKSH": 3787,
+  "LA": 2255,
+  "ADR": 1127
+ },
+ "base": {
+  "PS": 53.27,
+  "PD": 32.93,
+  "NISMA": 4.0,
+  "PSD": 3.1,
+  "PM": 3.05,
+  "LB": 1.53,
+  "KEA": 1.3,
+  "DZH": 0.37,
+  "OTH": 0.45
+ },
+ "minorWeights": {
+  "AKSH": 0.5282466173803878,
+  "LA": 0.31454875156925655,
+  "ADR": 0.1572046310503557
+ },
+ "counties": [
+  {
+   "key": "Berat",
+   "name": "Berat",
+   "seats": 7,
+   "votes": {
+    "PS": 46523,
+    "PD": 20895,
+    "NISMA": 5533,
+    "PSD": 265,
+    "PM": 1639,
+    "LB": 932,
+    "KEA": 431,
+    "DZH": 52,
+    "AKSH": 198,
+    "LA": 134,
+    "ADR": 69
+   }
+  },
+  {
+   "key": "Diber",
+   "name": "Dibër",
+   "seats": 5,
+   "votes": {
+    "PS": 36791,
+    "PD": 24081,
+    "NISMA": 1039,
+    "PSD": 1380,
+    "PM": 433,
+    "LB": 327,
+    "KEA": 667,
+    "DZH": 21,
+    "AKSH": 53,
+    "LA": 64,
+    "ADR": 29
+   }
+  },
+  {
+   "key": "Durres",
+   "name": "Durrës",
+   "seats": 14,
+   "votes": {
+    "PS": 84028,
+    "PD": 58978,
+    "NISMA": 4652,
+    "PSD": 414,
+    "PM": 4100,
+    "LB": 1995,
+    "KEA": 1369,
+    "DZH": 1004,
+    "AKSH": 371,
+    "LA": 342,
+    "ADR": 59
+   }
+  },
+  {
+   "key": "Elbasan",
+   "name": "Elbasan",
+   "seats": 14,
+   "votes": {
+    "PS": 93765,
+    "PD": 42519,
+    "NISMA": 6302,
+    "PSD": 1858,
+    "PM": 3267,
+    "LB": 1543,
+    "KEA": 2436,
+    "DZH": 417,
+    "AKSH": 359,
+    "LA": 173,
+    "ADR": 60
+   }
+  },
+  {
+   "key": "Fier",
+   "name": "Fier",
+   "seats": 16,
+   "votes": {
+    "PS": 116736,
+    "PD": 42693,
+    "NISMA": 9210,
+    "PSD": 2516,
+    "PM": 4617,
+    "LB": 2131,
+    "KEA": 1224,
+    "DZH": 1428,
+    "AKSH": 569,
+    "LA": 224,
+    "ADR": 69
+   }
+  },
+  {
+   "key": "Gjirokaster",
+   "name": "Gjirokastër",
+   "seats": 4,
+   "votes": {
+    "PS": 29685,
+    "PD": 12499,
+    "NISMA": 1669,
+    "PSD": 418,
+    "PM": 683,
+    "LB": 628,
+    "KEA": 212,
+    "DZH": 202,
+    "AKSH": 82,
+    "LA": 48,
+    "ADR": 37
+   }
+  },
+  {
+   "key": "Korce",
+   "name": "Korçë",
+   "seats": 10,
+   "votes": {
+    "PS": 68189,
+    "PD": 39794,
+    "NISMA": 5827,
+    "PSD": 2687,
+    "PM": 2623,
+    "LB": 1111,
+    "KEA": 1091,
+    "DZH": 226,
+    "AKSH": 252,
+    "LA": 139,
+    "ADR": 76
+   }
+  },
+  {
+   "key": "Kukes",
+   "name": "Kukës",
+   "seats": 3,
+   "votes": {
+    "PS": 11770,
+    "PD": 20769,
+    "NISMA": 342,
+    "PSD": 5164,
+    "PM": 294,
+    "LB": 147,
+    "KEA": 93,
+    "DZH": 42,
+    "AKSH": 54,
+    "LA": 44,
+    "ADR": 6
+   },
+   "derived": true
+  },
+  {
+   "key": "Lezhe",
+   "name": "Lezhë",
+   "seats": 7,
+   "votes": {
+    "PS": 33552,
+    "PD": 33623,
+    "NISMA": 4775,
+    "PSD": 2104,
+    "PM": 937,
+    "LB": 429,
+    "KEA": 1779,
+    "DZH": 92,
+    "AKSH": 79,
+    "LA": 71,
+    "ADR": 15
+   }
+  },
+  {
+   "key": "Shkoder",
+   "name": "Shkodër",
+   "seats": 11,
+   "votes": {
+    "PS": 40421,
+    "PD": 43025,
+    "NISMA": 2128,
+    "PSD": 16806,
+    "PM": 1398,
+    "LB": 665,
+    "KEA": 1827,
+    "DZH": 116,
+    "AKSH": 119,
+    "LA": 68,
+    "ADR": 28
+   }
+  },
+  {
+   "key": "Tirane",
+   "name": "Tirana",
+   "seats": 37,
+   "votes": {
+    "PS": 230157,
+    "PD": 164316,
+    "NISMA": 16520,
+    "PSD": 14781,
+    "PM": 23650,
+    "LB": 13381,
+    "KEA": 8992,
+    "DZH": 2066,
+    "AKSH": 1318,
+    "LA": 836,
+    "ADR": 570
+   }
+  },
+  {
+   "key": "Vlore",
+   "name": "Vlorë",
+   "seats": 12,
+   "votes": {
+    "PS": 64560,
+    "PD": 26162,
+    "NISMA": 6267,
+    "PSD": 1497,
+    "PM": 5354,
+    "LB": 1327,
+    "KEA": 742,
+    "DZH": 353,
+    "AKSH": 333,
+    "LA": 112,
+    "ADR": 109
+   }
+  }
+ ]
+};
+  var GEO = {"w":203.1,"h":453.9,"paths":{"Berat":"M117.89 292.99L113.64 294.12L110.07 294.58L107.18 289.83L104.63 290.96L102.42 290.51L102.08 285.54L96.46 286.90L96.12 283.28L92.38 281.48L94.08 277.41L91.36 275.83L84.05 275.38L87.28 271.54L85.07 268.15L77.59 268.38L74.02 269.96L67.04 269.73L63.79 269.09L60.88 272.27L56.55 273.16L57.00 277.42L52.22 277.62L53.94 280.20L53.49 282.77L55.50 284.36L56.62 287.04L56.77 291.40L57.67 293.08L63.23 297.28L62.32 302.12L67.06 306.00L62.32 306.96L66.15 310.11L65.97 317.37L70.52 319.07L75.08 319.07L77.76 324.84L83.03 324.84L86.94 328.23L87.96 325.06L90.17 324.84L90.34 328.45L93.40 328.68L93.40 325.06L97.99 325.97L101.40 329.58L105.48 336.36L109.73 338.61L114.32 342.68L121.80 341.55L120.44 336.13L122.65 333.42L125.88 332.52L129.46 334.55L133.20 332.97L134.05 329.35L133.88 321.90L132.35 318.51L135.75 314.45L131.50 312.42L126.05 308.58L125.37 304.06L121.97 301.35L121.29 297.74L117.89 292.99Z","Diber":"M144.82 126.12L140.39 126.43L137.59 121.31L133.16 120.54L130.83 121.62L130.94 124.72L128.26 126.58L123.01 126.74L122.31 124.41L121.03 123.17L122.43 119.77L119.16 115.89L115.78 115.89L114.27 118.68L112.52 120.23L108.20 120.08L106.45 119.46L103.69 120.13L103.51 122.55L101.14 122.31L97.31 124.73L103.51 127.88L103.87 131.27L100.77 131.75L94.76 136.11L93.12 138.53L88.38 138.53L88.02 142.88L84.56 144.09L82.73 142.16L80.68 143.62L79.16 141.91L77.64 141.91L77.64 145.48L76.60 147.18L72.98 145.01L68.78 144.24L66.68 145.48L64.35 142.38L63.18 139.13L57.47 145.17L60.85 148.11L62.60 150.43L62.72 154.15L60.03 156.01L60.97 157.40L64.82 157.87L63.53 160.04L63.30 164.06L64.00 166.23L67.15 169.79L72.40 173.36L77.06 175.06L76.95 178.47L81.26 182.65L81.61 186.37L85.46 187.61L88.61 190.08L88.72 193.65L91.99 194.89L92.22 190.86L94.32 188.85L97.24 190.70L98.75 196.59L104.82 196.59L108.43 197.82L114.26 193.70L118.27 195.40L121.73 192.49L128.66 188.86L129.57 192.01L131.75 195.64L136.86 195.64L141.59 199.03L143.42 196.61L145.75 192.87L144.93 191.78L145.82 190.29L145.67 189.20L146.64 188.80L145.67 186.32L144.18 185.23L144.10 183.75L142.84 183.45L141.42 183.45L140.60 182.66L140.97 181.27L139.70 179.29L139.92 177.10L138.36 175.52L136.04 174.33L136.19 172.94L135.73 168.09L138.06 165.30L140.27 164.37L142.61 164.68L144.82 162.82L146.57 162.05L146.22 158.64L145.29 157.71L144.71 156.01L142.84 153.38L142.96 151.36L141.67 149.04L143.07 146.56L142.39 143.30L141.34 141.62L141.42 139.34L141.19 137.95L142.09 135.97L143.51 134.18L142.69 133.09L144.55 132.30L145.67 130.91L147.54 131.01L148.06 129.72L146.57 126.25L144.82 126.12Z","Durres":"M63.30 164.06L61.78 162.98L57.47 162.82L53.62 166.08L48.25 166.08L45.22 164.06L35.66 163.75L33.21 161.89L30.88 163.91L25.86 164.37L21.08 161.74L24.00 167.16L28.31 170.72L27.45 177.78L22.89 183.07L20.61 189.50L14.92 189.12L16.91 194.04L17.06 200.80L20.80 203.37L24.30 202.68L28.71 208.33L31.62 210.61L35.90 211.86L36.45 207.02L41.37 205.81L41.18 200.72L43.01 197.09L41.55 192.74L38.45 189.35L37.90 183.54L40.82 181.12L44.10 183.54L48.72 185.59L51.87 189.46L54.09 189.00L56.19 186.06L61.08 183.42L63.42 180.64L66.45 183.58L67.79 178.46L69.79 179.91L71.80 177.25L72.40 173.36L67.15 169.79L64.00 166.23L63.30 164.06Z","Elbasan":"M117.89 292.99L115.85 290.96L119.93 288.70L123.50 287.80L129.97 288.93L134.05 287.80L137.11 281.48L135.92 275.60L131.50 267.70L127.42 265.22L126.05 260.92L132.52 259.12L130.31 256.63L130.99 252.12L133.54 250.99L137.21 249.88L143.68 243.55L145.55 244.26L150.54 247.75L151.65 245.92L153.39 238.87L150.27 235.26L149.92 234.02L148.80 232.54L149.74 230.76L150.62 229.96L150.16 229.14L150.36 228.90L150.19 228.50L149.82 228.47L149.71 227.81L149.43 227.80L148.96 226.65L148.97 225.87L148.28 225.31L147.97 224.30L147.53 224.13L147.44 223.50L146.78 222.45L146.25 222.02L146.45 221.14L146.31 220.42L146.07 220.19L145.73 220.58L145.22 220.38L144.66 219.80L144.15 220.15L143.44 219.43L143.12 218.68L143.38 218.13L142.89 216.99L142.24 216.57L142.18 215.47L141.49 214.72L141.52 213.16L141.92 212.67L141.95 212.18L141.27 211.00L141.29 210.28L140.95 209.90L141.09 209.26L140.84 207.67L141.38 206.68L141.32 206.23L140.58 205.92L140.30 204.79L140.90 204.32L140.67 203.88L140.27 203.77L140.52 202.78L139.47 201.26L139.53 200.17L139.04 200.01L138.67 199.41L139.61 198.65L141.59 199.03L136.86 195.64L131.75 195.64L129.57 192.01L128.66 188.86L121.73 192.49L118.27 195.40L114.26 193.70L108.43 197.82L105.99 201.98L102.42 201.53L96.80 204.01L95.78 208.53L92.04 208.98L91.70 213.95L89.32 214.85L87.79 212.37L83.54 211.47L82.86 216.66L74.47 224.18L70.44 224.18L67.83 226.20L62.17 227.07L62.82 231.84L55.20 231.98L52.70 236.17L48.67 236.32L48.56 241.81L46.77 243.72L48.56 247.29L51.62 249.96L54.98 245.80L59.24 247.39L62.52 250.46L62.45 252.34L59.76 254.52L60.58 257.79L61.55 259.78L59.83 260.87L62.37 263.15L58.86 265.13L60.95 266.32L61.48 268.50L63.79 269.09L67.04 269.73L74.02 269.96L77.59 268.38L85.07 268.15L87.28 271.54L84.05 275.38L91.36 275.83L94.08 277.41L92.38 281.48L96.12 283.28L96.46 286.90L102.08 285.54L102.42 290.51L104.63 290.96L107.18 289.83L110.07 294.58L113.64 294.12L117.89 292.99Z","Fier":"M63.79 269.09L61.48 268.50L60.95 266.32L58.86 265.13L62.37 263.15L59.83 260.87L61.55 259.78L60.58 257.79L59.76 254.52L62.45 252.34L62.52 250.46L59.24 247.39L54.98 245.80L51.62 249.96L48.56 247.29L46.77 243.72L44.76 240.25L41.77 238.96L38.93 241.74L37.66 240.15L34.90 239.55L30.20 243.22L27.59 242.03L26.92 243.62L24.08 241.93L20.57 249.47L23.63 253.73L20.72 257.60L22.66 257.69L20.94 261.66L18.18 260.57L12.33 265.36L15.37 265.51L16.06 269.39L11.02 274.84L12.58 278.02L10.42 282.18L10.57 292.70L9.75 296.26L4.60 298.73L4.90 301.41L11.84 300.72L16.02 303.89L17.88 301.31L18.93 301.31L20.05 303.99L21.69 303.69L23.71 305.09L23.86 307.65L30.13 309.24L29.60 312.31L34.01 311.32L32.81 314.30L35.72 315.88L40.72 316.58L48.91 319.38L50.84 324.15L54.33 324.51L56.13 328.50L53.39 333.59L56.67 336.25L60.86 336.01L62.87 330.44L64.87 329.47L67.43 326.57L70.52 325.84L75.08 319.07L70.52 319.07L65.97 317.37L66.15 310.11L62.32 306.96L67.06 306.00L62.32 302.12L63.23 297.28L57.67 293.08L56.77 291.40L56.62 287.04L55.50 284.36L53.49 282.77L53.94 280.20L52.22 277.62L57.00 277.42L56.55 273.16L60.88 272.27L63.79 269.09ZM24.69 257.73L25.56 253.89L26.39 251.29L28.74 252.79L29.68 259.97L28.63 263.94L25.42 265.62L22.89 265.92L21.39 266.32L20.42 266.12L21.80 262.85L24.69 257.73Z","Gjirokaster":"M75.08 319.07L70.52 325.84L67.43 326.57L64.87 329.47L62.87 330.44L60.86 336.01L56.67 336.25L59.65 339.33L60.56 342.72L57.37 344.66L54.36 346.00L55.91 349.15L64.03 356.66L62.20 358.47L64.67 361.75L65.58 366.35L69.71 373.47L70.18 377.36L71.90 378.50L75.56 383.27L77.29 390.59L80.54 391.21L81.67 390.32L84.53 390.24L88.78 390.85L90.24 392.71L92.63 393.15L93.29 395.53L98.08 400.38L101.07 404.09L105.25 406.20L109.90 409.87L109.73 413.88L112.96 416.64L113.22 419.41L118.53 421.27L118.61 427.71L119.63 427.65L122.78 428.95L125.20 431.21L126.27 431.55L128.27 429.23L128.90 428.95L130.01 427.14L129.67 426.47L130.09 425.00L129.88 424.21L130.05 422.91L129.58 422.68L126.31 417.38L126.73 415.91L125.81 415.68L124.87 412.51L121.66 411.41L122.17 407.69L121.97 405.90L118.96 402.73L119.48 400.52L125.18 401.35L126.22 400.24L127.88 399.83L128.09 397.35L129.13 397.07L130.69 394.59L130.37 391.28L132.24 390.04L135.67 388.39L137.43 389.91L139.82 389.77L140.13 387.56L142.41 387.01L145.94 390.46L149.47 389.77L154.28 386.72L145.78 376.56L139.49 373.39L143.91 369.78L142.72 367.97L142.21 362.33L139.66 360.07L138.98 351.94L141.36 345.84L134.90 341.10L136.43 335.00L133.20 332.97L129.46 334.55L125.88 332.52L122.65 333.42L120.44 336.13L121.80 341.55L114.32 342.68L109.73 338.61L105.48 336.36L101.40 329.58L97.99 325.97L93.40 325.06L93.40 328.68L90.34 328.45L90.17 324.84L87.96 325.06L86.94 328.23L83.03 324.84L77.76 324.84L75.08 319.07Z","Korce":"M133.20 332.97L136.43 335.00L134.90 341.10L141.36 345.84L138.98 351.94L139.66 360.07L142.21 362.33L142.72 367.97L143.91 369.78L139.49 373.39L145.78 376.56L154.28 386.72L161.09 384.91L162.45 377.01L160.58 370.46L165.17 369.10L164.66 362.55L163.47 358.94L167.72 353.97L170.61 351.49L170.78 347.87L173.33 345.62L172.99 335.23L178.43 332.06L179.62 327.10L183.19 328.23L186.77 328.23L188.64 330.03L191.53 328.90L193.74 324.61L194.08 321.90L203.09 314.22L203.09 301.35L202.92 296.83L195.27 290.06L194.76 281.25L190.00 285.09L188.30 283.73L186.94 281.25L190.17 278.99L190.34 273.80L192.21 272.22L189.49 267.70L190.51 264.99L194.42 266.34L190.34 260.02L186.77 261.83L182.51 260.70L179.28 258.89L176.39 262.28L174.69 264.76L165.84 262.17L164.65 263.65L162.15 264.11L159.64 263.92L156.43 262.26L155.58 258.94L155.89 256.87L156.87 253.73L154.78 248.46L154.95 242.60L156.38 240.59L156.29 238.87L155.65 239.34L154.03 238.32L154.49 236.47L152.27 235.97L150.27 235.26L153.39 238.87L151.65 245.92L150.54 247.75L145.55 244.26L143.68 243.55L137.21 249.88L130.99 252.12L130.31 256.63L132.52 259.12L126.05 260.92L127.42 265.22L131.50 267.70L135.92 275.60L137.11 281.48L134.05 287.80L129.97 288.93L123.50 287.80L119.93 288.70L115.85 290.96L117.89 292.99L121.29 297.74L121.97 301.35L125.37 304.06L126.05 308.58L131.50 312.42L135.75 314.45L132.35 318.51L133.88 321.90L134.05 329.35L133.20 332.97Z","Kukes":"M144.82 126.12L147.04 122.40L146.46 120.70L147.16 117.75L150.52 117.47L148.32 112.49L149.72 110.78L153.30 107.82L152.73 101.77L151.31 93.83L146.18 87.02L147.61 79.84L144.93 74.51L142.31 66.88L140.37 65.29L140.00 63.21L135.03 58.90L129.89 56.57L128.84 54.87L123.48 53.63L122.55 51.46L119.98 50.22L118.23 51.77L113.44 50.72L110.02 48.08L111.45 43.54L106.89 39.76L110.02 34.08L104.33 28.79L102.33 23.50L94.09 18.01L89.89 15.68L86.98 17.70L84.64 18.01L83.24 22.65L78.93 22.34L76.83 20.79L72.98 22.65L72.16 25.91L69.83 24.36L68.78 26.83L65.75 25.91L63.53 30.24L62.88 33.77L60.36 34.97L59.87 37.22L63.92 39.44L63.65 43.31L62.15 44.30L62.55 46.10L64.53 47.11L65.84 52.15L65.93 57.84L64.83 58.93L64.38 61.60L66.11 63.05L70.12 62.69L73.40 60.87L76.05 58.81L78.33 59.05L81.16 61.96L83.98 59.78L86.17 60.02L90.73 63.54L94.47 65.59L96.93 66.81L100.35 67.13L101.77 69.11L104.87 70.92L107.69 71.29L110.06 72.26L109.97 74.92L105.14 77.34L104.68 84.12L100.21 90.30L101.43 96.74L102.59 99.02L107.27 95.45L109.60 94.21L112.52 97.31L112.98 101.64L111.70 104.12L112.40 106.60L109.95 109.70L108.43 112.64L106.10 112.02L104.59 114.35L108.43 117.29L106.45 119.46L108.20 120.08L112.52 120.23L114.27 118.68L115.78 115.89L119.16 115.89L122.43 119.77L121.03 123.17L122.31 124.41L123.01 126.74L128.26 126.58L130.94 124.72L130.83 121.62L133.16 120.54L137.59 121.31L140.39 126.43L144.82 126.12Z","Lezhe":"M106.45 119.46L108.43 117.29L104.59 114.35L106.10 112.02L108.43 112.64L109.95 109.70L112.40 106.60L111.70 104.12L112.98 101.64L112.52 97.31L109.60 94.21L107.27 95.45L102.59 99.02L100.21 100.59L97.10 100.72L97.93 102.57L94.22 103.20L93.79 106.73L93.03 107.38L93.37 108.28L93.42 111.80L87.82 110.97L86.65 113.09L84.94 117.21L81.84 119.91L77.78 119.48L74.25 115.65L73.50 112.95L75.21 109.40L73.93 102.45L72.22 104.44L69.33 104.86L65.49 108.84L61.64 109.12L60.25 106.99L56.37 106.45L56.51 109.97L52.87 110.26L52.88 112.39L48.85 115.58L45.66 111.96L40.98 112.03L37.72 108.12L34.01 108.64L34.29 115.08L36.46 117.27L36.20 119.25L33.31 121.35L30.51 124.08L38.55 127.48L39.41 135.43L35.14 136.94L37.70 142.99L33.43 152.82L37.58 154.36L37.41 156.94L33.21 161.89L35.66 163.75L45.22 164.06L48.25 166.08L53.62 166.08L57.47 162.82L61.78 162.98L63.30 164.06L63.53 160.04L64.82 157.87L60.97 157.40L60.03 156.01L62.72 154.15L62.60 150.43L60.85 148.11L57.47 145.17L63.18 139.13L64.35 142.38L66.68 145.48L68.78 144.24L72.98 145.01L76.60 147.18L77.64 145.48L77.64 141.91L79.16 141.91L80.68 143.62L82.73 142.16L84.56 144.09L88.02 142.88L88.38 138.53L93.12 138.53L94.76 136.11L100.77 131.75L103.87 131.27L103.51 127.88L97.31 124.73L101.14 122.31L103.51 122.55L103.69 120.13L106.45 119.46Z","Shkoder":"M63.53 30.24L57.25 24.39L55.95 22.32L55.36 18.70L54.27 17.07L55.76 14.06L55.50 13.03L56.21 11.74L57.38 12.08L57.77 10.28L55.03 7.14L55.15 6.19L54.72 5.27L55.72 4.10L55.67 3.80L54.89 3.14L53.65 2.94L53.03 0.78L51.49 0.00L50.13 1.03L46.47 5.12L45.55 4.59L39.24 12.61L39.08 14.95L39.76 17.23L39.69 18.04L38.81 18.52L38.21 19.65L33.85 22.15L33.76 24.12L32.62 26.23L32.22 26.23L29.06 31.61L23.12 40.72L20.50 41.63L18.23 43.53L18.12 45.46L17.25 46.42L17.05 47.54L17.34 49.36L17.74 49.76L18.97 48.88L18.41 49.81L18.40 50.46L17.98 50.90L17.90 51.45L17.07 52.23L16.96 52.52L17.16 52.80L16.37 53.47L16.30 53.90L15.01 54.84L14.88 55.39L13.89 56.80L14.30 57.80L14.77 57.68L14.77 58.49L14.32 58.45L14.24 58.11L13.45 59.10L13.29 58.93L13.03 59.53L12.46 60.02L12.38 59.86L12.09 60.85L11.40 61.99L11.26 63.04L10.67 63.72L10.61 63.97L10.98 64.65L10.75 66.45L12.96 68.62L13.98 69.17L14.22 69.86L15.63 70.73L18.08 71.61L18.98 72.37L19.30 73.82L19.27 74.84L19.80 75.99L21.00 76.81L21.99 76.96L23.45 79.58L24.14 82.03L24.09 83.38L23.17 85.20L23.66 86.34L23.46 88.56L24.03 88.82L23.75 89.84L23.96 91.05L22.58 90.48L20.78 90.14L18.37 89.04L15.16 88.43L13.80 87.64L12.98 88.38L12.79 90.29L13.00 91.60L12.04 93.74L12.43 98.45L13.11 98.99L13.24 100.68L13.26 101.62L12.69 102.83L13.96 104.12L12.06 105.21L10.74 105.26L9.84 106.10L9.84 108.13L11.90 109.99L10.41 111.94L9.56 112.15L8.89 113.25L10.37 114.26L11.79 115.63L12.34 121.68L13.18 122.21L16.46 120.59L21.26 119.28L27.03 121.71L30.51 124.08L33.31 121.35L36.20 119.25L36.46 117.27L34.29 115.08L34.01 108.64L37.72 108.12L40.98 112.03L45.66 111.96L48.85 115.58L52.88 112.39L52.87 110.26L56.51 109.97L56.37 106.45L60.25 106.99L61.64 109.12L65.49 108.84L69.33 104.86L72.22 104.44L73.93 102.45L75.21 109.40L73.50 112.95L74.25 115.65L77.78 119.48L81.84 119.91L84.94 117.21L86.65 113.09L87.82 110.97L93.42 111.80L93.37 108.28L93.03 107.38L93.79 106.73L94.22 103.20L97.93 102.57L97.10 100.72L100.21 100.59L102.59 99.02L101.43 96.74L100.21 90.30L104.68 84.12L105.14 77.34L109.97 74.92L110.06 72.26L107.69 71.29L104.87 70.92L101.77 69.11L100.35 67.13L96.93 66.81L94.47 65.59L90.73 63.54L86.17 60.02L83.98 59.78L81.16 61.96L78.33 59.05L76.05 58.81L73.40 60.87L70.12 62.69L66.11 63.05L64.38 61.60L64.83 58.93L65.93 57.84L65.84 52.15L64.53 47.11L62.55 46.10L62.15 44.30L63.65 43.31L63.92 39.44L59.87 37.22L60.36 34.97L62.88 33.77L63.53 30.24Z","Tirane":"M72.40 173.36L71.80 177.25L69.79 179.91L67.79 178.46L66.45 183.58L63.42 180.64L61.08 183.42L56.19 186.06L54.09 189.00L51.87 189.46L48.72 185.59L44.10 183.54L40.82 181.12L37.90 183.54L38.45 189.35L41.55 192.74L43.01 197.09L41.18 200.72L41.37 205.81L36.45 207.02L35.90 211.86L31.62 210.61L28.71 208.33L28.61 213.95L24.36 220.72L23.53 224.24L21.65 227.01L19.35 227.29L21.09 230.44L21.84 236.62L20.19 243.76L20.57 249.47L24.08 241.93L26.92 243.62L27.59 242.03L30.20 243.22L34.90 239.55L37.66 240.15L38.93 241.74L41.77 238.96L44.76 240.25L46.77 243.72L48.56 241.81L48.67 236.32L52.70 236.17L55.20 231.98L62.82 231.84L62.17 227.07L67.83 226.20L70.44 224.18L74.47 224.18L82.86 216.66L83.54 211.47L87.79 212.37L89.32 214.85L91.70 213.95L92.04 208.98L95.78 208.53L96.80 204.01L102.42 201.53L105.99 201.98L108.43 197.82L104.82 196.59L98.75 196.59L97.24 190.70L94.32 188.85L92.22 190.86L91.99 194.89L88.72 193.65L88.61 190.08L85.46 187.61L81.61 186.37L81.26 182.65L76.95 178.47L77.06 175.06L72.40 173.36Z","Vlore":"M2.79 327.96L2.68 327.25L3.41 325.60L2.95 324.32L2.57 323.93L2.10 323.91L1.45 323.51L1.24 322.69L0.81 322.13L0.25 322.37L0.00 323.59L0.14 324.30L0.52 325.42L1.15 325.82L1.75 328.08L2.39 328.30L2.79 327.96ZM4.90 301.41L4.82 304.44L11.57 312.80L14.03 321.04L14.22 314.13L21.52 316.19L21.24 324.07L16.59 321.16L15.86 322.37L13.94 322.61L24.34 333.64L23.70 346.97L19.42 352.05L15.86 348.42L15.65 341.76L9.93 334.85L8.10 333.76L5.73 333.88L3.09 335.33L1.81 336.91L7.10 342.12L10.93 349.15L11.39 354.84L15.40 357.63L22.70 367.32L31.73 371.92L41.13 378.71L44.14 380.04L46.33 380.28L48.52 381.49L49.80 381.13L50.71 383.79L54.17 383.19L56.00 384.76L54.63 387.19L57.18 390.22L57.64 388.16L59.83 389.49L60.29 392.03L62.20 393.00L62.57 391.43L66.76 391.79L71.05 400.15L75.93 407.82L72.72 413.40L75.23 415.49L77.39 415.11L80.02 417.59L80.14 420.69L82.71 418.75L85.39 420.38L85.63 421.77L83.20 429.90L83.65 434.33L79.86 434.33L82.09 437.59L81.64 441.43L81.64 446.76L88.77 447.05L95.01 450.31L100.35 452.08L108.15 453.86L108.37 449.71L110.37 447.05L113.49 449.12L115.50 442.32L120.40 440.25L117.05 433.74L118.61 427.71L118.53 421.27L113.22 419.41L112.96 416.64L109.73 413.88L109.90 409.87L105.25 406.20L101.07 404.09L98.08 400.38L93.29 395.53L92.63 393.15L90.24 392.71L88.78 390.85L84.53 390.24L81.67 390.32L80.54 391.21L77.29 390.59L75.56 383.27L71.90 378.50L70.18 377.36L69.71 373.47L65.58 366.35L64.67 361.75L62.20 358.47L64.03 356.66L55.91 349.15L54.36 346.00L57.37 344.66L60.56 342.72L59.65 339.33L56.67 336.25L53.39 333.59L56.13 328.50L54.33 324.51L50.84 324.15L48.91 319.38L40.72 316.58L35.72 315.88L32.81 314.30L34.01 311.32L29.60 312.31L30.13 309.24L23.86 307.65L23.71 305.09L21.69 303.69L20.05 303.99L18.93 301.31L17.88 301.31L16.02 303.89L11.84 300.72L4.90 301.41Z"},"labels":{"Berat":[93.6,304.5],"Diber":[108.9,159.5],"Durres":[40.7,182.5],"Elbasan":[105.6,241.9],"Fier":[40.0,284.0],"Gjirokaster":[103.7,366.5],"Korce":[159.7,306.8],"Kukes":[110.9,70.7],"Lezhe":[67.0,129.9],"Shkoder":[52.6,73.6],"Tirane":[58.8,209.7],"Vlore":[61.1,377.0]},"source":"geoBoundaries gbOpen ALB ADM1 (simplified)"};
+  var counties = E.prepare(DATA);
+  var base = E.baseFull(DATA);          // 2025 national shares, all 11 lists
+  var sbase = DATA.base;                // 2025 slider shares (8 lists + Others)
+  var IDS = E.IDS, MINOR = E.MINOR;
+  var SLIDER_IDS = E.MAIN.concat(['OTH']);
+
+  var PARTIES = [
+    { id: 'PS', short: 'PS', name: 'Socialist Party', max: 70 },
+    { id: 'PD', short: 'PD–ASHM', name: 'Democratic Party', max: 70 },
+    { id: 'NISMA', short: 'NISMA–SHB', name: 'Albania Becomes Initiative', max: 70 },
+    { id: 'PSD', short: 'PSD', name: 'Social Democratic Party', max: 70 },
+    { id: 'PM', short: 'PM', name: 'Opportunity Party', max: 70 },
+    { id: 'LB', short: 'LB', name: 'Together Movement', max: 70 },
+    { id: 'KEA', short: 'KEA', name: 'Euroatlantic Coalition', max: 70 },
+    { id: 'DZH', short: 'DZh', name: 'Right for Development', max: 70 },
+    { id: 'OTH', short: '', name: 'Others', max: 70 }
+  ];
+  var EXTRA = [
+    { id: 'AKSH', short: 'AKSH', name: 'Albanian National Alliance' },
+    { id: 'LA', short: 'LA', name: 'Homeland Movement' },
+    { id: 'ADR', short: 'ADR', name: 'New Democracy Alliance' }
+  ];
+  var BY = {}; PARTIES.concat(EXTRA).forEach(function (p) { BY[p.id] = p; });
+  function tag(id) { return BY[id].short || BY[id].name; }
+  var HEMI_ORDER = ['LB', 'PS', 'PSD', 'ADR', 'NISMA', 'PM', 'KEA', 'AKSH', 'DZH', 'PD', 'LA'];
+  var TOTAL_SEATS = 140, MAJORITY = 71;
+
+  var state = { cents: {}, picked: {}, county: null, anchor: null, view: 'lead' };
+  SLIDER_IDS.forEach(function (id) { state.cents[id] = Math.round(sbase[id] * 100); });
+
+  var baseRes = E.project(base, counties, base);
+  var res = null;
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function svgEl(tag, attrs) { var e = document.createElementNS('http://www.w3.org/2000/svg', tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function f1(n) { return n.toFixed(1); }
+  function f2(n) { return n.toFixed(2); }
+  function sgn(n, dp) { var s = Math.abs(n).toFixed(dp); if (Number(s) === 0) return '0.' + '0'.repeat(dp); return (n > 0 ? '+' : '−') + s; }
+  function sgnInt(n) { return n === 0 ? '–' : (n > 0 ? '+' : '−') + Math.abs(n); }
+  function swatch(id, cls) { var s = el('span', cls || 'sw'); s.style.background = 'var(--c-' + id + ')'; return s; }
+  function entered(id) { return state.cents[id] / 100; }
+  function input() { return E.expand(E.normalise(state.cents, sbase), DATA.minorWeights); }
+
+  /* ---------- inputs ---------- */
+  var inputsEl = document.getElementById('inputs');
+  var rows = {};
+  PARTIES.forEach(function (p) {
+    var row = el('div', 'prow');
+    var head = el('div', 'phead');
+    head.appendChild(swatch(p.id));
+    var lab = el('label', 'pshort', p.name); lab.htmlFor = 'n-' + p.id; head.appendChild(lab);
+    if (p.short) head.appendChild(el('span', 'pname', '(' + p.short + ')'));
+    var ctl = el('div', 'pctrl');
+    var r = document.createElement('input'); r.type = 'range'; r.min = 0; r.max = p.max; r.step = 0.1; r.id = 'r-' + p.id;
+    r.setAttribute('aria-label', p.name + ' national vote share');
+    var n = document.createElement('input'); n.type = 'number'; n.min = 0; n.max = 70; n.step = 0.1; n.id = 'n-' + p.id; n.inputMode = 'decimal';
+    ctl.appendChild(r); ctl.appendChild(n);
+    row.appendChild(head); row.appendChild(ctl);
+    inputsEl.appendChild(row);
+    if (p.id === 'OTH') {
+      r.disabled = true; n.disabled = true; row.classList.add('auto');
+      var lt = el('span', 'locktag');
+      lt.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg>Automatic';
+      head.appendChild(lt);
+    }
+    rows[p.id] = { row: row, r: r, n: n };
+
+    r.addEventListener('input', function () { commit(p.id, parseFloat(r.value) * 100); });
+    n.addEventListener('change', function () {
+      var v = parseFloat(n.value);
+      if (isFinite(v) && p.id !== 'OTH') setMain(p.id, v * 100);
+      render();
+      n.value = f1(entered(p.id));
+    });
+  });
+  // Others is not set by hand: it takes whatever the eight named lists leave, so the total is always 100%.
+  function setMain(id, c) {
+    var m = {}; E.MAIN.forEach(function (k) { m[k] = state.cents[k]; });
+    m = E.setShare(m, id, Math.min(c, 7000));   // no slider goes above 70%
+    var sum = 0; E.MAIN.forEach(function (k) { state.cents[k] = m[k]; sum += m[k]; });
+    state.cents.OTH = 10000 - sum;
+  }
+  function commit(id, cents) { if (id !== 'OTH') setMain(id, cents); render(); }
+  document.getElementById('reset').addEventListener('click', function () {
+    SLIDER_IDS.forEach(function (id) { state.cents[id] = Math.round(sbase[id] * 100); });
+    render();
+  });
+
+  function renderInputs() {
+    PARTIES.forEach(function (p) {
+      var x = rows[p.id], v = entered(p.id);
+      x.r.value = v;
+      if (document.activeElement !== x.n) x.n.value = f1(v);
+    });
+  }
+
+  /* ---------- hemicycle ---------- */
+  var hemi = document.getElementById('hemi');
+  var seatEls = [];
+  (function buildHemi() {
+    var cx = 310, cy = 300, R0 = 118, R1 = 290, rows_ = 7, rad = 12;
+    var radii = [], sum = 0, i;
+    for (i = 0; i < rows_; i++) { radii.push(R0 + i * (R1 - R0) / (rows_ - 1)); sum += radii[i]; }
+    var counts = radii.map(function (r) { return Math.round(TOTAL_SEATS * r / sum); });
+    var diff = TOTAL_SEATS - counts.reduce(function (a, b) { return a + b; }, 0);
+    for (i = rows_ - 1; diff !== 0; i = (i - 1 + rows_) % rows_) { counts[i] += diff > 0 ? 1 : -1; diff += diff > 0 ? -1 : 1; }
+    var pts = [];
+    radii.forEach(function (r, ri) {
+      for (var j = 0; j < counts[ri]; j++) {
+        var th = Math.PI - Math.PI * j / (counts[ri] - 1);
+        pts.push({ x: cx + r * Math.cos(th), y: cy - r * Math.sin(th), th: th, r: r });
+      }
+    });
+    pts.sort(function (a, b) { return b.th - a.th || a.r - b.r; });
+    var g = svgEl('g', {});
+    pts.forEach(function (p) {
+      var c = svgEl('circle', { cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: rad, class: 'seat' });
+      g.appendChild(c); seatEls.push(c);
+    });
+    hemi.appendChild(g);
+  })();
+
+  function renderHemi() {
+    var t = res.total, i = 0;
+    HEMI_ORDER.forEach(function (id) {
+      for (var k = 0; k < t[id]; k++) { seatEls[i].style.fill = 'var(--c-' + id + ')'; i++; }
+    });
+    var lg = document.getElementById('hlegend'); lg.textContent = '';
+    HEMI_ORDER.slice().reverse().sort(function (a, b) { return t[b] - t[a]; }).forEach(function (id) {
+      if (!t[id]) return;
+      var s = el('span'); s.appendChild(swatch(id)); s.appendChild(el('span', null, tag(id))); lg.appendChild(s);
+    });
+  }
+
+  /* ---------- results table ---------- */
+  function renderTable() {
+    var tb = document.querySelector('#results tbody'); tb.textContent = '';
+    var inp = input(), tf = document.querySelector('#results tfoot'); tf.textContent = '';
+    var sNow = 0;
+    function row(id, name, share, seats, d) {
+      var tr = el('tr');
+      var c0 = el('td', 'party'); c0.appendChild(swatch(id)); c0.appendChild(el('span', null, name)); tr.appendChild(c0);
+      tr.appendChild(el('td', null, f1(share) + '%'));
+      sNow += seats;
+      tr.appendChild(el('td', 'strong', String(seats)));
+      tr.appendChild(el('td', 'chg' + (d > 0 ? ' up' : d < 0 ? ' down' : ''), sgnInt(d)));
+      tb.appendChild(tr);
+    }
+    function full(id) { return BY[id].short ? BY[id].name + ' (' + BY[id].short + ')' : BY[id].name; }
+    E.IDS.filter(function (id) { return res.eligible[id] || res.total[id]; })   // under 1% and no seats: not listed
+      .sort(function (a, b) { return res.total[b] - res.total[a] || inp[b] - inp[a]; })
+      .forEach(function (id) { row(id, full(id), inp[id], res.total[id], res.total[id] - baseRes.total[id]); });
+    var ft = el('tr');
+    ft.appendChild(el('td', null, 'Total')); ft.appendChild(el('td', null, '100.0%')); ft.appendChild(el('td', null, String(sNow))); ft.appendChild(el('td', null, ''));
+    tf.appendChild(ft);
+  }
+
+  /* ---------- coalition ---------- */
+  var chipsEl = document.getElementById('chips'), chipBtns = {};
+  IDS.forEach(function (id) {
+    var p = BY[id];
+    var b = el('button', 'chip'); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+    b.appendChild(swatch(p.id)); b.appendChild(el('span', null, tag(id))); var n = el('span', 'n', '0'); b.appendChild(n);
+    b.addEventListener('click', function () { state.picked[p.id] = !state.picked[p.id]; render(); });
+    chipsEl.appendChild(b); chipBtns[p.id] = { b: b, n: n };
+  });
+  document.getElementById('cclear').addEventListener('click', function () { state.picked = {}; render(); });
+  document.getElementById('cmark').style.left = (MAJORITY / TOTAL_SEATS * 100) + '%';
+  function renderCoalition() {
+    var t = res.total, total = 0, names = [];
+    var bar = document.getElementById('cbar'); bar.textContent = '';
+    IDS.forEach(function (id) {
+      var c = chipBtns[id], on = !!state.picked[id];
+      c.n.textContent = String(t[id]);
+      c.b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      c.b.disabled = !on && t[id] === 0;
+      c.b.hidden = !on && !res.eligible[id] && t[id] === 0;   // same rule as the results table
+    });
+    HEMI_ORDER.slice().sort(function (a, b) { return t[b] - t[a]; }).forEach(function (id) {
+      if (!state.picked[id] || !t[id]) return;
+      total += t[id]; names.push(tag(id));
+      var s = el('div', 'seg'); s.style.width = (t[id] / TOTAL_SEATS * 100) + '%'; s.style.background = 'var(--c-' + id + ')'; s.title = tag(id) + ': ' + t[id] + ' seats';
+      bar.appendChild(s);
+    });
+    var anyPicked = Object.keys(state.picked).some(function (k) { return state.picked[k]; });
+    document.getElementById('csum-n').textContent = String(total);
+    var v = document.getElementById('csum-v');
+    if (!anyPicked) v.textContent = '';
+    else if (total >= MAJORITY) v.textContent = names.join(' + ') + ' have a majority, ' + (total - MAJORITY) + ' over the 71 needed.';
+    else v.textContent = names.join(' + ') + ' are ' + (MAJORITY - total) + ' short of the 71 needed.';
+    bar.setAttribute('aria-label', total + ' of 140 seats for the selected parties');
+  }
+
+  /* ---------- map ---------- */
+  var map = document.getElementById('map'), stage = document.getElementById('stage'), tip = document.getElementById('tip');
+  var shapes = {};
+  var CAN_MIX = !!(window.CSS && CSS.supports && CSS.supports('fill', 'color-mix(in srgb, red 50%, black)'));
+  (function buildMap() {
+    var pad = 3;
+    map.setAttribute('viewBox', (-pad) + ' ' + (-pad) + ' ' + (GEO.w + 2 * pad) + ' ' + (GEO.h + 2 * pad));
+    var gS = svgEl('g', {});
+    counties.forEach(function (c) {
+      var p = svgEl('path', { d: GEO.paths[c.key], class: 'county', 'fill-rule': 'evenodd', tabindex: '0', role: 'button' });
+      p.setAttribute('aria-label', c.name + ' county');
+      p.addEventListener('mousedown', function (ev) { ev.preventDefault(); });
+      p.addEventListener('click', function (ev) { pickCounty(c.key, ev.clientX, ev.clientY); ev.stopPropagation(); });
+      p.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pickCounty(c.key); } });
+      gS.appendChild(p); shapes[c.key] = p;
+    });
+    map.appendChild(gS);
+    map.addEventListener('click', function () { closeTip(); });
+  })();
+
+  function vbox() { var a = map.getAttribute('viewBox').split(/\s+/).map(Number); return { x: a[0], y: a[1], width: a[2], height: a[3] }; }
+  function standing(c) {
+    var arr = IDS.map(function (id) { return { id: id, v: c.share[id] }; }).sort(function (a, b) { return b.v - a.v; });
+    return arr;
+  }
+  /* map view: who leads each county, or one party's strength from its weakest county to its strongest */
+  var viewEl = document.getElementById('mapview'), viewKey = '';
+  function listed() { return IDS.filter(function (id) { return res.eligible[id] || res.total[id]; }); }
+  function renderViews() {
+    var ids = listed();
+    if (state.view !== 'lead' && ids.indexOf(state.view) < 0) state.view = 'lead';
+    var key = ids.join(',') + '|' + state.view;
+    if (key === viewKey) return;
+    viewKey = key; viewEl.textContent = '';
+    function btn(v, label, id) {
+      var b = el('button', 'chip'); b.type = 'button'; b.setAttribute('aria-pressed', state.view === v ? 'true' : 'false');
+      if (id) b.appendChild(swatch(id));
+      b.appendChild(el('span', null, label));
+      b.addEventListener('click', function () { state.view = v; renderMap(); renderViews(); });
+      viewEl.appendChild(b);
+    }
+    btn('lead', 'Leading party');
+    ids.forEach(function (id) { btn(id, tag(id), id); });
+  }
+  function renderMap() {
+    var leaders = {}, v = state.view, lo = Infinity, hi = -Infinity;
+    if (v !== 'lead') res.counties.forEach(function (c) { lo = Math.min(lo, c.share[v]); hi = Math.max(hi, c.share[v]); });
+    res.counties.forEach(function (c) {
+      var lead = standing(c)[0]; leaders[lead.id] = true;
+      var p = shapes[c.key];
+      var isSel = state.county === c.key;
+      var id = v === 'lead' ? lead.id : v, col = 'var(--c-' + id + ')';
+      p.style.fill = isSel && CAN_MIX ? 'color-mix(in srgb, ' + col + ' 76%, black)' : col;
+      if (v === 'lead') p.style.fillOpacity = '';
+      else p.style.fillOpacity = String(0.14 + 0.86 * (hi > lo ? (c.share[v] - lo) / (hi - lo) : 1));
+      p.classList.toggle('sel', isSel && !CAN_MIX);
+      p.setAttribute('aria-pressed', isSel ? 'true' : 'false');
+      p.setAttribute('aria-label', c.name + ' county, ' + c.seats + ' seats, ' + (v === 'lead' ? tag(lead.id) + ' leads with ' + f1(lead.v) + '%' : tag(v) + ' ' + f1(c.share[v]) + '%'));
+    });
+    var ml = document.getElementById('mlegend'); ml.textContent = '';
+    if (v === 'lead') {
+      IDS.forEach(function (id) {
+        if (!leaders[id]) return;
+        var it = el('span'); it.appendChild(swatch(id)); it.appendChild(el('span', null, tag(id))); ml.appendChild(it);
+      });
+    } else {
+      var sb = el('span', 'scalebar'); sb.appendChild(el('span', null, 'Weakest'));
+      var bar = el('i'); bar.style.background = 'linear-gradient(90deg, color-mix(in srgb, var(--c-' + v + ') 14%, transparent), var(--c-' + v + '))';
+      sb.appendChild(bar); sb.appendChild(el('span', null, 'Strongest')); ml.appendChild(sb);
+    }
+  }
+
+  function pickCounty(key, cx, cy) {
+    var r = map.getBoundingClientRect(), vb = vbox();
+    if (state.county === key && cx != null) { closeTip(); return; }
+    state.county = key;
+    var ux, uy;
+    if (cx != null && r.width > 0) { ux = vb.x + (cx - r.left) / r.width * vb.width; uy = vb.y + (cy - r.top) / r.height * vb.height; }
+    else { var lp = GEO.labels[key]; ux = lp[0]; uy = lp[1]; }
+    state.anchor = { x: ux, y: uy };
+    render();
+    var p = shapes[key]; if (cx == null && document.activeElement !== p && !tip.hidden) { /* keep focus where it is */ }
+  }
+  function closeTip() { state.county = null; state.anchor = null; render(); }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.county) closeTip(); });
+  document.addEventListener('click', function (e) { if (state.county && !tip.contains(e.target) && !map.contains(e.target)) closeTip(); });
+
+  var narrow = window.matchMedia('(max-width: 700px)');
+  function renderTip() {
+    if (!state.county) { tip.hidden = true; return; }
+    var c = res.counties.filter(function (x) { return x.key === state.county; })[0];
+    tip.textContent = '';
+    var h = el('div', 'tip-h'); h.appendChild(el('strong', null, c.name)); h.appendChild(el('span', 'sub num', c.seats + ' seats'));
+    var x = el('button', 'x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.addEventListener('click', closeTip); h.appendChild(x);
+    tip.appendChild(h);
+    var shown = IDS.filter(function (id) { return c.share[id] >= 1 || c.alloc[id] > 0; });   // 1% of this county's vote, or a seat here
+    shown.sort(function (a, b) { return c.share[b] - c.share[a]; });
+    shown.forEach(function (id) {
+      var r = el('div', 'trow');
+      var nm = el('div', 'nm'); nm.appendChild(swatch(id)); nm.appendChild(el('span', null, tag(id))); r.appendChild(nm);
+      r.appendChild(el('div', 'pc', f1(c.share[id]) + '%'));
+      var sd = el('div');
+      if (c.alloc[id]) sd.appendChild(seatDots(id, c.alloc[id]));
+      r.appendChild(sd); tip.appendChild(r);
+    });
+    tip.hidden = false;
+    positionTip();
+  }
+  function seatDots(id, n) {
+    var d = el('div', 'dots');
+    for (var k = 0; k < n; k++) { var o = el('span', 'dot'); o.style.background = 'var(--c-' + id + ')'; d.appendChild(o); }
+    var wrap = el('div', 'dotsrow'); wrap.style.display = 'flex'; wrap.style.alignItems = 'center'; wrap.style.gap = '6px';
+    wrap.appendChild(d);
+    return wrap;
+  }
+  function positionTip() {
+    if (tip.hidden || narrow.matches || !state.anchor) { tip.style.left = ''; tip.style.top = ''; return; }
+    var sr = stage.getBoundingClientRect(), mr = map.getBoundingClientRect(), vb = vbox();
+    var ax = mr.left - sr.left + (state.anchor.x - vb.x) / vb.width * mr.width;
+    var ay = mr.top - sr.top + (state.anchor.y - vb.y) / vb.height * mr.height;
+    var w = tip.offsetWidth, hgt = tip.offsetHeight;
+    var left = ax + 16; if (left + w > sr.width) left = ax - w - 16; left = Math.max(2, Math.min(left, sr.width - w - 2));
+    var top = Math.max(0, Math.min(ay - 24, Math.max(0, sr.height - hgt)));
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  }
+  window.addEventListener('resize', positionTip);
+
+  function render() {
+    res = E.project(base, counties, input());
+    renderInputs(); renderHemi(); renderTable(); renderCoalition(); renderViews(); renderMap(); renderTip();
+    var tc = SLIDER_IDS.reduce(function (s, id) { return s + state.cents[id]; }, 0);
+    document.getElementById('total').textContent = f1(tc / 100) + '%' + (tc === 10000 ? '' : ' (scaled to 100% for the projection)');
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
