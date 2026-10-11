@@ -352,7 +352,7 @@ function seatLayout(n, rows, r0, r1) {
 var LAYOUT = seatLayout(TOTAL, 7, 112, 300);
 function drawHemi() {
   var svg = document.getElementById("hemi"), cx = 325, cy = 322;
-  svg.setAttribute("viewBox", "0 0 650 335");
+  svg.setAttribute("viewBox", "0 0 650 346");
   var order = [], k = 0;
   HEMI_ORDER.forEach(function (p) { for (var i = 0; i < R.seats[p]; i++) order.push(p); });
   var h = "";
@@ -472,7 +472,6 @@ document.getElementById("reset").addEventListener("click", function () {
 });
 buildInputs(); buildMap(); syncInputs(null); update();
 </script>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
