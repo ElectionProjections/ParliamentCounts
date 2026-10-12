@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armenia Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Armenia Seat Projector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one 760px column of flat, evenly spaced cards in workflow order; neutral cool-grey surfaces so party colours carry the page. */
+:root{
+  --bg:#eceff4; --card:#ffffff; --ink:#18202e; --ink2:#566175; --line:#e0e5ee;
+  --track:#cdd5e3; --accent:#3d5a99; --btn:#f1f3f8; --btn-on:#18202e; --btn-on-ink:#ffffff;
+  --good:#2b8a4b; --bad:#c0392b; --thumb:#ffffff; --tip:#ffffff;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14171d; --card:#1f232b; --ink:#e7ebf2; --ink2:#9aa5b8; --line:#303644;
+    --track:#5a667e; --accent:#8eaee8; --btn:#2a303b; --btn-on:#e7ebf2; --btn-on-ink:#1f232b;
+    --good:#5cc07b; --bad:#f2766b; --thumb:#e7ebf2; --tip:#262b35; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171d; --card:#1f232b; --ink:#e7ebf2; --ink2:#9aa5b8; --line:#303644;
+  --track:#5a667e; --accent:#8eaee8; --btn:#2a303b; --btn-on:#e7ebf2; --btn-on-ink:#1f232b;
+  --good:#5cc07b; --bad:#f2766b; --thumb:#e7ebf2; --tip:#262b35; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.4;
+  padding-inline:16px;padding-block:20px 28px}
+.wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:14px}
+h1{margin:0 0 2px;text-align:center;font-size:22px;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+h2{margin:0 0 12px;text-align:center;font-size:17px;font-weight:650;letter-spacing:-.005em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+button{font:inherit;color:inherit;cursor:pointer}
+/* inputs */
+.row{padding:9px 0 11px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;column-gap:12px;row-gap:9px;align-items:center}
+.row:first-of-type{border-top:0;padding-top:0}
+.row label{font-weight:500;min-width:0}
+.numw{display:flex;align-items:center;gap:4px;color:var(--ink2)}
+.num{width:58px;text-align:right;font:inherit;font-variant-numeric:tabular-nums;padding:4px 6px;color:var(--ink);
+  background:var(--btn);border:1px solid var(--line);border-radius:6px}
+.num:disabled{opacity:.75}
+input[type=range]{grid-column:1/-1;width:100%;height:8px;margin:2px 0;border-radius:4px;-webkit-appearance:none;appearance:none;
+  background:linear-gradient(to right,var(--c,var(--accent)) var(--p,0%),var(--track) var(--p,0%));cursor:pointer;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--thumb);
+  border:3px solid var(--c,var(--accent));cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--thumb);border:3px solid var(--c,var(--accent));cursor:pointer}
+input[type=range]::-moz-range-track{background:transparent}
+input[type=range]:active,input[type=range]::-webkit-slider-thumb:active{cursor:pointer}
+input[type=range]:disabled,input[type=range]:disabled::-webkit-slider-thumb{cursor:default}
+input[type=range]:disabled{opacity:.7}
+.row.ro label{color:var(--ink2)}
+.row.ro .num{background:transparent;border-color:transparent;color:var(--ink2);cursor:not-allowed;opacity:1}
+.row.ro input[type=range]{opacity:1;cursor:not-allowed;
+  background:linear-gradient(to right,transparent var(--p,0%),var(--track) var(--p,0%)),repeating-linear-gradient(135deg,var(--ink2) 0 2px,var(--track) 2px 6px)}
+.row.ro input[type=range]::-webkit-slider-thumb{width:0;height:0;border:0;box-shadow:none;background:transparent;cursor:not-allowed}
+.row.ro input[type=range]::-moz-range-thumb{width:0;height:0;border:0;background:transparent}
+.actions{display:flex;justify-content:center;margin-top:8px}
+.btn{background:var(--btn);border:1px solid var(--line);border-radius:7px;padding:4px 12px;font-size:13px}
+.btn:hover{border-color:var(--ink2)}
+/* results */
+.hemi{max-width:650px;margin-inline:auto}
+.hemi svg,.mapbox svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:16px 0 4px;font-size:13px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;display:inline-block}
+.tblwrap{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);text-align:right;padding:6px 8px}
+td{padding:8px;text-align:right;border-top:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+td:first-child{display:flex;align-items:center;gap:9px;min-width:0}
+td:first-child span.nm{min-width:0}
+/* chips */
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--btn);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:13px;font-weight:500}
+.chip:hover{border-color:var(--ink2)}
+.chip[aria-pressed=true]{background:var(--btn-on);color:var(--btn-on-ink);border-color:var(--btn-on)}
+/* coalition bar */
+.barwrap{position:relative;margin:30px 6px 56px}
+.bar{display:flex;height:16px;border-radius:5px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;border-right:2px solid var(--card)}
+.mk{position:absolute;top:-7px;width:2px;height:30px;background:var(--ink);transform:translateX(-1px)}
+.mk.on{background:var(--good)}
+.mkl{position:absolute;top:28px;transform:translateX(-50%);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink2)}
+.mk.on+.mkl{color:var(--good)}
+.note{margin:0;text-align:center;font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
+td.up{color:var(--good);font-weight:600}
+td.dn{color:var(--bad);font-weight:600}
+.note.on{color:var(--good);font-weight:600}
+/* map */
+.mapbox{position:relative;max-width:650px;margin:12px auto 0}
+.reg{stroke:var(--card);stroke-width:1.4;stroke-linejoin:round;cursor:pointer;outline:none;transition:filter .12s}
+.reg:hover,.reg:focus-visible{filter:brightness(.88)}
+.reg.sel{filter:brightness(.8)}
+#tip{position:absolute;z-index:3;width:172px;background:var(--tip);border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);font-size:12.5px}
+#tip h3{margin:0 0 5px;font-size:13px;font-weight:650}
+#tip .tr{display:flex;align-items:center;gap:6px;padding:2px 0;font-variant-numeric:tabular-nums}
+#tip .tr b{font-weight:500;flex:1}
+.grad{display:inline-block;width:90px;height:8px;border-radius:4px}
+.src{margin:2px 0 0;text-align:center;font-size:11.5px;color:var(--ink2);text-wrap:balance}
+@media (max-width:420px){ .card{padding:14px 12px} td,th{padding-inline:5px} }
+@media (prefers-reduced-motion: reduce){ .reg{transition:none} }
+</style>
+
+<main class="wrap">
+  <h1>Armenia Seat Projection</h1>
+
+  <section class="card" id="c-in">
+    <h2>Input vote share</h2>
+    <div id="rows"></div>
+    <div class="actions"><button class="btn" id="reset" type="button">Reset</button></div>
+  </section>
+
+  <section class="card" id="c-res">
+    <h2>Projected results</h2>
+    <div class="hemi"><svg id="hemi" role="img" aria-label="Seat distribution"></svg></div>
+    <div class="legend" id="hleg"></div>
+    <div class="tblwrap"><table id="tbl"><thead><tr><th>List</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="card" id="c-co">
+    <h2>Coalition builder</h2>
+    <div class="chips" id="chips"></div>
+    <div class="barwrap" id="bw"><div class="bar" id="bar" role="progressbar" aria-valuemin="0"></div><div class="mk" id="mk"></div><div class="mkl" id="mkl"></div></div>
+    <p class="note" id="note"></p>
+  </section>
+
+  <section class="card" id="c-map">
+    <h2>Projected results map</h2>
+    <div class="chips" id="modes"></div>
+    <div class="mapbox" id="mb"><svg id="map" role="group" aria-label="Map of provinces"></svg><div id="tip" hidden></div></div>
+    <div class="legend" id="mleg"></div>
+  </section>
+
+  <p class="src">Sources: Central Electoral Commission of Armenia (final 2026 results by marz and national seat allocation, elections.am; final results also via Armenpress), Electoral Code rules as set out by OSCE/ODIHR, the Venice Commission, elect.am and EVN Report, province boundaries from geoBoundaries (wmgeolab).</p>
+</main>
+
+<script>
+const DATA={"D":1461072,"valid":1456740,"regions":["Yerevan","Aragatsotn","Ararat","Armavir","Gegharkunik","Lori","Kotayk","Shirak","Syunik","Vayots Dzor","Tavush"],"parties":[{"id":"CC","acr":"CC","name":"Civil Contract","alliance":false,"slider":true,"thr":4,"votes":726819,"share":49.745597752882816,"reg":[203411,40774,72636,69581,54320,60873,69539,63851,35482,17266,38756],"elec":330},{"id":"SA","acr":"SA","name":"Strong Armenia","alliance":true,"slider":true,"thr":8,"votes":340006,"share":23.270995542998566,"reg":[121078,13608,25138,28870,18528,41153,31597,26665,14273,5632,13451],"elec":13},{"id":"AA","acr":"AA","name":"Armenia Alliance","alliance":true,"slider":true,"thr":8,"votes":144983,"share":9.923056495504671,"reg":[62571,6268,11426,11308,8868,6137,16236,8178,7200,2194,4589],"elec":8},{"id":"BHK","acr":"BHK","name":"Prosperous Armenia","alliance":false,"slider":true,"thr":4,"votes":58287,"share":3.9893311212589113,"reg":[10342,3099,8477,4095,5723,3904,12805,4340,2006,1269,2222],"elec":5},{"id":"WU","acr":"WU","name":"Wings of Unity","alliance":false,"slider":true,"thr":4,"votes":33537,"share":2.295369427379349,"reg":[14096,727,1601,1701,2629,1919,2686,1451,4948,342,1424],"elec":13},{"id":"MPA","acr":"MPA","name":"Meritocratic Party of Armenia","alliance":false,"slider":true,"thr":4,"votes":30642,"share":2.0972272413679818,"reg":[16540,918,1870,1671,1131,1774,2879,1549,1020,418,867],"elec":5},{"id":"DOK","acr":"DOK","name":"Democracy, Law and Discipline","alliance":false,"slider":false,"thr":4,"votes":25758,"share":1.7629521337757483,"reg":[11481,879,2210,2402,1093,1640,2386,1624,828,422,792],"elec":1},{"id":"NF","acr":"NF","name":"New Force Reformist Party","alliance":false,"slider":false,"thr":4,"votes":25551,"share":1.7487844541542101,"reg":[16305,552,1474,1303,696,1059,2057,821,576,237,468],"elec":3},{"id":"IAE","acr":"IAE","name":"I Am Against Everyone","alliance":false,"slider":false,"thr":4,"votes":21181,"share":1.4496889954772934,"reg":[11313,648,1177,1182,719,1203,1912,1295,774,337,616],"elec":5},{"id":"REP","acr":"REP","name":"Republic Party","alliance":false,"slider":false,"thr":4,"votes":15808,"share":1.081945311387803,"reg":[7779,751,1389,745,831,890,1190,886,575,230,538],"elec":4},{"id":"LHK","acr":"LHK","name":"Bright Armenia","alliance":false,"slider":false,"thr":4,"votes":7439,"share":0.5091467087179824,"reg":[2809,221,451,455,351,1078,547,461,493,101,471],"elec":1},{"id":"FR","acr":"FR","name":"In the Name of the Republic Alliance","alliance":true,"slider":false,"thr":8,"votes":6754,"share":0.4622633244631339,"reg":[3052,168,408,367,272,315,517,1163,247,106,139],"elec":0},{"id":"NDP","acr":"NDP","name":"Pan-Armenian National Democratic Pole","alliance":true,"slider":false,"thr":8,"votes":5481,"share":0.3751355169355104,"reg":[2558,178,374,339,292,410,481,420,206,89,134],"elec":0},{"id":"DCP","acr":"DCP","name":"Democratic Consolidation Party","alliance":false,"slider":false,"thr":4,"votes":5269,"share":0.36062562283036015,"reg":[2491,166,261,318,219,407,413,407,361,82,143],"elec":1},{"id":"ANC","acr":"ANC","name":"Armenian National Congress","alliance":false,"slider":false,"thr":4,"votes":3143,"share":0.21511602439852384,"reg":[1635,111,141,163,130,257,326,192,94,26,68],"elec":0},{"id":"CDP","acr":"CDP","name":"Christian Democratic Party","alliance":false,"slider":false,"thr":4,"votes":2671,"share":0.18281097714554792,"reg":[1260,85,168,204,101,155,289,147,83,116,63],"elec":0},{"id":"KNR","acr":"KNR","name":"Kochari National Revival and Awakening of the Nation","alliance":false,"slider":false,"thr":4,"votes":1986,"share":0.13592759289069944,"reg":[910,58,159,151,80,92,226,110,96,31,73],"elec":0},{"id":"RFP","acr":"RFP","name":"Reformists Party","alliance":false,"slider":false,"thr":4,"votes":1425,"share":0.09753112782942935,"reg":[536,66,113,143,65,109,140,96,82,26,49],"elec":0}],"map":{"w":650,"h":656,"paths":{"Gegharkunik":"M416.3,188.1L425.0,179.6L425.6,178.1L425.5,176.7L422.7,174.3L420.6,173.8L413.9,173.4L409.3,174.8L406.9,177.8L406.4,182.9L407.0,184.9L408.6,187.3L410.8,188.5L416.3,188.1ZM385.8,178.5L382.8,178.4L380.8,177.7L379.3,176.6L376.4,173.1L374.0,169.2L366.8,166.2L365.6,165.3L362.8,160.4L360.9,158.3L356.4,156.9L354.1,157.5L351.3,157.5L349.1,156.7L346.3,154.7L344.7,154.4L343.4,154.9L342.0,157.6L338.3,160.9L333.9,162.3L330.4,164.1L328.1,166.0L326.9,167.2L325.9,169.4L323.7,175.7L321.9,177.3L318.2,178.8L315.2,179.6L309.9,179.8L306.8,179.3L304.8,178.2L302.4,175.4L296.8,172.3L294.0,171.5L290.6,171.1L286.9,171.7L283.4,172.9L279.4,175.6L277.2,175.9L273.9,174.9L272.0,175.8L271.6,175.7L271.7,177.8L271.4,181.1L270.9,182.1L268.5,183.2L267.7,183.9L267.7,185.3L268.3,186.3L268.8,195.0L269.4,196.7L269.9,203.2L271.5,206.6L273.0,207.0L278.8,207.2L280.1,207.7L283.9,211.9L284.7,213.7L285.1,216.0L285.1,218.0L283.6,223.3L283.5,224.6L284.1,227.1L285.6,228.4L288.5,229.8L292.5,232.6L294.5,243.0L297.2,250.2L297.6,256.5L298.4,260.5L300.6,266.7L302.7,270.7L302.9,273.6L300.3,274.9L299.1,276.0L298.7,278.9L298.9,280.2L299.7,282.3L301.5,285.2L304.8,289.2L312.6,296.5L315.2,300.0L316.0,302.0L316.2,303.1L316.4,304.6L316.6,308.3L316.3,310.5L313.1,318.5L313.2,320.6L314.2,325.3L319.2,336.5L320.8,341.6L323.4,347.7L324.2,349.4L327.6,351.4L328.2,352.3L328.6,360.8L328.9,362.3L330.6,365.1L331.3,367.3L331.0,372.0L333.6,380.3L333.6,380.7L338.2,378.9L345.8,372.2L351.7,365.6L352.7,364.9L357.3,363.7L361.3,360.9L363.0,360.4L365.5,360.4L367.5,361.1L370.6,361.4L378.9,361.0L385.4,360.0L398.5,358.6L402.3,356.9L406.1,356.0L409.1,353.4L410.8,352.5L414.1,351.6L416.5,346.3L418.4,344.5L419.5,344.6L420.6,346.3L424.2,349.2L427.3,349.2L427.5,346.4L429.7,342.3L431.6,341.1L434.3,340.2L439.2,339.2L453.8,339.3L467.7,340.0L472.7,341.0L478.3,343.2L480.0,344.4L483.8,348.4L484.8,345.2L488.5,340.2L489.5,337.4L490.1,334.6L490.6,326.3L491.0,323.8L491.8,322.3L494.3,320.6L498.6,319.3L500.6,318.0L501.8,316.5L502.2,305.7L503.2,300.0L503.2,298.2L502.5,296.9L502.4,295.0L504.2,293.2L506.0,292.5L506.2,289.5L505.8,287.6L504.9,286.3L500.0,282.1L498.9,280.3L498.2,277.5L497.1,276.6L494.2,276.8L493.1,277.6L489.5,278.8L486.8,279.1L484.4,278.7L482.1,277.8L479.1,274.6L477.1,270.0L475.1,268.6L468.1,266.3L437.2,247.9L415.2,228.9L412.3,225.1L411.4,222.3L410.6,217.5L409.6,215.1L408.0,212.9L404.9,210.6L403.1,208.5L401.8,206.2L400.8,197.7L398.1,194.2L394.2,192.5L393.0,191.5L389.6,186.9L387.3,180.6L385.8,178.5Z","Syunik":"M454.7,451.4L457.1,450.1L460.5,449.7L463.6,450.1L466.2,450.9L470.1,452.4L473.5,454.7L476.2,456.6L477.3,458.9L478.3,463.1L477.6,469.8L477.7,472.7L479.4,480.7L482.0,485.8L481.9,488.5L481.1,490.7L474.4,502.8L473.0,505.9L472.6,508.9L472.8,510.7L474.1,512.9L476.0,514.1L478.5,514.6L482.5,514.6L486.1,515.3L488.2,516.4L492.4,521.4L497.2,525.1L500.5,526.5L507.1,528.1L512.2,530.2L514.7,532.5L516.1,534.9L516.2,539.3L515.6,541.1L514.3,543.6L511.0,547.6L510.3,549.6L510.0,551.7L510.9,558.0L512.1,560.6L514.0,563.2L517.3,566.5L523.8,575.5L528.3,582.5L530.7,588.6L534.4,601.2L539.0,627.5L541.3,635.8L543.8,641.9L544.2,648.2L545.6,649.3L548.1,649.6L550.4,649.1L557.0,644.8L559.6,644.1L572.2,637.0L574.9,636.2L579.3,636.0L581.5,635.4L585.0,633.6L587.1,633.3L590.1,633.8L596.2,637.2L601.1,639.3L606.4,639.6L615.7,641.1L618.1,641.7L621.1,643.9L623.5,643.6L624.0,641.2L620.1,626.8L619.6,619.7L621.4,613.1L624.9,604.6L626.2,599.1L626.1,595.8L625.2,594.3L623.5,592.6L621.5,586.9L617.1,577.7L616.1,576.4L614.7,575.4L609.1,574.0L607.9,571.3L605.0,568.8L603.8,566.4L603.4,564.4L602.9,560.3L603.3,558.4L604.3,557.4L606.1,556.8L608.6,557.1L616.9,560.8L617.4,558.7L618.7,558.6L619.7,559.9L621.5,561.3L622.8,561.7L627.5,556.4L631.8,553.7L638.8,551.5L642.6,550.1L644.0,549.1L640.6,548.7L635.2,545.1L631.9,543.4L624.0,540.5L622.2,538.8L620.4,536.7L618.5,532.8L615.8,521.7L614.5,519.3L609.0,519.4L606.2,518.8L600.2,515.0L593.2,509.7L591.4,507.1L589.6,503.6L588.7,500.1L588.4,497.0L589.2,493.9L590.8,491.8L592.7,490.8L598.5,490.5L600.2,489.8L607.7,482.5L609.4,482.0L611.1,482.2L613.3,483.6L614.9,483.7L615.8,482.5L615.5,480.1L613.5,476.3L613.6,474.0L614.8,471.9L616.8,470.4L618.6,469.8L620.7,469.9L621.4,468.3L621.3,466.1L620.2,462.3L618.0,459.0L616.2,457.1L611.5,454.7L609.2,454.8L607.4,455.5L604.9,455.5L592.9,454.1L590.6,453.2L589.8,451.8L588.3,450.3L587.6,446.7L586.3,445.3L578.7,442.6L576.9,442.9L573.5,444.1L570.3,446.0L562.2,449.5L558.5,449.8L554.5,449.6L551.9,448.6L547.3,444.9L545.7,442.8L543.0,436.4L540.8,433.5L538.8,431.4L527.3,426.8L524.6,424.5L521.6,420.8L518.7,414.6L513.8,406.1L511.7,403.0L509.5,401.6L497.1,398.6L488.6,393.9L477.7,385.5L473.5,379.7L469.2,381.3L467.9,382.1L467.0,383.2L464.3,388.0L458.2,402.4L453.9,405.1L452.9,407.1L452.7,408.5L453.3,410.3L456.5,414.5L457.5,416.5L458.9,421.6L458.6,428.2L458.0,431.4L454.0,442.7L454.0,445.4L454.7,451.4Z","Tavush":"M385.8,178.5L385.9,172.8L387.9,168.1L389.6,166.4L390.9,164.2L391.1,162.1L392.0,160.2L397.1,154.7L398.4,153.8L403.5,151.7L409.3,150.0L424.7,143.4L428.1,140.0L430.2,135.3L432.2,129.6L432.8,122.5L432.1,118.9L430.7,118.4L425.9,118.8L422.6,118.1L421.4,117.3L418.6,114.5L405.6,99.1L399.3,97.0L396.6,95.2L396.1,93.9L396.2,92.8L398.6,86.8L398.9,85.0L398.6,81.3L397.7,80.2L394.1,79.2L391.4,79.4L389.7,80.1L387.0,81.9L383.9,84.8L379.5,85.3L377.3,85.1L375.8,84.4L373.0,82.1L371.0,81.3L363.8,80.8L357.4,79.8L356.0,78.6L354.7,75.3L353.7,74.3L350.9,71.9L346.4,70.0L345.4,69.0L343.8,64.1L342.1,62.1L340.4,62.1L339.5,63.0L338.8,64.3L338.0,69.1L337.2,70.1L334.8,70.4L333.1,70.2L330.4,68.9L329.2,67.6L327.4,64.5L326.3,60.2L326.9,55.9L328.3,54.7L330.4,54.0L333.2,53.8L337.8,54.1L343.3,55.2L346.7,55.4L348.3,55.1L351.4,53.9L354.2,51.4L354.7,50.1L354.4,47.1L353.9,44.9L348.1,37.6L343.7,33.9L340.4,31.9L336.1,31.8L330.5,32.8L325.0,32.6L323.2,32.0L321.8,30.9L320.9,29.1L320.9,27.0L323.6,23.2L324.2,21.9L324.1,20.9L323.5,19.8L320.7,18.1L319.3,16.0L317.9,12.2L317.8,6.0L315.5,7.3L305.4,15.5L302.6,16.0L298.6,15.7L291.5,13.3L287.3,11.0L284.8,10.4L280.6,10.5L279.0,11.1L278.0,12.1L277.4,14.6L277.5,15.7L278.3,17.2L279.4,18.4L284.4,21.6L286.2,23.3L288.4,26.2L288.7,27.5L290.9,27.9L295.4,31.0L298.2,34.2L298.3,35.4L297.8,37.0L292.0,40.4L288.6,43.7L287.8,45.1L288.4,55.1L289.0,56.4L290.5,57.2L295.9,58.5L297.8,59.5L299.0,61.0L299.8,63.0L300.2,65.1L299.9,67.0L299.0,68.4L297.3,70.1L284.4,79.2L282.5,79.5L278.7,76.5L276.4,75.4L275.1,75.6L273.3,76.6L271.1,79.8L266.6,83.0L265.6,84.2L265.6,85.8L267.9,90.0L269.4,91.1L271.4,93.5L274.1,95.7L278.5,97.3L284.9,98.2L287.7,99.9L293.3,105.7L293.9,106.9L293.9,108.2L293.4,109.0L291.8,109.7L290.0,111.1L289.1,112.4L286.6,113.8L284.4,116.0L280.4,130.2L277.7,134.8L276.7,135.8L275.4,136.3L268.9,137.8L264.5,139.4L263.2,140.2L261.6,142.7L261.5,144.0L261.9,145.5L264.6,152.6L266.8,155.4L267.3,157.0L267.3,163.1L266.5,165.5L266.3,167.7L266.0,172.8L266.0,172.8L270.5,175.6L271.6,175.7L272.0,175.8L273.9,174.9L277.2,175.9L279.4,175.6L283.4,172.9L286.9,171.7L290.6,171.1L294.0,171.5L296.8,172.3L302.4,175.4L304.8,178.2L306.8,179.3L309.9,179.8L315.2,179.6L318.2,178.8L321.9,177.3L323.7,175.7L325.9,169.4L326.9,167.2L328.1,166.0L330.4,164.1L333.9,162.3L338.3,160.9L342.0,157.6L343.4,154.9L344.7,154.4L346.3,154.7L349.1,156.7L351.3,157.5L354.1,157.5L356.4,156.9L360.9,158.3L362.8,160.4L365.6,165.3L366.8,166.2L374.0,169.2L376.4,173.1L379.3,176.6L380.8,177.7L382.8,178.4L385.8,178.5ZM310.9,62.1L314.7,61.6L316.8,63.2L319.0,63.6L320.3,65.0L323.1,71.1L322.2,73.6L321.0,74.5L320.1,76.2L317.4,76.5L312.5,75.9L309.8,73.4L307.7,69.8L307.7,67.2L308.4,64.0L309.4,62.8L310.9,62.1ZM350.7,84.2L354.1,84.8L356.5,86.8L357.8,87.4L359.6,91.5L358.8,92.5L356.8,93.2L354.4,92.7L352.9,91.8L351.4,90.2L350.6,88.8L348.8,87.9L348.7,85.8L349.3,84.7L350.7,84.2Z","Shirak":"M144.6,152.4L142.1,152.4L136.2,151.6L134.4,150.5L133.3,148.9L132.3,145.1L131.4,144.2L121.5,142.4L120.6,141.0L118.9,135.4L115.8,129.2L115.8,128.0L117.4,124.5L118.3,120.4L120.6,114.8L121.5,114.1L122.7,114.0L125.1,115.4L127.5,115.7L130.5,114.9L132.9,113.4L133.7,108.4L135.2,106.2L137.4,104.6L137.9,103.7L138.2,99.7L140.8,95.6L140.5,94.8L139.6,94.2L138.2,93.9L131.2,93.7L128.9,93.3L126.1,91.9L125.4,90.8L125.3,89.6L126.4,87.4L129.2,85.2L129.7,84.2L129.7,83.2L129.1,82.0L125.3,79.2L120.4,74.3L117.5,67.8L115.5,66.3L109.7,63.8L108.0,62.6L107.3,61.6L107.2,58.5L108.2,55.5L109.6,44.0L109.7,39.8L104.4,40.0L99.4,39.3L94.3,39.1L88.0,40.2L85.0,41.5L81.5,43.7L78.1,47.4L74.2,50.1L71.6,51.2L69.4,51.6L63.8,51.6L56.9,50.4L46.9,50.1L42.3,49.5L36.4,48.1L30.9,45.9L26.6,45.7L23.4,46.1L19.5,47.7L13.8,51.6L8.0,51.3L7.1,51.4L6.3,52.3L6.0,56.5L6.5,59.3L8.3,64.6L9.1,72.7L10.5,74.4L16.5,77.6L20.6,79.0L22.9,81.0L32.2,82.9L34.3,84.3L42.0,94.0L45.3,97.4L47.4,101.1L49.0,117.7L49.9,120.7L54.1,130.0L59.4,138.8L62.2,146.1L62.2,152.6L60.2,157.0L60.2,159.4L62.0,163.5L62.2,165.4L61.7,167.5L58.6,173.1L54.9,181.4L49.9,189.5L46.9,193.5L41.1,199.9L40.8,202.0L41.3,203.5L40.9,204.8L39.5,205.7L37.1,208.7L34.4,208.9L33.1,209.7L31.6,211.6L29.3,213.6L25.2,215.9L23.8,218.7L21.9,220.9L21.9,222.5L23.3,224.1L28.3,226.5L30.2,229.7L33.6,232.6L35.1,235.1L35.7,237.5L38.9,237.3L40.2,237.7L41.7,237.3L42.7,236.1L43.4,233.5L46.3,231.9L49.5,231.0L51.5,228.1L53.8,222.2L56.3,220.6L60.6,220.0L62.3,219.3L68.9,214.9L71.0,214.8L76.8,216.6L81.1,217.0L85.1,218.8L88.4,220.9L94.5,222.2L101.9,221.8L103.0,220.9L104.3,218.3L105.7,217.6L113.1,217.5L114.5,219.0L115.5,220.8L116.8,221.9L119.1,226.4L120.6,227.5L123.2,228.3L126.7,227.3L131.5,224.0L135.5,222.8L140.1,219.5L141.5,218.8L144.3,218.4L148.4,215.7L151.0,213.5L151.6,212.5L151.2,211.3L149.1,209.4L148.9,207.3L148.9,202.8L150.7,196.6L151.4,192.5L150.6,192.0L145.3,192.9L142.3,193.0L139.3,192.6L138.2,192.0L137.4,188.1L133.9,182.3L132.9,180.8L128.6,177.8L128.0,176.6L128.3,175.5L131.7,173.8L133.1,172.6L135.2,168.1L138.2,166.0L140.1,163.6L144.5,155.5L144.6,152.4Z","Lori":"M288.7,27.5L284.3,28.2L279.3,28.3L256.7,28.0L252.7,27.6L248.8,26.6L247.3,25.6L243.8,24.4L240.5,24.0L238.2,24.5L237.1,25.3L233.7,29.0L230.9,33.1L228.1,34.9L224.8,34.8L223.4,33.6L222.5,30.2L221.9,29.3L220.9,28.7L219.6,28.7L218.2,28.7L217.3,29.2L213.4,32.6L210.8,33.9L203.0,34.1L199.7,33.0L195.0,29.6L191.6,27.8L188.7,27.1L185.6,27.2L184.0,27.8L181.1,29.2L179.4,30.4L176.6,31.5L173.8,31.3L170.3,29.7L166.8,26.0L164.4,24.3L159.2,22.3L155.4,21.6L152.0,22.5L151.5,23.4L149.9,29.3L148.9,31.4L146.7,33.0L144.3,33.9L139.4,34.5L135.9,34.1L132.8,32.7L131.2,32.5L127.1,33.1L124.9,33.5L115.4,38.2L109.7,39.8L109.6,44.0L108.2,55.5L107.2,58.5L107.3,61.6L108.0,62.6L109.7,63.8L115.5,66.3L117.5,67.8L120.4,74.3L125.3,79.2L129.1,82.0L129.7,83.2L129.7,84.2L129.2,85.2L126.4,87.4L125.3,89.6L125.4,90.8L126.1,91.9L128.9,93.3L131.2,93.7L138.2,93.9L139.6,94.2L140.5,94.8L140.8,95.6L138.2,99.7L137.9,103.7L137.4,104.6L135.2,106.2L133.7,108.4L132.9,113.4L130.5,114.9L127.5,115.7L125.1,115.4L122.7,114.0L121.5,114.1L120.6,114.8L118.3,120.4L117.4,124.5L115.8,128.0L115.8,129.2L118.9,135.4L120.6,141.0L121.5,142.4L131.4,144.2L132.3,145.1L133.3,148.9L134.4,150.5L136.2,151.6L142.1,152.4L144.6,152.4L145.2,152.4L148.4,150.8L150.0,150.8L152.4,152.2L153.6,153.6L154.3,155.3L155.9,156.9L157.6,157.8L161.7,158.4L163.6,158.1L166.4,156.7L167.1,154.6L169.7,152.2L171.0,151.9L175.7,151.8L182.7,153.8L185.9,155.7L193.2,160.9L194.9,164.8L195.9,169.2L195.9,170.5L200.0,167.5L203.5,165.9L209.8,164.4L212.6,163.1L215.9,162.8L217.8,163.3L221.9,166.0L223.4,166.2L225.0,165.6L226.3,164.3L229.9,163.7L231.9,164.4L235.2,166.6L239.9,169.0L244.2,171.6L246.3,172.4L249.0,172.8L253.2,172.3L258.1,173.2L261.8,173.0L265.4,172.8L266.0,172.8L266.3,167.7L266.5,165.5L267.3,163.1L267.3,157.0L266.8,155.4L264.6,152.6L261.9,145.5L261.5,144.0L261.6,142.7L263.2,140.2L264.5,139.4L268.9,137.8L275.4,136.3L276.7,135.8L277.7,134.8L280.4,130.2L284.4,116.0L286.6,113.8L289.1,112.4L290.0,111.1L291.8,109.7L293.4,109.0L293.9,108.2L293.9,106.9L293.3,105.7L287.7,99.9L284.9,98.2L278.5,97.3L274.1,95.7L271.4,93.5L269.4,91.1L267.9,90.0L265.6,85.8L265.6,84.2L266.6,83.0L271.1,79.8L273.3,76.6L275.1,75.6L276.4,75.4L278.7,76.5L282.5,79.5L284.4,79.2L297.3,70.1L299.0,68.4L299.9,67.0L300.2,65.1L299.8,63.0L299.0,61.0L297.8,59.5L295.9,58.5L290.5,57.2L289.0,56.4L288.4,55.1L287.8,45.1L288.6,43.7L292.0,40.4L297.8,37.0L298.3,35.4L298.2,34.2L295.4,31.0L290.9,27.9L288.7,27.5Z","Kotayk":"M271.6,175.7L270.5,175.6L266.0,172.8L266.0,172.8L265.4,172.8L261.8,173.0L258.1,173.2L253.2,172.3L249.0,172.8L246.3,172.4L244.2,171.6L239.9,169.0L235.2,166.6L231.9,164.4L229.9,163.7L226.3,164.3L225.0,165.6L223.4,166.2L221.9,166.0L217.8,163.3L215.9,162.8L212.6,163.1L209.8,164.4L203.5,165.9L200.0,167.5L195.9,170.5L195.9,170.6L197.1,174.1L197.0,179.3L196.1,182.0L196.2,184.9L197.3,186.1L201.5,188.0L208.0,192.0L210.9,195.2L217.4,196.8L221.9,198.4L223.2,199.4L223.8,200.7L223.9,203.3L223.1,206.8L217.9,220.6L217.3,228.3L216.2,231.7L211.7,236.3L210.9,238.0L211.1,239.6L211.6,240.9L212.6,241.6L213.3,242.9L213.8,244.5L213.6,246.4L212.9,247.7L209.3,249.3L208.4,250.4L204.9,257.7L203.1,264.1L200.3,265.8L198.5,265.9L196.6,266.6L195.1,267.7L194.5,268.9L194.5,270.7L195.8,272.4L197.1,273.5L200.6,275.4L201.2,276.9L200.7,278.4L199.4,279.7L196.5,281.3L195.6,282.9L195.3,284.8L195.6,287.5L198.0,291.8L198.4,293.1L199.9,291.8L205.5,291.1L207.4,290.3L210.0,290.5L211.8,291.3L214.2,291.3L220.3,289.7L226.1,286.8L228.0,286.6L230.0,287.2L231.1,290.8L232.7,292.5L235.6,294.4L235.9,295.6L235.4,296.9L232.6,299.5L230.8,303.1L230.0,306.6L229.2,308.1L229.3,309.5L231.4,312.1L232.8,312.3L235.8,311.4L240.0,311.2L241.5,311.8L242.2,312.8L242.6,314.6L244.6,318.4L245.8,322.2L246.7,323.4L248.4,324.0L250.2,324.5L254.8,323.4L264.4,322.2L271.1,319.4L275.8,315.9L279.3,313.8L286.1,310.6L297.7,306.0L302.9,303.3L308.4,303.1L312.2,303.2L316.2,303.1L316.0,302.0L315.2,300.0L312.6,296.5L304.8,289.2L301.5,285.2L299.7,282.3L298.9,280.2L298.7,278.9L299.1,276.0L300.3,274.9L302.9,273.6L302.7,270.7L300.6,266.7L298.4,260.5L297.6,256.5L297.2,250.2L294.5,243.0L292.5,232.6L288.5,229.8L285.6,228.4L284.1,227.1L283.5,224.6L283.6,223.3L285.1,218.0L285.1,216.0L284.7,213.7L283.9,211.9L280.1,207.7L278.8,207.2L273.0,207.0L271.5,206.6L269.9,203.2L269.4,196.7L268.8,195.0L268.3,186.3L267.7,185.3L267.7,183.9L268.5,183.2L270.9,182.1L271.4,181.1L271.7,177.8L271.6,175.7Z","Vayots Dzor":"M333.6,380.7L333.6,381.8L333.5,383.0L328.8,392.5L328.3,397.0L328.5,406.0L330.0,406.9L336.6,414.4L343.3,423.0L347.4,429.0L348.6,433.4L348.6,436.6L347.8,443.3L346.5,449.1L346.5,452.3L347.3,455.0L348.6,456.7L351.0,458.0L353.7,458.4L355.7,457.7L358.0,456.3L359.6,454.4L361.1,450.7L363.1,448.9L365.9,448.1L369.6,448.5L372.1,449.6L374.4,451.3L375.6,453.6L379.0,465.2L380.8,467.0L383.6,468.0L393.8,468.2L396.0,468.8L398.0,469.7L402.1,475.0L404.4,477.1L406.6,478.3L409.1,478.4L411.7,477.8L417.9,473.3L425.3,466.6L431.1,463.9L438.2,457.0L441.1,455.9L450.3,455.2L452.0,454.6L454.7,451.4L454.0,445.4L454.0,442.7L458.0,431.4L458.6,428.2L458.9,421.6L457.5,416.5L456.5,414.5L453.3,410.3L452.7,408.5L452.9,407.1L453.9,405.1L458.2,402.4L464.3,388.0L467.0,383.2L467.9,382.1L469.2,381.3L473.5,379.7L465.8,366.6L465.5,365.3L466.1,362.5L465.5,361.1L464.0,359.5L458.5,356.5L454.0,355.4L445.6,353.8L431.8,352.2L427.6,350.5L427.3,349.2L424.2,349.2L420.6,346.3L419.5,344.6L418.4,344.5L416.5,346.3L414.1,351.6L410.8,352.5L409.1,353.4L406.1,356.0L402.3,356.9L398.5,358.6L385.4,360.0L378.9,361.0L370.6,361.4L367.5,361.1L365.5,360.4L363.0,360.4L361.3,360.9L357.3,363.7L352.7,364.9L351.7,365.6L345.8,372.2L338.2,378.9L333.6,380.7Z","Armavir":"M197.4,296.3L196.0,296.9L189.0,296.1L182.3,293.3L180.5,291.4L178.1,289.7L172.8,288.8L171.7,287.2L171.4,285.3L170.6,283.8L169.1,283.2L165.8,283.0L162.6,283.6L161.0,284.3L157.4,287.2L154.1,286.5L153.1,284.5L153.1,283.2L148.5,281.8L146.4,282.0L146.3,282.7L146.8,287.8L148.8,293.7L148.7,295.5L147.6,297.3L146.1,298.2L143.4,298.6L140.5,298.2L133.3,296.7L130.1,296.6L126.4,296.9L124.4,297.4L120.0,297.4L114.2,296.4L112.4,295.4L111.1,294.1L109.0,289.9L107.5,288.5L97.1,286.0L96.1,284.8L95.5,283.4L91.9,280.1L86.9,277.8L83.1,277.6L82.1,277.2L80.5,276.1L77.4,271.2L76.5,270.5L75.0,270.3L74.0,270.4L73.1,271.1L70.9,275.3L70.0,276.2L66.7,276.1L65.6,275.4L64.9,274.2L63.5,273.6L61.9,273.8L60.2,275.4L59.3,277.3L58.1,278.6L54.0,281.4L51.2,282.3L51.3,284.3L49.4,285.3L48.6,287.3L48.9,289.5L58.0,300.6L58.0,302.1L57.6,303.4L48.4,305.8L45.4,307.3L43.8,308.6L43.4,311.2L44.0,313.7L45.3,315.6L50.2,319.5L54.3,321.6L57.2,322.8L67.2,325.5L75.3,328.5L80.5,331.0L93.3,339.3L97.4,341.1L103.5,342.5L112.9,342.8L121.2,343.9L123.5,343.1L130.9,338.2L133.3,337.8L136.1,338.4L141.8,341.8L143.8,342.1L146.1,341.8L150.0,339.2L151.3,337.5L153.9,337.1L157.9,338.2L161.8,336.1L164.4,335.2L167.1,334.8L169.8,335.0L174.9,338.4L181.9,340.1L190.2,344.2L189.8,336.9L183.2,324.3L183.5,322.2L188.3,319.3L192.2,312.9L196.4,310.3L199.3,309.1L201.1,307.8L201.6,306.6L201.3,305.8L201.1,305.2L199.7,304.0L198.7,302.5L198.4,301.2L198.9,298.2L197.4,296.3Z","Aragatsotn":"M35.7,237.5L34.4,240.3L34.1,245.1L33.4,248.2L31.7,252.3L31.5,254.7L31.9,256.8L32.9,259.5L34.4,261.4L38.3,264.5L39.9,267.5L42.8,271.0L45.3,273.5L48.7,275.6L50.4,278.1L51.2,282.3L54.0,281.4L58.1,278.6L59.3,277.3L60.2,275.4L61.9,273.8L63.5,273.6L64.9,274.2L65.6,275.4L66.7,276.1L70.0,276.2L70.9,275.3L73.1,271.1L74.0,270.4L75.0,270.3L76.5,270.5L77.4,271.2L80.5,276.1L82.1,277.2L83.1,277.6L86.9,277.8L91.9,280.1L95.5,283.4L96.1,284.8L97.1,286.0L107.5,288.5L109.0,289.9L111.1,294.1L112.4,295.4L114.2,296.4L120.0,297.4L124.4,297.4L126.4,296.9L130.1,296.6L133.3,296.7L140.5,298.2L143.4,298.6L146.1,298.2L147.6,297.3L148.7,295.5L148.8,293.7L146.8,287.8L146.3,282.7L146.4,282.0L148.5,281.8L153.1,283.2L153.1,284.5L154.1,286.5L157.4,287.2L161.0,284.3L162.6,283.6L165.8,283.0L169.1,283.2L170.6,283.8L171.4,285.3L171.7,287.2L172.8,288.8L178.1,289.7L180.5,291.4L182.3,293.3L189.0,296.1L196.0,296.9L197.4,296.3L198.4,293.1L198.0,291.8L195.6,287.5L195.3,284.8L195.6,282.9L196.5,281.3L199.4,279.7L200.7,278.4L201.2,276.9L200.6,275.4L197.1,273.5L195.8,272.4L194.5,270.7L194.5,268.9L195.1,267.7L196.6,266.6L198.5,265.9L200.3,265.8L203.1,264.1L204.9,257.7L208.4,250.4L209.3,249.3L212.9,247.7L213.6,246.4L213.8,244.5L213.3,242.9L212.6,241.6L211.6,240.9L211.1,239.6L210.9,238.0L211.7,236.3L216.2,231.7L217.3,228.3L217.9,220.6L223.1,206.8L223.9,203.3L223.8,200.7L223.2,199.4L221.9,198.4L217.4,196.8L210.9,195.2L208.0,192.0L201.5,188.0L197.3,186.1L196.2,184.9L196.1,182.0L197.0,179.3L197.1,174.1L195.9,170.6L195.9,170.5L195.9,169.2L194.9,164.8L193.2,160.9L185.9,155.7L182.7,153.8L175.7,151.8L171.0,151.9L169.7,152.2L167.1,154.6L166.4,156.7L163.6,158.1L161.7,158.4L157.6,157.8L155.9,156.9L154.3,155.3L153.6,153.6L152.4,152.2L150.0,150.8L148.4,150.8L145.2,152.4L144.6,152.4L144.5,155.5L140.1,163.6L138.2,166.0L135.2,168.1L133.1,172.6L131.7,173.8L128.3,175.5L128.0,176.6L128.6,177.8L132.9,180.8L133.9,182.3L137.4,188.1L138.2,192.0L139.3,192.6L142.3,193.0L145.3,192.9L150.6,192.0L151.4,192.5L150.7,196.6L148.9,202.8L148.9,207.3L149.1,209.4L151.2,211.3L151.6,212.5L151.0,213.5L148.4,215.7L144.3,218.4L141.5,218.8L140.1,219.5L135.5,222.8L131.5,224.0L126.7,227.3L123.2,228.3L120.6,227.5L119.1,226.4L116.8,221.9L115.5,220.8L114.5,219.0L113.1,217.5L105.7,217.6L104.3,218.3L103.0,220.9L101.9,221.8L94.5,222.2L88.4,220.9L85.1,218.8L81.1,217.0L76.8,216.6L71.0,214.8L68.9,214.9L62.3,219.3L60.6,220.0L56.3,220.6L53.8,222.2L51.5,228.1L49.5,231.0L46.3,231.9L43.4,233.5L42.7,236.1L41.7,237.3L40.2,237.7L38.9,237.3L35.7,237.5Z","Yerevan":"M198.4,293.1L197.4,296.3L198.9,298.2L198.4,301.2L198.7,302.5L199.7,304.0L201.1,305.2L201.3,305.8L202.4,306.1L204.1,306.1L205.6,306.4L206.6,307.4L207.2,309.4L207.1,311.1L206.0,316.3L206.4,318.0L208.5,321.1L213.8,322.6L217.0,322.9L218.3,323.8L220.6,327.3L221.8,330.2L222.8,331.0L225.1,331.4L231.1,331.2L237.8,323.6L240.8,318.5L242.0,317.1L242.6,314.6L242.2,312.8L241.5,311.8L240.0,311.2L235.8,311.4L232.8,312.3L231.4,312.1L229.3,309.5L229.2,308.1L230.0,306.6L230.8,303.1L232.6,299.5L235.4,296.9L235.9,295.6L235.6,294.4L232.7,292.5L231.1,290.8L230.0,287.2L228.0,286.6L226.1,286.8L220.3,289.7L214.2,291.3L211.8,291.3L210.0,290.5L207.4,290.3L205.5,291.1L199.9,291.8L198.4,293.1Z","Ararat":"M316.2,303.1L312.2,303.2L308.4,303.1L302.9,303.3L297.7,306.0L286.1,310.6L279.3,313.8L275.8,315.9L271.1,319.4L264.4,322.2L254.8,323.4L250.2,324.5L248.4,324.0L246.7,323.4L245.8,322.2L244.6,318.4L242.6,314.6L242.0,317.1L240.8,318.5L237.8,323.6L231.1,331.2L225.1,331.4L222.8,331.0L221.8,330.2L220.6,327.3L218.3,323.8L217.0,322.9L213.8,322.6L208.5,321.1L206.4,318.0L206.0,316.3L207.1,311.1L207.2,309.4L206.6,307.4L205.6,306.4L204.1,306.1L202.4,306.1L201.3,305.8L201.6,306.6L201.1,307.8L199.3,309.1L196.4,310.3L192.2,312.9L188.3,319.3L183.5,322.2L183.2,324.3L189.8,336.9L190.2,344.2L193.6,345.8L204.9,353.0L209.2,355.3L211.7,357.3L213.2,360.3L223.0,368.9L223.9,371.2L224.8,377.3L230.9,385.5L230.9,388.5L231.4,391.0L237.4,392.1L238.2,393.0L238.7,395.2L239.7,396.5L245.2,399.9L251.6,402.2L253.8,405.9L255.8,407.4L257.3,409.1L258.0,411.7L267.6,422.2L272.1,422.8L278.0,421.5L287.1,418.8L289.7,418.6L292.6,418.9L297.3,420.5L299.4,420.4L302.4,419.6L308.5,415.9L314.0,411.1L318.6,405.9L320.6,404.8L324.5,404.6L328.5,406.0L328.3,397.0L328.8,392.5L333.5,383.0L333.6,381.8L333.6,380.7L333.6,380.3L331.0,372.0L331.3,367.3L330.6,365.1L328.9,362.3L328.6,360.8L328.2,352.3L327.6,351.4L324.2,349.4L323.4,347.7L320.8,341.6L319.2,336.5L314.2,325.3L313.2,320.6L313.1,318.5L316.3,310.5L316.6,308.3L316.4,304.6L316.2,303.1ZM297.7,399.9L303.1,399.1L305.0,399.9L304.2,401.9L304.8,403.7L304.2,406.3L303.1,408.2L302.4,410.3L300.4,411.5L297.5,411.8L295.6,410.4L294.2,408.8L293.7,405.8L294.1,403.2L295.8,402.0L297.7,399.9Z"}}};
+const PAL={"CC":"#4885df","SA":"#d37812","AA":"#ce3e5d","BHK":"#0ca387","WU":"#915fc0","MPA":"#a88822","DOK":"#dd5ca5","NF":"#2e9e52","IAE":"#a08b97","REP":"#107c8b","LHK":"#936959","FR":"#6e7604","NDP":"#907bf8","DCP":"#bf69d8","ANC":"#1d8350","CDP":"#92618e","KNR":"#f15f7a","RFP":"#bf6583"};
+// Armenian Electoral Code seat allocation (Arts. 95-102 as documented by CEC/ODIHR/EVN/elect.am).
+// No second round. Shares are percentages of the CEC base (valid votes + ballot inaccuracies).
+var Engine=(function(){
+var EPS=1e-9;
+function largestRemainder(total, weights, tieKey){
+  // Hare quota / largest remainder. weights: array of non-negative numbers.
+  var S=weights.reduce(function(a,b){return a+b;},0), n=weights.length, out=[], rem=[];
+  if(S<=0){ // degenerate: no votes at all, spread in list order
+    for(var i=0;i<n;i++) out.push(0);
+    for(var j=0;j<total;j++) out[j%n]++;
+    return out;
+  }
+  var used=0;
+  for(var i2=0;i2<n;i2++){
+    var q=total*weights[i2]/S, f=Math.floor(q+EPS);
+    out.push(f); used+=f; rem.push({i:i2,r:q-f,t:tieKey?tieKey[i2]:weights[i2]});
+  }
+  rem.sort(function(a,b){ if(Math.abs(b.r-a.r)>EPS) return b.r-a.r; if(Math.abs(b.t-a.t)>EPS) return b.t-a.t; return a.i-b.i; });
+  for(var l=0;l<total-used;l++) out[rem[l%n].i]++;
+  return out;
+}
+function allocate(lists){
+  // lists: [{id, share, thr}] in default-strength order
+  var n=lists.length, i;
+  var q=[]; for(i=0;i<n;i++) if(lists[i].share>=lists[i].thr-EPS && lists[i].share>0) q.push(i);
+  var threeRule=false;
+  if(q.length<3){ // the three best contestants are represented if fewer than three pass
+    var order=[]; for(i=0;i<n;i++) order.push(i);
+    order.sort(function(a,b){ if(Math.abs(lists[b].share-lists[a].share)>EPS) return lists[b].share-lists[a].share; return a-b; });
+    q=order.slice(0,3).sort(function(a,b){return a-b;}); threeRule=true;
+  }
+  var seats={}, base={}, mino={}, i2;
+  for(i=0;i<n;i++){ seats[lists[i].id]=0; base[lists[i].id]=0; mino[lists[i].id]=0; }
+  // 1. 101 base mandates, Hare quota + largest remainder among qualifying lists
+  var bw=q.map(function(k){return lists[k].share;});
+  var b=largestRemainder(101,bw);
+  q.forEach(function(k,j){ base[lists[k].id]=b[j]; });
+  // 2. four minority mandates: repeatedly give a seat to the list with the highest M/(held+1)
+  for(var s=0;s<4;s++){
+    var best=-1,bc=-1;
+    q.forEach(function(k){
+      var c=base[lists[k].id]/(mino[lists[k].id]+1);
+      if(c>bc+EPS || (Math.abs(c-bc)<=EPS && best>=0 && lists[k].share>lists[best].share+EPS)){ bc=c; best=k; }
+    });
+    mino[lists[best].id]++;
+  }
+  var T=105;
+  for(i=0;i<n;i++) seats[lists[i].id]=base[lists[i].id]+mino[lists[i].id];
+  // winner
+  var w=q[0];
+  q.forEach(function(k){ var a=seats[lists[k].id], bb=seats[lists[w].id];
+    if(a>bb || (a===bb && lists[k].share>lists[w].share+EPS)) w=k; });
+  var W=seats[lists[w].id], topup=0, comp=0;
+  // 3. stable majority: more than half but under 52% -> add seats to the winner until it holds 52% of the enlarged house
+  if(2*W>T && 100*W<52*T){
+    topup=Math.ceil((52*T-100*W)/48-EPS);
+    seats[lists[w].id]+=topup; T+=topup; W+=topup;
+  }
+  // 4. effective opposition: a winner above two-thirds is capped; extra seats go to the other qualifying lists
+  if(3*W>2*T){
+    comp=Math.ceil((3*W-2*T)/2-EPS);
+    var others=q.filter(function(k){return k!==w;});
+    var ow=others.map(function(k){return lists[k].share;});
+    var c=largestRemainder(comp,ow);
+    others.forEach(function(k,j){ seats[lists[k].id]+=c[j]; });
+    T+=comp;
+  }
+  var win=lists[w].id;
+  return {seats:seats,base:base,minority:mino,total:T,winner:win,topup:topup,comp:comp,qualified:q.map(function(k){return lists[k].id;}),threeRule:threeRule,majority:(2*seats[win]>T)};
+}
+// Map layer: universal national swing on each region with a taper at 20% of baseline
+function projectRegions(parties, input, taper){
+  // parties: [{id, share (baseline national), reg:[regional votes]}], input: {id: national share}
+  var nR=parties[0].reg.length, regTot=[], r, p;
+  for(r=0;r<nR;r++){ var t=0; parties.forEach(function(x){t+=x.reg[r];}); regTot.push(t); }
+  var out=[]; for(r=0;r<nR;r++) out.push({});
+  parties.forEach(function(x){
+    var B=x.share, I=input[x.id], T=taper*B;
+    for(var r2=0;r2<nR;r2++){
+      var b=x.reg[r2]/regTot[r2]*100, v;
+      if(I>=T-EPS) v=Math.max(0,b+(I-B));
+      else v=Math.max(0,b+(T-B))*(I/T);
+      out[r2][x.id]=v;
+    }
+  });
+  for(r=0;r<nR;r++){ var s=0,id; for(id in out[r]) s+=out[r][id];
+    if(s>0) for(id in out[r]) out[r][id]=out[r][id]/s*100; }
+  return out;
+}
+return {allocate:allocate,projectRegions:projectRegions,largestRemainder:largestRemainder};
+})();
+if(typeof module!=='undefined') module.exports=Engine;
+
+(function(){
+"use strict";
+const P=DATA.parties, byId={}; P.forEach(p=>byId[p.id]=p);
+const SL=P.filter(p=>p.slider), MI=P.filter(p=>!p.slider);
+const sumSlBase=SL.reduce((a,p)=>a+p.share,0), otherBase=100-sumSlBase;
+const rank={}; P.forEach((p,i)=>rank[p.id]=i);
+const baseSeats=Engine.allocate(P.map(p=>({id:p.id,share:p.share,thr:p.thr}))).seats;
+const AX=60, TAPER=0.2;
+let vals={}; SL.forEach(p=>vals[p.id]=p.share);
+let sel=new Set(), mode="winner", openR=-1, editing=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const f1=x=>(Math.max(0,x)+1e-9).toFixed(1);
+const label=p=>p.name+" ("+p.acr+")";
+const NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+
+/* ---------- inputs ---------- */
+const refs={};
+function buildRows(){
+  const host=$("rows"); host.innerHTML="";
+  SL.concat([{id:"_other",name:"Other",acr:"",other:true}]).forEach(p=>{
+    const row=document.createElement("div"); row.className="row";
+    const lb=document.createElement("label"); lb.textContent=p.other?"Other":label(p); lb.htmlFor="n_"+p.id;
+    const nw=document.createElement("div"); nw.className="numw";
+    const num=document.createElement("input"); num.className="num"; num.id="n_"+p.id; num.type="text"; num.inputMode="decimal"; num.autocomplete="off";
+    const pc=document.createElement("span"); pc.textContent="%";
+    nw.append(num,pc);
+    const rg=document.createElement("input"); rg.type="range"; rg.min="0"; rg.max=String(AX); rg.step="0.1"; rg.id="r_"+p.id;
+    rg.setAttribute("aria-label",p.other?"Other":label(p));
+    row.append(lb,nw,rg); host.appendChild(row);
+    refs[p.id]={num,rg};
+    if(p.other){num.disabled=true;rg.disabled=true;row.classList.add("ro");return;}
+    rg.style.setProperty("--c",PAL[p.id]);
+    rg.addEventListener("input",()=>{setVal(p.id,parseFloat(rg.value));});
+    num.addEventListener("input",()=>{const x=parseFloat(num.value.replace(",","."));if(isFinite(x)){editing=p.id;setVal(p.id,x);}});
+    num.addEventListener("change",()=>{editing=null;num.value=f1(vals[p.id]);});
+    num.addEventListener("blur",()=>{editing=null;num.value=f1(vals[p.id]);});
+    num.addEventListener("keydown",e=>{if(e.key==="Enter")num.blur();});
+  });
+}
+function setVal(id,x){
+  let others=0; SL.forEach(p=>{if(p.id!==id)others+=vals[p.id];});
+  const max=Math.max(0,Math.min(AX,100-others));
+  x=Math.round(x*10)/10; x=Math.min(Math.max(x,0),max);
+  vals[id]=x; render();
+}
+function shares(){
+  const sum=SL.reduce((a,p)=>a+vals[p.id],0), other=Math.max(0,100-sum), r=otherBase>0?other/otherBase:0, s={};
+  SL.forEach(p=>s[p.id]=vals[p.id]); MI.forEach(p=>s[p.id]=p.share*r);
+  return {s:s,other:other};
+}
+function paintInputs(other){
+  SL.forEach(p=>{const r=refs[p.id];
+    r.rg.value=vals[p.id]; r.rg.style.setProperty("--p",Math.min(100,vals[p.id]/AX*100)+"%");
+    if(editing!==p.id)r.num.value=f1(vals[p.id]);
+  });
+  const o=refs._other; o.rg.value=Math.min(AX,other); o.rg.style.setProperty("--p",Math.min(100,other/AX*100)+"%"); o.num.value=f1(other);
+}
+
+/* ---------- hemicycle ---------- */
+function drawHemi(order,total){
+  const svg=$("hemi"); svg.innerHTML="";
+  const N=total, W=650, R=318, rin=R*0.34, cx=W/2;
+  const K=Math.max(3,Math.min(12,Math.round(Math.sqrt(N/2.9))));
+  const rad=[]; for(let i=0;i<K;i++)rad.push(rin+(R-rin)*(i+.5)/K);
+  const sr=rad.reduce((a,b)=>a+b,0); let cnt=rad.map(r=>Math.round(N*r/sr)); let diff=N-cnt.reduce((a,b)=>a+b,0);
+  for(let i=K-1;diff!==0;i=(i-1+K)%K){cnt[i]+=diff>0?1:-1;diff+=diff>0?-1:1;}
+  const rowSp=(R-rin)/K; let arc=1e9; rad.forEach((r,i)=>{arc=Math.min(arc,Math.PI*r/cnt[i]);});
+  const rho=0.42*Math.min(rowSp,arc), cy=R+rho*.4+4, H=Math.ceil(cy+rho+4);
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  const pts=[]; rad.forEach((r,i)=>{for(let j=0;j<cnt[i];j++){const th=Math.PI-Math.PI*(j+.5)/cnt[i];pts.push({th:th,r:r});}});
+  pts.sort((a,b)=>(b.th-a.th)||(a.r-b.r));
+  let k=0;
+  order.forEach(o=>{for(let n=0;n<o.n;n++){const q=pts[k++]; if(!q)return;
+    el("circle",{cx:(cx+q.r*Math.cos(q.th)).toFixed(1),cy:(cy-q.r*Math.sin(q.th)).toFixed(1),r:rho.toFixed(1),fill:PAL[o.id]},svg);}});
+  svg.setAttribute("aria-label","Seat distribution: "+order.map(o=>byId[o.id].acr+" "+o.n).join(", "));
+}
+
+/* ---------- main render ---------- */
+function render(){
+  const sh=shares(), S=sh.s;
+  paintInputs(sh.other);
+  const res=Engine.allocate(P.map(p=>({id:p.id,share:S[p.id],thr:p.thr})));
+  const seats=res.seats, T=res.total;
+  // hemicycle in default-strength order
+  const order=P.filter(p=>seats[p.id]>0).map(p=>({id:p.id,n:seats[p.id]}));
+  drawHemi(order,T);
+  $("hleg").innerHTML=order.map(o=>'<span><i class="dot" style="background:'+PAL[o.id]+'"></i>'+esc(byId[o.id].acr)+'</span>').join("");
+  // table
+  const rows=P.filter(p=>S[p.id]>=1-1e-9||seats[p.id]>0).sort((a,b)=>(S[b.id]-S[a.id])||(rank[a.id]-rank[b.id]));
+  $("tbl").tBodies[0].innerHTML=rows.map(p=>{
+    const d=seats[p.id]-baseSeats[p.id], ds=d>0?"+"+d:d<0?"−"+Math.abs(d):"0";
+    return '<tr><td><i class="dot" style="background:'+PAL[p.id]+'"></i><span class="nm">'+esc(label(p))+'</span></td><td>'+f1(S[p.id])+'%</td><td>'+seats[p.id]+'</td><td class="'+(d>0?"up":d<0?"dn":"")+'">'+ds+'</td></tr>';
+  }).join("");
+  // coalition builder
+  const withSeats=P.filter(p=>seats[p.id]>0).sort((a,b)=>(seats[b.id]-seats[a.id])||(rank[a.id]-rank[b.id]));
+  sel.forEach(id=>{if(!(seats[id]>0))sel.delete(id);});
+  $("chips").innerHTML=withSeats.map(p=>'<button type="button" class="chip" data-id="'+p.id+'" aria-pressed="'+sel.has(p.id)+'"><i class="dot" style="background:'+PAL[p.id]+'"></i>'+esc(p.acr)+'</button>').join("");
+  const maj=Math.floor(T/2)+1;
+  let got=0, bar="";
+  withSeats.forEach(p=>{if(sel.has(p.id)){got+=seats[p.id];bar+='<i style="width:'+(seats[p.id]/T*100)+'%;background:'+PAL[p.id]+'"></i>';}});
+  const b=$("bar"); b.innerHTML=bar; b.setAttribute("aria-valuemax",T); b.setAttribute("aria-valuenow",got);
+  $("mk").style.left=(maj/T*100)+"%"; $("mk").className="mk"+(got>=maj?" on":"");
+  $("mkl").style.left=(maj/T*100)+"%"; $("mkl").textContent=maj;
+  $("note").textContent=got+" of "+T+" seats"+(got>=maj?" · Majority":"");
+  $("note").className="note"+(got>=maj?" on":"");
+  renderMap(S,seats,withSeats);
+}
+$("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;const id=b.dataset.id;sel.has(id)?sel.delete(id):sel.add(id);render();});
+$("reset").addEventListener("click",()=>{SL.forEach(p=>vals[p.id]=p.share);editing=null;render();});
+
+/* ---------- map ---------- */
+let regs=null, last=null;
+function buildMap(){
+  const svg=$("map"); svg.setAttribute("viewBox","0 0 "+DATA.map.w+" "+DATA.map.h); svg.innerHTML="";
+  DATA.regions.forEach((n,i)=>{const p=el("path",{d:DATA.map.paths[n],"class":"reg","data-i":i,tabindex:"0",role:"button","aria-label":n,"fill-rule":"evenodd"},svg);});
+}
+function renderMap(S,seats,withSeats){
+  regs=Engine.projectRegions(P,S,TAPER); last={S:S,seats:seats};
+  const win=regs.map(r=>{let b=null;P.forEach(p=>{if(b===null||r[p.id]>r[b]+1e-12)b=p.id;});return b;});
+  // mode buttons: Winner + lists with 1%+ or a seat, ordered by seats
+  const ms=P.filter(p=>S[p.id]>=1-1e-9||seats[p.id]>0).sort((a,b)=>(seats[b.id]-seats[a.id])||(S[b.id]-S[a.id])||(rank[a.id]-rank[b.id]));
+  if(mode!=="winner"&&!ms.some(p=>p.id===mode))mode="winner";
+  $("modes").innerHTML='<button type="button" class="chip" data-m="winner" aria-pressed="'+(mode==="winner")+'">Winner</button>'+
+    ms.map(p=>'<button type="button" class="chip" data-m="'+p.id+'" aria-pressed="'+(mode===p.id)+'"><i class="dot" style="background:'+PAL[p.id]+'"></i>'+esc(p.acr)+'</button>').join("");
+  const paths=$("map").querySelectorAll(".reg");
+  let lo=1e9,hi=-1e9; if(mode!=="winner")regs.forEach(r=>{lo=Math.min(lo,r[mode]);hi=Math.max(hi,r[mode]);});
+  paths.forEach((pa,i)=>{
+    if(mode==="winner"){pa.setAttribute("fill",PAL[win[i]]);pa.setAttribute("fill-opacity","1");}
+    else{const t=hi>lo?(regs[i][mode]-lo)/(hi-lo):.6;pa.setAttribute("fill",PAL[mode]);pa.setAttribute("fill-opacity",(.14+.86*t).toFixed(3));}
+    pa.classList.toggle("sel",i===openR);
+  });
+  if(mode==="winner"){
+    const ws=[...new Set(win)].sort((a,b)=>(seats[byId[b].id]-seats[byId[a].id])||(rank[a]-rank[b]));
+    $("mleg").innerHTML=ws.map(id=>'<span><i class="dot" style="background:'+PAL[id]+'"></i>'+esc(byId[id].acr)+'</span>').join("");
+  }else{
+    $("mleg").innerHTML='<span>Weakest <i class="grad" style="background:linear-gradient(to right,'+PAL[mode]+'24,'+PAL[mode]+')"></i> Strongest</span>';
+  }
+  if(openR>=0)showTip(openR,null);
+}
+$("modes").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;mode=b.dataset.m;render();});
+function showTip(i,pt){
+  const tip=$("tip"), r=regs[i];
+  const list=P.filter(p=>r[p.id]>=1-1e-9).sort((a,b)=>(r[b.id]-r[a.id])||(rank[a.id]-rank[b.id]));
+  tip.innerHTML='<h3>'+esc(DATA.regions[i])+'</h3>'+list.map(p=>'<div class="tr"><i class="dot" style="background:'+PAL[p.id]+'"></i><b>'+esc(p.acr)+'</b><span>'+f1(r[p.id])+'%</span></div>').join("");
+  tip.hidden=false;
+  const box=$("mb").getBoundingClientRect();
+  let x,y;
+  if(pt){x=pt.x-box.left;y=pt.y-box.top;}else{const pa=$("map").querySelectorAll(".reg")[i].getBoundingClientRect();x=pa.left+pa.width/2-box.left;y=pa.top+pa.height/2-box.top;}
+  const w=tip.offsetWidth,h=tip.offsetHeight;
+  x=Math.max(0,Math.min(box.width-w,x+8)); y=y+h+12>box.height?Math.max(0,y-h-8):y+10;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function hideTip(){openR=-1;$("tip").hidden=true;$("map").querySelectorAll(".reg").forEach(p=>p.classList.remove("sel"));}
+$("map").addEventListener("click",e=>{
+  const pa=e.target.closest(".reg"); if(!pa){hideTip();return;}
+  const i=+pa.dataset.i; e.stopPropagation();
+  if(openR===i){hideTip();return;}
+  openR=i; $("map").querySelectorAll(".reg").forEach((q,k)=>q.classList.toggle("sel",k===i));
+  showTip(i,{x:e.clientX,y:e.clientY});
+});
+$("map").addEventListener("keydown",e=>{
+  if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("reg")){e.preventDefault();const i=+e.target.dataset.i;openR=i;
+    $("map").querySelectorAll(".reg").forEach((q,k)=>q.classList.toggle("sel",k===i));showTip(i,null);}
+  if(e.key==="Escape")hideTip();
+});
+document.addEventListener("click",e=>{if(!e.target.closest("#mb"))hideTip();});
+
+buildRows(); buildMap(); render();
+})();
+</script>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
