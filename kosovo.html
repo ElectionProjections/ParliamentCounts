@@ -163,8 +163,12 @@ td:first-child{display:flex;align-items:center;gap:8px}
 /* map */
 .mapbtns{margin-bottom:10px}
 .mapwrap{position:relative;max-width:650px;margin:0 auto}
-.mapwrap svg{display:block;width:100%;height:auto}
-.area{stroke:var(--card);stroke-width:.8;stroke-linejoin:round;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transition:filter .12s}
+.mapwrap svg{display:block;width:100%;height:auto;touch-action:pan-y pinch-zoom}
+.mapwrap svg.zoomed{cursor:grab}
+.mapwrap svg.zoomed:active{cursor:grabbing}
+.zoom{position:absolute;top:4px;right:4px;display:flex;flex-direction:column;align-items:stretch;gap:4px;z-index:4}
+.zoom button{min-width:30px;padding:2px 8px;font-weight:600;font-size:.85rem;line-height:1.3}
+.area{stroke:var(--card);stroke-width:.8px;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transition:filter .12s}
 .area:hover,.area.sel{filter:brightness(.84)}
 .area:focus{outline:none}
 .tip{position:absolute;z-index:5;min-width:120px;max-width:170px;background:var(--tip);color:var(--fg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--tip-shadow);padding:7px 9px;font-size:.8rem;line-height:1.35}
@@ -213,6 +217,7 @@ td:first-child{display:flex;align-items:center;gap:8px}
     <div class="mapwrap" id="mapWrap">
       <svg id="map" role="img" aria-label="Map of Kosovo by municipality"></svg>
       <div class="tip" id="tip" hidden></div>
+      <div class="zoom"><button id="zIn" type="button" aria-label="Zoom in">+</button><button id="zOut" type="button" aria-label="Zoom out">&minus;</button><button id="zReset" type="button" aria-label="Reset view">Reset</button></div>
     </div>
     <div id="mapLegend" class="maplegend"></div>
   </section>
@@ -476,6 +481,48 @@ if (typeof module !== 'undefined') {
     fillTip();
   }
 
+  /* ----- zoom and pan ----- */
+  function setupZoom() {
+    const svg = $('#map'), FW = DATA.view[0], FH = DATA.view[1];
+    const vb = { x: 0, y: 0, w: FW, h: FH }, ptrs = new Map();
+    let z = 1, dragged = false, panning = false, pinch = 0, start = null;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const apply = () => {
+      vb.w = FW / z; vb.h = FH / z; vb.x = clamp(vb.x, 0, FW - vb.w); vb.y = clamp(vb.y, 0, FH - vb.h);
+      svg.setAttribute('viewBox', vb.x + ' ' + vb.y + ' ' + vb.w + ' ' + vb.h);
+      svg.classList.toggle('zoomed', z > 1);
+      svg.style.touchAction = z > 1 ? 'none' : 'pan-y pinch-zoom';
+    };
+    const toSvg = (cx, cy) => { const r = svg.getBoundingClientRect(); return [vb.x + (cx - r.left) / r.width * vb.w, vb.y + (cy - r.top) / r.height * vb.h]; };
+    const zoomAt = (f, px, py) => { const nz = clamp(z * f, 1, 8), k = z / nz; vb.x = px - (px - vb.x) * k; vb.y = py - (py - vb.y) * k; z = nz; apply(); closeTip(); };
+    const centre = () => [vb.x + vb.w / 2, vb.y + vb.h / 2];
+    $('#zIn').addEventListener('click', () => zoomAt(1.6, ...centre()));
+    $('#zOut').addEventListener('click', () => zoomAt(1 / 1.6, ...centre()));
+    $('#zReset').addEventListener('click', () => { z = 1; vb.x = 0; vb.y = 0; apply(); closeTip(); });
+    svg.addEventListener('wheel', e => { if (z <= 1 && e.deltaY > 0) return; /* fully zoomed out: let the page scroll on */ e.preventDefault(); const [px, py] = toSvg(e.clientX, e.clientY); zoomAt(Math.exp(-clamp(e.deltaY, -100, 100) * 0.002), px, py); }, { passive: false });
+    svg.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); dragged = false; panning = false; start = { x: e.clientX, y: e.clientY };
+      if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); }
+    });
+    svg.addEventListener('pointermove', e => {
+      const p = ptrs.get(e.pointerId); if (!p) return;
+      const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
+      if (ptrs.size === 2) {
+        const [a, b] = [...ptrs.values()], nd = Math.hypot(a.x - b.x, a.y - b.y);
+        if (pinch > 0) { const [px, py] = toSvg((a.x + b.x) / 2, (a.y + b.y) / 2); zoomAt(nd / pinch, px, py); }
+        pinch = nd; dragged = true; return;
+      }
+      if (z <= 1) return;
+      if (!panning && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 4) { panning = true; dragged = true; closeTip(); try { svg.setPointerCapture(e.pointerId); } catch (_) {} }
+      if (panning) { const r = svg.getBoundingClientRect(); vb.x -= dx / r.width * vb.w; vb.y -= dy / r.height * vb.h; apply(); }
+    });
+    const end = e => { ptrs.delete(e.pointerId); pinch = 0; };
+    svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', end);
+    svg.addEventListener('click', e => { if (dragged) { e.stopImmediatePropagation(); e.preventDefault(); dragged = false; } }, true);
+    apply();
+  }
+
   /* ----- tooltip ----- */
   let tipXY = null;
   function placeTip(e) {
@@ -507,13 +554,12 @@ if (typeof module !== 'undefined') {
   }
 
   $('#coalReset').addEventListener('click', () => { picked.clear(); renderCoal(); });
-  buildRows(); layoutSeats(); buildMap(); update();
+  buildRows(); layoutSeats(); buildMap(); setupZoom(); update();
   SLIDER_PARTIES.forEach(p => { els[p.id].box.value = fmt1(inputs[p.id]); });
 })();
 
 </script>
 </body></html>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
