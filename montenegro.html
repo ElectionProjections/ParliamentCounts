@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montenegro Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montenegro Seat Projector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: single 760px column of stacked cards (inputs, results, builder, map); graphics capped at 650px and centred. */
+:root{
+  --bg:#eef1f5; --card:#ffffff; --fg:#18212c; --muted:#657080; --line:#e0e5eb;
+  --track:#d3dae3; --btn:#f2f4f7; --btn-on:#18212c; --btn-on-fg:#ffffff; --shade:rgba(24,33,44,.07);
+  --font:'Public Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161c; --card:#1b2129; --fg:#e8ecf1; --muted:#9aa4b2; --line:#2d3540;
+  --track:#6a7586; --btn:#262e39; --btn-on:#e8ecf1; --btn-on-fg:#12161c; --shade:rgba(255,255,255,.08); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161c; --card:#1b2129; --fg:#e8ecf1; --muted:#9aa4b2; --line:#2d3540;
+  --track:#6a7586; --btn:#262e39; --btn-on:#e8ecf1; --btn-on-fg:#12161c; --shade:rgba(255,255,255,.08); color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.4;padding-inline:16px;padding-block:24px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{text-align:center;font-size:26px;font-weight:700;margin:0 0 4px;text-wrap:balance}
+h2{text-align:center;font-size:18px;font-weight:600;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 18px;min-width:0}
+.sw{display:inline-block;width:11px;height:11px;border-radius:3px;flex:none}
+button{font:inherit;color:var(--fg);cursor:pointer}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 72px;column-gap:12px;row-gap:0;align-items:center;padding:5px 0 3px;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.lab{display:flex;align-items:center;gap:8px;min-width:0}
+.rng{grid-column:1/-1}
+.num{width:72px;box-sizing:border-box;font:inherit;text-align:right;padding:2px 8px;border:1px solid var(--line);border-radius:6px;background:var(--btn);color:var(--fg);font-variant-numeric:tabular-nums}
+.num[readonly]{opacity:.8}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;margin:0;background:transparent;cursor:pointer;display:block}
+input[type=range]:active,input[type=range]::-webkit-slider-thumb,input[type=range]::-moz-range-thumb,input[type=range]:active::-webkit-slider-thumb{cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--c) var(--p),var(--track) var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-5px;border-radius:50%;background:#fff;border:2px solid var(--c);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:var(--track)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--c)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--c);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]:disabled{cursor:default;opacity:.7}
+input[type=range]:focus-visible,.num:focus-visible,button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.reset{display:block;margin:12px auto 0;padding:6px 16px;border:1px solid var(--line);background:var(--btn);border-radius:8px}
+#hemi{display:block;width:100%;max-width:650px;margin:0 auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:16px auto 18px;max-width:650px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;max-width:650px;margin:0 auto;font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--muted);font-weight:500;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+td:first-child span.n{display:inline-flex;align-items:center;gap:8px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--btn);font-size:13px}
+.chip.on{background:var(--btn-on);color:var(--btn-on-fg);border-color:var(--btn-on)}
+.bar{position:relative;height:16px;border-radius:8px;background:var(--track);margin:0;overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.barw{max-width:650px;margin:20px auto 0;position:relative;padding-bottom:22px}
+.cnt{font-size:13px;font-variant-numeric:tabular-nums;margin-bottom:6px;color:var(--muted)}
+.note{max-width:650px;margin:2px auto 0;text-align:center;font-size:13px;min-height:2.8em;color:var(--muted)}
+.note b{color:var(--fg);font-weight:600}
+.mk{position:absolute;top:22px;width:2px;height:24px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.mkl{position:absolute;bottom:0;transform:translateX(-50%);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.mapw{position:relative;max-width:520px;margin:16px auto 0}
+#map{display:block;width:100%;height:auto}
+#map path{cursor:pointer;stroke:var(--card);stroke-width:.8;outline:none}
+#map path:hover,#map path.sel{filter:brightness(.86)}
+.tip{position:absolute;z-index:3;width:156px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.25);padding:8px 10px;font-size:12.5px;pointer-events:none}
+.tip b{display:block;margin-bottom:5px;font-size:13px}
+.tip div{display:flex;align-items:center;gap:6px;padding:1.5px 0}
+.tip div em{font-style:normal;margin-left:auto;font-variant-numeric:tabular-nums}
+.src{text-align:center;color:var(--muted);font-size:12px;margin:4px 0 0}
+@media (max-width:480px){.card{padding:16px 12px}h1{font-size:22px}}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="wrap">
+<h1>Montenegro Seat Projection</h1>
+<section class="card"><h2>Input vote share</h2><div id="inputs"></div><button class="reset" id="reset">Reset</button></section>
+<section class="card"><h2>Projected results</h2><svg id="hemi" viewBox="0 0 640 340"></svg><div class="legend" id="hlegend"></div><div class="tbl"><table id="tbl"></table></div></section>
+<section class="card"><h2>Coalition builder</h2><div class="chips" id="coal"></div><div class="barw"><div class="cnt" id="cnt"></div><div class="bar" id="bar"></div><div class="mk" id="mk"></div><div class="mkl" id="mkl"></div></div><div class="note" id="note"></div></section>
+<section class="card"><h2>Projected results map</h2><div class="chips" id="modes"></div><div class="mapw" id="mapw"><svg id="map"></svg><div class="tip" id="tip" hidden></div></div><div class="legend" id="mlegend"></div></section>
+<p class="src">Sources: State Election Commission of Montenegro, final results by polling station, 2023; Law on the Election of Councillors and Members of Parliament (Articles 94–95); Wikipedia, 2023 Montenegrin parliamentary election; Highcharts Map Collection, based on © OpenStreetMap contributors.</p>
+</div>
+<script>
+const PARTIES = [
+  { id: 'PES', name: 'Europe Now', acr: 'PES', col: 10, color: '#f08a24', slider: true },
+  { id: 'DPS', name: 'Democratic Party of Socialists of Montenegro', acr: 'DPS', col: 9, color: '#d7263d', slider: true },
+  { id: 'ZBCG', name: 'For the Future of Montenegro', acr: 'ZBCG', col: 13, color: '#2f4cb3', slider: true },
+  { id: 'DCG', name: 'Democrats of Montenegro', acr: 'DCG', col: 12, frac: 10 / 13.9, color: '#17a398', slider: true },
+  { id: 'BS', name: 'Bosniak Party', acr: 'BS', col: 0, color: '#3a9d3c', slider: true, min: 'bos' },
+  { id: 'URA', name: 'United Reform Action', acr: 'URA', col: 12, frac: 3.9 / 13.9, color: '#3ddc00', slider: true },
+  { id: 'SNP', name: 'Socialist People’s Party', acr: 'SNP', col: 3, color: '#8c5a2b', slider: true },
+  { id: 'SDP', name: 'Social Democratic Party', acr: 'SDP', col: 11, color: '#f0679e', slider: true },
+  { id: 'PZS', name: 'Justice for All', acr: 'PZS', col: 2, color: '#a04fd8', slider: false },
+  { id: 'FSH', name: 'Albanian Forum', acr: 'FSh', col: 14, color: '#8a9a1a', slider: true, min: 'alb' },
+  { id: 'ASH', name: 'Albanian Alliance', acr: 'ASh', col: 5, color: '#3da5e0', slider: true, min: 'alb' },
+  { id: 'HGI', name: 'Croatian Civic Initiative', acr: 'HGI', col: 1, color: '#f2c230', slider: false, type: 'cro', min: 'cro' },
+  { id: 'PRE', name: 'Turnaround', acr: 'PRE', col: 6, color: '#5f7a8a', slider: false },
+  { id: 'NK', name: 'People’s Coalition', acr: 'NK', col: 4, color: '#c2185b', slider: false },
+  { id: 'PZP', name: 'Movement for Changes', acr: 'PZP', col: 7, color: '#6b4f7a', slider: false },
+  { id: 'DMM', name: 'Yes We Can', acr: 'DMM', col: 8, color: '#a3a8b0', slider: false },
+];
+
+
+const SEATS = 81, THR = 3, MIN_THR = 0.7, CRO_THR = 0.35, POOL_CAP = 3;
+
+function dhondt(entries, seats) {
+  const q = [];
+  entries.forEach((e, o) => {
+    const n = Math.min(e.cap || seats, seats);
+    for (let d = 1; d <= n; d++) q.push({ q: e.votes / d, o, key: e.key });
+  });
+  q.sort((a, b) => b.q - a.q || a.o - b.o);
+  const out = {};
+  entries.forEach(e => (out[e.key] = 0));
+  q.slice(0, seats).forEach(x => out[x.key]++);
+  return out;
+}
+
+// P: parties {id,type,min}; sh: national vote share (%) by id
+// Art. 94: lists >=3% share seats on their own votes. Where NO list of a minority people (<=15% of population)
+// reaches 3%, that people's lists with >=0.7% each count as one pooled list worth at most 3 seats.
+function allocate(P, sh) {
+  const std = [], pools = {};
+  const groups = {};
+  P.forEach(p => { if (p.min) (groups[p.min] = groups[p.min] || []).push(p); });
+  P.forEach(p => { if (sh[p.id] >= THR) std.push(p); });
+  Object.keys(groups).forEach(g => {
+    if (groups[g].some(p => sh[p.id] >= THR)) return;
+    const m = groups[g].filter(p => sh[p.id] >= MIN_THR);
+    if (m.length) pools[g] = m;
+  });
+  const run = (seats, skip) => {
+    const ent = std.map(p => ({ key: p.id, votes: sh[p.id] }));
+    Object.keys(pools).forEach(g => {
+      const m = pools[g].filter(p => !(skip && skip.includes(p.id)));
+      if (m.length) ent.push({ key: '#' + g, votes: m.reduce((a, p) => a + sh[p.id], 0), cap: POOL_CAP });
+    });
+    const r = dhondt(ent, seats);
+    Object.keys(pools).forEach(g => {
+      const k = '#' + g;
+      if (!(k in r)) return;
+      const inner = dhondt(pools[g].filter(p => !(skip && skip.includes(p.id))).map(p => ({ key: p.id, votes: sh[p.id] })), r[k]);
+      Object.assign(r, inner);
+      delete r[k];
+    });
+    return r;
+  };
+  let res = run(SEATS);
+  const croHas = P.some(p => p.type === 'cro' && res[p.id] > 0);
+  const croBest = P.filter(p => p.type === 'cro' && sh[p.id] >= CRO_THR).sort((a, b) => sh[b.id] - sh[a.id])[0];
+  if (!croHas && croBest) {
+    res = run(SEATS - 1, P.filter(p => p.type === 'cro').map(p => p.id));
+    res[croBest.id] = 1;
+  }
+  const out = {};
+  P.forEach(p => (out[p.id] = res[p.id] || 0));
+  return out;
+}
+
+// rows: [{v:[votes per party index]}], P parties with .col index into v; S: national % per party id
+function project(rows, P, S) {
+  const N = rows.length, K = P.length;
+  const vv = (r, p) => r.v[p.col] * (p.frac || 1);
+  const tot = rows.map(r => P.reduce((a, p) => a + vv(r, p), 0));
+  const all = tot.reduce((a, b) => a + b, 0);
+  const w = tot.map(t => t / all);
+  const R = rows.map((r, i) => P.map(p => (vv(r, p) / tot[i]) * 100));
+  const b = P.map((p, k) => R.reduce((a, row, i) => a + w[i] * row[k], 0));
+  const X = rows.map(() => new Array(K).fill(0));
+  P.forEach((p, k) => {
+    const s = S[p.id], T = 0.2 * b[k], target = Math.max(s, T);
+    let lo = -100, hi = 100;
+    for (let it = 0; it < 60; it++) {
+      const d = (lo + hi) / 2;
+      const f = R.reduce((a, row, i) => a + w[i] * Math.max(0, row[k] + d), 0);
+      if (f < target) lo = d; else hi = d;
+    }
+    const d = (lo + hi) / 2;
+    rows.forEach((_, i) => {
+      let x = Math.max(0, R[i][k] + d);
+      if (s < T) x *= s / T;
+      X[i][k] = x;
+    });
+  });
+  for (let it = 0; it < 60; it++) {
+    X.forEach(row => {
+      const t = row.reduce((a, c) => a + c, 0) || 1;
+      for (let k = 0; k < K; k++) row[k] = (row[k] / t) * 100;
+    });
+    P.forEach((p, k) => {
+      const c = X.reduce((a, row, i) => a + w[i] * row[k], 0);
+      const f = c > 0 ? S[p.id] / c : 0;
+      X.forEach(row => (row[k] *= f));
+    });
+  }
+  X.forEach(row => {
+    const t = row.reduce((a, c) => a + c, 0) || 1;
+    for (let k = 0; k < K; k++) row[k] = (row[k] / t) * 100;
+  });
+  return { X, b, w };
+}
+
+
+const D = {"rows":[{"n":"Andrijevica","v":[2,7,108,525,19,0,10,7,3,594,558,10,157,452,0]},{"n":"Bar","v":[1344,138,547,201,168,253,196,121,122,6396,4139,594,2243,2202,133]},{"n":"Berane","v":[425,24,463,2057,289,11,44,156,38,2065,3729,141,1345,1972,43]},{"n":"Bijelo Polje","v":[4801,38,684,757,199,6,71,94,69,4207,5399,839,1965,3068,203]},{"n":"Budva","v":[30,55,292,258,192,5,154,136,49,2246,2301,296,1205,2468,3]},{"n":"Cetinje","v":[9,84,35,32,30,6,121,26,49,2444,982,2281,793,141,6]},{"n":"Danilovgrad","v":[5,19,196,215,112,8,219,64,29,2032,2840,89,1008,1110,10]},{"n":"Gusinje","v":[481,1,5,26,2,116,1,1,5,509,57,68,107,3,322]},{"n":"Herceg Novi","v":[23,133,493,307,343,11,135,85,57,2172,4109,152,2421,2193,71]},{"n":"Kolašin","v":[7,11,132,353,27,2,41,14,22,759,1084,66,759,618,4]},{"n":"Kotor","v":[14,482,232,80,403,7,125,68,46,2774,2143,213,1113,1064,14]},{"n":"Mojkovac","v":[6,8,93,299,59,3,29,51,13,1167,1112,30,539,793,4]},{"n":"Nikšić","v":[54,49,1074,717,229,15,370,153,176,10855,9617,872,4291,6200,240]},{"n":"Petnjica","v":[808,1,2,96,0,0,2,2,1,1019,105,135,190,1,0]},{"n":"Plav","v":[1343,6,45,120,32,10,14,4,22,1265,415,391,393,478,165]},{"n":"Plužine","v":[1,2,62,546,7,0,2,7,3,138,348,8,174,400,1]},{"n":"Pljevlja","v":[1245,27,354,553,222,4,36,47,34,2345,4434,75,1724,4802,12]},{"n":"Podgorica","v":[1923,295,2982,1627,825,95,2973,763,554,19274,27620,1644,11021,11353,682]},{"n":"Rožaje","v":[7502,13,13,86,10,16,25,27,15,1169,887,513,1077,100,121]},{"n":"Šavnik","v":[0,1,41,120,15,0,5,3,6,630,230,5,57,291,2]},{"n":"Tivat","v":[34,803,223,23,245,3,98,41,36,1543,1531,138,504,925,6]},{"n":"Tuzi","v":[1042,10,9,56,8,278,73,5,40,1177,374,89,360,40,3061]},{"n":"UIKS","v":[22,2,3,9,2,1,5,4,2,110,104,11,69,130,11]},{"n":"Ulcinj","v":[288,4,61,40,35,3657,26,13,14,1617,512,274,2818,237,640]},{"n":"Zeta","v":[11,10,172,254,114,4,50,68,41,1186,1994,68,1117,3186,13]},{"n":"Žabljak","v":[3,3,59,115,43,1,8,33,18,535,579,8,280,338,0]}],"geo":[{"n":"Herceg Novi","d":"M89.9 484.0L69.5 487.1L57.9 483.6L57.2 478.3L68.9 475.2L74.0 476.5L83.7 469.0L82.1 463.8L66.0 465.5L64.7 458.5L51.1 455.0L44.6 442.2L30.4 436.0L22.3 446.6L12.6 447.5L11.3 463.8L13.6 469.9L10.0 481.8L20.7 488.9L32.3 505.1L36.5 507.3L31.0 494.6L52.7 495.5L66.0 499.4L80.8 496.3L89.9 484.0ZM78.9 533.7L75.7 528.5L76.3 518.8L68.9 515.7L73.4 511.3L57.2 505.1L45.9 509.1L55.9 518.8L57.2 523.2L68.2 532.9L78.9 533.7Z"},{"n":"Plav","d":"M459.9 418.0L469.9 427.2L479.9 429.4L489.6 435.6L487.4 440.9L480.9 441.3L484.8 453.6L482.8 463.8L486.7 472.1L497.7 466.8L502.9 470.8L518.7 469.0L520.7 456.3L532.0 453.6L534.9 448.8L541.4 450.6L544.3 443.1L539.4 428.6L540.7 421.1L552.4 407.0L542.4 395.5L533.3 393.3L521.3 382.8L513.2 385.9L505.8 384.5L483.5 390.3L473.5 397.3L468.0 409.2L459.9 418.0Z"},{"n":"Rožaje","d":"M533.9 352.9L548.2 353.7L553.7 359.5L563.7 363.4L566.0 357.3L572.4 363.4L584.7 366.5L597.0 361.2L602.2 352.9L600.9 341.4L597.7 339.2L611.9 327.3L630.0 328.6L626.1 311.5L628.1 295.2L616.4 292.1L607.7 285.5L592.8 281.6L586.0 275.0L576.6 273.2L570.5 266.6L565.0 266.6L563.1 260.4L557.9 269.7L549.5 266.6L543.0 279.4L534.3 305.8L526.5 315.4L518.7 319.8L523.9 322.0L518.7 330.4L525.2 333.9L522.0 341.0L533.9 352.9Z"},{"n":"Andrijevica","d":"M403.9 395.5L407.2 418.0L412.7 418.9L420.1 406.1L429.5 405.2L431.4 412.7L437.6 415.8L435.6 425.5L443.1 434.7L451.8 432.5L461.8 436.0L467.3 434.7L459.9 418.0L468.0 409.2L473.5 397.3L483.5 390.3L478.6 384.5L460.5 372.2L457.9 362.5L465.1 350.7L459.2 346.3L453.1 350.7L448.9 346.3L430.8 340.1L423.3 340.1L416.5 331.7L406.5 332.6L399.1 319.8L396.5 322.0L392.9 341.0L403.0 346.7L403.6 359.0L407.2 370.9L405.2 382.8L401.7 389.8L403.9 395.5Z"},{"n":"Berane","d":"M399.1 319.8L406.5 332.6L416.5 331.7L423.3 340.1L430.8 340.1L448.9 346.3L453.1 350.7L459.2 346.3L465.1 350.7L457.9 362.5L460.5 372.2L478.6 384.5L483.5 390.3L505.8 384.5L513.2 385.9L521.3 382.8L526.5 377.5L521.3 376.2L520.7 368.7L523.9 359.0L533.9 352.9L522.0 341.0L525.2 333.9L518.7 330.4L523.9 322.0L518.7 319.8L526.5 315.4L505.2 303.1L492.2 293.4L475.4 288.2L466.7 285.5L457.0 278.5L457.0 270.1L448.2 275.0L446.9 283.8L434.0 286.8L427.5 292.1L414.6 291.2L403.0 293.0L397.1 300.5L392.3 304.9L392.9 310.2L403.0 314.6L399.1 319.8Z"},{"n":"Podgorica","d":"M245.8 547.4L248.4 539.9L257.7 541.2L259.4 535.9L252.6 529.3L253.2 524.9L261.9 521.0L274.2 525.4L273.6 528.5L281.7 527.1L281.7 521.0L292.3 510.4L293.0 506.9L304.6 506.0L311.1 510.4L320.8 509.1L320.8 502.1L312.1 494.6L326.6 484.9L326.6 488.9L340.2 492.4L347.7 491.1L365.8 479.6L371.3 462.4L377.4 454.1L386.1 462.4L391.6 457.2L389.7 441.3L407.2 418.0L403.9 395.5L390.3 397.3L390.3 392.5L380.0 385.9L351.2 385.0L345.1 382.8L335.7 385.9L336.3 392.5L330.2 398.6L322.1 396.4L326.0 403.0L315.3 410.5L309.2 404.8L284.9 406.1L280.7 408.3L273.3 435.6L263.2 451.9L259.4 465.5L265.8 469.0L258.4 485.8L245.8 483.6L226.7 489.3L199.8 489.3L194.4 480.5L188.9 485.8L203.7 497.7L206.6 509.5L216.0 510.4L219.9 523.2L243.8 539.9L245.8 547.4Z"},{"n":"Bar","d":"M188.2 623.1L193.7 626.6L195.6 633.7L207.9 633.7L212.5 642.0L219.9 646.4L221.5 655.2L219.3 659.6L238.3 676.3L239.6 697.9L261.3 705.8L271.3 710.7L275.5 708.0L273.3 692.2L270.0 689.1L263.2 686.0L263.9 677.2L269.4 678.5L264.5 667.5L257.7 659.6L261.9 658.3L270.0 664.9L274.2 664.5L274.9 671.1L285.6 669.7L287.5 672.4L303.0 668.0L314.7 666.7L312.7 657.4L308.5 654.8L301.7 656.1L290.4 645.5L271.3 634.5L268.7 630.6L258.7 620.9L253.9 602.8L249.7 596.7L242.2 593.6L229.0 593.2L226.7 583.5L231.5 580.4L227.7 572.9L225.4 565.9L218.0 560.2L210.5 565.4L201.1 559.3L197.9 560.6L204.4 570.7L200.5 579.5L194.4 580.8L186.3 574.2L185.0 568.1L173.3 564.6L172.7 575.1L181.4 590.1L188.2 602.8L194.4 605.0L193.7 614.7L188.2 623.1Z"},{"n":"Bijelo Polje","d":"M328.2 223.9L338.9 231.8L350.2 229.6L361.2 236.7L366.7 242.4L376.8 242.4L381.0 247.2L389.1 247.7L392.9 260.0L388.1 271.9L397.1 280.7L403.0 280.7L403.0 293.0L414.6 291.2L427.5 292.1L434.0 286.8L446.9 283.8L448.2 275.0L457.0 270.1L457.0 278.5L466.7 285.5L475.4 288.2L489.6 271.9L497.7 272.8L507.7 264.4L513.9 266.6L533.3 252.9L536.9 252.5L530.7 242.4L513.2 232.7L507.7 223.0L507.1 207.2L489.6 214.2L479.3 212.5L476.7 207.2L464.4 214.2L461.2 203.7L455.0 205.0L448.2 201.5L442.1 182.5L432.1 184.7L428.8 178.6L413.3 180.3L411.7 175.0L399.7 172.0L399.7 163.6L392.3 153.0L384.2 149.5L370.6 147.3L366.1 157.9L359.3 157.9L354.4 172.0L357.0 178.1L350.6 183.4L335.0 208.1L327.6 208.1L330.2 213.3L326.0 219.9L328.2 223.9Z"},{"n":"Budva","d":"M127.4 570.7L133.5 566.8L137.8 573.4L140.3 569.0L151.0 567.6L158.5 576.4L160.7 591.4L163.9 597.6L182.4 611.6L188.2 623.1L193.7 614.7L194.4 605.0L188.2 602.8L181.4 590.1L172.7 575.1L173.3 564.6L168.2 557.1L156.5 550.5L140.3 545.2L132.9 539.9L132.3 539.0L131.0 538.1L131.0 537.7L131.0 538.1L131.0 537.7L126.8 541.2L134.2 557.9L132.3 558.4L132.3 557.9L132.3 558.4L132.3 557.9L128.0 560.2L127.4 570.7Z"},{"n":"Cetinje","d":"M132.3 539.0L132.9 539.9L140.3 545.2L156.5 550.5L168.2 557.1L173.3 564.6L185.0 568.1L186.3 574.2L194.4 580.8L200.5 579.5L204.4 570.7L197.9 560.6L201.1 559.3L210.5 565.4L218.0 560.2L225.4 565.9L227.7 572.9L227.3 565.9L245.8 557.1L245.8 547.4L243.8 539.9L219.9 523.2L216.0 510.4L206.6 509.5L203.7 497.7L188.9 485.8L194.4 480.5L188.2 469.9L198.6 453.6L185.0 444.4L173.3 433.8L172.0 428.1L161.4 411.4L152.6 403.0L149.7 395.5L143.9 392.0L123.5 393.3L114.1 388.1L109.3 395.1L103.1 393.3L99.3 403.0L103.8 415.8L97.0 418.0L97.0 425.0L101.2 427.2L104.4 440.9L112.8 443.1L108.6 446.6L119.3 464.6L123.5 468.6L120.9 474.3L129.0 483.6L126.8 486.7L131.0 496.8L122.9 505.1L122.9 519.7L131.0 527.1L132.3 537.7L132.3 539.0Z"},{"n":"Danilovgrad","d":"M172.0 428.1L173.3 433.8L185.0 444.4L198.6 453.6L188.2 469.9L194.4 480.5L199.8 489.3L226.7 489.3L245.8 483.6L258.4 485.8L265.8 469.0L259.4 465.5L263.2 451.9L273.3 435.6L280.7 408.3L284.9 406.1L279.4 399.5L275.5 388.1L260.0 361.2L255.8 373.1L257.1 385.0L263.9 386.7L259.4 391.1L244.5 385.9L234.8 392.0L220.2 388.1L205.3 389.8L203.1 387.2L191.1 400.8L191.8 407.9L198.6 415.8L194.4 423.3L186.9 420.6L172.0 428.1Z"},{"n":"Kolašin","d":"M260.0 361.2L275.5 388.1L279.4 399.5L284.9 406.1L309.2 404.8L315.3 410.5L326.0 403.0L322.1 396.4L330.2 398.6L336.3 392.5L335.7 385.9L345.1 382.8L351.2 385.0L380.0 385.9L390.3 392.5L390.3 397.3L403.9 395.5L401.7 389.8L405.2 382.8L407.2 370.9L403.6 359.0L403.0 346.7L392.9 341.0L396.5 322.0L399.1 319.8L403.0 314.6L392.9 310.2L392.3 304.9L397.1 300.5L390.3 295.2L378.7 293.4L373.5 289.9L369.3 295.6L363.8 293.4L347.7 298.7L319.2 292.1L306.6 282.9L304.3 293.0L301.1 289.0L289.1 295.2L270.0 293.0L260.0 295.6L261.3 300.9L255.8 308.0L256.4 316.8L268.7 327.3L260.0 337.0L255.8 356.8L260.0 361.2Z"},{"n":"Kotor","d":"M89.9 484.0L78.9 479.6L89.9 467.7L93.8 469.0L95.1 481.8L108.6 481.8L116.1 479.6L116.1 502.9L114.8 509.1L112.5 496.8L106.7 490.2L93.8 485.8L97.3 492.4L103.1 492.4L110.6 506.9L106.1 509.1L105.4 510.4L105.4 517.0L107.4 526.3L106.1 528.5L105.4 528.5L106.1 528.5L105.4 528.5L103.1 526.3L93.8 532.4L99.9 545.6L99.9 551.8L115.4 566.8L120.9 576.4L127.4 570.7L128.0 560.2L132.3 557.9L132.3 558.4L132.3 557.9L132.3 558.4L134.2 557.9L126.8 541.2L131.0 537.7L131.0 538.1L131.0 537.7L131.0 538.1L132.3 539.0L132.9 539.9L132.3 539.0L132.3 537.7L131.0 527.1L122.9 519.7L122.9 505.1L131.0 496.8L126.8 486.7L129.0 483.6L120.9 474.3L123.5 468.6L119.3 464.6L108.6 446.6L112.8 443.1L104.4 440.9L101.2 427.2L97.0 425.0L97.0 418.0L93.1 423.3L85.0 418.0L77.6 425.0L62.7 429.4L62.7 435.6L49.1 439.1L44.6 442.2L51.1 455.0L64.7 458.5L66.0 465.5L82.1 463.8L83.7 469.0L74.0 476.5L68.9 475.2L57.2 478.3L57.9 483.6L69.5 487.1L89.9 484.0Z"},{"n":"Mojkovac","d":"M293.0 256.9L297.8 261.3L298.5 269.7L306.6 282.9L319.2 292.1L347.7 298.7L363.8 293.4L369.3 295.6L373.5 289.9L378.7 293.4L390.3 295.2L397.1 300.5L403.0 293.0L403.0 280.7L397.1 280.7L388.1 271.9L392.9 260.0L389.1 247.7L381.0 247.2L376.8 242.4L366.7 242.4L361.2 236.7L350.2 229.6L338.9 231.8L328.2 223.9L325.3 227.0L310.5 223.0L312.1 234.5L304.3 240.2L295.6 242.4L293.0 256.9Z"},{"n":"Nikšić","d":"M49.1 439.1L62.7 435.6L62.7 429.4L77.6 425.0L85.0 418.0L93.1 423.3L97.0 418.0L103.8 415.8L99.3 403.0L103.1 393.3L109.3 395.1L114.1 388.1L123.5 393.3L143.9 392.0L149.7 395.5L152.6 403.0L161.4 411.4L172.0 428.1L186.9 420.6L194.4 423.3L198.6 415.8L191.8 407.9L191.1 400.8L203.1 387.2L205.3 389.8L220.2 388.1L234.8 392.0L244.5 385.9L259.4 391.1L263.9 386.7L257.1 385.0L255.8 373.1L260.0 361.2L255.8 356.8L260.0 337.0L268.7 327.3L256.4 316.8L243.8 326.0L234.8 313.2L219.9 306.2L204.4 293.4L196.9 292.1L188.9 284.6L169.4 279.4L156.5 280.7L150.4 279.4L127.4 262.6L122.2 256.9L105.4 219.1L100.6 214.2L91.8 216.9L81.5 210.3L82.4 238.9L70.2 242.4L42.3 241.1L36.5 246.3L34.3 256.0L29.7 256.9L26.2 272.8L26.2 284.6L33.6 304.9L27.5 308.0L28.1 314.6L20.7 319.0L21.6 331.3L14.2 335.7L21.0 354.2L21.0 361.2L35.6 371.8L39.8 377.1L52.0 377.5L50.4 386.7L45.3 390.3L46.5 399.9L51.4 403.9L54.6 412.3L39.8 417.6L37.2 423.3L49.1 439.1Z"},{"n":"Pljevlja","d":"M191.8 142.9L192.4 150.4L202.4 155.7L204.4 163.2L212.5 164.5L232.8 160.1L243.2 159.2L249.0 165.8L272.0 181.2L284.9 192.2L287.5 201.9L294.9 201.9L304.3 209.4L310.5 223.0L325.3 227.0L328.2 223.9L326.0 219.9L330.2 213.3L327.6 208.1L335.0 208.1L350.6 183.4L357.0 178.1L354.4 172.0L359.3 157.9L366.1 157.9L370.6 147.3L363.8 133.7L366.1 123.1L362.5 114.3L350.2 111.2L342.2 103.7L335.7 82.6L325.3 81.7L317.3 73.8L304.6 72.1L300.4 63.7L291.1 61.5L274.9 51.8L264.5 43.4L265.8 30.7L263.9 21.9L243.2 20.6L232.8 26.3L225.4 25.8L206.0 33.8L206.6 24.1L195.6 15.3L193.7 10.0L188.2 10.4L185.6 23.2L176.9 25.0L163.9 33.8L166.9 39.0L176.2 33.3L179.5 52.7L186.9 55.8L198.6 66.3L199.2 76.0L206.0 80.4L204.7 94.5L212.5 99.8L219.3 114.3L218.0 123.1L203.7 127.1L200.5 137.6L195.0 144.2L191.8 142.9Z"},{"n":"Plužine","d":"M81.5 210.3L91.8 216.9L100.6 214.2L105.4 219.1L122.2 256.9L127.4 262.6L150.4 279.4L156.5 280.7L169.4 279.4L188.9 284.6L197.9 267.9L190.5 261.3L170.7 252.9L171.4 244.6L178.8 230.5L184.3 213.3L183.7 207.2L189.5 202.8L196.3 208.1L199.8 204.1L199.2 199.7L190.5 190.9L187.6 183.4L183.0 157.9L183.0 145.1L187.6 139.0L186.9 131.5L177.5 128.4L176.2 119.6L178.8 109.0L173.3 108.1L164.6 96.3L140.3 101.5L145.2 113.4L133.5 116.5L112.5 127.5L100.6 139.0L91.2 142.9L100.6 152.6L84.4 165.8L78.2 190.0L81.5 210.3Z"},{"n":"Tivat","d":"M78.9 533.7L80.2 526.3L88.3 524.9L93.8 532.4L103.1 526.3L105.4 528.5L106.1 528.5L105.4 528.5L106.1 528.5L107.4 526.3L105.4 517.0L105.4 510.4L106.1 509.1L110.6 506.9L103.1 492.4L97.3 492.4L93.8 485.8L89.9 493.3L98.0 511.3L98.6 519.7L95.1 521.9L73.4 511.3L68.9 515.7L76.3 518.8L75.7 528.5L78.9 533.7Z"},{"n":"Ulcinj","d":"M314.7 666.7L303.0 668.0L287.5 672.4L285.6 669.7L274.9 671.1L274.2 664.5L270.0 664.9L261.9 658.3L257.7 659.6L264.5 667.5L269.4 678.5L263.9 677.2L263.2 686.0L270.0 689.1L273.3 692.2L275.5 708.0L271.3 710.7L261.3 705.8L239.6 697.9L238.3 704.1L243.8 709.4L247.1 723.0L263.2 730.9L286.8 738.8L292.3 741.5L304.3 755.1L312.7 759.5L310.5 739.3L303.0 734.9L312.1 729.6L305.3 721.2L306.6 713.3L316.6 712.4L313.4 705.8L316.0 696.6L311.8 684.7L314.7 666.7Z"},{"n":"Šavnik","d":"M188.9 284.6L196.9 292.1L204.4 293.4L219.9 306.2L234.8 313.2L243.8 326.0L256.4 316.8L255.8 308.0L261.3 300.9L260.0 295.6L270.0 293.0L289.1 295.2L301.1 289.0L304.3 293.0L306.6 282.9L298.5 269.7L297.8 261.3L293.0 256.9L282.3 249.4L270.0 247.7L264.5 244.6L269.4 238.9L256.4 228.3L244.5 235.8L232.2 229.6L232.8 219.9L207.9 222.1L201.8 216.9L203.7 210.3L199.8 204.1L196.3 208.1L189.5 202.8L183.7 207.2L184.3 213.3L178.8 230.5L171.4 244.6L170.7 252.9L190.5 261.3L197.9 267.9L188.9 284.6Z"},{"n":"Žabljak","d":"M199.8 204.1L203.7 210.3L201.8 216.9L207.9 222.1L232.8 219.9L232.2 229.6L244.5 235.8L256.4 228.3L269.4 238.9L264.5 244.6L270.0 247.7L282.3 249.4L293.0 256.9L295.6 242.4L304.3 240.2L312.1 234.5L310.5 223.0L304.3 209.4L294.9 201.9L287.5 201.9L284.9 192.2L272.0 181.2L249.0 165.8L243.2 159.2L232.8 160.1L212.5 164.5L204.4 163.2L202.4 155.7L192.4 150.4L191.8 142.9L187.6 139.0L183.0 145.1L183.0 157.9L187.6 183.4L190.5 190.9L199.2 199.7L199.8 204.1Z"},{"n":"Gusinje","d":"M486.7 472.1L482.8 463.8L484.8 453.6L480.9 441.3L487.4 440.9L489.6 435.6L479.9 429.4L469.9 427.2L459.9 418.0L467.3 434.7L461.8 436.0L451.8 432.5L443.1 434.7L443.1 439.1L435.6 439.1L435.0 453.6L432.7 455.0L438.2 465.5L440.2 474.3L448.9 483.6L461.2 490.2L464.4 483.6L472.8 483.6L475.4 477.4L483.5 481.8L486.7 472.1Z"},{"n":"Petnjica","d":"M475.4 288.2L492.2 293.4L505.2 303.1L526.5 315.4L534.3 305.8L543.0 279.4L549.5 266.6L544.9 259.1L536.9 252.5L533.3 252.9L513.9 266.6L507.7 264.4L497.7 272.8L489.6 271.9L475.4 288.2Z"},{"n":"Tuzi","d":"M294.3 578.2L298.5 565.4L307.2 559.3L305.3 553.1L310.5 552.7L312.1 560.2L328.2 550.5L326.6 540.3L334.1 527.1L343.8 524.1L350.6 513.5L353.2 505.1L360.6 500.7L361.2 496.3L374.8 474.3L374.2 469.0L386.1 462.4L377.4 454.1L371.3 462.4L365.8 479.6L347.7 491.1L340.2 492.4L326.6 488.9L326.6 484.9L312.1 494.6L320.8 502.1L320.8 509.1L311.1 510.4L304.6 506.0L293.0 506.9L292.3 510.4L281.7 521.0L281.7 527.1L281.4 545.6L284.9 547.4L287.5 564.6L294.3 578.2Z"},{"n":"Zeta","d":"M227.7 572.9L231.5 580.4L240.9 580.8L240.9 577.3L273.6 579.5L281.7 584.8L294.3 588.3L294.3 578.2L287.5 564.6L284.9 547.4L281.4 545.6L281.7 527.1L273.6 528.5L274.2 525.4L261.9 521.0L253.2 524.9L252.6 529.3L259.4 535.9L257.7 541.2L248.4 539.9L245.8 547.4L245.8 557.1L227.3 565.9L227.7 572.9Z"}],"vb":[640,770]};
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+const P = PARTIES, byId = Object.fromEntries(P.map(p => [p.id, p]));
+const label = p => p.name + ' (' + p.acr + ')';
+const totAll = D.rows.reduce((a, r) => a + r.v.reduce((x, y) => x + y, 0), 0);
+const BASE = {}; P.forEach(p => BASE[p.id] = D.rows.reduce((a, r) => a + r.v[p.col] * (p.frac || 1), 0) / totAll * 100);
+const BASE_SEATS = allocate(P, BASE);
+const sliders = P.filter(p => p.slider), minors = P.filter(p => !p.slider);
+const minorBase = minors.reduce((a, p) => a + BASE[p.id], 0);
+const state = {}; sliders.forEach(p => state[p.id] = BASE[p.id]);
+let sel = new Set(), mode = 'win', tipIdx = -1, cur = null;
+const f1 = x => x.toFixed(1);
+const lum = c => { const n = parseInt(c.slice(1), 16), a = [n >> 16, (n >> 8) & 255, n & 255].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * a[0] + .7152 * a[1] + .0722 * a[2]; };
+const ink = c => lum(c) > .35 ? '#111' : '#fff';
+const el = (t, a = {}, ns) => { const e = ns ? document.createElementNS(NS, t) : document.createElement(t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+
+function otherShare() { return Math.max(0, 100 - sliders.reduce((a, p) => a + state[p.id], 0)); }
+function fullShares() {
+  const S = {}, o = otherShare();
+  sliders.forEach(p => S[p.id] = state[p.id]);
+  minors.forEach(p => S[p.id] = o * BASE[p.id] / minorBase);
+  return S;
+}
+
+/* inputs */
+const rowEls = {};
+function buildInputs() {
+  const box = $('inputs');
+  sliders.concat([{ id: 'OTH', name: 'Other', acr: '', color: '#8a94a3', other: true }]).forEach(p => {
+    const row = el('div', { class: 'row' });
+    const lab = el('div', { class: 'lab' });
+    const sw = el('span', { class: 'sw' }); sw.style.background = p.color;
+    lab.append(sw, document.createTextNode(p.other ? 'Other' : label(p)));
+    const num = el('input', { class: 'num', type: 'text', inputmode: 'decimal', id: 'n-' + p.id, 'aria-label': (p.other ? 'Other' : p.acr) + ' vote share' });
+    const rng = el('input', { class: 'rng', type: 'range', min: 0, max: 60, step: 0.1, id: 'r-' + p.id, 'aria-label': (p.other ? 'Other' : p.acr) + ' slider' });
+    rng.style.setProperty('--c', p.color);
+    if (p.other) { num.readOnly = true; rng.disabled = true; }
+    else {
+      rng.addEventListener('input', () => setVal(p.id, parseFloat(rng.value)));
+      const commit = () => { const v = parseFloat(num.value.replace(',', '.').replace('%', '')); setVal(p.id, isNaN(v) ? state[p.id] : v); };
+      num.addEventListener('change', commit);
+      num.addEventListener('blur', commit);
+      num.addEventListener('keydown', e => { if (e.key === 'Enter') commit(); });
+    }
+    row.append(lab, num, rng); box.append(row);
+    rowEls[p.id] = { num, rng };
+  });
+}
+function setVal(id, v) {
+  const others = sliders.reduce((a, p) => a + (p.id === id ? 0 : state[p.id]), 0);
+  v = Math.round(v * 10) / 10;
+  v = Math.max(0, Math.min(60, v, Math.round((100 - others) * 10) / 10));
+  state[id] = v; update();
+}
+function syncInputs() {
+  const o = otherShare();
+  sliders.forEach(p => { const r = rowEls[p.id]; r.num.value = f1(state[p.id]); r.rng.value = state[p.id]; r.rng.style.setProperty('--p', (state[p.id] / 60 * 100) + '%'); });
+  const r = rowEls.OTH; r.num.value = f1(o); r.rng.value = Math.min(60, o); r.rng.style.setProperty('--p', (Math.min(60, o) / 60 * 100) + '%');
+}
+$('reset').addEventListener('click', () => { sliders.forEach(p => state[p.id] = BASE[p.id]); update(); });
+
+/* hemicycle layout */
+const HEMI_ORDER = ['DPS', 'SDP', 'DCG', 'URA', 'PES', 'BS', 'FSH', 'ASH', 'HGI', 'PRE', 'DMM', 'PZP', 'NK', 'PZS', 'SNP', 'ZBCG'];
+const seatPos = (() => {
+  const rows = 5, r0 = .42, R = 290, cx = 320, cy = 322, radii = [];
+  for (let k = 0; k < rows; k++) radii.push(r0 + (1 - r0) * k / (rows - 1));
+  const sum = radii.reduce((a, b) => a + b, 0);
+  const cnt = radii.map(r => Math.round(81 * r / sum));
+  cnt[rows - 1] += 81 - cnt.reduce((a, b) => a + b, 0);
+  const s = [];
+  radii.forEach((r, k) => { for (let j = 0; j < cnt[k]; j++) { const a = Math.PI * (1 - j / (cnt[k] - 1)); s.push({ x: cx + R * r * Math.cos(a), y: cy - R * r * Math.sin(a), a, r }); } });
+  s.sort((p, q) => q.a - p.a || p.r - q.r);
+  return s;
+})();
+
+function render(res) {
+  const { seats, S, X } = res;
+  const shown = P.filter(p => S[p.id] >= 1 || seats[p.id] > 0).sort((a, b) => S[b.id] - S[a.id] || seats[b.id] - seats[a.id]);
+  /* hemicycle */
+  const h = $('hemi'); h.replaceChildren();
+  const seq = []; HEMI_ORDER.forEach(id => { for (let i = 0; i < seats[id]; i++) seq.push(id); });
+  seatPos.forEach((s, i) => { const c = el('circle', { cx: s.x.toFixed(1), cy: s.y.toFixed(1), r: 17, fill: byId[seq[i]].color }, 1); h.append(c); });
+  const hl = $('hlegend'); hl.replaceChildren();
+  P.filter(p => seats[p.id] > 0).sort((a, b) => seats[b.id] - seats[a.id]).forEach(p => hl.append(legItem(p)));
+  /* table */
+  const t = $('tbl'); t.replaceChildren();
+  t.innerHTML = '<thead><tr><th>List</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead>';
+  const tb = el('tbody');
+  shown.forEach(p => {
+    const d = seats[p.id] - BASE_SEATS[p.id];
+    const tr = el('tr');
+    tr.innerHTML = '<td><span class="n"><span class="sw" style="background:' + p.color + '"></span><span>' + label(p) + '</span></span></td><td>' + f1(S[p.id]) + '%</td><td>' + seats[p.id] + '</td><td>' + (d > 0 ? '+' + d : d < 0 ? '−' + (-d) : '0') + '</td>';
+    tb.append(tr);
+  });
+  t.append(tb);
+  /* coalition */
+  const holders = P.filter(p => seats[p.id] > 0).sort((a, b) => seats[b.id] - seats[a.id]);
+  sel = new Set([...sel].filter(id => seats[id] > 0));
+  const cl = $('coal'); cl.replaceChildren();
+  holders.forEach(p => {
+    const b = el('button', { class: 'chip' + (sel.has(p.id) ? ' on' : ''), type: 'button' });
+    const sw = el('span', { class: 'sw' }); sw.style.background = p.color;
+    b.append(sw, document.createTextNode(p.acr));
+    b.addEventListener('click', () => { sel.has(p.id) ? sel.delete(p.id) : sel.add(p.id); render(cur); });
+    cl.append(b);
+  });
+  const bar = $('bar'); bar.replaceChildren();
+  let n = 0;
+  holders.filter(p => sel.has(p.id)).forEach(p => { n += seats[p.id]; const i = el('i'); i.style.width = (seats[p.id] / 81 * 100) + '%'; i.style.background = p.color; bar.append(i); });
+  const chosen = holders.filter(p => sel.has(p.id));
+  $('cnt').textContent = chosen.length ? chosen.map(p => p.acr).join(' + ') + ': ' + n + ' seats' : '0 seats';
+  const nt = $('note'); nt.replaceChildren();
+  const line = (h, rest) => { const d = el('div'); const b = el('b'); b.textContent = h; d.append(b, document.createTextNode(rest)); nt.append(d); };
+  if (chosen.length) {
+    if (n < 41) {
+      line((41 - n) + ' seats short of a majority', '');
+    } else {
+      line('Majority with ' + (n - 41) + (n - 41 === 1 ? ' seat' : ' seats') + ' to spare', '');
+      const spare = chosen.filter(p => n - seats[p.id] >= 41);
+      const d = el('div'); d.textContent = spare.length ? spare.map(p => p.acr).join(', ') + (spare.length > 1 ? ' could each be dropped and' : ' could be dropped and') + ' it would still hold' : 'Every party is needed for the majority'; nt.append(d);
+    }
+  }
+  const m = 41 / 81 * 100;
+  $('mk').style.left = m + '%'; $('mkl').style.left = m + '%'; $('mkl').textContent = '41';
+  /* map */
+  const modes = $('modes'); modes.replaceChildren();
+  if (mode !== 'win' && !(seats[mode] > 0)) mode = 'win';
+  const mk = (id, text, color) => {
+    const b = el('button', { class: 'chip' + (mode === id ? ' on' : ''), type: 'button' });
+    if (color) { const sw = el('span', { class: 'sw' }); sw.style.background = color; b.append(sw); }
+    b.append(document.createTextNode(text));
+    b.addEventListener('click', () => { mode = id; render(cur); });
+    modes.append(b);
+  };
+  mk('win', 'Winner');
+  holders.forEach(p => mk(p.id, p.acr, p.color));
+  paintMap(res);
+}
+function legItem(p) { const s = el('span'); const w = el('i', { class: 'sw' }); w.style.background = p.color; s.append(w, document.createTextNode(p.acr)); return s; }
+
+/* map */
+const geo = D.geo, ridx = {}; D.rows.forEach((r, i) => ridx[r.n] = i);
+function buildMap() {
+  const m = $('map'); m.setAttribute('viewBox', '0 0 ' + D.vb[0] + ' ' + D.vb[1]);
+  geo.forEach((g, i) => { const p = el('path', { d: g.d, 'data-i': i, 'fill-rule': 'evenodd' }, 1); m.append(p); });
+  m.addEventListener('click', e => {
+    const t = e.target.closest && e.target.closest('path');
+    if (!t) return hideTip();
+    e.stopPropagation(); showTip(+t.getAttribute('data-i'), e);
+  });
+  document.addEventListener('click', e => { if (!e.target.closest || !e.target.closest('#map')) hideTip(); });
+}
+function winnerOf(ri, X) { let b = 0; X[ri].forEach((v, k) => { if (v > X[ri][b]) b = k; }); return b; }
+function paintMap(res) {
+  const { X, seats } = res, paths = $('map').children;
+  let lo = 0, hi = 1, k = -1;
+  if (mode !== 'win') { k = P.findIndex(p => p.id === mode); const vals = geo.map(g => X[ridx[g.n]][k]); lo = Math.min(...vals); hi = Math.max(...vals); }
+  const wins = new Set();
+  geo.forEach((g, i) => {
+    const ri = ridx[g.n], p = paths[i];
+    if (mode === 'win') { const w = winnerOf(ri, X); wins.add(P[w].id); p.setAttribute('fill', P[w].color); p.setAttribute('fill-opacity', 1); }
+    else { p.setAttribute('fill', P[k].color); p.setAttribute('fill-opacity', (.12 + .88 * (hi > lo ? (X[ri][k] - lo) / (hi - lo) : 1)).toFixed(3)); }
+    p.classList.toggle('sel', i === tipIdx);
+  });
+  const ml = $('mlegend'); ml.replaceChildren();
+  const lg = mode === 'win' ? holders2(wins, seats) : [byId[mode]];
+  lg.forEach(p => ml.append(legItem(p)));
+  if (tipIdx >= 0) fillTip(tipIdx);
+}
+function holders2(wins, seats) { return P.filter(p => wins.has(p.id)).sort((a, b) => seats[b.id] - seats[a.id] || BASE[b.id] - BASE[a.id]); }
+function fillTip(i) {
+  const tip = $('tip'), ri = ridx[geo[i].n], row = cur.X[ri];
+  const list = P.map((p, k) => ({ p, v: row[k] })).filter(x => x.v >= 1 || cur.seats[x.p.id] > 0).sort((a, b) => b.v - a.v);
+  tip.replaceChildren();
+  const b = el('b'); b.textContent = geo[i].n; tip.append(b);
+  list.forEach(x => { const d = el('div'); const s = el('span', { class: 'sw' }); s.style.background = x.p.color; const a = el('span'); a.textContent = x.p.acr; const e = el('em'); e.textContent = f1(x.v) + '%'; d.append(s, a, e); tip.append(d); });
+}
+function showTip(i, e) {
+  tipIdx = i; const tip = $('tip'); fillTip(i); tip.hidden = false;
+  const w = $('mapw').getBoundingClientRect(), x = e.clientX - w.left, y = e.clientY - w.top;
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  tip.style.left = Math.max(0, Math.min(w.width - tw, x + 10 - (x + 10 + tw > w.width ? tw + 20 : 0))) + 'px';
+  tip.style.top = Math.max(0, Math.min(w.height - th, y - th / 2)) + 'px';
+  Array.from($('map').children).forEach((p, k) => p.classList.toggle('sel', k === i));
+}
+function hideTip() { tipIdx = -1; $('tip').hidden = true; Array.from($('map').children).forEach(p => p.classList.remove('sel')); }
+
+function update() {
+  syncInputs();
+  const S = fullShares();
+  const seats = allocate(P, S), { X } = project(D.rows, P, S);
+  cur = { S, seats, X };
+  render(cur);
+}
+buildInputs(); buildMap(); update();
+window.__dbg = { BASE_SEATS, BASE };
+</script>
+
+</body>
+</html>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
