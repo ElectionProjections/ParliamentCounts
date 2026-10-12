@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northern Cyprus Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Northern Cyprus Seat Projector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>:root{color-scheme:light}html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<style>
+/* Layout: one 860px column of separate cards (inputs, results, builder, map); neutral cool greys, party colours carry all the hue. */
+:root{
+  --bg:#eceff3; --surface:#ffffff; --fg:#1a2029; --muted:#667283; --line:#dce1e8; --track:#d2d8e0;
+  --btn:#f3f5f8; --btn-line:#cdd4dd; --btn-on:#1a2029; --btn-on-fg:#ffffff; --tip-shadow:0 6px 20px rgba(20,28,40,.18);
+  --font:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101318; --surface:#1a1f26; --fg:#e7eaef; --muted:#98a3b2; --line:#2b323c; --track:#46505e;
+    --btn:#232a33; --btn-line:#3a4350; --btn-on:#e7eaef; --btn-on-fg:#12151a; --tip-shadow:0 6px 22px rgba(0,0,0,.55);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101318; --surface:#1a1f26; --fg:#e7eaef; --muted:#98a3b2; --line:#2b323c; --track:#46505e;
+  --btn:#232a33; --btn-line:#3a4350; --btn-on:#e7eaef; --btn-on-fg:#12151a; --tip-shadow:0 6px 22px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.4;padding-inline:16px;padding-block:20px 28px}
+.wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:24px;font-weight:600;text-align:center;margin:0 0 4px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:18px;font-weight:600;text-align:center;margin:0 0 12px;text-wrap:balance}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* inputs */
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr 84px;grid-template-areas:"lab box" "sl sl";gap:8px 10px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0;padding-top:2px}
+.row .lab{grid-area:lab;display:flex;align-items:center;gap:8px;min-width:0;font-weight:500}
+.row .lab i{width:11px;height:11px;border-radius:3px;flex:none;background:var(--c)}
+.row .lab span{overflow-wrap:anywhere}
+.row .box{grid-area:box;display:flex;align-items:center;gap:4px;justify-content:flex-end}
+.row input[type=range]{grid-area:sl}
+@media (min-width:600px){
+  .row{grid-template-columns:minmax(200px,260px) 1fr 84px;grid-template-areas:"lab sl box";gap:14px;padding:12px 0}
+}
+.box input{width:64px;-moz-appearance:textfield;appearance:textfield;font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:4px 6px;border:1px solid var(--btn-line);border-radius:6px;background:var(--btn);color:var(--fg)}
+.box input::-webkit-outer-spin-button,.box input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.box input:read-only{background:transparent;border-color:transparent}
+.box small{color:var(--muted);font-size:12px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;margin:0;border-radius:6px;cursor:pointer;
+  background:linear-gradient(to right,var(--c) 0,var(--c) var(--p),var(--track) var(--p),var(--track) 100%);outline:none}
+input[type=range]::-webkit-slider-runnable-track{height:10px;background:transparent;border-radius:6px}
+input[type=range]::-moz-range-track{height:10px;background:transparent;border-radius:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-5px;border-radius:50%;background:var(--surface);border:3px solid var(--c);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--c);cursor:pointer}
+input[type=range]:active,input[type=range]:hover{cursor:pointer}
+input[type=range]:disabled{cursor:default;opacity:.85}
+input[type=range]:disabled::-webkit-slider-thumb{display:none}
+input[type=range]:disabled::-moz-range-thumb{display:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 40%,transparent)}
+.actions{display:flex;justify-content:center;margin-top:8px}
+button{font:inherit;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;font-size:13px;line-height:1.3;border:1px solid var(--btn-line);border-radius:999px;background:var(--btn);color:var(--fg)}
+.btn:hover{border-color:var(--muted)}
+.btn:focus-visible{outline:2px solid var(--muted);outline-offset:2px}
+.btn i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.btn[aria-pressed="true"]{background:var(--btn-on);color:var(--btn-on-fg);border-color:var(--btn-on)}
+.btn.party[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.btn.party[aria-pressed="true"] i{background:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+
+/* hemicycle + table */
+.hemi{max-width:650px;margin:0 auto}
+.hemi svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:14px 0 12px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:12px;font-weight:500;color:var(--muted);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal;padding-left:2px}
+tr:last-child td{border-bottom:0}
+td .lst{display:flex;align-items:center;gap:8px}
+td .lst i{width:11px;height:11px;border-radius:3px;flex:none;background:var(--c)}
+td.seats{font-weight:600}
+
+/* coalition */
+.bar{position:relative;height:16px;border-radius:8px;background:var(--track);margin:26px 0 0;overflow:visible}
+.bar .fill{position:absolute;inset:0 auto 0 0;display:flex;border-radius:8px;overflow:hidden;width:100%;clip-path:inset(0 0 0 0 round 8px)}
+.bar .fill b{display:block;height:100%}
+.bar .mark{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--fg);transform:translateX(-1px);border-radius:1px}
+.bar .mark span{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.barwrap{padding-bottom:22px}
+
+/* map */
+.mapbtns{margin-bottom:12px}
+.mapwrap{position:relative;max-width:650px;margin:0 auto}
+.mapwrap svg{display:block;width:100%;height:auto}
+.mapwrap path{cursor:pointer;stroke:var(--surface);stroke-width:1.4;stroke-linejoin:round;outline:none;transition:filter .12s;-webkit-tap-highlight-color:transparent}
+.mapwrap path.hatch{pointer-events:none;stroke:none;cursor:default;filter:none!important}
+.mapwrap path:hover,.mapwrap path.sel{filter:brightness(.86)}
+.mapwrap path:focus,.mapwrap path:focus-visible{outline:none}
+.mapwrap svg:focus{outline:none}
+.tip{position:absolute;z-index:5;width:262px;max-width:calc(100% - 4px);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--tip-shadow);padding:8px 10px;font-size:12px;pointer-events:auto}
+.tip .th{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:600;font-size:13px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+.tip .th span{font-weight:400;color:var(--muted);font-size:12px;white-space:nowrap}
+.tip .occ{margin-top:6px;padding-top:6px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+.tip .tr{display:grid;grid-template-columns:66px 42px 62px 1fr;gap:6px;align-items:center;padding:3px 0}
+.tip .tr b{font-weight:500;display:flex;align-items:center;gap:5px}
+.tip .tr b i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.tip .tr.hd{padding:0 0 2px;color:var(--muted);font-size:10px}
+.tip .tr.hd em{font-size:10px;white-space:nowrap}
+.tip .tr .ob{color:var(--muted)}
+.tip .tr em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+.tip .sq{display:flex;flex-wrap:wrap;gap:2px}
+.tip .sq u{width:7px;height:7px;border-radius:2px;background:var(--c);display:block}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:12px;font-size:13px;align-items:center}
+.maplegend span{display:inline-flex;align-items:center;gap:6px}
+.maplegend i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.grad{width:120px;height:9px;border-radius:5px;background:linear-gradient(to right,color-mix(in srgb,var(--c) 15%,var(--surface)),var(--c))}
+.note{max-width:62ch;margin:0 auto 4px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.45;text-wrap:balance}
+.src{text-align:center;color:var(--muted);font-size:12px;margin:4px 0 0;text-wrap:balance}
+</style>
+
+<div class="wrap">
+  <h1>Northern Cyprus Seat Projection</h1>
+  <p class="note">Northern Cyprus has been under Turkish military control since 1974, and its government is recognised only by Turkey. The UN Security Council declared its 1983 declaration of independence legally invalid, and the Republic of Cyprus regards the area as occupied.</p>
+
+  <section class="card" id="c-input">
+    <h2>Input vote share</h2>
+    <div class="rows" id="rows"></div>
+    <div class="actions"><button class="btn" id="reset" type="button">Reset</button></div>
+  </section>
+
+  <section class="card" id="c-results">
+    <h2>Projected results</h2>
+    <div class="hemi" id="hemi"></div>
+    <div class="legend" id="hlegend"></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>List</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" id="c-coal">
+    <h2>Coalition builder</h2>
+    <div class="btns" id="coalbtns"></div>
+    <div class="barwrap"><div class="bar" id="bar"><div class="fill" id="barfill"></div><div class="mark" id="barmark"><span id="barlab"></span></div></div></div>
+  </section>
+
+  <section class="card" id="c-map">
+    <h2>Projected results map</h2>
+    <div class="btns mapbtns" id="mapbtns"></div>
+    <div class="mapwrap" id="mapwrap"></div>
+    <div class="maplegend" id="maplegend"></div>
+  </section>
+
+  <p class="src">Sources: Yüksek Seçim Kurulu (YSK), 23 January 2022 general election results by district and ballot box; GADM 2.8 district boundaries; geoBoundaries Cyprus ADM2 communities (Lefke–Güzelyurt split); UN Security Council Resolution 541 (1983).</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+var MAP = {"viewBox": [0, 0, 539.9, 234.1], "districts": {"Lefkoşa": {"d": "M285.5 222.4L282.7 223.7L279.2 224.5L278.4 224.6L272.4 219.7L269.2 221.2L266.3 223.8L262.9 223.3L259.6 220.7L258.3 215.8L256.6 213.0L254.3 210.9L252.6 210.9L251.6 213.0L251.2 216.3L248.8 215.7L247.7 215.9L246.1 215.3L243.6 214.8L241.7 214.8L240.0 216.3L238.0 222.3L236.7 224.6L235.9 228.7L235.4 232.0L235.4 234.1L232.7 233.3L232.5 230.2L234.0 222.3L235.4 216.0L235.4 203.7L233.5 200.6L225.5 185.9L222.2 179.5L221.4 174.9L220.5 171.0L218.4 169.2L214.9 169.7L211.7 172.8L209.6 176.2L207.9 177.5L199.9 180.0L194.9 180.0L192.0 181.6L187.7 181.3L180.0 179.2L171.8 178.5L167.4 175.9L158.3 172.3L149.5 173.8L145.3 175.4L143.2 177.8L142.2 176.2L141.4 173.3L141.5 170.2L142.5 166.2L142.6 164.5L142.5 162.6L142.1 161.4L140.9 159.7L136.5 155.8L133.5 152.4L134.1 152.2L136.6 152.6L137.4 153.2L139.9 153.3L141.3 153.6L142.4 154.1L145.0 154.3L146.2 154.0L146.8 153.1L147.2 151.9L148.5 151.7L149.6 152.1L150.7 152.1L151.8 150.6L153.4 150.7L154.8 153.0L155.9 153.6L160.1 153.6L161.1 154.1L161.9 154.8L162.9 156.9L164.8 159.5L166.0 159.7L168.1 158.9L171.0 157.1L172.1 156.2L177.3 153.7L179.5 153.8L180.6 154.2L182.0 155.7L183.0 156.4L184.3 156.5L186.6 156.0L189.6 156.2L190.8 156.6L193.5 158.5L194.7 158.9L196.4 157.7L197.5 157.3L207.4 157.4L209.9 157.1L214.9 156.4L219.3 155.2L227.6 153.3L227.5 152.2L226.1 149.2L226.1 147.8L226.3 146.7L226.9 146.3L229.1 145.0L233.1 143.6L237.3 142.6L240.7 142.2L242.9 142.0L245.8 142.1L250.6 141.5L250.7 141.4L253.1 143.8L254.3 145.6L254.9 147.0L255.4 149.6L256.0 151.5L256.7 152.7L259.4 156.2L260.2 158.2L260.1 159.8L259.7 160.7L258.3 162.8L257.9 163.9L257.8 165.1L258.4 167.7L260.7 173.8L260.9 175.7L260.8 177.1L260.5 178.4L259.4 180.5L256.1 184.6L255.3 185.8L254.9 187.3L254.8 188.0L255.1 189.4L256.2 190.9L257.6 191.9L260.2 192.9L265.5 194.4L267.9 195.3L275.2 199.6L277.7 201.2L278.9 202.3L280.6 204.5L281.6 206.7L282.1 209.4L282.8 214.8L283.2 216.4L283.8 218.4Z", "area": 0.051548486822847316}, "Gazimağusa": {"d": "M285.5 222.4L283.8 218.4L283.2 216.4L282.8 214.8L282.1 209.4L281.6 206.7L280.6 204.5L278.9 202.3L277.7 201.2L275.2 199.6L267.9 195.3L265.5 194.4L260.2 192.9L257.6 191.9L256.2 190.9L255.1 189.4L254.8 188.0L254.9 187.3L255.3 185.8L256.1 184.6L259.4 180.5L260.5 178.4L260.8 177.1L260.9 175.7L260.7 173.8L258.4 167.7L257.8 165.1L257.9 163.9L258.3 162.8L259.7 160.7L260.1 159.8L260.2 158.2L259.4 156.2L256.7 152.7L256.0 151.5L255.4 149.6L254.9 147.0L254.3 145.6L253.1 143.8L250.7 141.4L253.3 139.7L256.6 138.7L262.3 135.5L263.4 135.2L264.7 134.4L269.5 132.4L275.9 129.9L278.0 128.6L281.3 128.3L282.3 127.8L284.6 125.5L285.6 125.1L286.4 124.3L286.0 123.2L283.9 121.9L284.8 119.5L285.8 115.4L286.4 114.7L287.0 114.9L287.5 114.1L288.1 114.0L288.7 114.4L289.6 113.8L290.0 113.0L291.5 112.7L293.8 110.6L294.5 110.7L295.2 110.4L295.8 109.7L295.9 109.0L297.2 108.5L297.6 107.0L298.3 107.1L299.0 106.5L300.3 106.6L301.3 106.0L301.5 105.1L302.5 104.4L302.7 105.0L303.6 104.5L304.3 103.4L304.5 102.6L305.4 102.5L305.7 102.1L306.8 102.4L307.4 101.4L308.7 101.2L309.7 100.4L309.8 100.0L310.6 99.8L313.0 99.8L314.2 99.3L314.6 98.4L316.3 98.7L317.6 98.5L318.9 99.1L319.9 99.1L322.2 98.8L323.1 98.1L323.7 98.0L324.0 98.4L325.2 98.7L325.4 98.4L325.9 106.5L325.3 114.7L324.9 116.9L324.4 118.3L323.4 119.8L322.2 120.7L319.2 122.3L318.2 123.2L317.5 124.4L316.8 126.4L316.7 127.9L317.0 129.9L317.6 131.6L318.3 132.8L319.4 134.2L322.8 137.0L323.8 138.2L324.2 139.3L325.5 145.0L327.1 148.9L328.7 153.7L329.7 155.5L331.2 157.0L332.2 157.7L333.9 158.5L336.9 158.9L350.0 158.0L350.3 160.1L350.3 162.6L349.4 164.3L349.2 165.8L349.7 166.7L349.3 167.9L349.5 168.7L349.4 169.8L349.9 171.1L349.9 171.9L350.3 172.5L350.9 174.9L351.6 175.7L352.0 177.2L351.8 178.9L352.0 180.5L352.6 181.8L353.6 182.6L354.6 182.5L355.3 183.5L356.0 185.3L357.4 187.3L357.7 188.6L358.0 188.8L359.5 190.9L360.2 190.9L361.0 191.8L361.6 193.1L362.5 194.0L363.9 194.8L364.2 194.3L363.2 193.7L363.3 193.1L364.0 193.0L364.6 194.1L364.3 194.8L365.0 195.0L365.3 195.6L365.0 196.1L365.1 197.4L365.7 199.2L367.2 201.7L368.5 203.4L370.7 206.6L371.4 207.3L374.0 211.0L374.5 211.3L375.9 211.1L376.4 211.5L376.4 212.3L376.9 212.1L377.4 213.4L375.7 214.6L366.3 212.4L360.4 215.3L356.2 214.3L352.8 213.2L351.1 212.2L351.6 211.6L353.2 210.9L355.1 208.4L353.0 205.0L350.9 205.0L350.9 203.2L350.3 202.1L349.0 199.1L347.1 198.5L346.5 195.7L342.9 195.7L341.7 201.9L341.7 206.8L343.1 209.6L341.7 210.9L340.4 213.0L336.8 215.8L333.9 216.3L331.8 214.0L328.9 213.0L322.0 217.6L320.9 221.7L318.8 222.3L315.8 221.7L313.3 224.6L306.2 219.4L300.5 224.3L297.6 225.3L298.6 221.5L300.7 214.3L299.5 213.0L296.9 213.0L294.0 215.8L289.8 216.6L288.5 219.7L288.7 220.5Z", "area": 0.09157639383193009}, "Girne": {"d": "M250.7 141.4L250.6 141.5L245.8 142.1L242.9 142.0L240.7 142.2L237.3 142.6L233.1 143.6L229.1 145.0L226.9 146.3L226.3 146.7L226.1 147.8L226.1 149.2L227.5 152.2L227.6 153.3L219.3 155.2L214.9 156.4L209.9 157.1L207.4 157.4L197.5 157.3L196.4 157.7L194.7 158.9L193.5 158.5L190.8 156.6L189.6 156.2L186.6 156.0L184.3 156.5L183.0 156.4L182.0 155.7L180.6 154.2L179.5 153.8L177.3 153.7L172.1 156.2L171.0 157.1L168.1 158.9L166.0 159.7L164.8 159.5L162.9 156.9L161.9 154.8L161.1 154.1L160.1 153.6L155.9 153.6L154.8 153.0L153.4 150.7L151.8 150.6L150.7 152.1L149.6 152.1L148.5 151.7L147.2 151.9L146.8 153.1L146.2 154.0L145.0 154.3L142.4 154.1L141.3 153.6L139.9 153.3L137.4 153.2L136.6 152.6L134.1 152.2L133.5 152.4L132.9 152.6L131.7 154.4L130.8 153.8L130.5 152.6L129.6 151.9L128.5 152.1L126.1 154.4L124.1 155.3L122.9 154.8L121.5 153.2L118.9 151.2L117.3 148.7L116.6 149.3L113.1 150.0L110.4 149.4L105.9 149.1L103.9 149.9L102.1 151.2L100.8 151.2L98.1 150.6L91.1 149.2L89.5 148.7L90.6 141.2L90.8 138.3L90.8 136.0L90.3 134.2L90.9 134.3L90.7 133.6L90.0 133.3L90.4 132.7L90.1 130.4L89.7 129.9L90.0 129.3L89.7 128.6L89.7 125.2L89.9 123.4L89.1 120.2L87.9 120.1L87.0 119.7L86.6 118.7L86.7 118.1L86.5 117.0L86.1 116.9L86.0 115.2L86.6 114.4L86.5 112.5L86.2 112.2L86.0 111.4L86.1 109.6L85.7 109.0L85.7 106.6L86.2 106.1L86.0 105.2L85.5 105.0L85.6 103.5L85.6 101.8L86.0 101.6L86.3 102.2L87.4 102.8L88.0 102.8L88.5 103.4L90.3 104.1L91.0 104.8L92.0 105.0L92.9 105.8L94.5 106.1L95.0 106.4L96.5 106.3L96.9 106.8L97.7 106.8L98.6 107.5L99.9 109.1L101.4 109.9L102.4 110.9L103.0 111.0L104.2 112.6L105.0 113.3L106.1 113.4L106.6 112.9L106.9 113.4L108.2 113.3L109.1 113.9L111.1 114.1L111.3 113.8L112.1 114.1L114.3 114.2L114.3 113.9L115.8 113.5L116.1 114.0L116.9 114.1L117.5 115.1L118.7 115.0L120.1 116.6L121.4 116.6L121.7 117.1L122.9 116.7L123.0 117.2L124.3 117.7L125.7 117.7L126.1 117.4L126.7 118.0L127.9 117.7L128.0 118.1L129.5 118.1L130.1 118.4L131.7 118.4L133.2 118.2L134.4 117.2L135.0 117.3L135.6 116.1L136.5 115.9L137.0 114.1L137.9 113.2L138.2 114.0L139.1 114.9L140.3 114.9L140.6 115.2L142.1 114.7L143.0 114.7L143.0 115.2L143.5 115.4L143.9 116.1L145.4 116.0L145.8 116.5L146.8 117.0L147.7 117.1L148.3 117.7L150.7 118.1L151.1 118.5L153.1 118.9L154.3 118.8L154.5 119.1L156.3 119.3L156.8 118.5L158.3 118.3L159.6 116.6L160.2 116.5L160.9 117.0L162.4 116.9L162.6 117.4L164.1 117.4L164.3 117.1L165.5 117.3L165.8 118.2L166.7 118.4L167.0 119.0L168.4 119.1L169.1 119.7L170.5 119.9L170.5 120.7L172.0 120.8L172.3 121.1L174.0 121.1L175.0 120.4L175.0 120.8L175.9 120.4L175.8 119.5L176.1 119.2L177.1 119.3L177.4 119.7L179.1 120.1L180.0 120.8L180.9 121.2L182.0 121.3L182.5 120.5L184.6 119.9L185.3 120.7L186.1 120.4L186.7 121.3L188.2 121.4L188.7 122.0L190.6 122.3L191.0 121.9L191.9 122.2L192.1 121.8L194.4 121.7L194.2 122.6L194.6 122.2L195.1 122.5L195.9 121.9L196.4 121.0L196.9 121.0L198.0 122.3L197.3 122.2L197.3 121.7L196.7 121.7L196.6 122.2L197.5 123.6L198.4 123.3L198.5 123.7L201.0 124.3L202.2 123.7L202.9 124.3L204.0 124.1L204.4 123.7L205.8 124.6L207.1 124.7L208.1 124.3L208.0 123.4L209.1 123.3L210.3 124.6L211.0 124.4L211.2 123.9L213.2 124.8L217.0 124.9L217.3 124.1L217.9 124.2L218.7 125.6L219.6 125.0L220.5 125.5L221.0 125.1L222.3 125.4L224.2 124.8L224.2 124.3L224.7 123.9L226.2 124.2L226.9 124.8L227.2 124.0L228.5 123.8L228.9 124.3L230.0 124.3L230.4 123.7L231.4 124.0L232.1 123.8L232.2 124.5L233.0 124.5L233.5 125.1L235.4 124.9L235.5 125.3L236.3 125.5L237.8 125.3L238.1 124.6L238.6 124.0L239.1 124.7L240.0 124.9L240.4 124.1L240.2 123.5L240.8 123.1L241.5 123.5L242.3 123.3L244.4 123.5L245.5 123.1L246.4 122.1L247.7 121.9L250.5 120.6L251.5 120.7L252.0 121.4L252.7 121.4L254.0 120.6L255.5 120.5L256.3 120.9L256.7 120.5L257.6 120.4L259.9 120.5L260.3 120.1L261.3 120.1L264.2 119.3L264.5 118.6L266.5 117.9L266.8 118.4L268.0 118.2L268.0 117.3L268.9 117.1L269.1 117.6L269.8 117.2L270.1 116.4L270.7 115.9L271.0 116.3L270.6 116.8L271.1 117.5L272.0 117.8L273.9 117.9L274.5 117.5L274.5 116.9L275.5 116.8L276.5 117.0L277.7 116.5L278.4 116.5L278.9 117.1L279.9 117.2L280.6 116.9L281.2 117.1L282.4 116.3L283.1 116.4L283.7 115.9L283.9 114.9L285.1 114.7L285.8 115.4L284.8 119.5L283.9 121.9L286.0 123.2L286.4 124.3L285.6 125.1L284.6 125.5L282.3 127.8L281.3 128.3L278.0 128.6L275.9 129.9L269.5 132.4L264.7 134.4L263.4 135.2L262.3 135.5L256.6 138.7L253.3 139.7ZM185.8 119.2L185.9 120.2L185.3 120.2L185.3 119.4Z", "area": 0.06686838427413679}, "Güzelyurt": {"d": "M89.5 148.7L91.1 149.2L98.1 150.6L100.8 151.2L102.1 151.2L103.9 149.9L105.9 149.1L110.4 149.4L113.1 150.0L116.6 149.3L117.3 148.7L118.9 151.2L121.5 153.2L122.9 154.8L124.1 155.3L126.1 154.4L128.5 152.1L129.6 151.9L130.5 152.6L130.8 153.8L131.7 154.4L132.9 152.6L133.5 152.4L136.5 155.8L140.9 159.7L142.1 161.4L142.5 162.6L142.6 164.5L142.5 166.2L141.5 170.2L141.4 173.3L142.2 176.2L143.2 177.8L139.4 182.1L136.5 182.6L132.9 179.0L128.3 180.5L122.2 183.6L115.5 185.7L110.9 188.2L104.2 191.6L98.9 197.8L96.0 199.4L96.0 198.1L96.5 197.5L97.6 195.5L97.8 194.2L97.7 193.1L96.5 191.4L95.1 191.3L93.5 189.9L92.0 189.0L91.4 188.5L90.8 187.3L90.9 186.9L90.2 186.2L91.6 185.6L90.6 184.6L89.7 184.6L87.6 183.0L87.2 181.9L86.8 182.2L86.7 181.5L87.3 180.5L87.1 179.8L87.5 179.5L87.5 178.7L86.6 177.4L86.4 175.9L86.0 175.7L85.8 174.4L84.8 174.1L84.7 173.5L82.5 171.9L81.8 173.2L82.3 172.2L84.1 167.5L85.7 163.0L86.2 161.9L86.4 160.6L87.1 158.9L87.3 157.6L87.8 155.8L88.5 152.9L89.2 150.3Z", "area": 0.021597591462731398}, "İskele": {"d": "M539.9 0.5L538.8 1.9L538.7 2.5L537.4 3.1L538.1 2.3L538.2 1.6L538.9 1.2L538.9 0.6L539.6 0.0ZM325.4 98.4L325.9 106.5L325.3 114.7L324.9 116.9L324.4 118.3L323.4 119.8L322.2 120.7L319.2 122.3L318.2 123.2L317.5 124.4L316.8 126.4L316.7 127.9L317.0 129.9L317.6 131.6L318.3 132.8L319.4 134.2L322.8 137.0L323.8 138.2L324.2 139.3L325.5 145.0L327.1 148.9L328.7 153.7L329.7 155.5L331.2 157.0L332.2 157.7L333.9 158.5L336.9 158.9L350.0 158.0L350.0 155.6L350.3 155.3L350.5 153.5L350.2 153.2L351.0 150.1L352.3 149.5L353.6 147.8L354.3 145.1L355.1 143.8L356.0 143.1L357.1 142.6L357.6 140.9L359.5 136.6L359.8 136.4L360.7 134.7L361.5 134.0L361.9 133.3L362.8 132.9L363.3 131.9L363.7 131.9L364.4 130.7L366.2 130.3L367.1 129.3L367.1 128.7L367.8 128.7L368.9 127.9L370.1 127.8L370.6 128.3L371.1 128.1L372.2 128.3L374.3 127.1L375.9 127.0L376.4 127.7L377.6 128.0L377.4 129.2L377.9 128.7L378.5 129.2L380.1 129.2L380.2 129.1L382.6 128.5L384.0 128.4L384.9 128.0L385.9 127.8L388.0 127.7L388.5 128.1L389.7 128.1L390.8 127.0L392.5 127.0L393.3 127.3L394.2 126.7L396.0 124.7L396.0 123.8L396.7 122.8L396.5 121.5L396.5 120.2L396.7 119.1L397.6 117.4L398.1 117.7L398.0 117.1L397.6 116.8L397.8 113.6L398.2 113.0L399.7 112.6L400.6 111.9L402.1 108.9L403.1 108.6L403.1 108.1L404.0 106.8L404.5 106.8L405.7 105.3L406.6 105.2L408.1 103.5L408.7 102.2L409.6 101.5L410.6 99.9L411.4 99.8L411.6 99.0L412.4 97.8L415.0 95.7L415.9 95.3L416.4 94.8L418.3 94.2L418.4 93.9L419.3 92.9L419.9 92.9L420.2 92.4L421.5 91.6L422.5 90.3L423.6 89.9L424.5 89.3L426.6 88.3L427.9 87.4L429.7 87.1L430.2 86.6L431.1 86.5L431.5 86.1L432.2 86.0L433.4 85.0L434.3 85.1L435.6 84.3L436.4 84.1L436.7 83.7L437.6 83.3L438.9 82.4L439.1 81.8L440.9 80.8L442.4 80.3L443.0 79.9L443.8 79.8L444.3 79.3L445.1 79.1L446.4 78.5L447.7 78.4L448.9 77.9L450.1 77.1L451.0 76.9L451.6 77.1L452.2 76.6L452.8 77.0L453.9 76.4L454.8 74.5L455.9 73.9L456.8 73.9L457.6 73.1L459.3 71.8L460.5 70.8L460.8 69.4L461.9 68.7L462.0 68.1L462.9 67.7L463.5 66.5L464.5 65.4L465.6 65.2L466.2 64.3L467.1 63.9L467.7 62.6L468.4 62.2L468.8 62.7L469.2 62.4L469.3 61.4L469.8 60.8L471.8 60.3L472.3 58.8L473.0 58.3L473.8 58.2L474.0 57.7L475.7 57.5L476.2 57.1L478.0 57.0L479.1 56.1L479.7 55.9L480.0 55.1L480.4 54.9L481.0 53.5L482.1 53.4L482.9 52.9L483.7 51.8L485.0 51.8L485.4 51.4L486.5 51.1L486.7 50.6L486.7 48.9L487.6 48.7L487.4 47.9L487.8 46.1L488.4 45.3L488.0 44.5L488.3 43.5L489.0 42.5L489.9 43.1L490.2 42.4L490.9 42.3L490.1 41.6L490.2 40.2L490.6 39.5L491.6 39.1L491.6 38.5L492.2 37.9L493.3 38.0L493.5 36.9L494.3 36.3L495.0 36.8L495.7 35.6L496.2 35.8L497.7 34.4L498.4 34.2L498.4 33.8L499.3 33.7L499.8 33.0L500.8 32.3L501.7 32.0L501.9 31.3L502.3 31.6L503.6 31.3L504.2 30.8L506.1 30.5L506.4 30.1L507.0 30.3L508.3 30.2L508.8 29.8L509.7 29.9L510.6 29.1L510.4 28.5L511.7 28.1L511.9 28.6L512.4 28.3L512.5 27.7L513.3 26.7L514.2 26.1L514.7 26.2L515.6 25.3L517.1 25.5L518.4 25.3L518.8 25.9L519.5 25.9L519.4 24.6L520.3 24.2L520.6 23.6L522.7 23.3L523.9 22.5L526.1 23.0L527.0 23.7L527.7 23.6L527.8 22.5L529.0 21.2L529.8 21.3L529.8 19.3L530.5 19.4L531.2 18.2L531.0 17.1L531.3 16.5L530.6 16.3L530.2 14.9L531.3 15.0L531.0 14.5L530.4 14.3L530.6 13.7L531.4 13.3L532.0 12.6L531.9 10.8L531.7 9.8L532.3 8.7L532.8 8.5L533.4 7.3L534.7 5.8L535.5 5.3L532.8 5.5L532.0 6.3L527.8 6.3L527.5 6.6L526.0 6.7L524.8 7.3L523.2 7.7L522.6 8.3L522.7 9.1L521.4 10.2L520.6 10.4L520.9 11.3L519.5 11.3L519.2 12.1L518.4 12.6L517.9 12.6L517.4 13.6L517.0 13.3L516.0 13.3L515.6 13.7L514.4 13.6L514.7 12.8L514.5 12.4L513.8 12.4L513.7 11.6L511.6 12.1L511.5 12.7L512.1 13.2L511.5 13.4L511.8 14.4L511.2 14.5L510.4 15.9L509.7 16.7L509.0 16.6L508.2 17.6L507.6 17.2L507.0 17.5L506.1 17.5L505.8 17.0L504.5 17.6L504.3 18.0L502.8 18.5L502.2 18.5L502.0 19.3L501.0 19.3L499.6 19.9L499.0 19.4L498.7 18.4L498.0 18.7L497.2 18.4L496.1 18.4L495.2 18.7L493.8 18.8L492.8 19.9L491.5 20.3L491.5 21.0L490.8 21.8L489.8 21.6L489.7 20.9L489.2 20.9L489.4 22.4L489.6 22.8L489.2 23.2L488.2 23.4L487.8 22.6L487.5 23.6L486.9 24.7L486.3 25.3L485.1 25.3L484.8 25.6L483.4 25.6L483.1 24.4L482.5 24.4L482.2 24.9L479.5 25.0L478.6 25.5L478.5 26.1L478.0 25.7L476.5 26.3L476.6 27.1L476.2 27.2L476.0 28.5L475.0 28.7L474.4 28.0L473.8 28.3L472.2 28.2L472.0 29.1L471.0 29.1L470.6 29.5L469.3 29.4L469.7 30.6L469.7 32.6L469.3 32.8L469.2 33.7L468.5 34.0L467.5 35.2L467.5 36.0L466.4 36.1L465.9 37.0L465.2 36.6L464.5 35.7L464.1 35.5L463.9 36.3L463.5 36.8L463.2 38.3L462.1 39.6L461.5 39.7L460.9 40.4L460.2 40.3L460.3 41.0L459.0 40.7L458.2 41.3L458.0 42.2L456.7 42.8L455.9 43.6L455.5 43.6L454.4 44.8L452.7 44.9L451.6 44.5L451.6 43.6L451.1 43.6L450.9 44.3L450.2 44.2L450.1 44.7L449.5 44.8L449.6 45.5L448.9 45.3L448.6 46.0L448.2 45.2L447.6 45.3L446.9 46.2L446.9 46.7L444.8 46.8L443.3 46.4L443.0 47.9L442.3 47.6L442.1 48.4L441.6 48.7L441.6 49.5L440.8 49.4L440.3 50.3L439.5 50.6L438.9 50.3L438.6 51.0L435.9 51.0L436.0 49.7L435.1 50.0L434.7 50.6L434.7 51.4L433.9 51.5L433.5 51.0L433.0 51.0L433.3 49.8L432.4 49.5L431.7 50.0L431.8 50.8L431.0 51.3L430.0 51.3L429.6 50.8L429.1 51.1L427.7 51.1L427.7 50.7L426.4 50.1L426.4 49.5L425.3 49.3L424.9 49.6L423.6 49.5L422.6 50.3L422.8 51.9L422.3 53.2L422.4 54.3L421.9 54.1L421.7 54.9L421.2 55.0L421.1 55.5L419.9 56.0L419.2 55.9L418.8 56.4L418.1 56.4L417.3 57.2L416.7 59.7L415.7 59.9L416.1 60.8L415.0 60.7L414.0 61.1L413.4 63.2L412.7 63.7L412.5 64.9L411.4 66.1L410.1 68.2L409.4 68.4L409.0 68.9L407.5 69.3L407.5 69.8L406.3 69.8L405.9 70.1L404.6 69.8L404.5 70.3L403.1 70.4L402.4 71.1L401.5 71.4L400.2 71.2L400.2 71.7L398.9 71.7L398.3 72.0L398.3 71.4L397.7 71.3L396.4 72.5L396.0 73.6L395.4 73.8L395.2 74.4L394.2 74.5L394.2 75.0L392.5 75.3L392.6 75.9L392.1 75.8L391.9 76.4L390.9 76.4L390.4 75.9L390.3 76.4L389.5 77.5L389.1 78.3L388.1 79.0L387.3 79.3L385.6 79.5L385.6 80.0L384.7 80.4L384.4 79.7L383.5 79.9L382.3 80.8L380.9 81.6L380.3 82.6L378.5 83.4L377.5 84.1L376.3 84.0L374.3 84.3L373.9 84.9L373.1 84.8L372.1 86.0L371.4 85.8L370.9 86.2L371.0 86.9L370.6 87.0L369.4 88.0L367.9 87.8L366.3 88.9L365.4 88.4L365.3 87.9L364.4 88.3L363.1 88.2L361.8 89.5L361.8 90.0L360.5 90.0L359.4 90.5L359.2 91.5L358.3 91.4L358.0 91.8L357.1 91.4L356.6 91.7L355.7 91.0L354.7 91.3L354.3 92.8L352.8 92.8L352.7 93.5L351.9 93.7L351.6 93.1L350.1 93.5L349.4 94.5L348.3 94.5L347.4 94.0L346.3 93.9L345.9 94.9L345.4 94.8L344.9 95.3L344.0 95.7L343.8 96.3L342.9 96.3L342.6 96.7L341.6 96.5L341.3 97.1L340.1 97.0L339.5 97.7L338.4 97.6L338.1 98.0L336.0 98.8L335.4 98.6L334.0 98.7L333.4 98.4L332.6 98.7L332.3 98.4L331.7 99.0L330.4 99.3L330.0 99.0L328.1 98.8L327.9 99.1L326.9 99.1L326.0 98.4Z", "area": 0.08406429579190641}, "Lefke": {"d": "M96.0 199.4L96.0 198.1L96.5 197.5L97.6 195.5L97.8 194.2L97.7 193.1L96.5 191.4L95.1 191.3L93.5 189.9L92.0 189.0L91.4 188.5L90.8 187.3L90.9 186.9L90.2 186.2L91.6 185.6L90.6 184.6L89.7 184.6L87.6 183.0L87.2 181.9L86.8 182.2L86.7 181.5L87.3 180.5L87.1 179.8L87.5 179.5L87.5 178.7L86.6 177.4L86.4 175.9L86.0 175.7L85.8 174.4L84.8 174.1L84.7 173.5L82.5 171.9L81.8 173.2L81.1 174.9L79.7 177.0L78.4 178.2L76.2 180.7L74.7 181.7L72.8 182.2L71.8 182.0L71.6 182.5L70.4 183.1L69.7 183.9L67.7 185.9L65.7 186.3L63.9 187.7L62.8 187.8L61.0 188.5L59.8 188.4L59.5 187.9L58.3 187.7L57.7 186.9L57.5 185.3L57.3 186.4L56.5 186.4L56.3 186.1L53.4 185.7L53.0 185.1L51.6 184.7L50.6 183.2L49.5 182.2L49.0 181.5L46.7 181.1L46.1 180.6L44.9 180.6L42.9 179.8L42.1 178.8L39.9 178.3L38.2 177.5L37.8 177.5L37.7 176.3L36.7 175.4L35.4 175.4L35.0 176.0L33.4 175.8L33.4 175.5L29.4 175.0L29.2 177.1L29.8 181.1L31.9 184.4L34.9 187.7L38.2 189.5L42.4 190.8L51.9 193.1L57.1 196.5L61.3 201.9L63.2 206.9L64.6 208.7L68.1 208.9L69.7 206.0L72.2 202.7L73.9 201.9L77.1 201.1L83.4 201.9L86.3 202.4L89.4 201.9L92.8 201.1ZM36.8 175.4L36.5 174.8L37.0 174.8ZM0.8 175.3L1.8 175.6L2.9 175.1L2.9 174.1L3.2 174.1L3.4 173.0L3.8 173.0L4.7 171.7L5.3 171.7L5.6 171.1L6.3 171.1L6.9 171.6L7.3 172.5L8.3 172.5L8.2 173.5L10.4 173.3L8.8 177.9L6.5 180.5L3.6 181.1L0.2 177.5L0.0 176.2L0.5 176.0Z", "area": 0.012616342696432215}}};
+var DIST = [
+  {id:'Lefkoşa',seats:16},{id:'Gazimağusa',seats:13},{id:'Girne',seats:11},
+  {id:'Güzelyurt',seats:3},{id:'İskele',seats:5},{id:'Lefke',seats:2}
+];
+var TOTAL_SEATS = 50, MAJ = 26, THRESH = 5, TAPER = 0.2;
+/* votes per district, order: Lefkoşa, Gazimağusa, Girne, Güzelyurt, İskele, Lefke (YSK national table) */
+var PARTIES = [
+  {id:'UBP',acr:'UBP',name:'National Unity Party',color:'#2563c9',slider:true,s22:24,v:[649407,526485,443902,122736,201703,81535],gv:[602108, 549739, 370884, 169199, 254855, 78983]},
+  {id:'CTP',acr:'CTP',name:'Republican Turkish Party',color:'#d62839',slider:true,s22:18,v:[526137,423685,357744,97685,161885,64972],gv:[594081, 385342, 355085, 121985, 112619, 62996]},
+  {id:'DP',acr:'DP',name:'Democratic Party',color:'#e8771a',slider:true,s22:3,v:[122059,99699,83439,22247,37394,14820],gv:[80167, 99533, 82262, 36350, 55088, 26258]},
+  {id:'HP',acr:'HP',name:"People's Party",color:'#a67c00',slider:true,s22:3,v:[111188,88983,75669,19688,33454,13281],gv:[118894, 79287, 69060, 19627, 46659, 8736]},
+  {id:'YDP',acr:'YDP',name:'Rebirth Party',color:'#1f9d6b',slider:true,s22:2,v:[105715,86042,72530,19542,32556,13062],gv:[58076, 107962, 86672, 18968, 50930, 6839]},
+  {id:'TDP',acr:'TDP',name:'Communal Democracy Party',color:'#c2398f',slider:true,s22:0,v:[72952,58102,50684,12948,21904,8628],gv:[101860, 43875, 41122, 14907, 13304, 10150]},
+  {id:'BY',acr:'BY',name:'Independence Path',color:'#7b4fd0',slider:false,s22:0,v:[32865,25643,21319,5701,9651,3907],gv:[50842, 14951, 19226, 8125, 2819, 3123]},
+  {id:'TKP',acr:'TKP-YG',name:'Communal Liberation Party – New Forces',color:'#8a5a44',slider:false,s22:0,v:[26370,20719,17341,4581,7603,3012],gv:[21366, 20203, 14970, 7518, 12341, 3228]},
+  {id:'IND',acr:'IND',name:'Independents',color:'#7c8794',slider:false,s22:0,indep:true,v:[282,313,0,0,215,0],gv:[250, 220, 170, 46, 113, 11]}
+];
+/* hemicycle order, left to right (my choice) */
+var HEMI_ORDER = ['TKP','BY','TDP','CTP','HP','DP','UBP','YDP','IND'];
+var NAT_TOTAL = 5113984;
+var byId = {}; PARTIES.forEach(function(p){byId[p.id]=p;});
+var dTot = DIST.map(function(d,j){return PARTIES.reduce(function(a,p){return a+p.v[j];},0);});
+/* gv: votes cast at each district's ballot boxes (all 50 candidates per party), used for geographic display only */
+var gTot = DIST.map(function(d,j){return PARTIES.reduce(function(a,p){return a+p.gv[j];},0);});
+PARTIES.forEach(function(p){
+  p.nat = p.v.reduce(function(a,b){return a+b;},0)/NAT_TOTAL*100;
+  p.base = p.v.map(function(x,j){return x/dTot[j]*100;});
+  p.gbase = p.gv.map(function(x,j){return x/gTot[j]*100;});
+});
+var SLIDERS = PARTIES.filter(function(p){return p.slider;});
+var MINORS = PARTIES.filter(function(p){return !p.slider;});
+var minorBase = MINORS.reduce(function(a,p){return a+p.nat;},0);
+
+var S = {};  function resetState(){SLIDERS.forEach(function(p){S[p.id]=p.nat;});}
+resetState();
+
+function fmt1(x){return (Math.round(x*10)/10).toFixed(1);}
+function sumSliders(except){return SLIDERS.reduce(function(a,p){return a+(p.id===except?0:S[p.id]);},0);}
+
+/* ---------- projection ---------- */
+function project(){
+  var other = Math.max(0, 100 - sumSliders());
+  var s = {};
+  SLIDERS.forEach(function(p){s[p.id]=S[p.id];});
+  MINORS.forEach(function(p){s[p.id]=other*p.nat/minorBase;});
+  var v = {};
+  PARTIES.forEach(function(p){
+    var b=p.nat, t=TAPER*b, x=s[p.id];
+    v[p.id]=p.base.map(function(d){
+      if(x>=t) return Math.max(0, d + (x-b));
+      return Math.max(0, d + (t-b)) * (x/t);
+    });
+  });
+  var sh = {};
+  PARTIES.forEach(function(p){sh[p.id]=[];});
+  var dv = {};
+  PARTIES.forEach(function(p){
+    var b=p.nat, t=TAPER*b, x=s[p.id];
+    dv[p.id]=p.gbase.map(function(d){
+      if(x>=t) return Math.max(0, d + (x-b));
+      return Math.max(0, d + (t-b)) * (x/t);
+    });
+  });
+  DIST.forEach(function(d,j){
+    var tot=PARTIES.reduce(function(a,p){return a+dv[p.id][j];},0);
+    PARTIES.forEach(function(p){sh[p.id][j]= tot>0 ? dv[p.id][j]/tot*100 : 0;});
+  });
+  var osh = {};
+  PARTIES.forEach(function(p){osh[p.id]=[];});
+  DIST.forEach(function(d,j){
+    var tt=PARTIES.reduce(function(a,p){return a+v[p.id][j];},0);
+    PARTIES.forEach(function(p){osh[p.id][j]= tt>0 ? v[p.id][j]/tt*100 : 0;});
+  });
+  var elig = PARTIES.filter(function(p){return !p.indep && s[p.id] >= THRESH - 1e-9;});
+  var seats = {}; PARTIES.forEach(function(p){seats[p.id]=DIST.map(function(){return 0;});});
+  DIST.forEach(function(d,j){
+    var q=[];
+    elig.forEach(function(p){
+      for(var k=1;k<=d.seats;k++) q.push({p:p.id,q:v[p.id][j]/k,v:v[p.id][j],s:s[p.id]});
+    });
+    q.sort(function(a,b){return (b.q-a.q) || (b.v-a.v) || (b.s-a.s);});
+    q.slice(0,d.seats).forEach(function(r){seats[r.p][j]++;});
+  });
+  var tot = {}; PARTIES.forEach(function(p){tot[p.id]=seats[p.id].reduce(function(a,b){return a+b;},0);});
+  return {s:s,other:other,sh:sh,osh:osh,seats:seats,tot:tot};
+}
+
+/* ---------- state ---------- */
+var R, sel = new Set(), mapMode = 'winner', tipId = null, tipPos = null;
+var el = function(id){return document.getElementById(id);};
+
+/* ---------- inputs ---------- */
+function buildRows(){
+  var h='';
+  SLIDERS.forEach(function(p){
+    h+='<div class="row" data-id="'+p.id+'" style="--c:'+p.color+'">'+
+       '<div class="lab"><i></i><span>'+p.name+' ('+p.acr+')</span></div>'+
+       '<input type="range" min="0" max="60" step="0.1" aria-label="'+p.name+' vote share">'+
+       '<div class="box"><input type="number" min="0" max="60" step="0.1" inputmode="decimal" aria-label="'+p.name+' vote share, percent"><small>%</small></div></div>';
+  });
+  h+='<div class="row" data-id="OTHER" style="--c:#7c8794"><div class="lab"><i></i><span>Other</span></div>'+
+     '<input type="range" min="0" max="60" step="0.1" disabled aria-label="Other vote share">'+
+     '<div class="box"><input type="number" readonly tabindex="-1" aria-label="Other vote share, percent"><small>%</small></div></div>';
+  el('rows').innerHTML=h;
+  Array.prototype.forEach.call(el('rows').querySelectorAll('.row'),function(row){
+    var id=row.getAttribute('data-id'); if(id==='OTHER') return;
+    var rng=row.querySelector('input[type=range]'), num=row.querySelector('input[type=number]');
+    function apply(x){
+      var mx=Math.min(60,100-sumSliders(id));
+      S[id]=Math.max(0,Math.min(mx,x));
+    }
+    rng.addEventListener('input',function(){apply(parseFloat(rng.value)); refresh(null);});
+    num.addEventListener('input',function(){
+      var x=parseFloat(num.value); if(isNaN(x)) return; apply(x); refresh(num);
+    });
+    function commit(){ var x=parseFloat(num.value); if(!isNaN(x)) apply(x); refresh(null); }
+    num.addEventListener('change',commit);
+    num.addEventListener('blur',commit);
+    num.addEventListener('keydown',function(e){if(e.key==='Enter'){commit();num.blur();}});
+  });
+}
+function syncInputs(skip){
+  Array.prototype.forEach.call(el('rows').querySelectorAll('.row'),function(row){
+    var id=row.getAttribute('data-id'), rng=row.querySelector('input[type=range]'), num=row.querySelector('input[type=number]');
+    var x = id==='OTHER' ? R.other : S[id];
+    rng.value = Math.min(60, Math.round(x*10)/10);
+    rng.style.setProperty('--p',(Math.min(60,x)/60*100)+'%');
+    if(num!==skip) num.value=fmt1(x);
+  });
+}
+
+/* ---------- visible parties ---------- */
+function visibleParties(){
+  return PARTIES.filter(function(p){return !p.indep && (R.s[p.id]>=1 || R.tot[p.id]>0);})
+    .sort(function(a,b){return (R.tot[b.id]-R.tot[a.id]) || (R.s[b.id]-R.s[a.id]);});
+}
+
+/* ---------- hemicycle ---------- */
+function drawHemi(){
+  var W=620,Ro=280,rows=4,cx=W/2,PI=Math.PI;
+  /* pick the row gap d so that seats per row (arc length / d) add up to exactly 50, giving even spacing along and across rows */
+  var best=null, d, i;
+  for(d=Ro*0.12; d<=Ro*0.30; d+=0.01){
+    var tot=0, cs=[];
+    for(i=0;i<rows;i++){var n=Math.round(PI*(Ro-i*d)/d); cs.push(n); tot+=n;}
+    var diff=Math.abs(tot-TOTAL_SEATS);
+    if(!best||diff<best.diff) best={diff:diff,d:d,cs:cs,tot:tot};
+    if(diff===0) break;
+  }
+  d=best.d; var cnt=best.cs.slice(), radii=[];
+  var fix=TOTAL_SEATS-best.tot, k=0;
+  while(fix!==0){cnt[k%rows]+=fix>0?1:-1; fix+=fix>0?-1:1; k++;}
+  for(i=0;i<rows;i++) radii.push(Ro-i*d);
+  var seatR=Math.min(d*0.40, PI*radii[rows-1]/(cnt[rows-1]-1)*0.40);
+  var cy=Ro+seatR+8, H=cy+seatR+8;
+  var pts=[];
+  radii.forEach(function(r,ri){
+    var n=cnt[ri];
+    for(var j=0;j<n;j++){
+      var a=PI*(1-j/(n-1));
+      pts.push({a:a,r:r,x:cx+r*Math.cos(a),y:cy-r*Math.sin(a)});
+    }
+  });
+  pts.sort(function(p,q){return (q.a-p.a)||(q.r-p.r);});
+  var order=[]; HEMI_ORDER.forEach(function(id){for(var n=0;n<R.tot[id];n++) order.push(id);});
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Projected seats">';
+  pts.forEach(function(p,idx){
+    var id=order[idx]; if(!id) return;
+    svg+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+seatR.toFixed(1)+'" fill="'+byId[id].color+'"/>';
+  });
+  el('hemi').innerHTML=svg+'</svg>';
+  el('hlegend').innerHTML=HEMI_ORDER.filter(function(id){return R.tot[id]>0;}).map(function(id){
+    return '<span style="--c:'+byId[id].color+'"><i></i>'+byId[id].acr+'</span>';}).join('');
+}
+
+/* ---------- table ---------- */
+function drawTable(){
+  el('tbody').innerHTML=visibleParties().map(function(p){
+    var d=R.tot[p.id]-p.s22, ch = d>0?'+'+d : d<0?'−'+Math.abs(d) : '0';
+    return '<tr><td><span class="lst" style="--c:'+p.color+'"><i></i><span>'+p.name+' ('+p.acr+')</span></span></td>'+
+      '<td>'+fmt1(R.s[p.id])+'%</td><td class="seats">'+R.tot[p.id]+'</td><td>'+ch+'</td></tr>';
+  }).join('');
+}
+
+/* ---------- coalition ---------- */
+function drawCoalition(){
+  var parties=PARTIES.filter(function(p){return R.tot[p.id]>0;}).sort(function(a,b){return (R.tot[b.id]-R.tot[a.id])||(R.s[b.id]-R.s[a.id]);});
+  sel.forEach(function(id){if(!(R.tot[id]>0)) sel.delete(id);});
+  el('coalbtns').innerHTML=parties.map(function(p){
+    return '<button type="button" class="btn party" data-id="'+p.id+'" style="--c:'+p.color+'" aria-pressed="'+(sel.has(p.id)?'true':'false')+'"><i></i>'+p.acr+'</button>';
+  }).join('');
+  var segs='';
+  parties.forEach(function(p){ if(sel.has(p.id)) segs+='<b style="width:'+(R.tot[p.id]/TOTAL_SEATS*100)+'%;background:'+p.color+'"></b>'; });
+  el('barfill').innerHTML=segs;
+  el('barfill').style.width='100%';
+  el('barmark').style.left=(MAJ/TOTAL_SEATS*100)+'%';
+  el('barlab').textContent=MAJ;
+}
+
+/* ---------- map ---------- */
+function winnerOf(j){
+  var best=null,bv=-1;
+  PARTIES.forEach(function(p){ if(R.sh[p.id][j]>bv){bv=R.sh[p.id][j];best=p;} });
+  return best;
+}
+function drawMapButtons(){
+  var vp=visibleParties();
+  if(mapMode!=='winner' && !vp.some(function(p){return p.id===mapMode;})) mapMode='winner';
+  var h='<button type="button" class="btn" data-m="winner" aria-pressed="'+(mapMode==='winner')+'">Winner</button>';
+  vp.forEach(function(p){
+    h+='<button type="button" class="btn party" data-m="'+p.id+'" style="--c:'+p.color+'" aria-pressed="'+(mapMode===p.id)+'"><i></i>'+p.acr+'</button>';
+  });
+  el('mapbtns').innerHTML=h;
+}
+function buildMap(){
+  var vb=MAP.viewBox, h='<svg viewBox="0 0 '+vb[2]+' '+vb[3]+'" role="group" aria-label="Projected results by district">';
+  DIST.forEach(function(d,j){
+    h+='<path data-j="'+j+'" d="'+MAP.districts[d.id].d+'" fill-rule="evenodd" tabindex="0" role="button" aria-label="'+d.id+'"/>';
+  });
+  DIST.forEach(function(d){
+    h+='<path class="hatch" d="'+MAP.districts[d.id].d+'" fill="url(#hatch)" fill-rule="evenodd" aria-hidden="true"/>';
+  });
+  h+='<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="var(--fg)" stroke-opacity=".3" stroke-width="1.3" stroke-dasharray="3.5 2.5"/></pattern></defs>';
+  el('mapwrap').innerHTML=h+'</svg><div class="tip" id="tip" hidden></div>';
+}
+function paintMap(){
+  var paths=el('mapwrap').querySelectorAll('path[data-j]');
+  var legend='';
+  if(mapMode==='winner'){
+    var seen={};
+    DIST.forEach(function(d,j){
+      var w=winnerOf(j), pa=paths[j];
+      pa.style.fill=w.color; pa.style.fillOpacity=1; seen[w.id]=1;
+    });
+    legend=PARTIES.filter(function(p){return seen[p.id];}).sort(function(a,b){return (R.tot[b.id]-R.tot[a.id])||(R.s[b.id]-R.s[a.id]);})
+      .map(function(p){return '<span style="--c:'+p.color+'"><i></i>'+p.acr+'</span>';}).join('');
+  } else {
+    var p=byId[mapMode], vals=R.sh[p.id], mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals);
+    DIST.forEach(function(d,j){
+      var t = mx>mn ? (vals[j]-mn)/(mx-mn) : 1;
+      paths[j].style.fill=p.color; paths[j].style.fillOpacity=(0.15+0.85*t).toFixed(3);
+    });
+    legend='<span>Weakest</span><span class="grad" style="--c:'+p.color+'"></span><span>Strongest</span>';
+  }
+  el('maplegend').innerHTML=legend;
+  Array.prototype.forEach.call(paths,function(pa,j){pa.classList.toggle('sel',tipId===j);});
+}
+function drawTip(){
+  var tip=el('tip'); if(tipId===null){tip.hidden=true;return;}
+  var j=tipId, d=DIST[j];
+  var rows=PARTIES.filter(function(p){return !p.indep && (R.sh[p.id][j]>=1 || R.seats[p.id][j]>0);})
+    .sort(function(a,b){return R.sh[b.id][j]-R.sh[a.id][j];});
+  var h='<div class="th">'+d.id+'<span>'+d.seats+' seats</span></div>'+
+    '<div class="tr hd"><span></span><em>Local</em><em>Seat basis</em><span></span></div>';
+  rows.forEach(function(p){
+    var sq=''; for(var n=0;n<R.seats[p.id][j];n++) sq+='<u></u>';
+    h+='<div class="tr" style="--c:'+p.color+'"><b><i></i>'+p.acr+'</b><em>'+fmt1(R.sh[p.id][j])+'%</em><em class="ob">'+fmt1(R.osh[p.id][j])+'%</em><span class="sq">'+sq+'</span></div>';
+  });
+  h+='<div class="occ">Under Turkish military control</div>';
+  tip.innerHTML=h; tip.hidden=false;
+  var wrap=el('mapwrap'); wrap.style.minHeight='';
+  var W=wrap.clientWidth, Ht=wrap.clientHeight, tw=tip.offsetWidth, th=tip.offsetHeight;
+  var x=tipPos.x+8, y=tipPos.y+8;
+  if(x+tw>W) x=Math.max(0,W-tw);
+  if(y+th>Ht){
+    if(tipPos.y-th-8>=0) y=tipPos.y-th-8;
+    else { y=0; wrap.style.minHeight=th+'px'; }
+  }
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+
+/* ---------- refresh ---------- */
+function refresh(skip){
+  R=project();
+  syncInputs(skip);
+  drawHemi(); drawTable(); drawCoalition(); drawMapButtons(); paintMap(); drawTip();
+}
+
+/* ---------- events ---------- */
+el('reset').addEventListener('click',function(){resetState();refresh(null);});
+el('coalbtns').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-id]'); if(!b) return;
+  var id=b.getAttribute('data-id'); if(sel.has(id)) sel.delete(id); else sel.add(id);
+  drawCoalition();
+});
+el('mapbtns').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-m]'); if(!b) return;
+  mapMode=b.getAttribute('data-m'); drawMapButtons(); paintMap();
+});
+el('mapwrap').addEventListener('click',function(e){
+  var pa=e.target.closest('path');
+  if(!pa){ if(!e.target.closest('.tip')){tipId=null;drawTip();paintMap();} return; }
+  var j=+pa.getAttribute('data-j'), r=el('mapwrap').getBoundingClientRect();
+  if(tipId===j){tipId=null;} else {tipId=j; tipPos={x:e.clientX-r.left,y:e.clientY-r.top};}
+  drawTip(); paintMap();
+});
+el('mapwrap').addEventListener('keydown',function(e){
+  var pa=e.target.closest&&e.target.closest('path'); if(!pa) return;
+  if(e.key==='Enter'||e.key===' '){
+    e.preventDefault();
+    var j=+pa.getAttribute('data-j'), b=pa.getBoundingClientRect(), r=el('mapwrap').getBoundingClientRect();
+    if(tipId===j){tipId=null;} else {tipId=j; tipPos={x:b.left-r.left+b.width/2,y:b.top-r.top+b.height/2};}
+    drawTip(); paintMap();
+  }
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&tipId!==null){tipId=null;drawTip();paintMap();}});
+document.addEventListener('click',function(e){
+  if(tipId!==null && !e.target.closest('#mapwrap')){tipId=null;drawTip();paintMap();}
+});
+
+buildRows(); buildMap(); refresh(null);
+})();
+</script>
+</body>
+</html>
+      
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
