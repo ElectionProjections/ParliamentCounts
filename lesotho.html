@@ -181,6 +181,16 @@ svg.map path{stroke:var(--card);stroke-width:1.4;stroke-linejoin:round;cursor:po
 svg.map path:hover,svg.map path.sel{filter:brightness(.82)}
 svg.map path:focus{outline:none}
 svg.map{-webkit-tap-highlight-color:transparent}
+.zoom{position:absolute;top:6px;right:6px;z-index:4;display:flex;flex-direction:column;gap:4px}
+.zoom button{width:32px;height:32px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:18px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.zoom button:hover:not(:disabled){background:var(--btnh)}
+.zoom button:disabled{opacity:.4;cursor:default}
+.zoom button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.zoom .zr{font-size:13px}
+svg.map{touch-action:pan-y;-webkit-user-select:none;user-select:none}
+svg.map.zoomed{touch-action:none;cursor:grab}
+svg.map.panning{cursor:grabbing}
+.maphint{text-align:center;font-size:12px;color:var(--muted);margin:10px 0 0}
 .tip{position:absolute;z-index:5;width:176px;background:var(--tip);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:7px 9px;font-size:12px;display:none}
 .tip .h{display:flex;justify-content:space-between;gap:8px;font-weight:650;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--line)}
 .tip .h span:last-child{font-weight:500;color:var(--muted);white-space:nowrap}
@@ -216,7 +226,8 @@ svg.map{-webkit-tap-highlight-color:transparent}
 
 <section class="card" id="c-map"><h2>Projected constituency map</h2>
   <div class="mbtns" id="mbtns"></div>
-  <div class="mapwrap" id="mapwrap"><svg class="map" id="map" viewBox="-13 -13 2674 2307"></svg><div class="tip" id="tip"></div></div>
+  <div class="mapwrap" id="mapwrap"><svg class="map" id="map" viewBox="-13 -13 2674 2307"></svg><div class="zoom" role="group" aria-label="Map zoom"><button type="button" id="zin" aria-label="Zoom in" title="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out" title="Zoom out">−</button><button type="button" id="zreset" class="zr" aria-label="Reset zoom" title="Reset zoom">⤢</button></div><div class="tip" id="tip"></div></div>
+  <p class="maphint">Scroll over the map or pinch to zoom, drag to pan.</p>
   <div class="legend" id="mlegend" style="margin-top:14px;margin-bottom:0"></div>
 </section>
 
@@ -607,13 +618,66 @@ function update(){
   drawHemi(cur.seats); drawTable(cur); drawCoal(cur); drawMap(cur);
   if(tipN){const p=geoPaths[tipN]; const n=tipN; closeTip();}
 }
-buildInputs(); initMap(); syncInputs(null); update();
+/* ---------- map zoom ---------- */
+function initZoom(){
+  const svg=$("map"), VB0={x:-13,y:-13,w:2674,h:2307}, RATIO=VB0.h/VB0.w, MAXZ=10;
+  let vb=Object.assign({},VB0), dragged=false;
+  const ptrs=new Map(); let gest=null;
+  function apply(){
+    svg.setAttribute("viewBox",`${vb.x.toFixed(1)} ${vb.y.toFixed(1)} ${vb.w.toFixed(1)} ${vb.h.toFixed(1)}`);
+    const z=vb.w<VB0.w-1; svg.classList.toggle("zoomed",z);
+    $("zin").disabled=vb.w<=VB0.w/MAXZ+1; $("zout").disabled=!z; $("zreset").disabled=!z;
+  }
+  function clamp(){
+    vb.w=Math.min(VB0.w,Math.max(VB0.w/MAXZ,vb.w)); vb.h=vb.w*RATIO;
+    vb.x=Math.min(VB0.x+VB0.w-vb.w,Math.max(VB0.x,vb.x));
+    vb.y=Math.min(VB0.y+VB0.h-vb.h,Math.max(VB0.y,vb.y));
+  }
+  function zoomAt(f,fx,fy){
+    closeTip();
+    const nw=Math.min(VB0.w,Math.max(VB0.w/MAXZ,vb.w/f));
+    const cx=vb.x+vb.w*fx, cy=vb.y+vb.h*fy;
+    vb.w=nw; vb.h=nw*RATIO; vb.x=cx-nw*fx; vb.y=cy-vb.h*fy; clamp(); apply();
+  }
+  function frac(clientX,clientY){const r=svg.getBoundingClientRect(); return [(clientX-r.left)/r.width,(clientY-r.top)/r.height];}
+  $("zin").onclick=()=>zoomAt(1.3,.5,.5);
+  $("zout").onclick=()=>zoomAt(1/1.3,.5,.5);
+  $("zreset").onclick=()=>{closeTip(); vb=Object.assign({},VB0); apply();};
+  svg.addEventListener("wheel",e=>{
+    e.preventDefault(); const [fx,fy]=frac(e.clientX,e.clientY);
+    const dy=Math.max(-100,Math.min(100,e.deltaY*(e.deltaMode===1?16:1)));
+    zoomAt(Math.exp(-dy*0.002),fx,fy);
+  },{passive:false});
+  svg.addEventListener("pointerdown",e=>{
+    dragged=false; ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    gest={moved:false,sx:e.clientX,sy:e.clientY,dist:0};
+    if(ptrs.size===2){const [a,b]=[...ptrs.values()]; gest.dist=Math.hypot(a.x-b.x,a.y-b.y); dragged=true; closeTip();}
+  });
+  svg.addEventListener("pointermove",e=>{
+    const p=ptrs.get(e.pointerId); if(!p||!gest)return;
+    const r=svg.getBoundingClientRect(), dx=e.clientX-p.x, dy=e.clientY-p.y;
+    p.x=e.clientX; p.y=e.clientY;
+    if(ptrs.size===2){
+      const [a,b]=[...ptrs.values()], d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(gest.dist>0&&d>0){const [fx,fy]=frac((a.x+b.x)/2,(a.y+b.y)/2); zoomAt(d/gest.dist,fx,fy);}
+      gest.dist=d; return;
+    }
+    if(vb.w>=VB0.w-1)return;
+    if(!gest.moved&&Math.hypot(e.clientX-gest.sx,e.clientY-gest.sy)<5)return;
+    if(!gest.moved){gest.moved=true; dragged=true; closeTip(); svg.classList.add("panning"); try{svg.setPointerCapture(e.pointerId);}catch(_){}}
+    vb.x-=dx*vb.w/r.width; vb.y-=dy*vb.h/r.height; clamp(); apply();
+  });
+  const end=e=>{ptrs.delete(e.pointerId); if(!ptrs.size){svg.classList.remove("panning"); gest=null;} else if(gest){gest.dist=0;}};
+  svg.addEventListener("pointerup",end); svg.addEventListener("pointercancel",end); svg.addEventListener("lostpointercapture",end);
+  svg.addEventListener("click",e=>{if(dragged){e.stopPropagation();e.preventDefault();dragged=false;}},true);
+  svg.addEventListener("keydown",e=>{});
+  apply();
+}
+buildInputs(); initMap(); initZoom(); syncInputs(null); update();
 window.__app={project,BASE,BASEINP,BASESEATS,SLIDERS,ORDER,get inp(){return inp;},set inp(v){inp=v;syncInputs(null);update();}};
 </script>
-
 </body>
 </html>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
