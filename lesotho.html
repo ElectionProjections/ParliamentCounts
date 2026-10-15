@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesotho Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lesotho Seat Projector</title>
+<style>
+:root{
+  --bg:#f3f4f6; --card:#ffffff; --ink:#1b1f26; --muted:#6a7280; --line:#e3e6eb;
+  --track:#d5dae1; --base:#e9ecf0; --btn:#f1f3f6; --btnh:#e4e8ee; --btnon:#1b1f26; --btnonink:#ffffff;
+  --good:#1a8a3c; --bad:#c62828; --tip:#ffffff; --shadow:0 6px 20px rgba(0,0,0,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101216; --card:#1a1d23; --ink:#e8eaee; --muted:#9aa2b0; --line:#2b3039;
+    --track:#59606d; --base:#2a2e36; --btn:#262a32; --btnh:#323742; --btnon:#e8eaee; --btnonink:#101216;
+    --good:#4cc26a; --bad:#ff6b6b; --tip:#232730; --shadow:0 6px 20px rgba(0,0,0,.5); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101216; --card:#1a1d23; --ink:#e8eaee; --muted:#9aa2b0; --line:#2b3039;
+  --track:#59606d; --base:#2a2e36; --btn:#262a32; --btnh:#323742; --btnon:#e8eaee; --btnonink:#101216;
+  --good:#4cc26a; --bad:#ff6b6b; --tip:#232730; --shadow:0 6px 20px rgba(0,0,0,.5); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding-block:20px 36px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:24px;text-align:center;margin:8px 0 18px;font-weight:700}
+h2{font-size:19px;text-align:center;margin:0 0 14px;font-weight:650}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;margin:0 0 16px}
+.sources{font-size:12px;color:var(--muted);text-align:center;margin:20px 0 0;line-height:1.5}
+
+/* inputs */
+.row{padding:5px 0;border-top:1px solid var(--line)}
+@media (min-width:560px){.row{display:grid;grid-template-columns:minmax(0,250px) 1fr;align-items:center;gap:12px}.row .lab{margin:0 !important;font-size:13.5px}}
+.row:first-of-type{border-top:0;padding-top:0}
+.row .lab{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;display:inline-block}
+.ctl{display:flex;align-items:center;gap:12px}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:8px;border-radius:4px;cursor:pointer;margin:0;
+  background:linear-gradient(to right,var(--c) 0,var(--c) var(--p),var(--track) var(--p),var(--track) 100%)}
+input[type=range]:disabled{cursor:default;opacity:.85}
+input[type=range]::-webkit-slider-runnable-track{height:8px;background:transparent;border-radius:4px}
+input[type=range]::-moz-range-track{height:8px;background:transparent;border-radius:4px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--c);margin-top:-6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--c);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]:disabled::-webkit-slider-thumb{display:none}
+input[type=range]:disabled::-moz-range-thumb{display:none}
+input[type=range]:active{cursor:pointer}
+.num{width:64px;flex:none;font:inherit;text-align:right;padding:3px 7px;border:1px solid var(--line);border-radius:7px;background:var(--btn);color:var(--ink)}
+.num:read-only{opacity:.8}
+.pct{color:var(--muted);margin-left:-6px;width:10px;flex:none}
+button{font:inherit;color:var(--ink);cursor:pointer}
+.reset{display:block;margin:12px auto 0;padding:5px 18px;border:1px solid var(--line);border-radius:8px;background:var(--btn)}
+.reset:hover{background:var(--btnh)}
+
+/* hemicycle */
+.hemi{display:block;width:100%;max-width:650px;margin:0 auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:18px auto 14px;max-width:650px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin-top:6px;min-width:440px}
+th{vertical-align:bottom}
+td:first-child span{white-space:normal}
+th{font-size:12px;color:var(--muted);font-weight:600;text-align:right;padding:6px 6px;border-bottom:1px solid var(--line)}
+td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+td:first-child{display:flex;align-items:center;gap:8px}
+tr:last-child td{border-bottom:0}
+@media (max-width:559px){.fn{display:none}table{min-width:0}th,td{padding-left:4px;padding-right:4px}th{font-size:11px}}
+.up{color:var(--good)} .dn{color:var(--bad)} .zero{color:var(--muted)}
+
+/* coalition */
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:0 0 20px}
+.chip{padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--btn);font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{background:var(--btnh)}
+.chip[aria-pressed=true]{background:var(--btnon);color:var(--btnonink);border-color:var(--btnon)}
+.bar{position:relative;height:16px;border-radius:8px;background:var(--track)}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:var(--btnon);width:0;display:flex;overflow:hidden}
+.bar .fill i{display:block;height:100%}
+.bar .mark{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);left:50.8333%;margin-left:-1px}
+.barwrap{max-width:600px;margin:0 auto;position:relative;padding:0 0 22px}
+.marklab{position:absolute;top:24px;font-size:11px;color:var(--muted);left:50.8333%;transform:translateX(-50%)}
+.count{text-align:center;margin-top:8px;font-size:14px}
+.maj{color:var(--good);font-weight:650;text-align:center;margin-top:4px;min-height:20px}
+
+/* map */
+.mapwrap{position:relative;max-width:650px;margin:0 auto}
+svg.map{display:block;width:100%;height:auto}
+svg.map path{stroke:var(--card);stroke-width:1.4;stroke-linejoin:round;cursor:pointer;outline:none;transition:filter .1s}
+svg.map path:hover,svg.map path.sel{filter:brightness(.82)}
+svg.map path:focus{outline:none}
+svg.map{-webkit-tap-highlight-color:transparent}
+.tip{position:absolute;z-index:5;width:176px;background:var(--tip);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:7px 9px;font-size:12px;display:none}
+.tip .h{display:flex;justify-content:space-between;gap:8px;font-weight:650;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.tip .h span:last-child{font-weight:500;color:var(--muted);white-space:nowrap}
+.tip .r.w,.tip .r.w b,.tip .r.w em{font-weight:700;color:var(--ink)}
+.tip .r{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;padding:1.5px 0}
+.tip .r b{font-weight:500;display:flex;align-items:center;gap:5px}
+.tip .r .dot{width:8px;height:8px}
+.tip .r em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.tip .sq{width:9px;height:9px;display:inline-block}
+.mbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 14px}
+.grad{height:10px;border-radius:5px;max-width:240px;margin:0 auto 4px}
+.gl{display:flex;justify-content:space-between;max-width:240px;margin:0 auto;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<main>
+<h1>Lesotho Seat Projection</h1>
+
+<section class="card" id="c-in"><h2>Input vote share</h2><div id="inputs"></div><button class="reset" id="reset" type="button">Reset</button></section>
+
+<section class="card" id="c-res"><h2>Projected results</h2>
+  <svg class="hemi" id="hemi" viewBox="0 0 600 316" role="img" aria-label="Hemicycle"></svg>
+  <div class="legend" id="hlegend"></div>
+  <div class="tw"><table><thead><tr><th>Party</th><th>Vote share</th><th>Constituency seats</th><th>List seats</th><th>Total seats</th><th>+/-</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</section>
+
+<section class="card" id="c-coal"><h2>Coalition builder</h2>
+  <div class="chips" id="chips"></div>
+  <div class="barwrap"><div class="bar"><div class="fill" id="cfill"></div><div class="mark"></div></div><div class="marklab">61</div></div>
+  <div class="count" id="ccount"></div><div class="maj" id="cmaj"></div>
+</section>
+
+<section class="card" id="c-map"><h2>Projected constituency map</h2>
+  <div class="mbtns" id="mbtns"></div>
+  <div class="mapwrap" id="mapwrap"><svg class="map" id="map" viewBox="-13 -13 2674 2307"></svg><div class="tip" id="tip"></div></div>
+  <div class="legend" id="mlegend" style="margin-top:14px;margin-bottom:0"></div>
+</section>
+
+<p class="sources">Sources: Independent Electoral Commission of Lesotho (2022 constituency results, constituency maps); National Assembly Electoral Act 2011, Schedule 3, as quoted in the judgments of the High Court and Court of Appeal of Lesotho; Wikimedia Commons constituency map by Kaythehistorian (CC BY-SA 4.0), derived from the IEC maps; Wikipedia (party names and colours).</p>
+</main>
+<script>
+"use strict";
+const PARTIES=[["RFP", "Revolution for Prosperity", "#6B2D8F"], ["DC", "Democratic Congress", "#D7263D"], ["ABC", "All Basotho Convention", "#F2C500"], ["BAP", "Basotho Action Party", "#A8742A"], ["AD", "Alliance of Democrats", "#6B1030"], ["MEC", "Movement for Economic Change", "#274A9C"], ["LCD", "Lesotho Congress for Democracy", "#5E8C1A"], ["SR", "Socialist Revolutionaries", "#F26522"], ["BNP", "Basotho National Party", "#7B61FF"], ["PFD", "Popular Front for Democracy", "#EF8FA8"], ["MPS", "Mpulule Political Summit", "#9CC9EE"], ["BCM", "Basotho Covenant Movement", "#0090C8"], ["HOPE", "HOPE – Mphatlalatsane", "#0B6B3A"], ["NIP", "National Independent Party", "#7A4C1F"], ["BPP", "Basotho Patriotic Party", "#B5DD3A"], ["UFC", "United for Change", "#0E8F9E"], ["LPC", "Lesotho People's Congress", "#A8481F"], ["AFM", "Alliance for Free Movement", "#FF9A1F"], ["BCP", "Basutoland Congress Party", "#AD1457"], ["RCL", "Reformed Congress of Lesotho", "#00A86B"], ["MFP", "Marematlou Freedom Party", "#86E3C6"], ["BLM", "Basotho Liberation Movement", "#C77DFF"], ["BDC", "Basotho Democratic Congress", "#C0B283"], ["BDNP", "Basotho Democratic National Party", "#7A8CA5"], ["LEFF", "Lesotho Economic Freedom", "#E91E8C"], ["BEE", "Basotho Economic Enrichment", "#8A7A3A"], ["BTLC", "Basotho Total Liberation Congress", "#E5B46C"], ["KB", "Khothalang Basotho", "#A51DA5"], ["AUM", "African Unity Movement", "#E56CE5"], ["YONA", "Your Opportunity and Network Alliance", "#29E072"], ["LMM", "Lekhotla la Mekhoa le Meetlo", "#A5A51D"], ["BSP", "Basotho Social Party", "#29BCE0"], ["METSI", "Metsi and Natural Resources Party", "#2972E0"], ["BPSP", "Basotho Poverty Solution Party", "#7229E0"], ["BTM", "Bahlabani ba Tokoloho Movement", "#E56C6C"], ["DPA", "Development Party for All", "#E59C6C"], ["BANC", "Basutholand African National Congress", "#6C9CE5"], ["RAD", "Revolutionary Alliance of Democracy", "#A51D1D"], ["TEB", "Tsepo Ea Basotho", "#381DA5"], ["AA", "African Ark", "#BC29E0"], ["BCEF", "Basotho Council for Economic Freedom", "#E5E56C"], ["BRP", "Basotho Redevelopment Party", "#E029BC"], ["EMB", "Empowerment Movement for Basotho", "#B46CE5"], ["MTF", "Mookoli Theological Front", "#6CE5E5"], ["YES", "Yearn for Economic Sustainability", "#E56CB4"], ["PC", "People's Convention", "#1D6EA5"], ["APC", "Allies for Patriotic Change", "#1DA51D"], ["CFM", "CFM", "#A58A1D"], ["TSD", "TSD", "#4E29E0"], ["PSL", "Prayer Shawl and Light", "#6CE5B4"], ["CNC", "CNC", "#4EE029"], ["BTS", "BTS", "#9729E0"]];      // [acr,name,colour]
+const SLIDERS=["RFP", "DC", "ABC", "BAP", "AD", "MEC", "LCD", "SR", "BNP"];      // acronyms with input sliders, default strength order
+const NAMES={"1": "Mechachane", "2": "Hololo", "3": "Motete", "4": "Qalo", "5": "Butha-Buthe", "6": "Maliba-Matso", "7": "Mphosong", "8": "Thaba-Phats'oa", "9": "Mahobong", "10": "Pela-Ts'oeu", "11": "Matlakeng", "12": "Leribe", "13": "Hlotse", "14": "Tsikoane", "15": "Maputsoe", "16": "Moselinyane", "17": "Peka", "18": "Kolonyama", "19": "Mosalemane", "20": "'Makhoroana", "21": "Bela-Bela", "22": "Malimong", "23": "Khafung", "24": "Teya-Teyaneng", "25": "Tsoana-Makhulo", "26": "Thuathe", "27": "Mokhethoaneng", "28": "Khubetsoana", "29": "Mabote", "30": "Motimposo", "31": "Majoe-A-Lits'oene", "32": "Stadium Area", "33": "Maseru", "34": "Thetsane", "35": "Tsolo", "36": "Likotsi", "37": "Qoaling", "38": "Lithoteng", "39": "Abia", "40": "Lithabaneng", "41": "Matala", "42": "Thaba-Bosiu", "43": "Machache", "44": "Thaba-Putsoa", "45": "Maama", "46": "Koro-Koro", "47": "Qeme", "48": "Rothe", "49": "Matsieng", "50": "Makhaleng", "51": "'Maletsunyane", "52": "Thaba-Phechela", "53": "Phoqoane", "54": "Matelile", "55": "'Maliepetsane", "56": "Thabana-Morena", "57": "Qalabane", "58": "Mafeteng", "59": "Taung", "60": "Mpharane", "61": "Mohale's Hoek", "62": "Mekaling", "63": "Phamong", "64": "Hloahloeng", "65": "Moyeni", "66": "Sempe", "67": "Mt Moorosi", "68": "Qhoali", "69": "Qacha's Nek", "70": "Lebakeng", "71": "Tsoelike", "72": "Mantšonyane", "73": "Thaba-Moea", "74": "Thaba-Tseka", "75": "Semena", "76": "Mashai", "77": "Malingoaneng", "78": "Senqu", "79": "Mokhotlong", "80": "Bobatsi"};          // constituency names by number
+const RAW=`1|MECHACHANE|Butha-Buthe|MEC:639,BNP:90,NIP:43,MFP:25,ABC:826,DC:1964,BAP:129,BDNP:29,PFD:47,BPP:15,SR:88,BTLC:19,BCM:79,LPC:23,MPS:35,HOPE:72,BCP:14,METSI:25,AFM:38,RCL:38,RFP:1772,LCD:231,BLM:24,BCEF:24,AD:37
+2|HOLOLO|Butha-Buthe|SR:143,BCP:35,BDC:17,YONA:14,BDNP:24,PFD:66,LPC:22,BAP:68,HOPE:78,BCM:62,BCEF:29,RCL:40,ABC:295,BPP:76,NIP:20,MPS:59,DC:1505,AD:52,MEC:425,METSI:38,LCD:22,RFP:2405,MFP:14,BLM:29,BTLC:31,BNP:71
+3|MOTETE|Butha-Buthe|BAP:58,PFD:50,BPP:35,MPS:52,HOPE:51,RCL:27,DC:2136,MEC:227,AFM:27,RFP:782,BCP:30,SR:2302,BNP:45,ABC:454,BEE:56,BTM:10,BCM:23,TEB:36,LPC:19,METSI:16,BPSP:27,BDC:30,NIP:41,MFP:15,AD:55
+4|QALO|Butha-Buthe|BCM:49,RFP:1962,AD:436,BPSP:25,BRP:43,BTM:24,HOPE:40,ABC:286,LPC:24,BPP:29,NIP:32,MEC:256,LEFF:13,MFP:24,BAP:207,LCD:51,BDNP:18,BCP:40,DC:1106,TSD:18,MPS:58,UFC:106,BEE:38,AFM:21,BCEF:24,SR:327,RCL:42,BNP:73,BTLC:40,KB:36,METSI:17,PFD:91,BDC:28
+5|BUTHA-BUTHE|Butha-Buthe|BTLC:33,IND:5,PFD:43,BCM:36,BPP:14,ABC:579,BLM:18,BAP:476,RCL:10,NIP:25,YONA:7,MPS:13,BDC:12,PSL:6,RAD:3,EMB:4,LPC:10,BSP:14,MFP:24,LCD:50,DC:1064,MEC:383,BNP:83,AD:112,AFM:28,RFP:2035,BRP:39,HOPE:38,LEFF:18,BANC:20,BCP:16,BDNP:17,METSI:17,UFC:13,SR:137,BEE:9
+6|MALIBA-MATSO|Leribe|BCP:47,HOPE:83,AD:2485,RFP:2295,BPP:34,MEC:343,BNP:97,SR:46,BDC:14,LCD:59,MPS:76,METSI:15,DC:1177,MTF:30,ABC:163,BPSP:6,MFP:21,PFD:150,NIP:69,AFM:41,RCL:29,BAP:178,AUM:22,LPC:86
+7|MPHOSONG|Leribe|AFM:49,AD:78,BAP:116,DC:1809,BCM:91,BNP:66,SR:88,METSI:13,BDNP:46,BPP:31,BLM:13,LPC:31,HOPE:90,MEC:199,PFD:36,MPS:63,RFP:2930,NIP:79,BTM:32,BEE:15,BCP:20,RCL:21,ABC:416,LCD:764
+8|THABA-PHATS'OA|Leribe|RCL:19,BEE:15,PFD:84,SR:105,BCM:83,BDNP:68,LPC:19,RFP:2751,MPS:60,HOPE:162,DC:2007,LCD:564,MEC:233,ABC:664,BAP:570,BPP:66,AFM:13,AD:156,BNP:78,NIP:20,KB:23
+9|MAHOBONG|Leribe|MEC:141,BNP:80,UFC:36,BAP:151,AD:27,ABC:393,HOPE:56,BDC:13,MFP:49,LPC:13,RCL:11,BDNP:38,LCD:1414,SR:41,PFD:43,BCM:84,DC:1027,MPS:95,LEFF:32,NIP:40,PSL:31,BLM:16,BCP:30,RFP:3530,AFM:62,KB:76,BPP:55
+10|PELA-TS'OEU|Leribe|PFD:59,RFP:1427,LEFF:29,LCD:82,MEC:234,AFM:34,HOPE:58,AD:1385,METSI:55,DC:537,MFP:49,MPS:40,BCM:121,BSP:28,NIP:28,BCP:12,BPP:5,BDC:28,BAP:261,BNP:42,RCL:17,YONA:38,ABC:390,AUM:31,BRP:17,LPC:42,UFC:30,SR:67,BLM:92
+11|MATLAKENG|Leribe|LPC:38,MPS:68,RCL:30,ABC:392,DC:838,AFM:29,EMB:18,HOPE:36,AUM:35,PFD:93,BNP:141,BANC:16,UFC:127,IND:25,BPP:29,BDC:26,SR:70,DPA:63,LEFF:11,BCM:74,BTLC:29,AD:184,BSP:59,MEC:84,YES:24,METSI:88,BCP:39,NIP:65,RFP:2247,BLM:23,BRP:49,LCD:355,IND:27,BEE:35,BAP:643,MFP:20
+12|LERIBE|Leribe|BAP:348,UFC:32,LCD:218,BCM:77,AFM:19,DC:1639,BDNP:25,BPP:56,MPS:49,SR:74,BCP:16,BTLC:10,AUM:3,HOPE:70,KB:2,AD:100,RCL:12,MTF:20,NIP:14,PSL:10,BDC:19,RFP:1773,MEC:205,BEE:16,PFD:37,LPC:111,YONA:10,ABC:677,LEFF:7,MFP:35,BNP:116
+13|HLOTSE|Leribe|PFD:181,BPP:32,BTM:27,BNP:112,AD:60,BDNP:9,BAP:425,UFC:40,LMM:7,LPC:7,EMB:1,HOPE:50,AFM:22,KB:7,LEFF:4,MFP:31,BEE:9,LCD:342,MPS:17,NIP:14,MEC:552,ABC:417,MTF:29,RFP:2470,BTLC:10,BANC:10,DC:975,BLM:24,BCP:11,SR:47,BCM:79,RCL:11
+14|TSIKOANE|Leribe|EMB:4,MEC:115,MTF:52,BPP:40,BCM:136,MPS:34,RFP:2840,BNP:218,BAP:268,HOPE:51,RAD:31,MFP:14,UFC:40,YES:1,LPC:30,LCD:435,DC:1122,SR:257,LEFF:14,BCP:8,PFD:38,ABC:410,NIP:68,AD:179,AFM:54,BEE:11,RCL:18,BTLC:101,BLM:23,KB:63,BDC:17
+15|MAPUTSOE|Leribe|LCD:187,BNP:77,RAD:20,BTLC:17,LEFF:32,DC:642,UFC:13,HOPE:44,BCM:56,AFM:40,AD:67,RCL:27,BAP:244,BLM:19,MFP:34,MPS:40,ABC:202,SR:240,NIP:47,RFP:2737,YONA:22,BDC:32,PFD:25,LPC:17,MEC:167,BPP:43,YES:23,MTF:44,KB:22
+16|MOSELINYANE|Leribe|AFM:32,DC:429,LPC:19,SR:31,BNP:38,RCL:21,LCD:69,NIP:27,BCP:5,HOPE:49,BPP:37,ABC:288,KB:13,PFD:70,MTF:22,MEC:127,AUM:5,BLM:18,BAP:325,MPS:31,BDC:24,BTLC:26,RFP:2726,BCM:62
+17|PEKA|Leribe|UFC:31,BCM:89,BTLC:29,BCP:42,MPS:51,RAD:26,AFM:28,ABC:582,BDNP:32,MFP:34,LPC:21,LCD:179,HOPE:70,RFP:4456,LMM:35,MEC:145,BANC:8,RCL:12,BLM:15,DC:825,LEFF:32,BAP:478,BNP:57,YONA:14,NIP:18,MTF:36,AD:134,SR:89,EMB:14,BPP:27,PFD:70
+18|KOLONYAMA|Leribe|AD:650,YONA:10,UFC:235,RCL:15,MEC:229,RFP:2565,PFD:94,DC:1037,BCM:143,LCD:246,HOPE:56,LMM:9,MFP:37,BNP:165,BTLC:14,NIP:34,BAP:356,ABC:653,MPS:35,AFM:37,TEB:30,BEE:36,LEFF:24,LPC:68,PSL:29,BTM:14,BPP:136,BCP:65,SR:524
+19|MOSALEMANE|Berea|LPC:17,MPS:139,BDNP:28,BLM:20,RFP:1003,BCM:70,LCD:38,HOPE:51,BPP:6,SR:64,BTLC:14,RCL:9,LEFF:15,BAP:655,BCP:24,BTM:8,BNP:93,KB:40,AD:2435,ABC:387,MEC:670,AFM:42,PFD:65
+20|'MAKHOROANA|Berea|BDNP:27,DC:1462,MPS:53,BNP:96,PFD:30,RFP:1092,ABC:242,AUM:28,BDC:7,LPC:22,BTM:8,BPP:39,BCM:280,MEC:51,RCL:18,EMB:14,LCD:157,LEFF:24,AD:213,LMM:7,YONA:20,BCP:7,AFM:76,BTLC:26,BAP:1022,KB:40,BLM:14,SR:46,HOPE:42
+21|BELA-BELA|Berea|MFP:35,LEFF:9,SR:98,BTLC:42,BDNP:81,BAP:1193,IND:358,BLM:25,ABC:391,AD:24,RFP:1943,BCM:178,MTF:19,KB:67,AFM:20,UFC:26,LPC:16,DC:1158,BCP:12,BPP:28,HOPE:34,LCD:78,MEC:79,MPS:84,BDC:22,BNP:54,RCL:49,PFD:68
+22|MALIMONG|Berea|LEFF:16,MFP:28,MEC:83,BDC:32,MPS:56,PFD:63,RAD:26,BCM:115,BPP:27,HOPE:66,RFP:2212,AD:216,BCP:23,YONA:14,LMM:17,TEB:18,BAP:196,ABC:847,LCD:131,UFC:17,DC:1428,BTLC:24,SR:94,BNP:132,BLM:25,NIP:30,BEE:36,RCL:28,LPC:74
+23|KHAFUNG|Berea|BPP:95,BNP:96,PC:26,MEC:715,BTLC:48,MPS:115,MFP:119,RFP:2156,LPC:41,LMM:8,LEFF:37,ABC:350,BCM:325,YONA:21,PFD:40,LCD:249,HOPE:47,DC:1145,AUM:24,BCP:28,SR:51,RCL:21,BAP:177,UFC:45,AD:32,BLM:15
+24|TEYA-TEYANENG|Berea|BCP:24,BLM:17,BCM:107,BPP:22,METSI:9,BNP:265,RFP:4414,UFC:32,LEFF:11,LMM:17,BSP:38,BDC:3,RCL:2,LPC:13,YONA:12,AUM:3,AFM:20,NIP:17,LCD:58,AD:63,DC:983,MFP:33,HOPE:21,MPS:36,MEC:60,PFD:20,TSD:57,BPSP:127,SR:54,PC:43,ABC:500,BAP:1117,BTLC:38
+25|TSOANA-MAKHULO|Berea|BCP:39,TEB:7,BTLC:26,AFM:16,AD:1670,HOPE:64,BNP:68,PC:50,MFP:24,UFC:24,AA:12,BCM:98,LEFF:7,BAP:204,ABC:427,SR:35,BLM:62,RFP:2035,BDC:26,RCL:20,NIP:24,PFD:57,DC:1280,LPC:39,MPS:90,LCD:107,BDNP:33,LMM:139,MEC:57,BANC:8
+26|THUATHE|Berea|EMB:14,BCP:16,PFD:71,BDC:19,LCD:115,BAP:377,MEC:67,BCM:48,AFM:15,NIP:29,BPSP:23,LEFF:64,SR:94,BDNP:34,BPP:14,UFC:97,BTLC:11,YONA:13,ABC:991,DPA:38,TEB:11,AD:34,DC:2130,HOPE:59,BEE:14,RCL:14,MFP:39,PC:30,BLM:40,BANC:27,BNP:74,LPC:26,MPS:38,AA:83,RFP:3142
+27|MOKHETHOANENG|Berea|BCM:71,BCP:19,HOPE:25,BNP:56,SR:113,MPS:47,BPP:266,BCEF:9,UFC:105,RCL:10,RFP:4209,AD:58,BAP:1009,DC:1389,LPC:22,PFD:16,ABC:523,APC:30,LCD:113,MEC:380,LEFF:23,EMB:20,BLM:23,AA:9,AFM:24,LMM:7,BPSP:15,NIP:7,BDC:33
+28|KHUBETSOANA|Berea|YONA:11,BDC:13,BAP:913,BDNP:10,BNP:112,BTLC:4,EMB:11,RAD:3,LMM:39,RFP:3269,BPP:27,RCL:14,NIP:10,TEB:1,BCM:13,BCEF:1,DPA:51,UFC:89,LPC:12,BEE:21,BLM:7,AA:19,SR:15,BTM:21,PFD:25,MFP:23,LCD:149,LEFF:16,AD:32,METSI:9,ABC:428,DC:982,KB:9,MPS:18,AFM:8,BSP:14,HOPE:9,MEC:88
+29|MABOTE|Berea|PFD:37,AFM:6,AA:22,MEC:59,HOPE:42,BEE:17,BNP:54,ABC:403,RFP:3113,BDC:26,RAD:14,LCD:59,MFP:17,BTM:28,DPA:23,BCP:4,DC:1087,PSL:8,BLM:8,LMM:11,SR:32,MPS:22,AD:107,BSP:11,LPC:3,EMB:6,METSI:6,BAP:526,KB:31,LEFF:4,BPP:31,BCM:13,UFC:98,NIP:7
+30|MOTIMPOSO|Maseru|RCL:53,BNP:102,BCP:7,RAD:17,BPP:60,LEFF:3,MEC:62,IND:40,ABC:524,IND:26,PFD:38,BLM:1,SR:141,BTLC:8,BCM:26,YONA:12,LCD:62,RFP:2760,BEE:18,DPA:21,EMB:10,AD:86,BAP:448,METSI:12,AA:27,LPC:13,BDC:7,BTM:10,HOPE:21,MPS:44,DC:1209,NIP:15,BCEF:10,LMM:1,UFC:112,TEB:23
+31|MAJOE-A-LITS'OE|Maseru|EMB:4,MEC:69,BLM:31,LEFF:30,ABC:428,MFP:18,YONA:18,MPS:23,LPC:10,BEE:4,BCM:17,BDNP:15,DC:1172,RCL:16,BCP:5,BTS:3,BTLC:8,BNP:35,UFC:58,SR:73,RFP:1971,BPSP:5,LCD:46,BDC:17,RAD:15,BPP:44,HOPE:47,YES:7,BAP:233,AD:106
+32|STADIUM AREA|Maseru|LCD:152,BCM:5,LMM:2,BPP:3,EMB:3,UFC:19,HOPE:4,BNP:24,MFP:3,BEE:71,NIP:1,MEC:188,BPSP:1,LPC:6,AD:45,BDC:1,BLM:3,BTLC:5,YONA:3,PSL:5,RCL:4,DC:412,YES:3,DPA:8,PFD:19,MPS:3,TEB:2,BAP:167,RAD:4,RFP:1611,ABC:256,BCP:3
+33|MASERU|Maseru|YONA:3,EMB:14,BLM:21,HOPE:26,AA:4,BCM:66,BNP:117,MFP:19,LEFF:23,SR:36,RFP:3138,BAP:501,BPP:23,MEC:174,BANC:11,LPC:13,BTLC:3,DC:986,RAD:4,NIP:3,LCD:71,MPS:16,BCP:11,RCL:10,UFC:48,DPA:14,LMM:1,AD:76,PFD:21,TEB:4,BCEF:6,ABC:550
+34|THETSANE|Maseru|BEE:26,YONA:10,TEB:16,MFP:18,BANC:16,SR:10,METSI:11,ABC:398,BCP:21,AD:34,RCL:13,DC:689,PSL:9,AUM:3,LMM:4,BNP:57,UFC:24,BLM:6,LPC:27,LCD:90,BCM:49,RFP:2580,LEFF:10,BAP:283,BPP:48,HOPE:13,AFM:5,YES:21,PFD:25,MEC:55,BSP:8,EMB:2,MPS:38
+35|TSOLO|Maseru|MPS:27,LEFF:13,AUM:9,BTM:11,BNP:21,UFC:32,RCL:19,TEB:14,BCM:125,BCP:8,MEC:66,AFM:17,BCEF:9,BAP:121,AD:81,RFP:2373,METSI:21,BRP:29,YONA:8,BEE:30,BLM:19,DC:710,PFD:18,BPP:136,LCD:48,MFP:28,YES:11,LPC:13,ABC:371,LMM:9,NIP:2,HOPE:32,SR:57,IND:123
+36|LIKOTSI|Maseru|BTM:4,UFC:78,AFM:7,AA:18,PFD:30,MEC:187,MTF:12,METSI:10,LPC:24,BCEF:15,TEB:14,IND:147,BDNP:17,YONA:30,BEE:5,BANC:12,RAD:27,LEFF:8,BNP:45,BDC:19,NIP:11,LCD:71,BLM:11,DC:1540,BPP:9,AD:76,BCP:3,BCM:26,ABC:656,LMM:9,RCL:39,RFP:3429,SR:40,HOPE:34,BSP:11,BPSP:6,MFP:16,KB:15,MPS:42,BAP:544
+37|QOALING|Maseru|BPP:18,MPS:35,AFM:6,LEFF:3,MEC:92,HOPE:30,BTLC:7,LCD:79,BTM:7,TEB:18,BNP:67,BCM:81,KB:26,BAP:408,AUM:3,ABC:605,AD:91,YONA:21,NIP:9,RAD:7,RCL:37,BCP:19,BDNP:16,YES:11,RFP:3735,LPC:50,SR:105,PFD:28,BSP:21,BEE:8,DPA:22,BLM:21,EMB:7,BDC:6,LMM:10,MFP:36,UFC:140,DC:1755,BANC:3
+38|LITHOTENG|Maseru|IND:29,LEFF:7,BANC:3,MFP:7,BSP:19,BLM:8,LPC:30,RFP:1493,IND:10,BAP:424,BEE:5,BPSP:5,BCM:4,PFD:52,YES:3,AD:34,BCEF:3,BTLC:7,SR:22,BNP:27,MPS:12,HOPE:15,ABC:319,DC:714,BDNP:8,LCD:44,YONA:5,MEC:92,AA:25,BPP:11,NIP:21,LMM:3,RAD:16,BTM:9,BDC:3,TEB:2,RCL:9,AFM:6
+39|ABIA|Maseru|NIP:11,MFP:8,DC:997,BCP:11,MPS:26,BTS:7,UFC:70,AUM:7,PFD:51,RFP:3051,BDC:7,AD:54,YONA:3,KB:8,RAD:9,BPSP:22,BPP:23,LEFF:14,ABC:577,BLM:36,IND:40,EMB:8,SR:43,BNP:86,LPC:16,BEE:10,IND:41,HOPE:33,RCL:15,LCD:30,MEC:147,BCM:25,BANC:15,BCEF:17,AFM:14,AA:22,DPA:20,BTLC:10,IND:219,BAP:516,BSP:31
+40|LITHABANENG|Maseru|BPSP:3,MEC:79,EMB:1,BDNP:5,CFM:21,PFD:43,HOPE:22,RCL:8,BPP:20,BAP:432,AFM:24,TEB:10,DPA:33,BCM:24,LPC:14,AD:89,BDC:3,BSP:14,MPS:29,BRP:27,LEFF:23,SR:45,LCD:120,BNP:113,BLM:12,RAD:14,AA:5,YONA:12,BEE:5,DC:1101,IND:9,BCP:5,BTLC:12,MFP:24,ABC:536,RFP:3752,UFC:71,NIP:8
+41|MATALA|Maseru|HOPE:26,MFP:15,BSP:4,SR:34,MPS:16,AD:130,AUM:19,NIP:2,BNP:133,MEC:47,METSI:17,BPP:7,RCL:20,BEE:7,LCD:40,RFP:2430,UFC:50,DC:569,PFD:29,EMB:17,IND:12,BCM:18,YONA:12,DPA:28,LMM:4,BAP:452,LPC:12,BRP:11,BCEF:3,AA:18,BLM:10,BCP:10,LEFF:8,ABC:626,AFM:16
+42|THABA-BOSIU|Maseru|RFP:3019,AA:10,DC:2007,HOPE:70,LEFF:9,BPP:7,BNP:35,ABC:504,BDC:17,LMM:15,AFM:10,BEE:20,LPC:7,RCL:3,RAD:15,MFP:23,SR:48,AD:152,BCP:24,UFC:179,METSI:34,PFD:143,NIP:22,YONA:57,BPSP:17,BCM:46,MPS:39,BLM:27,TEB:25,BAP:1425,MEC:32,LCD:161
+43|MACHACHE|Maseru|MPS:87,LCD:49,BEE:24,HOPE:103,SR:82,METSI:90,LEFF:45,AA:13,NIP:44,BAP:211,AD:986,MFP:51,TEB:24,PFD:60,MEC:85,BLM:38,BPP:56,RFP:2951,YONA:25,APC:48,BNP:143,AFM:72,ABC:321,RCL:49,BCP:55,DC:916,LMM:21,BCM:146,LPC:26,BPSP:16
+44|THABA-PUTSOA|Maseru|AD:1347,BCM:43,AUM:14,BNP:83,BRP:27,AA:10,BPP:25,RFP:2182,BAP:137,NIP:16,RAD:30,SR:20,MEC:63,BDNP:16,BLM:41,MFP:25,DC:2386,BEE:16,ABC:1075,LMM:4,PFD:36,LPC:68,MPS:93,BPSP:40,METSI:19,LCD:21,BCP:10,PC:63
+45|MAAMA|Maseru|PC:9,BDNP:17,BCM:44,BPP:15,RFP:3186,EMB:12,HOPE:49,LEFF:16,MPS:42,MEC:52,SR:15,PFD:63,DC:927,BAP:658,LPC:11,LCD:21,RCL:11,NIP:22,MFP:18,BDC:17,AD:94,RAD:14,BNP:113,AA:1,BCP:11,ABC:641,UFC:44,TEB:10,BTS:4,BEE:31,BLM:10,YONA:16
+46|KORO-KORO|Maseru|RFP:3214,BDC:25,LMM:2,DPA:26,AD:333,BAP:1390,BEE:14,YES:12,BNP:84,MFP:17,RAD:8,LCD:191,EMB:3,BANC:40,MEC:80,SR:37,LEFF:13,BCM:20,BLM:2,PFD:19,BCP:13,ABC:599,AA:16,UFC:54,BDNP:14,AFM:51,RCL:42,HOPE:75,BPP:32,MPS:53,DC:2128
+47|QEME|Maseru|RFP:2560,ABC:1877,MFP:32,BCM:16,TEB:34,BPP:19,LCD:87,HOPE:51,BAP:193,BPSP:7,BSP:41,AFM:22,DC:1627,UFC:100,BTM:28,AD:107,BEE:37,BDC:41,RCL:43,BLM:19,BCP:13,SR:81,LEFF:76,PFD:30,LPC:24,MPS:82,MEC:72,AA:6,BNP:58,YONA:28,NIP:24
+48|ROTHE|Maseru|AD:50,BNP:114,YONA:15,MEC:72,BCM:71,BAP:232,AUM:21,ABC:1695,BCP:28,BEE:3,MFP:30,DC:1714,PFD:40,BTM:12,LCD:71,LEFF:28,RFP:2199,BLM:19,RCL:10,SR:37,LPC:19,UFC:42,MPS:29
+49|MATSIENG|Maseru|RAD:19,BTM:15,ABC:463,BNP:110,BCM:29,DC:2594,TEB:11,BSP:57,RFP:2898,BCEF:17,UFC:37,HOPE:46,MFP:34,LCD:164,AA:8,MPS:57,YONA:9,METSI:11,MEC:125,KB:15,LPC:16,BTLC:16,LEFF:6,RCL:37,BAP:419,BEE:4,BDC:104,BCP:18,BPP:30,AD:78,PFD:26,SR:29,BLM:2
+50|MAKHALENG|Maseru|SR:100,DC:1768,BAP:311,AUM:19,BLM:16,BCM:21,ABC:734,RCL:17,LPC:21,LCD:82,MEC:59,NIP:54,HOPE:34,BDNP:13,YONA:18,MPS:39,EMB:14,BNP:63,RFP:1216,BTLC:14,UFC:45,BDC:17,AD:134
+51|MALETSUNYANE|Maseru|DC:1790,LEFF:57,ABC:168,BCM:43,AD:334,NIP:126,AUM:30,HOPE:28,MEC:71,UFC:60,BEE:25,BTLC:31,MFP:9,LPC:13,BAP:237,MPS:25,SR:80,PFD:41,DPA:60,BPP:50,BLM:10,APC:117,LCD:877,BDNP:15,BNP:68,RCL:26,LMM:9,RFP:989,BCP:15
+52|THABA-PHECHELA|Mafeteng|DC:2025,AFM:24,BNP:53,BAP:69,HOPE:45,MPS:31,BLM:29,TSD:41,PFD:50,MEC:114,RCL:24,BCM:19,SR:37,BTM:24,BCP:46,LPC:35,ABC:1120,RFP:1900,BPP:31,LEFF:5,BDNP:38,AUM:94,NIP:39,LCD:55,BEE:23,AD:1412
+53|PHOQOANE|Mafeteng|NIP:34,MFP:25,AFM:38,DC:2183,AD:58,MPS:73,ABC:246,BNP:206,LPC:52,TSD:12,UFC:24,LEFF:7,BCM:29,BTM:63,BCEF:28,MEC:292,AUM:14,BCP:35,PFD:61,BEE:19,SR:238,RCL:14,CFM:22,YONA:27,HOPE:142,PSL:17,BDC:25,BLM:43,CNC:37,BANC:16,LCD:198,BPP:26,RFP:2704,BAP:266,IND:124
+54|MATELILE|Mafeteng|ABC:303,LPC:9,AD:85,LCD:59,AUM:24,UFC:32,MPS:79,DC:1886,BAP:241,BDNP:31,BTM:33,RFP:1669,NIP:34,LMM:40,BLM:53,MFP:28,PFD:53,BPP:31,AFM:45,KB:44,BTLC:34,SR:1074,BCM:32,BNP:49,BANC:28,RCL:40,BCP:36,BDC:31
+55|MALIEPETSANE|Mafeteng|DC:2551,LMM:41,CFM:12,BCM:23,BPP:46,MFP:26,LCD:45,LEFF:30,NIP:29,IND:31,MPS:68,BDNP:19,BEE:16,AUM:4,RFP:1841,BCEF:42,BNP:67,RCL:25,MEC:631,AD:9,AFM:39,ABC:798,BCP:38,SR:175,LPC:26,UFC:45,PFD:46,BAP:459,YONA:23,BLM:18,TEB:26
+56|THABANA-MORENA|Mafeteng|BEE:37,BNP:138,BPP:36,MPS:141,YONA:10,DC:1715,CFM:69,RCL:21,NIP:44,BTM:54,BAP:193,BCP:226,CNC:22,UFC:9,RAD:33,LPC:38,MEC:2243,BCM:49,LEFF:15,LCD:54,LMM:30,BSP:43,RFP:1601,SR:30,PFD:63,MFP:34,AUM:18,AFM:59,YES:15,AD:49,KB:39,ABC:322,HOPE:38,BDNP:36,BLM:49
+57|QALABANE|Mafeteng|BCP:36,BTM:21,BLM:18,BNP:32,LEFF:23,DC:2306,AD:167,BCM:26,NIP:34,SR:89,RFP:2870,BEE:31,BANC:7,BPP:19,HOPE:66,MPS:49,CFM:42,ABC:266,AFM:24,BAP:116,MEC:279,BDNP:21,AUM:11,RCL:11,YONA:16,MFP:38,EMB:70,LPC:37,LCD:84
+58|MAFETENG|Mafeteng|AUM:18,NIP:10,PFD:23,MEC:152,AD:43,DC:2034,LEFF:19,SR:65,BPP:28,BDNP:5,CFM:19,YES:14,BCM:48,BLM:6,LPC:23,BAP:246,RFP:2715,BCEF:8,MPS:27,MFP:18,BNP:21,IND:26,BCP:36,YONA:9,BDC:16,RCL:27,ABC:284,AFM:15,HOPE:34,BANC:23,LCD:36,EMB:3,IND:19,KB:7
+59|TAUNG|Mohales Hoek|BLM:24,AFM:81,MFP:43,BCP:44,AD:423,BNP:33,MEC:526,PFD:70,HOPE:51,ABC:1032,DC:2465,BEE:49,LEFF:22,RAD:22,DPA:28,RFP:1796,AUM:32,LCD:64,BCM:57,BAP:199,NIP:26,UFC:53,BPP:39,SR:46,BDNP:31,LPC:34,MPS:55,BDC:42,RCL:64
+60|MPHARANE|Mohales Hoek|MPS:78,BDNP:37,SR:86,PFD:32,BAP:106,DC:1803,NIP:49,BEE:17,MEC:97,LCD:34,RFP:2860,BLM:18,BCP:42,BPP:13,BCM:57,BTLC:37,MFP:15,AD:832,BNP:47,ABC:307,LPC:17,RCL:12,AUM:22
+61|MOHALE'S HOEK|Mohales Hoek|LCD:110,AUM:11,MFP:16,BCEF:11,BCP:28,DC:1853,UFC:72,BNP:85,LEFF:9,IND:13,BPP:13,BCM:53,HOPE:26,RFP:3624,PFD:19,RCL:13,MPS:34,BDC:9,SR:21,ABC:390,BDNP:10,MEC:92,BEE:6,KB:14,BTLC:16,YONA:73,LPC:32,BTM:5,BANC:16,AD:168,NIP:25,BLM:15,YES:13,BAP:295
+62|MEKALING|Mohales Hoek|LPC:21,NIP:44,AFM:35,DC:2998,BAP:80,SR:21,KB:40,ABC:227,BDNP:16,BEE:16,AUM:16,BCP:10,LEFF:11,MFP:17,AD:444,RCL:12,PFD:17,BANC:12,BPP:12,MEC:140,HOPE:53,LCD:129,RFP:2083,BCM:32,MPS:256,BNP:59,BLM:12
+63|PHAMONG|Mohales Hoek|KB:59,MFP:30,ABC:717,BCP:37,RFP:2253,AD:143,RCL:16,BANC:6,AFM:30,BPP:19,MEC:599,BAP:69,SR:21,PFD:31,DC:2424,MPS:84,LMM:15,BNP:40,BLM:4,AUM:10,LPC:6,LCD:23,BDNP:15
+64|HLOAHLOENG|Mohales Hoek|SR:53,AUM:12,LPC:39,BNP:44,DC:3248,LMM:15,AD:58,BAP:295,RAD:45,MEC:553,BEE:33,MPS:72,BCP:15,BLM:14,AFM:48,LCD:47,RFP:1896,ABC:144
+65|MOYENI|Quthing|AUM:14,BCM:9,MEC:53,AD:237,BTLC:36,BLM:55,BANC:31,BCP:9,UFC:2,AFM:40,PFD:39,LMM:14,BNP:78,RCL:8,LPC:3,BDNP:4,BDC:22,RFP:3076,MFP:13,YES:8,HOPE:31,ABC:558,BAP:169,LEFF:22,MPS:83,BPP:28,LCD:214,DC:2670,SR:34,BEE:20,NIP:23,IND:19
+66|SEMPE|Quthing|KB:32,HOPE:33,BPP:38,AFM:35,ABC:332,AUM:4,MEC:60,RCL:27,PFD:32,LEFF:31,BNP:315,BDNP:10,BCM:23,UFC:13,RFP:1351,MPS:30,BEE:28,BCP:30,NIP:1565,BLM:8,BANC:6,SR:29,AD:103,LPC:23,LCD:215,BAP:134
+67|MT.MOOROSI|Quthing|BAP:61,UFC:27,ABC:128,YONA:29,DC:2194,PFD:58,BDNP:21,AD:227,BNP:313,AFM:35,BLM:31,RFP:2467,MPS:62,HOPE:76,NIP:23,MEC:83,IND:150,MFP:13,TEB:50,BCP:26,SR:24,LCD:98,YES:11,LPC:11,RCL:109,LMM:14
+68|QHOALI|Quthing|LPC:20,SR:68,AUM:18,MEC:84,MFP:6,LCD:72,LEFF:11,BAP:40,AD:42,DC:3606,BANC:22,BCP:14,BLM:7,AFM:21,BNP:65,NIP:8,PFD:11,MPS:37,ABC:52,RCL:45,RFP:1586
+69|QACHA'S NEK|Qachas Nek|DC:2663,AUM:29,RFP:1371,BDNP:12,RCL:5,BNP:146,SR:58,YONA:4,NIP:7,ABC:139,LCD:60,LEFF:9,PFD:22,BTLC:6,LPC:16,BANC:6,HOPE:13,BLM:2,RAD:7,DPA:24,MEC:167,AFM:86,AD:15,BDC:64,UFC:11,BEE:6,TEB:15,BPSP:18,MPS:20,MFP:23,BAP:95,BPP:7
+70|LEBAKENG|Qachas Nek|HOPE:69,LPC:24,BCP:19,MEC:139,MPS:40,PFD:31,BPP:7,LEFF:21,NIP:24,DC:3438,BSP:94,ABC:378,AD:20,RCL:17,AFM:14,LCD:32,BNP:47,BDC:16,AUM:51,RFP:1894,SR:11
+71|TSOELIKE|Qachas Nek|AFM:16,PFD:34,YONA:12,BLM:18,BPP:9,MFP:22,BTLC:11,MPS:38,BDC:18,BPSP:14,LPC:6,BAP:134,RCL:26,LEFF:11,LCD:54,HOPE:32,NIP:9,AUM:25,BSP:45,DC:3162,AD:7,ABC:137,BCP:26,MEC:168,RFP:1411,BNP:72,SR:58
+72|MANTS'ONYANE|Thaba-Tseka|BAP:84,BDNP:55,BNP:33,NIP:37,BCEF:46,LPC:45,MEC:115,RFP:4629,BRP:46,ABC:312,BDC:13,BPP:54,AD:17,SR:67,DC:1048,MFP:27,PFD:239,RCL:13,BPSP:21,BCP:41,MPS:117
+73|THABA-MOEA|Thaba-Tseka|NIP:28,BNP:77,MEC:110,BAP:157,BCP:30,AD:53,ABC:116,LCD:41,BPP:81,PFD:45,MPS:155,DC:1257,RFP:3870,SR:438,LPC:34
+74|THABA - TSEKA|Thaba-Tseka|RFP:2916,HOPE:83,LEFF:14,NIP:37,LPC:31,BDNP:27,MEC:58,MFP:30,KB:46,ABC:540,BPSP:36,RCL:33,AFM:12,BCP:56,BLM:27,LCD:63,AD:46,MPS:49,BPP:22,BDC:52,DC:1791,BNP:314,SR:122,BAP:705,PFD:165
+75|SEMENA|Thaba-Tseka|SR:474,AFM:113,HOPE:120,LPC:49,BCP:18,LEFF:31,MFP:39,BNP:63,BDNP:45,LCD:55,MPS:65,BAP:87,DC:2114,MEC:54,BCM:33,PFD:507,RFP:2074,ABC:110,BPP:17,AD:23
+76|MASHAI|Thaba-Tseka|LMM:13,LPC:28,SR:61,MEC:75,PFD:254,BAP:66,BDC:48,AUM:29,BDNP:20,DC:1879,BPSP:35,RFP:3533,LCD:205,AD:42,BNP:121,BCP:36,BPP:10,ABC:121,MPS:41,HOPE:50,RCL:59,MFP:24,AFM:25,NIP:32
+77|MALINGOANENG|Mokhotlong|RCL:13,BNP:34,LPC:14,ABC:140,BAP:327,IND:27,NIP:184,MEC:129,LCD:838,PFD:36,BANC:39,MPS:80,DC:1732,YES:24,AFM:69,RFP:3384,AD:53,UFC:34,BDC:32,BLM:98,LEFF:13,BDNP:14,KB:20,SR:81,HOPE:46,BPP:15
+78|SENQU|Mokhotlong|BDC:45,RCL:24,BNP:185,BAP:317,RFP:2195,LPC:45,HOPE:81,ABC:151,KB:34,YES:18,DC:1976,NIP:15,AUM:5,BDNP:37,SR:330,MFP:15,UFC:22,AFM:34,LCD:57,AD:197,BPP:29,BCP:42,MPS:60,PFD:34,MEC:542
+79|MOKHOTLONG|Mokhotlong|RFP:2680,UFC:33,MPS:59,MFP:27,HOPE:146,DC:1704,LPC:32,AA:16,LCD:33,BNP:56,LEFF:11,BDC:8,BPP:470,AD:40,SR:70,BEE:15,BDNP:1,BAP:166,YES:5,RCL:45,BCP:15,NIP:108,BANC:15,ABC:190,PFD:31,BLM:11,MEC:282
+80|BOBATSI|Mokhotlong|MEC:325,HOPE:104,RFP:1377,RCL:25,DC:2324,BNP:62,BANC:30,MPS:57,BLM:32,ABC:229,MFP:31,SR:293,BAP:1172,AD:174,NIP:32,AUM:13,BPP:134,PFD:34,TEB:20`;
+const GEO=`Mechachane|1775,2 -8,2 0,3 -5,0 -1,3 -2,-4 -2,5 -3,0 0,4 -11,-3 -10,19 -6,-3 -3,6 -11,2 -4,6 -7,-5 -6,0 -3,8 -3,-4 -6,4 -4,-6 -9,-3 -2,5 -2,-2 -4,5 -1,-3 -5,0 -2,-5 -5,6 -4,-1 1,2 -4,2 -5,-11 -4,3 -4,-1 0,5 4,1 -13,5 -4,3 2,3 -6,-6 1,-5 -4,2 -3,-4 -1,2 -6,-2 -4,7 -4,-5 -4,1 -2,-3 -5,-1 -2,5 -4,-2 -5,1 -1,3 -2,-1 2,3 -5,-2 -3,8 -5,-3 -3,3 -1,-4 -3,5 -1,-2 -4,4 -1,-2 -7,0 -5,6 -1,-1 -6,3 -7,0 -2,-6 -3,0 -8,3 2,4 -2,4 4,6 -2,7 -4,-1 -3,4 -3,-3 -3,0 0,4 -4,1 2,5 -2,-1 -2,4 -12,6 -2,4 -7,0 6,7 -3,3 5,5 -1,5 -5,0 0,3 -4,-1 0,2 -5,1 2,2 -2,3 -3,-1 1,4 -2,-1 -2,3 5,1 5,-2 4,4 -3,2 10,6 4,0 3,6 5,-7 -4,-2 7,-1 -2,-2 6,0 -1,-2 5,-6 2,4 6,0 2,-2 -3,-2 5,-4 -1,-3 4,1 7,-4 6,2 9,-7 7,6 4,-4 2,6 2,-4 5,2 0,6 11,15 3,12 19,1 10,5 9,0 16,8 27,-3 6,5 10,0 7,-3 4,2 1,5 12,1 13,8 9,-4 4,-9 -2,-6 6,-4 -1,-5 8,-10 -1,-4 8,-4 0,-6 4,-4 1,-6 3,-2 7,0 10,-6 12,-10 0,-4 17,-1 4,-6 5,-3 15,-2 10,-9 3,-10 4,0 -3,-13 5,-9 -6,-10 -12,-9 -4,-6 0,-5 -9,-4 -10,-9 -3,1 -11,-5 0,-3
+Hololo|1534,121 -9,7 -6,-2 -7,4 -4,-1 1,3 -5,4 3,2 -2,2 -6,0 -2,-4 -5,5 1,3 -6,0 2,2 -7,1 4,2 -5,7 -3,-6 -4,0 -10,-6 3,-2 -4,-4 -5,2 -5,-1 -3,5 2,2 0,20 3,5 -12,11 -6,1 5,6 0,11 4,0 3,4 6,-3 4,7 -1,4 3,1 -6,11 1,9 2,-1 1,8 9,11 4,9 19,14 10,11 2,4 -3,5 2,5 -4,6 11,1 6,7 4,12 7,3 9,11 5,3 12,-1 8,-7 15,-1 11,2 -1,-13 -9,-10 -5,-2 -3,-10 5,-10 0,-9 19,-6 -19,-36 -14,-11 -16,-3 -6,-11 1,-4 -6,-4 0,-12 -5,-4 2,-3 -3,-9 7,0 -1,-4 5,-3 2,1 1,5 5,-4 7,1 0,-3 7,7 7,0 4,-4 6,5 8,0 3,5 5,-4 11,4 9,10 7,0 4,3 7,-2 17,5 2,-2 -1,-26 -26,2 -16,-8 -9,0 -10,-5 -19,-1 -3,-12 -11,-15 0,-6 -5,-2 -2,4 -2,-6 -4,4 -6,-5
+Motete|1823,79 -2,5 -10,9 -15,2 -5,3 -4,6 -17,1 0,4 -12,10 -10,6 -7,0 -3,2 -1,6 -4,4 0,6 -8,4 1,4 -8,10 1,5 -6,4 2,6 -6,11 -9,2 -11,-8 -12,-1 -1,-5 -4,-2 -6,3 -10,0 -7,-5 -2,10 2,17 -3,2 -16,-5 -7,2 -4,-3 -7,0 -9,-10 -11,-4 -5,4 -3,-5 -8,0 -6,-5 -4,4 -7,0 -7,-7 0,3 -7,-1 -5,4 -1,-5 -2,-1 -5,3 1,4 -7,0 3,9 -2,3 5,4 0,12 6,4 -1,4 6,11 16,3 14,11 19,36 -19,6 0,9 -5,11 3,9 5,2 9,10 1,13 8,5 13,23 2,11 -5,9 -8,8 3,9 18,11 5,7 -6,6 2,4 -4,3 7,7 -14,5 -5,8 -2,6 1,8 -3,6 -3,18 3,8 4,1 -10,7 2,12 7,4 1,5 4,3 4,22 7,5 1,-2 17,4 -4,-9 8,-5 1,-4 -7,-9 4,-2 10,4 -4,-12 7,-4 -2,-6 3,-4 8,2 35,0 22,14 6,2 2,4 9,4 5,6 8,3 8,-8 6,-3 3,-5 4,0 9,-5 21,-3 4,-3 -1,-6 12,-14 11,-10 8,0 3,-13 -4,-5 6,-14 3,-18 24,-28 3,-9 10,-15 1,-10 5,-6 9,-6 13,1 8,4 8,-3 20,1 13,-12 2,-5 -5,-5 -4,-23 -12,-27 4,-18 -1,-3 -4,-1 1,-12 16,-30 0,-7 -5,-4 -5,-13 1,-11 -5,-7 2,-8 10,-15 -5,-4 -1,-8 -7,-2 -6,-9 -16,2 -14,-12 -14,-7 -12,5 -17,0 -1,-5 -23,-13 5,-8 -4,-8 2,-3 -5,-6 -7,-5
+Qalo|1401,133 -2,11 -4,1 2,3 -3,-1 -2,3 0,-4 -2,-1 -1,5 -3,0 -2,4 -3,-1 -1,3 -5,2 -9,-4 -5,-6 -13,6 13,23 -4,4 -5,-1 -1,4 4,2 -5,4 7,8 2,18 6,0 3,9 4,1 16,12 9,0 6,7 0,8 6,5 2,7 11,5 3,6 11,4 11,9 26,13 25,3 4,-6 -2,-5 3,-6 -12,-14 -19,-14 -4,-9 -9,-11 -1,-8 -2,1 -1,-9 6,-11 -3,-1 1,-4 -4,-7 -6,3 -3,-4 -4,0 0,-11 -5,-7 6,0 12,-12 -3,-4 0,-20 -4,-1 0,-5 -5,1 -2,-7 -7,6 -3,-3 -2,4 -7,2 5,3 -1,2 -12,-6 -7,0 -2,-2 1,-3 -5,-4
+Butha-Buthe|1411,265 -2,-7 -6,-5 0,-8 -6,-7 -9,0 -16,-12 -4,-1 -3,-9 -6,0 0,-11 -9,-15 5,-4 -4,-2 1,-4 5,1 4,-4 -13,-23 4,-3 -2,-3 0,-6 -17,2 -1,-6 -9,-2 -4,4 -1,4 -6,2 0,3 2,4 1,8 7,6 6,0 3,5 7,5 1,16 -4,16 -5,7 2,19 8,6 6,11 15,10 12,3 5,6 21,-1 10,-5
+Maliba Matšo|1891,361 -9,6 -5,6 -1,10 -10,15 -3,9 -24,28 -3,18 -6,14 4,5 -3,13 -8,0 -11,10 -12,14 1,6 -6,5 -19,1 -9,5 -4,0 -3,5 -6,3 -8,8 -8,-3 -5,-6 -9,-4 -2,-4 -6,-2 -22,-14 -35,0 -9,-2 -2,4 2,6 -7,4 4,12 -10,-4 -4,2 7,9 -1,4 -8,5 4,9 -17,-4 -1,2 -7,-5 -4,-22 -4,-3 -1,-5 -7,-4 -2,-12 10,-7 -4,-1 -3,-8 3,-18 3,-6 -1,-8 2,-6 5,-8 14,-5 -7,-7 4,-3 -2,-4 6,-6 0,-2 -21,-13 -8,10 -13,2 -5,5 -7,0 -14,8 -2,4 1,8 -13,4 0,8 -3,4 -18,1 1,13 -12,7 9,19 1,13 -12,3 3,8 -5,3 3,1 -1,6 3,5 -3,5 -4,-2 -3,2 -4,10 -8,5 -5,1 -16,-11 -20,-1 -6,8 -13,1 -18,-3 -5,5 -4,11 3,11 -1,4 -7,2 -10,-1 -17,4 -10,16 10,-2 4,-6 8,1 17,3 9,6 3,-2 1,3 4,-2 6,7 4,0 2,2 2,-2 9,3 -2,3 4,4 -2,5 -5,-1 0,4 -3,2 1,5 -4,5 3,6 -3,3 7,2 -2,6 6,-1 -2,5 4,3 -4,3 6,3 2,7 3,1 -3,3 8,-1 -1,7 5,-3 3,1 0,7 -5,1 9,9 -1,2 -5,-1 5,5 -3,5 1,5 -2,3 8,1 -4,5 2,2 6,0 -7,6 9,3 0,3 5,0 3,8 -3,5 6,3 0,5 5,0 -4,4 1,2 7,1 -2,3 -8,1 -1,7 10,3 0,4 9,0 4,7 5,1 -11,9 1,2 9,-1 5,4 4,-2 4,3 2,-4 2,3 -3,4 2,1 9,-7 3,2 1,5 10,-2 9,6 15,2 7,-3 6,7 9,-8 2,5 5,2 15,-4 5,14 9,1 4,4 -2,6 4,3 20,1 3,6 8,5 16,0 10,7 17,-1 1,-9 10,-3 16,12 0,-3 -7,-5 1,-4 6,0 -3,-2 6,-10 6,-2 0,-4 -10,2 -3,2 1,5 -3,-1 -2,-4 -12,-6 6,-5 0,-5 -2,0 -5,4 0,-10 -5,1 -7,-3 11,-5 -1,-2 -4,1 -3,-10 -13,2 4,-3 -4,-7 1,-6 -2,0 -6,8 -3,1 2,-3 -4,-9 6,-3 1,-9 -7,4 -3,-4 7,-6 -4,0 -1,-3 -6,-2 6,-3 1,-4 -7,-7 4,-10 -5,-6 7,2 3,-2 -3,-2 0,-7 -5,-4 9,-2 -5,-7 4,0 3,-4 8,0 -2,-10 14,-2 -1,-2 -9,1 4,-5 0,-8 11,3 -1,-12 8,0 0,-4 10,-5 6,1 -1,7 2,3 2,-1 -2,-2 1,-7 10,2 2,-4 5,4 8,-1 -3,-8 3,-2 6,1 0,-10 7,0 -2,-3 7,-3 -1,-4 11,-1 2,-3 12,-1 -2,-8 11,5 -6,-6 0,-3 3,-1 4,5 2,-6 7,-2 -4,-8 4,1 -1,-6 5,-1 3,-5 7,5 1,-1 -2,-4 3,3 8,-7 2,2 -4,3 11,-1 -3,-6 9,-4 -4,-3 0,-4 7,0 -4,-3 5,-1 -2,-4 5,-7 -1,-5 5,-6 5,-1 -1,-7 5,1 -3,-4 7,-2 5,-5 0,6 2,1 7,-7 -2,-2 6,-2 -4,-1 2,-5 -5,-1 0,-6 -5,-5 5,-2 -3,-2 0,-4 6,-4 -3,-4 2,-6 -6,-2 4,-1 1,-9 -6,-1 1,-4 -3,-2 1,-3 4,1 3,-3 -5,-4 1,-8 -2,-5 2,-5 -7,-6 4,-8 -2,-4 3,-4 -3,-1 0,-9 2,-2 -2,-2 5,-16 10,-4 8,1 8,-13 22,-9 -20,-1 -8,3 -8,-4 -12,-1
+Mphosong|1431,399 -31,23 -1,7 -2,0 -5,-3 -5,-1 0,3 -9,-3 -1,3 -3,-2 -2,3 -5,-2 -4,-9 -9,1 0,-5 -7,-2 -4,1 -6,-4 -2,4 -5,1 -4,-5 -5,2 -6,-1 -7,-7 -17,27 -4,19 0,12 -6,11 3,4 -1,3 4,16 3,4 -2,3 5,14 0,14 4,10 6,5 3,8 25,24 2,10 -3,18 5,24 25,-11 1,-4 -5,-9 11,-18 18,-5 10,1 7,-2 1,-4 -3,-11 4,-11 5,-5 18,3 13,-1 6,-8 20,1 5,2 6,7 9,2 9,-6 4,-10 3,-2 4,2 3,-5 -3,-5 1,-6 -3,-1 5,-3 -3,-7 12,-5 -1,-12 -9,-19 12,-7 -1,-13 -6,-2 -25,-16 -13,-11 -14,-5 -10,-10 -9,-1 -3,-7 -7,-5
+Thaba-Phatšoa|1282,474 -6,0 -7,-9 -5,-2 -3,-3 0,-3 -2,-1 2,-4 -10,-5 0,-6 2,0 2,-9 -6,-1 -4,-6 -2,3 -2,-6 -2,2 -4,-2 -1,4 -6,-3 -1,-9 -4,0 -1,-7 -6,3 -5,-4 -9,-1 -5,-15 -8,-4 3,-5 -5,-10 -5,1 -8,-7 0,-3 -9,-5 -5,-8 1,-6 -5,-6 -5,3 1,8 -4,-1 1,8 -17,19 -13,10 1,7 -10,3 -1,-4 -10,7 -5,-1 -3,2 14,18 0,15 -2,2 2,1 -1,3 2,6 0,3 6,7 2,-2 3,2 6,-2 4,7 11,3 1,2 -1,3 10,10 4,0 7,4 -4,12 5,13 8,3 9,9 4,10 -3,12 -3,0 -3,9 3,2 4,-1 0,3 8,4 10,-4 4,-5 6,0 0,-4 9,-1 7,3 12,14 2,-2 4,5 33,16 8,10 9,4 19,0 8,20 -1,10 16,10 2,-3 -5,-24 3,-24 -3,-6 -24,-22 -3,-8 -6,-5 -4,-10 -2,-26 -3,-2 2,-3 -3,-4 -4,-16 1,-2 -2,-3
+Mahobong|1193,332 -15,14 -4,-3 -3,3 -3,7 4,5 2,7 8,7 5,-1 5,10 -3,5 8,4 0,5 6,10 8,1 5,4 6,-3 1,7 4,0 1,9 6,3 1,-4 4,2 2,-2 2,6 2,-3 4,6 6,1 -2,9 -2,0 0,5 8,5 2,9 8,5 7,9 6,0 1,-3 0,-5 4,-5 0,-12 4,-19 16,-26 5,1 3,5 6,1 5,-2 4,5 5,-1 2,-4 6,4 4,-1 7,2 0,5 9,-1 4,9 5,2 2,-3 3,2 1,-3 9,3 0,-3 5,1 5,3 2,0 1,-7 31,-23 -2,-2 -5,3 -10,-22 -12,-3 -3,-3 -3,0 -17,-10 -6,2 -12,-1 -3,10 -6,2 -17,-4 -9,1 -1,-4 -2,-3 -4,1 -2,-7 -5,-3 -7,-1 -2,-3 -8,3 -7,-7 -5,-2 -6,3 -4,-3 -10,3 -4,-6 0,5 -4,0 1,2 -3,2 -5,-6 -10,4 -4,-4 -6,1 -1,3 -5,0 -2,-6 -6,1 3,-5 -2,1 0,-5 -1,2 -2,-2 -1,3 -4,-2 -2,3 -1,-5 2,-2 -5,0 1,4 -9,-5
+Pela-Tšoeu|1348,253 -7,1 -10,8 1,11 -9,13 7,10 3,1 3,5 -1,5 -13,4 -9,-16 -11,-4 -16,3 -5,4 -3,6 4,4 -2,15 2,7 -6,4 -1,4 9,1 -1,7 9,4 1,4 10,-2 2,3 7,1 6,4 1,6 6,1 1,5 9,-1 17,4 6,-1 3,-11 12,1 6,-2 17,10 3,0 3,3 12,3 10,22 5,-3 10,8 3,7 9,1 10,10 14,5 38,27 10,3 14,-2 3,-4 0,-8 13,-4 -1,-8 2,-4 14,-8 7,0 5,-5 13,-2 8,-10 -5,-12 8,-8 5,-9 -1,-6 -15,-29 -18,-6 -15,1 -8,7 -12,1 -5,-3 -9,-11 -7,-3 -4,-12 -6,-7 -38,-4 -24,-13 -11,-9 -11,-4 -3,-6 -10,-5 -13,5 -21,1 -5,-6 -12,-3 -13,-9
+Matlakeng|1269,135 2,3 -4,5 2,8 -18,-4 1,5 -2,3 -7,3 3,3 -8,1 6,4 -1,3 -5,-2 3,7 -3,1 -5,-9 -8,7 0,10 -5,-5 -3,5 3,-1 14,13 0,5 15,3 4,3 10,-12 3,6 -1,6 5,2 0,3 -3,0 1,4 -4,8 1,10 -4,19 7,-1 5,3 5,21 -2,10 8,1 3,8 12,-3 13,4 10,16 6,-1 2,-3 6,-1 -3,-9 -3,-1 -7,-9 9,-14 -1,-11 10,-8 7,-1 -4,-3 -4,-9 -9,-9 2,-4 -3,-12 5,-7 4,-16 -1,-16 -7,-5 -3,-5 -6,0 -7,-6 -3,-15 -10,-2 -4,5 -15,5 -6,-6 -1,-10 -7,-3
+Leribe|1218,182 -6,3 1,5 -4,2 -7,-7 -3,1 1,18 -6,0 -6,8 -7,1 -3,3 -4,10 2,4 -3,1 1,2 -7,9 -7,0 4,1 1,6 -11,9 2,2 -4,1 -1,5 -16,-1 -10,4 2,9 -2,4 5,5 0,8 6,-6 7,6 2,9 5,0 1,7 6,9 26,6 17,11 3,-2 -2,-2 5,0 -2,2 1,5 2,-3 4,2 1,-3 2,2 1,-2 0,5 2,-1 -3,5 6,-1 2,6 5,0 1,-3 6,-1 4,4 10,-4 5,6 3,-2 -1,-2 4,0 0,-5 4,6 10,-3 4,3 7,-4 0,-6 -9,-1 1,-4 6,-4 -2,-7 2,-15 -4,-5 3,-6 7,-3 -4,-8 -8,-1 2,-10 -5,-21 -5,-3 -7,1 4,-19 -1,-10 4,-8 -1,-4 3,0 0,-3 -5,-2 1,-6 -3,-6 -10,12 -4,-3 -15,-3 0,-5 -15,-13
+Hlotse|1156,337 5,6 -1,6 5,7 8,6 -1,-4 -4,-5 3,-8 3,-2 4,3 15,-14 -14,-7 -22,-5 -6,-9 -1,-7 -5,1 0,-7 -8,-8 -4,1 -7,6 -4,-2 -6,4 -1,5 -5,-1 -5,7 -4,-1 -5,5 2,3 4,-4 2,3 -3,5 5,1 -2,5 3,2 0,9 4,5 -5,5 7,4 3,-2 4,1 3,-10 12,2 0,-3 5,-6 7,4 6,-1 1,-4 2,4
+Tsikoane|1105,428 -1,-14 -13,-16 3,-2 5,1 10,-7 1,4 10,-3 -1,-7 13,-10 17,-19 -1,-8 4,1 -1,-8 5,-3 -1,-3 -2,3 -5,2 -5,-2 -3,-3 -5,6 0,4 -5,-3 -8,1 -2,9 -4,-1 -3,2 -7,-4 5,-4 -4,-6 -1,-8 -5,-1 2,3 -2,3 -5,-6 -11,7 -7,-8 -4,-1 -3,6 -6,-6 -2,5 -7,1 5,2 -1,4 -7,-6 -15,-3 -8,-10 -1,-6 -7,-1 -8,-7 -10,-4 0,4 -10,1 -3,4 1,5 -8,-3 -5,8 5,7 16,-5 7,15 9,6 -7,7 2,9 -10,4 21,30 1,10 -9,11 -2,-3 -6,-1 -5,-7 0,18 -10,26 1,6 3,3 6,0 1,5 4,5 -1,-3 3,1 5,-6 16,-30 5,-3 3,-9 7,-3 4,2 7,-8 5,3 5,10 4,-1 2,3 6,1 6,-6 10,8 8,0 4,2
+Maputsoe|999,323 -14,4 -1,6 -9,4 -19,-2 -7,9 5,3 6,0 2,4 -2,4 8,3 2,0 2,-12 14,4 10,16 15,-6 -2,-9 7,-7 -9,-6 -7,-15
+Moselinyane|991,448 10,-25 1,-12 -1,-7 5,7 6,1 2,3 9,-11 -1,-10 -12,-18 -9,-12 -5,2 -10,-16 -14,-4 -2,12 -10,-3 -2,12 -5,2 -3,7 -6,-2 -15,5 -6,-7 -5,1 -1,-4 -4,-1 2,6 -2,30 2,5 6,4 8,13 18,4 1,5 10,-3 1,12 -2,8 6,9 9,-2 6,3 7,-3 2,4 4,-15
+Peka|1006,467 -4,-5 -1,-5 -9,-2 -1,-7 -4,15 -2,-4 -7,3 -6,-3 -9,2 -6,-9 2,-8 -1,-12 -10,3 -1,-5 -19,-5 -15,-21 2,-30 -5,-13 -5,1 1,5 -9,7 -11,-13 2,10 -5,0 -11,9 -9,-4 -11,2 -7,-5 2,-5 -17,-3 -16,-10 -9,0 3,16 6,0 4,5 -1,8 -9,11 5,3 -2,4 -13,1 -5,-7 -1,2 4,5 -3,1 -5,-5 -4,7 -6,2 -1,4 -6,-1 3,4 0,4 -5,1 0,8 3,1 5,-2 12,1 4,11 7,5 11,-1 29,19 4,1 4,6 4,1 4,-3 13,11 8,4 3,15 20,-5 2,7 -3,4 4,2 10,-2 5,3 26,-1 7,-7 10,6 3,-6 11,7 8,11 3,-3 3,0 3,-5 8,-3 -1,-3 8,1 5,-5 -6,-7 4,-12 -5,-5 1,-6
+Kolonyama|777,427 -5,2 -1,10 -7,8 -10,0 3,9 7,1 -2,5 3,3 -1,5 -4,8 -8,0 -22,-8 -3,3 -1,11 7,7 -2,2 -5,-1 0,5 -7,-3 -5,1 0,3 5,4 1,6 -3,5 -15,5 -9,-7 -10,4 3,12 9,0 -1,5 3,0 6,-6 7,8 7,1 3,3 -2,3 3,4 -3,6 -9,-1 -5,9 -12,-9 -9,2 -2,3 0,3 8,0 4,5 -3,6 5,6 -3,5 1,3 4,-2 5,2 1,-2 -3,0 -2,-6 5,-5 11,9 2,-2 -2,-4 5,-1 6,12 3,-1 -1,-4 3,0 -1,-4 5,-3 11,7 -1,-2 3,-2 -3,-3 2,-3 6,5 -2,8 6,5 1,4 5,-2 3,4 3,-5 3,2 3,-3 -2,-3 1,-3 2,1 1,-8 4,-3 2,3 0,-6 2,0 4,-6 11,0 2,-5 3,1 -2,-2 2,-2 -1,-3 4,-3 5,2 -1,-4 4,2 -2,-2 2,-2 3,3 3,-2 4,3 0,3 9,5 -1,-9 3,0 0,-5 4,-3 -2,-1 3,0 0,-5 3,1 2,7 7,-4 3,2 2,-11 2,-1 1,3 1,-3 5,0 -1,-11 5,5 2,-6 2,3 8,-4 4,0 6,3 -1,3 4,0 -4,3 4,0 -3,2 4,2 0,8 12,0 3,3 -1,2 8,6 10,-2 4,1 3,3 0,-4 7,8 1,-4 4,0 1,-3 3,-1 5,10 6,-3 -3,-4 7,-2 0,-6 5,-4 5,-9 5,-3 1,-7 -8,-11 -11,-7 -3,6 -10,-6 -5,6 -28,2 -5,-3 -8,3 -6,-3 3,-4 -2,-7 -20,5 -3,-15 -8,-4 -13,-11 -4,3 -4,-1 -4,-6 -4,-1 -29,-19 -11,1 -7,-5 -4,-11 -11,-1
+Mosalemane|1179,533 -8,0 -4,-10 -3,-2 -18,0 -1,6 -8,5 -4,7 -17,4 2,5 -11,-3 -12,5 -4,7 -5,1 0,8 -4,-1 -4,1 1,-9 -6,0 4,6 -6,3 -1,-5 -7,2 -1,9 -3,0 4,6 -3,9 7,-1 -1,-3 4,-2 -2,-2 1,-2 7,5 2,-4 6,2 -1,10 -5,5 -6,19 2,-1 7,4 8,-4 4,14 4,-3 1,-6 4,-2 0,-3 8,4 -4,-5 0,-5 4,2 3,-2 2,7 6,7 2,-1 1,-7 3,3 3,-2 2,1 -6,9 6,3 -8,2 4,3 -8,-2 0,3 -4,2 1,2 -4,2 1,3 -5,-1 2,2 -3,5 4,0 -2,4 2,18 -10,13 -13,4 10,3 -4,7 6,21 -5,16 4,2 0,3 9,2 2,7 -6,6 1,2 -8,5 -13,-4 -15,6 2,13 12,-4 12,10 1,7 -5,5 3,2 -5,2 4,6 -6,0 -1,2 12,2 -3,4 1,4 5,1 1,3 -1,4 -6,2 1,2 6,2 5,-3 -1,6 -3,1 5,4 -9,3 -2,6 12,3 -11,1 -1,3 10,5 1,5 4,-1 0,6 -3,5 3,4 1,3 7,2 15,-10 17,-13 1,-6 8,-10 31,-8 3,-5 -4,-1 -3,-7 3,-3 7,1 2,-6 18,2 8,-7 11,-2 2,-9 -3,-7 1,-9 5,-4 5,-1 6,3 4,8 0,10 5,2 6,8 6,1 4,7 10,7 1,6 2,1 3,-11 14,0 -5,-4 3,-5 9,-2 -3,-11 14,2 -3,-7 4,-8 3,-1 9,4 3,-3 -4,-3 7,-1 -1,-5 3,3 4,-4 5,0 3,-2 2,2 1,-4 7,-1 -4,-5 6,-4 -2,-4 9,-6 5,4 -1,-3 5,-3 0,-2 -6,1 -2,-2 5,-7 -7,-3 1,-1 3,0 -5,-9 -1,-8 -3,2 -7,-4 0,-2 4,-1 -3,-4 3,0 1,-4 -9,0 0,-9 -7,0 3,-4 -7,-1 6,-4 -6,1 1,-6 -5,0 -3,-6 -3,1 -8,-4 -2,-9 -10,-13 0,-6 7,-5 5,-8 -16,-10 1,-10 -8,-20 -19,0 -9,-4 -8,-10 -33,-16 -4,-5 -2,2 -10,-13 -7,-3 -11,0 0,4 -6,0 -4,5 -12,4 -6,-4 0,-3 -4,1 -3,-2 6,-15
+Makhoroana|1054,512 -6,3 -6,-2 -5,10 -11,2 -5,7 2,4 -4,11 -3,1 1,3 -10,2 -1,-4 -8,0 -1,3 -4,1 3,4 -2,11 4,22 -1,11 4,-2 2,3 -2,7 -5,3 -3,8 3,-1 4,4 -2,10 3,5 11,7 15,4 10,8 11,2 14,9 11,10 -1,2 16,7 14,-4 10,-13 -2,-18 2,-4 -4,0 3,-5 -2,-2 5,1 -1,-3 4,-2 -1,-2 4,-2 0,-3 8,2 -4,-3 8,-2 -6,-3 6,-9 -2,-1 -3,2 -3,-3 -1,7 -2,1 -6,-7 -2,-7 -3,2 -4,-2 0,5 4,5 -8,-4 0,3 -4,2 -1,6 -4,3 -4,-14 -8,4 -7,-4 -2,1 6,-19 5,-5 1,-10 -6,-2 -2,4 -7,-5 -1,2 2,2 -4,2 1,3 -7,1 3,-9 -5,-6 4,0 1,-3 -11,1 -7,-5 -4,2 -4,-3 7,-6 5,1 3,-4 11,-3 3,-6 -2,-8 2,-2 -1,-3 2,-9 -3,-7 -9,-5
+Bela-Bela|1055,408 -7,8 -4,-2 -7,3 -3,9 -5,3 -16,30 -5,6 -3,-1 2,2 -2,8 5,5 -4,12 6,7 -5,5 -8,-1 1,3 -8,3 -2,5 -6,0 -2,10 -5,3 -10,15 6,7 0,4 8,0 1,-2 6,1 2,-3 5,5 2,-1 1,-3 8,0 1,4 10,-2 -1,-3 3,-1 4,-11 -2,-4 5,-7 11,-2 5,-10 6,2 4,-3 9,2 6,10 -2,9 1,3 -2,2 2,8 -3,6 -11,3 -3,4 -5,-1 -7,5 4,4 5,-2 6,5 9,0 2,-6 6,-3 1,5 4,-1 3,-2 -4,-6 5,-1 -1,5 3,1 -2,4 4,-1 4,1 0,-8 5,-1 2,-6 14,-6 11,3 -2,-5 17,-4 4,-7 8,-5 1,-6 18,0 3,2 4,10 8,0 2,-6 -4,-10 -9,-9 -6,-2 -4,-4 1,-4 -4,-6 4,-9 -2,-5 -9,-2 -10,-10 1,-3 -1,-2 -11,-3 -4,-7 -6,2 -3,-2 -1,3 -2,-2 -5,-6 0,-3 -2,-6 1,-3 -2,-1 2,-5 -3,-2 -9,0 -10,-8 -6,6 -6,-1 -2,-3 -4,1 -5,-10 -5,-3
+Malimong|856,679 -1,3 7,7 0,24 6,4 -5,13 4,2 -1,6 17,-10 3,3 0,8 -3,4 5,1 4,5 6,-3 4,1 5,5 0,6 -4,8 3,3 7,-2 -5,-3 5,-1 1,-7 10,-1 2,3 2,-2 15,6 19,13 6,1 0,5 4,3 6,1 7,5 54,6 9,-2 7,-5 7,-1 1,-5 7,-2 2,-5 -2,-14 15,-5 13,4 8,-5 -1,-2 6,-5 -2,-8 -9,-2 0,-3 -4,-2 5,-16 -6,-21 3,-6 -15,3 -7,-3 -7,0 -7,-6 -14,-6 -4,-5 -3,1 -2,-4 -9,-3 -2,-3 -4,1 -7,-6 -5,-1 -9,4 -2,-5 -2,3 -7,-2 -3,-4 -5,1 -4,-6 -5,1 -8,-2 -6,2 -9,-1 -6,4 0,-4 -3,-1 1,-3 -3,-6 1,-1 -3,-3 -11,2 -1,-2 -1,2 -2,-1 0,3 -4,1 0,-2 -7,5 -7,-4 -2,2 -7,-3 -6,1 -2,-5 -6,-1 -2,-6 -4,4 -1,25 -1,4 -3,0 0,10 -5,-1 -5,-12 -3,8 1,7 -4,6
+Khafung|884,513 -9,5 -2,-3 -2,6 -5,-5 1,11 -5,0 -1,3 -1,-3 -2,1 -2,11 -3,-2 -7,4 -3,-7 -2,-1 0,5 -3,0 2,1 -4,3 0,5 -3,0 1,9 -9,-5 0,-3 -4,-3 -3,2 -3,-3 -2,2 2,2 -4,-2 1,4 -5,-2 -4,3 1,3 -2,2 2,2 -3,-1 -2,5 4,0 13,7 4,-3 5,3 1,5 7,5 -1,1 6,9 2,10 -3,1 6,8 -1,4 -5,10 -6,28 -7,2 -2,4 10,2 6,15 8,0 10,6 4,-6 -1,-7 3,-8 5,12 4,1 1,-10 3,0 1,-4 1,-25 4,-4 2,6 6,1 2,5 6,-1 7,3 2,-2 7,4 7,-5 0,2 4,-1 0,-3 2,1 1,-2 1,2 11,-2 3,3 -1,1 3,6 -1,3 3,1 0,4 6,-4 19,-1 2,2 7,-1 4,6 5,-1 5,4 5,2 2,-3 2,5 4,-3 10,0 6,5 5,0 5,5 6,1 2,4 3,-1 6,6 12,5 4,5 17,4 16,-4 -27,-10 1,-2 -11,-10 -14,-9 -15,-4 -6,-6 -15,-4 -14,-8 2,-14 -4,-4 -3,1 3,-8 5,-3 2,-7 -2,-3 -4,2 1,-11 -4,-22 2,-11 -3,-3 -1,-5 -3,-1 -1,3 -6,-1 -1,2 -8,0 0,-4 -6,-5 -2,3 -5,1 3,3 -6,4 -5,-10 -3,1 -1,3 -4,0 -1,4 -7,-8 0,4 -3,-3 -4,-1 -10,2 -8,-6 1,-2 -3,-3 -12,0 0,-8 -4,-2 2,-2 -3,0 4,-3 -4,0 1,-3 -9,-4
+Teya-Teyaneng|676,603 6,4 -1,6 3,4 9,3 4,8 7,3 9,0 5,-6 7,1 13,-3 14,-11 2,2 2,-2 1,9 10,17 10,2 2,3 6,5 6,-3 4,4 4,-1 3,-3 16,3 2,3 -2,1 4,4 2,-4 7,-2 6,-28 5,-10 0,-4 -5,-8 3,-1 -2,-9 -6,-10 1,-1 -7,-5 0,-5 -6,-3 -4,3 -13,-7 -15,0 -4,6 -2,0 0,6 -2,-3 -4,3 -1,8 -2,-1 -1,4 2,1 -1,1 -2,3 -3,-2 -3,5 -3,-4 -5,2 -1,-4 -6,-5 2,-8 -6,-5 -2,3 3,3 -3,2 1,2 -11,-7 -5,3 1,4 -3,0 1,4 -3,1 -6,-12 -5,1 2,4 -2,2 -11,-9 -5,5 2,6 3,0 -1,2 -5,-2 -4,2 -6,11 -8,-4 -7,1 -1,4 6,3 -1,5
+Tšoana-Makhulo|759,624 -5,9 2,3 -1,9 -6,8 -16,-2 -11,8 0,15 -7,1 -5,-4 -2,5 -3,-4 -3,3 0,-8 -8,0 1,-6 -7,-1 -5,2 1,4 -6,8 4,6 -7,3 -2,7 10,-6 3,1 3,-3 4,2 4,2 0,3 4,1 1,13 8,2 15,-3 11,3 8,5 1,3 9,3 8,12 12,2 9,7 0,2 6,0 8,7 0,8 -5,4 -14,0 -9,4 -2,-3 -10,1 -1,4 -7,6 1,6 -3,3 -1,7 -3,6 -4,1 -2,10 -5,5 -5,-1 0,3 -5,2 -2,5 -7,4 3,3 11,3 12,-5 4,-4 4,3 5,0 2,5 -7,0 -3,4 10,1 -1,7 -3,1 2,2 -4,8 10,-5 3,-6 4,1 2,-3 8,1 4,3 4,-2 6,-16 -6,-9 39,-18 14,-3 11,-8 74,43 8,17 10,3 6,7 8,0 4,-5 7,2 6,-10 25,6 4,-2 3,-8 10,-2 3,-5 20,-2 7,-17 11,-4 1,-10 8,-4 3,-6 -1,-2 6,-4 2,-5 -2,5 -7,2 -1,5 -7,1 -7,5 -9,2 -54,-6 -7,-5 -6,-1 -4,-3 0,-5 -6,-1 -19,-13 -15,-6 -2,2 -2,-3 -10,1 -1,7 -5,1 5,3 -7,2 -3,-3 4,-8 0,-6 -5,-5 -4,-1 -6,3 -4,-5 -5,-1 3,-4 0,-8 -3,-3 -17,10 1,-6 -4,-2 5,-13 -6,-3 0,-25 -7,-7 0,-5 -9,-4 -8,0 -5,-14 -14,-5 -1,-6 -16,-3 -3,3 -4,1 -4,-4 -6,3 -6,-5 -2,-3 -8,0 -7,-8 -3,-7
+Thuathe|676,603 -1,3 -4,3 -13,3 -8,-2 -10,4 1,4 15,12 0,6 -3,7 -15,5 -5,6 7,9 2,0 5,5 3,14 -1,9 7,11 -2,2 3,3 7,0 2,-2 4,3 1,15 -5,11 4,9 3,2 4,0 5,10 -4,2 -14,-6 1,4 5,4 -8,3 0,6 4,0 -6,1 -8,-10 -5,3 2,3 -6,3 -1,4 -3,2 -8,-8 -11,-4 -1,12 -6,5 3,8 6,2 -10,4 4,4 -4,5 0,3 3,0 -9,3 -14,1 -10,-4 -3,11 -10,9 9,1 4,6 10,8 7,-2 16,4 11,-3 9,-8 0,-4 8,-6 -3,-9 9,0 4,-11 0,-10 10,-6 6,3 11,12 1,4 -3,11 3,12 6,-1 5,-4 6,0 1,-4 4,5 6,-1 6,2 -2,-3 7,-4 2,-5 3,0 2,-5 5,1 5,-5 2,-10 4,-1 3,-6 1,-7 3,-3 -1,-6 7,-6 1,-4 10,-1 2,3 9,-4 13,0 5,-4 0,-3 2,-1 -2,-7 -13,-4 0,-2 -9,-7 -12,-2 -6,-10 -11,-5 -1,-3 -5,-4 -14,-4 -15,3 -8,-2 0,-9 -1,-4 -4,-1 0,-3 -9,-4 -2,3 -3,-1 -10,6 2,-7 7,-3 -4,-6 6,-8 -1,-4 5,-2 7,1 -1,6 8,0 0,8 3,-3 3,4 2,-5 5,4 7,-1 0,-15 11,-8 16,2 6,-8 1,-9 -2,-3 5,-9 -3,-12 -2,2 -2,-2 -14,11 -13,3 -7,-1 -5,6 -9,0 -7,-3 -4,-8 -9,-3 -3,-4 1,-6 -6,-4
+Mokhethoaneng|620,645 -3,1 -6,20 -8,3 -3,5 -15,4 -11,10 -6,13 -6,2 -5,-2 -11,8 11,7 -5,7 1,3 4,0 6,-4 4,3 8,2 7,6 -4,8 8,13 -2,11 2,9 -4,0 -10,12 6,3 2,5 7,3 0,5 -5,3 10,4 14,-1 9,-3 -3,0 0,-3 4,-5 -4,-4 10,-4 -6,-2 -3,-8 6,-5 1,-12 11,4 8,8 3,-2 1,-4 6,-3 -2,-3 5,-3 8,10 6,-1 -4,0 0,-6 8,-3 -5,-4 -1,-4 14,6 4,-3 -5,-9 -4,0 -3,-2 -4,-9 4,-11 0,-15 -4,-3 -2,2 -7,0 -3,-3 2,-2 -7,-11 1,-9 -3,-14 -12,-10 -2,-4 3,-3 -2,1 -6,-6 -6,-1
+Khubetsoana|578,741 -5,6 -17,7 -4,10 -7,7 1,4 5,4 4,-2 6,4 10,-9 15,2 -2,-9 2,-11 -8,-12
+Mabote|545,771 -4,16 4,9 -2,7 5,-8 8,5 8,-2 19,-24 -3,-2 -9,0 -10,9 -6,-4 -4,2 -6,-8
+Motimposo|573,786 -9,12 -8,2 -8,-5 -1,4 4,1 6,10 5,3 5,0 3,-2 3,-4 -1,-6 9,5 6,-4 0,-5 -7,-3 -2,-5 -5,-3
+Majoe-a-Litšoene|572,801 0,7 -5,5 -10,-3 -5,2 0,6 2,6 -13,3 4,6 5,-2 5,1 6,-7 4,3 14,-12 3,-11 -5,0 -5,-3
+Stadium Area|535,771 -11,3 0,5 -5,5 2,6 -3,5 2,10 17,20 3,-12 2,-1 7,5 2,6 3,1 -2,-6 0,-6 5,-4 -8,-9 -3,0 -3,4 2,-7 -4,-9 2,-15 -7,-1
+Maseru|537,825 -17,-20 -1,-13 -6,0 0,-5 -2,-3 -18,0 -12,4 3,8 7,2 1,7 8,6 -12,8 -5,0 1,4 -5,2 -2,-2 2,4 -2,1 4,4 2,-2 9,3 9,-3 8,4 -1,3 11,-1 4,-5 1,-5 6,5 7,-6
+Thetsane|499,845 3,-6 3,0 -1,-4 4,2 1,-3 -8,-4 -9,3 -9,-3 -2,2 -4,-4 2,-1 -2,-4 2,2 5,-3 -1,-3 -13,2 -9,6 -1,9 8,7 12,5 10,-3 5,2 4,-2
+Tsolo|505,854 -2,-6 -4,-3 -19,3 -12,-5 -8,-7 -2,11 2,4 10,3 14,-1 5,5 1,6 5,-6 15,5 -6,-8 1,-2
+Likotsi|548,863 -13,-13 -5,3 -5,-3 -4,2 0,-5 -17,8 7,8 -3,0 -13,-5 -5,6 -1,-6 -5,-5 -14,1 -9,-3 1,11 -7,8 6,4 -2,8 4,3 3,-1 4,3 -1,3 10,2 6,6 4,-1 3,4 9,-1 4,-4 4,-8 -3,-1 4,-5 -1,-5 7,6 2,-6 5,1 -1,-5 12,7 5,-6 9,-6 0,-5
+Qoaling|535,850 -1,-4 4,-3 -5,-1 -1,-3 5,-3 9,0 -5,-9 10,-4 -2,-6 -7,-5 -2,1 -5,15 -5,3 -6,-5 -5,10 -15,-1 1,4 -3,0 -3,6 4,3 2,6 13,-4 3,-3 0,5 4,-2 5,3 4,-2
+Lithoteng|557,864 0,-5 -3,-1 -1,-3 7,-3 -13,-17 -2,2 -12,0 -2,3 2,2 5,1 -5,5 15,15 8,1
+Abia|569,866 -21,-3 0,5 -14,10 -5,11 8,11 8,1 4,4 6,-2 3,-5 7,5 3,-2 -1,-3 6,-3 7,3 -2,-18 -2,-5 -5,-2 -2,-7
+Lithabaneng|561,824 -6,8 -5,-1 -5,2 15,19 -7,3 1,3 3,1 0,5 11,2 1,-3 2,1 -3,-5 2,-2 3,-1 1,4 4,-3 4,3 9,-5 -2,-2 2,-3 5,3 5,0 4,-4 -6,-11 -7,2 -10,-8 -4,-6 -10,-1 -4,3 -2,-3
+Matala|601,853 -5,0 -5,-3 -2,3 2,2 -9,5 -4,-3 -4,3 -2,-4 -4,2 3,5 -3,1 3,9 5,2 3,6 2,17 -5,-1 1,2 4,2 4,-2 1,8 2,-8 2,-1 4,6 4,-7 5,0 0,-5 6,3 0,-5 6,6 9,-6 1,-4 8,-12 0,-6 -6,2 -2,4 -9,5 -11,1 -2,-2 0,-6 -4,-3 3,-4 -3,-7 2,-5
+Thaba-Bosiu|663,785 -10,6 0,10 -4,11 -9,0 3,9 -4,2 -7,11 -6,5 -11,3 -16,-4 6,11 -6,9 3,7 -3,4 4,4 0,6 13,0 9,-5 2,-4 7,-1 -1,5 -8,12 0,3 -11,7 -1,5 -10,0 -1,3 5,4 0,3 4,0 -3,3 11,3 2,7 -4,4 8,7 -2,5 2,-3 3,3 2,-4 5,1 3,-4 3,2 10,-3 0,-2 1,2 5,1 2,-4 6,1 5,-3 6,0 17,-11 32,-1 7,3 16,0 -2,-2 -5,1 -1,-6 -3,3 -10,-4 -5,-5 -9,0 -1,-7 -4,-1 -6,-7 -9,3 -8,-2 23,-5 -1,-2 8,-11 -1,-10 10,4 -5,5 7,3 -2,0 1,1 -2,5 4,-3 4,4 -4,-6 3,-1 -1,-1 1,-5 4,-2 0,-16 9,-2 5,2 4,-8 -2,-4 3,-1 1,-7 -10,-1 3,-4 7,0 -2,-5 -5,0 -4,-3 -4,4 -15,5 -15,-5 -6,1 -4,-5 -1,4 -6,0 -5,4 -6,1 -3,-12 3,-11 -1,-4 -7,-9 -8,-6
+Machache|748,849 -1,2 -4,-2 -9,2 0,16 -4,2 -1,5 1,1 -3,1 4,6 -4,-4 -4,3 2,-5 -1,-1 2,0 -7,-3 5,-5 -10,-4 1,10 -8,11 1,2 -13,2 -10,4 8,1 9,-3 6,7 4,1 1,7 9,0 9,8 6,1 3,-2 1,5 5,-1 2,4 -15,4 -1,3 19,-1 5,5 8,-5 8,0 6,-3 3,1 1,-2 2,1 1,-2 2,-1 0,7 3,-1 1,2 7,-3 6,2 10,10 -1,5 3,4 13,7 6,10 21,7 5,-5 -3,-15 18,-1 9,3 5,-2 6,-10 11,-8 2,-6 -2,-4 3,-1 -4,-4 4,-3 2,-4 -4,-4 10,-6 -1,-3 3,-4 13,-6 9,0 5,2 6,-2 4,-4 -2,-5 6,-5 2,1 1,-3 -5,-5 -4,0 2,-9 3,0 -3,-8 -4,5 -8,0 -6,-7 -10,-3 -8,-17 -74,-43 -11,8 -14,3 -39,18 6,9 -6,16 -4,2 -4,-3 -8,-1 -2,3 -4,-1 -3,6 -10,5
+Thaba-Putsoa|957,849 3,8 -3,0 -2,9 4,0 5,5 -1,3 -2,-1 -6,5 2,5 -10,6 -5,-2 -9,0 -13,6 -3,4 1,3 -10,6 4,4 -2,4 -4,3 4,4 -3,1 2,4 -2,6 -11,8 -6,10 -5,2 -9,-3 -12,2 -4,-2 -2,1 0,4 3,11 -5,5 -2,8 -4,3 -8,-1 -7,-4 -9,3 -2,3 -7,0 -1,3 0,-1 -6,5 1,-3 -6,-2 -13,2 -4,-2 0,8 -6,-1 -5,8 2,3 -3,1 1,7 10,25 -2,3 -14,-1 0,9 4,4 16,-5 -4,-3 4,-6 29,6 1,4 -3,3 3,1 -1,12 2,1 -10,7 -6,-2 -3,2 3,8 -7,3 -5,9 3,4 12,-4 7,4 6,18 19,20 -2,15 4,11 -2,6 4,2 6,-1 11,7 7,0 0,-4 3,0 3,-5 6,-4 -2,-5 3,-6 6,2 4,-2 4,5 2,-3 9,-4 4,-6 10,-1 -3,-1 -3,-7 4,-8 11,7 3,0 2,-5 -6,0 -3,-11 4,-1 2,-5 13,-5 10,4 3,5 3,-5 4,0 -1,3 10,-2 -1,4 4,-1 3,5 -1,4 9,3 -2,2 2,4 9,-1 1,4 5,1 -2,2 2,0 1,5 2,-1 1,2 4,-1 -2,2 5,2 -1,2 8,5 11,-2 16,5 9,-7 24,11 23,5 10,0 25,-6 13,1 5,4 6,1 9,-2 8,5 9,2 1,7 10,5 8,1 12,4 6,-1 7,2 11,9 3,-3 -2,-4 9,1 6,-7 2,-1 3,7 4,1 4,-6 -15,-15 -9,4 -3,0 5,-11 -2,-14 8,-6 -6,-4 -9,1 -4,-10 2,-4 9,-5 2,-4 -2,-2 -6,2 -7,-12 7,4 4,-1 -5,-5 -1,-7 9,-5 2,-4 -10,-12 -12,-6 1,-3 8,-8 2,-5 -3,-6 -11,-5 -2,-7 1,-4 9,-2 2,-4 -10,-2 -12,5 -7,0 0,-4 9,-12 -5,-10 -6,-1 2,6 -14,1 -4,-4 5,-4 0,-3 -19,-4 0,-5 20,2 5,-8 -5,-4 -20,3 -2,-3 1,-4 13,-2 4,-5 -4,-4 -8,1 -6,-1 0,-7 -3,-6 4,-4 1,-10 6,-1 6,-5 -3,-8 8,0 -8,-11 8,-1 0,-8 10,5 10,-7 -1,9 1,1 6,-4 9,0 -3,-9 7,2 10,-2 -4,-12 9,4 3,-1 -2,-7 9,-12 6,1 -2,4 10,2 1,-3 -5,-4 -1,-7 13,5 3,-8 -10,0 -3,-3 1,-3 4,0 3,4 3,-5 11,-4 2,-3 -6,-7 2,-1 6,1 1,-4 -4,1 -3,-9 -10,-7 -4,-7 -6,-1 -6,-8 -5,-2 -3,-16 -4,-4 -6,-1 -7,5 -1,9 3,7 -2,9 -11,2 -8,7 -9,0 -9,-2 -2,6 -9,1 -1,3 3,5 4,1 -3,5 -31,8 -8,10 -2,6 -31,23 -4,-1 -7,-8 3,-5 0,-7 -4,2 -1,-5 -10,-5 1,-3 11,-1 -12,-3 2,-6 9,-3 -5,-4 3,-1 2,-5 -8,2 -4,-2 -1,-2 6,-2 1,-4 -1,-3 -5,-1 -1,-4 3,-4 -12,-1 1,-3 6,0 -3,-1 -1,-5 5,-1 -3,-4 5,-4 -2,-8 -11,-9 -12,4 -2,5 -6,4 1,2 -3,6 -8,4 -1,10 -11,4 -7,17 -20,2 -3,5 -10,2 -3,8 -4,2 -25,-6 -6,10 -7,-2
+Maama|748,918 -16,0 -7,-3 -32,1 -17,11 3,5 7,-2 5,3 2,7 11,12 2,10 6,8 1,11 9,12 0,10 6,2 0,6 5,-1 0,7 3,0 0,3 2,-5 2,2 7,0 0,9 14,6 8,8 5,11 1,-1 -4,-4 0,-9 12,1 4,-2 -11,-32 3,-2 -2,-3 5,-8 6,1 0,-8 4,2 13,-2 6,2 -1,3 6,-5 0,1 1,-3 7,0 2,-3 9,-3 7,4 8,1 4,-3 2,-7 -21,-8 -6,-10 -13,-7 -3,-4 1,-5 -10,-10 -6,-2 -7,3 -1,-2 -3,1 0,-7 -3,3 -2,-1 -1,2 -3,-1 -6,3 -8,0 -9,5 -4,-5 -20,1 2,-3 10,-1 5,-5
+Koro-Koro|774,1051 -4,-5 -1,-6 -8,-8 -14,-6 -1,-9 -6,0 -2,-2 -2,5 0,-3 -3,0 0,-7 -4,2 -2,-7 -5,-2 1,-7 -10,-15 -1,-11 -7,-8 0,-8 -6,-5 0,-4 -6,-5 -3,-7 -5,-3 -6,2 -7,-6 -7,4 -6,-1 -3,4 -4,-1 -1,-2 0,2 -10,3 -4,-2 -3,4 -4,-1 -2,4 -3,-2 -2,2 1,-5 -8,-7 5,-4 -3,-7 -10,-3 2,-3 -4,0 0,-3 -5,-4 2,-2 10,-1 0,-8 -4,-3 0,5 -6,-3 -1,5 -5,0 -3,7 -3,-6 -4,1 -2,21 5,4 7,-4 8,6 -7,23 0,8 4,3 1,6 -11,17 -1,12 -5,17 2,0 2,5 3,-1 7,4 4,10 2,0 -2,4 2,5 5,0 5,9 7,3 4,1 0,-2 14,-9 6,2 8,-9 13,1 -1,38 11,6 0,9 2,2 4,-1 4,13 6,2 -3,3 1,4 6,5 2,-7 4,-2 50,1 4,-8 -1,-6 2,-5 3,-1 1,-7 10,-10 2,-8 -3,-5 2,-6
+Qeme|518,1040 3,-3 9,1 5,-4 5,0 2,-6 6,-2 3,3 4,0 0,2 7,4 0,3 4,0 9,-5 0,-3 2,1 5,-3 1,-4 6,-1 3,-5 -6,-6 6,-17 0,-12 11,-17 0,-6 -5,-3 0,-8 7,-23 -8,-6 -6,4 -6,-3 1,-21 -2,-1 -6,1 -3,-6 -8,4 1,3 -3,2 -6,-4 -10,6 -4,-4 -8,-1 -8,-11 4,-9 -11,-7 1,5 -5,-1 -2,6 -8,-6 2,5 -4,5 3,1 -8,12 -9,1 -3,-4 -3,3 7,6 2,10 -5,1 -2,5 2,6 -7,6 -3,7 -9,5 -3,0 -17,8 -9,2 0,4 18,-9 5,1 5,-2 7,7 3,-4 2,5 5,-5 1,6 -4,3 4,11 6,3 0,3 15,18 0,15 3,0 1,3 -3,6 5,-2 3,1 -1,5 2,3 -4,10 2,2
+Rothe|463,1150 2,-3 8,1 1,-4 4,-2 0,2 4,-1 7,1 11,-4 4,2 2,-5 4,-1 -2,-2 5,-5 0,-5 14,-16 -2,-39 4,-8 -4,-8 -6,1 -2,-2 0,-12 -2,-2 4,-10 -2,-3 1,-5 -3,-1 -5,2 3,-6 -1,-3 -3,0 0,-15 -15,-18 0,-3 -6,-3 -4,-11 4,-3 -1,-6 -5,5 -2,-5 -3,4 -7,-7 -5,2 -4,-1 -19,8 0,-3 9,-2 17,-8 3,0 9,-5 3,-7 7,-6 -2,-6 2,-5 5,-1 -2,-10 -7,-5 3,-4 -4,1 -6,-6 -10,-2 1,-3 -4,-3 -5,1 -2,-3 2,-9 -12,-4 -12,-8 -8,-1 1,11 15,14 0,10 4,7 -2,4 -5,4 -13,3 -12,-3 -4,6 0,8 -10,9 -3,9 -5,3 -5,6 -15,4 0,15 7,13 -2,8 -15,2 -8,-2 -7,-6 -5,1 -25,17 -1,10 -5,7 4,9 3,12 -2,3 3,3 2,14 5,2 20,-12 5,0 1,-4 6,-3 3,4 5,-4 9,3 3,8 6,-2 2,5 -7,3 4,7 -2,3 9,12 -3,12 11,6 3,-5 -1,-2 5,2 -1,7 7,3 -2,6 3,7 -7,2 -1,3 2,3 4,1 6,-3 4,10 -2,6 3,-1 2,4 6,0 11,-6 6,10 6,-1 8,2
+Matsieng|698,1116 -7,-7 4,-5 -7,-2 -4,-13 -3,1 -2,-2 -1,-9 -11,-6 1,-38 -13,-1 -8,9 -6,-2 -14,9 0,2 -9,-3 -6,-5 -1,-5 -5,0 -2,-5 2,-5 -2,1 -4,-10 -7,-4 -4,7 -6,1 -1,4 -5,3 -2,-1 0,3 -9,5 -4,0 0,-3 -7,-4 0,-2 -4,0 -3,-3 -6,2 -2,6 -5,0 -5,4 -9,-1 -4,4 0,11 2,2 6,-1 4,8 -4,8 2,39 -14,16 0,5 -5,5 2,2 -4,1 -2,5 -4,-2 -11,4 -7,-1 -4,1 -1,-1 -6,6 -6,-2 -6,12 0,3 4,2 4,-1 2,3 -5,4 1,2 -5,6 0,10 -6,2 -1,5 2,8 7,1 0,6 2,2 6,2 8,-4 7,9 13,-16 14,-10 18,-22 17,-7 23,-1 7,7 1,7 -4,2 3,8 -11,-3 -9,1 3,5 -1,5 4,1 -2,4 11,5 1,2 0,3 -9,4 5,5 6,-1 -1,9 3,1 1,4 4,-1 5,3 2,5 6,-1 2,3 2,-1 6,2 19,-5 2,-9 15,-11 19,-2 0,-4 -5,-1 3,-2 4,1 -2,-4 7,-2 -1,-9 5,-6 -5,-15 5,-5 2,-10 13,-2 4,-5 4,-2 -1,-8 3,-8 -6,-7 3,-7 5,-3
+Makhaleng|869,1172 -7,0 -11,-7 -6,1 -4,-2 2,-6 -4,-11 2,-15 -19,-20 -6,-18 -7,-4 -12,4 -3,-4 5,-9 7,-3 -3,-8 3,-2 6,2 11,-8 -3,0 1,-12 -3,-1 3,-3 -2,-5 -12,0 -16,-5 -4,6 4,3 -13,4 -4,3 -1,7 2,4 -2,8 -10,10 -1,7 -3,1 -2,5 2,6 -5,8 -50,-1 -3,2 -2,6 -6,4 -3,8 6,6 -3,8 2,7 -9,8 -13,2 -2,10 -5,7 3,4 -1,4 3,5 -5,6 1,8 -5,4 -2,-1 2,4 -4,-1 -3,2 5,1 0,4 11,-1 12,7 26,-7 -5,13 2,4 -3,4 9,9 0,8 5,5 6,-3 20,13 2,10 7,2 5,6 -4,1 -4,-4 -4,10 -5,1 -4,-2 3,6 -2,3 -9,1 2,-8 -8,-1 -5,10 1,6 -5,5 6,7 0,3 16,2 28,14 4,10 -7,9 -11,4 -14,-6 -5,-6 -13,0 -11,-8 -3,1 -2,5 2,8 -2,3 -11,2 -12,-3 4,7 6,4 -1,9 -6,3 -3,-1 -3,-5 -7,-1 -4,6 1,4 -4,3 3,5 -2,4 10,1 5,-4 6,2 7,-4 4,5 3,-3 5,3 3,-4 5,1 9,-5 4,7 6,-6 8,1 4,-5 15,-7 12,-2 15,-7 13,1 9,-2 2,-4 10,0 16,-2 6,4 44,2 -8,-10 3,-6 15,-9 11,1 5,-5 6,0 -2,-10 -3,-2 2,-8 -8,-1 4,-7 7,-4 7,1 8,-7 6,0 16,-10 2,-6 18,-6 8,-19 3,-1 -1,-5 10,1 6,-2 4,-4 0,-8 -5,-7 -1,-6 -16,0 -10,-7 -4,-6 -10,-3 -13,-12 -8,-2 -2,-2 3,-18 -18,0 -6,4 -11,1 -9,3 -10,-2 -14,-1 -2,2 -3,-3 -4,0 1,-6 9,-3
+Maletsunyane|1247,1192 -4,3 -10,-9 -7,-2 -6,1 -12,-4 -8,-1 -10,-5 -1,-7 -9,-2 -8,-5 -9,2 -6,-1 -5,-4 -13,-1 -24,6 -11,0 -23,-5 -24,-11 -9,7 -16,-5 -11,2 -8,-5 1,-2 -5,-2 2,-2 -4,1 -1,-2 -2,1 -1,-5 -2,0 2,-2 -5,-1 -1,-4 -9,1 -2,-4 2,-2 -9,-3 1,-4 -3,-5 -4,1 1,-4 -10,2 1,-3 -4,0 -3,5 -3,-5 -10,-4 -13,5 -2,5 -4,1 3,11 6,0 -2,5 -3,0 -11,-7 -4,8 3,7 3,1 -10,1 -4,6 -9,4 -2,3 -4,-5 -4,2 -6,-2 -3,6 1,7 -5,2 -3,5 -3,0 0,5 -9,3 -1,6 4,0 3,3 2,-2 14,1 10,2 9,-3 11,-1 5,-4 18,0 -2,18 2,2 8,2 13,12 10,3 4,6 10,7 16,1 1,5 5,7 0,8 -9,6 -11,-2 1,6 -3,1 -8,18 -6,4 -4,-1 -8,4 -2,6 -16,10 -6,0 -8,7 -7,-1 -7,4 -4,7 8,1 -2,8 3,2 2,10 -6,0 -5,5 3,7 12,6 24,-2 2,-6 14,-3 7,6 8,3 29,1 6,-5 13,2 3,2 -1,5 5,8 12,-3 33,8 4,12 0,10 -3,6 -4,4 -13,-2 -16,9 -2,2 2,15 -3,5 1,10 8,3 8,8 12,0 2,6 -5,6 10,3 7,0 15,-4 8,0 13,6 22,-3 22,1 7,-7 19,-3 12,-4 4,-7 9,-5 21,0 5,-5 5,0 4,1 3,8 7,-1 4,-5 12,3 3,-9 7,-3 4,-6 14,5 5,-1 22,-21 4,-6 2,-8 6,-2 -1,-3 -10,3 -4,-14 -4,-1 -2,4 3,11 -10,-3 3,-6 -3,-3 5,-9 4,-4 1,-6 -12,-1 2,-2 6,-1 -6,-15 4,-7 -10,-13 -11,-4 2,-5 5,-4 1,-10 -3,-6 -2,-1 -4,4 -2,0 -2,-12 -10,-2 -1,-4 15,-3 3,-4 -4,-8 -13,-3 -12,2 2,-8 -9,-6 8,-5 -3,-9 10,-10 -3,-2 -5,4 -4,-1 1,-9 -7,-14 17,-10 1,-3 -3,-1 -8,4 -10,-3 -9,1
+Thaba-Phechela|289,1035 -15,7 -7,1 -2,3 1,12 -12,7 -14,0 -5,-11 -6,1 0,5 -16,9 2,8 -6,3 -9,-1 -6,3 -5,-4 -28,-7 -5,1 -14,16 -13,-2 -10,4 -6,8 -11,6 2,14 -12,1 -6,5 -5,7 -3,-1 -4,-4 -2,-9 -11,-6 -1,3 2,7 -3,6 2,9 -10,19 -9,-3 -6,-6 -7,-8 -3,-9 -15,3 -3,3 8,10 4,12 -18,11 2,13 7,4 5,0 47,45 35,-18 4,1 58,-26 5,9 -3,1 1,3 4,3 7,-10 8,2 0,-4 8,3 2,14 -7,5 3,11 5,-1 3,3 18,2 13,-4 15,1 2,-3 8,1 -1,2 6,2 4,5 8,1 5,-9 1,-10 15,-1 22,-10 1,-20 8,-11 -1,-5 3,-3 3,-11 -9,-15 -1,-9 -3,-4 4,-6 -6,-25 -4,-5 2,-1 -2,-6 2,-11 -3,-4 4,-13 -5,-4 1,-7 -16,-8
+Phoqoane|316,1041 -10,2 -1,7 5,4 -4,13 3,4 -2,11 2,6 -2,1 4,5 6,25 -4,6 3,4 1,9 9,15 -3,11 -3,3 1,5 -8,11 -1,20 -22,10 -15,1 -1,10 -5,9 -8,-1 -4,-5 -6,-2 1,-2 -8,-1 -2,3 -15,-1 -13,4 9,0 6,-3 7,4 4,4 0,4 4,1 2,8 0,4 -3,2 3,3 -2,2 2,6 -2,6 7,9 1,22 -1,3 4,8 -2,6 -2,-1 1,7 6,7 15,-3 -1,12 8,4 23,-11 16,-12 7,-13 2,-7 3,-3 1,-3 5,-2 -2,-2 3,-12 4,-3 1,-6 4,-1 6,2 1,3 -1,4 2,5 -2,21 3,7 4,3 9,-3 19,-3 6,2 3,5 7,1 1,2 4,-1 -1,-6 3,-6 -3,-7 17,-27 9,-6 0,-7 3,-4 -2,-3 1,-9 3,-4 5,-15 11,-16 -1,-16 6,-2 0,-10 5,-6 -1,-2 5,-5 -2,-2 -4,1 -4,-2 4,-13 -8,-2 -6,1 -6,-10 -11,6 -6,0 -2,-4 -3,1 2,-6 -4,-10 -6,3 -4,-1 -2,-3 1,-3 7,-2 -3,-7 2,-6 -7,-3 1,-7 -5,-2 1,2 -3,5 -11,-6 3,-12 -9,-12 2,-3 -4,-7 7,-3 -2,-5 -6,2 -3,-8 -5,-2 -5,-1 -4,4 -3,-4 -6,3 -1,4 -5,0 -21,12 -4,-3 -2,-14 -6,-4
+Matelile|733,1530 1,-28 -10,-20 1,-7 -3,-9 -12,-6 -5,-8 -10,-6 -3,-4 -16,-7 -5,-10 -9,3 -4,0 -5,-4 1,-6 -3,-6 3,-2 2,-9 2,-2 -6,-6 -14,-6 -2,-5 -3,2 -8,-11 -12,-8 -12,0 -3,1 2,2 -1,5 -12,1 -8,-15 6,-2 3,-3 4,-16 2,-1 0,-9 -5,-5 -4,0 -3,4 -7,3 -6,-5 -11,-1 -7,-6 -4,1 3,-26 -4,-5 -1,-7 -4,-4 3,-7 -5,-3 0,-5 -10,-2 -7,5 -6,-1 2,-2 -2,-1 -9,-2 0,-6 -7,-4 2,-2 -6,-2 -2,-6 -9,-1 -4,-6 -7,-3 -1,-7 -5,-3 -1,11 -3,0 -1,4 -7,1 -7,-3 -5,-7 -2,2 -3,10 -3,5 -1,8 2,3 -3,4 0,7 -9,6 -17,27 3,7 -3,6 1,6 -4,1 -1,-2 -6,-1 -4,-5 -6,-2 -28,6 4,3 8,2 1,6 16,-3 4,3 0,3 -12,16 2,5 3,0 2,7 2,-1 -1,7 9,5 -3,5 1,6 -2,2 5,9 22,2 5,-4 10,-1 0,-10 4,-13 6,-7 13,-3 -1,-3 3,-2 1,-4 6,-1 4,7 14,0 5,7 1,14 8,6 0,5 7,8 0,5 5,4 1,7 5,6 4,1 2,5 -1,4 8,15 -2,3 7,5 -1,2 6,7 -3,6 13,9 -1,3 4,-1 0,4 9,3 2,4 3,-8 6,6 3,-5 6,-2 6,-5 7,6 7,-5 22,21 2,8 11,8 1,4 4,-4 4,3 1,-2 4,1 9,-12 30,0 9,8 19,11 9,13 5,3
+Maliepetsane|563,1162 -16,2 -17,7 -18,22 -14,10 -13,16 -7,-9 -9,4 -7,-4 0,-6 -7,-1 0,3 -11,19 5,7 14,2 1,-4 3,0 2,-11 4,3 1,7 7,3 4,6 9,1 2,6 6,2 -2,2 7,4 0,6 9,2 2,1 -2,2 6,1 5,-5 11,1 1,6 5,3 -3,7 4,4 1,7 4,5 -4,26 5,-1 7,6 11,1 6,5 7,-3 3,-4 4,0 5,5 0,9 -2,1 -4,16 -3,3 -6,2 7,14 13,0 1,-5 -2,-2 3,-1 12,0 12,8 8,11 3,-2 2,5 14,6 6,6 -2,2 -2,9 -3,2 3,6 -1,6 5,4 4,0 9,-3 5,10 16,7 3,4 10,6 5,8 13,7 2,8 -1,7 10,20 -1,28 6,0 5,-4 14,-6 2,-8 14,-2 4,-4 5,-1 4,-12 7,-2 17,-19 -11,-9 4,-8 -4,-12 8,-7 4,-12 10,-4 4,-7 -1,-5 2,-2 25,-7 3,-6 7,-4 -1,-10 19,-3 -1,-5 4,-3 -44,-2 -6,-4 -16,2 -10,0 -2,4 -9,2 -13,-1 -15,7 -12,2 -15,7 -4,5 -8,-1 -6,6 -4,-7 -9,5 -5,-1 -3,4 -5,-3 -3,3 -4,-5 -7,4 -6,-2 -5,4 -10,-1 2,-4 -3,-5 4,-3 -1,-4 4,-6 7,1 3,5 3,1 6,-3 1,-9 -6,-4 -4,-7 12,3 11,-2 2,-3 -2,-8 3,-5 13,7 13,0 5,6 14,6 6,-1 6,-5 6,-7 -4,-10 -28,-14 -16,-2 0,-3 -6,-7 5,-5 -1,-6 5,-10 8,1 -2,8 9,-1 2,-3 -3,-6 4,2 5,-1 4,-10 4,4 4,-1 -5,-6 -7,-2 -2,-10 -20,-13 -6,3 -5,-5 0,-8 -9,-9 3,-4 -2,-4 5,-13 -25,7 -16,-7 -27,3 -15,11 -2,9 -19,5 -6,-2 -2,1 -2,-3 -6,1 -2,-5 -5,-3 -4,1 -1,-4 -3,-1 1,-9 -6,1 -5,-5 9,-4 0,-3 -1,-2 -11,-5 2,-4 -4,-1 1,-5 -3,-5 9,-1 11,3 -3,-9 4,-2 -1,-6 -7,-7 -5,0
+Thabana-Morena|347,1268 -4,1 -1,6 -4,3 -3,12 2,2 -5,2 -1,3 -3,3 -2,7 -11,16 -34,20 -10,-3 2,16 4,2 -3,8 0,7 -1,2 -13,0 5,5 0,5 6,1 4,12 8,14 7,5 -12,11 -7,3 -2,3 2,7 -10,4 18,3 29,-6 4,3 6,-3 14,-11 19,-5 5,-10 -4,-9 2,-6 9,-8 1,-7 17,1 7,-4 6,7 1,8 6,2 -6,13 10,12 -6,2 -1,7 -10,4 0,2 -5,5 3,3 -1,2 -4,1 5,7 -9,10 1,2 -2,3 5,1 2,4 -5,2 -4,9 6,11 2,0 -4,9 0,8 5,0 -2,5 7,7 -2,5 3,4 1,-3 2,1 0,3 -4,1 3,8 11,2 -1,3 4,2 5,11 3,-1 3,3 0,6 11,5 2,2 -2,5 4,-2 0,7 3,5 -1,2 4,2 -1,3 13,7 9,-4 4,1 3,-4 3,2 2,-4 -3,-4 9,-5 5,3 14,-2 6,-6 -6,-1 -2,-5 14,1 -8,-10 4,-4 10,-1 1,-13 10,-4 9,3 1,-5 -7,-8 -10,-1 -3,-2 1,-4 17,0 4,-5 6,-1 4,-6 6,0 1,-3 -4,-4 2,-6 9,-2 0,-12 -7,-3 1,-8 9,1 1,-6 -10,-4 0,-4 -4,1 1,-3 -13,-9 3,-6 -6,-7 1,-2 -7,-5 2,-3 -8,-15 1,-4 -2,-5 -4,-1 -5,-6 -1,-7 -4,-4 -1,-5 -7,-8 0,-5 -8,-6 -1,-14 -5,-7 -14,0 -4,-7 -6,1 -1,4 -3,2 1,3 -13,3 -6,7 -4,13 0,10 -10,1 -5,4 -22,-2 -5,-9 2,-2 -1,-6 3,-5 -9,-5 1,-7 -2,1 -2,-7 -3,0 -2,-5 12,-16 0,-3 -4,-3 -16,3 -1,-6 -8,-2 -8,-6 -3,-7 2,-21 -2,-5 1,-4 -1,-3 -5,-2
+Qalabane|261,1445 10,-4 -2,-7 2,-3 7,-3 12,-11 -7,-5 -8,-14 -4,-12 -2,-1 0,2 -4,-3 0,-4 -5,-5 5,-1 -3,-6 -7,-1 -7,-7 -4,2 -2,5 -4,-1 -4,-6 -6,1 -6,-4 12,-3 -1,-9 19,-20 -1,-9 2,1 2,-4 0,-5 -3,0 -1,-5 1,-3 -1,-22 -7,-9 2,-6 -2,-6 2,-2 -3,-3 3,-2 -1,-10 -9,-11 -7,-4 -13,4 -20,-3 -3,-3 -5,1 -3,-11 7,-5 -2,-14 -8,-3 0,4 -8,-2 -7,10 -4,-3 -1,-3 3,-1 -5,-9 -58,26 -4,-1 -35,18 20,12 -3,5 15,9 85,180 7,0 8,4 25,-4 10,6 29,3
+Mafeteng|260,1375 13,0 1,-2 0,-7 3,-8 -4,-2 -3,-11 2,0 -1,-5 2,0 -2,-2 2,-11 -15,3 -6,-6 -19,21 1,9 -4,2 -8,0 6,5 6,-1 4,6 4,1 2,-5 4,-2 7,7 5,-1 4,4 1,4 -5,1
+Taung|424,1697 0,-2 11,-2 4,-9 9,-2 0,-6 -7,-4 -2,-5 2,-3 8,0 10,-8 -3,-5 6,-13 -5,-6 5,0 12,8 2,-1 -13,-13 8,-10 -3,-12 -3,-1 -3,4 -4,-1 -5,3 -6,1 -11,-7 1,-3 -4,-2 1,-2 -3,-5 0,-7 -5,1 3,-5 -13,-6 0,-6 -3,-3 -3,1 -5,-11 -4,-2 1,-3 -11,-2 -3,-8 4,-1 0,-3 -2,-1 -1,3 -3,-4 2,-5 -7,-7 2,-5 -5,0 0,-8 4,-9 -2,0 -6,-11 4,-9 5,-2 -2,-4 -5,-1 2,-3 -1,-2 9,-10 -5,-7 4,-1 1,-2 -3,-3 5,-5 0,-2 10,-4 1,-7 6,-2 -9,-11 5,-14 -7,-3 0,-7 -7,-7 -6,4 -17,-1 -1,7 -9,8 -2,6 4,9 -5,10 -18,4 -15,12 -6,3 -4,-3 -29,6 -49,-6 -10,-6 -25,4 -8,-4 -7,0 51,107 1,10 -5,4 17,-1 19,18 18,1 -4,7 3,10 25,9 6,6 32,99 67,-4 12,-4
+Mpharane|448,1676 1,-2 20,-3 8,-4 7,2 6,-2 7,1 7,9 11,5 10,0 3,4 3,13 -7,2 5,17 7,2 5,-2 7,-8 10,-6 3,-7 6,-4 1,-9 8,-12 15,-6 16,-3 8,3 11,-6 8,-15 6,-4 4,-8 -2,-2 1,-8 -1,-8 -5,-5 6,-6 -5,-9 5,-9 14,-1 16,-10 26,6 20,-3 -2,-1 5,-8 -7,-13 0,-11 10,-5 7,-9 -13,-17 -30,-19 -28,0 -9,12 -4,-1 -1,2 -4,-3 -4,4 -1,-4 -11,-8 -2,-8 -22,-21 -7,5 -7,-6 -6,5 -6,2 -3,5 -6,-6 -5,11 -9,-1 -1,8 7,3 0,12 -9,2 -2,6 4,4 -1,3 -6,0 -4,6 -6,1 -4,5 -17,0 -1,4 3,2 10,1 7,8 -1,5 -9,-3 -10,4 -1,13 -10,1 -4,4 8,10 -14,-1 2,5 6,1 -6,6 -14,2 -5,-3 -9,5 3,4 -2,5 3,10 -8,10 13,13 -2,1 -12,-8 -5,0 5,6 -6,13 3,5 -10,8 -8,0 -2,3 2,5 6,3
+Mohale's Hoek|492,1667 -7,0 -1,2 -7,-2 -8,4 -21,3 0,9 -9,1 -5,10 -11,1 7,8 -4,6 7,2 -1,4 -9,3 1,6 -10,3 -1,10 -2,2 -10,0 0,3 6,3 0,10 -2,2 5,11 11,1 3,10 13,0 1,8 3,-9 7,-5 -1,-6 6,-1 3,-3 -6,-12 8,-5 17,0 15,8 -1,4 6,-4 12,5 15,-6 0,-2 -11,0 -2,-2 6,-10 13,-7 2,-5 -2,-2 0,-13 -4,-11 7,-2 -3,-13 -3,-4 -10,0 -11,-5 -6,-8 -6,-2
+Mekaling|673,1575 -16,10 -12,0 -7,9 5,9 -6,7 5,5 1,8 -1,8 2,2 -4,8 -6,4 -8,15 -11,6 -8,-3 -16,3 -18,9 -5,9 -1,9 -7,5 -2,6 -20,15 -9,-1 -2,6 3,3 -2,5 -14,8 -5,9 13,2 -2,4 -13,4 -12,-5 -6,4 1,-4 -15,-8 -17,0 -8,5 6,12 -3,3 -6,1 1,6 -7,5 -3,9 -1,-8 -13,0 -3,-10 -11,-1 -5,-11 -15,-5 -2,3 3,6 4,0 -2,10 -9,11 6,11 -4,10 4,12 -5,12 5,8 -4,8 3,5 5,2 6,-7 3,9 7,1 0,2 -4,5 4,4 -10,7 4,5 10,-1 3,3 -1,5 -7,-3 -3,3 7,9 -1,3 -4,2 -3,-4 -8,5 4,5 2,7 11,4 19,-9 10,-7 19,-2 20,-11 12,3 10,8 -2,9 3,19 -3,6 17,11 -1,9 5,2 9,-3 -1,7 7,10 6,0 9,-5 13,1 6,10 19,12 1,7 4,-2 3,5 18,0 16,-10 3,-4 0,-2 -7,-5 -13,7 -6,0 0,-10 -6,-7 -2,-7 9,-14 6,-2 21,2 10,-9 9,5 8,-9 19,-10 -2,-14 2,-4 -12,-12 21,-13 -3,-2 3,-6 -16,1 -10,-4 4,-12 -3,-5 0,-3 -6,-7 -11,0 -28,-11 3,0 2,-5 8,-2 5,-9 -3,-9 4,-1 0,-5 -5,-2 -2,-6 6,-6 -5,-6 0,-6 7,-6 7,-1 9,-16 13,-8 -2,-7 28,-23 7,-16 18,-21 9,-5 0,-8 -8,-6 4,-21 -2,-8 2,-12 -5,-7 -15,-7 -1,-3 7,-7 8,-1 -1,-8 -22,2 -26,-6
+Phamong|900,1343 -14,3 -11,9 1,4 3,2 4,7 -4,3 1,5 -19,3 1,10 -7,4 -2,5 -26,8 -2,2 1,5 -4,7 -10,4 -4,12 -8,7 4,12 -4,8 11,9 -17,19 -7,2 -4,12 -5,1 -4,4 -14,2 -1,7 -15,7 -5,4 -7,-1 0,3 -7,8 -9,5 -1,11 7,13 -5,8 4,2 1,7 -8,2 -7,7 1,3 15,7 5,7 -2,12 2,8 -4,21 8,6 0,8 -9,5 -18,21 -7,16 -28,23 2,7 -13,8 -9,16 -7,1 -7,6 0,6 5,5 -6,7 2,6 5,2 0,5 -4,1 3,9 -5,8 -8,3 -5,7 28,9 11,0 6,7 0,3 3,5 -4,12 10,4 16,-1 -3,6 3,2 -21,13 12,12 -2,4 2,14 10,0 8,-3 14,5 15,14 15,5 25,2 3,-8 -2,-6 -11,-8 0,-6 15,-4 9,1 7,-8 -1,-4 -9,-9 7,-21 -3,-8 -5,-2 -7,1 -7,-5 7,-7 4,-9 15,-12 7,-2 5,4 -1,20 5,7 19,0 15,-8 6,4 9,2 2,-5 10,-8 1,-10 4,-3 6,2 9,13 8,2 4,-4 1,-5 -3,-12 2,-6 21,1 11,-9 1,-19 -2,-9 4,-7 11,-2 6,10 4,2 27,-23 1,-6 -9,-3 -13,3 -5,-2 -8,-9 2,-4 12,-5 2,-10 -6,-12 -12,-10 -2,-5 2,-7 12,-3 5,-8 16,-3 11,-6 -17,-16 -1,-11 1,-6 11,-10 18,1 6,-2 6,13 -6,16 13,7 10,1 13,-14 3,-12 -9,-15 25,-13 1,-5 8,4 2,-7 -5,-2 6,1 1,-9 8,-5 -6,-2 -2,-3 2,-1 6,2 7,-4 -7,-6 12,-14 2,-10 16,-6 3,-4 -3,-2 1,-4 3,0 1,3 6,-3 8,-12 5,-1 -4,-5 3,-3 -1,-3 3,-10 -3,-1 -1,-2 2,-10 6,-1 1,-8 -3,-3 -1,-6 -25,3 -13,-6 -8,0 -15,4 -7,0 -10,-3 5,-6 -2,-6 -12,0 -8,-8 -8,-3 -1,-10 3,-5 -1,-3 1,-2 -2,-10 18,-11 13,2 7,-10 0,-12 -4,-10 -33,-8 -12,3 -5,-8 1,-5 -3,-2 -13,-2 -6,5 -29,-1 -8,-3 -7,-6 -14,3 -2,6 -24,2 -11,-5 -4,-8 -4,-1
+Hloahloeng|1672,1312 -20,10 -6,-4 -8,1 -14,9 -11,11 -5,0 -7,-4 -8,2 -7,-2 -32,14 -7,7 -20,2 -13,19 -11,0 0,11 -16,-4 -8,15 -19,3 -3,6 -11,5 -5,-1 -21,4 -7,4 -13,0 -20,7 -23,-8 7,-4 2,-4 0,-5 -8,1 -14,-7 -8,-2 -12,17 -17,16 -5,1 -14,-5 -4,6 -7,3 -3,9 -12,-3 -4,5 -7,1 -4,-8 -8,-1 -4,5 -22,0 -9,5 -4,7 -12,4 -19,3 -7,7 -19,-1 1,6 3,3 -1,8 -6,1 -2,10 1,2 3,1 -3,10 1,3 -3,3 4,5 -5,1 -8,12 -6,3 -1,-3 -3,0 -1,4 3,2 -3,4 -16,6 -2,10 -12,14 7,6 -7,4 -6,-2 -2,1 2,3 6,2 -8,5 -1,9 -6,-1 5,2 -2,7 -8,-4 -1,5 -5,1 -4,4 22,21 6,3 4,-3 0,-7 6,-2 24,12 20,4 10,-14 6,-3 21,-3 15,-5 6,1 5,5 5,1 2,-3 -4,-10 5,-11 23,-13 15,0 10,-6 18,13 16,-6 7,-12 11,1 13,-5 16,2 6,-5 21,5 12,0 3,-2 1,-4 -12,-12 2,-8 6,-8 8,6 18,-2 5,3 13,0 21,4 8,9 -6,5 -9,-3 -3,0 0,3 11,3 4,9 5,3 4,0 6,-4 8,1 4,-1 4,8 12,13 -2,9 3,7 13,-3 9,5 -4,-16 4,-3 0,-5 4,-5 1,-10 6,-7 17,-4 3,-6 1,-7 14,-1 4,-12 16,-2 4,-7 9,2 5,-15 7,-12 18,-6 6,-9 9,-1 20,-7 4,-7 -1,-3 14,6 11,0 11,-12 5,-16 6,-8 -6,-11 -19,-13 3,-7 -3,-9 5,-5 7,-2 0,-13 -2,-2 -1,-6 5,-8 9,-8 -5,-6 1,-6 14,-9 -11,-8 -7,-2 -6,-7 -10,-1 -3,-6 -5,-3
+Moyeni|665,1929 -8,9 -9,-5 -10,9 -26,-1 -9,11 -1,8 8,10 0,10 6,0 13,-7 7,5 0,2 -3,4 -16,10 -15,1 -8,-6 2,9 11,11 0,3 -7,4 3,12 5,3 22,3 10,-4 2,1 1,2 -8,8 7,1 6,14 6,7 0,12 -3,3 -5,0 2,4 3,2 10,-3 0,9 3,5 15,9 8,2 0,3 8,-3 5,2 0,4 8,2 8,12 8,-1 12,7 3,4 -2,4 6,5 -4,3 2,4 5,1 4,5 15,4 3,10 11,12 7,5 6,10 6,3 11,1 32,13 46,-6 26,3 30,-4 33,19 13,1 13,17 5,-2 0,-5 -8,-7 0,-6 -12,-6 9,-12 -1,-8 -11,-19 6,-2 3,-12 3,-5 -4,-15 -11,-13 -13,-4 -5,-6 -20,-4 -1,-19 8,-18 1,-12 -9,-9 -19,-8 1,-11 -5,-4 -17,-10 -10,-3 -2,-7 -7,-3 0,-9 -9,-3 -8,-6 0,-4 3,-5 -1,-10 -6,-3 -13,-3 -12,1 -9,-4 -8,5 -28,-2 -11,-6 -11,0 -3,-5 -15,-9 -5,3 -5,-1 -1,4 -3,-2 -7,1 -3,5 -18,9 0,-3 -5,0 -6,-9 1,-3 -3,-2 1,-3 -5,-7 0,-10 -11,1 -6,-3 -5,1 -4,-3
+Sempe|800,1825 -7,2 -15,11 -4,11 -6,5 0,3 6,3 7,-1 5,2 3,8 -7,21 10,11 -4,8 -3,2 -9,-1 -15,4 0,6 11,8 2,6 -3,8 -25,-2 -15,-5 -15,-14 -14,-5 -8,3 -12,0 -17,10 6,5 5,-1 6,3 11,-1 0,10 5,7 -1,3 3,2 -1,3 6,9 5,0 0,3 18,-9 3,-5 7,-1 3,2 1,-4 5,1 5,-3 15,9 3,5 11,0 11,5 28,3 8,-5 9,4 12,-1 13,3 6,3 1,10 -3,5 0,4 8,6 9,3 0,9 7,3 2,7 10,3 17,10 5,4 -1,11 19,8 9,9 -1,12 -8,18 1,19 19,3 10,-9 3,-8 5,-5 -2,-6 -8,-2 3,-12 -8,-16 0,-6 -4,-10 0,-6 9,2 20,-1 3,-1 -1,-7 18,1 9,-4 7,-9 19,-4 0,-8 -4,-1 -3,-10 -4,-5 1,-5 -3,2 -5,1 -4,-6 5,-12 -10,0 0,-9 -3,0 -1,4 -3,0 -3,-3 0,-5 -6,-1 -6,-7 -7,5 0,4 -3,0 0,-7 -7,-1 -1,-7 -6,-2 3,-3 -3,-4 -8,0 -1,3 -5,-3 10,-8 -6,-11 -3,0 -4,5 -14,-4 0,-4 -7,0 0,-8 3,-3 -4,-2 -6,2 -15,-3 -1,-4 -7,3 -5,-7 -6,-2 2,-5 -6,-12 -4,-3 -9,-2 -1,-7 -4,-1 -3,-21 -8,6 -3,5 -9,-2 -5,-4 -15,8 -19,0 -5,-5 1,-21 -3,-4
+Mount Moorosi|1057,1616 -16,8 9,15 -4,13 -15,14 -11,-3 -9,-6 6,-16 -6,-13 -6,2 -17,-2 -10,9 -3,8 1,11 17,16 -11,6 -16,3 -5,8 -12,3 -2,7 2,5 12,10 6,12 -2,10 -14,7 4,8 7,4 15,-2 10,5 -29,27 -4,-2 -6,-10 -11,2 -4,7 2,9 -2,21 -10,7 -21,-1 -2,6 3,12 -1,5 -4,4 -8,-2 -9,-13 -4,-2 -6,2 0,8 -3,5 3,21 4,1 1,7 9,2 4,3 6,12 -2,5 6,2 5,7 7,-3 1,4 15,3 6,-2 4,2 -3,3 0,8 7,0 0,4 14,4 4,-5 4,1 5,10 -4,4 -5,2 0,3 4,2 1,-3 8,0 3,4 -3,3 6,3 1,6 7,1 0,8 3,-1 0,-4 6,-5 7,7 6,1 0,5 3,3 3,0 1,-4 3,0 0,9 10,0 -5,11 0,3 4,4 5,-1 3,-2 -1,5 4,5 2,10 5,1 0,8 -19,4 -7,9 -9,4 -18,-1 1,7 -3,1 -20,1 -9,-2 0,6 4,10 0,6 8,16 -3,12 8,2 2,5 -5,6 -3,8 -10,9 6,7 13,4 11,13 4,15 -3,5 -3,12 -6,2 11,19 1,8 -9,12 12,6 0,5 8,8 0,5 43,11 12,-5 14,10 21,-1 13,-3 14,4 14,-3 9,3 8,-1 8,-5 6,7 10,5 9,13 5,-2 5,-6 4,-2 2,-13 0,-10 -7,-11 2,-16 -6,-7 -2,-6 3,-12 8,1 3,-4 6,-4 11,-1 5,-6 8,-3 3,-8 6,-3 -1,-5 3,-7 -1,-2 3,-4 -5,-6 -1,-9 6,-4 5,-11 7,-1 3,-3 -6,-17 9,-9 -1,-11 -2,-3 -13,-7 -2,-7 -10,-5 1,-6 8,-4 2,-8 12,-9 3,-7 7,-4 13,-3 9,5 11,-7 13,0 5,-11 5,-3 2,-5 8,2 3,5 9,-2 -5,-14 7,-3 5,-16 3,-3 1,-8 4,-8 -4,-10 3,-4 -1,-4 -7,-6 -7,-1 -4,-5 -1,-9 5,-4 -4,-2 4,-4 -11,-1 -4,-6 -10,-3 -6,-6 -8,0 -6,-3 -3,-10 -6,-7 -2,0 -2,18 -11,9 -9,1 -13,-5 -19,-1 -7,2 -3,5 -5,3 -21,1 -11,-1 -4,-7 -23,3 -8,-6 -4,-6 2,-4 -7,-12 -10,-5 2,-5 6,-2 3,-4 10,4 13,-1 8,-2 7,-9 10,-5 1,-4 10,-3 3,-4 -3,-4 -16,-7 3,-3 7,2 -1,-4 2,-6 -20,-18 -17,0 -4,9 -8,8 -36,9 -18,-22 10,-20 -6,-5 -11,-4 -3,-9 -13,-3 1,-5 7,-2 0,-2 -8,-4 -3,-6 15,-8 12,-4 7,1 8,-3 5,1 7,-5 4,-5 -26,-8 -1,-15 -3,-3 2,-7 12,3 13,-1 8,-16 3,-11 -20,-4 -22,-12 -8,2 0,7 -6,2 -24,-22
+Qhoali|1345,1571 -6,5 -16,-2 -13,5 -12,-1 -6,12 -16,6 -18,-13 -10,6 -14,-1 -24,14 -5,11 4,10 -2,3 -5,-1 -5,-5 -6,-1 -40,9 -12,16 -3,11 -8,16 -13,1 -12,-3 -1,2 -1,6 3,2 1,15 26,8 -4,5 -7,5 -5,-1 -8,3 -7,-1 -12,4 -15,8 3,6 8,4 0,2 -7,2 -1,5 13,3 3,9 11,4 6,5 -10,20 18,22 36,-9 8,-8 4,-9 17,0 20,18 -2,6 1,4 -7,-2 -3,3 16,7 3,4 -3,4 -10,3 -1,4 -10,5 -7,9 -8,2 -13,1 -10,-4 -3,4 -5,1 -3,6 10,5 7,12 -2,4 4,6 4,4 19,1 8,-2 5,7 31,0 5,-3 3,-5 7,-2 19,1 13,5 9,-1 11,-9 2,-18 10,-4 11,-15 12,-8 1,-6 26,-4 4,-6 11,5 10,-1 4,3 11,-3 7,1 8,-6 3,-9 13,-4 5,-8 3,3 7,2 8,-3 0,-5 -3,-5 5,-6 -4,-2 0,-4 4,-4 2,-9 7,-8 -2,-4 10,-22 4,0 1,-2 -3,-10 -12,0 -5,4 -13,-7 -20,2 -12,-6 -14,3 -4,-5 -6,0 -12,-7 -15,0 -6,3 -13,-2 -15,-10 -7,-8 5,-11 -1,-6 -4,-5 3,-6 4,-3 -1,-18 11,-8 2,1 1,5 6,-8 7,12 0,-2 4,1 -4,-6 9,1 -4,-7 6,-3 -2,-5 4,0 3,7 3,1 -3,-4 6,-3 -4,-3 2,-5 4,1 2,9 8,-2 6,8 7,-9 5,6 1,4 -1,2 2,1 5,1 3,-5 10,5 5,-1 -2,-2 3,-1 -11,-13 3,-3 -7,-7 1,-9 -11,-11 -20,0 -9,-3 0,-3 -24,-5
+Qacha's Nek|1378,1542 -6,8 -2,8 12,14 -4,4 -8,1 -1,3 17,4 13,-1 11,11 -1,9 7,7 -3,3 11,13 -3,1 2,2 -5,1 -10,-5 -3,5 -5,-1 -2,-1 1,-2 -1,-4 -5,-6 -7,9 -6,-8 -8,2 -2,-9 -4,-1 -2,5 4,3 -6,3 3,4 -3,-1 -3,-7 -4,0 2,5 -6,3 4,7 -9,-1 4,6 -4,-1 0,2 -7,-12 -6,8 -1,-5 -2,-1 -11,8 1,18 -4,3 -3,6 4,5 1,6 -5,11 7,8 15,10 13,2 6,-3 15,0 12,7 6,0 4,5 14,-3 12,6 20,-2 13,7 5,-4 10,0 4,3 1,10 11,0 4,-1 2,-5 6,-1 6,-12 0,-5 4,-4 22,5 3,3 20,5 18,2 4,-3 11,1 12,-8 18,3 5,-6 30,-14 2,-6 3,-2 15,-4 5,3 16,0 5,4 18,-1 7,5 8,0 14,5 8,-4 10,-1 10,3 6,0 5,4 4,-1 9,4 6,-5 19,-7 2,-5 9,4 6,-3 1,-4 7,2 1,-5 6,-1 -4,-3 -5,-12 -4,2 -8,0 -4,-7 -6,-1 -19,1 -10,4 0,5 -6,-2 -2,-2 0,-8 -8,0 -6,-10 -9,-3 -8,-7 0,-6 -7,-3 1,-4 -3,-2 0,-2 -3,0 -1,-5 -5,-1 -1,-4 -6,2 -6,9 -4,1 -14,-10 -6,0 -7,-3 -15,2 -7,10 -13,0 -4,-8 -5,5 -22,1 -5,-3 1,-17 -16,-2 -17,16 -6,15 -4,0 -5,-5 -5,-1 1,7 -4,3 -6,0 -13,-8 -10,-1 -11,1 -5,-2 -5,0 -6,-5 -12,3 -4,-7 2,-9 -12,-13 -4,-8 -4,1 -8,-1 -6,4 -4,0 -5,-3 -4,-9 -11,-3 1,-3 11,3 5,-3 0,-3 -6,-7 -22,-5 -13,0 -5,-3 -18,2 -6,-6
+Lebakeng|2095,1284 -21,7 -12,0 -5,5 -13,6 -19,5 -29,20 -4,7 -4,4 -3,-1 -13,4 -11,-1 -28,-9 -2,9 -11,-2 -7,13 9,10 3,12 6,1 10,-3 -1,8 -19,3 -21,0 -1,6 -7,9 -16,0 -11,10 -12,5 -4,8 -3,1 -2,-12 -5,-2 -2,4 -3,0 1,-3 -3,-7 5,-11 5,-5 -3,-9 3,-4 -1,-11 -7,-7 -1,-4 -8,-3 -7,-10 -4,2 -4,-6 -6,0 -4,-4 -4,0 -4,-5 -13,-1 -13,-10 -17,-3 -33,-17 -5,4 -6,1 -7,8 -10,5 -12,2 6,8 10,1 6,7 7,2 11,8 -14,9 -1,6 5,6 -9,8 -5,8 1,6 2,2 0,13 -7,2 -5,5 3,9 -3,7 19,13 6,12 -6,7 -5,16 -9,11 -12,2 -15,-7 1,3 -4,7 -20,7 -9,1 -6,9 -14,4 -6,5 -10,24 -9,-2 -4,7 -16,2 -4,12 -14,1 -1,7 -3,6 -17,4 -6,6 -1,11 -4,5 0,5 -4,3 4,16 7,2 11,-1 10,1 15,8 8,-3 -1,-7 5,1 5,5 4,0 6,-15 17,-16 16,2 -1,17 3,3 24,-1 5,-5 4,8 13,0 7,-10 15,-2 7,3 6,0 11,9 6,1 8,-11 10,-3 33,-18 -3,-7 -11,6 -2,-1 -1,-5 4,-5 9,-1 3,-9 6,-8 12,-6 12,11 10,4 0,-5 -6,-8 0,-5 4,-8 11,-3 10,4 6,-4 2,1 2,10 -13,-1 -2,2 11,8 12,-1 1,4 -4,4 4,2 -1,9 3,-4 4,3 1,2 3,0 11,-8 10,11 6,-3 8,-1 5,4 5,-2 8,3 6,-3 2,3 -1,8 5,3 3,0 4,-16 5,-3 6,5 -6,8 8,4 4,-2 0,-5 7,6 2,10 5,2 7,-1 2,-11 3,4 6,-6 2,8 13,6 1,-6 5,-3 -7,-2 -6,3 3,-11 3,0 2,-4 2,-1 2,4 5,2 2,7 6,-2 -2,-6 -4,0 0,-3 28,1 -1,-5 -5,0 1,-8 4,-1 1,7 3,0 10,-15 1,5 -4,15 9,5 7,-1 1,-2 -6,-3 -1,-6 5,-12 3,10 9,4 2,-3 -1,-6 3,-6 -3,-1 -2,2 -8,-7 -4,3 -6,-8 -11,-6 1,-5 -4,-3 3,-2 -3,-2 5,-8 0,-12 -5,-6 0,-4 -8,-16 -2,-18 38,-7 6,-7 18,-1 3,-2 -3,-6 1,-2 -4,-4 0,-3 10,-5 13,-1 8,-6 5,1 0,-5 5,-8 -7,-4 0,-6 -7,-11 8,-8 -7,-4 -8,-9 3,-5 -5,-6 -1,-11 15,-20 9,-2 11,-10 -2,-4 5,-9 -16,-2 -5,-5 -22,-6
+Tsoelike|2185,1233 -3,5 -12,4 -1,12 -6,6 -8,3 -3,11 -7,3 -9,7 -2,3 5,10 -5,9 2,4 -11,10 -9,2 -15,20 1,11 5,6 -3,5 8,9 7,4 -8,8 7,11 0,6 7,2 -5,15 -5,-1 -8,6 -13,1 -10,5 0,3 4,4 -1,2 3,6 -3,2 -18,1 -6,7 -38,7 2,18 9,16 -1,4 5,6 0,12 -5,8 3,2 -3,2 4,3 -1,5 11,6 6,8 4,-3 8,7 2,-2 3,1 -3,6 1,6 -2,3 -9,-4 -3,-10 -5,12 1,6 6,3 -1,2 -7,1 -9,-5 4,-15 -1,-5 -10,15 -3,0 -1,-7 -4,1 -1,8 5,0 1,5 -28,-1 0,3 4,0 2,6 -6,2 -2,-7 -5,-2 -2,-4 -2,1 -2,4 -3,0 -3,11 6,-3 7,2 -5,3 -1,6 -13,-6 -2,-8 -6,6 -3,-4 -2,11 -7,1 -5,-2 -2,-10 -7,-6 0,5 -4,2 -8,-4 6,-8 -6,-5 -5,3 -4,16 -3,0 -5,-3 1,-8 -2,-3 -6,3 -8,-3 -5,2 -5,-4 -8,1 -6,3 -10,-11 -11,8 -3,0 -1,-2 -4,-3 -3,4 1,-9 -4,-2 4,-4 -1,-4 -12,1 -11,-8 2,-2 13,1 -2,-10 -2,-1 -6,4 -10,-4 -11,3 -4,8 0,5 6,8 0,5 -10,-4 -12,-11 -12,6 -6,8 -3,9 -9,1 -4,5 1,5 2,1 11,-6 3,7 -38,20 1,4 5,1 1,5 3,0 0,2 3,2 -1,4 7,3 0,6 8,7 9,3 6,10 8,0 0,8 2,2 6,2 0,-5 10,-4 19,-1 6,1 4,7 8,0 4,-2 5,12 4,3 2,-3 5,2 2,-4 9,-1 5,4 2,-6 6,-2 -1,-2 8,-2 39,5 6,-6 -2,-4 9,0 7,-4 26,-1 9,-6 16,-1 4,-4 -2,-9 12,-1 10,-8 16,-2 4,-4 6,2 9,-7 9,-1 2,-5 16,-4 6,-15 12,0 6,3 9,-7 4,2 10,-5 8,2 4,-4 2,-9 7,-10 22,-14 7,2 5,-2 5,-6 0,-6 5,-3 4,2 2,-3 7,0 9,-5 9,-6 5,-8 10,2 2,-6 6,-1 17,7 -2,-11 8,-22 5,0 14,-8 10,0 14,-5 6,1 2,-4 13,-6 -4,-9 -8,-2 7,-6 -4,-6 2,-3 0,-9 -16,0 -3,-6 -4,-1 4,-10 -9,-9 -27,-6 -11,-6 0,-4 9,-1 2,-3 4,-1 2,-7 12,-2 3,-7 -3,-7 4,-6 -7,-2 -2,-7 2,-13 4,-4 2,-19 -8,-5 6,-3 6,1 -1,-4 6,-2 1,-10 -6,-9 1,-3 -7,-3 -7,2 -4,0 -10,-8 -5,-2 -8,-7 -1,-6 -3,-1 -22,0 -16,-4 -10,2 -9,-5 -11,0
+Mantšonyane|1373,594 -5,6 -11,3 3,15 -25,10 -7,12 -7,5 0,6 10,13 2,9 8,4 3,-1 3,6 5,0 -1,6 6,-1 -6,4 7,1 -3,4 7,0 0,9 9,0 -1,4 -3,0 3,4 -4,1 0,2 7,4 3,-2 1,8 5,9 -3,0 -1,1 7,3 -5,7 2,2 6,-1 0,2 -5,3 1,3 -5,-4 -9,6 2,4 -6,4 4,5 -7,1 -1,4 -2,-2 -3,3 -5,-1 -4,4 -3,-3 1,5 -7,1 4,3 -3,3 -9,-4 -3,1 -4,8 3,8 -14,-3 3,11 -9,2 -3,5 5,4 -14,0 -3,12 4,0 1,2 -10,2 6,8 -6,5 -7,1 -3,5 -3,-4 -4,0 -1,3 3,3 10,0 -3,8 -13,-5 1,7 5,4 -1,3 -10,-2 2,-4 -6,-1 -9,12 2,7 -3,1 -9,-4 0,5 5,6 -9,3 -9,-2 -1,2 4,5 -3,3 -6,-1 -6,4 -1,-1 1,-9 -10,7 -10,-5 0,8 -8,1 8,11 -8,0 3,8 -6,5 -6,1 -1,10 -4,4 3,6 0,7 6,1 8,-1 4,4 -4,5 -13,2 -1,4 2,3 20,-3 5,4 -5,8 -20,-2 0,5 19,4 0,3 -5,4 4,4 14,-1 -2,-6 6,1 5,10 -9,12 0,4 7,0 12,-5 10,2 -2,4 -9,2 -1,4 2,7 11,5 3,6 -2,5 -8,8 -1,3 12,6 10,12 -2,4 -9,5 1,7 5,5 -4,1 -7,-4 7,12 6,-2 2,2 -2,4 -9,5 -2,4 4,10 9,-1 6,4 -8,6 2,14 -5,11 3,0 9,-4 15,15 -4,6 -8,-8 -7,8 -8,-1 -2,2 3,2 9,-1 8,3 11,-4 2,2 -3,4 -15,8 7,14 -1,9 4,1 5,-4 3,2 -10,10 3,9 -8,5 9,6 -1,9 11,-3 14,4 2,9 -15,3 -2,2 0,3 10,2 3,13 7,-4 4,5 -1,13 -5,3 -2,5 11,4 10,13 -4,7 6,15 -7,1 -1,2 3,2 11,-3 0,-3 3,0 4,-8 0,-6 9,5 9,-1 0,-1 -9,0 1,-10 8,3 3,-2 0,-3 -6,-2 2,-6 4,-2 -5,-7 11,-1 -5,-5 -6,4 -3,-2 4,-6 4,-2 -8,-4 5,-4 -2,-5 1,-4 -4,-1 -4,-5 9,-1 0,-4 -7,-1 6,-3 -1,-5 4,-8 -2,-1 -8,4 2,-2 -2,-6 6,0 -1,-6 -4,-2 9,-1 -5,-2 0,-2 5,0 4,-6 -8,-4 5,-5 0,-3 -3,3 -8,-3 1,-4 3,4 6,-13 -7,0 1,-7 -5,2 -4,-7 1,-2 7,3 -3,-7 5,-1 1,-7 -2,-1 0,5 -3,2 1,-5 -3,-5 -7,0 0,-6 8,-3 -3,0 -1,-6 -6,-3 6,-4 -6,-5 -1,-4 3,-1 -4,-4 0,-3 7,-3 -2,-3 4,1 2,-8 8,-2 -3,-4 1,-5 -5,-2 3,-1 -1,-6 3,-3 6,3 1,-7 -5,-3 5,-1 4,4 7,-2 -3,-6 -7,-4 3,-8 4,-1 4,4 -1,-8 8,4 3,-3 3,0 1,-2 -3,-3 3,-2 0,4 6,-2 2,7 1,-5 5,0 1,-5 3,4 3,-4 4,4 3,-3 5,3 4,-3 3,5 2,-2 -2,-4 5,-4 5,2 4,-5 3,3 8,-6 1,3 4,1 0,-5 5,2 2,-4 3,3 10,-4 7,3 7,-2 3,1 -3,3 11,5 3,-4 -3,-2 2,-1 2,2 0,3 4,1 1,-3 0,5 3,1 0,-4 4,1 2,-3 -2,6 3,2 2,-8 1,5 3,2 7,-4 21,7 7,1 1,-3 4,0 3,1 1,-2 3,1 1,-3 13,-4 6,-9 3,-23 -3,-7 3,-18 -2,-27 4,7 5,2 8,-7 -3,-33 4,-8 -2,-5 2,-1 -3,-13 -9,-21 -8,-3 -9,-20 7,-16 10,-8 2,-4 1,-6 -2,-5 0,-4 2,-2 -1,-6 8,-5 -8,0 -4,-6 -10,8 -5,-7 -7,3 -15,-2 -9,-6 -10,2 -1,-5 -3,-2 -9,7 -2,-1 3,-4 -2,-3 -2,4 -4,-3 -4,2 -5,-4 -10,0 10,-8 1,-3 -5,0 -4,-7 -7,1 -2,-1 0,-4 -10,-3 1,-7 8,-1 2,-3 -7,-1 -1,-2 4,-4 -5,0 0,-5 -6,-3 3,-5 -3,-8 -5,0 0,-3 -9,-3 7,-6 -6,0 -2,-2 4,-5 -8,-1 2,-3 -1,-5 3,-5 -5,-5 5,1 1,-2 -9,-9 5,-1 0,-7 -3,-1 -5,3 1,-7 -8,1 3,-3 -3,-1 -2,-7 -6,-2 4,-4 -4,-3 2,-5 -6,1 2,-6 -7,-2 3,-3 -3,-6 4,-5 -1,-5 3,-2 0,-4 5,1 2,-5 -4,-4 2,-3 -9,-3 -2,2 -2,-2 -4,0 -6,-7 -4,2 -1,-3 -3,2 -9,-6 -23,-4
+Thaba-Moea|1599,989 -5,0 -6,-9 -1,2 3,25 -3,18 3,7 -3,23 -6,9 -13,4 -1,3 -3,-1 -1,2 -3,-1 -4,0 -1,3 -7,-1 -21,-7 -7,4 -3,-2 -1,-5 -2,8 -3,-2 2,-6 -2,3 -4,-1 0,4 -3,-1 0,-5 -1,3 -4,-1 0,-3 -2,-2 -2,1 3,2 -3,4 -11,-5 3,-3 -3,-1 -7,2 -7,-3 -10,4 -3,-2 -2,3 -5,-2 0,5 -4,-1 -1,-3 -8,6 -3,-3 -4,5 -5,-2 -5,4 2,4 -2,2 -3,-5 -4,3 -5,-3 -3,3 -4,-4 -3,4 -3,-4 -1,5 -5,0 -1,5 -2,-7 -6,2 0,-4 -3,2 3,3 -1,2 -3,0 -3,3 -8,-4 1,8 -4,-4 -4,1 -3,8 7,4 3,6 -7,2 -4,-4 -5,1 5,3 -1,7 -6,-3 -3,3 1,6 -3,1 5,2 -1,5 3,4 -8,2 -2,8 -4,-1 2,3 -7,3 0,3 4,4 -3,1 1,4 6,5 -6,4 6,3 1,6 3,0 -8,3 0,6 7,0 3,5 -1,5 3,-2 0,-5 2,1 -1,7 -5,1 3,7 -7,-3 -1,2 4,7 5,-2 -1,7 7,0 -6,13 -3,-4 -1,4 8,3 3,-3 0,3 -5,5 8,4 -4,6 -5,0 0,2 5,2 -9,1 4,2 1,6 -6,0 2,6 -2,2 8,-4 2,1 -5,8 2,5 -6,3 7,1 0,4 -9,1 4,5 4,1 -1,4 2,5 -5,4 8,4 -4,2 -4,6 3,2 6,-4 5,5 -11,1 5,7 -4,2 -2,6 6,2 0,3 -3,2 -8,-3 -1,10 9,0 0,2 -9,0 -9,-5 0,6 -4,8 -4,1 -2,10 -4,4 -5,9 3,3 -2,7 9,2 -3,-11 2,-4 4,1 4,14 11,-2 -2,4 -4,0 0,2 9,2 14,7 8,-1 0,5 -2,4 -7,4 23,8 20,-7 13,0 7,-4 21,-4 5,1 11,-5 3,-6 19,-3 8,-15 16,4 0,-11 11,0 13,-19 20,-2 7,-7 32,-13 7,1 8,-2 7,4 5,0 11,-11 14,-9 8,-1 6,4 20,-10 7,-10 19,-14 10,-15 19,-9 17,-26 0,-4 -8,-7 -8,-14 -1,-8 4,-7 1,-9 6,-7 -4,-8 -2,-9 -5,-3 1,-8 -5,-1 -5,-6 -3,-11 -7,-3 -3,-4 -18,-5 -7,-10 -8,-3 -3,-4 -21,-3 -3,-4 -8,-5 -3,1 -3,-3 -19,-6 -2,-4 1,-3 4,-1 7,-5 4,-7 -3,-10 4,-6 3,-2 9,1 11,-9 2,-10 4,-5 12,-1 -5,-8 3,-19 -8,0 -3,1 -1,4 -5,1 -6,-4 0,2 -6,-1 -5,-6 -21,-1 -11,-3
+Thaba-Tseka|1599,989 12,5 21,1 5,6 6,1 0,-2 6,4 5,-1 1,-4 3,-1 8,0 -3,19 5,8 -12,1 -4,5 0,7 -4,5 -6,3 -3,4 -9,-1 -4,2 -3,6 3,10 -4,7 -7,5 -4,1 -1,3 2,4 19,6 3,3 3,-1 8,5 3,4 21,3 3,4 8,3 7,10 20,6 1,3 7,3 2,8 6,9 5,1 0,9 4,2 2,9 4,6 -6,9 -1,8 -4,8 1,8 8,14 8,7 0,5 -17,25 -19,9 -10,15 -19,14 -7,10 14,0 12,-6 7,-8 6,-1 5,-4 33,17 17,3 13,10 13,1 4,5 4,0 4,4 6,0 4,6 4,-2 7,10 8,3 1,4 7,7 1,11 -3,4 3,9 -5,5 -5,11 3,7 -1,3 3,0 2,-4 5,2 2,12 3,-1 4,-8 12,-5 11,-10 16,0 7,-9 1,-6 21,0 20,-3 0,-8 -10,3 -6,-1 -3,-12 -9,-11 7,-12 11,2 3,-12 -35,-6 -5,-4 0,-7 15,-15 2,-7 -2,-7 4,-5 -5,-3 -6,4 -11,-2 -3,-9 -8,-5 -7,-10 -7,-1 -4,-6 1,-3 10,-8 -5,-13 1,-6 7,-5 0,-15 4,-4 8,3 6,11 4,2 13,0 12,7 7,-3 -1,-3 -6,-3 -7,-12 -13,-7 -13,0 -5,-5 -5,-8 2,-9 14,-8 5,2 4,4 11,-4 13,5 4,-1 3,-5 -3,-3 -12,0 -17,-6 -19,-2 -4,1 -4,-10 6,-11 1,-17 -9,-6 -4,-5 -5,2 -4,24 -10,3 -7,-3 -5,-9 2,-8 8,-9 -9,-6 -5,1 -5,-3 -1,-5 11,-4 2,-3 -8,-13 -11,0 -7,-7 -10,-4 -3,3 3,8 -3,3 -7,-17 -1,-11 -8,-10 -12,7 -19,-8 1,-3 16,-7 8,-9 -8,-6 -2,-9 -10,-16 -1,3 -3,-2 -2,2 -2,-6 -8,0 -12,-8 -15,-5 -26,-4 -29,2 -6,-2 -10,1 -6,10 -12,1 -26,17
+Semena|1827,680 -25,16 -9,15 -22,13 -5,5 -10,1 -5,3 0,3 -3,-2 0,5 -11,1 -5,3 2,3 -4,4 -20,2 -7,5 -3,-2 -6,3 -3,-2 -11,6 0,2 4,0 -7,6 3,4 6,-4 0,9 -6,3 4,9 -2,3 2,0 8,-9 0,6 4,7 -3,3 12,-2 3,10 4,-1 1,2 -11,5 7,3 5,-1 0,10 5,-4 2,0 0,5 -5,2 0,4 5,0 1,4 5,1 4,5 2,-1 -1,-5 12,-3 0,4 -6,3 -6,9 3,2 -6,0 -1,5 6,3 1,4 -16,-12 -9,2 -2,10 -2,1 -15,0 -11,-7 -15,0 -8,-5 -3,-6 -18,0 -6,-3 2,-7 -4,-4 -9,-1 -4,-13 -3,-1 -16,8 1,6 -2,2 0,4 2,5 -1,6 -2,4 -10,8 -7,14 9,22 8,3 4,7 8,25 -2,3 2,5 -4,8 3,33 -6,7 6,-1 10,-9 15,-8 12,-1 7,-10 10,-1 14,2 24,-1 31,5 1,3 5,0 12,8 8,0 2,6 2,-2 2,2 4,-2 10,24 8,7 -8,8 -16,7 -1,3 19,8 12,-7 8,10 0,7 5,16 4,5 2,-3 -3,-8 2,-3 9,3 8,7 6,2 6,-1 2,-5 15,-9 4,2 3,10 12,4 4,-2 1,-4 -11,-17 -1,-11 8,-2 12,6 5,-4 3,-8 -6,-5 -9,4 -4,0 -3,-16 15,-5 -3,-5 2,-2 20,5 2,-7 -8,-4 -2,-3 17,-8 7,-12 3,0 6,6 3,-2 -2,-14 -3,-3 -9,-1 -4,-5 2,-10 6,-2 11,3 13,-11 -2,-3 -5,0 -7,-21 16,-6 0,-6 -5,-6 1,-2 6,0 10,5 8,-8 1,-7 -4,-5 -5,-1 -16,6 -1,-5 8,-6 -1,-4 -17,-16 -8,0 -5,3 -22,-2 -5,4 -9,-2 -7,9 -9,4 -17,-8 -6,-6 -3,-7 -16,-13 -19,-1 -8,-4 -1,-3 3,-4 0,-4 9,-2 12,-12 -3,-2 3,-2 -2,-1 2,-1 -1,-3 4,-3 -2,-1 2,-2 -2,-1 3,-3 -4,-1 3,-1 -1,-5 3,1 2,-18 4,0 -2,-3 4,-3 2,-10 8,-6 5,-14 3,-13 -2,-9 -4,-2 -6,8 -5,1 -3,-2 -1,-16 -5,-3
+Mashai|1904,986 -7,2 9,6 -2,7 -20,-5 -2,2 3,5 -15,5 3,16 4,0 9,-4 6,5 -3,8 -5,4 -12,-6 -8,2 1,11 11,17 -1,4 -4,2 -12,-4 -3,-10 -4,-2 -16,10 -1,6 8,8 0,3 -2,3 -7,1 -5,5 5,6 7,-1 9,6 -8,9 -2,8 5,9 7,3 10,-3 4,-24 5,-2 4,5 9,6 -1,17 -6,11 4,10 4,-1 19,2 17,6 12,0 3,3 -3,5 -4,1 -13,-5 -11,4 -4,-4 -5,-2 -14,8 -2,9 5,8 5,5 13,0 13,7 7,12 6,3 1,3 -7,3 -12,-7 -13,0 -4,-2 -6,-11 -8,-3 -4,4 0,15 -7,5 -1,6 5,13 -10,8 -1,3 4,6 7,1 7,10 8,5 3,9 11,2 6,-4 5,3 -4,5 2,7 -2,7 -15,15 1,8 24,8 13,0 2,2 -2,3 34,9 6,0 13,-4 3,1 4,-4 4,-7 19,-14 42,-17 6,-5 11,0 22,-7 22,6 5,5 16,2 -5,-10 2,-3 9,-7 7,-3 3,-11 8,-3 6,-6 1,-12 12,-4 3,-5 12,0 9,5 10,-2 16,4 22,0 3,1 1,6 8,7 5,1 10,9 4,0 7,-2 18,4 5,-8 -6,-19 6,-8 11,-2 -2,-5 4,-14 -3,-6 2,-7 9,2 6,-2 4,-2 3,-8 9,4 11,-13 7,0 7,-3 5,-10 9,-2 4,1 0,-3 4,-4 7,3 26,-4 5,5 10,1 3,-1 6,-17 -4,-7 11,-6 -2,-4 1,-12 -7,-12 -1,-5 36,-3 7,-14 -4,-6 -17,-11 -12,15 -16,1 -7,-1 -1,-4 -11,-3 -6,-6 -5,0 -2,-3 -7,5 -6,-6 -4,6 -6,-4 -4,1 -1,7 -11,-6 -4,4 1,3 -3,1 5,2 1,6 -4,1 -7,-8 -7,2 -5,-7 -4,4 -2,-2 2,-3 -6,-5 -3,10 -7,-1 0,4 6,8 -9,-2 -3,-2 0,6 3,0 -1,2 -8,0 -3,6 -8,-7 -3,2 -11,-7 -9,-1 -3,-12 1,-15 -7,-3 -2,-8 -6,-8 -8,-1 -14,-7 -6,4 -3,0 -14,-14 -12,-3 -8,1 -16,-11 -12,-2 -5,2 -6,-4 -5,6 -10,0 -6,11 -14,-8 -6,4 -8,-3 -33,8 -17,0 -6,-4 -5,-1 -14,7 -13,-3 -5,-6 -12,-3 -2,-11 -6,-4 -14,-4 -10,6 -11,0 -6,7 -9,4 -21,2 -5,4 -7,0 -4,-4 -1,-10 -17,-13
+Malingoaneng|1999,202 -11,4 -7,-2 -7,3 -12,6 -1,6 -3,2 -8,0 0,8 -16,29 -1,12 4,1 1,3 -4,18 12,27 4,23 5,4 -1,4 -16,15 -20,8 -8,13 -8,-1 -11,6 -4,14 2,2 -2,2 0,9 3,1 -3,4 2,4 -4,8 7,6 -2,5 2,5 -1,8 4,5 -2,2 -3,-1 -2,3 3,2 -1,4 6,1 -1,9 -4,1 6,2 -2,6 3,4 -6,4 0,4 3,2 -5,2 5,5 0,6 5,1 -2,5 4,1 -6,2 2,2 -7,7 -2,-1 0,-6 -5,5 -7,2 0,1 4,2 -6,0 1,8 -5,0 -5,6 1,5 -5,7 2,4 -5,1 4,3 -7,0 0,4 5,2 -3,3 -7,2 3,6 -11,1 4,-3 -2,-2 -8,7 -3,-3 2,4 -1,1 -7,-5 -3,5 -5,1 1,6 -4,-1 4,8 -7,2 -2,6 -4,-5 -3,1 0,3 6,6 -11,-5 2,8 -12,1 -2,3 -11,1 1,4 -7,3 2,3 -7,0 0,10 -6,-1 -3,2 0,2 3,4 -1,2 -7,1 -5,-4 -2,4 -9,-2 -2,7 2,2 -2,1 -2,-3 1,-7 -7,-1 -9,5 0,4 -8,0 2,10 -2,3 -10,-4 0,8 -4,6 8,-2 2,2 -14,2 2,10 -8,0 -3,4 -4,0 5,7 -9,2 5,4 0,7 3,2 -3,2 -7,-1 5,5 -4,10 7,7 -1,4 -7,2 2,2 6,2 11,-6 3,2 6,-3 3,2 7,-5 20,-2 4,-4 -2,-3 5,-3 11,-1 0,-5 4,2 -1,-3 15,-4 5,-5 21,-12 5,-5 5,-11 22,-15 4,0 4,2 1,16 3,2 5,-1 6,-8 4,2 2,9 -3,13 -5,14 -8,5 -2,11 -4,3 2,3 -4,0 -2,18 -3,-1 1,5 -3,1 4,1 -3,3 2,1 -2,2 2,1 -4,3 1,3 -2,1 2,1 -3,2 3,2 -13,12 -8,2 0,4 -3,4 1,3 8,4 19,1 16,13 3,7 6,6 17,8 9,-4 7,-9 9,2 5,-4 22,2 11,-4 8,7 1,-5 22,-6 7,-5 0,-4 -9,-1 -3,-4 3,-4 12,0 -4,-17 3,-3 8,0 5,12 7,6 8,-1 0,-5 -10,-5 0,-6 13,-1 8,-5 0,-4 -5,-1 -9,5 -2,-3 2,-6 13,-11 12,3 -3,-10 7,1 -3,-3 6,-1 4,-5 -4,-14 -5,0 -3,7 -2,1 -3,-7 9,-8 15,-4 0,-3 -6,-4 -10,6 -7,-10 -4,5 -4,0 1,-8 7,-7 5,1 0,8 6,0 8,3 0,-9 2,-1 10,5 -1,-4 3,-4 -12,0 0,-7 -8,5 -4,-1 2,-6 -5,-5 8,0 3,-6 -3,-10 2,-2 2,5 14,10 2,-3 -7,-5 11,-3 0,-6 3,-3 3,1 -1,5 2,4 4,-11 3,1 5,-5 5,0 2,-6 6,3 7,-3 -5,-8 4,0 4,-2 3,-4 -2,-5 6,-1 3,-4 -4,-7 9,-7 -7,-7 6,-3 -2,-5 4,1 -4,-8 7,-6 -3,-4 5,-2 -6,-4 5,-4 -2,-5 9,0 0,-2 -6,-1 6,-7 -4,-7 7,1 3,-6 8,-2 -8,-7 -2,-4 10,-11 -1,-2 -3,2 -2,-5 -9,-1 6,-7 -5,-3 3,-8 -6,-1 -8,-8 -7,4 -3,-1 -5,-5 0,-3 5,0 8,-9 -3,-1 0,5 -3,1 -7,-8 -10,1 -1,-4 5,1 3,-3 -1,-11 -3,-2 -5,4 -3,-1 1,-6 -7,-1 2,-8 3,-3 -13,-2 0,-3 5,-2 -2,-4 -13,-6 3,-3 8,4 9,-5 -6,-1 -10,-5 1,-4 -6,-2 -1,-3 4,-4 9,-3 -16,-9 0,-4 5,-1 1,-7 -5,1 -4,7 1,-5 -5,-1 -1,-8 4,-1 1,-5 8,-3 -5,-2 -1,-4 7,-5 -2,-4 -9,3 -3,-4 11,-4 0,-5 -5,-2 -10,2 -1,-2 3,-3 -7,-1 0,-3 3,-2 -5,-5 -2,0 -1,3 -7,-3 -1,-2 4,-4 -6,-1 6,-5 -11,0 -2,-2 11,-5 2,-7 -6,5 -2,-5 -10,0 -1,-4 6,-1 -3,-3 1,-4 -3,-1 -5,3 3,-6 -3,-1 -5,4 -1,-2 3,-4 -9,0 3,-4 -9,-2 1,-6 4,1 1,-3 -8,-13 -7,-4 2,-3 0,-15 7,-19 20,-10 1,-2 -6,-3
+Senqu|2048,205 -11,8 -6,9 -13,-2 -8,-12 -3,-2 -4,5 -17,7 -6,12 0,22 -3,3 7,4 8,12 -1,4 -4,-1 -1,6 9,2 -3,4 9,0 -3,4 1,2 5,-4 3,1 -3,6 6,-3 3,2 -2,3 3,3 -6,1 1,4 10,0 2,5 6,-5 -2,7 -11,5 2,2 11,0 -6,5 6,1 -4,4 1,2 7,3 1,-3 2,0 5,5 -3,2 0,3 7,1 -3,3 1,2 10,-2 5,2 0,5 -11,4 3,4 9,-3 2,4 -7,5 1,4 5,2 -8,3 -1,5 -4,1 1,8 5,1 -1,5 4,-7 5,-1 -1,7 -5,1 0,4 16,9 -9,3 -4,4 1,3 6,2 -1,4 10,5 6,1 -9,5 -8,-4 -3,3 13,6 2,4 -5,3 0,2 13,2 -3,3 -2,8 7,1 -1,6 3,1 5,-4 3,2 1,11 -3,3 -5,-1 2,4 9,-1 7,8 3,-1 0,-5 3,1 -8,9 -5,0 0,3 5,5 3,1 7,-4 8,8 6,1 -3,8 5,3 -6,7 9,1 2,5 3,-2 1,2 -10,11 2,4 8,7 -8,2 -3,6 -7,-1 4,7 -6,7 6,1 0,2 -9,0 2,5 -5,4 6,4 -5,2 3,4 -7,6 4,8 -4,-1 2,5 -6,3 7,7 -9,7 4,7 -3,4 -6,1 2,5 -3,4 -4,2 -4,0 5,8 -7,3 -6,-3 -2,6 -5,0 -5,5 -3,-1 -4,11 -2,-4 1,-5 -3,-1 -3,3 0,6 -11,3 7,5 -2,3 -14,-10 -3,-5 -2,4 4,6 -3,8 -8,0 5,5 -2,6 4,1 8,-5 0,7 12,0 -3,4 1,4 -10,-5 -2,1 0,9 -8,-3 -6,0 0,-8 -3,-1 -9,7 0,9 7,-6 7,10 10,-6 7,6 -16,5 -9,8 3,7 2,-1 3,-7 5,0 4,14 -4,5 -6,1 3,3 -7,-1 3,10 5,-1 6,1 13,13 3,-2 6,-10 13,-5 5,1 4,5 -13,1 -3,2 3,5 8,3 4,5 -4,7 -8,5 18,3 8,5 7,-4 4,3 5,-1 3,-7 -10,-6 -1,-3 2,-1 12,7 7,-13 5,2 3,4 9,-3 7,6 9,-1 3,-4 -5,-5 -8,-4 0,-3 12,4 11,-5 13,8 4,0 1,-18 -17,-5 12,-3 -2,-7 4,-6 3,2 1,9 6,5 4,-1 -4,-4 6,-4 2,2 -4,2 7,3 3,-5 6,-3 2,2 -4,3 -1,5 3,3 2,-5 4,0 0,10 8,-6 0,-8 11,3 2,4 4,-7 -2,-7 4,-8 7,-3 9,-11 8,-3 28,-31 7,-4 11,0 4,-2 9,0 1,-3 30,-6 7,-4 4,1 7,-3 13,-1 8,-7 19,-1 -4,-6 4,2 10,-5 7,4 12,-3 5,4 22,1 17,9 14,-5 17,-3 6,-3 -1,-8 4,-1 0,-10 2,-2 -5,-10 3,-4 7,-3 -3,-4 1,-4 6,-4 0,-2 -3,-4 1,-4 -8,-8 2,-1 -13,-10 -4,-7 -9,-3 0,-5 -19,-21 -31,-1 -11,6 -9,9 -6,0 -4,-8 -11,-7 -15,-13 3,-3 0,-4 -21,-21 7,-5 -1,-7 -17,-13 -13,2 -6,-6 -5,-8 -20,1 -6,-7 -2,-8 -4,0 3,-2 -12,-7 -3,-1 0,3 -4,2 -11,-6 -1,-10 3,-3 4,0 -2,-3 -20,-14 0,-3 -9,-1 -1,-6 -7,-7 -8,0 -8,4 -6,-3 4,-10 -5,-6 6,-4 -17,-3 -4,3 -10,-5 -8,1 -4,-4 -1,-7 -9,-8 0,-11 -11,-6 -6,2 -3,8 4,3 -2,4 -6,0 -3,5 -10,3 -3,7 -4,4 -10,-2 -5,-7 1,-16 -12,-6 0,-4 -6,-7 5,-4 -2,-4 -15,-1 -8,-7 4,-7 10,-1 0,-2 -8,-9 2,-4 -2,-7 3,-7 -3,0 1,-3 -9,-2 1,-4 -9,1 -6,-4 -3,-4 15,-8 5,1 9,-3 -1,-5 -12,-6 2,-7 7,1 -2,-5 -12,-9 -18,-5 -1,-6 -10,-6
+Mokhotlong|2424,659 -10,5 -4,-2 4,6 -19,1 -8,7 -13,1 -7,3 -4,-1 -7,4 -10,1 -7,4 -43,8 -30,33 -8,3 -9,11 -9,5 -3,7 3,7 -4,6 -2,-4 -11,-3 0,8 -8,6 0,-10 -4,0 -2,5 -3,-3 1,-5 4,-3 -2,-2 -5,3 -4,5 -7,-3 4,-2 -2,-2 -6,4 4,4 -4,1 -6,-5 -1,-9 -3,-2 -4,6 2,7 -12,3 17,5 -1,18 -4,0 -13,-8 -11,5 -11,-4 -2,2 22,15 1,-1 -4,-5 2,-3 4,3 -2,2 4,2 -1,3 5,-1 5,3 0,2 -6,2 4,1 3,4 -4,3 3,0 2,5 -4,5 4,3 6,0 -2,3 4,2 -2,3 4,0 -2,2 3,4 8,-5 0,4 7,2 -3,2 4,3 0,3 3,-1 4,3 5,-3 4,6 8,1 3,3 -1,3 7,5 6,19 21,2 60,21 11,16 14,10 6,1 11,9 39,13 6,5 7,1 18,15 35,12 10,2 1,-5 11,5 7,0 1,-5 -4,-6 9,-8 12,1 1,-4 7,-3 18,5 4,-6 9,-3 2,-8 3,-1 4,3 4,0 0,-5 9,-1 0,-3 9,-4 0,-4 -4,-5 6,-16 4,-4 13,-3 -4,-10 2,-11 18,0 -1,-10 14,-12 0,-8 -7,-7 -1,-5 3,-6 -3,-6 17,-4 -5,-14 0,-8 -4,-1 -1,-4 -10,-8 7,-7 -10,-20 0,-5 5,-6 0,-7 -3,-4 -11,-5 -9,0 0,-8 4,1 3,-4 -3,-11 -5,-3 -2,-5 -11,-3 3,-9 8,2 -9,-11 -28,-12 -17,4 -8,-2 -5,-9 -11,-7 0,-6 -37,11 -17,-9 -22,-1 -5,-4 -12,3 -7,-4
+Bobatsi|2069,774 -15,5 -6,10 -3,2 -13,-13 -6,-1 -8,2 -10,-4 -12,11 -2,8 5,0 8,-5 3,2 0,4 -8,5 -11,0 -3,3 1,4 10,5 0,5 -8,1 -7,-6 -5,-12 -8,0 -3,3 4,17 -12,0 -3,4 3,4 9,1 0,4 -7,5 -23,7 2,6 9,8 1,4 -8,6 1,5 16,-6 5,1 4,5 -1,7 -8,8 -10,-5 -6,0 -1,2 5,6 0,6 -16,6 7,21 5,0 2,3 -13,11 -11,-3 -6,2 -2,10 4,5 9,1 3,3 2,14 -3,2 -6,-6 -3,0 -7,12 -17,8 10,-1 7,4 11,10 -1,6 4,7 8,0 5,-4 21,-2 9,-4 6,-7 11,0 10,-6 14,4 6,4 2,11 12,3 5,6 13,3 14,-7 5,1 6,4 17,0 33,-8 8,3 6,-4 14,8 6,-11 10,0 5,-6 6,4 5,-2 12,2 16,11 8,-1 12,3 14,14 3,0 6,-4 14,7 8,1 6,8 2,8 7,3 -1,15 3,12 9,1 11,7 3,-2 8,7 3,-6 8,0 1,-2 -3,0 0,-6 3,2 9,2 -6,-8 0,-4 7,1 3,-10 6,6 -2,2 2,2 4,-4 5,7 7,-2 7,8 4,-1 -1,-6 -5,-2 3,-1 -1,-3 4,-4 11,6 1,-7 4,-1 6,4 4,-6 6,6 3,0 4,-5 2,3 4,0 7,6 12,3 2,4 17,1 4,-1 13,-18 7,-6 0,-9 -6,-3 -5,-8 -8,-7 11,-3 1,-6 -2,-9 -11,-11 2,-7 -2,-2 -37,-12 -10,-11 -11,-3 -6,-5 -39,-13 -3,-4 -23,-12 -16,-20 -60,-21 -21,-2 -6,-19 -7,-5 1,-3 -3,-3 -8,-1 -4,-6 -5,3 -4,-3 -3,1 0,-3 -4,-3 2,-2 -6,-2 1,-3 -9,4 -3,-4 2,-2 -3,0 1,-3 -4,-2 2,-3 -6,0 -4,-4 4,-4 -2,-5 -3,0 4,-3 -3,-4 -4,-1 6,-3 -5,-4 -5,1 1,-3 -4,-2 2,-2 -4,-3 -2,3 4,6 -9,-5 -3,4 -6,2 -5,-1 -5,-6 -8,4 -8,-7 -3,2 -1,7 -4,4 -13,-7 0,4 10,6 -4,7 -4,1 -4,-3 -7,4 -8,-5 -18,-2 12,-13 -4,-5 -8,-3 -3,-5 3,-2 13,-1 -4,-5`;
+const GEOKEY={"1": 0, "2": 1, "3": 2, "4": 3, "5": 4, "6": 5, "7": 6, "8": 7, "9": 8, "10": 9, "11": 10, "12": 11, "13": 12, "14": 13, "15": 14, "16": 15, "17": 16, "18": 17, "19": 18, "20": 19, "21": 20, "22": 21, "23": 22, "24": 23, "25": 24, "26": 25, "27": 26, "28": 27, "29": 28, "30": 29, "31": 30, "32": 31, "33": 32, "34": 33, "35": 34, "36": 35, "37": 36, "38": 37, "39": 38, "40": 39, "41": 40, "42": 41, "43": 42, "44": 43, "45": 44, "46": 45, "47": 46, "48": 47, "49": 48, "50": 49, "51": 50, "52": 51, "53": 52, "54": 53, "55": 54, "56": 55, "57": 56, "58": 57, "59": 58, "60": 59, "61": 60, "62": 61, "63": 62, "64": 63, "65": 64, "66": 65, "67": 66, "68": 67, "69": 68, "70": 69, "71": 70, "72": 71, "73": 72, "74": 73, "75": 74, "76": 75, "77": 76, "78": 77, "79": 78, "80": 79};        // constituency number -> geo line index
+const SEATS_TOTAL=120, NCONS=80, MAJ=61;
+
+const COL={}, FULL={}; for(const [a,n,c] of PARTIES){COL[a]=c;FULL[a]=n;}
+const ORDER=PARTIES.map(p=>p[0]);
+
+/* ---------- baseline data ---------- */
+const C=[]; // {n,name,v:{acr:votes},T}
+for(const line of RAW.trim().split("\n")){
+  const [n,,,r]=line.split("|"); const v={}; let T=0;
+  for(const kv of r.split(",")){const [k,x]=kv.split(":"); if(k==="IND")continue; v[k]=(v[k]||0)+(+x); T+=+x;}
+  C.push({n:+n,name:NAMES[+n],v,T});
+}
+const TOT=C.reduce((s,c)=>s+c.T,0);
+const BASE={}; for(const a of ORDER)BASE[a]=0; for(const c of C)for(const a in c.v)BASE[a]+=c.v[a]; for(const a in BASE)BASE[a]/=TOT;
+const MINORS=ORDER.filter(a=>!SLIDERS.includes(a));
+const BASE_OTHER=MINORS.reduce((s,a)=>s+BASE[a],0);
+
+let LASTPOOL={};
+function hare(parties,S,cons){
+  const keys=Object.keys(parties); const out={};
+  if(!keys.length||S<=0){for(const k of keys)out[k]=0;return out;}
+  let sum=0; for(const k of keys)sum+=parties[k];
+  const q=Math.ceil(sum/S);
+  const qs={},a={}; let used=0;
+  for(const k of keys){qs[k]=Math.round(parties[k]/q*1e5)/1e5; a[k]=Math.floor(qs[k]); used+=a[k];}
+  const order=keys.slice().sort((x,y)=>{
+    const fx=qs[x]-a[x],fy=qs[y]-a[y]; if(fx!==fy)return fy-fx;
+    return ((cons[x]||0)-a[x])-((cons[y]||0)-a[y]);
+  });
+  for(let i=0;i<S-used&&i<order.length;i++)a[order[i]]++;
+  return a;
+}
+function schedule3(votes,cons,S){
+  const parties={}; for(const k in votes)if(votes[k]>0)parties[k]=votes[k];
+  const fixed={}; let nfixed=0;
+  for(;;){
+    const fs=Object.values(fixed).reduce((s,x)=>s+x,0);
+    const a=hare(parties,S-fs,cons);
+    let comp=0; for(const k in a)comp+=Math.max(0,a[k]-(cons[k]||0));
+    if(!nfixed&&comp<=S-NCONS){LASTPOOL=Object.assign({},parties);return a;}
+    const ex=Object.keys(a).filter(k=>(cons[k]||0)>0&&cons[k]>=a[k]);
+    if(!ex.length){LASTPOOL=Object.assign({},parties);return Object.assign({},a,fixed);}
+    for(const k of ex){fixed[k]=cons[k];delete parties[k];nfixed++;}
+    if(!Object.keys(parties).length){LASTPOOL={};return fixed;}
+  }
+}
+
+/* ---------- projection ---------- */
+function project(inp){ // inp: acr -> share (0..1) for slider parties; Other residual computed
+  let used=0; for(const a of SLIDERS)used+=inp[a]; const other=Math.max(0,1-used);
+  const I={}; for(const a of SLIDERS)I[a]=inp[a];
+  for(const a of MINORS)I[a]=BASE_OTHER>0?BASE[a]*other/BASE_OTHER:0;
+  const keys=ORDER; const res=[]; const nat={}; for(const a of keys)nat[a]=0; const cons={};
+  for(const c of C){
+    const s={}; let sum=0;
+    for(const a of keys){
+      const b=(c.v[a]||0)/c.T, B=BASE[a], T20=0.2*B; let x;
+      if(I[a]>=T20)x=Math.max(0,b+I[a]-B); else x=Math.max(0,b+T20-B)*(I[a]/T20);
+      s[a]=x; sum+=x;
+    }
+    let win=null,wv=-1;
+    for(const a of keys){s[a]/=sum; nat[a]+=s[a]*c.T; if(s[a]>wv+1e-15){wv=s[a];win=a;}}
+    cons[win]=(cons[win]||0)+1;
+    res.push({c,s,win});
+  }
+  const tot=Object.values(nat).reduce((x,y)=>x+y,0);
+  const seats=schedule3(nat,cons,SEATS_TOTAL); const pool=LASTPOOL; let pt=0; for(const k in pool)pt+=pool[k];
+  for(const a of keys){ if(seats[a]===undefined)seats[a]=0; if(seats[a]<(cons[a]||0))seats[a]=cons[a]; }
+  const share={}; for(const a of keys)share[a]=nat[a]/tot;
+  return {res,seats,cons,share,nat,pool,pt};
+}
+
+/* ---------- state ---------- */
+const BASEINP={}; for(const a of SLIDERS)BASEINP[a]=BASE[a];
+let inp=Object.assign({},BASEINP);
+const BASESEATS=project(BASEINP).seats;
+let sel=new Set(); let mapMode=null; let cur=null;
+
+const f1=x=>(x*100).toFixed(1);
+const $=id=>document.getElementById(id);
+
+/* ---------- inputs ---------- */
+const rows={};
+function buildInputs(){
+  const box=$("inputs"); box.innerHTML="";
+  const mk=(a,label,color,ro)=>{
+    const r=document.createElement("div"); r.className="row";
+    r.innerHTML=`<div class="lab"><span class="dot" style="background:${color}"></span><span>${label}</span></div><div class="ctl"><input type="range" min="0" max="60" step="0.1" aria-label="${label}"><input class="num" type="text" inputmode="decimal" aria-label="${label} value"><span class="pct">%</span></div>`;
+    box.appendChild(r);
+    const rg=r.querySelector("input[type=range]"), nb=r.querySelector(".num");
+    rg.style.setProperty("--c",color);
+    if(ro){rg.disabled=true;nb.readOnly=true;}
+    return {rg,nb};
+  };
+  for(const a of SLIDERS){
+    const o=mk(a,`${FULL[a]} (${a})`,COL[a],false); rows[a]=o;
+    o.rg.addEventListener("input",()=>setVal(a,parseFloat(o.rg.value),false));
+    o.nb.addEventListener("input",()=>{const v=parseFloat(o.nb.value.replace(",","."));if(!isNaN(v))setVal(a,v,true);});
+    const fmt=()=>{let v=parseFloat(o.nb.value.replace(",","."));if(isNaN(v))v=inp[a]*100;setVal(a,v,false);o.nb.value=(inp[a]*100).toFixed(1);};
+    o.nb.addEventListener("change",fmt); o.nb.addEventListener("blur",fmt);
+    o.nb.addEventListener("keydown",e=>{if(e.key==="Enter"){fmt();o.nb.blur();}});
+  }
+  rows.__other=mk("__other","Other","#9aa2b0",true);
+  rows.__other.rg.style.setProperty("--c","#9aa2b0");
+}
+function setVal(a,pct,fromBox){
+  let others=0; for(const k of SLIDERS)if(k!==a)others+=inp[k];
+  const maxAllowed=Math.max(0,Math.min(0.6,1-others));
+  let v=Math.max(0,Math.min(pct/100,maxAllowed));
+  v=Math.round(v*1000)/1000;
+  if(v>maxAllowed)v=Math.floor(maxAllowed*1000)/1000;
+  inp[a]=v; syncInputs(fromBox?a:null); update();
+}
+function syncInputs(skipBox){
+  let used=0;
+  for(const a of SLIDERS){
+    const o=rows[a], v=inp[a]*100; used+=inp[a];
+    o.rg.value=v; o.rg.style.setProperty("--p",(v/60*100)+"%");
+    if(skipBox!==a)o.nb.value=v.toFixed(1);
+    else if(parseFloat(o.nb.value.replace(",","."))/100>inp[a]+1e-9)o.nb.value=v.toFixed(1);
+  }
+  const ov=Math.max(0,100-used*100), o=rows.__other;
+  o.rg.value=Math.min(60,ov); o.rg.style.setProperty("--p",Math.min(60,ov)/60*100+"%"); o.nb.value=ov.toFixed(1);
+}
+$("reset").addEventListener("click",()=>{inp=Object.assign({},BASEINP);syncInputs(null);update();});
+
+/* ---------- hemicycle ---------- */
+function hemiPositions(N,rowsN,rin){
+  const radii=[]; for(let k=0;k<rowsN;k++)radii.push(rin+(1-rin)*k/(rowsN-1));
+  const sr=radii.reduce((s,x)=>s+x,0); const cnt=radii.map(r=>Math.round(N*r/sr));
+  let diff=N-cnt.reduce((s,x)=>s+x,0); cnt[rowsN-1]+=diff;
+  const pts=[];
+  radii.forEach((r,k)=>{const n=cnt[k]; for(let j=0;j<n;j++){const t=Math.PI*(1-(n===1?0.5:j/(n-1))); pts.push({t,r,k});}});
+  pts.sort((a,b)=>b.t-a.t||a.r-b.r);
+  return {pts,radii,cnt};
+}
+const HP=hemiPositions(SEATS_TOTAL,6,0.34);
+function drawHemi(seats){
+  const R=285, cx=300, cy=300; const rowGap=(1-0.34)*R/5;
+  let minArc=1e9; HP.radii.forEach((r,k)=>{minArc=Math.min(minArc,Math.PI*r*R/(HP.cnt[k]-1));});
+  const dr=Math.min(rowGap,minArc)*0.43;
+  const list=[]; for(const a of ORDER)for(let i=0;i<(seats[a]||0);i++)list.push(a);
+  let s=""; HP.pts.forEach((p,i)=>{const a=list[i]; if(!a)return; const x=cx+Math.cos(p.t)*p.r*R,y=cy-Math.sin(p.t)*p.r*R; s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${dr.toFixed(1)}" fill="${COL[a]}"/>`;});
+  $("hemi").innerHTML=s;
+  $("hlegend").innerHTML=ORDER.filter(a=>seats[a]>0).sort((a,b)=>seats[b]-seats[a]||ORDER.indexOf(a)-ORDER.indexOf(b)).map(a=>`<span><i class="dot" style="background:${COL[a]}"></i>${a}</span>`).join("");
+}
+
+/* ---------- table ---------- */
+function drawTable(P){
+  const list=ORDER.filter(a=>P.seats[a]>0||P.share[a]>=0.01).sort((a,b)=>P.seats[b]-P.seats[a]||P.share[b]-P.share[a]);
+  $("tbody").innerHTML=list.map(a=>{
+    const d=P.seats[a]-(BASESEATS[a]||0); const cl=d>0?"up":d<0?"dn":"zero"; const tx=d>0?"+"+d:d<0?"−"+Math.abs(d):"0";
+    const inPool=P.pool[a]!==undefined; const lv=inPool?Math.round(P.pool[a]).toLocaleString('en-GB'):"–"; const ls=inPool?f1(P.pool[a]/P.pt)+"%":"–";
+    return `<tr><td><i class="dot" style="background:${COL[a]}"></i><span><span class="fn">${FULL[a]} (</span>${a}<span class="fn">)</span></span></td><td>${f1(P.share[a])}%</td><td>${P.cons[a]||0}</td><td>${P.seats[a]-(P.cons[a]||0)}</td><td><b>${P.seats[a]}</b></td><td class="${cl}">${tx}</td></tr>`;
+  }).join("");
+}
+
+/* ---------- coalition ---------- */
+function drawCoal(P){
+  const have=ORDER.filter(a=>P.seats[a]>0).sort((a,b)=>P.seats[b]-P.seats[a]||ORDER.indexOf(a)-ORDER.indexOf(b));
+  for(const a of [...sel])if(!(P.seats[a]>0))sel.delete(a);
+  $("chips").innerHTML=have.map(a=>`<button type="button" class="chip" data-a="${a}" aria-pressed="${sel.has(a)}"><i class="dot" style="background:${COL[a]}"></i>${a}</button>`).join("");
+  for(const b of $("chips").children)b.onclick=()=>{const a=b.dataset.a; sel.has(a)?sel.delete(a):sel.add(a); drawCoal(P);};
+  let tot=0,seg=""; for(const a of have)if(sel.has(a)){tot+=P.seats[a]; seg+=`<i style="width:${P.seats[a]/SEATS_TOTAL*100}%;background:${COL[a]}"></i>`;}
+  $("cfill").innerHTML=seg; $("cfill").style.width="100%";
+  $("cfill").style.background="transparent";
+  $("ccount").textContent=`${tot} of ${SEATS_TOTAL} seats`;
+  $("cmaj").textContent=tot>=MAJ?"Majority reached":"";
+}
+
+/* ---------- map ---------- */
+const geoPaths={};
+function initMap(){
+  const lines=GEO.trim().split("\n"); let s="";
+  for(const c of C){
+    const ln=lines[GEOKEY[c.n]]; const body=ln.split("|")[1].split(" "); let x=0,y=0,d="";
+    body.forEach((t,i)=>{const [dx,dy]=t.split(",").map(Number); x+=dx;y+=dy; d+=(i?"L":"M")+x+" "+y;});
+    s+=`<path data-n="${c.n}" d="${d}Z" tabindex="-1"/>`;
+  }
+  $("map").innerHTML=s;
+  for(const p of $("map").children){geoPaths[p.dataset.n]=p; p.addEventListener("click",e=>{e.stopPropagation();openTip(p,e);});}
+  document.addEventListener("click",e=>{if(!e.target.closest(".tip"))closeTip();});
+}
+let tipN=null;
+function closeTip(){$("tip").style.display="none"; if(tipN){geoPaths[tipN].classList.remove("sel");} tipN=null;}
+function openTip(p,e){
+  const n=+p.dataset.n; if(tipN===n){closeTip();return;} closeTip(); tipN=n; p.classList.add("sel");
+  const r=cur.res.find(x=>x.c.n===n); const tip=$("tip");
+  const list=ORDER.filter(a=>r.s[a]>=0.01||a===r.win).sort((a,b)=>r.s[b]-r.s[a]);
+  tip.innerHTML=`<div class="h"><span>Constituency ${n} ${r.c.name}</span></div>`+list.map(a=>`<div class="r${a===r.win?" w":""}"><b><i class="dot" style="background:${COL[a]}"></i>${a}</b><em>${f1(r.s[a])}%</em></div>`).join("");
+  tip.style.display="block";
+  const wrap=$("mapwrap").getBoundingClientRect(); let x=e.clientX-wrap.left+10,y=e.clientY-wrap.top+10;
+  const w=tip.offsetWidth,h=tip.offsetHeight; if(x+w>wrap.width)x=e.clientX-wrap.left-w-10; if(x<0)x=2; if(y+h>wrap.height)y=wrap.height-h-2; if(y<0)y=2;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+function drawMap(P){
+  const have=ORDER.filter(a=>P.seats[a]>0).sort((a,b)=>P.seats[b]-P.seats[a]||ORDER.indexOf(a)-ORDER.indexOf(b));
+  if(mapMode&&!(P.seats[mapMode]>0))mapMode=null;
+  $("mbtns").innerHTML=`<button type="button" class="chip" data-a="" aria-pressed="${mapMode===null}">Winning party</button>`+have.map(a=>`<button type="button" class="chip" data-a="${a}" aria-pressed="${mapMode===a}"><i class="dot" style="background:${COL[a]}"></i>${a}</button>`).join("");
+  for(const b of $("mbtns").children)b.onclick=()=>{mapMode=(!b.dataset.a||mapMode===b.dataset.a)?null:b.dataset.a; drawMap(P);};
+  let lo=1,hi=0; if(mapMode){for(const r of P.res){const v=r.s[mapMode]; if(v<lo)lo=v; if(v>hi)hi=v;}}
+  for(const r of P.res){
+    const p=geoPaths[r.c.n];
+    if(!mapMode)p.style.fill=COL[r.win];
+    else{const t=hi>lo?(r.s[mapMode]-lo)/(hi-lo):1; p.style.fill=`color-mix(in srgb, ${COL[mapMode]} ${Math.round(8+92*t)}%, var(--base))`;}
+  }
+  if(!mapMode){
+    const wins={}; for(const r of P.res)wins[r.win]=(wins[r.win]||0)+1;
+    $("mlegend").innerHTML=have.filter(a=>wins[a]).map(a=>`<span><i class="dot" style="background:${COL[a]}"></i>${a}</span>`).join("");
+  }else{
+    $("mlegend").innerHTML=`<div style="width:100%"><div class="grad" style="background:linear-gradient(to right,color-mix(in srgb, ${COL[mapMode]} 8%, var(--base)),${COL[mapMode]})"></div><div class="gl"><span>${f1(lo)}%</span><span>${f1(hi)}%</span></div></div>`;
+  }
+}
+
+function update(){
+  cur=project(inp);
+  drawHemi(cur.seats); drawTable(cur); drawCoal(cur); drawMap(cur);
+  if(tipN){const p=geoPaths[tipN]; const n=tipN; closeTip();}
+}
+buildInputs(); initMap(); syncInputs(null); update();
+window.__app={project,BASE,BASEINP,BASESEATS,SLIDERS,ORDER,get inp(){return inp;},set inp(v){inp=v;syncInputs(null);update();}};
+</script>
+
+</body>
+</html>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
