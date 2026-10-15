@@ -1,0 +1,13 @@
+name: Cancel stuck Pages deployment
+on: workflow_dispatch
+permissions:
+  pages: write
+  id-token: write
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api -X POST repos/${{ github.repository }}/pages/deployments/050a2d1189f02b3b0084394c238631094150a0a6/cancel || true
