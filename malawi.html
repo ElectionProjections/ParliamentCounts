@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malawi Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<title>Malawi Seat Projector</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one 760px column of cards in workflow order; neutral slate palette, party colours carry the colour. */
+:root{
+  --bg:#eef1f5; --card:#ffffff; --fg:#1b2330; --muted:#667085; --line:#e3e7ee;
+  --track:#cfd6e0; --thumb:#ffffff; --thumb-line:#8a95a6; --btn:#f3f5f9; --btn-line:#c9d0db; --btn-on:#1b2330; --btn-on-fg:#ffffff;
+  --good:#18864b; --bad:#c62f2f; --bar:#e3e7ee; --emp:#e3e7ee; --city:#000000;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161d; --card:#1c222c; --fg:#e8ecf3; --muted:#9aa5b6; --line:#2d3544;
+  --track:#58647a; --thumb:#f2f5fa; --thumb-line:#9aa5b6; --btn:#262e3b; --btn-line:#3d485b; --btn-on:#e8ecf3; --btn-on-fg:#12161d;
+  --good:#4cc48a; --bad:#ff7b7b; --bar:#2d3544; --emp:#2d3544; --city:#f4f6fa; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161d; --card:#1c222c; --fg:#e8ecf3; --muted:#9aa5b6; --line:#2d3544;
+  --track:#58647a; --thumb:#f2f5fa; --thumb-line:#9aa5b6; --btn:#262e3b; --btn-line:#3d485b; --btn-on:#e8ecf3; --btn-on-fg:#12161d;
+  --good:#4cc48a; --bad:#ff7b7b; --bar:#2d3544; --emp:#2d3544; --city:#f4f6fa; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.35;
+  padding-block:20px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{text-align:center;font-size:22px;font-weight:600;margin:0 0 4px;text-wrap:balance}
+.card{background:var(--card);border-radius:10px;padding:14px 16px 16px;min-width:0}
+h2{text-align:center;font-size:17px;font-weight:600;margin:0 0 10px}
+.num{font-variant-numeric:tabular-nums}
+.toolbar{display:flex;justify-content:center;margin-bottom:6px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--btn);color:var(--fg);border:1px solid var(--btn-line);border-radius:6px;padding:4px 12px;font-size:13px}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+/* inputs */
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 84px;align-items:center;gap:6px 14px;padding:11px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.lab{display:flex;align-items:center;gap:8px;min-width:0}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+.lab span.t{min-width:0;overflow-wrap:anywhere}
+.box{display:flex;align-items:center;gap:4px;justify-content:flex-end}
+.box input{width:64px;-moz-appearance:textfield;appearance:textfield;font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:4px 6px;border:1px solid var(--btn-line);border-radius:6px;background:var(--btn);color:var(--fg)}
+.box input:disabled{opacity:1}
+.box input::-webkit-outer-spin-button,.box input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.box span{color:var(--muted)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:22px;margin:0;background:transparent;cursor:pointer}
+input[type=range]:disabled{cursor:default;opacity:.85}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--pc) 0 var(--f),var(--track) var(--f) 100%)}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--pc) 0 var(--f),var(--track) var(--f) 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--thumb);border:2px solid var(--thumb-line);margin-top:-5px;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--thumb);border:2px solid var(--thumb-line);cursor:pointer}
+input[type=range]:active{cursor:pointer}
+
+.row.locked .lab,.row.locked .box{opacity:.7}
+.row.locked input[type=range]{cursor:not-allowed}
+.row.locked input[type=range]::-webkit-slider-thumb{visibility:hidden}
+.row.locked input[type=range]::-moz-range-thumb{visibility:hidden}
+.row.locked input[type=range]::-webkit-slider-runnable-track{background:repeating-linear-gradient(135deg,var(--track) 0 4px,transparent 4px 8px);border:1px dashed var(--thumb-line);height:8px;box-sizing:border-box}
+.row.locked input[type=range]::-moz-range-track{background:repeating-linear-gradient(135deg,var(--track) 0 4px,transparent 4px 8px);border:1px dashed var(--thumb-line);height:8px;box-sizing:border-box}
+.row.locked .box input{background:transparent;border-style:dashed;cursor:not-allowed}
+.lock{width:12px;height:12px;flex:none;color:var(--muted)}
+@media (max-width:520px){
+  .row{grid-template-columns:minmax(0,1fr) 84px;padding:10px 0}
+  .row .sl{grid-column:1 / -1;order:3}
+}
+/* results */
+#hemi{display:block;width:100%;max-width:650px;margin:0 auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:14px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px 8px;text-align:right;font-variant-numeric:tabular-nums}
+th{font-weight:500;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)}
+td{border-top:1px solid var(--line)}
+tr:first-child td{border-top:0}
+th:first-child,td:first-child{text-align:left;padding-left:2px}
+td.seats{font-weight:700}
+.pn{display:flex;align-items:center;gap:8px}
+.up{color:var(--good)} .down{color:var(--bad)}
+/* coalition */
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.btns .btn{padding:3px 10px;font-size:12.5px;display:inline-flex;align-items:center;gap:6px}
+.btns .btn.on{background:var(--btn-on);color:var(--btn-on-fg);border-color:var(--btn-on)}
+.bar{position:relative;height:16px;border-radius:4px;background:var(--bar);margin:22px 0 0;display:flex;overflow:visible}
+.bar .seg{height:100%}
+.bar .seg:first-child{border-radius:4px 0 0 4px}
+.tick{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.tickl{position:absolute;top:22px;transform:translateX(-50%);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cstat{text-align:center;margin-top:30px;min-height:20px;font-variant-numeric:tabular-nums}
+.cstat .ok{color:var(--good);font-weight:600}
+
+.mapwrap{position:relative;max-width:300px;margin:0 auto}
+#map{display:block;width:100%;height:auto;-webkit-tap-highlight-color:transparent}
+#map *{outline:none}
+#map .land{fill:var(--emp);stroke:var(--line);stroke-width:.8}
+#map .hx{cursor:pointer;stroke:var(--card);stroke-width:.9;transition:filter .1s}
+#map .cityline{fill:none;stroke:var(--city);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+#map .hx:hover{filter:brightness(.88)}
+#map .hx.sel{filter:brightness(.78)}
+.mbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:10px}
+.mbtns .btn{padding:3px 10px;font-size:12.5px;display:inline-flex;align-items:center;gap:6px}
+.mbtns .btn.on{background:var(--btn-on);color:var(--btn-on-fg);border-color:var(--btn-on)}
+.mleg{display:flex;justify-content:center;margin-top:12px}
+.mleg .legend{margin:0}
+.cbar{width:min(300px,100%)}
+.cbar .gr{height:10px;border-radius:5px}
+.cbar .lb{display:flex;justify-content:space-between;margin-top:4px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tip{position:absolute;z-index:5;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.18);padding:7px 9px;width:max-content;min-width:150px;max-width:210px;font-size:12.5px;line-height:1.3}
+.tip .th{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding-bottom:5px;margin-bottom:3px;border-bottom:1px solid var(--line)}
+.tip .th b{font-weight:600;overflow-wrap:anywhere}
+.tip .th span{color:var(--muted);white-space:nowrap;font-size:12px}
+.tip .tr{display:flex;align-items:center;gap:6px;padding:2px 0;font-variant-numeric:tabular-nums}
+.tip .tr .n{flex:1}
+.tip .tr.w{font-weight:700}
+.src{text-align:center;color:var(--muted);font-size:12px;margin:2px 0 0}
+</style>
+
+<main>
+  <h1>Malawi Seat Projection</h1>
+
+  <section class="card" id="c-in">
+    <h2>Input vote share</h2>
+    <div class="toolbar"><button class="btn" id="reset" type="button">Reset</button></div>
+    <div id="rows"></div>
+  </section>
+
+  <section class="card" id="c-res">
+    <h2>Projected results</h2>
+    <svg id="hemi" viewBox="-312 -312 624 330" role="img" aria-label="Projected seats"></svg>
+    <div class="legend" id="legend"></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+  </section>
+
+  <section class="card" id="c-co">
+    <h2>Coalition builder</h2>
+    <div class="btns" id="cbtn"></div>
+    <div class="bar" id="cbar"></div>
+    <div class="cstat" id="cstat"></div>
+  </section>
+
+  <section class="card" id="c-map">
+    <h2>Projected results map</h2>
+    <div class="mbtns" id="mbtn"></div>
+    <div class="mapwrap" id="mapwrap"><svg id="map" role="img" aria-label="Projected results map"></svg></div>
+    <div class="mleg" id="mleg"></div>
+  </section>
+
+  <p class="src">Sources: Malawi Electoral Commission (2025 general election results; 17 March 2026 and 30 June 2026 by-election declarations); Nation Online, Nyasa Times and Malawi24 (nullified, postponed and unopposed seats); Wikipedia (party colours); geoBoundaries and Natural Earth (outline).</p>
+</main>
+
+<script>
+// Seat model: constituency-level universal national swing with a 20% taper, first past the post.
+// Fixed party order (default strength). Position in this list is also the final tie-break.
+const PARTIES = [
+  ["IND", "Independents"], ["DPP", "Democratic Progressive Party"], ["MCP", "Malawi Congress Party"],
+  ["UTM", "United Transformation Movement"], ["UDF", "United Democratic Front"], ["PP", "People's Party"],
+  ["AFORD", "Alliance for Democracy"], ["PDP", "People's Development Party"], ["ODYA", "Odya Zake Alibe Mlandu Party"],
+  ["FP", "Freedom Party"], ["NDP", "National Development Party"], ["NPP", "Nationalist Patriotic Party"],
+  ["LEFP", "Liberation for Economic Freedom Party"], ["PPM", "People's Progressive Movement"],
+  ["PCP", "Patriotic Citizens Party"], ["SA", "Solidarity Alliance"], ["NC", "Nzika Coalition"],
+  ["MAFUNDE", "Malawi Forum for Unity and Development"], ["PETRA", "People's Transformation Party"],
+  ["ADD", "Assembly for Democracy and Development"]
+];
+const SLIDER_CODES = ["IND", "DPP", "MCP", "UTM", "UDF", "PP", "AFORD"];
+const TAPER = 0.2;
+
+function buildBase(cons) {
+  // national baseline (% of votes cast across the 229 constituencies)
+  const tot = {}; let all = 0;
+  for (const c of cons) for (const p in c.v) { tot[p] = (tot[p] || 0) + c.v[p]; all += c.v[p]; }
+  const base = {};
+  for (const [p] of PARTIES) base[p] = 100 * (tot[p] || 0) / all;
+  return base;
+}
+
+// inputs: slider parties' national % -> full national % for every party (Other split pro rata over minors)
+function fullInputs(sl, base) {
+  const out = {}; let used = 0;
+  for (const p of SLIDER_CODES) { out[p] = sl[p]; used += sl[p]; }
+  const other = Math.max(0, 100 - used);
+  let baseOther = 0;
+  for (const [p] of PARTIES) if (!SLIDER_CODES.includes(p)) baseOther += base[p];
+  for (const [p] of PARTIES) if (!SLIDER_CODES.includes(p)) out[p] = other * base[p] / baseOther;
+  return out;
+}
+
+function adjusted(shareFrac, I, B) {
+  const T = TAPER * B, s = shareFrac * 100;
+  if (I >= T) return Math.max(0, s + (I - B));
+  return Math.max(0, s + (T - B)) * (I / T);
+}
+
+function project(cons, base, nat) {
+  const seats = {}; for (const [p] of PARTIES) seats[p] = 0;
+  const winners = [], detail = [];
+  for (const c of cons) {
+    const tot = Object.values(c.v).reduce((a, b) => a + b, 0);
+    const adj = {}, bs = {}; let sum = 0;
+    const sole = tot > 0 ? null : Object.keys(c.v)[0];   // unopposed seat: its sole candidate holds 100%
+    for (const [p] of PARTIES) {
+      const s = tot > 0 ? (c.v[p] || 0) / tot : (p === sole ? 1 : 0);   // every other party is assumed to contest every seat (0% baseline there)
+      bs[p] = s; adj[p] = adjusted(s, nat[p], base[p]); sum += adj[p];
+    }
+    if (sum <= 0) { sum = 0; for (const p in bs) { adj[p] = bs[p] * 100; sum += adj[p]; } }
+    let best = null, bestStrength = -1, bestBase = -1, bestIdx = 99;
+    const shares = {};
+    for (const p in adj) {
+      const share = adj[p] / sum * 100; shares[p] = share;
+      const strength = p === "IND" ? share * (c.it > 0 && c.v.IND > 0 ? c.it / c.v.IND : 1) : share;   // only the leading independent can win
+      const b = bs[p], idx = PARTIES.findIndex(x => x[0] === p);
+      if (strength > bestStrength + 1e-9 ||
+          (Math.abs(strength - bestStrength) <= 1e-9 && (b > bestBase + 1e-12 || (Math.abs(b - bestBase) <= 1e-12 && idx < bestIdx)))) {
+        best = p; bestStrength = strength; bestBase = b; bestIdx = idx;
+      }
+    }
+    winners.push(best); detail.push({ w: best, s: shares });
+    seats[best]++;
+  }
+  return { seats, winners, detail };
+}
+
+
+const DATA = {"cons":[{"n":1,"v":{"IND":5311,"MCP":3228,"DPP":916,"PP":520,"UTM":296,"NDP":83},"it":5311},{"n":2,"v":{"IND":6899,"MCP":3934,"AFORD":2695,"DPP":653,"UTM":270,"PP":49},"it":6899},{"n":3,"v":{"IND":7331,"MCP":5205,"DPP":599,"UTM":548,"PP":50},"it":7331},{"n":4,"v":{"UTM":5981,"IND":4989,"MCP":933,"DPP":889,"PP":515},"it":4989},{"n":5,"v":{"IND":12820,"DPP":1894,"MCP":1068},"it":12820},{"n":6,"v":{"MCP":6506,"IND":3608,"DPP":2458,"NDP":37},"it":3608},{"n":7,"v":{"MCP":4086,"AFORD":2500,"UTM":2499,"DPP":2366,"IND":3245,"PP":228},"it":1949},{"n":8,"v":{"NDP":7802,"DPP":2407,"MCP":2204,"UTM":1117,"IND":62},"it":62},{"n":9,"v":{"UTM":6985,"DPP":6522,"MCP":6058,"UDF":333},"it":0},{"n":10,"v":{"PP":17198,"MCP":3319,"DPP":1056,"AFORD":271,"UTM":193,"PCP":85},"it":0},{"n":11,"v":{"MCP":9434,"UTM":4835,"IND":1892,"DPP":1632,"AFORD":236},"it":1892},{"n":12,"v":{"DPP":11028,"MCP":4034,"AFORD":1340,"UTM":933,"PP":135,"NDP":100},"it":0},{"n":13,"v":{"IND":13021,"MCP":1636,"UTM":649,"DPP":498,"PP":483,"AFORD":453},"it":11109},{"n":14,"v":{"AFORD":5787,"IND":6438,"DPP":2154,"MCP":1938,"FP":66},"it":4581},{"n":15,"v":{"AFORD":6822,"UTM":3450,"IND":3177,"MCP":2157,"DPP":1020,"ODYA":47},"it":2797},{"n":16,"v":{"UTM":10338,"DPP":3599,"MCP":3085,"IND":1707,"AFORD":958,"PPM":53},"it":1292},{"n":17,"v":{"IND":9308,"MCP":5698,"DPP":2403,"AFORD":457,"PP":421,"UTM":228},"it":8584},{"n":18,"v":{"IND":12982,"DPP":1795,"MCP":565,"AFORD":507,"UTM":265,"ODYA":81},"it":7220},{"n":19,"v":{"MCP":14964,"DPP":4041,"IND":1685,"UTM":1213,"PP":69},"it":1685},{"n":20,"v":{"IND":17852,"DPP":1656,"UTM":680},"it":13042},{"n":21,"v":{"IND":11433,"MCP":4599,"AFORD":4063,"UTM":3768,"DPP":1621},"it":8688},{"n":22,"v":{"DPP":6486,"MCP":6092,"IND":3575,"UTM":1418,"SA":610,"PDP":286,"FP":237},"it":3575},{"n":23,"v":{"FP":5674,"DPP":5133,"UTM":3690,"IND":2539,"MCP":2249},"it":2539},{"n":24,"v":{"DPP":5874,"MCP":4742,"IND":5503,"UTM":2082,"FP":1072,"AFORD":979,"UDF":388},"it":4432},{"n":25,"v":{"AFORD":4623,"MCP":4193,"DPP":3850,"IND":4540,"UTM":974,"FP":599,"PDP":310},"it":3413},{"n":26,"v":{"MCP":22137,"UTM":1872,"NPP":265},"it":0},{"n":27,"v":{"MCP":4446,"PP":4365,"IND":4342,"DPP":2573,"UTM":963,"AFORD":134,"UDF":113},"it":2760},{"n":28,"v":{"IND":20073,"MCP":1972,"UTM":1783,"DPP":840},"it":10198},{"n":29,"v":{"DPP":4670,"MCP":2604,"UTM":1947,"AFORD":199,"PP":133},"it":0},{"n":30,"v":{"IND":6914,"DPP":3685,"MCP":647,"AFORD":248,"PP":111,"ODYA":88,"FP":79},"it":6871},{"n":31,"v":{"DPP":5385,"IND":5377,"MCP":2539,"UTM":497,"AFORD":67},"it":5377},{"n":32,"v":{"DPP":3919,"UTM":2703,"IND":2712,"MCP":1367,"FP":782,"PP":598,"AFORD":497,"PDP":363},"it":1868},{"n":33,"v":{"PP":3395,"UTM":2844,"DPP":2797,"IND":1193,"MCP":464,"PDP":389,"AFORD":241},"it":1193},{"n":34,"v":{"UTM":3614,"IND":4779,"MCP":1906,"DPP":1755,"PP":341},"it":2245},{"n":35,"v":{"MCP":4988,"IND":4624,"DPP":3451,"AFORD":2467,"ODYA":1048,"PP":306},"it":3744},{"n":36,"v":{"IND":10747,"DPP":2217,"MCP":1847,"UTM":1552,"AFORD":164},"it":10565},{"n":37,"v":{"IND":11447,"MCP":5362,"UTM":2528,"DPP":2472,"UDF":365,"AFORD":263,"PETRA":183},"it":8136},{"n":38,"v":{"DPP":3172,"MCP":2458,"IND":1136,"PP":97},"it":1136},{"n":39,"v":{"MCP":9898,"DPP":4384,"IND":3048,"UDF":275,"UTM":178},"it":3048},{"n":40,"v":{"DPP":4742,"IND":5779,"MCP":508,"PDP":49},"it":2946},{"n":41,"v":{"IND":17745,"MCP":5187,"DPP":4424,"UDF":285},"it":7099},{"n":42,"v":{"MCP":10441,"IND":12051,"DPP":1787,"UTM":244},"it":5794},{"n":43,"v":{"MCP":12661,"IND":12184,"DPP":3418,"UDF":154},"it":8494},{"n":44,"v":{"PP":11537,"MCP":10517,"DPP":4010},"it":0},{"n":45,"v":{"MCP":7685,"IND":8340,"UTM":4217,"DPP":1648},"it":5371},{"n":46,"v":{"MCP":8101,"IND":12171,"DPP":4098,"PDP":1912,"AFORD":463,"UTM":131},"it":6380},{"n":47,"v":{"DPP":7635,"MCP":7202,"IND":5801,"AFORD":320},"it":2989},{"n":48,"v":{"IND":11092,"MCP":9836,"DPP":1963,"PP":141},"it":11092},{"n":49,"v":{"MCP":10101,"IND":10222,"UTM":381},"it":9008},{"n":50,"v":{"MCP":13194,"IND":7735,"AFORD":1769,"ODYA":1552},"it":6617},{"n":51,"v":{"IND":13947,"MCP":4724,"PP":4302},"it":13947},{"n":52,"v":{"IND":13683,"MCP":6310,"AFORD":504,"UTM":411},"it":9206},{"n":53,"v":{"MCP":12349,"IND":12458,"UTM":232},"it":11817},{"n":54,"v":{"IND":9870,"DPP":4235,"MCP":3779,"UTM":294,"AFORD":202},"it":7109},{"n":55,"v":{"MCP":10494,"DPP":6646,"IND":2470,"PDP":170,"UTM":140},"it":2470},{"n":56,"v":{"IND":14166,"MCP":5884,"PDP":76},"it":10584},{"n":57,"v":{"MCP":12894,"IND":3438,"DPP":1579,"UTM":1023},"it":1780},{"n":58,"v":{"IND":17030,"MCP":1906,"DPP":889,"UTM":193},"it":7269},{"n":59,"v":{"IND":19141,"MCP":3839,"UTM":1245,"DPP":35},"it":19141},{"n":60,"v":{"IND":16627,"MCP":5621,"DPP":494,"UTM":238},"it":6200},{"n":61,"v":{"MCP":18006,"IND":5980},"it":5980},{"n":62,"v":{"MCP":12068,"IND":11652,"UTM":523},"it":6944},{"n":63,"v":{"IND":19085,"MCP":5646},"it":19085},{"n":64,"v":{"IND":17374,"MCP":7346},"it":14381},{"n":65,"v":{"MCP":12142,"IND":10343,"UTM":1059},"it":10343},{"n":66,"v":{"IND":14357,"MCP":13198,"UTM":117},"it":14357},{"n":67,"v":{"MCP":25111,"DPP":3997},"it":0},{"n":68,"v":{"IND":14219,"MCP":5587},"it":11592},{"n":69,"v":{"IND":27302,"MCP":3997},"it":26756},{"n":70,"v":{"MCP":15536,"IND":7151,"DPP":1311},"it":4883},{"n":71,"v":{"MCP":11273,"IND":13063,"DPP":2351,"UTM":1159},"it":6782},{"n":72,"v":{"IND":19394,"MCP":7209,"DPP":602,"UTM":348},"it":14312},{"n":73,"v":{"IND":8910,"MCP":7646,"DPP":1953,"UDF":981},"it":8041},{"n":74,"v":{"MCP":21903,"DPP":4040,"UTM":1798,"PDP":1366},"it":0},{"n":75,"v":{"MCP":10809,"IND":11264,"UTM":531},"it":10557},{"n":76,"v":{"IND":16306,"MCP":6582,"UTM":172},"it":10496},{"n":77,"v":{"MCP":14285,"DPP":4323,"IND":3544,"UTM":459},"it":3544},{"n":78,"v":{"IND":13895,"MCP":9016,"DPP":1502},"it":13895},{"n":79,"v":{"DPP":4935,"IND":7935,"MCP":3072,"UDF":698,"UTM":177},"it":4717},{"n":80,"v":{"MCP":8434,"DPP":6903,"IND":4096,"UTM":1104,"UDF":265},"it":3224},{"n":81,"v":{"IND":10959,"MCP":5407,"DPP":4580,"UTM":405},"it":5985},{"n":82,"v":{"IND":10996,"DPP":4535,"MCP":3378,"UDF":516,"UTM":377},"it":4717},{"n":83,"v":{"MCP":0},"it":0},{"n":84,"v":{"IND":32044,"MCP":10116},"it":16561},{"n":85,"v":{"MCP":32079,"IND":10706,"ODYA":1016},"it":9113},{"n":86,"v":{"MCP":15969,"IND":24680,"DPP":346},"it":9724},{"n":87,"v":{"MCP":26474,"IND":13996,"UTM":932},"it":10409},{"n":88,"v":{"IND":12546,"MCP":6692,"DPP":290},"it":11405},{"n":89,"v":{"IND":29592,"MCP":7450,"UTM":774,"DPP":409},"it":20234},{"n":90,"v":{"MCP":11273,"IND":12102},"it":8263},{"n":91,"v":{"IND":15431,"MCP":9421,"PP":278,"PDP":220},"it":13036},{"n":92,"v":{"IND":21695,"MCP":11250,"DPP":1355},"it":18649},{"n":93,"v":{"MCP":12219,"IND":7868,"DPP":5765,"UTM":2645,"ODYA":481},"it":7868},{"n":94,"v":{"MCP":9071,"DPP":5736,"IND":8056,"ODYA":444},"it":4550},{"n":95,"v":{"MCP":13557,"IND":18087},"it":12579},{"n":96,"v":{"MCP":20921,"IND":6048,"DPP":564,"UTM":135},"it":6048},{"n":97,"v":{"MCP":19054,"IND":9377,"DPP":676},"it":9377},{"n":98,"v":{"MCP":12689,"IND":11753,"DPP":1539,"UTM":870,"PDP":101},"it":6858},{"n":99,"v":{"MCP":11048,"IND":13258,"DPP":718},"it":9109},{"n":100,"v":{"MCP":15132,"IND":13351},"it":11185},{"n":101,"v":{"MCP":11659,"IND":11507,"PCP":211},"it":11507},{"n":102,"v":{"MCP":9426,"IND":12975,"DPP":3545,"UTM":1071,"AFORD":568},"it":7443},{"n":103,"v":{"MCP":8714,"DPP":6096,"IND":9670,"UTM":1687},"it":3980},{"n":104,"v":{"MCP":15002,"DPP":13716,"UTM":3200,"ODYA":530,"PDP":406,"AFORD":366,"PP":260},"it":0},{"n":105,"v":{"DPP":8117,"MCP":6999,"IND":7317,"UTM":821,"AFORD":369},"it":4436},{"n":106,"v":{"DPP":6582,"MCP":5860,"IND":4788,"UTM":2522,"NC":246,"NDP":65},"it":4438},{"n":107,"v":{"DPP":12369,"MCP":12360,"IND":1610,"UTM":1313,"AFORD":97},"it":1610},{"n":108,"v":{"MCP":4707,"DPP":2725,"IND":1138,"UTM":364},"it":943},{"n":109,"v":{"MCP":6000,"DPP":5129,"IND":8741,"UTM":3718,"UDF":1657,"PDP":1550},"it":4340},{"n":110,"v":{"DPP":7055,"MCP":4747,"IND":5317,"UTM":2094},"it":3291},{"n":111,"v":{"MCP":6911,"IND":10156,"DPP":4240,"UTM":1279,"UDF":745,"PP":115},"it":5139},{"n":112,"v":{"IND":7156,"MCP":5871,"DPP":5871,"UTM":3229,"PDP":279,"ODYA":267,"FP":265,"PCP":130},"it":6042},{"n":113,"v":{"MCP":8185,"DPP":8090,"UTM":3457,"IND":1535,"ODYA":627},"it":1194},{"n":114,"v":{"IND":16204,"MCP":11790,"UDF":1942},"it":14199},{"n":115,"v":{"MCP":13448,"IND":13343,"UDF":1101,"UTM":244},"it":11557},{"n":116,"v":{"MCP":13326,"IND":16170},"it":8200},{"n":117,"v":{"MCP":8837,"IND":6787},"it":3830},{"n":118,"v":{"IND":21653,"MCP":8190,"DPP":499,"UTM":360,"UDF":340},"it":17020},{"n":119,"v":{"IND":12017,"MCP":6116,"DPP":1662,"UTM":1263,"UDF":638},"it":6174},{"n":120,"v":{"IND":14775,"MCP":3983,"DPP":3241,"UDF":813,"PP":170},"it":10570},{"n":121,"v":{"MCP":13029,"IND":13249},"it":6823},{"n":122,"v":{"IND":15114,"MCP":7040},"it":9338},{"n":123,"v":{"IND":15659,"MCP":7271},"it":11615},{"n":124,"v":{"DPP":8305,"IND":2661,"ODYA":1775,"MCP":1768,"UTM":1714,"NPP":670},"it":2344},{"n":125,"v":{"DPP":4851,"IND":12933,"MCP":2008,"UTM":1882,"NPP":92},"it":3251},{"n":126,"v":{"IND":10633,"DPP":2755,"UTM":1188,"MCP":867},"it":5819},{"n":127,"v":{"IND":12553,"DPP":3986,"UTM":526,"MCP":294,"AFORD":93},"it":5596},{"n":128,"v":{"IND":8725,"UTM":5553,"DPP":4750,"MCP":318,"AFORD":91},"it":7208},{"n":129,"v":{"IND":8996,"DPP":4277,"MCP":584,"UTM":447},"it":4579},{"n":130,"v":{"DPP":10634,"IND":2814,"UTM":1034,"MCP":939},"it":1927},{"n":131,"v":{"UTM":11828,"DPP":4409,"MCP":1347,"IND":197},"it":197},{"n":132,"v":{"DPP":8820,"IND":7688,"MCP":6069,"PP":558,"UDF":459},"it":7413},{"n":133,"v":{"DPP":7488,"UDF":6877,"PP":3900,"IND":2139,"UTM":705,"AFORD":626,"MCP":413,"PDP":236},"it":1135},{"n":134,"v":{"DPP":6538,"IND":10297,"UDF":5814,"PP":1090,"MCP":310},"it":5944},{"n":135,"v":{"MCP":17971,"DPP":11126,"IND":686,"UTM":399,"UDF":194},"it":686},{"n":136,"v":{"DPP":15437,"IND":7555,"UTM":898,"MCP":574},"it":4495},{"n":137,"v":{"DPP":11802,"IND":10056,"UDF":2575,"MCP":794},"it":9629},{"n":138,"v":{"DPP":11063,"IND":9321,"UDF":3354,"MCP":730,"UTM":392,"PP":208},"it":3812},{"n":139,"v":{"DPP":10708,"IND":10165,"UDF":6584,"MCP":842,"UTM":537,"PP":167},"it":8486},{"n":140,"v":{"DPP":7549,"IND":12242,"UTM":4602,"UDF":3566,"PP":817,"MCP":159},"it":5304},{"n":141,"v":{"IND":11003,"DPP":8704,"UTM":5615,"UDF":2854,"MCP":771,"ODYA":474,"PP":144},"it":10831},{"n":142,"v":{"DPP":8843,"UTM":6035,"UDF":2716,"IND":1894,"AFORD":508,"MCP":479,"PP":344},"it":1894},{"n":143,"v":{"UDF":12536,"DPP":5615,"IND":4994,"UTM":1482,"PDP":1311,"MCP":533},"it":3306},{"n":144,"v":{"DPP":11340,"UDF":5946,"IND":6748,"MCP":3087,"UTM":746,"PP":108},"it":4153},{"n":145,"v":{"IND":14621,"DPP":8635,"UDF":3084,"MCP":675,"UTM":635,"PP":376,"ODYA":219},"it":9055},{"n":146,"v":{"IND":18303,"DPP":4090,"UTM":2707,"UDF":1166,"PP":967,"AFORD":919,"NPP":515,"MCP":350},"it":7703},{"n":147,"v":{"DPP":10461,"IND":7437,"UDF":1129,"LEFP":1089,"MCP":358,"UTM":228,"PDP":67},"it":7437},{"n":148,"v":{"UDF":15766,"DPP":8098,"UTM":2303,"PP":397,"MCP":345,"PCP":240,"ODYA":231},"it":0},{"n":149,"v":{"DPP":5438,"IND":11135,"UDF":2362,"PP":2189,"UTM":973,"AFORD":962,"MCP":745},"it":4388},{"n":150,"v":{"DPP":14795,"IND":5002,"UTM":1897,"MCP":1176,"ODYA":1008,"UDF":990},"it":2537},{"n":151,"v":{"UDF":7728,"DPP":5116,"IND":7448,"MCP":541,"UTM":319},"it":4541},{"n":152,"v":{"DPP":11824,"UDF":6222,"IND":4729,"UTM":1473,"AFORD":1429,"MCP":569,"PP":408,"ODYA":346,"PDP":252},"it":3414},{"n":153,"v":{"DPP":13603,"IND":9319,"UDF":3280},"it":8485},{"n":154,"v":{"IND":17900,"DPP":4161,"UTM":980,"UDF":642,"MCP":238},"it":13574},{"n":155,"v":{"DPP":14283,"IND":8039,"UTM":1151,"MCP":819,"UDF":572,"MAFUNDE":229},"it":8039},{"n":156,"v":{"DPP":12964,"IND":17021,"UDF":852,"UTM":732,"MCP":345,"PDP":62},"it":12007},{"n":157,"v":{"IND":17283,"DPP":8162,"UDF":1839,"MCP":270,"UTM":266,"PDP":160},"it":8445},{"n":158,"v":{"DPP":20419,"PP":3338,"NDP":625,"UDF":580,"MCP":475,"IND":385,"UTM":374,"ODYA":286,"PDP":176},"it":385},{"n":159,"v":{"IND":17583,"DPP":4459,"MCP":1399,"UTM":459,"UDF":408,"PDP":192,"PP":174,"AFORD":151},"it":8186},{"n":160,"v":{"DPP":8491,"IND":12355,"UDF":5113,"MCP":292,"PP":140},"it":5934},{"n":161,"v":{"IND":24862,"DPP":6505,"UTM":404,"PP":349},"it":23683},{"n":162,"v":{"DPP":9366,"IND":14817,"PP":426,"UTM":280,"UDF":249},"it":6856},{"n":163,"v":{"IND":17825,"UDF":3927,"DPP":3694,"MCP":1259,"UTM":324,"PDP":277,"PP":175},"it":16205},{"n":164,"v":{"DPP":13729,"IND":12613,"PP":3234,"UTM":219},"it":11783},{"n":165,"v":{"DPP":15044,"IND":5491,"UTM":1031,"PP":855,"MCP":517,"UDF":428,"PDP":109},"it":5440},{"n":166,"v":{"DPP":14407,"UTM":3785,"IND":2962,"UDF":551,"MCP":266},"it":916},{"n":167,"v":{"DPP":11305,"MCP":1710,"IND":1048},"it":800},{"n":168,"v":{"DPP":3406,"IND":10101,"UTM":1199,"MCP":667},"it":2797},{"n":169,"v":{"DPP":4841,"IND":6010,"PPM":691},"it":3806},{"n":170,"v":{"DPP":13570,"UTM":5996,"UDF":2672,"MCP":1306},"it":0},{"n":171,"v":{"IND":13783,"DPP":4966,"UDF":1450,"MCP":1059,"UTM":487},"it":8016},{"n":172,"v":{"IND":6256,"DPP":2688,"AFORD":49,"PPM":11},"it":5178},{"n":173,"v":{"IND":16410,"DPP":7342,"UDF":5923,"UTM":503,"MCP":456},"it":13651},{"n":174,"v":{"IND":12313,"DPP":8606,"UTM":564,"MCP":562,"UDF":212},"it":9552},{"n":175,"v":{"IND":13198,"DPP":6765,"MCP":464},"it":9113},{"n":176,"v":{"DPP":13803,"UDF":6176,"UTM":2543,"MCP":995},"it":0},{"n":177,"v":{"DPP":17594,"MCP":2800,"UTM":500,"PP":230},"it":0},{"n":178,"v":{"UTM":9233,"IND":8318,"MCP":509},"it":3881},{"n":179,"v":{"MCP":6360,"DPP":4349,"IND":8239,"UTM":363},"it":3200},{"n":180,"v":{"DPP":10899,"IND":13821,"UTM":700,"MCP":243,"PP":131},"it":9179},{"n":181,"v":{"DPP":24941,"IND":9298,"UTM":462,"MCP":310},"it":6329},{"n":182,"v":{"IND":25441,"DPP":6242,"MCP":255,"UTM":175,"PP":76},"it":14355},{"n":183,"v":{"DPP":20216,"IND":2915,"UTM":484,"PDP":450,"MCP":198},"it":2678},{"n":184,"v":{"DPP":10245,"IND":14025,"MCP":305,"UDF":255,"UTM":61},"it":9377},{"n":185,"v":{"DPP":20089,"IND":2868,"UTM":611,"AFORD":485,"MCP":238},"it":1296},{"n":186,"v":{"DPP":16117,"IND":8651,"UDF":446,"PP":267,"UTM":261,"MCP":228,"AFORD":204},"it":3974},{"n":187,"v":{"DPP":19304,"IND":5611,"UTM":595,"MCP":210},"it":3116},{"n":188,"v":{"DPP":14392,"UTM":4838,"IND":4281,"MCP":1007},"it":2794},{"n":189,"v":{"DPP":8340,"IND":15769,"UTM":457,"MCP":136},"it":5884},{"n":190,"v":{"DPP":14584,"IND":5328,"UTM":2210,"MCP":242,"PDP":217},"it":4916},{"n":191,"v":{"UTM":7838,"DPP":7658,"IND":10440,"MCP":198},"it":7402},{"n":192,"v":{"IND":19691,"DPP":3837,"UTM":220,"PDP":183,"MCP":99},"it":8534},{"n":193,"v":{"DPP":9887,"IND":6467,"UTM":3047,"PDP":1997,"MCP":287},"it":3884},{"n":194,"v":{"IND":22495,"DPP":9729,"MCP":176,"UTM":75},"it":18862},{"n":195,"v":{"DPP":22142,"IND":1270,"UTM":1205,"MCP":980},"it":1270},{"n":196,"v":{"PDP":17635,"IND":5563,"DPP":4381,"UTM":384,"MCP":264},"it":5563},{"n":197,"v":{"IND":21912,"DPP":4290,"UTM":219,"MCP":71},"it":12962},{"n":198,"v":{"DPP":13622,"IND":6008,"PDP":417,"UTM":265,"MCP":135,"UDF":90},"it":3957},{"n":199,"v":{"DPP":8547,"IND":14980,"MCP":518,"UDF":136},"it":7672},{"n":200,"v":{"DPP":8161,"IND":9469,"UTM":1126,"MCP":353,"LEFP":121},"it":7543},{"n":201,"v":{"DPP":13443,"IND":8597,"UDF":1781,"UTM":684,"MCP":514,"AFORD":278},"it":8597},{"n":202,"v":{"UDF":11967,"DPP":6918,"IND":5299,"MCP":1291,"UTM":1267},"it":5299},{"n":203,"v":{"DPP":20472,"MCP":4316,"UTM":3595,"IND":1472,"UDF":357},"it":1472},{"n":204,"v":{"DPP":6081,"UDF":5375,"IND":3411,"PDP":1667,"UTM":542,"MCP":312,"ADD":80},"it":3291},{"n":205,"v":{"IND":11415,"DPP":7192,"AFORD":5908,"UDF":1147,"MCP":474},"it":8608},{"n":206,"v":{"DPP":12462,"IND":9827,"UTM":2319,"UDF":2062,"MCP":1718},"it":7423},{"n":207,"v":{"UTM":10370,"DPP":10134,"MCP":2372,"IND":1688,"UDF":951},"it":1329},{"n":208,"v":{"DPP":22484,"IND":2195,"MCP":641,"UDF":582},"it":2195},{"n":209,"v":{"IND":17655,"DPP":6422,"MCP":5306,"ODYA":298},"it":15729},{"n":210,"v":{"IND":13601,"DPP":6654,"MCP":5889,"UTM":264},"it":8248},{"n":211,"v":{"DPP":14716,"IND":9895,"AFORD":1788,"MCP":732,"UTM":514,"PP":182},"it":9895},{"n":212,"v":{"IND":20199,"DPP":7248,"UTM":1485,"MCP":1479,"PP":531},"it":10186},{"n":213,"v":{"DPP":10390,"IND":8540,"UDF":5549,"PP":1242,"MCP":963,"UTM":599},"it":5895},{"n":214,"v":{"DPP":12218,"MCP":7687,"IND":12575},"it":7580},{"n":215,"v":{"IND":25065,"DPP":7018,"UTM":1518},"it":24885},{"n":216,"v":{"DPP":9959,"IND":11849,"MCP":566,"UTM":142},"it":3187},{"n":217,"v":{"DPP":17527,"IND":12167,"UTM":346},"it":4493},{"n":218,"v":{"DPP":11872,"IND":15389,"UTM":341,"MCP":321,"UDF":204},"it":6401},{"n":219,"v":{"IND":19941,"DPP":3963,"MCP":270,"UTM":163,"PDP":158},"it":19941},{"n":220,"v":{"DPP":26848,"IND":3462,"MCP":366},"it":3462},{"n":221,"v":{"DPP":32005,"IND":1742,"UTM":918,"MCP":440},"it":1742},{"n":222,"v":{"DPP":5861,"IND":12489,"UTM":1114,"AFORD":537,"MCP":127,"PDP":101},"it":4673},{"n":223,"v":{"DPP":9583,"IND":10210,"UTM":760,"MCP":152},"it":8404},{"n":224,"v":{"DPP":2584,"MCP":2524,"IND":2719,"UTM":485,"PDP":39},"it":1615},{"n":225,"v":{"DPP":9911,"IND":11480,"MCP":2357,"UTM":145},"it":8033},{"n":226,"v":{"IND":16355,"DPP":5714,"UTM":1784,"MCP":239},"it":13655},{"n":227,"v":{"DPP":11478,"MCP":5211,"IND":1708,"UTM":523,"PP":172},"it":1525},{"n":228,"v":{"IND":17385,"DPP":3187,"MCP":969,"NPP":203,"UTM":201},"it":6328},{"n":229,"v":{"DPP":7558,"IND":13420,"AFORD":979,"MCP":458,"UTM":169,"PP":67},"it":7525}],"hex":[{"n":1,"name":"Chitipa North","x":-19.3,"y":-370.6},{"n":2,"name":"Chitipa Central","x":-52.3,"y":-389.6},{"n":3,"name":"Chitipa East","x":2.7,"y":-370.6},{"n":4,"name":"Chitipa Chendo","x":-8.3,"y":-351.5},{"n":5,"name":"Chitipa South","x":13.7,"y":-313.4},{"n":6,"name":"Karonga Songwe","x":24.7,"y":-370.6},{"n":7,"name":"Karonga Lufilya","x":46.7,"y":-332.5},{"n":8,"name":"Karonga Central","x":68.7,"y":-332.5},{"n":9,"name":"Karonga Nyungwe","x":13.7,"y":-351.5},{"n":10,"name":"Karonga South","x":24.7,"y":-332.5},{"n":11,"name":"Karonga Town","x":35.7,"y":-351.5},{"n":12,"name":"Rumphi North","x":35.7,"y":-313.4},{"n":13,"name":"Rumphi West","x":2.7,"y":-294.4},{"n":14,"name":"Rumphi East","x":57.7,"y":-313.4},{"n":15,"name":"Rumphi Central","x":24.7,"y":-294.4},{"n":16,"name":"Mzimba North","x":13.7,"y":-275.3},{"n":17,"name":"Mzimba West","x":-8.3,"y":-237.2},{"n":18,"name":"Mzimba Kafukule","x":-19.3,"y":-256.3},{"n":19,"name":"Mzimba North East","x":46.7,"y":-294.4},{"n":20,"name":"Mzimba Central","x":2.7,"y":-256.3},{"n":21,"name":"Mzimba East","x":35.7,"y":-275.3},{"n":22,"name":"Mzimba Hora","x":2.7,"y":-218.2},{"n":23,"name":"Mzimba South West","x":-19.3,"y":-218.2},{"n":24,"name":"Mzimba Solola","x":24.7,"y":-218.2},{"n":25,"name":"Mzimba Perekezi","x":13.7,"y":-237.2},{"n":26,"name":"Mzimba South","x":13.7,"y":-199.1},{"n":27,"name":"Mzimba South East","x":35.7,"y":-199.1},{"n":28,"name":"Mzimba Luwerezi","x":-8.3,"y":-275.3},{"n":29,"name":"Nkhata Bay North","x":68.7,"y":-294.4},{"n":30,"name":"Nkhata Bay Mpamba","x":79.7,"y":-275.3},{"n":31,"name":"Nkhata Bay Central","x":35.7,"y":-237.2},{"n":32,"name":"Nkhata Bay West","x":24.7,"y":-256.3},{"n":33,"name":"Nkhata Bay Chintheche","x":57.7,"y":-237.2},{"n":34,"name":"Nkhata Bay South","x":46.7,"y":-218.2},{"n":35,"name":"Mzuzu City North","x":57.7,"y":-275.3,"city":"Mzuzu"},{"n":36,"name":"Mzuzu City South West","x":46.7,"y":-256.3,"city":"Mzuzu"},{"n":37,"name":"Mzuzu City South East","x":68.7,"y":-256.3,"city":"Mzuzu"},{"n":38,"name":"Likoma Islands","x":68.7,"y":-180.1},{"n":39,"name":"Nkhotakota Dwangwa","x":90.7,"y":-142.0},{"n":40,"name":"Nkhotakota Liwaladzi","x":57.7,"y":-161.0},{"n":41,"name":"Nkhotakota Central","x":79.7,"y":-161.0},{"n":42,"name":"Nkhotakota Chia","x":46.7,"y":-180.1},{"n":43,"name":"Nkhotakota Mkhula","x":57.7,"y":-199.1},{"n":44,"name":"Kasungu North","x":-19.3,"y":-180.1},{"n":45,"name":"Kasungu North West","x":-41.3,"y":-180.1},{"n":46,"name":"Kasungu West","x":-52.3,"y":-161.0},{"n":47,"name":"Kasungu North North East","x":2.7,"y":-180.1},{"n":48,"name":"Kasungu East","x":13.7,"y":-161.0},{"n":49,"name":"Kasungu North East","x":24.7,"y":-180.1},{"n":50,"name":"Kasungu Central","x":-30.3,"y":-161.0},{"n":51,"name":"Kasungu South East","x":-19.3,"y":-142.0},{"n":52,"name":"Kasungu South West","x":-41.3,"y":-142.0},{"n":53,"name":"Kasungu South","x":-30.3,"y":-122.9},{"n":54,"name":"Kasungu Municipality","x":-8.3,"y":-161.0},{"n":55,"name":"Ntchisi North","x":35.7,"y":-161.0},{"n":56,"name":"Ntchisi West","x":24.7,"y":-142.0},{"n":57,"name":"Ntchisi Central East","x":68.7,"y":-142.0},{"n":58,"name":"Ntchisi East","x":46.7,"y":-142.0},{"n":59,"name":"Ntchisi South","x":57.7,"y":-122.9},{"n":60,"name":"Dowa Ngala","x":68.7,"y":-65.8},{"n":61,"name":"Dowa Kasangadzi","x":2.7,"y":-142.0},{"n":62,"name":"Dowa Mphudzu","x":35.7,"y":-122.9},{"n":63,"name":"Dowa Central","x":13.7,"y":-122.9},{"n":64,"name":"Dowa Mndolera","x":24.7,"y":-103.9},{"n":65,"name":"Dowa North East","x":68.7,"y":-103.9},{"n":66,"name":"Dowa West","x":2.7,"y":-103.9},{"n":67,"name":"Dowa East","x":46.7,"y":-103.9},{"n":68,"name":"Dowa Central East","x":79.7,"y":-84.8},{"n":69,"name":"Dowa South East","x":57.7,"y":-84.8},{"n":70,"name":"Mchinji North East","x":-41.3,"y":-103.9},{"n":71,"name":"Mchinji North","x":-52.3,"y":-122.9},{"n":72,"name":"Mchinji East","x":-30.3,"y":-46.7},{"n":73,"name":"Mchinji West","x":-85.3,"y":-103.9},{"n":74,"name":"Mchinji Central East","x":-52.3,"y":-84.8},{"n":75,"name":"Mchinji South West","x":-74.3,"y":-84.8},{"n":76,"name":"Mchinji South","x":-52.3,"y":-46.7},{"n":77,"name":"Salima North","x":79.7,"y":-122.9},{"n":78,"name":"Salima Central West","x":101.7,"y":-84.8},{"n":79,"name":"Salima Central East","x":178.7,"y":-65.8},{"n":80,"name":"Salima Central","x":90.7,"y":-103.9},{"n":81,"name":"Salima South Linthipe","x":145.7,"y":-8.6},{"n":82,"name":"Salima South","x":112.7,"y":-65.8},{"n":83,"name":"Lilongwe Chilobwe","x":-41.3,"y":-65.8},{"n":84,"name":"Lilongwe Mphande","x":2.7,"y":10.4},{"n":85,"name":"Lilongwe Mude","x":24.7,"y":10.4},{"n":86,"name":"Lilongwe Demera","x":-8.3,"y":-8.6},{"n":87,"name":"Lilongwe Chiwamba","x":-63.3,"y":-103.9},{"n":88,"name":"Lilongwe East","x":101.7,"y":-46.7},{"n":89,"name":"Lilongwe Mapuyu North","x":-8.3,"y":-122.9},{"n":90,"name":"Lilongwe Machenga","x":35.7,"y":-8.6},{"n":91,"name":"Lilongwe Nkhoma","x":57.7,"y":-8.6},{"n":92,"name":"Lilongwe Likuni","x":-19.3,"y":-27.7},{"n":93,"name":"Lilongwe Central","x":68.7,"y":-27.7},{"n":94,"name":"Lilongwe Mpenu","x":79.7,"y":-46.7},{"n":95,"name":"Lilongwe Mapuyu South","x":13.7,"y":29.5},{"n":96,"name":"Lilongwe Nyanja","x":-19.3,"y":-65.8},{"n":97,"name":"Lilongwe Msozi","x":90.7,"y":-65.8},{"n":98,"name":"Lilongwe Bunda","x":-30.3,"y":-84.8},{"n":99,"name":"Lilongwe Phirilanjuzi","x":-19.3,"y":-103.9},{"n":100,"name":"Lilongwe Msinja South","x":13.7,"y":-8.6},{"n":101,"name":"Lilongwe Msinja North","x":-8.3,"y":-84.8},{"n":102,"name":"Lilongwe City Lumbadzi","x":35.7,"y":-46.7,"city":"Lilongwe City"},{"n":103,"name":"Lilongwe City Dzenza","x":13.7,"y":-46.7,"city":"Lilongwe City"},{"n":104,"name":"Lilongwe City Centre","x":24.7,"y":-65.8,"city":"Lilongwe City"},{"n":105,"name":"Lilongwe City Chipala-Nafisi","x":24.7,"y":-27.7,"city":"Lilongwe City"},{"n":106,"name":"Lilongwe City Nankhaka","x":46.7,"y":-65.8,"city":"Lilongwe City"},{"n":107,"name":"Lilongwe City Mtandire-Mtsiriza","x":46.7,"y":-27.7,"city":"Lilongwe City"},{"n":108,"name":"Lilongwe City Bwaila","x":57.7,"y":-46.7,"city":"Lilongwe City"},{"n":109,"name":"Lilongwe City Masintha","x":2.7,"y":-65.8,"city":"Lilongwe City"},{"n":110,"name":"Lilongwe City M'buka","x":2.7,"y":-27.7,"city":"Lilongwe City"},{"n":111,"name":"Lilongwe City Mlodza","x":35.7,"y":-84.8,"city":"Lilongwe City"},{"n":112,"name":"Lilongwe City Kamphuno","x":-8.3,"y":-46.7,"city":"Lilongwe City"},{"n":113,"name":"Lilongwe City Ngwenya","x":13.7,"y":-84.8,"city":"Lilongwe City"},{"n":114,"name":"Dedza Mayani","x":112.7,"y":48.5},{"n":115,"name":"Dedza Mlunduni","x":46.7,"y":10.4},{"n":116,"name":"Dedza Kasina","x":68.7,"y":10.4},{"n":117,"name":"Dedza Mtakataka","x":112.7,"y":10.4},{"n":118,"name":"Dedza Linthipe","x":134.7,"y":10.4},{"n":119,"name":"Dedza Boma","x":79.7,"y":-8.6},{"n":120,"name":"Dedza Golomoti","x":101.7,"y":-8.6},{"n":121,"name":"Dedza Chikoma","x":123.7,"y":-8.6},{"n":122,"name":"Dedza Mphunzi","x":90.7,"y":-27.7},{"n":123,"name":"Dedza Dzalanyama","x":112.7,"y":-27.7},{"n":124,"name":"Ntcheu North","x":134.7,"y":48.5},{"n":125,"name":"Ntcheu Bwanje","x":123.7,"y":105.7},{"n":126,"name":"Ntcheu North West","x":123.7,"y":29.5},{"n":127,"name":"Ntcheu Central East","x":156.7,"y":48.5},{"n":128,"name":"Ntcheu Central","x":145.7,"y":29.5},{"n":129,"name":"Ntcheu Dzonzi Mvai","x":123.7,"y":67.6},{"n":130,"name":"Ntcheu Central Central East","x":145.7,"y":67.6},{"n":131,"name":"Ntcheu South","x":134.7,"y":86.6},{"n":132,"name":"Mangochi North","x":189.7,"y":-46.7},{"n":133,"name":"Mangochi Lutende","x":167.7,"y":29.5},{"n":134,"name":"Mangochi East","x":211.7,"y":-8.6},{"n":135,"name":"Mangochi Monkey Bay","x":200.7,"y":10.4},{"n":136,"name":"Mangochi West","x":167.7,"y":-8.6},{"n":137,"name":"Mangochi Central","x":233.7,"y":29.5},{"n":138,"name":"Mangochi North East","x":200.7,"y":-27.7},{"n":139,"name":"Mangochi Masongola","x":156.7,"y":10.4},{"n":140,"name":"Mangochi South West","x":178.7,"y":10.4},{"n":141,"name":"Mangochi South","x":211.7,"y":29.5},{"n":142,"name":"Mangochi Malombe","x":222.7,"y":10.4},{"n":143,"name":"Mangochi Nkungulu","x":156.7,"y":-103.9},{"n":144,"name":"Mangochi Municipality","x":189.7,"y":-8.6},{"n":145,"name":"Machinga North East","x":222.7,"y":48.5},{"n":146,"name":"Machinga South East","x":244.7,"y":86.6},{"n":147,"name":"Machinga Central","x":200.7,"y":48.5},{"n":148,"name":"Machinga East","x":244.7,"y":48.5},{"n":149,"name":"Machinga Mikoko","x":189.7,"y":67.6},{"n":150,"name":"Machinga Central East","x":233.7,"y":67.6},{"n":151,"name":"Machinga Likwenu","x":211.7,"y":67.6},{"n":152,"name":"Machinga South","x":200.7,"y":86.6},{"n":153,"name":"Balaka Ulongwe","x":145.7,"y":105.7},{"n":154,"name":"Balaka Bwaila","x":156.7,"y":86.6},{"n":155,"name":"Balaka Ngwangwa","x":178.7,"y":86.6},{"n":156,"name":"Balaka Ririvi","x":167.7,"y":67.6},{"n":157,"name":"Balaka Mulunguzi","x":178.7,"y":48.5},{"n":158,"name":"Zomba Malosa","x":189.7,"y":181.9},{"n":159,"name":"Zomba Nsondole","x":211.7,"y":181.9},{"n":160,"name":"Zomba Chingale","x":178.7,"y":162.8},{"n":161,"name":"Zomba Likangala","x":211.7,"y":143.8},{"n":162,"name":"Zomba Changalume","x":178.7,"y":124.7},{"n":163,"name":"Zomba Ntonya","x":200.7,"y":124.7},{"n":164,"name":"Zomba Matiya","x":189.7,"y":105.7},{"n":165,"name":"Zomba Thondwe","x":211.7,"y":105.7},{"n":166,"name":"Zomba Chikomwe","x":222.7,"y":86.6},{"n":167,"name":"Neno North","x":123.7,"y":143.8},{"n":168,"name":"Neno East","x":134.7,"y":124.7},{"n":169,"name":"Neno South","x":112.7,"y":200.9},{"n":170,"name":"Blantyre North","x":156.7,"y":124.7},{"n":171,"name":"Blantyre Central","x":156.7,"y":162.8},{"n":172,"name":"Blantyre West","x":145.7,"y":143.8},{"n":173,"name":"Blantyre North East","x":167.7,"y":105.7},{"n":174,"name":"Blantyre South West","x":134.7,"y":162.8},{"n":175,"name":"Blantyre South East","x":167.7,"y":143.8},{"n":176,"name":"Zomba City North","x":189.7,"y":143.8,"city":"Zomba City"},{"n":177,"name":"Zomba City South","x":200.7,"y":162.8,"city":"Zomba City"},{"n":178,"name":"Mwanza Central","x":112.7,"y":162.8},{"n":179,"name":"Mwanza West","x":101.7,"y":220.0},{"n":180,"name":"Phalombe North","x":233.7,"y":181.9},{"n":181,"name":"Phalombe North East","x":244.7,"y":162.8},{"n":182,"name":"Phalombe Machemba","x":222.7,"y":200.9},{"n":183,"name":"Phalombe South","x":233.7,"y":220.0},{"n":184,"name":"Phalombe East","x":244.7,"y":200.9},{"n":185,"name":"Chiradzulu Nyungwe","x":200.7,"y":239.0},{"n":186,"name":"Chiradzulu Masanjala","x":123.7,"y":220.0},{"n":187,"name":"Chiradzulu Thumbwe","x":123.7,"y":181.9},{"n":188,"name":"Chiradzulu Nguludi","x":145.7,"y":181.9},{"n":189,"name":"Chiradzulu Midima","x":167.7,"y":181.9},{"n":190,"name":"Mulanje North","x":211.7,"y":220.0},{"n":191,"name":"Mulanje West","x":178.7,"y":277.1},{"n":192,"name":"Mulanje Pasani","x":200.7,"y":277.1},{"n":193,"name":"Mulanje South West","x":189.7,"y":296.2},{"n":194,"name":"Mulanje Limbuli","x":244.7,"y":239.0},{"n":195,"name":"Mulanje South","x":211.7,"y":258.1},{"n":196,"name":"Mulanje Central","x":222.7,"y":239.0},{"n":197,"name":"Mulanje South East","x":233.7,"y":258.1},{"n":198,"name":"Mulanje Bale","x":200.7,"y":200.9},{"n":199,"name":"Blantyre City South Lunzu","x":167.7,"y":258.1,"city":"Blantyre City"},{"n":200,"name":"Blantyre City Michiru-Chirimba","x":167.7,"y":220.0,"city":"Blantyre City"},{"n":201,"name":"Blantyre City Mapanga-Mpingwe-Mzedi","x":145.7,"y":220.0,"city":"Blantyre City"},{"n":202,"name":"Blantyre City Ndirande Malabada Nyambadwe","x":156.7,"y":239.0,"city":"Blantyre City"},{"n":203,"name":"Blantyre City Chilomoni Kabula Nancholi","x":156.7,"y":200.9,"city":"Blantyre City"},{"n":204,"name":"Blantyre City Mbayani-Mussa Magasa","x":178.7,"y":239.0,"city":"Blantyre City"},{"n":205,"name":"Blantyre City Nkolokoti-Ndirande Matope","x":178.7,"y":200.9,"city":"Blantyre City"},{"n":206,"name":"Blantyre City Chichiri-Misesa","x":189.7,"y":220.0,"city":"Blantyre City"},{"n":207,"name":"Blantyre City Soche-Zingwangwa","x":134.7,"y":239.0,"city":"Blantyre City"},{"n":208,"name":"Blantyre City Chigumula BCA-Club Banana","x":134.7,"y":200.9,"city":"Blantyre City"},{"n":209,"name":"Chikwawa West","x":112.7,"y":277.1},{"n":210,"name":"Chikwawa North","x":112.7,"y":239.0},{"n":211,"name":"Chikwawa Central West","x":90.7,"y":239.0},{"n":212,"name":"Chikwawa Central","x":145.7,"y":334.3},{"n":213,"name":"Chikwawa East","x":134.7,"y":277.1},{"n":214,"name":"Chikwawa Mkombedzi","x":134.7,"y":315.2},{"n":215,"name":"Chikwawa South","x":123.7,"y":296.2},{"n":216,"name":"Thyolo Mikolongwe","x":156.7,"y":315.2},{"n":217,"name":"Thyolo Goliati","x":178.7,"y":315.2},{"n":218,"name":"Thyolo Bvumbwe-Masenjere","x":145.7,"y":296.2},{"n":219,"name":"Thyolo Khonjeni-Mangunda","x":167.7,"y":296.2},{"n":220,"name":"Thyolo Central","x":156.7,"y":277.1},{"n":221,"name":"Thyolo Thava","x":101.7,"y":258.1},{"n":222,"name":"Thyolo Masambanjati","x":123.7,"y":258.1},{"n":223,"name":"Thyolo Thekerani","x":145.7,"y":258.1},{"n":224,"name":"Luchenza","x":189.7,"y":258.1},{"n":225,"name":"Nsanje North","x":167.7,"y":334.3},{"n":226,"name":"Nsanje Lalanje","x":178.7,"y":353.3},{"n":227,"name":"Nsanje Central","x":189.7,"y":372.4},{"n":228,"name":"Nsanje South West","x":156.7,"y":353.3},{"n":229,"name":"Nsanje South","x":178.7,"y":391.4}],"hs":12.7,"outline":["M83.7,220.5L101.2,198.5L103.6,188.8L100.2,167.4L102.0,154.3L109.3,152.5L110.4,139.7L116.4,134.5L119.3,123.7L115.9,90.8L121.4,82.8L115.2,70.8L117.3,61.2L110.4,46.5L113.7,40.9L109.9,27.3L96.6,7.8L92.7,6.8L82.7,11.5L63.7,14.4L63.5,18.1L47.2,15.9L32.4,27.1L24.6,19.5L22.1,24.8L23.6,30.8L18.1,36.5L11.3,18.5L-3.5,8.6L-12.9,-13.0L-17.0,-12.8L-21.9,-22.4L-19.5,-31.9L-22.0,-40.5L-28.2,-46.2L-32.0,-45.5L-38.2,-55.3L-45.8,-49.4L-50.7,-37.2L-54.8,-44.5L-53.9,-53.7L-58.0,-55.8L-65.1,-73.6L-72.4,-79.3L-75.2,-76.7L-79.0,-79.7L-77.8,-84.6L-71.2,-87.4L-71.8,-90.2L-76.4,-97.0L-89.7,-100.9L-87.9,-106.8L-81.8,-105.4L-70.6,-114.1L-71.3,-120.0L-63.1,-126.8L-60.2,-142.7L-52.4,-148.2L-57.0,-157.0L-51.3,-170.8L-58.9,-175.0L-58.5,-180.3L-46.0,-188.7L-34.4,-186.5L-24.0,-192.7L-14.5,-191.2L5.3,-205.6L4.2,-208.4L-2.5,-209.2L-14.4,-207.0L-20.5,-214.8L-20.8,-221.0L-26.3,-222.7L-20.6,-233.2L-18.9,-239.6L-21.1,-242.7L-17.8,-248.2L-20.3,-262.8L-30.3,-263.0L-26.5,-267.6L-29.6,-274.6L-27.6,-276.5L-21.7,-274.1L-22.8,-278.3L-10.0,-292.7L-22.0,-300.9L-20.6,-303.3L-27.7,-305.2L-3.9,-308.2L22.7,-320.9L6.6,-329.6L4.2,-334.9L7.0,-339.1L-20.0,-350.2L-12.9,-359.8L-16.2,-365.7L-29.1,-371.1L-30.0,-377.3L-40.7,-378.7L-43.4,-374.4L-52.6,-377.7L-54.3,-380.1L-50.8,-385.1L-59.5,-385.9L-60.1,-389.7L-60.3,-394.4L-53.9,-400.0L-37.8,-385.8L-19.0,-386.5L-6.2,-377.8L29.5,-379.4L45.0,-373.9L41.8,-370.7L48.4,-360.6L47.6,-355.6L54.3,-347.6L83.3,-327.8L77.0,-326.3L78.9,-323.1L72.7,-319.3L77.3,-311.4L79.8,-295.4L76.4,-291.7L77.9,-284.8L82.4,-281.3L83.6,-268.2L89.2,-256.8L73.2,-246.1L73.4,-239.2L60.2,-231.9L55.7,-214.0L63.9,-202.4L72.6,-201.4L75.7,-193.3L73.4,-186.6L83.9,-180.0L81.8,-176.1L86.4,-173.1L86.9,-168.7L89.6,-170.5L87.7,-167.8L91.5,-143.5L86.2,-136.0L96.0,-112.4L101.6,-103.9L107.6,-105.7L109.6,-101.6L111.0,-103.3L122.3,-89.3L116.7,-62.0L110.1,-51.0L113.8,-28.8L120.6,-14.8L128.9,-11.0L129.0,-3.8L141.7,-8.2L143.1,-23.0L147.7,-28.3L145.1,-39.0L147.6,-45.4L153.3,-38.9L157.1,-20.2L166.5,-18.7L172.1,-6.6L187.4,10.7L194.4,4.9L181.9,-28.1L182.0,-38.6L169.1,-85.9L151.4,-87.4L146.9,-91.5L148.1,-118.3L171.9,-91.2L215.2,-19.4L218.5,-7.3L239.8,17.7L256.7,45.0L256.8,58.6L250.9,61.4L248.5,72.6L249.9,83.7L253.7,89.1L247.9,105.4L254.7,153.4L250.9,256.1L239.4,267.0L235.2,266.2L226.6,272.0L222.7,270.1L219.1,277.6L214.9,270.0L208.9,268.9L194.4,288.2L192.5,301.8L194.9,305.4L191.1,311.6L190.4,322.1L178.1,333.0L180.8,342.0L193.6,352.3L196.4,365.5L191.0,385.7L195.4,390.8L195.7,400.7L170.8,399.9L174.1,398.4L168.0,393.1L181.0,384.5L178.8,365.8L174.8,363.6L168.5,366.0L161.2,360.4L160.4,356.0L153.6,355.9L153.3,350.9L147.0,348.4L144.7,339.0L137.8,336.8L135.5,326.4L127.9,325.2L127.8,317.2L124.2,318.8L118.4,314.6L115.7,300.3L110.8,295.3L107.1,297.6L100.6,292.7L96.3,272.5L101.3,261.4L92.3,246.8L82.0,239.7L81.4,236.3L83.7,220.5Z"],"vb":"-105 -415 377 831"};
+// One colour map feeds every swatch, seat, bar segment and button (same in light and dark mode).
+const COLORS = {"IND": "#8b95a5", "DPP": "#2f6fd6", "MCP": "#e5383b", "UTM": "#8b1a3a", "UDF": "#f2c200", "PP": "#f28c00", "AFORD": "#19b5e0", "PDP": "#8e44ad", "ODYA": "#8d6e63", "FP": "#8cc63f", "NDP": "#1f9d55", "NPP": "#ec6fa8", "LEFP": "#3949ab", "PPM": "#6d7a2a", "PCP": "#00897b", "SA": "#b39ddb", "NC": "#d81b9a", "MAFUNDE": "#b0763a", "PETRA": "#ff7a59", "ADD": "#d7b98e"};
+const HEMI_ORDER = ["MCP","UTM","PP","AFORD","UDF","PDP","ODYA","FP","NDP","NPP","LEFP","PPM","PCP","SA","NC","MAFUNDE","PETRA","ADD","IND","DPP"];
+const NAME = Object.fromEntries(PARTIES);
+const BASE = buildBase(DATA.cons);
+const TOTAL = DATA.cons.length, MAJ = Math.floor(TOTAL / 2) + 1;
+const BASE_PROJ = project(DATA.cons, BASE, BASE), BASE_SEATS = BASE_PROJ.seats, BASE_DETAIL = BASE_PROJ.detail;
+const state = {}; SLIDER_CODES.forEach(p => state[p] = BASE[p]);
+const sel = new Set();
+const $ = id => document.getElementById(id);
+const f1 = v => v.toFixed(1);
+const clamp = (p, v) => {
+  let others = 0; SLIDER_CODES.forEach(q => { if (q !== p) others += state[q]; });
+  return Math.max(0, Math.min(60, 100 - others, v));
+};
+
+// ---- inputs
+const rowsEl = $("rows"), refs = {};
+function mkRow(code, label, disabled) {
+  const r = document.createElement("div"); r.className = "row";
+  r.innerHTML = '<div class="lab"><i class="sw" style="background:' + COLORS[code] + '"></i><span class="t"></span></div>' +
+    '<div class="sl"><input type="range" min="0" max="60" step="0.1" id="s-' + code + '"' + (disabled ? " disabled" : "") + '></div>' +
+    '<div class="box"><input type="number" min="0" max="60" step="0.1" id="n-' + code + '"' + (disabled ? " disabled" : "") + '><span>%</span></div>';
+  r.querySelector(".t").textContent = label;
+  rowsEl.appendChild(r);
+  refs[code] = { s: r.querySelector("input[type=range]"), n: r.querySelector("input[type=number]") };
+  refs[code].s.style.setProperty("--pc", COLORS[code]);
+  return refs[code];
+}
+SLIDER_CODES.forEach(p => {
+  const x = mkRow(p, NAME[p] + " (" + p + ")", false);
+  x.s.addEventListener("input", () => { state[p] = clamp(p, parseFloat(x.s.value)); update(); });
+  const commit = () => { const v = parseFloat(x.n.value); state[p] = clamp(p, isNaN(v) ? state[p] : Math.round(v * 10) / 10); update(); };
+  x.n.addEventListener("change", commit);
+  x.n.addEventListener("blur", commit);
+  x.n.addEventListener("keydown", e => { if (e.key === "Enter") commit(); });
+});
+const oth = mkRow("Other", "Other", true);
+oth.s.style.setProperty("--pc", "var(--muted)");
+const othRow = oth.s.closest(".row"); othRow.classList.add("locked");
+othRow.querySelector(".lab").insertAdjacentHTML("beforeend", '<svg class="lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-label="Locked"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="currentColor" stroke="none"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2"/></svg>');
+oth.s.previousElementSibling;
+document.querySelector("#rows .row:last-child .sw").style.background = "var(--muted)";
+$("reset").addEventListener("click", () => { SLIDER_CODES.forEach(p => state[p] = BASE[p]); update(); });
+
+// ---- hemicycle geometry (fixed seat positions, parties in fixed order)
+const NR = 9, RO = 300, RI = 0.30 * RO;
+const radii = Array.from({ length: NR }, (_, i) => RI + (RO - RI) * i / (NR - 1));
+const sumR = radii.reduce((a, b) => a + b, 0);
+let counts = radii.map(r => Math.round(TOTAL * r / sumR));
+let diff = TOTAL - counts.reduce((a, b) => a + b, 0);
+for (let i = NR - 1; diff !== 0; i = (i + NR - 1) % NR) { counts[i] += Math.sign(diff); diff -= Math.sign(diff); }
+const seatsPos = [];
+radii.forEach((r, i) => { for (let j = 0; j < counts[i]; j++) seatsPos.push({ a: Math.PI - Math.PI * j / (counts[i] - 1), r }); });
+seatsPos.sort((p, q) => (q.a - p.a) || (p.r - q.r));
+const dot = 0.46 * (RO - RI) / (NR - 1);
+const hemi = $("hemi"), dots = [];
+seatsPos.forEach(s => {
+  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  c.setAttribute("cx", (s.r * Math.cos(s.a)).toFixed(2)); c.setAttribute("cy", (-s.r * Math.sin(s.a)).toFixed(2));
+  c.setAttribute("r", dot.toFixed(2)); c.setAttribute("fill", "var(--track)");
+  hemi.appendChild(c); dots.push(c);
+});
+
+
+// Buttons are only rebuilt when their set changes, so a click is never lost to a re-render.
+function syncBtns(box, items, isOn, onClick) {
+  const sig = items.map(x => x[0]).join(",");
+  if (box.dataset.sig !== sig) {
+    box.dataset.sig = sig; box.innerHTML = "";
+    items.forEach(([k, lab]) => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "btn"; b.dataset.k = k;
+      b.innerHTML = (k === "win" || k === "flip" ? "" : '<i class="sw" style="background:' + COLORS[k] + '"></i>') + lab;
+      box.appendChild(b);
+    });
+  }
+  box._on = onClick;
+  box.onclick = e => { const b = e.target.closest("button"); if (b) box._on(b.dataset.k); };
+  [...box.children].forEach(b => b.classList.toggle("on", !!isOn(b.dataset.k)));
+}
+// ---- render
+function update() {
+  const nat = fullInputs(state, BASE);
+  const proj = project(DATA.cons, BASE, nat); const res = proj.seats;
+  // inputs
+  let used = 0; SLIDER_CODES.forEach(p => used += state[p]);
+  SLIDER_CODES.forEach(p => {
+    refs[p].s.value = state[p]; refs[p].n.value = f1(state[p]);
+    refs[p].s.style.setProperty("--f", (state[p] / 60 * 100) + "%");
+  });
+  const o = Math.max(0, 100 - used);
+  refs.Other.s.value = o; refs.Other.n.value = f1(o); refs.Other.s.style.setProperty("--f", (o / 60 * 100) + "%");
+  // hemicycle
+  let k = 0;
+  HEMI_ORDER.forEach(p => { for (let i = 0; i < res[p]; i++) dots[k++].setAttribute("fill", COLORS[p]); });
+  // legend
+  $("legend").innerHTML = HEMI_ORDER.filter(p => res[p] > 0).map(p =>
+    '<span><i class="sw" style="background:' + COLORS[p] + '"></i>' + p + '</span>').join("");
+  // table
+  $("tb").innerHTML = PARTIES.map(([p, n]) => p).filter(p => nat[p] >= 1 || res[p] > 0).sort((a, b) => res[b] - res[a]).map(p => {
+    const d = res[p] - BASE_SEATS[p];
+    const cls = d > 0 ? "up" : d < 0 ? "down" : "";
+    const txt = d > 0 ? "+" + d : d < 0 ? "−" + (-d) : "0";
+    return '<tr><td><div class="pn"><i class="sw" style="background:' + COLORS[p] + '"></i><span>' + NAME[p] + " (" + p + ")" +
+      '</span></div></td><td>' + f1(nat[p]) + '%</td><td class="seats">' + res[p] + '</td><td class="' + cls + '">' + txt + "</td></tr>";
+  }).join("");
+  // coalition
+  const avail = PARTIES.map(x => x[0]).filter(p => res[p] > 0).sort((a, b) => res[b] - res[a] || PARTIES.findIndex(x => x[0] === a) - PARTIES.findIndex(x => x[0] === b));
+  [...sel].forEach(p => { if (!(res[p] > 0)) sel.delete(p); });
+  syncBtns($("cbtn"), avail.map(p => [p, p]), p => sel.has(p), p => { sel.has(p) ? sel.delete(p) : sel.add(p); update(); });
+  let got = 0;
+  const segs = avail.filter(p => sel.has(p)).map(p => { got += res[p]; return '<div class="seg" style="width:' + (res[p] / TOTAL * 100) + '%;background:' + COLORS[p] + '"></div>'; }).join("");
+  const mp = MAJ / TOTAL * 100;
+  $("cbar").innerHTML = segs + '<div class="tick" style="left:' + mp + '%"></div><div class="tickl" style="left:' + mp + '%">' + MAJ + "</div>";
+  renderMap(proj, res, avail);
+  $("cstat").innerHTML = got + " of " + TOTAL + " seats" + (got >= MAJ ? ' <span class="ok">Majority reached</span>' : "");
+}
+// ---- map (schematic hex layout, one hex per constituency)
+const IDX = {}; DATA.cons.forEach((c, i) => IDX[c.n] = i);
+const mapEl = $("map"); mapEl.setAttribute("viewBox", DATA.vb);
+const SVGNS = "http://www.w3.org/2000/svg";
+DATA.outline.forEach(d => { const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", d); p.setAttribute("class", "land"); mapEl.appendChild(p); });
+const hexEls = {}, HR = DATA.hs;
+const hexPts = (x, y) => [0, 1, 2, 3, 4, 5].map(k => { const a = Math.PI / 180 * (90 + 60 * k); return (x + HR * Math.cos(a)).toFixed(1) + "," + (y - HR * Math.sin(a)).toFixed(1); }).join(" ");
+DATA.hex.forEach(h => {
+  const e = document.createElementNS(SVGNS, "polygon");
+  e.setAttribute("points", hexPts(h.x, h.y)); e.setAttribute("class", "hx"); e.dataset.n = h.n;
+  mapEl.appendChild(e); hexEls[h.n] = e;
+});
+
+// outline each major city's block of hexes (shared edges between its own hexes are not drawn)
+(function () {
+  const groups = {};
+  DATA.hex.forEach(h => { if (h.city) (groups[h.city] = groups[h.city] || []).push(h); });
+  Object.values(groups).forEach(hs => {
+    const verts = [], snap = (x, y) => { let k = verts.findIndex(v => Math.hypot(v[0] - x, v[1] - y) < 2); if (k < 0) { verts.push([x, y]); k = verts.length - 1; } return k; };
+    const cnt = {}, seg = {};
+    hs.forEach(h => {
+      const ids = [0, 1, 2, 3, 4, 5].map(k => { const a = Math.PI / 180 * (90 + 60 * k); return snap(h.x + HR * Math.cos(a), h.y - HR * Math.sin(a)); });
+      ids.forEach((v, i) => { const w = ids[(i + 1) % 6], key = Math.min(v, w) + "-" + Math.max(v, w); cnt[key] = (cnt[key] || 0) + 1; seg[key] = [v, w]; });
+    });
+    const d = Object.keys(cnt).filter(k => cnt[k] === 1).map(k => { const [a, b] = seg[k]; return "M" + verts[a][0].toFixed(1) + "," + verts[a][1].toFixed(1) + "L" + verts[b][0].toFixed(1) + "," + verts[b][1].toFixed(1); }).join("");
+    const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", d); p.setAttribute("class", "cityline"); mapEl.appendChild(p);
+  });
+})();
+const HEXN = Object.fromEntries(DATA.hex.map(h => [h.n, h]));
+let mapMode = "win", tipN = null, lastProj = null, lastRes = null;
+const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; $("mapwrap").appendChild(tip);
+function tipHtml(n) {
+  const d = lastProj.detail[IDX[n]];
+  const rows = Object.entries(d.s).filter(([p, v]) => v >= 1 || p === d.w).sort((a, b) => b[1] - a[1]);
+  return '<div class="th"><b>' + HEXN[n].name + '</b></div>' +
+    rows.map(([p, v]) => '<div class="tr' + (p === d.w ? " w" : "") + '"><i class="sw" style="background:' + COLORS[p] + '"></i><span class="n">' + p + "</span><span>" + f1(v) + "%</span></div>").join("");
+}
+function placeTip() {
+  if (tipN == null) { tip.hidden = true; return; }
+  tip.innerHTML = tipHtml(tipN); tip.hidden = false;
+  const w = $("mapwrap").getBoundingClientRect(), r = hexEls[tipN].getBoundingClientRect();
+  const cx = r.left - w.left + r.width / 2;
+  let left = Math.max(0, Math.min(w.width - tip.offsetWidth, cx - tip.offsetWidth / 2));
+  let top = r.top - w.top - tip.offsetHeight - 6;
+  if (top < 0) top = r.bottom - w.top + 6;
+  tip.style.left = left + "px"; tip.style.top = top + "px";
+}
+mapEl.addEventListener("click", e => {
+  const h = e.target.closest(".hx");
+  tipN = h ? (+h.dataset.n === tipN ? null : +h.dataset.n) : null;
+  Object.values(hexEls).forEach(x => x.classList.remove("sel"));
+  if (tipN != null) hexEls[tipN].classList.add("sel");
+  placeTip(); e.stopPropagation();
+});
+document.addEventListener("click", e => {
+  if (tip.contains(e.target)) return;
+  tipN = null; Object.values(hexEls).forEach(x => x.classList.remove("sel")); placeTip();
+});
+function renderMap(proj, res, avail) {
+  lastProj = proj; lastRes = res;
+  if (mapMode !== "win" && mapMode !== "flip" && !avail.includes(mapMode)) mapMode = "win";
+  syncBtns($("mbtn"), [["win", "Winner"], ["flip", "Flips"]].concat(avail.map(p => [p, p])), k => mapMode === k, k => { mapMode = k; renderMap(lastProj, lastRes, avail); });
+  const leg = $("mleg");
+  if (mapMode === "flip") {
+    const gained = new Set();
+    DATA.cons.forEach((c, i) => {
+      const f = proj.detail[i].w !== BASE_DETAIL[i].w;
+      hexEls[c.n].style.fill = f ? COLORS[proj.detail[i].w] : "var(--emp)";
+      if (f) gained.add(proj.detail[i].w);
+    });
+    leg.innerHTML = '<div class="legend">' + HEMI_ORDER.filter(p => gained.has(p)).map(p => '<span><i class="sw" style="background:' + COLORS[p] + '"></i>' + p + "</span>").join("") + "</div>";
+  } else if (mapMode === "win") {
+    DATA.cons.forEach((c, i) => hexEls[c.n].style.fill = COLORS[proj.detail[i].w]);
+    leg.innerHTML = '<div class="legend">' + HEMI_ORDER.filter(p => res[p] > 0).map(p => '<span><i class="sw" style="background:' + COLORS[p] + '"></i>' + p + "</span>").join("") + "</div>";
+  } else {
+    const vals = DATA.cons.map((c, i) => proj.detail[i].s[mapMode] || 0);
+    const lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
+    const tint = t => "color-mix(in srgb, " + COLORS[mapMode] + " " + (10 + 90 * t).toFixed(0) + "%, var(--emp))";
+    DATA.cons.forEach((c, i) => hexEls[c.n].style.fill = tint((vals[i] - lo) / span));
+    leg.innerHTML = '<div class="cbar"><div class="gr" style="background:linear-gradient(to right,' + tint(0) + "," + tint(1) + ')"></div><div class="lb"><span>' + f1(lo) + "%</span><span>" + f1(hi) + "%</span></div></div>";
+  }
+  placeTip();
+}
+
+update();
+</script>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
