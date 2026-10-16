@@ -164,7 +164,7 @@ td:first-child i{display:inline-block;width:10px;height:10px;border-radius:2px;m
 .filled .ok{color:var(--good);font-weight:600;margin-left:8px}
 .mapbox{position:relative;max-width:650px;margin:0 auto}
 #map{display:block;width:100%;height:auto}
-#map path{stroke:var(--map-line);stroke-width:.5;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+#map path{fill-rule:evenodd;stroke:var(--map-line);stroke-width:.5;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
 #map path:hover,#map path.sel{filter:brightness(.86)}
 .zb{position:absolute;top:0;right:0;display:flex;flex-direction:column;gap:4px;z-index:4}
 .zb .btn{width:30px;padding:4px 0;font-size:15px;line-height:1;text-align:center}
