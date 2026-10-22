@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iraq Election Projection</title>
+    <style>
+        /* Basic reset and font styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+        }
+
+        /* The Navigation Bar container */
+        .navbar {
+            background-color: #24292f; /* GitHub dark gray */
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        /* Site Title / Brand */
+        .nav-logo {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-right: 40px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #adbac7;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Application Container Area */
+        .app-container {
+            max-width: 1400px; /* Wider container to comfortably fit election maps and sidebars */
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+    </style>
+<!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://electionprojections.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+<body>
+
+    <!-- 1. Shared Global Navigation Component -->
+    <nav class="navbar" id="global-nav"></nav>
+
+    <!-- 2. Application Wrapper Content Zone -->
+    <div class="app-container">
+
+        <!-- ============================================================= -->
+        <!-- START PASTING HERE -->
+        <!-- ============================================================= -->
+        
+<title>Iraq Seat Projector</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one 760px working column of separate cards (inputs, results, coalition builder, map). Neutral cool greys; party colours are fixed and identical in both themes. */
+:root{
+  --bg:#f2f3f5; --card:#ffffff; --fg:#1c2128; --muted:#677080; --line:#e3e6eb;
+  --track:#cdd3db; --thumb:#ffffff; --btn:#f3f4f7; --btnb:#c9cfd8; --btnh:#e8ebf0;
+  --pos:#15803d; --neg:#c62828; --lock1:#d9dde3; --lock2:#eceef2; --tipbg:#ffffff; --shadow:0 4px 14px rgba(20,26,36,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1013; --card:#191c21; --fg:#e7e9ec; --muted:#98a0ab; --line:#2b3038;
+    --track:#59616f; --thumb:#e7e9ec; --btn:#252930; --btnb:#3a404a; --btnh:#2f343c;
+    --pos:#4cc47f; --neg:#ff756c; --lock1:#3a404a; --lock2:#2a2f36; --tipbg:#22262c; --shadow:0 4px 14px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1013; --card:#191c21; --fg:#e7e9ec; --muted:#98a0ab; --line:#2b3038;
+  --track:#59616f; --thumb:#e7e9ec; --btn:#252930; --btnb:#3a404a; --btnh:#2f343c;
+  --pos:#4cc47f; --neg:#ff756c; --lock1:#3a404a; --lock2:#2a2f36; --tipbg:#22262c; --shadow:0 4px 14px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  padding-block:20px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));line-height:1.35}
+main{max-width:760px;margin:0 auto}
+h1{font-size:1.45rem;text-align:center;margin:4px 0 16px;font-weight:650;text-wrap:balance}
+h2{font-size:1.12rem;text-align:center;margin:0 0 12px;font-weight:650}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 14px 16px;margin-bottom:14px;min-width:0}
+button{font:inherit;color:var(--fg);cursor:pointer}
+.btn,.chip{font-size:.78rem;padding:4px 10px;border-radius:6px;background:var(--btn);border:1px solid var(--btnb);line-height:1.3}
+.btn:hover,.chip:hover{background:var(--btnh)}
+.btn:focus-visible,.chip:focus-visible,.num:focus-visible,input[type=range]:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px}
+.chip i{width:9px;height:9px;border-radius:2px;display:inline-block;flex:none}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--card);border-color:var(--fg)}
+.chip[aria-pressed="true"]:hover{background:var(--fg)}
+.center{display:flex;justify-content:center}
+
+/* inputs */
+.srow{display:grid;grid-template-columns:minmax(0,1fr);gap:0 14px;padding:5px 0;border-bottom:1px solid var(--line);align-items:center}
+.srow:first-child{padding-top:0}
+.sname{font-size:.84rem;line-height:1.25;min-width:0;overflow-wrap:anywhere}
+.sctl{display:flex;align-items:center;gap:8px;min-width:0}
+.sctl input[type=range]{flex:1;min-width:0}
+.numw{display:flex;align-items:center;gap:3px;flex:none;font-size:.84rem;color:var(--muted)}
+.num{width:58px;font:inherit;font-size:.84rem;text-align:right;padding:2px 6px;border-radius:5px;border:1px solid var(--btnb);background:var(--btn);color:var(--fg);font-variant-numeric:tabular-nums}
+@media (min-width:600px){.srow{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
+input[type=range]{-webkit-appearance:none;appearance:none;height:20px;background:transparent;margin:0;cursor:pointer;--p:0%;--fill:#888}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--fill) 0,var(--fill) var(--p),var(--track) var(--p),var(--track) 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--thumb);border:3px solid var(--fill);margin-top:-6px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:var(--track)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--fill)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--thumb);border:3px solid var(--fill);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+input[type=range]:active,input[type=range]::-webkit-slider-thumb:active{cursor:pointer}
+.locked .sname{color:var(--muted);display:flex;align-items:center;gap:6px}
+.locked input[type=range]{cursor:not-allowed;opacity:.75}
+.locked input[type=range]::-webkit-slider-runnable-track{background:repeating-linear-gradient(135deg,var(--lock1) 0 5px,var(--lock2) 5px 10px);border:1px dashed var(--btnb)}
+.locked input[type=range]::-moz-range-track{background:repeating-linear-gradient(135deg,var(--lock1) 0 5px,var(--lock2) 5px 10px);border:1px dashed var(--btnb)}
+.locked input[type=range]::-moz-range-progress{background:transparent}
+.locked input[type=range]::-webkit-slider-thumb{width:12px;height:12px;border-radius:3px;border:2px solid var(--muted);background:var(--lock2);margin-top:-3px;cursor:not-allowed;box-shadow:none}
+.locked input[type=range]::-moz-range-thumb{width:8px;height:8px;border-radius:3px;border:2px solid var(--muted);background:var(--lock2);cursor:not-allowed;box-shadow:none}
+.locked .num{background:transparent;border-style:dashed;color:var(--muted);cursor:not-allowed}
+.lock{width:13px;height:13px;flex:none;color:var(--muted)}
+.resetrow{display:flex;justify-content:center;margin-top:10px}
+
+/* results */
+svg{display:block}
+#hemi{width:100%;max-width:650px;margin:0 auto;height:auto}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 12px;margin:16px 0 14px;font-size:.78rem}
+.lg{display:inline-flex;align-items:center;gap:5px}
+.lg i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.84rem;font-variant-numeric:tabular-nums}
+th{font-weight:600;color:var(--muted);font-size:.76rem;text-align:right;padding:4px 6px;border-bottom:1px solid var(--line)}
+td{padding:4px 6px;line-height:1.25;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}
+th:first-child,td:first-child{text-align:left}
+td:first-child{min-width:0}
+.pn{display:flex;align-items:center;gap:8px}
+.pn i{width:10px;height:10px;border-radius:2px;flex:none;display:inline-block}
+td.seats{font-weight:700}
+.pos{color:var(--pos)} .neg{color:var(--neg)} .zero{color:var(--muted)}
+tr:last-child td{border-bottom:0}
+
+/* builder */
+.bwrap{max-width:560px;margin:18px auto 0}
+.bar{position:relative;height:16px;border-radius:5px;background:var(--track);overflow:visible;display:flex}
+.bar .seg{height:100%;transition:width .2s}
+.bar .seg:first-child{border-radius:5px 0 0 5px}
+.mark{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.marklab{position:absolute;top:calc(100% + 8px);transform:translateX(-50%);font-size:.72rem;color:var(--muted);white-space:nowrap}
+.bmsg{text-align:center;font-size:.86rem;margin-top:30px;font-variant-numeric:tabular-nums}
+.maj{color:var(--pos);font-weight:650;margin-left:8px}
+
+/* map */
+.mapwrap{position:relative;max-width:650px;margin:14px auto 0}
+#map{width:100%;height:auto}
+#map path{stroke:var(--card);stroke-width:1.3;stroke-linejoin:round;cursor:pointer;outline:none;transition:fill-opacity .15s}
+#map path:hover,#map path.sel{filter:brightness(.86)}
+#tip{position:absolute;z-index:5;width:218px;background:var(--tipbg);border:1px solid var(--btnb);border-radius:8px;box-shadow:var(--shadow);padding:8px 10px 9px;font-size:.76rem;display:none}
+.th{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid var(--line);font-size:.8rem}
+.th span{color:var(--muted);font-size:.74rem}
+.tr{display:grid;grid-template-columns:44px 40px minmax(0,1fr);gap:0 6px;align-items:center;padding:2px 0;font-variant-numeric:tabular-nums}
+.tr .tp{display:flex;align-items:center;gap:5px}
+.tr .tp i{width:7px;height:7px;border-radius:50%;flex:none}
+.tr .pc{text-align:right}
+.tr .sqs{display:flex;flex-wrap:wrap;gap:2px}
+.sq{width:8px;height:8px;border-radius:1.5px;display:inline-block}
+.tr.q{margin-top:4px;padding-top:5px;border-top:1px solid var(--line)}
+tr.q td{border-top:2px solid var(--line)}
+.mleg{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cbar{width:100%;max-width:300px;height:11px;border-radius:4px;border:1px solid var(--line)}
+.cnum{width:100%;max-width:300px;display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.src{font-size:.74rem;color:var(--muted);text-align:center;margin:6px 0 0;text-wrap:pretty}
+</style>
+
+<main>
+<h1>Iraq Seat Projection</h1>
+
+<section class="card" id="c-in">
+  <h2>Input vote share</h2>
+  <div id="sliders"></div>
+  <div class="resetrow"><button class="btn" id="reset" type="button">Reset</button></div>
+</section>
+
+<section class="card" id="c-res">
+  <h2>Projected results</h2>
+  <svg id="hemi" viewBox="0 0 600 312" role="img" aria-label="Hemicycle"></svg>
+  <div class="legend" id="hlegend"></div>
+  <div class="tw"><table id="tbl"><thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead><tbody></tbody></table></div>
+  <div class="resetrow"><button class="btn" id="small" type="button" hidden>Show smaller parties</button></div>
+</section>
+
+<section class="card" id="c-coal">
+  <h2>Coalition builder</h2>
+  <div class="chips" id="cbtn"></div>
+  <div class="bwrap"><div class="bar" id="cbar"></div></div>
+  <div class="bmsg" id="cmsg"></div>
+</section>
+
+<section class="card" id="c-map">
+  <h2>Projected results map</h2>
+  <div class="chips" id="mbtn"></div>
+  <div class="mapwrap" id="mapwrap"><svg id="map" role="img" aria-label="Map of Iraq by governorate"></svg><div id="tip"></div></div>
+  <div class="mleg" id="mleg"></div>
+</section>
+
+<p class="src">Sources: Wikipedia, 2025 Iraqi parliamentary election (final IHEC results by governorate); UN Iraq, Information package on the 2025 Council of Representatives elections (seat allocation); geoBoundaries governorate boundaries via geo-atlas-data.</p>
+</main>
+
+<script>
+(function(){
+var D={"parties":{"RDC":"Reconstruction and Development Coalition","KDP":"Kurdistan Democratic Party","TAQ":"Progress Party","SOL":"State of Law Coalition","SDQ":"Al-Sadiqoun Bloc","BDR":"Badr Organization","PUK":"Patriotic Union of Kurdistan","NSF":"Alliance of Nation State Forces","AZM":"Azem Alliance","SOV":"National Sovereignty Alliance","ASA":"Iraqi Fundamental Coalition","HOQ":"Rights Movement","NDA":"National Determination Alliance","ABS":"Good News, Iraq","ISK":"Ishraqat Kanoon","SVC":"Services Alliance","TSM":"Tasmim Alliance","KIU":"Kurdistan Islamic Union","NSM":"National Stance Movement","NGM":"New Generation Movement","ANB":"Al-Anbar Is Our Identity Alliance","NFP":"Nineveh for Its People","WAJ":"Wasit Ajmal Alliance","NPM":"National Party of the Masses","QMM":"Qimam Coalition","TFQ":"Tafawq Alliance","ALT":"Alternative Alliance","SUM":"Sumerian Movement","UTF":"Unified Iraqi Turkmen Front","FZK":"Al-Faw Zakho Coalition","SUA":"Saladin Unified Alliance","NPU":"Nineveh's People Union","ARP":"Arab Project","DFC":"Diyala First Coalition","AAK":"Arab Alliance in Kirkuk","SPA":"Saladin Partnership Alliance","NID":"National Identity","KJG":"Kurdistan Justice Group","YCA":"Yazidi Cause Alliance","HWK":"Our Hawks","KTS":"Kirkuk Turkmen Salvation Alliance","NDP":"National Depth Alliance","THB":"Thabitun","NNF":"Nineveh First Alliance","IDR":"Idraak Movement","SSB":"State Support Bloc","PPF":"People's Front","QDM":"Qadimun","HDB":"National Hadbaa Alliance","YTM":"The Youth Machine","CVP":"Civil Party","CDA":"Civil Democratic Alliance","LDA":"Leadership Alliance","NPN":"National Pioneers Movement","KSD":"Kurdistan Social Democratic Party","SHQ":"Sharqat Alliance","DWF":"Diwaniyah Flame","ALP":"Iraqi Altruism Party","UMR":"Al-Umran Party","NTM":"National Tribal Movement in Iraq","IRP":"Iraq Reform Party","RSC":"Rescuers","ITF":"Iraqi Turkmen Front","NBP":"National Brigade Party","DAE":"Al-Daae Party","NSP":"National Spread Party","OCM":"Our Cause Movement","FYF":"Fayli Front","NRF":"National Al-Refah Party","IND":"Independents","MIN":"Minority quota seats"},"sliders":["RDC","KDP","TAQ","SOL","SDQ","BDR","PUK","NSF","AZM","SOV","ASA","HOQ","NDA","ABS","ISK","SVC","TSM","KIU","NSM","NGM"],"hemi":["BDR","SDQ","HOQ","ISK","SOL","RDC","NSF","ASA","SVC","ABS","SSB","IDR","SUM","TSM","WAJ","YTM","ALT","NDP","NPN","CDA","ALP","CVP","IRP","RSC","DWF","QDM","NRF","NDA","NID","DFC","THB","NFP","NPM","NNF","HDB","TFQ","AZM","TAQ","QMM","ANB","SOV","ARP","SUA","SPA","SHQ","HWK","LDA","NBP","NSP","OCM","UMR","DAE","NTM","FZK","FYF","YCA","KTS","UTF","ITF","AAK","NPU","PPF","KSD","KIU","NSM","NGM","KJG","PUK","KDP","IND","MIN"],"cons":[{"key":"Anbar","name":"Anbar","general":15,"quota":0,"total":632755,"votes":{"TAQ":212838,"ANB":128325,"QMM":97635,"AZM":78446,"TFQ":47074,"SOV":40820,"NDA":18013,"LDA":8226,"UMR":898,"NSP":480}},{"key":"Babil","name":"Babil","general":17,"quota":0,"total":554934,"votes":{"RDC":91424,"SDQ":79566,"SOL":68584,"ISK":56174,"NSF":51916,"SVC":38547,"SUM":29857,"IDR":28491,"BDR":25192,"QDM":20193,"ABS":19738,"HOQ":16416,"ASA":13043,"FZK":10287,"NDP":4958,"UMR":354,"IND":194}},{"key":"Baghdad","name":"Baghdad","general":69,"quota":2,"total":1984801,"votes":{"RDC":411300,"TAQ":277416,"SOL":228300,"NSF":138904,"SDQ":128249,"AZM":128122,"BDR":116704,"SOV":110037,"ASA":104164,"HOQ":77763,"NDA":53143,"ABS":38762,"SVC":37933,"ISK":23288,"FZK":22004,"ALT":12278,"NDP":9906,"NPN":7389,"IRP":4056,"RSC":2876,"CDA":2616,"FYF":1159,"NTM":1124,"NSP":1123,"OCM":813,"UMR":717,"DAE":693,"IND":2662,"MIN":41300}},{"key":"Basra","name":"Basra","general":25,"quota":0,"total":795502,"votes":{"TSM":173761,"SDQ":151274,"RDC":126077,"SOL":69445,"NSF":54652,"HOQ":49545,"BDR":47327,"ABS":44584,"FZK":31972,"ASA":31718,"SVC":11158,"NDP":2438,"NTM":1551}},{"key":"Dhi Qar","name":"Dhi Qar","general":19,"quota":0,"total":532157,"votes":{"RDC":80892,"SOL":74563,"SDQ":61696,"NSF":46607,"BDR":44421,"SUM":36611,"SVC":31171,"ABS":23214,"ISK":22521,"SSB":21615,"HOQ":21184,"ALT":19672,"ASA":16171,"YTM":14915,"CDA":6453,"ALP":5505,"NDP":4946}},{"key":"Diyala","name":"Diyala","general":14,"quota":0,"total":562369,"votes":{"BDR":105346,"TAQ":101691,"SOV":77496,"SDQ":55409,"AZM":54939,"DFC":53469,"THB":30449,"PUK":29103,"NSF":20749,"HWK":20209,"ISK":7613,"NGM":1559,"ALT":1201,"DAE":1038,"UMR":822,"KSD":433,"IND":843}},{"key":"Dohuk","name":"Dohuk","general":11,"quota":1,"total":574306,"votes":{"KDP":413890,"KIU":72986,"NSM":18322,"NGM":14674,"PPF":2789,"PUK":2426,"KJG":1419,"KSD":295,"IND":276,"MIN":47229}},{"key":"Erbil","name":"Erbil","general":15,"quota":1,"total":665322,"votes":{"KDP":369724,"PUK":97411,"NSM":63298,"NGM":38921,"KIU":28656,"KJG":13774,"PPF":5589,"ITF":1814,"KSD":762,"IND":3676,"MIN":41697}},{"key":"Karbala","name":"Karbala","general":11,"quota":0,"total":302807,"votes":{"RDC":78388,"SOL":59314,"ISK":42814,"ASA":27715,"SDQ":26816,"NSF":22262,"BDR":20299,"ABS":9270,"ALT":7789,"HOQ":4887,"NDP":2443,"OCM":511,"IND":299}},{"key":"Kirkuk","name":"Kirkuk","general":12,"quota":1,"total":631953,"votes":{"PUK":178845,"TAQ":107037,"UTF":66179,"KDP":59374,"AAK":53046,"AZM":46412,"KTS":32751,"NDA":27279,"NGM":12332,"PPF":1702,"KSD":791,"UMR":626,"NTM":521,"NRF":234,"IND":471,"MIN":44353}},{"key":"Maysan","name":"Maysan","general":10,"quota":0,"total":239669,"votes":{"RDC":67122,"BDR":41029,"SOL":34706,"SDQ":34590,"NSF":31744,"HOQ":12993,"ABS":5084,"NTM":524,"IND":11877}},{"key":"Muthanna","name":"Muthanna","general":7,"quota":0,"total":249129,"votes":{"RDC":57411,"SOL":41408,"SDQ":37183,"NSF":34740,"ASA":32817,"BDR":14123,"ABS":12702,"HOQ":10784,"SVC":7961}},{"key":"Najaf","name":"Najaf","general":12,"quota":0,"total":347417,"votes":{"RDC":56464,"NSF":45224,"SOL":41173,"SDQ":40338,"SVC":33000,"ABS":32706,"ASA":27657,"ISK":24823,"ALT":16213,"BDR":13103,"HOQ":11538,"NDP":3122,"RSC":1102,"UMR":316,"IND":638}},{"key":"Ninawa","name":"Nineveh","general":31,"quota":3,"total":1307890,"votes":{"KDP":189535,"TAQ":157958,"RDC":146859,"NFP":111125,"AZM":101035,"NDA":86656,"BDR":77046,"SOV":64545,"NPU":56420,"ARP":54573,"NID":50200,"YCA":49211,"NPM":37381,"NNF":29381,"HDB":18383,"CVP":12974,"ASA":3472,"NGM":1980,"NBP":1774,"UMR":528,"IND":422,"MIN":56432}},{"key":"Qadisiyyah","name":"Qadisiyyah","general":11,"quota":0,"total":341298,"votes":{"RDC":70953,"SOL":52568,"BDR":35073,"SDQ":34490,"NSF":31123,"SVC":30937,"ISK":22102,"ABS":19585,"ASA":18519,"HOQ":13616,"DWF":5612,"ALT":5113,"NDP":1548,"IND":59}},{"key":"Saladin","name":"Saladin","general":12,"quota":0,"total":545927,"votes":{"TAQ":82870,"RDC":80528,"AZM":74783,"NPM":67368,"SUA":57150,"SPA":50980,"NDA":41378,"TFQ":37252,"SOV":23517,"HWK":21225,"SHQ":6941,"ALT":1543,"NTM":392}},{"key":"Sulaymaniyah","name":"Sulaymaniyah","general":18,"quota":0,"total":572414,"votes":{"PUK":241143,"NSM":75375,"NGM":69781,"KDP":68834,"KIU":65312,"KJG":34563,"PPF":10928,"KSD":4819,"ITF":581,"IND":1078}},{"key":"Wasit","name":"Wasit","general":11,"quota":1,"total":389259,"votes":{"WAJ":106152,"SOL":58385,"RDC":51269,"SDQ":37291,"NSF":35794,"BDR":17187,"ASA":15852,"HOQ":12287,"ALT":7888,"ABS":5631,"NDP":2468,"MIN":39055}}],"colours":{"KDP":"#E8B100","PUK":"#3CB371","SOL":"#1E7B34","TAQ":"#F28A1E","KIU":"#8B5A2B","RDC":"#0E8F8A","SDQ":"#7B4BB5","IND":"#9AA0A8","MIN":"#6B7A8F","BDR":"#FE2D65","NSF":"#F663E2","AZM":"#88810E","SOV":"#16AFFE","ASA":"#EE9787","HOQ":"#E2491E","NDA":"#9E4E72","ABS":"#95BB20","ISK":"#19BFD1","SVC":"#BEA1E4","TSM":"#7C99FD","NSM":"#ED93B4","NGM":"#A15148","ANB":"#A571FE","NFP":"#B59053","WAJ":"#275FDC","NPM":"#9C6EA9","QMM":"#4B9800","TFQ":"#D625A7","ALT":"#1882D5","SUM":"#48C0AD","UTF":"#B87750","FZK":"#C46B83","SUA":"#5F6E2C","NPU":"#8D9D58","ARP":"#C91A54","DFC":"#CB6A60","AAK":"#9C6F07","SPA":"#099068","NID":"#D00E26","KJG":"#B19F04","YCA":"#F97944","HWK":"#51C53E","KTS":"#827FC2","NDP":"#E1A073","THB":"#FB459A","NNF":"#B75101","IDR":"#786726","SSB":"#C47300","PPF":"#62894C","QDM":"#6361A1","HDB":"#F27887","YTM":"#C57FB2","CVP":"#AF49D0","CDA":"#B9AF69","LDA":"#974B95","NPN":"#8BBA7D","KSD":"#7067DC","SHQ":"#D287FC","DWF":"#D39017","ALP":"#F74141","UMR":"#10ABD5","NTM":"#0A6DA7","IRP":"#097756","RSC":"#D86510","ITF":"#BA3D19","NBP":"#5D7CC8","DAE":"#FE7266","NSP":"#9F91F5","OCM":"#D03E80","FYF":"#D24350","NRF":"#099B4A"}}, MAP={"w":600.0,"h":608.8,"paths":{"Anbar":"M148,160.5L150.1,161.3L152,162.2L157.6,165.2L160.2,166.9L162.4,168L164.7,168.3L166.8,168L180.3,172.3L189.9,176.1L221.8,175.5L223,202.7L243.1,216.1L252.4,205.9L252.3,226.9L257,232.8L259.9,234.6L263.5,237.1L264.2,239.4L264.2,241.8L268.4,243.2L268.4,245.8L277.1,254.9L289,258.4L292.1,258.7L295.6,258.7L298.2,258.9L300.2,260.1L301.9,261.7L319.5,262.4L321,263.6L322.7,265.4L323.3,267.5L323.3,270.4L324.7,271.6L328.4,274.4L331.4,279.4L334.2,284.9L325.9,295.1L314.8,295.1L313.4,295.8L312.6,297.6L313.2,299L314.8,299.7L316.3,302.2L317.1,302.3L318.3,301L320.1,302.3L321.3,303.7L322.7,305.5L323.8,307.2L324.1,309.2L324.3,311.2L324.3,316.6L324.9,320L324.7,322.6L323.2,325.6L322.1,331.3L319.8,331.6L317.2,331.6L314.9,332.1L312.3,333.2L310.5,334.4L307.9,335.9L305.9,337.9L300.5,340.7L293.2,342.4L273.9,347.5L308.3,383.2L300.8,389.7L293,395L290.4,396.1L287.5,396.9L285,398.3L283.4,400L281.8,402L280.8,404.3L278.8,408.2L276.2,412.9L270.8,418.2L271,426.4L269.6,429.9L267.4,433L264.7,437.8L264.7,447.4L264.1,449.1L260.4,451.6L258.7,453.3L257.5,455L256.4,457.2L254.3,462.4L253.2,498.2L253.2,498.4L201.7,454.1L175.7,441.1L166.8,436.9L154.3,429.9L134.7,416L99,392L25,376.7L31.1,370L28.2,362L16,366.5L12,352.4L17.9,350.5L0,286.7L111.7,217.6L114.9,216L118.1,215.2L120.7,215.2L123.8,215.1L126.2,214.6L129.3,214.3L131.8,213.3L132.7,212.4L133.7,210.8L135,208.1L136.7,205.3L139.3,200.1L139.7,198.8L141.7,195.3L142.5,193.2L145.4,189.8L146.8,188L148.3,185.7L148.6,172.6L148,170.1L148,160.5Z","Karbala":"M273.9,347.5L293.2,342.4L300.5,340.7L305.9,337.9L307.9,335.9L310.5,334.4L312.3,333.2L314.9,332.1L317.2,331.6L319.8,331.6L322.1,331.3L326.7,333L329.8,333.3L330.7,334.4L331,335.5L330.8,336.3L329.8,337.3L328.4,337.9L327.6,338.7L325.3,341.5L323.3,345.2L323.3,346.3L324.1,347.2L327.2,351.7L327.9,352.6L329.2,354.9L331.9,358.9L333.6,363.4L301.8,376.4L273.9,347.5Z","Najaf":"M253.2,498.2L254.3,462.4L256.4,457.2L257.5,455L258.7,453.3L260.4,451.6L264.1,449.1L264.7,447.4L264.7,437.8L267.4,433L269.6,429.9L271,426.4L270.8,418.2L276.2,412.9L278.8,408.2L280.8,404.3L281.8,402L283.4,400L285,398.3L287.5,396.9L290.4,396.1L293,395L300.8,389.7L308.3,383.2L301.8,376.4L333.6,363.4L334.4,367.1L334.5,368.2L335.2,370.8L335.3,373.5L335.9,376.1L336.9,376.7L340.2,376.2L343.8,371.2L345.7,370.3L347.8,371.9L352,374.5L353.5,375.9L354.1,376.5L354.2,376.6L354,377.4L352.4,378.4L350.5,380.1L349.9,381.3L349.8,384.3L349.6,385.7L349.6,388.1L349.9,389.8L350.3,391.3L350.9,392.7L351.7,393.9L352.6,395.3L352.8,396.5L352.3,397.9L350,399.3L349.1,400.1L349,401.3L350.1,405.1L349.7,406.3L348.3,407.2L347.5,408.1L347.5,409.2L349.6,413.4L349.8,415.1L349.7,416.1L348.2,416.6L345.5,416.9L345.4,419.1L346.5,421.4L348.2,423.8L349.9,425.8L351.2,428.6L351.9,429.5L353.3,430.2L355.8,430.6L357.4,430.7L359.1,431.1L360,431.6L361.8,431.9L364.7,431.8L365.6,432.4L365.7,432.8L366,433.5L365.5,435L361.8,443.6L359.6,448.4L357.6,452.2L356.4,453.3L355.4,454.7L354.5,456.5L353.7,459.3L353.2,463.8L351.6,468.8L351,470.5L346.1,476.8L340.5,483.8L335.3,489.7L334,491.3L327.6,505.5L325.4,512.2L325,514.2L323.2,519.4L320.2,527.3L315.6,533.2L312.1,539L307,546.7L306.9,546.6L306.9,546.6L255.8,500.9L253.2,498.2Z","Babil":"M322.1,331.3L323.2,325.6L324.7,322.6L324.9,320L324.3,316.6L324.3,311.2L324.1,309.2L323.8,307.2L322.7,305.5L321.3,303.7L320.1,302.3L318.3,301L317.1,302.3L316.3,302.2L314.8,299.7L313.2,299L312.6,297.6L313.4,295.8L314.8,295.1L325.9,295.1L328,297.7L330.6,299.2L332.2,299.6L333.7,299.7L336,299.5L339.7,298.4L342.5,296.9L343.9,296.4L345.8,296.4L347.6,296.4L347.8,296.4L348.4,297.8L348.4,299L348.6,300.1L349.3,301L351.6,302.5L352.3,303.7L352.9,306.1L353,307.1L352.3,308.1L351.8,309.1L352,312L351.8,312.9L350.8,313.6L349.8,313.7L348.9,314.2L348.4,315.2L348.6,316.5L348.9,317.3L349.7,317.9L351,318.5L352.3,320L353,321.2L353.2,322.1L354.6,322.9L356.9,323.1L358.3,322L359.8,321.4L362.8,321.7L363.6,322.7L364.3,325.3L367.7,328.6L369.4,329.6L374.2,330.5L375.6,331.4L376.8,332.6L379.3,335.9L380.6,337.2L382,337.8L383.3,338L384.3,338.3L384.5,338.7L383.3,339.9L383,340.7L383.4,344.2L384.6,345.2L385.8,345.2L388.4,345.2L388.7,345.9L387.8,347.2L386.5,347.7L385.2,348.8L384.3,350L383.5,351.8L383.7,353.2L384.8,353.9L386,354.2L387.2,354.3L388.4,355L389.1,356.3L388.2,357.8L387.1,358.7L384.4,359.9L383.7,360.4L383.2,362.1L382.7,363.1L382,364L381.3,364.5L378.9,364.8L378.2,365.8L377,368L376.1,368.7L372.9,370L371.1,370.2L370.1,370.6L369,373L369.1,378.3L368.8,379.4L367.5,380L363.9,379.9L362.4,379.1L361.3,378.8L359.5,378.7L358,378.4L356.3,377.2L355.5,377.3L354.1,376.5L353.5,375.9L352,374.5L347.8,371.9L345.7,370.3L343.8,371.2L340.2,376.2L336.9,376.7L335.9,376.1L335.3,373.5L335.2,370.8L334.5,368.2L334.4,367.1L333.6,363.4L331.9,358.9L329.2,354.9L327.9,352.6L327.2,351.7L324.1,347.2L323.3,346.3L323.3,345.2L325.3,341.5L327.6,338.7L328.4,337.9L329.8,337.3L330.8,336.3L331,335.5L330.7,334.4L329.8,333.3L326.7,333L322.1,331.3Z","Baghdad":"M325.9,295.1L334.2,284.9L339.3,280.4L339.4,280.4L352.1,280.6L354.4,283.1L354.9,288.4L354.8,292.5L354.9,293.3L354.5,294.2L353.8,294.9L352.8,295.4L350.3,296.1L347.6,296.4L345.8,296.4L343.9,296.4L342.5,296.9L339.7,298.4L336,299.5L333.7,299.7L332.2,299.6L330.6,299.2L328,297.7L325.9,295.1Z","Qadisiyyah":"M365.7,432.8L365.6,432.4L364.7,431.8L361.8,431.9L360,431.6L359.1,431.1L357.4,430.7L355.8,430.6L353.3,430.2L351.9,429.5L351.2,428.6L349.9,425.8L348.2,423.8L346.5,421.4L345.4,419.1L345.5,416.9L348.2,416.6L349.7,416.1L349.8,415.1L349.6,413.4L347.5,409.2L347.5,408.1L348.3,407.2L349.7,406.3L350.1,405.1L349,401.3L349.1,400.1L350,399.3L352.3,397.9L352.8,396.5L352.6,395.3L351.7,393.9L350.9,392.7L350.3,391.3L349.9,389.8L349.6,388.1L349.6,385.7L349.8,384.3L349.9,381.3L350.5,380.1L352.4,378.4L354,377.4L354.2,376.6L354.1,376.5L355.5,377.3L356.3,377.2L358,378.4L359.5,378.7L361.3,378.8L362.4,379.1L363.9,379.9L367.5,380L368.8,379.4L369.1,378.3L369,373L370.1,370.6L371.1,370.2L372.9,370L376.1,368.7L377,368L378.2,365.8L378.9,364.8L381.3,364.5L382,364L382.7,363.1L383.2,362.1L383.7,360.4L384.4,359.9L387.1,358.7L388.2,357.8L389.1,356.3L393,358.5L394.9,358.6L395.7,359L398.6,359.9L400.1,360.7L401.3,361.9L402.5,363.6L403,364.2L405.2,365.4L408,367.2L409.4,369.6L412.8,372.9L415.5,376L417.5,378.9L418.9,381.7L420.5,383.6L421,384.6L421.6,386.7L421.7,387.9L422,388.6L422.5,389.5L422.8,390.1L423.1,390.7L423.5,398.7L425.5,401.3L425.9,402.1L426.5,405.2L427,409.2L427.4,411L427.3,414.8L426.8,415.4L425.4,415.3L423.3,414.7L415.9,412L409.5,409.8L401.6,407.8L399.3,407.8L397.9,407.4L397.3,406.7L395.3,406.1L394.2,406.6L392.7,410L391.3,410.8L389.6,410.9L384.7,410.6L383.4,410.7L382.8,411.3L382.9,412L383.8,412.8L384.9,414.2L385.5,415L385.9,415.8L386.7,416.8L387.6,417.6L387.9,418.5L387.4,419.7L386.7,421L383.9,424.3L383.1,425.5L382.6,426.9L382.5,428.1L382,429.1L381.8,430.2L381.8,431.1L381.3,432.1L380.6,433.3L379.4,435.8L378.6,439.3L378.1,440.3L377.2,441.4L376.7,441.6L373.3,439.1L372.2,437.8L370.6,435.1L369.9,434.2L368.5,433.1L365.7,432.8Z","Muthanna":"M306.9,546.6L306.9,546.6L307,546.7L312.1,539L315.6,533.2L320.2,527.3L323.2,519.4L325,514.2L325.4,512.2L327.6,505.5L334,491.3L335.3,489.7L340.5,483.8L346.1,476.8L351,470.5L351.6,468.8L353.2,463.8L353.7,459.3L354.5,456.5L355.4,454.7L356.4,453.3L357.6,452.2L359.6,448.4L361.8,443.6L365.5,435L366,433.5L365.7,432.8L368.5,433.1L369.9,434.2L370.6,435.1L372.2,437.8L373.3,439.1L376.7,441.6L377.2,441.4L378.1,440.3L378.6,439.3L379.4,435.8L380.6,433.3L381.3,432.1L381.8,431.1L381.8,430.2L382,429.1L382.5,428.1L382.6,426.9L383.1,425.5L383.9,424.3L386.7,421L387.4,419.7L387.9,418.5L387.6,417.6L386.7,416.8L385.9,415.8L385.5,415L384.9,414.2L383.8,412.8L382.9,412L382.8,411.3L383.4,410.7L384.7,410.6L389.6,410.9L391.3,410.8L392.7,410L394.2,406.6L395.3,406.1L397.3,406.7L397.9,407.4L399.3,407.8L401.6,407.8L409.5,409.8L415.9,412L423.3,414.7L425.4,415.3L426.8,415.4L428.1,416.4L428.2,417.6L427.6,419L427.2,420.5L427.1,422.5L427.1,429.3L426.5,430.8L425.7,432.4L424,434.7L423.8,435.8L425.2,436.3L425.8,437L426,438.3L424.9,440.6L424.9,442.4L425.3,444.7L426,445.6L426.4,447L426,452L426,453.3L424.9,454.6L423.4,455.8L422.9,457.1L422.7,458.6L422.3,460L421.6,461.6L420.3,462.7L418.6,463.6L418.3,464.5L418.3,468.2L418.5,472.1L419.2,473.2L420.5,474.3L429,475L435.7,476.2L440.9,476.9L453.1,477.1L455.8,477.4L458.3,479.5L462.7,483L464.4,484.6L465.5,486L468.9,491L471.7,496.4L472.6,497.5L475.6,498.2L475.8,498.3L476.3,499L477.3,500.2L477.6,501.9L477.7,506.5L478,508.4L478.8,509.7L479,510.6L479.6,512.7L480.7,514.8L482,517L484.5,520.5L486.2,523.9L486.1,532.8L485.5,534.8L483.5,548.7L481.6,555.4L480.6,561.5L480,566.4L480.1,576.4L480.6,578.3L480.5,579.6L479.9,581.3L478.7,583.2L478,584L476.7,585.9L475.6,597.6L475.5,604.1L475.4,606.3L468.5,608.8L442.2,606.8L420.2,604.1L408.9,603.3L400.8,602.6L377.3,600.4L362.7,598.9L313.1,552.8L306.9,546.6Z","Dhi Qar":"M426.8,415.4L427.3,414.8L427.4,411L427,409.2L426.5,405.2L425.9,402.1L425.5,401.3L423.5,398.7L423.1,390.7L422.8,390.1L424.6,389.9L425.3,389.3L426.9,389L454.5,388.8L460,388.6L460.8,388.5L462.2,388.5L463.1,388.7L463.5,389.3L463.6,390.4L463.4,390.7L460.2,391.1L459.9,391.7L460.2,392.6L462.6,394.3L463.9,395L465.8,398.4L466.5,400.2L467.3,403.3L467.9,409.1L468.4,410.8L469.3,412L472.8,415.4L473.3,417.1L475,419.1L477.2,420.6L477.8,421.6L478.5,423.9L478.4,426.4L477.5,428.5L477.5,429.5L477.7,431.1L478.3,432.1L479.2,433.1L483.1,436L485.6,437.3L486.4,437.9L487,438.8L487.1,445L487.4,446.1L487.9,446.8L488.6,447.4L489.8,447.8L490.7,448.7L492.3,451.5L493.4,452L495.2,452.4L500.3,452.5L501.2,451.7L501.7,451.4L505.8,451L510.2,450.8L509.7,472.5L509.9,474.8L509.2,477.2L508.5,479L508.3,482.8L507.6,484.2L506.8,486.4L507.7,488.2L508.2,489.4L508.2,491L507.7,492.3L504.8,491.5L502.8,489.3L501.4,488.6L499.3,488.6L496.1,489.6L492.1,491.5L485,494.3L476.9,496.7L475.8,498.3L475.6,498.2L472.6,497.5L471.7,496.4L468.9,491L465.5,486L464.4,484.6L462.7,483L458.3,479.5L455.8,477.4L453.1,477.1L440.9,476.9L435.7,476.2L429,475L420.5,474.3L419.2,473.2L418.5,472.1L418.3,468.2L418.3,464.5L418.6,463.6L420.3,462.7L421.6,461.6L422.3,460L422.7,458.6L422.9,457.1L423.4,455.8L424.9,454.6L426,453.3L426,452L426.4,447L426,445.6L425.3,444.7L424.9,442.4L424.9,440.6L426,438.3L425.8,437L425.2,436.3L423.8,435.8L424,434.7L425.7,432.4L426.5,430.8L427.1,429.3L427.1,422.5L427.2,420.5L427.6,419L428.2,417.6L428.1,416.4L426.8,415.4Z","Basra":"M475.5,604.1L475.6,597.6L476.7,585.9L478,584L478.7,583.2L479.9,581.3L480.5,579.6L480.6,578.3L480.1,576.4L480,566.4L480.6,561.5L481.6,555.4L483.5,548.7L485.5,534.8L486.1,532.8L486.2,523.9L484.5,520.5L482,517L480.7,514.8L479.6,512.7L479,510.6L478.8,509.7L478,508.4L477.7,506.5L477.6,501.9L477.3,500.2L476.3,499L475.8,498.3L476.9,496.7L485,494.3L492.1,491.5L496.1,489.6L499.3,488.6L501.4,488.6L502.8,489.3L504.8,491.5L507.7,492.3L508.2,491L508.2,489.4L507.7,488.2L506.8,486.4L507.6,484.2L508.3,482.8L508.5,479L509.2,477.2L509.9,474.8L509.7,472.5L510.2,450.8L512.1,446L513.9,444.1L515.4,442.7L517.2,441.8L522.1,440.9L524.3,440.7L526.4,440.7L529.1,440.8L531.2,441.1L532.3,441.5L539.2,441.7L543.2,442.1L544.4,442.3L544.7,448.8L544.9,450.1L545,451.9L544.4,457.5L544.5,462L563.7,461.6L564.7,462.3L565.8,487.3L565.8,488.7L565.2,492.2L565,494.1L565.7,498.6L566.4,500.2L568.3,501.8L569.2,502.4L571.5,503.2L572.3,503.7L573.3,505L574.2,508.8L574.4,510L575.2,511.5L576,512.1L576.9,511.6L578,511.2L579.5,511.2L587.2,520.3L587.8,521L588.1,522.4L588.1,523.4L587.3,524.3L586.7,525.3L586.5,526.4L587.3,527.6L588.3,528.1L589.1,529L589.6,530.3L590,531.9L590.3,535L590.9,536L593.5,537.6L597.4,539.7L598.8,541L600,541.6L600,542L598.5,542.9L597.4,543L595.3,542.1L593.4,541.8L592,542L588.2,541.8L581.8,537.1L579,535.3L576.9,534.2L575,533.8L574.2,533.8L572.9,533.6L571.1,533.2L569.7,533.2L567,533.5L566,534.3L564.4,535.1L562.7,536.5L560.1,536L546.5,529.1L525.6,527.9L523.9,528.6L522.6,529.7L520.6,530.8L516.3,532.1L514,532.9L512.3,534L508.2,540.3L506.8,546L503.9,552L502.7,555.5L502.4,557.9L502,559.3L499.3,565.5L497.8,567.6L496.8,570L495.8,573.7L493.8,578.9L493.5,580.8L492.9,582.1L489.8,586.3L485.8,593.3L482.3,598.2L479.4,601.3L478.2,602.7L477.2,603.5L475.5,604.1Z","Maysan":"M510.2,450.8L505.8,451L501.7,451.4L501.2,451.7L500.3,452.5L495.2,452.4L493.4,452L492.3,451.5L490.7,448.7L489.8,447.8L488.6,447.4L487.9,446.8L487.4,446.1L487.1,445L487,438.8L486.4,437.9L485.6,437.3L483.1,436L479.2,433.1L478.3,432.1L477.7,431.1L477.5,429.5L477.5,428.5L478.4,426.4L478.5,423.9L477.8,421.6L477.2,420.6L475,419.1L473.3,417.1L472.8,415.4L469.3,412L468.4,410.8L467.9,409.1L467.3,403.3L466.5,400.2L465.8,398.4L463.9,395L462.6,394.3L460.2,392.6L459.9,391.7L460.2,391.1L463.4,390.7L463.6,390.4L463.5,389.3L463.1,388.7L463,387.8L464.8,386.5L465.1,385.7L464.7,384.7L463.4,383.1L462.9,381.7L462.9,380.1L463.1,378.8L464.2,378L467.3,377.2L470,376L471,375.7L472.1,374.9L472.3,374.1L472.5,373.8L472.5,372.2L472.4,371.7L471.6,370.9L469.8,369.9L469.2,369.5L468.8,368.9L468.7,366L465.4,362.8L464.9,362L464.4,360.4L464.4,359.1L465.2,358.7L466.4,357.5L468.1,353.2L468.4,351.9L468.8,351.2L469.5,351L470.3,350.2L470.4,349.4L470.6,342.7L471.5,339.9L472.5,335.9L473,332.7L474,330.6L474.8,329.6L475,328.4L475,327.9L474.4,327.3L473.9,326.6L473.6,325.9L474.3,324.8L475.7,323.4L476.3,322.6L476.7,323.5L477.5,324.4L480,326.7L481.6,327.4L483.7,328.2L487,330.1L488.3,331.6L490.2,334.5L492.2,337.2L493.8,338.8L495,340.2L498.2,341.6L499.7,342.6L501.4,343.9L503.7,346L506.1,348.5L506.7,349.4L508,349.9L509.3,350.7L510.8,351.8L511.8,352.6L513.4,352.8L515.2,352.5L518.2,352.4L519.6,350.9L521,350.1L522.8,351.5L523.6,351.9L525.8,352.1L526.5,353.1L528,354.8L528.8,355.9L529.8,356.5L530.5,357.3L530.8,358.1L530.5,358.8L529.8,359.4L529.5,360.2L529.8,361.6L530.4,362.7L530.9,363.3L532.3,363.7L533.4,363.8L533.7,364.7L533.4,366.4L533.9,367.6L536.1,369.1L537.3,370.5L537.4,371.5L537,372.3L535.7,373.3L535.3,373.9L535.7,377.8L536.9,378.2L537.9,378.2L538.4,377.5L539.8,378.6L540.6,379.5L543,381.5L543.2,382.5L543.2,383.6L543.9,384.8L545.5,385.3L545.8,386L546.1,388.5L546.5,389.3L547.5,390.1L547.5,391.2L547.8,392.3L548.5,393.1L549.9,393.5L551.1,396L551.4,397.7L551.9,398.6L552.9,398.9L553.9,399.5L554.6,400L554.4,404.9L551.4,412.4L550.8,414.2L549.9,418.1L548.2,423.2L546.4,426.6L545.6,428.4L545.1,430L544.5,432.9L544.3,442.3L543.2,442.1L539.2,441.7L532.3,441.5L531.2,441.1L529.1,440.8L526.4,440.7L524.3,440.7L522.1,440.9L517.2,441.8L515.4,442.7L513.9,444.1L512.1,446L510.2,450.8Z","Wasit":"M389.1,356.3L388.4,355L387.2,354.3L386,354.2L384.8,353.9L383.7,353.2L383.5,351.8L384.3,350L385.2,348.8L386.5,347.7L387.8,347.2L388.7,345.9L388.4,345.2L385.8,345.2L384.6,345.2L383.4,344.2L383,340.7L383.3,339.9L384.5,338.7L384.3,338.3L383.3,338L382,337.8L380.6,337.2L379.3,335.9L376.8,332.6L375.6,331.4L374.2,330.5L369.4,329.6L367.7,328.6L364.3,325.3L363.6,322.7L362.8,321.7L359.8,321.4L358.3,322L356.9,323.1L354.6,322.9L353.2,322.1L353,321.2L352.3,320L351,318.5L349.7,317.9L348.9,317.3L348.6,316.5L348.4,315.2L348.9,314.2L349.8,313.7L350.8,313.6L351.8,312.9L352,312L351.8,309.1L352.3,308.1L353,307.1L353.7,308.1L353.9,308.7L354.5,308.3L355.5,307.9L357.1,308.1L357.9,308.8L357.7,310.1L357.7,311.3L358.4,312L359.5,312.3L360.7,312.1L361.5,311.6L363.1,311.2L364.1,309.8L366.8,307L369.1,304.9L369.9,303.2L370.6,301.3L371.5,298.1L372.8,295.9L373.7,295.3L377.6,294.1L379.4,293.8L380.6,293.1L382,292.8L385.6,294.1L389.9,295.9L392.8,297.5L394.9,299L396,299.9L397.4,300.5L399.8,300.7L404.5,300.8L407.2,301.5L408.1,302L409.7,302L411.5,302.9L414.8,304.9L416.1,305.2L417.3,304.8L418.6,303.9L421,301.7L423.3,298.3L423.9,297.2L425.7,292.1L426.5,291.1L429.4,290.8L431.1,289.6L431.6,288.3L432.1,287.4L433.7,283.6L434.1,283.1L438.5,281.1L439.5,280L440.7,277.9L441.5,277.2L442.7,277.4L443.9,278.6L443.5,280.1L443.5,281.2L443.7,281.9L444.9,282.8L445.4,283.8L445.5,286.1L446,286.8L447.2,287.3L447.8,289.3L448.2,290.2L449.8,292.1L451.3,293L452.2,293.3L452.8,294.7L453.2,295.9L452.6,296.2L452.3,296.9L452.2,297.5L453.3,298.3L453.4,298.9L452.8,299.3L452.2,300.5L450.8,301.6L450.2,302.6L449.3,303.4L448.5,303.6L445.2,303.7L444.6,304.1L444.2,304.8L444.2,305.3L444.7,305.9L448.5,307.1L449.9,307.3L450.6,307.8L450.9,308.7L449.9,309.8L448.9,310.5L448.7,311.3L447.6,312.2L447.4,312.9L447.3,314.1L447.9,314.5L449,315.1L449.9,316.3L450.8,316.8L451.7,316.5L452.6,315.9L457,315.4L460.9,315.5L464.3,316.8L465.4,316.9L468.7,318.5L473.1,321L474,321.7L476.2,322.7L475.7,323.4L474.3,324.8L473.6,325.9L473.9,326.6L474.4,327.3L475,327.9L475,328.4L474.8,329.6L474,330.6L473,332.7L472.5,335.9L471.5,339.9L470.6,342.7L470.4,349.4L470.3,350.2L469.5,351L468.8,351.2L468.4,351.9L468.1,353.2L466.4,357.5L465.2,358.7L464.4,359.1L464.4,360.4L464.9,362L465.4,362.8L468.7,366L468.8,368.9L469.2,369.5L469.8,369.9L471.6,370.9L472.4,371.7L472.5,372.2L472.5,373.8L472.3,374.1L472.1,374.9L471,375.7L470,376L467.3,377.2L464.2,378L463.1,378.8L462.9,380.1L462.9,381.7L463.4,383.1L464.7,384.7L465.1,385.7L464.8,386.5L463,387.8L463.1,388.7L462.2,388.5L460.8,388.5L460,388.6L454.5,388.8L426.9,389L425.3,389.3L424.6,389.9L422.8,390.1L422.5,389.5L422,388.6L421.7,387.9L421.6,386.7L421,384.6L420.5,383.6L418.9,381.7L417.5,378.9L415.5,376L412.8,372.9L409.4,369.6L408,367.2L405.2,365.4L403,364.2L402.5,363.6L401.3,361.9L400.1,360.7L398.6,359.9L395.7,359L394.9,358.6L393,358.5L389.1,356.3Z","Ninawa":"M221.8,175.5L189.9,176.1L180.3,172.3L166.8,168L164.7,168.3L162.4,168L160.2,166.9L157.6,165.2L152,162.2L150.1,161.3L148,160.5L149.4,149.5L150.7,145.9L151.4,143.6L151.5,140.4L151.5,136L151.7,133.9L158.2,125.8L157.8,116.8L157.6,109.6L150.4,92.8L152.1,80.7L152.3,71.6L159.3,59.2L185.7,53.6L189.2,50L192.1,47.6L193.9,45.4L199.4,40.4L201.7,37.9L207.7,30.5L210.6,27.8L212.6,26.2L215.7,22.6L216.9,20.8L218.7,19.2L219.1,23.2L219.7,24.8L220.8,26.9L221.8,28L222.9,29.5L224.1,30.3L224.9,30.1L226.3,28.6L227.3,28.5L227.7,30L227.4,31.2L227.3,33.6L226.9,34.8L226.2,35.8L226.1,37.2L226.6,37.5L229.6,37.8L230.1,38L231,39L231.3,40L232.2,41.1L232.5,41.7L234.2,42L235,41.6L235.7,40.2L236.7,39.9L238.2,40.4L238.9,40.8L238.9,41.7L240.7,42.9L241.9,43.9L241.8,44.7L240.9,45.9L240.9,46.5L241.4,47L242.5,47.2L242.9,47L243.7,45.9L245.2,45.2L246,46.3L246.1,47.9L246.9,48.1L247.7,47.7L248.4,46.8L249.2,46.5L254.2,47.3L255.1,47.3L255.7,46.4L256.8,46.1L258.2,46.1L259.1,45.6L262.1,44.7L262.4,43.9L264.1,41.2L265.5,40L266,38.9L266.8,37.5L267.6,36.6L269.3,34L270.2,33L272.2,32.9L272.8,32.4L275.4,32L276.4,32.4L276.9,33.1L279.4,34.5L280.1,35.2L282,36.2L284,37.8L284.9,38.7L286.2,39.4L288.9,39.8L290.9,39.4L292.9,38.8L295.9,37.3L296.8,36.7L297.6,34.4L297.6,32.7L297.1,32.1L295.9,31.2L294.2,29.6L293.6,28.6L293.5,27.6L294,26.7L295.4,26.6L296.6,26.8L299.3,25.7L301,25.4L306.5,25.3L307.8,25.7L308.1,25.8L309.4,26.7L311.5,27.7L313.4,28.3L316.7,29.8L318.1,30.7L319.5,32.1L319.8,33.1L321,33.8L321.5,34.7L321.9,35.9L324.7,36.4L326.4,37.7L327.9,37.8L330.9,39.3L332.6,39.8L334.1,40.8L334.9,43.2L336.4,44.4L336.8,45.1L336.5,45.8L335.9,46.3L335.2,46.7L334,48.2L333.6,49L332.3,50.6L331.3,51L330.2,51.8L329.4,52.9L328.7,53.3L327.6,53.4L326.9,54.1L326,54.5L325.4,53.7L324.8,53.9L323.9,54.4L322.4,54.4L321.1,53.3L320.1,53.6L319.2,54.1L317.1,56L316,57.1L315.4,58L314.8,58.6L313.8,59.1L313.3,60L312.2,61.1L310.6,61.3L310,61.8L310.1,63.2L309.7,64.1L308.9,64.4L307.8,65L306.4,69.8L305.4,70.7L302.4,74.3L301.3,75.3L300.5,75.9L299,76.8L297.3,77.5L295.4,79.4L293.1,82.3L292.5,83.2L291.7,84.1L290.3,85.9L290.2,86.8L289.5,88.1L288,92.4L287.3,93.9L286.5,94.9L285.5,95.4L282.7,96.2L281.8,96.9L281.7,97.6L282.5,100.4L282.6,102.8L282,103.8L281.1,104.5L279.6,106.9L278.7,109.2L278.5,112.2L277.6,113.4L277.2,114.5L276.8,116.5L276.8,117L276.6,117.7L275.5,118.8L273.8,119.7L270.7,121L267.2,123.1L263.1,123.9L257,123.9L250.1,129.8L248.5,130.9L247.3,132L245.8,133.8L244.7,135.5L244.6,140.9L245.2,142.6L245.5,143.8L245.5,145.6L245.9,146.8L251.4,153.8L255.5,160L256.9,162.8L221.6,163.5L221.8,175.5Z","Dohuk":"M307.8,25.7L306.5,25.3L301,25.4L299.3,25.7L296.6,26.8L295.4,26.6L294,26.7L293.5,27.6L293.6,28.6L294.2,29.6L295.9,31.2L297.1,32.1L297.6,32.7L297.6,34.4L296.8,36.7L295.9,37.3L292.9,38.8L290.9,39.4L288.9,39.8L286.2,39.4L284.9,38.7L284,37.8L282,36.2L280.1,35.2L279.4,34.5L276.9,33.1L276.4,32.4L275.4,32L272.8,32.4L272.2,32.9L270.2,33L269.3,34L267.6,36.6L266.8,37.5L266,38.9L265.5,40L264.1,41.2L262.4,43.9L262.1,44.7L259.1,45.6L258.2,46.1L256.8,46.1L255.7,46.4L255.1,47.3L254.2,47.3L249.2,46.5L248.4,46.8L247.7,47.7L246.9,48.1L246.1,47.9L246,46.3L245.2,45.2L243.7,45.9L242.9,47L242.5,47.2L241.4,47L240.9,46.5L240.9,45.9L241.8,44.7L241.9,43.9L240.7,42.9L238.9,41.7L238.9,40.8L238.2,40.4L236.7,39.9L235.7,40.2L235,41.6L234.2,42L232.5,41.7L232.2,41.1L231.3,40L231,39L230.1,38L229.6,37.8L226.6,37.5L226.1,37.2L226.2,35.8L226.9,34.8L227.3,33.6L227.4,31.2L227.7,30L227.3,28.5L226.3,28.6L224.9,30.1L224.1,30.3L222.9,29.5L221.8,28L220.8,26.9L219.7,24.8L219.1,23.2L218.7,19.2L218.7,18.5L218.9,18.4L218.6,18L219.4,17.8L220.8,17.9L222.1,17L223.6,16.9L225.6,16.9L226.6,16.7L227.5,16.2L229.2,15.8L230.2,16.5L231,16.1L232.6,13.1L233,12L235.1,9.4L235.4,8.5L236.5,7.5L237.7,6.6L238.2,5.8L240.2,3.9L242.4,1.5L243.8,0.3L244.8,0L246,0.7L247.1,2.1L249.8,3L250.4,3.4L252.4,3.8L254.6,3.9L255.7,3.9L256.6,3.3L258.4,1.7L259.6,1.5L260.7,1.1L262.1,0.4L264.7,0.2L266.2,0.5L267.3,1.3L269,1.4L271,2.3L272.5,3.2L273.6,4.2L274.4,4.6L274.9,4.6L275.6,4.5L276.4,3.9L277.3,3.7L278.4,3.8L279.5,4.2L279.8,4.7L281,4.9L281.3,5.4L281.5,6.1L282.4,6.9L284.8,7.4L285.3,8.2L286.5,8.8L288.5,9.1L289.2,9L290,8.1L291.3,8.4L292.9,9.3L293.1,9.8L294.3,10.6L295.6,11L296.9,11L297.5,10.4L303.7,10.1L304.9,10.2L306.5,11.2L307.4,12.3L309.3,11.2L311.3,11.3L312.4,11.2L313.1,10.6L314.6,8.2L315.2,6L317,5.7L317.7,4.6L319.1,3.7L321.1,3.5L321.9,3.8L322.9,5.5L323.9,6.6L323.9,13.2L321.8,13.4L321.2,13.7L320.5,14.6L320.2,15.4L319.5,16.4L318.2,17.6L315.5,19.7L314.6,20.6L311.8,22.3L310.2,23.1L307.8,25.7Z","Saladin":"M334.2,284.9L331.4,279.4L328.4,274.4L324.7,271.6L323.3,270.4L323.3,267.5L322.7,265.4L321,263.6L319.5,262.4L301.9,261.7L300.2,260.1L298.2,258.9L295.6,258.7L292.1,258.7L289,258.4L277.1,254.9L268.4,245.8L268.4,243.2L264.2,241.8L264.2,239.4L263.5,237.1L259.9,234.6L257,232.8L252.3,226.9L252.4,205.9L243.1,216.1L223,202.7L221.8,175.5L221.6,163.5L256.9,162.8L255.5,160L251.4,153.8L245.9,146.8L245.5,145.6L245.5,143.8L245.2,142.6L244.6,140.9L244.7,135.5L245.8,133.8L247.3,132L248.5,130.9L250.1,129.8L257,123.9L263.1,123.9L267.2,123.1L270.7,121L273.8,119.7L275.5,118.8L276.6,117.7L276.8,117L276.8,116.5L277.6,117.5L278,118.5L278.1,119.9L277.9,122.4L276.3,126.4L276.1,127.3L276.1,128.2L276.4,129L277.5,129.8L278.6,130.4L279.2,131L279.7,131.8L279.8,132.6L279,133.2L277.9,133.7L275.7,134.5L272.6,135.3L271.4,135.9L270.9,136.5L271.8,141.1L272.7,142.5L273.4,144.1L274.8,148.2L277,152.8L277.7,154.2L278.7,156.6L280,157.4L281.6,158L284.1,158.5L288.5,159.8L291.2,160.9L292.5,161.6L294.8,162.7L301.3,164.8L303,165.6L304.5,166.7L306.4,169.1L309.3,172.4L310.3,173.9L311.2,175L312.5,176.6L313.9,177.3L319.8,178.6L321.5,179.4L324.8,182.1L327.7,184.8L329,185.4L331.3,187.3L332.3,188.5L333.7,189.2L334.9,188.8L337.7,184.3L341.6,175.5L345.9,166.8L346.5,165.1L347.2,160.6L348.1,158.8L348.2,158.9L349.3,159.5L350.6,160.9L351.5,161.6L353.1,162.4L355.6,162.9L360.3,163L365.3,163.5L367.7,163.5L369.7,163.9L372,165.3L373.5,166.6L374.8,168.2L375.3,170.3L375.3,171.8L375.6,173.5L375.4,175L374.6,176.4L374.2,178.1L374.1,179.8L373.4,180.1L371.4,180.1L368.1,181L367,184.9L364.6,187.6L363.7,188.4L362.9,189.6L362.6,192.2L362.5,196.5L361.1,197.3L360.3,197.9L359.6,201.8L359.2,202.9L358.5,204L357.1,203.8L355.7,202.6L353.5,200L352.1,199L351.4,198.9L349.7,199.2L349.3,199.8L349.2,201.2L349.3,202.6L349.5,203.4L349.9,203.9L350.1,204.7L349.9,205.6L349.3,206.2L348.2,207L348.6,209.6L349,210.7L349.1,211.9L348.4,212.8L348.2,213.5L347.6,214.1L347.2,214.8L347.1,215.9L347.6,216.8L348.3,217.3L348.3,221.5L347.6,222.5L345.9,223.4L345.1,224.2L344.5,225.4L344,226.7L343,227.2L341,227.3L339.7,229L338.5,231.7L337.8,233.8L337,234.8L336.7,236.1L336.7,238.9L337.5,239.4L340.3,239.7L341.6,240.1L342.4,240.8L343.1,241.7L343.9,242.3L344.4,243.3L346.2,244.3L346.5,247.3L345.5,248L345.2,248.4L344.7,250.4L344,251.6L342.9,252.7L341.9,253.5L341.7,257.1L341.8,258.2L343.1,258.9L343.6,259.8L343.8,260.8L343.6,261.7L342.8,262.5L342.2,267L341.9,267.6L339.5,267.9L338.5,269.1L338.5,270.4L338.3,272.1L337.9,272.8L337,273.8L337.2,277.6L337.5,278.4L338.3,279.4L339.3,280.4L334.2,284.9Z","Diyala":"M353,307.1L352.9,306.1L352.3,303.7L351.6,302.5L349.3,301L348.6,300.1L348.4,299L348.4,297.8L347.8,296.4L347.6,296.4L350.3,296.1L352.8,295.4L353.8,294.9L354.5,294.2L354.9,293.3L354.8,292.5L354.9,288.4L354.4,283.1L352.1,280.6L339.4,280.4L339.3,280.4L338.3,279.4L337.5,278.4L337.2,277.6L337,273.8L337.9,272.8L338.3,272.1L338.5,270.4L338.5,269.1L339.5,267.9L341.9,267.6L342.2,267L342.8,262.5L343.6,261.7L343.8,260.8L343.6,259.8L343.1,258.9L341.8,258.2L341.7,257.1L341.9,253.5L342.9,252.7L344,251.6L344.7,250.4L345.2,248.4L345.5,248L346.5,247.3L346.2,244.3L344.4,243.3L343.9,242.3L343.1,241.7L342.4,240.8L341.6,240.1L340.3,239.7L337.5,239.4L336.7,238.9L336.7,236.1L337,234.8L337.8,233.8L338.5,231.7L339.7,229L341,227.3L343,227.2L344,226.7L344.5,225.4L345.1,224.2L345.9,223.4L347.6,222.5L348.3,221.5L348.3,217.3L347.6,216.8L347.1,215.9L347.2,214.8L347.6,214.1L348.2,213.5L348.4,212.8L349.1,211.9L349,210.7L348.6,209.6L348.2,207L349.3,206.2L349.9,205.6L350.1,204.7L349.9,203.9L349.5,203.4L349.3,202.6L349.2,201.2L349.3,199.8L349.7,199.2L351.4,198.9L352.1,199L353.5,200L355.7,202.6L357.1,203.8L358.5,204L359.2,202.9L359.6,201.8L360.3,197.9L361.1,197.3L362.5,196.5L362.6,192.2L362.9,189.6L363.7,188.4L364.6,187.6L367,184.9L368.1,181L371.4,180.1L373.4,180.1L374.1,179.8L375,180.3L376.8,180.6L378.4,180.3L379.2,179.7L381.3,177.8L382.3,178.1L383.1,178.9L384.1,180.6L384.4,181.6L385,182.4L386,182L386.6,181.6L388,181.2L388.7,180.4L389.7,180.3L390.9,181.1L391.4,182L391.4,183L391.7,184.2L392.1,185L392,186.2L392.5,186.9L393.2,187.4L393.9,188.3L394.3,190.7L394.7,191.3L394.9,193.9L394.8,195.2L395.7,197L396.8,197.2L398.2,195.9L400.9,192.9L402,192.6L403.8,192.6L405.2,192.5L406.7,191.2L408.2,189.9L408.2,188.3L408.7,184.7L409.2,183.4L410.1,182.4L412.2,180.3L412.5,179.4L412.7,177L413.9,175.9L414.9,174.6L416.2,174.1L416.9,173.6L417.1,172L418,171.1L417.9,170.3L417.3,169.8L416.6,168.6L416.6,167.3L418,166L418.4,164.9L419.3,164L421.3,162.8L422.1,161.1L422.7,158.9L423.7,158.8L424.3,158.2L425.2,157.7L426.2,157.9L426.6,159.1L426.6,167.7L427.8,170.2L428,171.9L428,174.7L428,176.9L428,177.9L427.7,178.6L426.9,179.4L425.5,180L423.5,180.3L422.7,180.9L422.5,184.1L422.1,184.7L421.6,185.1L420.6,186.5L420.3,187.5L420.4,188.4L421.1,189.1L422.1,189.6L423.3,191.8L423.5,192.3L423.7,193.7L424.3,194.6L424.6,195.5L424.8,200.6L424.5,201.3L422.5,200.1L417.4,200.2L416.3,200L414.9,199.4L414.1,198.6L413.6,197L412.7,196.8L412.2,197.8L411.8,198.9L411.8,203.3L411.7,204.5L411.2,205.2L410.1,205.6L407.7,206L406.8,206.7L406.8,207.6L407.3,208.7L408.3,210L408.5,211.3L408.3,213.4L409.2,214.6L411.1,215.2L412,215.2L413.6,215.7L413.7,216L415.2,217.4L415.7,218.3L415.9,219.6L415.9,220.3L415.8,221.6L414.7,222.4L414.6,223.5L414.6,224.5L413.9,225L413.7,225.4L413.8,226.4L414.4,227.2L414.9,227.7L415.2,229.8L414.7,230.4L413.3,230.5L411.7,231.9L410.9,232.3L409.5,234.7L409.1,237L408.4,238L408,238.9L407.3,239.5L406,240L404.8,241.4L406.3,244.1L407.7,244.4L408.7,243.6L410,243.1L411.4,243.5L411.4,244.9L412.6,247.6L414.8,250.8L416.3,254.6L417.4,255.7L418.7,256.7L419.5,258.2L419.7,259.3L420.4,260.8L421.3,262L422.7,263L423.8,264.2L425.8,265.5L426.7,266.3L426.9,266.9L425.5,268L427,269.2L428.2,268.3L429.2,267.1L431.8,266.5L435.4,266.5L435.7,267.5L435.7,268.4L437.3,269.7L438.8,270.3L439.3,271.5L438,272.9L436.8,273.5L435.4,274.5L434.2,276.1L433.7,277.4L435.9,277.6L437.1,277.1L439.3,275L440.6,275.4L441.8,277.2L441.5,277.2L440.7,277.9L439.5,280L438.5,281.1L434.1,283.1L433.7,283.6L432.1,287.4L431.6,288.3L431.1,289.6L429.4,290.8L426.5,291.1L425.7,292.1L423.9,297.2L423.3,298.3L421,301.7L418.6,303.9L417.3,304.8L416.1,305.2L414.8,304.9L411.5,302.9L409.7,302L408.1,302L407.2,301.5L404.5,300.8L399.8,300.7L397.4,300.5L396,299.9L394.9,299L392.8,297.5L389.9,295.9L385.6,294.1L382,292.8L380.6,293.1L379.4,293.8L377.6,294.1L373.7,295.3L372.8,295.9L371.5,298.1L370.6,301.3L369.9,303.2L369.1,304.9L366.8,307L364.1,309.8L363.1,311.2L361.5,311.6L360.7,312.1L359.5,312.3L358.4,312L357.7,311.3L357.7,310.1L357.9,308.8L357.1,308.1L355.5,307.9L354.5,308.3L353.9,308.7L353.7,308.1L353,307.1Z","Kirkuk":"M348.2,158.9L348.1,158.8L347.2,160.6L346.5,165.1L345.9,166.8L341.6,175.5L337.7,184.3L334.9,188.8L333.7,189.2L332.3,188.5L331.3,187.3L329,185.4L327.7,184.8L324.8,182.1L321.5,179.4L319.8,178.6L313.9,177.3L312.5,176.6L311.2,175L310.3,173.9L309.3,172.4L306.4,169.1L304.5,166.7L303,165.6L301.3,164.8L294.8,162.7L292.5,161.6L291.2,160.9L288.5,159.8L284.1,158.5L281.6,158L280,157.4L278.7,156.6L277.7,154.2L277,152.8L274.8,148.2L273.4,144.1L272.7,142.5L271.8,141.1L270.9,136.5L271.4,135.9L272.6,135.3L275.7,134.5L277.9,133.7L279,133.2L279.8,132.6L281,133.1L282.1,134L283.1,135.7L283.6,136.2L284.6,136.4L285.3,136.1L285.7,134.5L286.1,133.9L287.2,134.2L288.2,134.9L288.4,135.6L288.7,136.3L289.4,136.8L289.9,137.7L290.4,136.9L290.6,132.7L290.9,132.1L293.8,131.8L294.7,131.8L295.6,132.5L296.1,133.1L296.8,133.7L298.1,133.9L298.9,133.6L299,130.6L300.2,129.3L300.8,125.9L301.2,124.8L301.5,123.4L302.1,122.4L302.3,121.4L302.3,119.8L302.9,118.1L303.3,115.8L304.4,113L304.8,111.6L305.7,110.7L306.3,109.7L307,109.1L308.4,107.1L313.1,107.2L314.6,107.6L315.5,108.1L316.6,108.4L317.4,108.9L318.8,109.8L319.4,110.5L320.5,110.5L322,110.1L322.9,109.3L324.7,107.3L333.2,107.5L334.3,108L336.5,108.3L339.6,108.5L341,108.2L342.2,107L343.6,106.2L348.1,106.1L349.3,106.6L350,107L351.5,106.9L352.4,105.4L352.9,105.1L353.5,104.4L355,104.2L356.3,104.2L359,105L360.9,105.9L361.2,106.1L361.8,106.5L363,107.5L363.5,109L363.5,110.5L362.1,111.5L361.5,113.3L362.1,114.8L365,118.3L366.1,119.4L365.8,120.7L364.1,122.8L364.1,125.2L364.2,127.2L364.5,128.4L365.9,130.5L366.8,132.2L368.4,134.4L368.8,136L368.8,137.2L367.9,138.6L366.5,139.3L365.4,140.2L362.8,142.9L361.5,145.7L360.7,146.6L359.6,152L357.5,154.2L356.3,155.7L355.3,156.6L354.4,157.1L350.7,157.8L348.2,158.9Z","Erbil":"M276.8,116.5L277.2,114.5L277.6,113.4L278.5,112.2L278.7,109.2L279.6,106.9L281.1,104.5L282,103.8L282.6,102.8L282.5,100.4L281.7,97.6L281.8,96.9L282.7,96.2L285.5,95.4L286.5,94.9L287.3,93.9L288,92.4L289.5,88.1L290.2,86.8L290.3,85.9L291.7,84.1L292.5,83.2L293.1,82.3L295.4,79.4L297.3,77.5L299,76.8L300.5,75.9L301.3,75.3L302.4,74.3L305.4,70.7L306.4,69.8L307.8,65L308.9,64.4L309.7,64.1L310.1,63.2L310,61.8L310.6,61.3L312.2,61.1L313.3,60L313.8,59.1L314.8,58.6L315.4,58L316,57.1L317.1,56L319.2,54.1L320.1,53.6L321.1,53.3L322.4,54.4L323.9,54.4L324.8,53.9L325.4,53.7L326,54.5L326.9,54.1L327.6,53.4L328.7,53.3L329.4,52.9L330.2,51.8L331.3,51L332.3,50.6L333.6,49L334,48.2L335.2,46.7L335.9,46.3L336.5,45.8L336.8,45.1L336.4,44.4L334.9,43.2L334.1,40.8L332.6,39.8L330.9,39.3L327.9,37.8L326.4,37.7L324.7,36.4L321.9,35.9L321.5,34.7L321,33.8L319.8,33.1L319.5,32.1L318.1,30.7L316.7,29.8L313.4,28.3L311.5,27.7L309.4,26.7L308.1,25.8L307.8,25.7L310.2,23.1L311.8,22.3L314.6,20.6L315.5,19.7L318.2,17.6L319.5,16.4L320.2,15.4L320.5,14.6L321.2,13.7L321.8,13.4L323.9,13.2L323.9,6.6L322.9,5.5L321.9,3.8L323.8,3.6L326.3,4.2L327.3,4.8L328.2,5.6L328.7,5.8L332.2,7L333,7.6L334.4,9.2L335.3,11.8L334.8,15L334.2,15.4L332.2,15.5L331.8,16L330.3,17.5L330.2,18.9L330.6,20.1L331.6,22.1L332.3,22.5L332.6,23.2L332.9,24.8L333.5,25.3L333.9,27L334,27.3L335.4,27.6L336.5,27.6L337.3,27.2L338,26.1L338.9,25.6L339.7,23.7L339.9,22.4L340.5,22L343.5,22L346.1,21.1L348.3,19.5L349.2,18.3L351.6,17.2L352.2,16.2L354.5,14L356.1,13.6L357.7,13.5L358.5,13.6L359,13.9L361.5,14.5L363.9,14.4L365.4,14.5L366,15L366.1,16.2L365.5,16.9L364.7,17.5L364.2,18.1L365.2,18.9L365.9,19.8L366.7,21.5L367.5,22.6L369.8,22.9L370.6,23.3L372.5,24.1L373.1,25.5L373,26.6L373.1,30.4L373.3,31.1L373.8,31.9L374.1,33L374,34.1L373.5,35L370.8,37.6L369.8,39.5L370,40.5L370.6,41.1L373.6,40.9L375.4,40.9L376.3,41L377.1,41.4L378.3,42.5L381.1,43.4L382.1,44.8L382.6,46.1L383.4,47.1L383.8,48.7L383.8,51.6L383.5,52.1L382.4,53L381.5,53.8L381.9,55L382,55.8L381.8,56.5L380,57.5L379.9,58.1L379.6,58.4L379.6,58.4L379.3,58.7L377.2,58.9L374.9,58.8L373.4,59L372.3,59.4L368.1,62L366.2,62L364.8,61.2L363.8,59.7L362.9,59L361.9,59L360.5,59.2L359.5,59.5L359.1,60.4L357.7,61.9L357.5,62.8L356.7,63.5L355.7,64.1L353.3,64.2L353.2,73.6L354.7,74.2L355.8,73.5L356.8,72.7L358.1,72.8L358.6,74L358.9,75.5L360,76L361.6,76.3L363.1,77L363.4,78.5L363.2,79.5L356.4,79.7L355.2,79.9L354.7,82.5L354.6,84L354.6,85L354.9,85.9L356.4,87.4L357.1,88.4L358.6,89.2L362.6,93.5L363.3,94.4L363.9,95.6L364.8,96.5L366,97.3L367,98.4L370,100L371.1,101.1L373.5,102.4L374,103.2L373.9,104.7L372.5,103.7L371.7,104.1L370.6,106L369.2,104.8L368.4,105.2L367.7,105.8L366.6,105.7L365.8,104.5L364.1,104.4L362.7,104.6L361.2,106.1L360.9,105.9L359,105L356.3,104.2L355,104.2L353.5,104.4L352.9,105.1L352.4,105.4L351.5,106.9L350,107L349.3,106.6L348.1,106.1L343.6,106.2L342.2,107L341,108.2L339.6,108.5L336.5,108.3L334.3,108L333.2,107.5L324.7,107.3L322.9,109.3L322,110.1L320.5,110.5L319.4,110.5L318.8,109.8L317.4,108.9L316.6,108.4L315.5,108.1L314.6,107.6L313.1,107.2L308.4,107.1L307,109.1L306.3,109.7L305.7,110.7L304.8,111.6L304.4,113L303.3,115.8L302.9,118.1L302.3,119.8L302.3,121.4L302.1,122.4L301.5,123.4L301.2,124.8L300.8,125.9L300.2,129.3L299,130.6L298.9,133.6L298.1,133.9L296.8,133.7L296.1,133.1L295.6,132.5L294.7,131.8L293.8,131.8L290.9,132.1L290.6,132.7L290.4,136.9L289.9,137.7L289.4,136.8L288.7,136.3L288.4,135.6L288.2,134.9L287.2,134.2L286.1,133.9L285.7,134.5L285.3,136.1L284.6,136.4L283.6,136.2L283.1,135.7L282.1,134L281,133.1L279.8,132.6L279.7,131.8L279.2,131L278.6,130.4L277.5,129.8L276.4,129L276.1,128.2L276.1,127.3L276.3,126.4L277.9,122.4L278.1,119.9L278,118.5L277.6,117.5L276.8,116.5Z","Sulaymaniyah":"M374.1,179.8L374.2,178.1L374.6,176.4L375.4,175L375.6,173.5L375.3,171.8L375.3,170.3L374.8,168.2L373.5,166.6L372,165.3L369.7,163.9L367.7,163.5L365.3,163.5L360.3,163L355.6,162.9L353.1,162.4L351.5,161.6L350.6,160.9L349.3,159.5L348.2,158.9L350.7,157.8L354.4,157.1L355.3,156.6L356.3,155.7L357.5,154.2L359.6,152L360.7,146.6L361.5,145.7L362.8,142.9L365.4,140.2L366.5,139.3L367.9,138.6L368.8,137.2L368.8,136L368.4,134.4L366.8,132.2L365.9,130.5L364.5,128.4L364.2,127.2L364.1,125.2L364.1,122.8L365.8,120.7L366.1,119.4L365,118.3L362.1,114.8L361.5,113.3L362.1,111.5L363.5,110.5L363.5,109L363,107.5L361.8,106.5L361.2,106.1L362.7,104.6L364.1,104.4L365.8,104.5L366.6,105.7L367.7,105.8L368.4,105.2L369.2,104.8L370.6,106L371.7,104.1L372.5,103.7L373.9,104.7L374,103.2L373.5,102.4L371.1,101.1L370,100L367,98.4L366,97.3L364.8,96.5L363.9,95.6L363.3,94.4L362.6,93.5L358.6,89.2L357.1,88.4L356.4,87.4L354.9,85.9L354.6,85L354.6,84L354.7,82.5L355.2,79.9L356.4,79.7L363.2,79.5L363.4,78.5L363.1,77L361.6,76.3L360,76L358.9,75.5L358.6,74L358.1,72.8L356.8,72.7L355.8,73.5L354.7,74.2L353.2,73.6L353.3,64.2L355.7,64.1L356.7,63.5L357.5,62.8L357.7,61.9L359.1,60.4L359.5,59.5L360.5,59.2L361.9,59L362.9,59L363.8,59.7L364.8,61.2L366.2,62L368.1,62L372.3,59.4L373.4,59L374.9,58.8L377.2,58.9L379.3,58.7L379.6,58.4L379.6,58.4L380.2,59L380.6,59.7L382.1,60.3L382.6,60.9L383.1,61.7L383.6,63.3L384.1,63.9L384.5,65.5L385,66.2L386.8,67.6L387.4,67.7L388.3,67.7L389.3,67.5L390.2,67.1L392,66.7L393.2,66.5L394,66.7L394.7,67.1L394.9,67.8L396.5,68.9L396.3,73L396.1,73.8L396,74.4L396.3,75.3L397.1,75.9L397.5,76.3L397.8,77L397.7,77.5L397.5,77.8L396.2,78.3L396,78.9L396.2,79.3L397.6,79.6L398.7,80.1L399.1,80.9L399.4,81.6L399.7,83.2L399.7,84.1L399.5,84.7L399.9,86.5L400,87.4L400.6,88.1L401.1,89.2L401.7,89.8L402.1,90.5L402.3,92.2L402,92.9L401.4,93.7L400.5,96.5L401.1,97.5L401.3,98.2L401.7,98.9L404.2,99.6L404.8,98.8L406.2,98L407.7,97.9L409.6,97.1L411,97L412.6,97.1L413.7,97.4L414.4,98.1L415.5,98.5L415.8,99.1L416.6,99.5L417.8,99.8L418.4,100.5L418.9,101.4L420.5,103.4L420.8,104.3L421.3,104.8L422.1,105.5L423,107L424,108.2L424.5,109.9L424.9,110.7L426,111.9L427,111.8L427.5,110.8L428.8,110.5L429.7,111L430.5,110.8L431.7,110.9L434.7,109.2L436.2,109.9L436.8,109.8L437.7,108.9L438.7,108.7L440.3,109.2L441.5,109.2L443,108.6L444.5,107.6L446.4,107.8L447.2,108.5L449.2,109.1L449.4,110L449.8,110.7L451.1,111.6L452.4,111.8L454.6,111.4L456.5,111.5L457.1,110.8L459.8,109.9L460.7,110.3L461.1,110.9L461.4,112.1L461.4,113L459.4,114.9L458.2,115.6L457.8,116.4L457.3,116.8L455.3,117.8L453,117.8L451.6,118.5L451,119.2L450.3,119.7L449.5,119.4L448.4,119.4L447.6,119.8L446.3,119.8L444.5,119.7L443.4,120L442.3,120.5L441.7,121.2L441.2,122.8L440.5,123.2L439.8,123.9L439.9,124.5L441.3,124.5L441.5,125.3L441.3,127.2L441.5,128.5L441.3,128.9L439.9,128.3L438.9,128.4L438.9,129.4L440.4,130.9L441.1,132L440.7,132.8L439.8,133.2L439.3,134.3L440.3,136.6L441.2,139.3L443.1,141.5L444.1,142.4L445.1,143.6L445.6,144.6L447.6,145.7L449.4,148.5L449.9,149.3L449.5,150.4L448.7,151.4L448.2,152.6L448.2,153.4L448.9,154L449,154.3L450.3,154L451.4,154.5L452,155.4L452.3,156.1L451.3,156.5L450.6,157L450.5,157.9L449.7,159.9L450.3,161.1L448.9,162.1L447.1,162L445.7,161.7L445.3,162.4L445.3,163.6L444.8,164.7L443.5,164.9L442.7,164L441.9,163.6L439.8,163.3L437.7,161.7L436.8,161.5L436.7,162.9L436.5,164.2L435.6,164.4L434.4,164.4L433.6,165.2L433.3,166.8L434.6,168.9L434.6,169.7L434.2,170.6L433.7,171.2L433.1,172.2L432.9,173.6L432.2,175.4L431.8,175.6L430.6,174.9L429.6,174.8L428,174.7L428,171.9L427.8,170.2L426.6,167.7L426.6,159.1L426.2,157.9L425.2,157.7L424.3,158.2L423.7,158.8L422.7,158.9L422.1,161.1L421.3,162.8L419.3,164L418.4,164.9L418,166L416.6,167.3L416.6,168.6L417.3,169.8L417.9,170.3L418,171.1L417.1,172L416.9,173.6L416.2,174.1L414.9,174.6L413.9,175.9L412.7,177L412.5,179.4L412.2,180.3L410.1,182.4L409.2,183.4L408.7,184.7L408.2,188.3L408.2,189.9L406.7,191.2L405.2,192.5L403.8,192.6L402,192.6L400.9,192.9L398.2,195.9L396.8,197.2L395.7,197L394.8,195.2L394.9,193.9L394.7,191.3L394.3,190.7L393.9,188.3L393.2,187.4L392.5,186.9L392,186.2L392.1,185L391.7,184.2L391.4,183L391.4,182L390.9,181.1L389.7,180.3L388.7,180.4L388,181.2L386.6,181.6L386,182L385,182.4L384.4,181.6L384.1,180.6L383.1,178.9L382.3,178.1L381.3,177.8L379.2,179.7L378.4,180.3L376.8,180.6L375,180.3L374.1,179.8Z"}};
+// Seat projection engine: universal national swing with taper, then the real allocation rule
+// (modified Sainte-Lague, first divisor 1.7, in each of the 18 governorate constituencies; quota seats fixed).
+function createEngine(D) {
+  var DIV0 = 1.7, TAPER = 0.2;
+  var parties = Object.keys(D.parties);
+  var totalAll = 0, natVotes = {};
+  D.cons.forEach(function (c) {
+    totalAll += c.total;
+    Object.keys(c.votes).forEach(function (p) { natVotes[p] = (natVotes[p] || 0) + c.votes[p]; });
+  });
+  var base = {};
+  parties.forEach(function (p) { base[p] = (natVotes[p] || 0) / totalAll * 100; });
+  var consBase = D.cons.map(function (c) {
+    var o = {};
+    parties.forEach(function (p) { o[p] = (c.votes[p] || 0) / c.total * 100; });
+    return o;
+  });
+  var strength = parties.slice().sort(function (a, b) { return (natVotes[b] || 0) - (natVotes[a] || 0) || (a < b ? -1 : 1); });
+  var sliders = D.sliders.slice();
+  var isSlider = {};
+  sliders.forEach(function (s) { isSlider[s] = true; });
+  var others = parties.filter(function (p) { return !isSlider[p]; });
+  var sliderBase = sliders.reduce(function (a, s) { return a + base[s]; }, 0);
+  var otherBase = others.reduce(function (a, q) { return a + base[q]; }, 0);
+
+  function nationalInputs(sl) {
+    var S = sliders.reduce(function (a, s) { return a + sl[s]; }, 0);
+    var O = Math.max(0, 100 - S);
+    var inp = {};
+    sliders.forEach(function (s) { inp[s] = sl[s]; });
+    others.forEach(function (q) { inp[q] = otherBase > 0 ? O * base[q] / otherBase : 0; });
+    return { inp: inp, other: O };
+  }
+
+  // universal national swing with taper below 20% of the party's baseline national share
+  function constituencyVote(p, ci, inp) {
+    var b = consBase[ci][p];
+    if (!(b > 0)) return 0;
+    var bp = base[p], x = inp[p];
+    var swing = x - bp;
+    if (Math.abs(swing) < 1e-9) return b;
+    var t = TAPER * bp;
+    if (x >= t) return Math.max(0, b + swing);
+    return Math.max(0, b + (t - bp)) * (x / t);
+  }
+
+  function allocate(votes, seats) {
+    var got = {};
+    for (var n = 0; n < seats; n++) {
+      var best = null, bq = -1;
+      for (var i = 0; i < strength.length; i++) {
+        var p = strength[i], v = votes[p];
+        if (!(v > 0)) continue;
+        var k = got[p] || 0;
+        var q = v / (k === 0 ? DIV0 : 2 * k + 1);
+        if (q > bq) { bq = q; best = p; }
+      }
+      if (best === null) break;
+      got[best] = (got[best] || 0) + 1;
+    }
+    return got;
+  }
+
+  function run(sl) {
+    var ni = nationalInputs(sl), inp = ni.inp;
+    var natSeats = {};
+    var cons = D.cons.map(function (c, ci) {
+      var raw = {}, sum = 0;
+      parties.forEach(function (p) {
+        var v = constituencyVote(p, ci, inp);
+        if (v > 0) { raw[p] = v; sum += v; }
+      });
+      var shares = {};
+      Object.keys(raw).forEach(function (p) { shares[p] = raw[p] / sum * 100; });
+      var lv = {};
+      Object.keys(shares).forEach(function (p) { if (p !== 'MIN') lv[p] = shares[p]; });
+      var seats = allocate(lv, c.general);
+      if (c.quota > 0) seats.MIN = c.quota;
+      Object.keys(seats).forEach(function (p) { natSeats[p] = (natSeats[p] || 0) + seats[p]; });
+      var winner = null;
+      Object.keys(shares).forEach(function (p) {
+        if (p === 'MIN') return;
+        if (winner === null || (seats[p] || 0) > (seats[winner] || 0) ||
+            ((seats[p] || 0) === (seats[winner] || 0) && shares[p] > shares[winner])) winner = p;
+      });
+      return { key: c.key, name: c.name, seatsTotal: c.general + c.quota, shares: shares, seats: seats, winner: winner };
+    });
+    return { inputs: inp, other: ni.other, seats: natSeats, cons: cons };
+  }
+
+  var defaults = {};
+  sliders.forEach(function (s) { defaults[s] = base[s]; });
+  var baseline = run(defaults);
+
+  return { parties: parties, base: base, natVotes: natVotes, sliders: sliders, others: others, strength: strength,
+           defaults: defaults, baseline: baseline, run: run, sliderBase: sliderBase, otherBase: otherBase,
+           totalSeats: D.cons.reduce(function (a, c) { return a + c.general + c.quota; }, 0) };
+}
+var E=createEngine(D), COL=D.colours, NAME=D.parties;
+var SMAX=30, TOTAL=E.totalSeats, MAJ=Math.floor(TOTAL/2)+1;
+var sl={}; E.sliders.forEach(function(s){sl[s]=E.defaults[s];});
+var sel={}, mapMode='winner', tipKey=null, res=null;
+var SVGNS='http://www.w3.org/2000/svg';
+function $(id){return document.getElementById(id);}
+function fmt(v){return v.toFixed(1);}
+function lab(p){return NAME[p]+' ('+p+')';}
+function rgb(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+function sv(tag,attrs){var e=document.createElementNS(SVGNS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);return e;}
+
+/* ---------- inputs ---------- */
+var LOCK='<svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="currentColor"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+var rng={}, box={};
+E.sliders.concat(['OTHER']).forEach(function(s){
+  var other=s==='OTHER';
+  var row=document.createElement('div'); row.className='srow'+(other?' locked':'');
+  var nm=document.createElement('div'); nm.className='sname'; nm.innerHTML=other?(LOCK+'<span>Other</span>'):lab(s);
+  var ctl=document.createElement('div'); ctl.className='sctl';
+  var r=document.createElement('input'); r.type='range'; r.min=0; r.max=SMAX; r.step=0.1; r.id='r_'+s;
+  r.setAttribute('aria-label',other?'Other (locked)':NAME[s]);
+  if(!other) r.style.setProperty('--fill',COL[s]); else r.disabled=true;
+  var w=document.createElement('div'); w.className='numw';
+  var n=document.createElement('input'); n.type='text'; n.inputMode='decimal'; n.className='num'; n.id='n_'+s;
+  n.setAttribute('aria-label',(other?'Other':NAME[s])+' vote share');
+  if(other) n.readOnly=true;
+  w.appendChild(n); w.appendChild(document.createTextNode('%'));
+  ctl.appendChild(r); ctl.appendChild(w); row.appendChild(nm); row.appendChild(ctl); $('sliders').appendChild(row);
+  rng[s]=r; box[s]=n;
+  if(!other){
+    r.addEventListener('input',function(){ setVal(s,parseFloat(r.value),false); });
+    n.addEventListener('input',function(){
+      var v=parseFloat(n.value.replace(',','.')); if(isFinite(v)) setVal(s,v,true);
+    });
+    n.addEventListener('change',function(){ commitBox(s); });
+    n.addEventListener('blur',function(){ commitBox(s); });
+    n.addEventListener('keydown',function(e){ if(e.key==='Enter'){ n.blur(); } });
+  }
+});
+function limit(s,v){
+  var others=0; E.sliders.forEach(function(k){ if(k!==s) others+=sl[k]; });
+  var mx=Math.min(SMAX,100-others); mx=Math.floor(mx*10+1e-9)/10; if(mx<0) mx=0;
+  v=Math.round(v*10)/10; if(v>mx) v=mx; if(v<0) v=0; return v;
+}
+function setVal(s,v,typing){ sl[s]=limit(s,v); update(typing?s:null); }
+function commitBox(s){
+  var v=parseFloat(box[s].value.replace(',','.'));
+  if(isFinite(v)) sl[s]=limit(s,v);
+  box[s].value=fmt(sl[s]); update(null);
+}
+$('reset').addEventListener('click',function(){
+  E.sliders.forEach(function(s){ sl[s]=E.defaults[s]; }); update(null);
+});
+function syncInputs(skip){
+  E.sliders.forEach(function(s){
+    rng[s].value=sl[s]; rng[s].style.setProperty('--p',(sl[s]/SMAX*100)+'%');
+    if(s!==skip) box[s].value=fmt(sl[s]);
+  });
+  rng.OTHER.value=res.other; rng.OTHER.style.setProperty('--p',Math.min(100,res.other/SMAX*100)+'%'); box.OTHER.value=fmt(res.other);
+}
+
+/* ---------- hemicycle (fixed party order, left to right) ---------- */
+var hemi=$('hemi'), seatEls=[];
+(function buildHemi(){
+  var cx=300, cy=302, R=288, r0=115, rows=10, sr=8.2, radii=[], sum=0, i;
+  for(i=0;i<rows;i++){ radii.push(r0+(R-r0)*i/(rows-1)); sum+=radii[i]; }
+  var cnt=radii.map(function(r){return TOTAL*r/sum;}), fl=cnt.map(Math.floor), used=fl.reduce(function(a,b){return a+b;},0);
+  var ord=cnt.map(function(c,k){return [c-fl[k],k];}).sort(function(a,b){return b[0]-a[0];});
+  for(i=0;used<TOTAL;i++,used++) fl[ord[i][1]]++;
+  var seats=[];
+  radii.forEach(function(r,k){
+    var n=fl[k];
+    for(var j=0;j<n;j++){
+      var th=n===1?Math.PI/2:Math.PI-j*Math.PI/(n-1);
+      seats.push({t:th,r:r,x:cx+r*Math.cos(th),y:cy-r*Math.sin(th)});
+    }
+  });
+  seats.sort(function(a,b){return (b.t-a.t)||(a.r-b.r);});
+  seats.forEach(function(s){
+    var c=sv('circle',{cx:s.x.toFixed(1),cy:s.y.toFixed(1),r:sr,fill:'#999'}); hemi.appendChild(c); seatEls.push(c);
+  });
+})();
+function renderHemi(){
+  var k=0;
+  D.hemi.forEach(function(p){ var n=res.seats[p]||0; for(var j=0;j<n;j++){ seatEls[k].setAttribute('fill',COL[p]); k++; } });
+  $('hlegend').innerHTML=D.hemi.filter(function(p){return (res.seats[p]||0)>0;}).map(function(p){
+    return '<span class="lg"><i style="background:'+COL[p]+'"></i>'+p+'</span>'; }).join('');
+}
+
+/* ---------- table ---------- */
+var showSmall=false;
+function isSmall(p){ return p!=='MIN' && !((res.seats[p]||0)>1 && res.inputs[p]>=1); }
+$('small').addEventListener('click',function(){ showSmall=!showSmall; renderTable(); });
+function renderTable(){
+  var rows=E.parties.filter(function(p){ return (res.seats[p]||0)>0 || res.inputs[p]>=1; });
+  var nSmall=rows.filter(isSmall).length;
+  if(!showSmall) rows=rows.filter(function(p){ return !isSmall(p); });
+  $('small').hidden=nSmall===0; $('small').textContent=showSmall?'Hide smaller parties':'Show smaller parties';
+  rows.sort(function(a,b){ return (res.seats[b]||0)-(res.seats[a]||0) || res.inputs[b]-res.inputs[a]; });
+  var quota=rows.indexOf('MIN')>=0; rows=rows.filter(function(p){ return p!=='MIN'; }); if(quota) rows.push('MIN');
+  $('tbl').querySelector('tbody').innerHTML=rows.map(function(p){
+    var s=res.seats[p]||0, d=s-(E.baseline.seats[p]||0);
+    var cls=d>0?'pos':d<0?'neg':'zero', txt=d>0?'+'+d:d<0?'−'+Math.abs(d):'0';
+    return '<tr'+(p==='MIN'?' class="q"':'')+'><td><span class="pn"><i style="background:'+COL[p]+'"></i><span>'+lab(p)+'</span></span></td><td>'+fmt(res.inputs[p])+'%</td><td class="seats">'+s+'</td><td class="'+cls+'">'+txt+'</td></tr>';
+  }).join('');
+}
+
+/* ---------- coalition builder ---------- */
+function seatOrder(){
+  return E.parties.filter(function(p){return (res.seats[p]||0)>0;}).sort(function(a,b){
+    return (res.seats[b]||0)-(res.seats[a]||0) || res.inputs[b]-res.inputs[a]; });
+}
+function renderBuilder(){
+  var order=seatOrder(), n=0, segs='';
+  $('cbtn').innerHTML=order.map(function(p){
+    return '<button type="button" class="chip" data-p="'+p+'" aria-pressed="'+(!!sel[p])+'"><i style="background:'+COL[p]+'"></i>'+p+'</button>'; }).join('');
+  order.forEach(function(p){ if(sel[p]){ var s=res.seats[p]; n+=s; segs+='<div class="seg" style="width:'+(s/TOTAL*100)+'%;background:'+COL[p]+'"></div>'; } });
+  var pos=(MAJ/TOTAL*100)+'%';
+  $('cbar').innerHTML=segs+'<div class="mark" style="left:'+pos+'"></div><div class="marklab" style="left:'+pos+'">'+MAJ+'</div>';
+  $('cmsg').innerHTML=n+' of '+TOTAL+' seats'+(n>=MAJ?'<span class="maj">Majority reached</span>':'');
+}
+$('cbtn').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-p]'); if(!b) return;
+  var p=b.getAttribute('data-p'); if(sel[p]) delete sel[p]; else sel[p]=true; renderBuilder();
+});
+
+/* ---------- map ---------- */
+var mapSvg=$('map'), pathEls={};
+mapSvg.setAttribute('viewBox','0 0 '+MAP.w+' '+MAP.h);
+D.cons.forEach(function(c){
+  var p=sv('path',{d:MAP.paths[c.key],fill:'#999'}); p.setAttribute('data-k',c.key); mapSvg.appendChild(p); pathEls[c.key]=p;
+  p.addEventListener('click',function(ev){ ev.stopPropagation(); showTip(c.key,ev.clientX,ev.clientY); });
+});
+mapSvg.addEventListener('click',function(){ hideTip(); });
+document.addEventListener('click',function(e){ if(!e.target.closest('#tip')) hideTip(); });
+$('mbtn').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-m]'); if(!b) return; mapMode=b.getAttribute('data-m'); renderMap();
+});
+function renderMap(){
+  var order=seatOrder();
+  if(mapMode!=='winner' && order.indexOf(mapMode)<0) mapMode='winner';
+  $('mbtn').innerHTML='<button type="button" class="chip" data-m="winner" aria-pressed="'+(mapMode==='winner')+'">Leading party</button>'+order.map(function(p){
+    return '<button type="button" class="chip" data-m="'+p+'" aria-pressed="'+(mapMode===p)+'"><i style="background:'+COL[p]+'"></i>'+p+'</button>'; }).join('');
+  var leg=$('mleg');
+  if(mapMode==='winner'){
+    var seen={}, ws=[];
+    res.cons.forEach(function(c){ pathEls[c.key].setAttribute('fill',COL[c.winner]); pathEls[c.key].setAttribute('fill-opacity',1); if(!seen[c.winner]){seen[c.winner]=1;ws.push(c.winner);} });
+    ws.sort(function(a,b){ return order.indexOf(a)-order.indexOf(b); });
+    leg.innerHTML='<div class="legend" style="margin:0">'+ws.map(function(p){ return '<span class="lg"><i style="background:'+COL[p]+';border-radius:2px"></i>'+p+'</span>'; }).join('')+'</div>';
+  } else {
+    var p=mapMode, vals=res.cons.map(function(c){return c.shares[p]||0;}), mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals);
+    res.cons.forEach(function(c,i){
+      var t=mx>mn?(vals[i]-mn)/(mx-mn):1;
+      pathEls[c.key].setAttribute('fill',COL[p]); pathEls[c.key].setAttribute('fill-opacity',(0.12+0.88*t).toFixed(3));
+    });
+    var q=rgb(COL[p]);
+    leg.innerHTML='<div class="cbar" style="background:linear-gradient(to right,rgba('+q+',.12),rgba('+q+',1))"></div><div class="cnum"><span>'+fmt(mn)+'%</span><span>'+fmt((mn+mx)/2)+'%</span><span>'+fmt(mx)+'%</span></div>';
+  }
+}
+function showTip(key,cx,cy){
+  tipKey=key;
+  var c=res.cons.filter(function(x){return x.key===key;})[0];
+  var seen={}, all=Object.keys(c.shares).concat(Object.keys(c.seats)).filter(function(p){ if(seen[p]) return false; seen[p]=1; return true; });
+  var ps=all.filter(function(p){return (c.shares[p]||0)>=1||(c.seats[p]||0)>0;}).sort(function(a,b){return (c.shares[b]||0)-(c.shares[a]||0);});
+  var hasQ=ps.indexOf('MIN')>=0; ps=ps.filter(function(p){return p!=='MIN';}); if(hasQ) ps.push('MIN');
+  var h='<div class="th"><b>'+c.name+'</b><span>'+c.seatsTotal+(c.seatsTotal===1?' seat':' seats')+'</span></div>';
+  ps.forEach(function(p){
+    var n=c.seats[p]||0, sq=''; for(var i=0;i<n;i++) sq+='<i class="sq" style="background:'+COL[p]+'"></i>';
+    h+='<div class="tr'+(p==='MIN'?' q':'')+'"><span class="tp"><i style="background:'+COL[p]+'"></i>'+p+'</span><span class="pc">'+fmt(c.shares[p]||0)+'%</span><span class="sqs">'+sq+'</span></div>';
+  });
+  var tip=$('tip'); tip.innerHTML=h; tip.style.display='block';
+  Object.keys(pathEls).forEach(function(k){ pathEls[k].classList.toggle('sel',k===key); });
+  var wr=$('mapwrap').getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  var x=cx-wr.left-tw/2, y=cy-wr.top+14;
+  x=Math.max(4,Math.min(x,wr.width-tw-4));
+  if(y+th>wr.height-4) y=Math.max(4,cy-wr.top-th-14);
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){
+  tipKey=null; $('tip').style.display='none';
+  Object.keys(pathEls).forEach(function(k){ pathEls[k].classList.remove('sel'); });
+}
+
+/* ---------- update ---------- */
+function update(skip){
+  res=E.run(sl);
+  syncInputs(skip);
+  renderHemi(); renderTable(); renderBuilder(); renderMap();
+  if(tipKey){
+    var t=$('tip'), l=t.style.left, tp=t.style.top, k=tipKey, wr=$('mapwrap').getBoundingClientRect();
+    showTip(k, wr.left+parseFloat(l||0)+t.offsetWidth/2, wr.top+parseFloat(tp||0)-14);
+  }
+}
+update(null);
+window.__E=E;
+})();
+</script>
+
+        <!-- ============================================================= -->
+        <!-- END PASTING HERE -->
+        <!-- ============================================================= -->
+
+    </div>
+
+    <!-- 3. Dynamic Injection Engine Script -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('global-nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+
+</body>
+</html>
