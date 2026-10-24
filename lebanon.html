@@ -418,8 +418,9 @@ SL.forEach((i,k)=>{
 $('reset').onclick=()=>{SL.forEach((i,k)=>val[k]=+B[i].toFixed(1));sync();run();};
 // hemicycle: 8 rows, small centre; parties in fixed positions
 const ORDER=['AMH','AICP','JI','EFM','NDP','POP','PSP','CHG','MMFD','IND','AZM','BH','KAT','LF','FPM','MAR','IM','ARF'].map(id=>parties.findIndex(p=>p.id===id));
-function seatPos(n){const rows=8,r0=64,rr=190;let rad=[],tot=0;for(let i=0;i<rows;i++){rad.push(r0+(rr-r0)*i/(rows-1));tot+=rad[i];}
- let cnt=rad.map(r=>Math.round(n*r/tot)),diff=n-cnt.reduce((a,b)=>a+b,0);for(let i=rows-1;diff!==0;i=(i+rows-1)%rows){cnt[i]+=Math.sign(diff);diff-=Math.sign(diff);}
+function seatPos(n){const rows=7,r0=64,rr=190;let rad=[],tot=0;for(let i=0;i<rows;i++){rad.push(r0+(rr-r0)*i/(rows-1));tot+=rad[i];}
+ const ex=rad.map(r=>n*r/tot),cnt=ex.map(Math.floor);let left=n-cnt.reduce((a,b)=>a+b,0);
+ ex.map((v,i)=>[v-Math.floor(v),i]).sort((p,q)=>q[0]-p[0]).slice(0,left).forEach(p=>cnt[p[1]]++);
  const pts=[];rad.forEach((r,i)=>{for(let j=0;j<cnt[i];j++){const a=Math.PI*(1-(cnt[i]===1?.5:j/(cnt[i]-1)));pts.push({a,r,x:200+r*Math.cos(a),y:198-r*Math.sin(a)});}});
  pts.sort((p,q)=>q.a-p.a||p.r-q.r);return pts;}
 const POS=seatPos(128);
@@ -487,7 +488,6 @@ function paint(){let leg='';
  $('mleg').innerHTML=leg;}
 sync();run();
 </script>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
