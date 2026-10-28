@@ -219,9 +219,9 @@ td.p{white-space:normal}
 .chip[aria-pressed=true]{background:var(--fill);border-color:var(--fill);color:var(--card);font-weight:600}
 .chip:focus-visible{outline:2px solid var(--fill);outline-offset:1px}
 .barwrap{position:relative;margin:20px 6px 30px}
-.bar{height:14px;border-radius:7px;background:var(--track);overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--fill);border-radius:7px;transition:width .15s}
-.bar.win i{background:var(--good)}
+.bar{height:14px;border-radius:7px;background:var(--track);overflow:hidden;display:flex}
+.bar i{display:block;height:100%;flex:none;box-shadow:inset -1.5px 0 0 var(--card)}
+.bar i:last-child{box-shadow:none}
 .mark{position:absolute;top:-6px;width:2px;height:26px;background:var(--fg);transform:translateX(-1px)}
 .mark b{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
 .status{text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
@@ -303,7 +303,7 @@ td.p{white-space:normal}
 <section class="card">
   <h2>Coalition builder</h2>
   <div class="chips" id="chips"></div>
-  <div class="barwrap"><div class="bar" id="cbar"><i></i></div><div class="mark" id="cmark"><b></b></div></div>
+  <div class="barwrap"><div class="bar" id="cbar"></div><div class="mark" id="cmark"><b></b></div></div>
   <div class="status" id="cstatus"></div>
 </section>
 
@@ -477,7 +477,7 @@ function render(){
   $('chips').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
     const k=b.dataset.k; coal.has(k)?coal.delete(k):coal.add(k); render(); const n=$('chips').querySelector('[data-k="'+k+'"]'); if(n&&b.matches(':focus-visible, :focus'))n.focus();}));
   let got=0; coal.forEach(k=>got+=S[k]);
-  const cb=$('cbar'); cb.classList.toggle('win',got>=MAJ); cb.firstElementChild.style.width=(got/NSEATS*100)+'%';
+  const cb=$('cbar'); cb.classList.toggle('win',got>=MAJ); cb.innerHTML=cl.filter(k=>coal.has(k)).map(k=>'<i title="'+P[k].acr+': '+S[k]+'" style="width:'+(S[k]/NSEATS*100)+'%;background:'+P[k].color+'"></i>').join('');
   $('cmark').style.left=(MAJ/NSEATS*100)+'%'; $('cmark').firstElementChild.textContent=MAJ;
   $('cstatus').innerHTML=got+' of '+NSEATS+' seats'+(got>=MAJ?' <span class="ok">· Majority reached</span>':'');
   /* map modes */
@@ -573,7 +573,6 @@ $('mapbox').addEventListener('click',e=>{if(moved){e.stopPropagation();e.prevent
 syncInputs(); render();
 window.addEventListener('resize',()=>{if(selected!==null)render()});
 </script>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
