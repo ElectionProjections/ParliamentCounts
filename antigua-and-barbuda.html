@@ -452,12 +452,12 @@ window.APP_DATA = {"parties":[{"k":"ABLP","name":"Antigua and Barbuda Labour Par
   var res = null;
 
   /* ---------- inputs ---------- */
-  var ctrls = {};
+  var ctrls = {}, CAP = 80;
   function buildRow(key, label, locked) {
     var row = el('div', { 'class': 'row' + (locked ? ' locked' : '') });
     row.appendChild(el('div', { 'class': 'name' }, label));
     var ctl = el('div', { 'class': 'ctl' });
-    var rng = el('input', { type: 'range', min: '0', max: '100', step: '0.1', id: 'rng-' + key, 'aria-label': label + ' vote share' });
+    var rng = el('input', { type: 'range', min: '0', max: locked ? '100' : String(CAP), step: '0.1', id: 'rng-' + key, 'aria-label': label + ' vote share' });
     var num = el('input', { type: 'text', inputmode: 'decimal', 'class': 'num', id: 'num-' + key, 'aria-label': label + ' vote share percent' });
     if (locked) { rng.disabled = true; num.readOnly = true; num.tabIndex = -1; }
     else rng.style.setProperty('--c', P[key].color);
@@ -484,7 +484,7 @@ window.APP_DATA = {"parties":[{"k":"ABLP","name":"Antigua and Barbuda Labour Par
   function setInput(k, v) {
     v = Math.round(v * 10) / 10;
     var others = 0; eng.sliderKeys.forEach(function (j) { if (j !== k) others += inputs[j]; });
-    var max = Math.max(0, 100 - others);
+    var max = Math.max(0, Math.min(CAP, 100 - others));
     v = Math.max(0, Math.min(v, max));
     inputs[k] = v;
     paintInputs(); render();
@@ -492,7 +492,8 @@ window.APP_DATA = {"parties":[{"k":"ABLP","name":"Antigua and Barbuda Labour Par
   function paint(key, v, color) {
     var c = ctrls[key];
     c.rng.value = String(Math.round(v * 10) / 10);
-    c.rng.style.setProperty('--p', Math.max(0, Math.min(100, v)) + '%');
+    var mx = parseFloat(c.rng.max) || 100;
+    c.rng.style.setProperty('--p', Math.max(0, Math.min(100, v / mx * 100)) + '%');
     c.num.value = f1(v);
   }
   function paintInputs() {
