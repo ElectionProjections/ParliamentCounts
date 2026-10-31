@@ -87,7 +87,15 @@
                     <li><a href="the-bahamas.html"><span class="fi fi-bs flag" aria-hidden="true"></span><span class="name">The Bahamas</span></a></li>
                     <li><a href="trinidad-and-tobago.html"><span class="fi fi-tt flag" aria-hidden="true"></span><span class="name">Trinidad and Tobago</span></a></li>
                     <li><a href="uruguay.html"><span class="fi fi-uy flag" aria-hidden="true"></span><span class="name">Uruguay</span></a></li>
-                    <li><a href="usa.html"><span class="fi fi-us flag" aria-hidden="true"></span><span class="name">United States</span></a></li>
+
+                    <!-- UNITED STATES DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="usa.html"><span class="fi fi-us flag" aria-hidden="true"></span><span class="name">United States</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="puerto-rico.html"><span class="fi fi-pr flag" aria-hidden="true"></span><span class="name">Puerto Rico</span></a>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </li>
@@ -170,7 +178,15 @@
                         </div>
                     </li>
 
-                    <li><a href="france.html"><span class="fi fi-fr flag" aria-hidden="true"></span><span class="name">France</span></a></li>
+
+                    <!-- FRANCE DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="france.html"><span class="fi fi-fr flag" aria-hidden="true"></span><span class="name">France</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="new-caledonia.html"><span class="fi fi-nc flag" aria-hidden="true"></span><span class="name">New Caledonia</span></a>
+                        </div>
+                    </li>
+
                     <li><a href="germany.html"><span class="fi fi-de flag" aria-hidden="true"></span><span class="name">Germany</span></a></li>
                     <li><a href="greece.html"><span class="fi fi-gr flag" aria-hidden="true"></span><span class="name">Greece</span></a></li>
                     <li><a href="hungary.html"><span class="fi fi-hu flag" aria-hidden="true"></span><span class="name">Hungary</span></a></li>
@@ -213,6 +229,8 @@
                                 </div>
                             </div>
                             <a href="wales.html"><span class="fi fi-gb-wls flag" aria-hidden="true"></span><span class="name">Wales</span></a>
+                            <div class="sub-divider" role="separator"></div>
+                            <a href="bermuda.html"><span class="fi fi-bm flag" aria-hidden="true"></span><span class="name">Bermuda</span></a>
                             <a href="guernsey.html"><span class="fi fi-gg flag" aria-hidden="true"></span><span class="name">Guernsey</span></a>
                             <a href="isle-of-man.html"><span class="fi fi-im flag" aria-hidden="true"></span><span class="name">Isle of Man</span></a>
                             <a href="jersey.html"><span class="fi fi-je flag" aria-hidden="true"></span><span class="name">Jersey</span></a>
@@ -720,6 +738,13 @@
         color: var(--nav-text-hi) !important;
         background-color: rgba(83, 155, 245, 0.22) !important;
         font-weight: 600 !important;
+    }
+
+    /* Divider between two groups inside one flyout (UK nations / dependencies) */
+    #nav-shield .sub .sub-divider {
+        height: 1px !important;
+        margin: 5px 10px !important;
+        background: var(--nav-border) !important;
     }
 
     /* ---- Third level: a subnation with a flyout of its own (Scotland > Scottish Councils) ---- */
