@@ -155,13 +155,21 @@
                     <li class="has-sub">
                         <a href="denmark.html"><span class="fi fi-dk flag" aria-hidden="true"></span><span class="name">Denmark</span> <span class="chevron">›</span></a>
                         <div class="sub">
-                            <a href="faroe.html">Faroe</a>
-                            <a href="greenland.html">Greenland</a>
+                            <a href="faroe.html"><span class="fi fi-fo flag" aria-hidden="true"></span><span class="name">Faroe</span></a>
+                            <a href="greenland.html"><span class="fi fi-gl flag" aria-hidden="true"></span><span class="name">Greenland</span></a>
                         </div>
                     </li>
 
                     <li><a href="estonia.html"><span class="fi fi-ee flag" aria-hidden="true"></span><span class="name">Estonia</span></a></li>
-                    <li><a href="finland.html"><span class="fi fi-fi flag" aria-hidden="true"></span><span class="name">Finland</span></a></li>
+
+                    <!-- FINLAND DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="finland.html"><span class="fi fi-fi flag" aria-hidden="true"></span><span class="name">Finland</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="åland.html"><span class="fi fi-ax flag" aria-hidden="true"></span><span class="name">Åland</span></a>
+                        </div>
+                    </li>
+
                     <li><a href="france.html"><span class="fi fi-fr flag" aria-hidden="true"></span><span class="name">France</span></a></li>
                     <li><a href="germany.html"><span class="fi fi-de flag" aria-hidden="true"></span><span class="name">Germany</span></a></li>
                     <li><a href="greece.html"><span class="fi fi-gr flag" aria-hidden="true"></span><span class="name">Greece</span></a></li>
@@ -197,10 +205,17 @@
                     <li class="has-sub">
                         <a href="uk.html"><span class="fi fi-gb flag" aria-hidden="true"></span><span class="name">United Kingdom</span> <span class="chevron">›</span></a>
                         <div class="sub">
-                            <a href="northern-ireland.html">Northern Ireland</a>
-                            <a href="scotland.html">Scotland</a>
-                            <a href="scottish-councils.html">Scottish Councils</a>
-                            <a href="wales.html">Wales</a>
+                            <a href="northern-ireland.html"><span class="flag" aria-hidden="true"></span><span class="name">Northern Ireland</span></a>
+                            <div class="has-sub">
+                                <a href="scotland.html"><span class="fi fi-gb-sct flag" aria-hidden="true"></span><span class="name">Scotland</span> <span class="chevron">›</span></a>
+                                <div class="sub">
+                                    <a href="scottish-councils.html"><span class="fi fi-gb-sct flag" aria-hidden="true"></span><span class="name">Scottish Councils</span></a>
+                                </div>
+                            </div>
+                            <a href="wales.html"><span class="fi fi-gb-wls flag" aria-hidden="true"></span><span class="name">Wales</span></a>
+                            <a href="guernsey.html"><span class="fi fi-gg flag" aria-hidden="true"></span><span class="name">Guernsey</span></a>
+                            <a href="isle-of-man.html"><span class="fi fi-im flag" aria-hidden="true"></span><span class="name">Isle of Man</span></a>
+                            <a href="jersey.html"><span class="fi fi-je flag" aria-hidden="true"></span><span class="name">Jersey</span></a>
                         </div>
                     </li>
                 </ul>
@@ -680,7 +695,9 @@
     }
 
     #nav-shield .sub a {
-        display: block !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
         box-sizing: border-box !important;
         padding: 7px 12px !important;
         color: var(--nav-text) !important;
@@ -703,6 +720,27 @@
         color: var(--nav-text-hi) !important;
         background-color: rgba(83, 155, 245, 0.22) !important;
         font-weight: 600 !important;
+    }
+
+    /* ---- Third level: a subnation with a flyout of its own (Scotland > Scottish Councils) ---- */
+    #nav-shield .sub .has-sub {
+        position: relative !important;
+    }
+
+    #nav-shield .sub .has-sub > a {
+        background-color: rgba(83, 155, 245, 0.07) !important;
+        box-shadow: inset 0 0 0 1px rgba(83, 155, 245, 0.32) !important;
+    }
+
+    #nav-shield .sub .has-sub:hover > a,
+    #nav-shield .sub .has-sub:focus-within > a {
+        background-color: rgba(83, 155, 245, 0.18) !important;
+        box-shadow: inset 0 0 0 1px var(--nav-accent) !important;
+        color: var(--nav-text-hi) !important;
+    }
+
+    #nav-shield .sub .has-sub > a:focus-visible {
+        box-shadow: 0 0 0 2px var(--nav-accent) !important;
     }
 
     /* ---- Opening rules: hover and keyboard focus on desktop mice ---- */
@@ -879,8 +917,12 @@
         shield.querySelectorAll('.country-list a, .nav-about').forEach(function (a) {
             if (a.getAttribute('href') !== here) return;
             a.setAttribute('aria-current', 'page');
-            var parentItem = a.closest('.has-sub');
-            if (parentItem) parentItem.firstElementChild.setAttribute('aria-current', 'true');
+            // Mark every country or subnation above this link, at any depth
+            var up = a.parentElement.closest('.has-sub');
+            while (up) {
+                if (up.firstElementChild !== a) up.firstElementChild.setAttribute('aria-current', 'true');
+                up = up.parentElement.closest('.has-sub');
+            }
         });
 
         function setExpanded(c, state) {
@@ -906,8 +948,14 @@
 
         // Flip a subnation flyout to the left if it would run off-screen
         function placeFlyout(item) {
-            var sub = item.querySelector('.sub');
+            var sub = item.querySelector(':scope > .sub');
+            if (!sub) return;
             sub.classList.remove('flip');
+            var parentSub = item.closest('.sub');
+            if (parentSub && parentSub.classList.contains('flip')) {
+                sub.classList.add('flip');   // a flyout inside a flipped flyout keeps opening to the left
+                return;
+            }
             var r = item.getBoundingClientRect();
             if (r.right + sub.offsetWidth + 24 > document.documentElement.clientWidth) sub.classList.add('flip');
         }
