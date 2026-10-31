@@ -1,10 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parliament Counts</title>
+
+    <!-- Country flags (flag-icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
+
+    <style>
+        body { margin: 0; background: #0d1117; }
+    </style>
+</head>
+<body>
+
 <div id="nav-shield">
     <a href="index.html" class="nav-logo">
         <span class="logo-mark"><img src="profile pic.png" alt=""></span>
         <span class="logo-name">Parliament <em>Counts</em></span>
     </a>
-
-    <a href="about.html" class="nav-about">About</a>
 
     <!-- Mobile menu toggle (no JavaScript needed) -->
     <input type="checkbox" id="nav-toggle" aria-label="Toggle navigation menu">
@@ -13,171 +27,220 @@
     </label>
 
     <ul class="nav-links">
-        <li><a href="albania.html">Albania</a></li>
-        <li><a href="andorra.html">Andorra</a></li>
-        <li><a href="angola.html">Angola</a></li>
-        <li><a href="antigua-and-barbuda.html">Antigua and Barbuda</a></li>
-        <li><a href="argentina.html">Argentina</a></li>
-        <li><a href="armenia.html">Armenia</a></li>
-        <li><a href="australia.html">Australia</a></li>
-        <li><a href="austria.html">Austria</a></li>
-        <li><a href="bangladesh.html">Bangladesh</a></li>
-        <li><a href="barbados.html">Barbados</a></li>
-        <li><a href="belize.html">Belize</a></li>
-        <li><a href="belgium.html">Belgium</a></li>
-        <li><a href="benin.html">Benin</a></li>
-        <li><a href="bhutan.html">Bhutan</a></li>
-        <li><a href="bolivia.html">Bolivia</a></li>
-        <li><a href="bosnia-and-herzegovina.html">Bosnia and Herzegovina</a></li>
-        <li><a href="botswana.html">Botswana</a></li>
-        <li><a href="brazil.html">Brazil</a></li>
-        <li><a href="bulgaria.html">Bulgaria</a></li>
 
-        <!-- CANADA DROPDOWN MENU -->
-        <li class="dropdown">
-            <a href="canada.html" class="dropbtn">Canada <span class="arrow">▾</span></a>
-            <div class="dropdown-content">
-                <a href="british-columbia.html">British Columbia</a>
-                <a href="quebec.html">Quebec</a>
+        <!-- ============ AFRICA ============ -->
+        <li class="continent" style="--rows: 7; --rows-narrow: 7">
+            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Africa <span class="arrow">▾</span></button>
+            <div class="panel">
+                <ul class="country-list">
+                    <li><a href="angola.html"><span class="fi fi-ao flag" aria-hidden="true"></span><span class="name">Angola</span></a></li>
+                    <li><a href="benin.html"><span class="fi fi-bj flag" aria-hidden="true"></span><span class="name">Benin</span></a></li>
+                    <li><a href="botswana.html"><span class="fi fi-bw flag" aria-hidden="true"></span><span class="name">Botswana</span></a></li>
+                    <li><a href="cape-verde.html"><span class="fi fi-cv flag" aria-hidden="true"></span><span class="name">Cape Verde</span></a></li>
+                    <li><a href="comoros.html"><span class="fi fi-km flag" aria-hidden="true"></span><span class="name">Comoros</span></a></li>
+                    <li><a href="ghana.html"><span class="fi fi-gh flag" aria-hidden="true"></span><span class="name">Ghana</span></a></li>
+                    <li><a href="ivory-coast.html"><span class="fi fi-ci flag" aria-hidden="true"></span><span class="name">Ivory Coast</span></a></li>
+                    <li><a href="lesotho.html"><span class="fi fi-ls flag" aria-hidden="true"></span><span class="name">Lesotho</span></a></li>
+                    <li><a href="malawi.html"><span class="fi fi-mw flag" aria-hidden="true"></span><span class="name">Malawi</span></a></li>
+                    <li><a href="mauritania.html"><span class="fi fi-mr flag" aria-hidden="true"></span><span class="name">Mauritania</span></a></li>
+                    <li><a href="mauritius.html"><span class="fi fi-mu flag" aria-hidden="true"></span><span class="name">Mauritius</span></a></li>
+                    <li><a href="morocco.html"><span class="fi fi-ma flag" aria-hidden="true"></span><span class="name">Morocco</span></a></li>
+                    <li><a href="namibia.html"><span class="fi fi-na flag" aria-hidden="true"></span><span class="name">Namibia</span></a></li>
+                    <li><a href="seychelles.html"><span class="fi fi-sc flag" aria-hidden="true"></span><span class="name">Seychelles</span></a></li>
+                    <li><a href="sierra-leone.html"><span class="fi fi-sl flag" aria-hidden="true"></span><span class="name">Sierra Leone</span></a></li>
+                    <li><a href="somaliland.html"><span class="flag" aria-hidden="true"></span><span class="name">Somaliland</span></a></li>
+                    <li><a href="south-africa.html"><span class="fi fi-za flag" aria-hidden="true"></span><span class="name">South Africa</span></a></li>
+                    <li><a href="the-gambia.html"><span class="fi fi-gm flag" aria-hidden="true"></span><span class="name">The Gambia</span></a></li>
+                    <li><a href="zimbabwe.html"><span class="fi fi-zw flag" aria-hidden="true"></span><span class="name">Zimbabwe</span></a></li>
+                </ul>
             </div>
         </li>
 
-        <li><a href="cape-verde.html">Cape Verde</a></li> 
-        <li><a href="chile.html">Chile</a></li> 
-        <li><a href="colombia.html">Colombia</a></li> 
-        <li><a href="comoros.html">Comoros</a></li> 
-        <li><a href="costa-rica.html">Costa Rica</a></li>       
-        <li><a href="croatia.html">Croatia</a></li>
-        <li><a href="cyprus.html">Cyprus</a></li>
-        <li><a href="czechia.html">Czechia</a></li>
+        <!-- ============ AMERICAS ============ -->
+        <li class="continent" style="--rows: 8; --rows-narrow: 11">
+            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Americas <span class="arrow">▾</span></button>
+            <div class="panel">
+                <ul class="country-list">
+                    <li><a href="antigua-and-barbuda.html"><span class="fi fi-ag flag" aria-hidden="true"></span><span class="name">Antigua and Barbuda</span></a></li>
+                    <li><a href="argentina.html"><span class="fi fi-ar flag" aria-hidden="true"></span><span class="name">Argentina</span></a></li>
+                    <li><a href="barbados.html"><span class="fi fi-bb flag" aria-hidden="true"></span><span class="name">Barbados</span></a></li>
+                    <li><a href="belize.html"><span class="fi fi-bz flag" aria-hidden="true"></span><span class="name">Belize</span></a></li>
+                    <li><a href="bolivia.html"><span class="fi fi-bo flag" aria-hidden="true"></span><span class="name">Bolivia</span></a></li>
+                    <li><a href="brazil.html"><span class="fi fi-br flag" aria-hidden="true"></span><span class="name">Brazil</span></a></li>
 
-        <!-- DENMARK DROPDOWN MENU -->
-        <li class="dropdown">
-            <a href="denmark.html" class="dropbtn">Denmark <span class="arrow">▾</span></a>
-            <div class="dropdown-content">
-                <a href="faroe.html">Faroe</a>
-                <a href="greenland.html">Greenland</a>
+                    <!-- CANADA DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="canada.html"><span class="fi fi-ca flag" aria-hidden="true"></span><span class="name">Canada</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="british-columbia.html">British Columbia</a>
+                            <a href="quebec.html">Quebec</a>
+                        </div>
+                    </li>
+
+                    <li><a href="chile.html"><span class="fi fi-cl flag" aria-hidden="true"></span><span class="name">Chile</span></a></li>
+                    <li><a href="colombia.html"><span class="fi fi-co flag" aria-hidden="true"></span><span class="name">Colombia</span></a></li>
+                    <li><a href="costa-rica.html"><span class="fi fi-cr flag" aria-hidden="true"></span><span class="name">Costa Rica</span></a></li>
+                    <li><a href="dominica.html"><span class="fi fi-dm flag" aria-hidden="true"></span><span class="name">Dominica</span></a></li>
+                    <li><a href="dominican-republic.html"><span class="fi fi-do flag" aria-hidden="true"></span><span class="name">Dominican Republic</span></a></li>
+                    <li><a href="ecuador.html"><span class="fi fi-ec flag" aria-hidden="true"></span><span class="name">Ecuador</span></a></li>
+                    <li><a href="el-salvador.html"><span class="fi fi-sv flag" aria-hidden="true"></span><span class="name">El Salvador</span></a></li>
+                    <li><a href="grenada.html"><span class="fi fi-gd flag" aria-hidden="true"></span><span class="name">Grenada</span></a></li>
+                    <li><a href="guatemala.html"><span class="fi fi-gt flag" aria-hidden="true"></span><span class="name">Guatemala</span></a></li>
+                    <li><a href="guyana.html"><span class="fi fi-gy flag" aria-hidden="true"></span><span class="name">Guyana</span></a></li>
+                    <li><a href="honduras.html"><span class="fi fi-hn flag" aria-hidden="true"></span><span class="name">Honduras</span></a></li>
+                    <li><a href="jamaica.html"><span class="fi fi-jm flag" aria-hidden="true"></span><span class="name">Jamaica</span></a></li>
+                    <li><a href="mexico.html"><span class="fi fi-mx flag" aria-hidden="true"></span><span class="name">Mexico</span></a></li>
+                    <li><a href="panama.html"><span class="fi fi-pa flag" aria-hidden="true"></span><span class="name">Panama</span></a></li>
+                    <li><a href="paraguay.html"><span class="fi fi-py flag" aria-hidden="true"></span><span class="name">Paraguay</span></a></li>
+                    <li><a href="peru.html"><span class="fi fi-pe flag" aria-hidden="true"></span><span class="name">Peru</span></a></li>
+                    <li><a href="saint-kitts-and-nevis.html"><span class="fi fi-kn flag" aria-hidden="true"></span><span class="name">Saint Kitts and Nevis</span></a></li>
+                    <li><a href="saint-lucia.html"><span class="fi fi-lc flag" aria-hidden="true"></span><span class="name">Saint Lucia</span></a></li>
+                    <li><a href="saint-vincent-and-the-grenadines.html"><span class="fi fi-vc flag" aria-hidden="true"></span><span class="name">Saint Vincent and the Grenadines</span></a></li>
+                    <li><a href="suriname.html"><span class="fi fi-sr flag" aria-hidden="true"></span><span class="name">Suriname</span></a></li>
+                    <li><a href="the-bahamas.html"><span class="fi fi-bs flag" aria-hidden="true"></span><span class="name">The Bahamas</span></a></li>
+                    <li><a href="trinidad-and-tobago.html"><span class="fi fi-tt flag" aria-hidden="true"></span><span class="name">Trinidad and Tobago</span></a></li>
+                    <li><a href="uruguay.html"><span class="fi fi-uy flag" aria-hidden="true"></span><span class="name">Uruguay</span></a></li>
+                    <li><a href="usa.html"><span class="fi fi-us flag" aria-hidden="true"></span><span class="name">United States</span></a></li>
+                </ul>
             </div>
         </li>
 
-        <li><a href="dominica.html">Dominica</a></li>   
-        <li><a href="dominican-republic.html">Dominican Republic</a></li>   
-        <li><a href="ecuador.html">Ecuador</a></li>  
-        <li><a href="el-salvador.html">El Salvador</a></li>      
-        <li><a href="estonia.html">Estonia</a></li>
-        <li><a href="fiji.html">Fiji</a></li>
-        <li><a href="finland.html">Finland</a></li>
-        <li><a href="france.html">France</a></li>
-        <li><a href="germany.html">Germany</a></li>
-        <li><a href="ghana.html">Ghana</a></li>
-        <li><a href="greece.html">Greece</a></li>
-        <li><a href="grenada.html">Grenada</a></li>
-        <li><a href="guatemala.html">Guatemala</a></li>
-        <li><a href="guyana.html">Guyana</a></li>
-        <li><a href="honduras.html">Honduras</a></li>
-        <li><a href="hungary.html">Hungary</a></li>
-        <li><a href="iceland.html">Iceland</a></li>
-        <li><a href="india.html">India</a></li>
-        <li><a href="indonesia.html">Indonesia</a></li>
-        <li><a href="iraq.html">Iraq</a></li>
-        <li><a href="ireland.html">Ireland</a></li>
-        <li><a href="israel.html">Israel</a></li>
-        <li><a href="italy.html">Italy</a></li>
-        <li><a href="ivory-coast.html">Ivory Coast</a></li>
-        <li><a href="jamaica.html">Jamaica</a></li>
-        <li><a href="japan.html">Japan</a></li>
-        <li><a href="jordan.html">Jordan</a></li>
-        <li><a href="kosovo.html">Kosovo</a></li>
-        <li><a href="latvia.html">Latvia</a></li>
-        <li><a href="lebanon.html">Lebanon</a></li>
-        <li><a href="lesotho.html">Lesotho</a></li>
-        <li><a href="liechtenstein.html">Liechtenstein</a></li>
-        <li><a href="lithuania.html">Lithuania</a></li>
-        <li><a href="luxembourg.html">Luxembourg</a></li>
-        <li><a href="malawi.html">Malawi</a></li> 
+        <!-- ============ ASIA ============ -->
+        <li class="continent" style="--rows: 6; --rows-narrow: 8">
+            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Asia <span class="arrow">▾</span></button>
+            <div class="panel">
+                <ul class="country-list">
+                    <li><a href="armenia.html"><span class="fi fi-am flag" aria-hidden="true"></span><span class="name">Armenia</span></a></li>
+                    <li><a href="bangladesh.html"><span class="fi fi-bd flag" aria-hidden="true"></span><span class="name">Bangladesh</span></a></li>
+                    <li><a href="bhutan.html"><span class="fi fi-bt flag" aria-hidden="true"></span><span class="name">Bhutan</span></a></li>
+                    <li><a href="india.html"><span class="fi fi-in flag" aria-hidden="true"></span><span class="name">India</span></a></li>
+                    <li><a href="indonesia.html"><span class="fi fi-id flag" aria-hidden="true"></span><span class="name">Indonesia</span></a></li>
+                    <li><a href="iraq.html"><span class="fi fi-iq flag" aria-hidden="true"></span><span class="name">Iraq</span></a></li>
+                    <li><a href="israel.html"><span class="fi fi-il flag" aria-hidden="true"></span><span class="name">Israel</span></a></li>
+                    <li><a href="japan.html"><span class="fi fi-jp flag" aria-hidden="true"></span><span class="name">Japan</span></a></li>
+                    <li><a href="jordan.html"><span class="fi fi-jo flag" aria-hidden="true"></span><span class="name">Jordan</span></a></li>
+                    <li><a href="lebanon.html"><span class="fi fi-lb flag" aria-hidden="true"></span><span class="name">Lebanon</span></a></li>
 
-        <!-- MALAYSIA DROPDOWN MENU -->
-        <li class="dropdown">
-            <a href="malaysia.html" class="dropbtn">Malaysia <span class="arrow">▾</span></a>
-            <div class="dropdown-content">
-                <a href="johor.html">Johor</a>
-                <a href="malacca.html">Malacca</a>
-                <a href="negeri-sembilan.html">Negeri Sembilan</a>
-                <a href="sarawak.html">Sarawak</a>
-                <a href="selangor.html">Selangor</a>
-            </div>
-        </li>
-     
-        <li><a href="maldives.html">Maldives</a></li> 
-        <li><a href="malta.html">Malta</a></li> 
-        <li><a href="mauritania.html">Mauritania</a></li>   
-        <li><a href="mauritius.html">Mauritius</a></li>    
-        <li><a href="mexico.html">Mexico</a></li>        
-        <li><a href="moldova.html">Moldova</a></li>
-        <li><a href="monaco.html">Monaco</a></li> 
-        <li><a href="mongolia.html">Mongolia</a></li>
-        <li><a href="montenegro.html">Montenegro</a></li>
-        <li><a href="morocco.html">Morocco</a></li>
-        <li><a href="namibia.html">Namibia</a></li>
-        <li><a href="nepal.html">Nepal</a></li>
-        <li><a href="netherlands.html">Netherlands</a></li>
-        <li><a href="new-zealand.html">New Zealand</a></li>
-        <li><a href="north-macedonia.html">North Macedonia</a></li>
-        <li><a href="northern-cyprus.html">Northern Cyprus</a></li>
-        <li><a href="norway.html">Norway</a></li>
-        <li><a href="pakistan.html">Pakistan</a></li>
-        <li><a href="panama.html">Panama</a></li>
-        <li><a href="papua-new-guinea.html">Papua New Guinea</a></li>
-        <li><a href="paraguay.html">Paraguay</a></li>
-        <li><a href="peru.html">Peru</a></li>
-        <li><a href="poland.html">Poland</a></li>
-        <li><a href="philippines.html">Philippines</a></li>
-        <li><a href="portugal.html">Portugal</a></li>
-        <li><a href="romania.html">Romania</a></li>
-        <li><a href="saint-kitts-and-nevis.html">Saint Kitts and Nevis</a></li>
-        <li><a href="saint-lucia.html">Saint Lucia</a></li>
-        <li><a href="saint-vincent-and-the-grenadines.html">Saint Vincent and the Grenadines</a></li>
-        <li><a href="samoa.html">Samoa</a></li>
-        <li><a href="san-marino.html">San Marino</a></li>
-        <li><a href="serbia.html">Serbia</a></li>
-        <li><a href="seychelles.html">Seychelles</a></li>
-        <li><a href="sierra-leone.html">Sierra Leone</a></li>
-        <li><a href="singapore.html">Singapore</a></li>
-        <li><a href="slovakia.html">Slovakia</a></li>
-        <li><a href="slovenia.html">Slovenia</a></li>
-        <li><a href="solomon-islands.html">Solomon Islands</a></li>
-        <li><a href="somaliland.html">Somaliland</a></li>
-        <li><a href="south-africa.html">South Africa</a></li>
-        <li><a href="south-korea.html">South Korea</a></li>
-        <li><a href="spain.html">Spain</a></li>
-        <li><a href="sri-lanka.html">Sri Lanka</a></li>
-        <li><a href="suriname.html">Suriname</a></li>
-        <li><a href="sweden.html">Sweden</a></li>
-        <li><a href="switzerland.html">Switzerland</a></li>
-        <li><a href="taiwan.html">Taiwan</a></li>
-        <li><a href="thailand.html">Thailand</a></li>
-        <li><a href="the-bahamas.html">The Bahamas</a></li>
-        <li><a href="the-gambia.html">The Gambia</a></li>
-        <li><a href="timor-leste.html">Timor-Leste</a></li>
-        <li><a href="trinidad-and-tobago.html">Trinidad and Tobago</a></li>
-        <li><a href="turkey.html">Turkey</a></li>
+                    <!-- MALAYSIA DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="malaysia.html"><span class="fi fi-my flag" aria-hidden="true"></span><span class="name">Malaysia</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="johor.html">Johor</a>
+                            <a href="malacca.html">Malacca</a>
+                            <a href="negeri-sembilan.html">Negeri Sembilan</a>
+                            <a href="sarawak.html">Sarawak</a>
+                            <a href="selangor.html">Selangor</a>
+                        </div>
+                    </li>
 
-        <!-- UK DROPDOWN MENU -->
-        <li class="dropdown">
-            <a href="uk.html" class="dropbtn">United Kingdom <span class="arrow">▾</span></a>
-            <div class="dropdown-content">
-                <a href="jersey.html">Jersey</a>
-                <a href="northern-ireland.html">Northern Ireland</a>
-                <a href="scotland.html">Scotland</a>
-                <a href="scottish-councils.html">Scottish Councils</a>
-                <a href="wales.html">Wales</a>
+                    <li><a href="maldives.html"><span class="fi fi-mv flag" aria-hidden="true"></span><span class="name">Maldives</span></a></li>
+                    <li><a href="mongolia.html"><span class="fi fi-mn flag" aria-hidden="true"></span><span class="name">Mongolia</span></a></li>
+                    <li><a href="nepal.html"><span class="fi fi-np flag" aria-hidden="true"></span><span class="name">Nepal</span></a></li>
+                    <li><a href="pakistan.html"><span class="fi fi-pk flag" aria-hidden="true"></span><span class="name">Pakistan</span></a></li>
+                    <li><a href="philippines.html"><span class="fi fi-ph flag" aria-hidden="true"></span><span class="name">Philippines</span></a></li>
+                    <li><a href="singapore.html"><span class="fi fi-sg flag" aria-hidden="true"></span><span class="name">Singapore</span></a></li>
+                    <li><a href="south-korea.html"><span class="fi fi-kr flag" aria-hidden="true"></span><span class="name">South Korea</span></a></li>
+                    <li><a href="sri-lanka.html"><span class="fi fi-lk flag" aria-hidden="true"></span><span class="name">Sri Lanka</span></a></li>
+                    <li><a href="taiwan.html"><span class="fi fi-tw flag" aria-hidden="true"></span><span class="name">Taiwan</span></a></li>
+                    <li><a href="thailand.html"><span class="fi fi-th flag" aria-hidden="true"></span><span class="name">Thailand</span></a></li>
+                    <li><a href="timor-leste.html"><span class="fi fi-tl flag" aria-hidden="true"></span><span class="name">Timor-Leste</span></a></li>
+                    <li><a href="turkey.html"><span class="fi fi-tr flag" aria-hidden="true"></span><span class="name">Turkey</span></a></li>
+                </ul>
             </div>
         </li>
 
-        <li><a href="uruguay.html">Uruguay</a></li>
-        <li><a href="usa.html">United States</a></li>
-        <li><a href="vanuatu.html">Vanuatu</a></li>
-        <li><a href="zimbabwe.html">Zimbabwe</a></li>
+        <!-- ============ EUROPE ============ -->
+        <li class="continent" style="--rows: 9; --rows-narrow: 11">
+            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Europe <span class="arrow">▾</span></button>
+            <div class="panel">
+                <ul class="country-list">
+                    <li><a href="albania.html"><span class="fi fi-al flag" aria-hidden="true"></span><span class="name">Albania</span></a></li>
+                    <li><a href="andorra.html"><span class="fi fi-ad flag" aria-hidden="true"></span><span class="name">Andorra</span></a></li>
+                    <li><a href="austria.html"><span class="fi fi-at flag" aria-hidden="true"></span><span class="name">Austria</span></a></li>
+                    <li><a href="belgium.html"><span class="fi fi-be flag" aria-hidden="true"></span><span class="name">Belgium</span></a></li>
+                    <li><a href="bosnia-and-herzegovina.html"><span class="fi fi-ba flag" aria-hidden="true"></span><span class="name">Bosnia and Herzegovina</span></a></li>
+                    <li><a href="bulgaria.html"><span class="fi fi-bg flag" aria-hidden="true"></span><span class="name">Bulgaria</span></a></li>
+                    <li><a href="croatia.html"><span class="fi fi-hr flag" aria-hidden="true"></span><span class="name">Croatia</span></a></li>
+                    <li><a href="cyprus.html"><span class="fi fi-cy flag" aria-hidden="true"></span><span class="name">Cyprus</span></a></li>
+                    <li><a href="czechia.html"><span class="fi fi-cz flag" aria-hidden="true"></span><span class="name">Czechia</span></a></li>
+
+                    <!-- DENMARK DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="denmark.html"><span class="fi fi-dk flag" aria-hidden="true"></span><span class="name">Denmark</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="faroe.html">Faroe</a>
+                            <a href="greenland.html">Greenland</a>
+                        </div>
+                    </li>
+
+                    <li><a href="estonia.html"><span class="fi fi-ee flag" aria-hidden="true"></span><span class="name">Estonia</span></a></li>
+                    <li><a href="finland.html"><span class="fi fi-fi flag" aria-hidden="true"></span><span class="name">Finland</span></a></li>
+                    <li><a href="france.html"><span class="fi fi-fr flag" aria-hidden="true"></span><span class="name">France</span></a></li>
+                    <li><a href="germany.html"><span class="fi fi-de flag" aria-hidden="true"></span><span class="name">Germany</span></a></li>
+                    <li><a href="greece.html"><span class="fi fi-gr flag" aria-hidden="true"></span><span class="name">Greece</span></a></li>
+                    <li><a href="hungary.html"><span class="fi fi-hu flag" aria-hidden="true"></span><span class="name">Hungary</span></a></li>
+                    <li><a href="iceland.html"><span class="fi fi-is flag" aria-hidden="true"></span><span class="name">Iceland</span></a></li>
+                    <li><a href="ireland.html"><span class="fi fi-ie flag" aria-hidden="true"></span><span class="name">Ireland</span></a></li>
+                    <li><a href="italy.html"><span class="fi fi-it flag" aria-hidden="true"></span><span class="name">Italy</span></a></li>
+                    <li><a href="kosovo.html"><span class="fi fi-xk flag" aria-hidden="true"></span><span class="name">Kosovo</span></a></li>
+                    <li><a href="latvia.html"><span class="fi fi-lv flag" aria-hidden="true"></span><span class="name">Latvia</span></a></li>
+                    <li><a href="liechtenstein.html"><span class="fi fi-li flag" aria-hidden="true"></span><span class="name">Liechtenstein</span></a></li>
+                    <li><a href="lithuania.html"><span class="fi fi-lt flag" aria-hidden="true"></span><span class="name">Lithuania</span></a></li>
+                    <li><a href="luxembourg.html"><span class="fi fi-lu flag" aria-hidden="true"></span><span class="name">Luxembourg</span></a></li>
+                    <li><a href="malta.html"><span class="fi fi-mt flag" aria-hidden="true"></span><span class="name">Malta</span></a></li>
+                    <li><a href="moldova.html"><span class="fi fi-md flag" aria-hidden="true"></span><span class="name">Moldova</span></a></li>
+                    <li><a href="monaco.html"><span class="fi fi-mc flag" aria-hidden="true"></span><span class="name">Monaco</span></a></li>
+                    <li><a href="montenegro.html"><span class="fi fi-me flag" aria-hidden="true"></span><span class="name">Montenegro</span></a></li>
+                    <li><a href="netherlands.html"><span class="fi fi-nl flag" aria-hidden="true"></span><span class="name">Netherlands</span></a></li>
+                    <li><a href="north-macedonia.html"><span class="fi fi-mk flag" aria-hidden="true"></span><span class="name">North Macedonia</span></a></li>
+                    <li><a href="northern-cyprus.html"><span class="flag" aria-hidden="true"></span><span class="name">Northern Cyprus</span></a></li>
+                    <li><a href="norway.html"><span class="fi fi-no flag" aria-hidden="true"></span><span class="name">Norway</span></a></li>
+                    <li><a href="poland.html"><span class="fi fi-pl flag" aria-hidden="true"></span><span class="name">Poland</span></a></li>
+                    <li><a href="portugal.html"><span class="fi fi-pt flag" aria-hidden="true"></span><span class="name">Portugal</span></a></li>
+                    <li><a href="romania.html"><span class="fi fi-ro flag" aria-hidden="true"></span><span class="name">Romania</span></a></li>
+                    <li><a href="san-marino.html"><span class="fi fi-sm flag" aria-hidden="true"></span><span class="name">San Marino</span></a></li>
+                    <li><a href="serbia.html"><span class="fi fi-rs flag" aria-hidden="true"></span><span class="name">Serbia</span></a></li>
+                    <li><a href="slovakia.html"><span class="fi fi-sk flag" aria-hidden="true"></span><span class="name">Slovakia</span></a></li>
+                    <li><a href="slovenia.html"><span class="fi fi-si flag" aria-hidden="true"></span><span class="name">Slovenia</span></a></li>
+                    <li><a href="spain.html"><span class="fi fi-es flag" aria-hidden="true"></span><span class="name">Spain</span></a></li>
+                    <li><a href="sweden.html"><span class="fi fi-se flag" aria-hidden="true"></span><span class="name">Sweden</span></a></li>
+                    <li><a href="switzerland.html"><span class="fi fi-ch flag" aria-hidden="true"></span><span class="name">Switzerland</span></a></li>
+
+                    <!-- UK DROPDOWN MENU -->
+                    <li class="has-sub">
+                        <a href="uk.html"><span class="fi fi-gb flag" aria-hidden="true"></span><span class="name">United Kingdom</span> <span class="chevron">›</span></a>
+                        <div class="sub">
+                            <a href="northern-ireland.html">Northern Ireland</a>
+                            <a href="scotland.html">Scotland</a>
+                            <a href="scottish-councils.html">Scottish Councils</a>
+                            <a href="wales.html">Wales</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- ============ OCEANIA ============ -->
+        <li class="continent" style="--rows: 7; --rows-narrow: 7">
+            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Oceania <span class="arrow">▾</span></button>
+            <div class="panel">
+                <ul class="country-list">
+                    <li><a href="australia.html"><span class="fi fi-au flag" aria-hidden="true"></span><span class="name">Australia</span></a></li>
+                    <li><a href="fiji.html"><span class="fi fi-fj flag" aria-hidden="true"></span><span class="name">Fiji</span></a></li>
+                    <li><a href="new-zealand.html"><span class="fi fi-nz flag" aria-hidden="true"></span><span class="name">New Zealand</span></a></li>
+                    <li><a href="papua-new-guinea.html"><span class="fi fi-pg flag" aria-hidden="true"></span><span class="name">Papua New Guinea</span></a></li>
+                    <li><a href="samoa.html"><span class="fi fi-ws flag" aria-hidden="true"></span><span class="name">Samoa</span></a></li>
+                    <li><a href="solomon-islands.html"><span class="fi fi-sb flag" aria-hidden="true"></span><span class="name">Solomon Islands</span></a></li>
+                    <li><a href="vanuatu.html"><span class="fi fi-vu flag" aria-hidden="true"></span><span class="name">Vanuatu</span></a></li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- ABOUT -->
+        <li class="nav-about-item">
+            <a href="about.html" class="nav-about">About</a>
+        </li>
+
     </ul>
 </div>
 
@@ -300,7 +363,7 @@
 
     /* ---- About button (top right) ---- */
     #nav-shield .nav-about {
-        margin-left: auto !important;
+        margin: 0 !important;
         display: inline-block !important;
         color: var(--nav-text-hi) !important;
         text-decoration: none !important;
@@ -339,92 +402,123 @@
         height: auto !important;
     }
 
-    #nav-shield .nav-links li {
-        text-align: left !important;
+    #nav-shield .nav-links .continent {
+        position: relative !important;
+        display: block !important;
         margin: 0 !important;
         padding: 0 !important;
-        display: flex !important;
-        align-items: center !important;
         list-style: none !important;
         height: auto !important;
+        text-align: left !important;
     }
 
-    #nav-shield .nav-links li a {
-        display: inline-block !important;
-        color: var(--nav-text) !important;
-        text-decoration: none !important;
-        font-size: 0.9rem !important;
-        line-height: 1.5 !important;
-        padding: 5px 11px !important;
+    #nav-shield .nav-links .nav-about-item {
+        display: block !important;
         margin: 0 !important;
-        border-radius: 999px !important;
-        transition: background-color 0.18s ease, color 0.18s ease !important;
+        padding: 0 !important;
+        list-style: none !important;
     }
 
-    #nav-shield .nav-links li a:hover,
-    #nav-shield .nav-links li a:focus-visible {
+    #nav-shield .continent-btn {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 !important;
+        padding: 7px 16px !important;
+        font: inherit !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        line-height: 1.5 !important;
         color: var(--nav-text-hi) !important;
-        background-color: rgba(255, 255, 255, 0.09) !important;
-        outline: none !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid var(--nav-border) !important;
+        border-radius: 999px !important;
+        cursor: pointer !important;
+        transition: background-color 0.18s ease, border-color 0.18s ease !important;
     }
 
-    #nav-shield .nav-links li a:focus-visible {
+    #nav-shield .continent-btn .arrow {
+        font-size: 0.75rem !important;
+        display: inline-block !important;
+        transition: transform 0.2s ease !important;
+    }
+
+    #nav-shield .continent-btn:focus-visible {
+        outline: none !important;
         box-shadow: 0 0 0 2px var(--nav-accent) !important;
     }
 
-    /* Current page */
-    #nav-shield .nav-links a[aria-current="page"] {
-        color: var(--nav-text-hi) !important;
-        background-color: rgba(83, 155, 245, 0.22) !important;
-        font-weight: 600 !important;
+    #nav-shield .continent.open .continent-btn {
+        background: rgba(83, 155, 245, 0.22) !important;
+        border-color: var(--nav-accent) !important;
+    }
+
+    #nav-shield .continent.open .continent-btn .arrow {
+        transform: rotate(180deg) !important;
+    }
+
+    /* ---- Segmented bar (desktop): the five continents join into one bar ---- */
+    @media (min-width: 861px) {
+        #nav-shield .nav-links {
+            gap: 0 !important;
+        }
+
+        #nav-shield .continent + .continent {
+            margin-left: -1px !important;
+        }
+
+        #nav-shield .continent-btn {
+            border-radius: 0 !important;
+            padding: 8px 18px !important;
+        }
+
+        #nav-shield .continent:first-child .continent-btn {
+            border-radius: 999px 0 0 999px !important;
+            padding-left: 22px !important;
+        }
+
+        #nav-shield .continent:nth-child(5) .continent-btn {
+            border-radius: 0 999px 999px 0 !important;
+            padding-right: 22px !important;
+        }
+
+        #nav-shield .continent:hover,
+        #nav-shield .continent:focus-within,
+        #nav-shield .continent.open {
+            z-index: 1 !important;
+        }
+
+        #nav-shield .nav-links .nav-about-item {
+            margin-left: 14px !important;
+        }
     }
 
     /* ---- Dropdowns ---- */
-    #nav-shield .dropdown {
-        position: relative !important;
-        display: inline-block !important;
-    }
-
-    #nav-shield .dropdown .arrow {
-        font-size: 0.75rem;
-        margin-left: 2px;
-        display: inline-block;
-        transition: transform 0.2s ease;
-    }
-
-    #nav-shield .dropdown:hover .arrow,
-    #nav-shield .dropdown:focus-within .arrow {
-        transform: rotate(180deg);
-    }
-
-    #nav-shield .dropdown-content {
-        display: block !important;
+    #nav-shield .panel {
         visibility: hidden !important;
         opacity: 0 !important;
         transform: translateY(-6px) !important;
         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s !important;
 
         position: absolute !important;
-        background-color: var(--nav-bg-2) !important;
-        min-width: 180px !important;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
-        z-index: 99999 !important;
-        border-radius: 10px !important;
-        border: 1px solid var(--nav-border) !important;
-        padding: 6px !important;
-        left: 0 !important;
         top: 100% !important;
-        margin-top: 6px !important;
-    }
-
-    /* Flipped by the script below if the menu would run off-screen */
-    #nav-shield .dropdown-content.align-right {
-        left: auto !important;
-        right: 0 !important;
+        left: 0 !important;
+        margin-top: 8px !important;
+        z-index: 99999 !important;
+        box-sizing: border-box !important;
+        width: max-content !important;
+        max-width: calc(100vw - 32px) !important;
+        padding: 10px !important;
+        background-color: var(--nav-bg-2) !important;
+        border: 1px solid var(--nav-border) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
     }
 
     /* Invisible hover-bridge preventing the menu from snapping shut */
-    #nav-shield .dropdown-content::before {
+    #nav-shield .panel::before {
         content: "" !important;
         position: absolute !important;
         top: -12px !important;
@@ -434,31 +528,254 @@
         background: transparent !important;
     }
 
-    #nav-shield .dropdown-content a {
-        color: var(--nav-text) !important;
-        padding: 8px 12px !important;
-        text-decoration: none !important;
+    #nav-shield .country-list {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: grid !important;
+        grid-auto-flow: column !important;
+        grid-template-rows: repeat(var(--rows, 8), auto) !important;
+        grid-auto-columns: minmax(180px, max-content) !important;
+        column-gap: 6px !important;
+    }
+
+    @media (max-width: 1100px) {
+        #nav-shield .country-list {
+            grid-template-rows: repeat(var(--rows-narrow, 8), auto) !important;
+        }
+    }
+
+    #nav-shield .country-list > li {
+        position: relative !important;
         display: block !important;
-        text-align: left !important;
-        font-size: 0.88rem !important;
-        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+    }
+
+    #nav-shield .country-list > li > a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
         box-sizing: border-box !important;
+        padding: 6px 10px !important;
+        color: var(--nav-text) !important;
+        font-size: 0.88rem !important;
+        line-height: 1.4 !important;
+        text-decoration: none !important;
+        white-space: nowrap !important;
+        border-radius: 8px !important;
+        transition: background-color 0.18s ease, color 0.18s ease !important;
+    }
+
+    #nav-shield .country-list > li > a:hover,
+    #nav-shield .country-list > li > a:focus-visible,
+    #nav-shield .has-sub:hover > a,
+    #nav-shield .has-sub:focus-within > a {
+        color: var(--nav-text-hi) !important;
+        background-color: rgba(255, 255, 255, 0.09) !important;
+        outline: none !important;
+    }
+
+    #nav-shield .country-list a:focus-visible {
+        box-shadow: 0 0 0 2px var(--nav-accent) !important;
+    }
+
+    /* Current page */
+    #nav-shield .country-list a[aria-current="page"] {
+        color: var(--nav-text-hi) !important;
+        background-color: rgba(83, 155, 245, 0.22) !important;
+        font-weight: 600 !important;
+    }
+
+    #nav-shield .country-list .flag {
+        flex: 0 0 auto !important;
+        width: 1.4em !important;
+        height: 1.05em !important;
+        font-size: 1rem !important;
+        line-height: 1 !important;
+        border-radius: 2px !important;
+    }
+
+    /* Flags only: a hairline keeps white flags visible on the dark panel */
+    #nav-shield .country-list .flag.fi {
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) !important;
+    }
+
+    #nav-shield .country-list .name {
+        flex: 1 1 auto !important;
+    }
+
+    /* Countries with subnations: tinted outline, and an arrow chip that fills in on hover */
+    #nav-shield .country-list > li.has-sub > a {
+        background-color: rgba(83, 155, 245, 0.07) !important;
+        box-shadow: inset 0 0 0 1px rgba(83, 155, 245, 0.32) !important;
+    }
+
+    #nav-shield .country-list > li.has-sub:hover > a,
+    #nav-shield .country-list > li.has-sub:focus-within > a {
+        background-color: rgba(83, 155, 245, 0.18) !important;
+        box-shadow: inset 0 0 0 1px var(--nav-accent) !important;
+    }
+
+    #nav-shield .country-list > li.has-sub > a:focus-visible {
+        box-shadow: 0 0 0 2px var(--nav-accent) !important;
+    }
+
+    #nav-shield .chevron {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+        box-sizing: border-box !important;
+        width: 18px !important;
+        height: 18px !important;
+        padding-bottom: 2px !important;
+        border-radius: 50% !important;
+        background: rgba(83, 155, 245, 0.2) !important;
+        color: var(--nav-accent) !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        transition: background-color 0.18s ease, color 0.18s ease !important;
+    }
+
+    #nav-shield .has-sub:hover .chevron,
+    #nav-shield .has-sub:focus-within .chevron {
+        background: var(--nav-accent) !important;
+        color: #0d1117 !important;
+    }
+
+    /* ---- Subnation flyout ---- */
+    #nav-shield .sub {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateX(-6px) !important;
+        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s !important;
+
+        position: absolute !important;
+        top: -7px !important;
+        left: 100% !important;
+        margin-left: 8px !important;
+        min-width: 190px !important;
+        box-sizing: border-box !important;
+        padding: 6px !important;
+        z-index: 2 !important;
+        background-color: var(--nav-bg-2) !important;
+        border: 1px solid var(--nav-border) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    /* Flipped by the script below if the menu would run off-screen */
+    #nav-shield .sub.flip {
+        left: auto !important;
+        right: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 8px !important;
+    }
+
+    /* Hover-bridge across the gap between item and flyout */
+    #nav-shield .sub::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -12px !important;
+        width: 12px !important;
+        height: 100% !important;
+        background: transparent !important;
+    }
+
+    #nav-shield .sub.flip::before {
+        left: auto !important;
+        right: -12px !important;
+    }
+
+    #nav-shield .sub a {
+        display: block !important;
+        box-sizing: border-box !important;
+        padding: 7px 12px !important;
+        color: var(--nav-text) !important;
+        font-size: 0.86rem !important;
+        line-height: 1.4 !important;
+        text-decoration: none !important;
         white-space: nowrap !important;
         border-radius: 6px !important;
+        transition: background-color 0.18s ease, color 0.18s ease !important;
     }
 
-    #nav-shield .dropdown-content a:hover,
-    #nav-shield .dropdown-content a:focus-visible {
-        background-color: rgba(83, 155, 245, 0.18) !important;
+    #nav-shield .sub a:hover,
+    #nav-shield .sub a:focus-visible {
         color: var(--nav-text-hi) !important;
+        background-color: rgba(83, 155, 245, 0.18) !important;
+        outline: none !important;
     }
 
-    #nav-shield .dropdown:hover .dropdown-content,
-    #nav-shield .dropdown:focus-within .dropdown-content {
+    #nav-shield .sub a[aria-current="page"] {
+        color: var(--nav-text-hi) !important;
+        background-color: rgba(83, 155, 245, 0.22) !important;
+        font-weight: 600 !important;
+    }
+
+    /* ---- Opening rules: hover and keyboard focus on desktop mice ---- */
+    @media (min-width: 861px) and (hover: hover) {
+        #nav-shield .continent:hover .continent-btn,
+        #nav-shield .continent:focus-within .continent-btn {
+            background: rgba(83, 155, 245, 0.22) !important;
+            border-color: var(--nav-accent) !important;
+        }
+
+        #nav-shield .continent:hover .continent-btn .arrow,
+        #nav-shield .continent:focus-within .continent-btn .arrow {
+            transform: rotate(180deg) !important;
+        }
+
+        #nav-shield .continent:hover > .panel,
+        #nav-shield .continent:focus-within > .panel {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+        }
+
+        #nav-shield .has-sub:hover > .sub,
+        #nav-shield .has-sub:focus-within > .sub {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+        }
+    }
+
+    /* Opened by tap or click (touch screens) */
+    #nav-shield .continent.open > .panel {
         visibility: visible !important;
         opacity: 1 !important;
         transform: translateY(0) !important;
         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+    }
+
+    /* Sub-menus simply appear inline, indented, on mobile */
+    @media (max-width: 860px), (hover: none) {
+        #nav-shield .sub,
+        #nav-shield .sub.flip {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: none !important;
+            position: static !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-left: 2px solid var(--nav-border) !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            margin: 0 0 4px 16px !important;
+            padding: 0 !important;
+            min-width: 0 !important;
+        }
+
+        #nav-shield .sub::before { display: none !important; }
+        #nav-shield .chevron { display: none !important; }
     }
 
     /* ---- Mobile menu button (hidden on desktop) ---- */
@@ -509,6 +826,7 @@
             display: none !important;
             flex: 1 1 100% !important;
             flex-direction: column !important;
+            flex-wrap: nowrap !important;
             align-items: stretch !important;
             margin-top: 10px !important;
             gap: 2px !important;
@@ -518,35 +836,42 @@
 
         #nav-shield #nav-toggle:checked ~ .nav-links { display: flex !important; }
 
-        #nav-shield .nav-links li { display: block !important; }
-
-        #nav-shield .nav-links li a {
-            display: block !important;
-            padding: 10px 12px !important;
-            border-radius: 8px !important;
+        /* Continents become tap-to-open accordions */
+        #nav-shield .continent-btn {
+            width: 100% !important;
+            justify-content: space-between !important;
+            padding: 10px 14px !important;
+            border-radius: 10px !important;
         }
 
-        /* Sub-menus simply appear inline, indented, on mobile */
-        #nav-shield .dropdown { display: block !important; }
-        #nav-shield .dropdown .arrow { display: none !important; }
-
-        #nav-shield .dropdown-content,
-        #nav-shield .dropdown-content.align-right {
+        #nav-shield .panel {
+            display: none !important;
             visibility: visible !important;
             opacity: 1 !important;
             transform: none !important;
             position: static !important;
-            box-shadow: none !important;
+            width: auto !important;
+            margin: 4px 0 6px 10px !important;
+            padding: 0 0 0 8px !important;
+            background: transparent !important;
             border: none !important;
             border-left: 2px solid var(--nav-border) !important;
             border-radius: 0 !important;
-            background: transparent !important;
-            margin: 0 0 4px 16px !important;
-            padding: 0 !important;
-            min-width: 0 !important;
+            box-shadow: none !important;
         }
 
-        #nav-shield .dropdown-content::before { display: none !important; }
+        #nav-shield .continent.open > .panel { display: block !important; }
+        #nav-shield .panel::before { display: none !important; }
+
+        #nav-shield .country-list { display: block !important; }
+
+        #nav-shield .country-list > li > a { padding: 9px 10px !important; white-space: normal !important; }
+
+        #nav-shield .nav-about {
+            display: block !important;
+            padding: 10px 14px !important;
+            border-radius: 10px !important;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -559,24 +884,104 @@
         var shield = document.getElementById('nav-shield');
         if (!shield) return;
 
+        var desktopHover = window.matchMedia('(min-width: 861px) and (hover: hover)');
+        var continents = shield.querySelectorAll('.continent');
+
         // Highlight the link for the page you're on
         var here = location.pathname.split('/').pop() || 'index.html';
-        shield.querySelectorAll('.nav-links a, .nav-about').forEach(function (a) {
-            if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page');
+        shield.querySelectorAll('.country-list a, .nav-about').forEach(function (a) {
+            if (a.getAttribute('href') !== here) return;
+            a.setAttribute('aria-current', 'page');
+            var parentItem = a.closest('.has-sub');
+            if (parentItem) parentItem.firstElementChild.setAttribute('aria-current', 'true');
         });
 
+        function setExpanded(c, state) {
+            c.querySelector('.continent-btn').setAttribute('aria-expanded', state ? 'true' : 'false');
+        }
+
+        function closeAll(except) {
+            continents.forEach(function (c) {
+                if (c === except) return;
+                c.classList.remove('open');
+                setExpanded(c, false);
+            });
+        }
+
         // Keep dropdowns on-screen when their parent sits near the right edge
-        shield.querySelectorAll('.dropdown').forEach(function (dd) {
-            var menu = dd.querySelector('.dropdown-content');
-            function check() {
-                menu.classList.remove('align-right');
-                var r = dd.getBoundingClientRect();
-                if (r.left + menu.offsetWidth > document.documentElement.clientWidth - 8) {
-                    menu.classList.add('align-right');
-                }
-            }
-            dd.addEventListener('mouseenter', check);
-            dd.addEventListener('focusin', check);
+        function placePanel(c) {
+            var panel = c.querySelector('.panel');
+            panel.style.left = '0px';
+            var r = c.getBoundingClientRect();
+            var over = r.left + panel.offsetWidth - (document.documentElement.clientWidth - 16);
+            if (over > 0) panel.style.left = (-Math.min(over, Math.max(r.left - 16, 0))) + 'px';
+        }
+
+        // Flip a subnation flyout to the left if it would run off-screen
+        function placeFlyout(item) {
+            var sub = item.querySelector('.sub');
+            sub.classList.remove('flip');
+            var r = item.getBoundingClientRect();
+            if (r.right + sub.offsetWidth + 24 > document.documentElement.clientWidth) sub.classList.add('flip');
+        }
+
+        continents.forEach(function (c) {
+            var btn = c.querySelector('.continent-btn');
+
+            // Tap or click: toggle (touch screens and the mobile menu)
+            btn.addEventListener('click', function (e) {
+                if (desktopHover.matches) return;
+                e.stopPropagation();
+                var willOpen = !c.classList.contains('open');
+                closeAll(c);
+                c.classList.toggle('open', willOpen);
+                setExpanded(c, willOpen);
+                if (willOpen) placePanel(c);
+            });
+
+            // Mouse and keyboard on desktop: CSS opens the panel, this keeps ARIA and position in step
+            c.addEventListener('mouseenter', function () {
+                if (!desktopHover.matches) return;
+                placePanel(c);
+                setExpanded(c, true);
+            });
+            c.addEventListener('mouseleave', function () {
+                if (desktopHover.matches) setExpanded(c, false);
+            });
+            c.addEventListener('focusin', function () {
+                if (!desktopHover.matches) return;
+                placePanel(c);
+                setExpanded(c, true);
+            });
+            c.addEventListener('focusout', function (e) {
+                if (desktopHover.matches && !c.contains(e.relatedTarget)) setExpanded(c, false);
+            });
+        });
+
+        shield.querySelectorAll('.has-sub').forEach(function (item) {
+            item.addEventListener('mouseenter', function () { placeFlyout(item); });
+            item.addEventListener('focusin', function () { placeFlyout(item); });
+        });
+
+        // Tapping elsewhere or pressing Escape closes any open panel
+        document.addEventListener('click', function (e) {
+            if (!shield.contains(e.target)) closeAll(null);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            closeAll(null);
+            if (shield.contains(document.activeElement)) document.activeElement.blur();
+        });
+
+        // Close open panels when the window width changes (not when a phone's address bar hides and shows)
+        var lastWidth = window.innerWidth;
+        window.addEventListener('resize', function () {
+            if (window.innerWidth === lastWidth) return;
+            lastWidth = window.innerWidth;
+            closeAll(null);
         });
     })();
 </script>
+
+</body>
+</html>
