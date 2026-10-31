@@ -633,6 +633,11 @@
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) !important;
     }
 
+    /* Entries with no flag get a plain white block of the same size, so the eye still lands on them */
+    #nav-shield .country-list .flag:not(.fi) {
+        background: rgba(255, 255, 255, 0.92) !important;
+    }
+
     #nav-shield .country-list .name {
         flex: 1 1 auto !important;
     }
