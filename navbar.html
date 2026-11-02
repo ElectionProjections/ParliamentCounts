@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Parliament Counts</title>
-
-    <!-- Country flags (flag-icons) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
-</head>
-<body>
+<!-- Country flags (flag-icons) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 
 <div id="nav-shield">
     <a href="index.html" class="nav-logo">
@@ -26,7 +17,8 @@
 
         <!-- ============ AFRICA ============ -->
         <li class="continent" style="--rows: 7; --rows-narrow: 7">
-            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Africa <span class="arrow">▾</span></button>
+            <input type="checkbox" id="nav-cont-africa" class="cont-toggle" aria-label="Africa countries">
+            <label for="nav-cont-africa" class="continent-btn">Africa <span class="arrow">▾</span></label>
             <div class="panel">
                 <ul class="country-list">
                     <li><a href="angola.html"><span class="fi fi-ao flag" aria-hidden="true"></span><span class="name">Angola</span></a></li>
@@ -54,7 +46,8 @@
 
         <!-- ============ AMERICAS ============ -->
         <li class="continent" style="--rows: 8; --rows-narrow: 11">
-            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Americas <span class="arrow">▾</span></button>
+            <input type="checkbox" id="nav-cont-americas" class="cont-toggle" aria-label="Americas countries">
+            <label for="nav-cont-americas" class="continent-btn">Americas <span class="arrow">▾</span></label>
             <div class="panel">
                 <ul class="country-list">
                     <li><a href="antigua-and-barbuda.html"><span class="fi fi-ag flag" aria-hidden="true"></span><span class="name">Antigua and Barbuda</span></a></li>
@@ -111,7 +104,8 @@
 
         <!-- ============ ASIA ============ -->
         <li class="continent" style="--rows: 6; --rows-narrow: 8">
-            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Asia <span class="arrow">▾</span></button>
+            <input type="checkbox" id="nav-cont-asia" class="cont-toggle" aria-label="Asia countries">
+            <label for="nav-cont-asia" class="continent-btn">Asia <span class="arrow">▾</span></label>
             <div class="panel">
                 <ul class="country-list">
                     <li><a href="armenia.html"><span class="fi fi-am flag" aria-hidden="true"></span><span class="name">Armenia</span></a></li>
@@ -155,7 +149,8 @@
 
         <!-- ============ EUROPE ============ -->
         <li class="continent" style="--rows: 9; --rows-narrow: 11">
-            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Europe <span class="arrow">▾</span></button>
+            <input type="checkbox" id="nav-cont-europe" class="cont-toggle" aria-label="Europe countries">
+            <label for="nav-cont-europe" class="continent-btn">Europe <span class="arrow">▾</span></label>
             <div class="panel">
                 <ul class="country-list">
                     <li><a href="albania.html"><span class="fi fi-al flag" aria-hidden="true"></span><span class="name">Albania</span></a></li>
@@ -271,7 +266,8 @@
 
         <!-- ============ OCEANIA ============ -->
         <li class="continent" style="--rows: 7; --rows-narrow: 7">
-            <button type="button" class="continent-btn" aria-haspopup="true" aria-expanded="false">Oceania <span class="arrow">▾</span></button>
+            <input type="checkbox" id="nav-cont-oceania" class="cont-toggle" aria-label="Oceania countries">
+            <label for="nav-cont-oceania" class="continent-btn">Oceania <span class="arrow">▾</span></label>
             <div class="panel">
                 <ul class="country-list">
                     <li><a href="australia.html"><span class="fi fi-au flag" aria-hidden="true"></span><span class="name">Australia</span></a></li>
@@ -479,6 +475,7 @@
     #nav-shield .continent-btn {
         -webkit-appearance: none !important;
         appearance: none !important;
+        box-sizing: border-box !important;
         display: inline-flex !important;
         align-items: center !important;
         gap: 8px !important;
@@ -502,18 +499,32 @@
         transition: transform 0.2s ease !important;
     }
 
-    #nav-shield .continent-btn:focus-visible {
+    /* Each continent button is a label for a hidden checkbox, so tapping opens it with no script needed */
+    #nav-shield .cont-toggle {
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+
+    #nav-shield .cont-toggle:focus-visible + .continent-btn {
         outline: none !important;
         box-shadow: 0 0 0 2px var(--nav-accent) !important;
     }
 
-    #nav-shield .continent.open .continent-btn {
-        background: rgba(83, 155, 245, 0.22) !important;
-        border-color: var(--nav-accent) !important;
-    }
+    /* Open state on touch screens and the mobile menu */
+    @media (max-width: 860px), (hover: none) {
+        #nav-shield .cont-toggle:checked + .continent-btn {
+            background: rgba(83, 155, 245, 0.22) !important;
+            border-color: var(--nav-accent) !important;
+        }
 
-    #nav-shield .continent.open .continent-btn .arrow {
-        transform: rotate(180deg) !important;
+        #nav-shield .cont-toggle:checked + .continent-btn .arrow {
+            transform: rotate(180deg) !important;
+        }
     }
 
     /* ---- Segmented bar (desktop): the five continents join into one bar ---- */
@@ -542,8 +553,7 @@
         }
 
         #nav-shield .continent:hover,
-        #nav-shield .continent:focus-within,
-        #nav-shield .continent.open {
+        #nav-shield .continent:focus-within {
             z-index: 1 !important;
         }
 
@@ -840,12 +850,14 @@
         }
     }
 
-    /* Opened by tap or click (touch screens) */
-    #nav-shield .continent.open > .panel {
-        visibility: visible !important;
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+    /* Opened by tap (touch screens) */
+    @media (max-width: 860px), (hover: none) {
+        #nav-shield .cont-toggle:checked ~ .panel {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s !important;
+        }
     }
 
     /* Sub-menus simply appear inline, indented, on mobile */
@@ -952,7 +964,7 @@
             box-shadow: none !important;
         }
 
-        #nav-shield .continent.open > .panel { display: block !important; }
+        #nav-shield .cont-toggle:checked ~ .panel { display: block !important; }
         #nav-shield .panel::before { display: none !important; }
 
         #nav-shield .country-list { display: block !important; }
@@ -992,15 +1004,10 @@
             }
         });
 
-        function setExpanded(c, state) {
-            c.querySelector('.continent-btn').setAttribute('aria-expanded', state ? 'true' : 'false');
-        }
-
         function closeAll(except) {
             continents.forEach(function (c) {
                 if (c === except) return;
-                c.classList.remove('open');
-                setExpanded(c, false);
+                c.querySelector('.cont-toggle').checked = false;
             });
         }
 
@@ -1028,35 +1035,21 @@
         }
 
         continents.forEach(function (c) {
-            var btn = c.querySelector('.continent-btn');
+            var toggle = c.querySelector('.cont-toggle');
 
-            // Tap or click: toggle (touch screens and the mobile menu)
-            btn.addEventListener('click', function (e) {
-                if (desktopHover.matches) return;
-                e.stopPropagation();
-                var willOpen = !c.classList.contains('open');
+            // The checkbox opens the panel by itself; opening one here also closes the others
+            toggle.addEventListener('change', function () {
+                if (!toggle.checked) return;
                 closeAll(c);
-                c.classList.toggle('open', willOpen);
-                setExpanded(c, willOpen);
-                if (willOpen) placePanel(c);
+                placePanel(c);
             });
 
-            // Mouse and keyboard on desktop: CSS opens the panel, this keeps ARIA and position in step
+            // Mouse and keyboard on desktop: CSS opens the panel, this keeps it on-screen
             c.addEventListener('mouseenter', function () {
-                if (!desktopHover.matches) return;
-                placePanel(c);
-                setExpanded(c, true);
-            });
-            c.addEventListener('mouseleave', function () {
-                if (desktopHover.matches) setExpanded(c, false);
+                if (desktopHover.matches) placePanel(c);
             });
             c.addEventListener('focusin', function () {
-                if (!desktopHover.matches) return;
-                placePanel(c);
-                setExpanded(c, true);
-            });
-            c.addEventListener('focusout', function (e) {
-                if (desktopHover.matches && !c.contains(e.relatedTarget)) setExpanded(c, false);
+                if (desktopHover.matches) placePanel(c);
             });
         });
 
@@ -1084,6 +1077,3 @@
         });
     })();
 </script>
-
-</body>
-</html>
