@@ -121,6 +121,21 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 .chamber-box{background:#F3EFE6;border:1px solid #E9E3D5;border-radius:11px;padding:1.1rem 1.15rem;margin-bottom:1rem;}
 .chamber-label{font-size:13px;font-weight:600;color:#43403A;margin-bottom:.5rem;}
 .legend-row{display:flex;gap:12px;font-size:12.5px;color:#7C7669;margin-bottom:.9rem;flex-wrap:wrap;}
+.map-legend{justify-content:center;margin:.7rem 0 0;}
+.toss-panel{max-width:440px;margin:1.5rem auto 1.4rem;background:#F3EFE6;border:1px solid #E9E3D5;border-radius:11px;padding:.35rem 1rem .8rem;}
+.toss-row{display:flex;align-items:center;gap:10px;padding:.55rem 0;font-size:14px;color:#2B2924;}
+.toss-name{flex:1;font-weight:600;}
+.toss-sw{width:18px;height:18px;border-radius:5px;flex-shrink:0;border:1px solid rgba(0,0,0,.08);}
+.toss-sw-grey{background:#C2BEB2;}
+.toss-sw-fade{background:linear-gradient(90deg,rgba(37,99,235,.45) 50%,rgba(220,38,38,.45) 50%);}
+.toss-sub{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .25s ease,opacity .2s ease;margin-left:9px;}
+.toss-sub-inner{overflow:hidden;min-height:0;border-left:2px solid #CFC7B2;padding-left:17px;margin-bottom:-1px;visibility:hidden;transition:visibility 0s .25s;}
+.toss-panel.toss-on .toss-sub{grid-template-rows:1fr;opacity:1;}
+.toss-panel.toss-on .toss-sub-inner{visibility:visible;transition-delay:0s;}
+.toss-row-sub{font-size:13.5px;padding:.45rem 0;}
+.toss-row-sub .toss-name{font-weight:500;}
+.toss-note{font-size:12px;line-height:1.45;color:#7C7669;border-top:1px solid #E4DFD3;margin-top:.35rem;padding-top:.6rem;}
+@media(prefers-reduced-motion:reduce){.toss-sub,.toss-sub-inner{transition:none}}
 .leg-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:middle;}
 .bar-outer{position:relative;width:100%;height:18px;border-radius:5px;overflow:hidden;background:#E4DFD3;display:flex;box-shadow:inset 0 1px 2px rgba(0,0,0,.06);}
 .hemicycle-svg{width:86%;height:auto;display:block;margin:0 auto;}
@@ -296,11 +311,23 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 </div>
 
 <h2 class="results-heading">Projected Results</h2>
-<div class="toggle-row">
-  <span>Assign tossups to leaning party</span>
-  <label class="switch"><input type="checkbox" id="assign-toss"><span class="slider"></span></label>
+<div class="toss-panel" id="toss-panel">
+  <div class="toss-row">
+    <span class="toss-sw toss-sw-grey" aria-hidden="true"></span>
+    <span class="toss-name" id="show-toss-lbl">Show tossups</span>
+    <label class="switch"><input type="checkbox" id="show-toss" aria-labelledby="show-toss-lbl"><span class="slider"></span></label>
+  </div>
+  <div class="toss-sub" id="toss-sub" aria-hidden="false">
+    <div class="toss-sub-inner">
+      <div class="toss-row toss-row-sub">
+        <span class="toss-sw toss-sw-fade" aria-hidden="true"></span>
+        <span class="toss-name" id="assign-toss-lbl">Assign tossups to leaning party</span>
+        <label class="switch"><input type="checkbox" id="assign-toss" aria-labelledby="assign-toss-lbl"><span class="slider"></span></label>
+      </div>
+    </div>
+  </div>
+  <div class="toss-note" id="toss-note" aria-live="polite"></div>
 </div>
-<div style="text-align:center;font-size:11.5px;color:#9C9686;margin-bottom:1.25rem">A race is a tossup when the top two contenders are within 5 points of each other.</div>
 
 <div class="chamber-tabs" role="tablist" aria-label="Choose a race">
   <button type="button" role="tab" class="ch-tab active" id="tab-house" data-pane="house" aria-selected="true" aria-controls="pane-house">House</button>
@@ -319,7 +346,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 
 <h3 class="proj-h3">Projected House of Representatives results</h3>
 <div class="chamber-box">
-  <div class="legend-row">
+  <div class="legend-row" id="h-legend-src">
     <span><span class="leg-dot" style="background:#2563eb"></span>Democrat</span>
     <span><span class="leg-dot" style="background:#dc2626"></span>Republican</span>
     <span id="leg-lib" style="display:none"><span class="leg-dot" style="background:#facc15"></span>Libertarian</span>
@@ -801,6 +828,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
     </g>
     </g>
   </svg>
+  <div class="legend-row map-legend" id="house-map-legend" aria-label="Parties winning seats"></div>
   <div class="map-caption" id="house-map-caption"></div>
   <div class="ec-tooltip" id="house-tooltip"><span class="ec-tt-close" id="house-tt-close">✕</span><div id="house-tt-body"></div></div>
 </div>
@@ -819,7 +847,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 
 <h3 class="proj-h3">Projected Senate results</h3>
 <div class="chamber-box">
-  <div class="legend-row">
+  <div class="legend-row" id="s-legend-src">
     <span><span class="leg-dot" style="background:#2563eb"></span>Democrat</span>
     <span id="s-leg-dind" style="display:none"><span class="leg-dot" style="background:#4C6C9C"></span>Independent (D caucus)</span>
     <span><span class="leg-dot" style="background:#dc2626"></span>Republican</span>
@@ -1004,6 +1032,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 <circle id="seat-WY-b" cx="318.35" cy="195.27" r="8" class="seat-dot" data-code="WY" data-slot="b"></circle>
 </g>
   </svg>
+  <div class="legend-row map-legend" id="senate-map-legend" aria-label="Parties winning seats"></div>
   <div class="map-caption">Each state has two Senate seats, shown as a pair of dots · the bold dot is the seat up in 2026 (faded if a tossup) · the pale dot is not up this cycle, shaded by its current incumbent's party · click a dot for details</div>
   <div class="ec-tooltip" id="s-map-tooltip"><span class="ec-tt-close" id="s-map-tt-close">✕</span><div id="s-map-tt-body"></div></div>
 </div>
@@ -1024,7 +1053,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 
 <h3 class="proj-h3">Projected Presidential results</h3>
 <div class="chamber-box">
-  <div class="legend-row">
+  <div class="legend-row" id="ec-legend-src">
     <span><span class="leg-dot" style="background:#2563eb"></span>Democrat</span>
     <span><span class="leg-dot" style="background:#dc2626"></span>Republican</span>
     <span id="ec-leg-lib" style="display:none"><span class="leg-dot" style="background:#facc15"></span>Libertarian</span>
@@ -1129,6 +1158,7 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 <path id="map-WY" d="M369.064,155.719L367.47,175.13L366.333,188.349L365.287,201.029L361.419,246.546L350.892,245.626L347.846,245.412L333.146,243.999L324.831,243.103L320.852,242.569L301.086,240.259L285.899,238.378L277.097,237.161L268.935,236.075L252.702,233.736L243.545,232.228L247.169,209.57L248.976,198.215L249.818,193.318L256.021,153.885L256.458,150.484L257.808,142.031L262.092,142.672L263.321,143.111L271.341,144.251L272.782,144.292L278.478,145.183L288.751,146.548L289.056,146.732L298.304,147.985L320.03,150.685L320.801,150.858L333.877,152.401L339.217,152.971L339.471,152.828L357.785,154.674Z" data-name="Wyoming"></path>
 
   </svg>
+  <div class="legend-row map-legend" id="ec-map-legend" aria-label="Parties winning electoral votes"></div>
   <div class="map-caption" id="ec-map-caption">Solid colors are decided states · faded colors are tossups leaning to that party · Maine and Nebraska are shown by their statewide (at-large) result · click a state for details</div>
   <div class="ec-tooltip" id="ec-tooltip"><span class="ec-tt-close" id="ec-tt-close">✕</span><div id="ec-tt-body"></div></div>
 </div>
@@ -1352,7 +1382,12 @@ function update(){
   g('sum-val').className=ok?'ok':'warn';
   g('sum-note').textContent=ok?'✓':(total<100?'('+(100-total).toFixed(1)+'% unallocated)':'('+(total-100).toFixed(1)+'% over)');
   g('sum-note').className=ok?'ok':'warn';
-  var assignToss=g('assign-toss').checked;
+  var showTossOn=g('show-toss').checked;
+  if(!showTossOn)g('assign-toss').checked=false;   // sub-option only exists while tossups are shown
+  var assignToss=!showTossOn||g('assign-toss').checked; // tossups hidden => every race goes to its leader
+  var fadeAssigned=showTossOn&&assignToss;               // faded styling only when tossups are shown AND assigned
+  TOSS_ON=showTossOn;
+  syncTossPanel(showTossOn,assignToss);
 
   // House
   var hres=projectHouse(rep,dem,lib,grn,ind,con);
@@ -1373,16 +1408,16 @@ function update(){
   g('h-toss-seats').textContent=hres.toss;
   var hdw=hD>=H_MAJ,hrw=hR>=H_MAJ;
   var hSegs=[{color:PARTY_COLOR.D,count:hres.d}];
-  if(assignToss)hSegs.push({color:PARTY_COLOR.D,count:hres.tossBy.d,opacity:0.4});
+  if(assignToss)hSegs.push({color:PARTY_COLOR.D,count:hres.tossBy.d,opacity:fadeAssigned?0.4:1});
   hSegs.push({color:PARTY_COLOR.L,count:hres.l});
-  if(assignToss)hSegs.push({color:PARTY_COLOR.L,count:hres.tossBy.l,opacity:0.4});
+  if(assignToss)hSegs.push({color:PARTY_COLOR.L,count:hres.tossBy.l,opacity:fadeAssigned?0.4:1});
   hSegs.push({color:PARTY_COLOR.G,count:hres.g});
-  if(assignToss)hSegs.push({color:PARTY_COLOR.G,count:hres.tossBy.g,opacity:0.4});
+  if(assignToss)hSegs.push({color:PARTY_COLOR.G,count:hres.tossBy.g,opacity:fadeAssigned?0.4:1});
   hSegs.push({color:PARTY_COLOR.I,count:hres.i});
-  if(assignToss)hSegs.push({color:PARTY_COLOR.I,count:hres.tossBy.i,opacity:0.4});
+  if(assignToss)hSegs.push({color:PARTY_COLOR.I,count:hres.tossBy.i,opacity:fadeAssigned?0.4:1});
   if(!assignToss)hSegs.push({color:'#C2BEB2',count:hres.toss});
   hSegs.push({color:PARTY_COLOR.C,count:hres.c});
-  if(assignToss)hSegs.push({color:PARTY_COLOR.C,count:hres.tossBy.c,opacity:0.4},{color:PARTY_COLOR.R,count:hres.tossBy.r,opacity:0.4});
+  if(assignToss)hSegs.push({color:PARTY_COLOR.C,count:hres.tossBy.c,opacity:fadeAssigned?0.4:1},{color:PARTY_COLOR.R,count:hres.tossBy.r,opacity:fadeAssigned?0.4:1});
   hSegs.push({color:PARTY_COLOR.R,count:hres.r});
   renderHemicycle('h-hemicycle',HOUSE_HEMI_LAYOUT,hSegs,5.6);
   var hparts=[];
@@ -1397,7 +1432,7 @@ function update(){
   if(hres.runoffN)hnote+=' '+hres.runoffN+' Georgia, Louisiana, Maine or Alaska seat'+(hres.runoffN>1?'s are':' is')+' projected to need a runoff or ranked-choice count (no candidate above 50%) and '+(hres.runoffN>1?'are':'is')+' counted for the projected winner — click a district for details.';
   if((hdw&&hD-H_MAJ<=10)||(hrw&&hR-H_MAJ<=10))hnote+=' Extremely narrow majority.';
   g('h-result').textContent=hnote;
-  g('h-maj-note').textContent='218 seats needed for a majority · 435 total seats'+(assignToss&&hres.toss>0?' · faded segments show tossup seats assigned to their leaning party':'');
+  g('h-maj-note').textContent='218 seats needed for a majority · 435 total seats'+(fadeAssigned&&hres.toss>0?' · faded segments show tossup seats assigned to their leaning party':'');
 
   // House district map
   var houseMode=g('house-map-mode')?g('house-map-mode').value:'winner';
@@ -1429,7 +1464,7 @@ function update(){
       }else{
         var partyKey=dres.leader==='r'?'R':dres.leader==='d'?'D':dres.leader==='l'?'L':dres.leader==='g'?'G':dres.leader==='c'?'C':'I';
         hp.style.fill=PARTY_COLOR[partyKey];
-        hp.style.fillOpacity=dres.isToss?0.45:1;
+        hp.style.fillOpacity=(dres.isToss&&TOSS_ON)?0.45:1;
       }
     }else{
       var hVal=dres.shares[hStrengthKey];
@@ -1459,16 +1494,16 @@ function update(){
   var sdw=sDemTotal>=S_MAJ,srw=sR>=S_MAJ;
   var sShowToss=sres.toss>0&&!assignToss;
   var sSegs=[{color:PARTY_COLOR.D,count:sres.pureD}];
-  if(assignToss)sSegs.push({color:PARTY_COLOR.D,count:sres.tossBy.pureD,opacity:0.4});
+  if(assignToss)sSegs.push({color:PARTY_COLOR.D,count:sres.tossBy.pureD,opacity:fadeAssigned?0.4:1});
   sSegs.push({color:PARTY_COLOR.L,count:sres.l});
-  if(assignToss)sSegs.push({color:PARTY_COLOR.L,count:sres.tossBy.l,opacity:0.4});
+  if(assignToss)sSegs.push({color:PARTY_COLOR.L,count:sres.tossBy.l,opacity:fadeAssigned?0.4:1});
   sSegs.push({color:PARTY_COLOR.G,count:sres.g});
-  if(assignToss)sSegs.push({color:PARTY_COLOR.G,count:sres.tossBy.g,opacity:0.4});
+  if(assignToss)sSegs.push({color:PARTY_COLOR.G,count:sres.tossBy.g,opacity:fadeAssigned?0.4:1});
   sSegs.push({color:PARTY_COLOR.Ind,count:sres.ind},{color:PARTY_COLOR.I,count:sres.i});
-  if(assignToss)sSegs.push({color:PARTY_COLOR.Ind,count:sres.tossBy.indD,opacity:0.4},{color:PARTY_COLOR.I,count:sres.tossBy.i,opacity:0.4});
+  if(assignToss)sSegs.push({color:PARTY_COLOR.Ind,count:sres.tossBy.indD,opacity:fadeAssigned?0.4:1},{color:PARTY_COLOR.I,count:sres.tossBy.i,opacity:fadeAssigned?0.4:1});
   if(!assignToss)sSegs.push({color:'#C2BEB2',count:sres.toss});
   sSegs.push({color:PARTY_COLOR.C,count:sres.c});
-  if(assignToss)sSegs.push({color:PARTY_COLOR.C,count:sres.tossBy.c,opacity:0.4},{color:PARTY_COLOR.R,count:sres.tossBy.r,opacity:0.4});
+  if(assignToss)sSegs.push({color:PARTY_COLOR.C,count:sres.tossBy.c,opacity:fadeAssigned?0.4:1},{color:PARTY_COLOR.R,count:sres.tossBy.r,opacity:fadeAssigned?0.4:1});
   sSegs.push({color:PARTY_COLOR.R,count:sres.r});
   renderHemicycle('s-hemicycle',SENATE_HEMI_LAYOUT,sSegs,7.2);
   g('s-toss-seats').textContent=sres.toss;
@@ -1505,7 +1540,7 @@ function update(){
   g('s-result').textContent=snote;
   renderCoalition('house',{D:hD,R:hR,L:hL,G:hG,C:hC,I:hI},H_MAJ,H_TOTAL,assignToss?0:hres.toss);
   renderCoalition('senate',{D:sDemTotal,R:sR,L:sL,G:sG,C:sC,I:sI},S_MAJ,100,assignToss?0:sres.toss);
-  g('s-maj-note').textContent='51 seats needed for a majority · 100 total seats'+(assignToss&&sres.toss>0?' · faded segments show tossup seats assigned to their leaning party':'');
+  g('s-maj-note').textContent='51 seats needed for a majority · 100 total seats'+(fadeAssigned&&sres.toss>0?' · faded segments show tossup seats assigned to their leaning party':'');
 
   // Senate seat map
   var seatDots=document.querySelectorAll('#senate-map .seat-dot');
@@ -1522,7 +1557,7 @@ function update(){
         dot.style.fillOpacity=1;
       }else{
         dot.style.fill=PARTY_COLOR[sr2.leader];
-        dot.style.fillOpacity=sr2.isToss?0.45:1;
+        dot.style.fillOpacity=(sr2.isToss&&TOSS_ON)?0.45:1;
       }
       dot.style.stroke='#1A1815';
       dot.style.strokeWidth='2';
@@ -1595,6 +1630,7 @@ function update(){
   g('ec-seg-r').style.width=(ecres.r/538*100).toFixed(2)+'%';
   if(assignToss){
     g('ec-seg-t').style.width='0%';
+    ['d','l','g','c','i','r'].forEach(function(k){g('ec-seg-ft-'+k).style.opacity=fadeAssigned?'.4':'1';});
     g('ec-seg-ft-d').style.width=(ecres.tossBy.d/538*100).toFixed(2)+'%';
     g('ec-seg-ft-l').style.width=(ecres.tossBy.l/538*100).toFixed(2)+'%';
     g('ec-seg-ft-g').style.width=(ecres.tossBy.g/538*100).toFixed(2)+'%';
@@ -1618,7 +1654,7 @@ function update(){
   if(ecParts.length)ecNote+=' Other: '+ecParts.join(', ')+'.';
   if(ecShowToss)ecNote+=' '+ecres.t+' electoral votes remain tossups (within 5pp).';
   g('ec-result').textContent=ecNote;
-  g('ec-maj-note').textContent='270 electoral votes needed to win · 538 total'+(assignToss&&ecres.t>0?' · faded segments show tossup EVs assigned to their leaning party':'');
+  g('ec-maj-note').textContent='270 electoral votes needed to win · 538 total'+(fadeAssigned&&ecres.t>0?' · faded segments show tossup EVs assigned to their leaning party':'');
 
   // Electoral College map
   var ecMode=g('ec-map-mode')?g('ec-map-mode').value:'winner';
@@ -1658,7 +1694,7 @@ function update(){
         p.style.fillOpacity=1;
       }else{
         p.style.fill=PARTY_COLOR[res.leader];
-        p.style.fillOpacity=res.isToss?0.45:1;
+        p.style.fillOpacity=(res.isToss&&TOSS_ON)?0.45:1;
       }
     }else{
       var ecVal=res.shares[ecStrengthKey];
@@ -1687,7 +1723,34 @@ function update(){
       'Solid colors are decided states · faded colors are tossups leaning to that party · Maine and Nebraska are shown by their statewide (at-large) result · click a state for details':
       'Shading shows '+PARTY_NAME[ecMode]+' vote share by state, from lightest (weakest) to darkest (strongest) · Maine and Nebraska are shown by their statewide (at-large) result · click a state for details';
   }
+  syncMapLegends();
+}
 
+// Map legends: mirror the party legend above each chamber chart, so only parties
+// that actually win seats appear. Tossup / "270 to win" markers are not parties.
+var TOSS_ON=false;
+function syncTossPanel(show,assign){
+  var pn=g('toss-panel');pn.classList.toggle('toss-on',show);
+  g('toss-sub').setAttribute('aria-hidden',show?'false':'true');
+  g('assign-toss').tabIndex=show?0:-1;
+  g('toss-note').textContent=!show
+    ?'Tossups are off: races within 5 points are counted for whichever party leads, with no special marking.'
+    :assign
+      ?'Races within 5 points keep the leader\'s colour but appear faded, and count toward that leading party.'
+      :'Races within 5 points are shown in grey and not counted for any party until assigned.';
+}
+function syncMapLegends(){
+  [['h-legend-src','house-map-legend'],['s-legend-src','senate-map-legend'],['ec-legend-src','ec-map-legend']].forEach(function(pr){
+    var src=g(pr[0]),dst=g(pr[1]);
+    if(!src||!dst)return;
+    var html='';
+    Array.prototype.forEach.call(src.children,function(sp){
+      if(sp.style.display==='none')return;
+      if(/toss/.test(sp.id||'')||/270/.test(sp.textContent))return;
+      html+='<span>'+sp.innerHTML+'</span>';
+    });
+    if(dst.innerHTML!==html)dst.innerHTML=html;
+  });
 }
 
 function clampField(nid,sid){
@@ -1716,6 +1779,7 @@ g('gb-reset').addEventListener('click',function(){
   update();
 });
 g('assign-toss').addEventListener('change',update);
+g('show-toss').addEventListener('change',update);
 g('house-map-mode').addEventListener('change',update);
 g('ec-map-mode').addEventListener('change',update);
 document.querySelectorAll('.mm-bar').forEach(function(bar){
@@ -1751,7 +1815,7 @@ document.querySelectorAll('.mm-bar').forEach(function(bar){
       .sort(function(a,b){return data.shares[b]-data.shares[a];})
       .map(function(k){return '<div class="ec-tt-row"><span style="color:'+PARTY_COLOR[k]+'">'+PARTY_NAME[k]+'</span><span>'+data.shares[k].toFixed(1)+'%</span></div>';})
       .join('');
-    var statusText=data.isToss?PARTY_NAME[data.leader]+' leaning (tossup)':PARTY_NAME[data.leader]+' win';
+    var statusText=(data.isToss&&TOSS_ON)?PARTY_NAME[data.leader]+' leaning (tossup)':PARTY_NAME[data.leader]+' win';
     var bodyHtml='<div class="ec-tt-title">'+data.name+' · '+data.ev+' EV</div>'+rows+'<div class="ec-tt-status">'+statusText+'</div>';
     if(data.evSplit){
       var evRows=data.evSplit.map(function(e){return '<div class="ec-tt-row"><span style="color:'+PARTY_COLOR[e.party]+'">'+PARTY_NAME[e.party]+'</span><span>'+e.ev+' EV</span></div>';}).join('');
@@ -1816,7 +1880,7 @@ document.querySelectorAll('.mm-bar').forEach(function(bar){
         .join('');
       if(sro2)rows='<div class="ec-tt-row" style="font-size:10.5px;color:#7C7669"><span style="margin-left:auto">Round 1</span><span style="min-width:48px;text-align:right">'+(sro2.type==='rcv'?'Final':'Round 2')+'</span></div>'+rows;
       var ldr=data.up.leader;
-      var statusText=data.up.isToss?PARTY_NAME[ldr]+' leaning (tossup)':PARTY_NAME[ldr]+' win';
+      var statusText=(data.up.isToss&&TOSS_ON)?PARTY_NAME[ldr]+' leaning (tossup)':PARTY_NAME[ldr]+' win';
       bodyHtml='<div class="ec-tt-title">'+data.name+' · seat up in 2026</div>'+rows+'<div class="ec-tt-status">'+statusText+' · held by '+data.up.holder+'</div>';
     }else{
       var info=slot==='a'?data.notUpA:data.notUpB;
@@ -2012,7 +2076,7 @@ document.querySelectorAll('.mm-bar').forEach(function(bar){
       .join('');
     if(ro)rows='<div class="ec-tt-row" style="font-size:10.5px;color:#7C7669"><span style="margin-left:auto">Round 1</span><span style="min-width:48px;text-align:right">'+(ro.type==='rcv'?'Final':'Round 2')+'</span></div>'+rows;
     var pk=nameMap[dres.leader];
-    var statusText=dres.isToss?PARTY_NAME[pk]+' leaning (tossup)':PARTY_NAME[pk]+' win';
+    var statusText=(dres.isToss&&TOSS_ON)?PARTY_NAME[pk]+' leaning (tossup)':PARTY_NAME[pk]+' win';
     var bodyHtml='<div class="ec-tt-title">'+label+'</div>'+rows+'<div class="ec-tt-status">'+statusText+'</div>';
     ttBody.innerHTML=bodyHtml;
     tt.style.display='block';
@@ -2182,6 +2246,7 @@ window.addEventListener('load',function(){update();});
 
 </body>
 </html>
+        
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
