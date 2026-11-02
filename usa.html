@@ -122,6 +122,11 @@ h2{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-style:it
 .chamber-label{font-size:13px;font-weight:600;color:#43403A;margin-bottom:.5rem;}
 .legend-row{display:flex;gap:12px;font-size:12.5px;color:#7C7669;margin-bottom:.9rem;flex-wrap:wrap;}
 .map-legend{justify-content:center;margin:.7rem 0 0;}
+.delta{font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2;margin-top:2px;color:#9C9686;}
+.delta.up{color:#3F7D4C;}
+.delta.down{color:#B3372D;}
+.tp-card .delta{font-size:11.5px;margin-top:0;}
+.delta-note{font-size:11px;color:#9C9686;text-align:center;margin:-.35rem 0 1rem;}
 .toss-panel{max-width:440px;margin:1.5rem auto 1.4rem;background:#F3EFE6;border:1px solid #E9E3D5;border-radius:11px;padding:.35rem 1rem .8rem;}
 .toss-row{display:flex;align-items:center;gap:10px;padding:.55rem 0;font-size:14px;color:#2B2924;}
 .toss-name{flex:1;font-weight:600;}
@@ -1386,7 +1391,7 @@ function update(){
   if(!showTossOn)g('assign-toss').checked=false;   // sub-option only exists while tossups are shown
   var assignToss=!showTossOn||g('assign-toss').checked; // tossups hidden => every race goes to its leader
   var fadeAssigned=showTossOn&&assignToss;               // faded styling only when tossups are shown AND assigned
-  TOSS_ON=showTossOn;
+  TOSS_ON=showTossOn;ASSIGN_TOSS_NOW=assignToss;
   syncTossPanel(showTossOn,assignToss);
 
   // House
@@ -1566,7 +1571,7 @@ function update(){
     }else{
       var notUpInfo=hasRace?NOT_UP_SINGLE[scode]:(NOT_UP_BOTH[scode]?NOT_UP_BOTH[scode][slot==='a'?0:1]:null);
       dot.style.fill=notUpInfo?PARTY_COLOR[notUpInfo.p]:'#FBFAF7';
-      dot.style.fillOpacity=notUpInfo?0.22:1;
+      dot.style.fillOpacity=notUpInfo?(notUpInfo.p==='Ind'?0.6:0.22):1; // D-caucus independents (King, Sanders) get a stronger tint so they read differently from Democrats
       dot.style.stroke='#FAF8F4';
       dot.style.strokeWidth='1.6';
       if(!senStateData[scode])senStateData[scode]={name:ALL_STATE_NAMES[scode]||scode,hasRace:hasRace};
@@ -1723,12 +1728,13 @@ function update(){
       'Solid colors are decided states · faded colors are tossups leaning to that party · Maine and Nebraska are shown by their statewide (at-large) result · click a state for details':
       'Shading shows '+PARTY_NAME[ecMode]+' vote share by state, from lightest (weakest) to darkest (strongest) · Maine and Nebraska are shown by their statewide (at-large) result · click a state for details';
   }
+  applyDeltas(assignToss,{d:hD,r:hR,l:hL,g:hG,c:hC,i:hI},{d:sDemTotal,r:sR,l:sL,g:sG,c:sC,i:sI},{d:ecD,r:ecR,l:ecL,g:ecG,c:ecC,i:ecI});
   syncMapLegends();
 }
 
 // Map legends: mirror the party legend above each chamber chart, so only parties
 // that actually win seats appear. Tossup / "270 to win" markers are not parties.
-var TOSS_ON=false;
+var TOSS_ON=false,ASSIGN_TOSS_NOW=false;
 function syncTossPanel(show,assign){
   var pn=g('toss-panel');pn.classList.toggle('toss-on',show);
   g('toss-sub').setAttribute('aria-hidden',show?'false':'true');
@@ -1738,6 +1744,54 @@ function syncTossPanel(show,assign){
     :assign
       ?'Races within 5 points keep the leader\'s colour but appear faded, and count toward that leading party.'
       :'Races within 5 points are shown in grey and not counted for any party until assigned.';
+}
+// Seat / EV changes shown under each party card (green = gained, red = lost).
+var _HB=null,_EB=null;
+function setDelta(id,n){
+  var el=g(id);if(!el)return;
+  var d=el.nextElementSibling;
+  if(!d||!d.classList.contains('delta')){d=document.createElement('div');d.className='delta';el.insertAdjacentElement('afterend',d);}
+  if(n===0){d.style.display='none';return;}
+  d.style.display='';
+  d.className='delta '+(n>0?'up':n<0?'down':'');
+  d.textContent=n>0?'+'+n:n<0?'\u2212'+(-n):'\u00B10';
+}
+function setDeltaNote(afterId,text){
+  var a=g(afterId);if(!a)return;
+  var n=a.nextElementSibling;
+  if(!n||!n.classList.contains('delta-note')){n=document.createElement('div');n.className='delta-note';a.insertAdjacentElement('afterend',n);}
+  n.textContent=text;
+}
+// Current Senate composition (all 100 seats): holders of the 35 seats up + the 65 not up
+function senateCurrent(){
+  var c={D:0,R:0};
+  function add(p){if(p==='D'||p==='Ind')c.D++;else if(p==='R')c.R++;}
+  SEN.forEach(function(r){add(r[1]);});
+  for(var k in NOT_UP_SINGLE)add(NOT_UP_SINGLE[k].p);
+  for(var k2 in NOT_UP_BOTH)NOT_UP_BOTH[k2].forEach(function(x){add(x.p);});
+  return c;
+}
+function applyDeltas(assignToss,H,S,E){
+  // House: vs. the zero-swing baseline (same reference as the Gains map)
+  if(!_HB)_HB=projectHouse(H_NAT_R,H_NAT_D,H_NAT_L,H_NAT_G,H_NAT_I,H_NAT_C);
+  var hb=function(k){return _HB[k]+(assignToss?_HB.tossBy[k]:0);};
+  setDelta('h-dem',H.d-hb('d'));setDelta('h-rep',H.r-hb('r'));
+  setDelta('lib-seats',H.l-hb('l'));setDelta('grn-seats',H.g-hb('g'));
+  setDelta('con-seats',H.c-hb('c'));setDelta('ind-seats',H.i-hb('i'));
+  // Senate: vs. the current chamber
+  var cur=senateCurrent();
+  setDelta('s-dem',S.d-cur.D);setDelta('s-rep',S.r-cur.R);
+  setDelta('s-lib-seats',S.l);setDelta('s-grn-seats',S.g);
+  setDelta('s-con-seats',S.c);setDelta('s-ind-seats',S.i);
+  // Electoral College: vs. the zero-swing baseline
+  if(!_EB)_EB=projectEC(EC_NAT_R,EC_NAT_D,EC_NAT_L,EC_NAT_G,EC_NAT_C,EC_NAT_I);
+  var eb=function(k){return _EB[k]+(assignToss?_EB.tossBy[k]:0);};
+  setDelta('ec-dem',E.d-eb('d'));setDelta('ec-rep',E.r-eb('r'));
+  setDelta('ec-lib-ev',E.l-eb('l'));setDelta('ec-grn-ev',E.g-eb('g'));
+  setDelta('ec-con-ev',E.c-eb('c'));setDelta('ec-ind-ev',E.i-eb('i'));
+  setDeltaNote('tp-grid','Green/red: seats gained/lost vs. the 2024 baseline (all parties at their 2024 national vote share)');
+  setDeltaNote('s-tp-grid','Green/red: seats gained/lost vs. the current Senate (Democrats incl. independents who caucus with them)');
+  setDeltaNote('ec-tp-grid','Green/red: electoral votes gained/lost vs. the 2024 baseline');
 }
 function syncMapLegends(){
   [['h-legend-src','house-map-legend'],['s-legend-src','senate-map-legend'],['ec-legend-src','ec-map-legend']].forEach(function(pr){
@@ -1749,6 +1803,16 @@ function syncMapLegends(){
       if(/toss/.test(sp.id||'')||/270/.test(sp.textContent))return;
       html+='<span>'+sp.innerHTML+'</span>';
     });
+    // Senate map: also list D-caucus independents that appear as dots (e.g. King, Sanders), even when none is up
+    if(pr[1]==='senate-map-legend'&&html.indexOf('D caucus')<0&&window.senStateData){
+      var hasInd=Object.keys(window.senStateData).some(function(k){var d=window.senStateData[k];
+        return (d.notUpA&&d.notUpA.p==='Ind')||(d.notUpB&&d.notUpB.p==='Ind')||(d.up&&d.up.leader==='Ind'&&!(d.up.isToss&&!ASSIGN_TOSS_NOW));});
+      if(hasInd){
+        var ind='<span><span class="leg-dot" style="background:#4C6C9C"></span>Independent (D caucus)</span>';
+        var i=html.indexOf('</span></span>')+'</span></span>'.length;
+        html=html.slice(0,i)+ind+html.slice(i);
+      }
+    }
     if(dst.innerHTML!==html)dst.innerHTML=html;
   });
 }
@@ -1881,11 +1945,11 @@ document.querySelectorAll('.mm-bar').forEach(function(bar){
       if(sro2)rows='<div class="ec-tt-row" style="font-size:10.5px;color:#7C7669"><span style="margin-left:auto">Round 1</span><span style="min-width:48px;text-align:right">'+(sro2.type==='rcv'?'Final':'Round 2')+'</span></div>'+rows;
       var ldr=data.up.leader;
       var statusText=(data.up.isToss&&TOSS_ON)?PARTY_NAME[ldr]+' leaning (tossup)':PARTY_NAME[ldr]+' win';
-      bodyHtml='<div class="ec-tt-title">'+data.name+' · seat up in 2026</div>'+rows+'<div class="ec-tt-status">'+statusText+' · held by '+data.up.holder+'</div>';
+      bodyHtml='<div class="ec-tt-title">'+data.name+' · seat up in 2026</div>'+rows+'<div class="ec-tt-status">'+statusText+' · held by '+(PARTY_NAME[data.up.holder]||data.up.holder)+'</div>';
     }else{
       var info=slot==='a'?data.notUpA:data.notUpB;
       bodyHtml=info?
-        '<div class="ec-tt-title">'+data.name+' · not up in 2026</div><div class="ec-tt-row" style="justify-content:flex-start;gap:6px"><span style="color:'+PARTY_COLOR[info.p]+';font-weight:600">'+info.n+'</span></div><div class="ec-tt-status">Next on the ballot in '+info.y+'.</div>':
+        '<div class="ec-tt-title">'+data.name+' · not up in 2026</div><div class="ec-tt-row" style="justify-content:flex-start;gap:6px"><span style="color:'+PARTY_COLOR[info.p]+';font-weight:600">'+info.n+'</span><span style="color:'+PARTY_COLOR[info.p]+';opacity:.85">· '+(PARTY_NAME[info.p]||info.p)+'</span></div><div class="ec-tt-status">Next on the ballot in '+info.y+'.</div>':
         '<div class="ec-tt-title">'+data.name+'</div><div class="ec-tt-status">Not up for election in 2026.</div>';
     }
     ttBody.innerHTML=bodyHtml;
@@ -2160,23 +2224,19 @@ var HOUSE_HEMI_LAYOUT=computeHemicycleLayout(435,90,230,14);
 var SENATE_HEMI_LAYOUT=computeHemicycleLayout(100,60,150,17);
 
 function renderHemicycle(svgId,layout,segments,dotR){
-  var n=layout.totalSeats;
-  var wedges=[],cum=Math.PI;
-  segments.forEach(function(seg){
-    var span=(seg.count/n)*Math.PI;
-    wedges.push({seg:seg,angleStart:cum,angleEnd:cum-span});
-    cum-=span;
-  });
-  var parts=[];
-  layout.rowData.forEach(function(rowSeats){
-    rowSeats.forEach(function(p){
-      var w=null;
-      for(var k=0;k<wedges.length;k++){
-        if(p.angle<=wedges[k].angleStart+1e-9&&p.angle>=wedges[k].angleEnd-1e-9){w=wedges[k].seg;break;}
-      }
-      if(!w)w=wedges.length?wedges[wedges.length-1].seg:{color:'#ccc'};
-      parts.push('<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+dotR+'" fill="'+w.color+'" fill-opacity="'+(w.opacity==null?1:w.opacity)+'"></circle>');
-    });
+  // Seats are ordered left-to-right by angle and handed out segment by segment, so every
+  // segment gets exactly its seat count (angle-band matching could drop or add seats).
+  var seats=[];
+  layout.rowData.forEach(function(rowSeats){rowSeats.forEach(function(p){seats.push(p);});});
+  seats.sort(function(a,b){return (b.angle-a.angle)||(Math.hypot(b.x,b.y)-Math.hypot(a.x,a.y));});
+  var segs=segments.filter(function(sg){return sg.count>0;});
+  var bounds=[],cum=0;
+  segs.forEach(function(sg){cum+=sg.count;bounds.push(cum);});
+  var parts=[],k=0;
+  seats.forEach(function(p,i){
+    while(k<segs.length-1&&i>=bounds[k])k++;
+    var w=segs.length?segs[k]:{color:'#ccc'};
+    parts.push('<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+dotR+'" fill="'+w.color+'" fill-opacity="'+(w.opacity==null?1:w.opacity)+'"></circle>');
   });
   g(svgId).innerHTML=parts.join('');
 }
