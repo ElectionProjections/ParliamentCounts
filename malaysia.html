@@ -93,7 +93,8 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
 
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;font:14px system-ui}[hidden]{display:none!important}</style></head><body><title>Malaysian Parliament Seat Projection</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Malaysian Parliament Seat Projection</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 :root{--bg:#f5f5f3;--card:#fff;--fg:#1a1a18;--muted:#6b6a65;--line:#ddddd5;--line2:#b4b2a9;--soft:#f1efe8;--track:#d3d1c8;--pos:#2e7d32;--neg:#c62828;--ring:rgba(0,0,0,.22);--free:#2e7d32;--partly:#d99a00;--notfree:#c62828;--land:#c3c1b8;--mapbg:#fafaf8;--onbg:#1a1a18;--onfg:#fff;--shadow:0 4px 16px rgba(0,0,0,.15);--maj:#2e7d32;--hi-bg:#eaf3de;--hi-fg:#3b6d11;--mid-bg:#faeeda;--mid-fg:#854f0b;color-scheme:light}
@@ -242,6 +243,41 @@ table.mc td.rg{width:28%;min-width:54px;}
 .pill.lo{background:var(--soft);color:var(--muted);}
 .src{font-size:11px;color:var(--muted);text-align:center;line-height:1.5;padding:0 4px;}
 .src a{color:inherit;}
+.mcrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,180px) 54px;align-items:center;gap:6px 14px;padding:10px 2px;border-top:1px solid var(--line);}
+.mcrow label{font-size:13px;font-weight:500;min-width:0;}
+.mcrow output{font-size:13px;font-variant-numeric:tabular-nums;text-align:right;font-weight:600;}
+.mcrow .vs{--c:var(--fg);}
+@media(max-width:560px){.mcrow{grid-template-columns:minmax(0,1fr) 54px;}.mcrow label{grid-column:1/-1;}}
+.mcruns{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px;font-size:13px;}
+.mcruns .seg{margin:0;}
+.mcprog{height:4px;border-radius:2px;background:var(--soft);overflow:hidden;margin:12px 0 6px;box-shadow:inset 0 0 0 1px var(--line);}
+.mcprog i{display:block;height:100%;width:0;background:var(--fg);}
+.mcprog{transition:opacity .3s;}
+.mcprog.done{opacity:0;}
+table.mc td:first-child{display:table-cell;}
+table.mc td:first-child .pdot{vertical-align:-1px;}
+.mcstat{display:block;text-align:center;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-height:16px;}
+#mcOut{transition:opacity .2s;margin-top:14px;}
+#mcOut.stale{opacity:.4;}
+.mcsec{display:block;text-align:center;margin:18px 0 10px;}
+.mcsec:first-child{margin-top:0;}
+.obar{display:flex;height:24px;border-radius:6px;overflow:hidden;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line);}
+.obar i{display:block;height:100%;min-width:0;}
+.olegend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:12px;font-size:12px;font-variant-numeric:tabular-nums;}
+.olegend span{display:inline-flex;align-items:center;gap:5px;}
+.olegend .sw{width:12px;height:12px;border-radius:2px;display:inline-block;box-shadow:0 0 0 1px var(--ring);}
+.hchips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:6px;}
+.mchist{position:relative;padding-top:50px;max-width:650px;margin:0 auto;}
+.mchist svg{display:block;width:100%;height:auto;overflow:visible;touch-action:manipulation;}
+.mchist .hbar{transition:opacity .1s;}
+.mchist svg.hov .hbar:not(.on){opacity:.28;}
+.mchist .hhit{fill:transparent;cursor:pointer;}
+.mchist .axis{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums;}
+.mchist .base{stroke:var(--line2);stroke-width:1;}
+.mchist .majl{stroke:var(--fg);stroke-width:1.5;stroke-dasharray:4 3;}
+.mchist .majt{font-size:11px;fill:var(--fg);font-weight:600;}
+.htip{position:absolute;top:0;transform:translateX(-50%);background:var(--card);border:1px solid var(--line2);border-radius:8px;padding:6px 10px;box-shadow:var(--shadow);font-size:12px;line-height:1.45;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums;text-align:center;}
+.htip .c{color:var(--muted);}
 </style>
 <main class="wrap">
 <h1>Malaysian Parliament Seat Projection</h1>
@@ -329,12 +365,21 @@ table.mc td.rg{width:28%;min-width:54px;}
 </section>
 <section class="card" id="cardMC">
   <h2>Probability model</h2>
-  <div class="mcctl">
-    <label for="mcSd">Uncertainty &plusmn;</label><input type="number" id="mcSd" min="0.5" max="10" step="0.5" value="3"><span>pp</span>
-    <button class="btn" id="runMcBtn" onclick="runMonteCarlo()">Run 1,000 scenarios</button>
-    <span class="mcstat" id="mcStatus"></span>
+  <div class="mcruns"><span class="lab">Runs</span><div class="seg" id="mcRuns" role="group" aria-label="Number of runs"></div></div>
+  <div class="mcrow"><label for="mcVs">Vote share error (% of each party’s own share)</label><input type="range" class="vs" id="mcVs" min="0" max="30" step="1" value="10"><output id="mcVsOut" for="mcVs">10%</output></div>
+  <div class="mcrow"><label for="mcSe">Seat-level error (extra random variation in each seat)</label><input type="range" class="vs" id="mcSe" min="0" max="10" step="0.5" value="3"><output id="mcSeOut" for="mcSe">3 pts</output></div>
+  <div class="mcprog" role="progressbar" aria-label="Simulation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="mcProg"></i></div>
+  <span class="mcstat" id="mcStatus" aria-live="polite"></span>
+  <div id="mcOut" hidden>
+    <span class="lab mcsec">Chance of each outcome</span>
+    <div class="obar" id="mcBar" role="img"></div>
+    <div class="olegend" id="mcLegend"></div>
+    <span class="lab mcsec">Seats across runs</span>
+    <div style="overflow-x:auto"><table class="mc"><thead><tr><th>Party</th><th>Median</th><th>90% range</th></tr></thead><tbody id="mcBody"></tbody></table></div>
+    <span class="lab mcsec">Seat distribution</span>
+    <div class="hchips" id="mcHistChips"></div>
+    <div class="mchist" id="mcHist"></div>
   </div>
-  <div style="overflow-x:auto"><table class="mc"><thead><tr><th>Alliance</th><th>Mean</th><th>Range</th><th>Largest</th><th>Majority</th></tr></thead><tbody id="mcBody"></tbody></table></div>
 </section>
 <p class="src">Sources: GE15 results by constituency and component parties, electiondata.my and Free Malaysia Today; GE15 candidate votes by constituency, Wikipedia (from ElectionData.MY), and candidates by coalition, as supplied; 2026 candidate lists, as supplied with the original model; constituency boundaries, Department of Statistics Malaysia (dosm-malaysia/data-open); population, DOSM Current Population Estimates, Malaysia 2026; Freedom House, Freedom in the World 2026; electoral system, Federal Constitution of Malaysia and Election Commission of Malaysia; world map, Natural Earth via world-atlas; flag, flag-icons (lipis).</p>
 </main>
@@ -844,8 +889,8 @@ function readInput(id){
   if(!isNaN(ex)&&Math.abs(v-parseFloat(ex.toFixed(1)))<1e-9)return ex;
   return v;
 }
-// One seat's projection -- shared by the live projection and the Monte Carlo.
-function projectSeat(s,sw,sc){
+// One seat's projection. The Monte Carlo uses projectLean(), an operation-for-operation lean copy.
+function projectSeat(s,sw,sc,noise){
   const[id,name,state,ph,pn,bn,gps,war,grs,muda,tot]=s;
   const ov=Math.max(0,tot-(ph+pn+bn+gps+war+grs+muda));
   const base=(MODE==='unity')
@@ -869,6 +914,11 @@ function projectSeat(s,sw,sc){
   if(projTotal>0){
     PARTIES.forEach(p=>{proj[p.id]=proj[p.id]/projTotal*100;});
     proj['OTHERS']=proj['OTHERS']/projTotal*100;
+  }
+  // Optional noise (Monte Carlo): scaled by the party's baseline strength in this seat.
+  if(noise){
+    PARTIES.forEach(p=>{if(proj[p.id]>0)proj[p.id]=Math.max(0,noise(proj[p.id],Math.sqrt(Math.max(base[p.id]||0,0.5)/20)));});
+    if(proj['OTHERS']>0)proj['OTHERS']=Math.max(0,noise(proj['OTHERS'],Math.sqrt(Math.max(ov/tot*100,0.5)/20)));
   }
   // "Others" is a residual that can pool several separate candidates, so it can only take a
   // seat where an Others/independent candidate actually won in GE15.
@@ -969,12 +1019,6 @@ function resolveComponentParty(coal, id){
   Object.entries(cand).forEach(([origCoal,p])=>{if(!found && mapCoal(origCoal,p)===coal) found=p;});
   if(found) return found;
   return DEFAULT_COMP[coal]||coal;
-}
-function randn(){
-  let u=0,v=0;
-  while(u===0)u=Math.random();
-  while(v===0)v=Math.random();
-  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
 }
 function projectScenario(ns){
   const sw={},sc={};
@@ -1102,7 +1146,7 @@ function project(){
   renderCoalition();
   renderMapControls();
   renderMap();
-  clearMC();
+  mcSchedule();
 }
 
 // ── Entities (alliances and parties) ─────────────────────────────────────
@@ -1558,50 +1602,276 @@ function showStateTip(code,evt){
   tip.innerHTML=html;placeTip(tip,evt);
 }
 
-// ── Probability model (1,000 random scenarios) ───────────────────────────
-function clearMC(){const b=document.getElementById('mcBody');if(b)b.innerHTML='';const s=document.getElementById('mcStatus');if(s)s.textContent='';}
-function runMonteCarlo(){
-  const N=1000;
-  const sd=parseFloat(document.getElementById('mcSd').value)||3;
-  const btn=document.getElementById('runMcBtn');
-  btn.disabled=true;document.getElementById('mcStatus').textContent='Running…';
-  const means={};PARTIES.forEach(p=>{means[p.id]=readInput(p.id);});
-  const allIds=[...PARTIES.map(p=>p.id),'OTHERS'];
-  const sums={},mins={},maxs={},largest={},maj={};
-  allIds.forEach(id=>{sums[id]=0;mins[id]=999;maxs[id]=0;largest[id]=0;maj[id]=0;});
-  setTimeout(()=>{
-    const origTotal=PARTIES.reduce((a,p)=>a+(means[p.id]||0),0);
-    for(let i=0;i<N;i++){
-      const shocked={};let st=0;
-      PARTIES.forEach(p=>{shocked[p.id]=Math.max(0,means[p.id]+randn()*sd);st+=shocked[p.id];});
-      const scale=origTotal>0&&st>0?origTotal/st:1;
-      const ns={};PARTIES.forEach(p=>{ns[p.id]=shocked[p.id]*scale;});
-      const ps=projectScenario(ns);
-      let lid=null,lv=-1;
-      allIds.forEach(id=>{const v=ps[id]||0;sums[id]+=v;if(v<mins[id])mins[id]=v;if(v>maxs[id])maxs[id]=v;if(v>lv){lv=v;lid=id;}});
-      if(lid)largest[lid]++;
-      allIds.forEach(id=>{if((ps[id]||0)>=MAJ)maj[id]++;});
+// ── Probability model (Monte Carlo) ──────────────────────────────────────
+// Each run perturbs national shares (log-normal, renormalised to 100), then runs the
+// normal seat projection in lean mode with optional Gaussian noise in every seat.
+// Runs are seeded from their index, so results are reproducible and extendable.
+const MC_SEED=0x5EED2026, MC_CHUNK_MS=25, MC_DELAY_MS=500, MC_MAX=5000;
+const MC={runs:1000,vs:10,se:3,job:0,timer:null,data:null,hist:null,hover:-1};
+function mcRng(i){
+  let a=(i+MC_SEED)>>>0;
+  // splitmix-style scramble of the seed, then mulberry32
+  a=Math.imul(a^(a>>>16),0x45d9f3b);a=Math.imul(a^(a>>>16),0x45d9f3b);a=(a^(a>>>16))>>>0;
+  let spare=null;
+  const u=()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};
+  return function gauss(){
+    if(spare!==null){const s=spare;spare=null;return s;}
+    let x=0,y=0;while(x===0)x=u();y=u();
+    const r=Math.sqrt(-2*Math.log(x)),th=2*Math.PI*y;
+    spare=r*Math.sin(th);return r*Math.cos(th);
+  };
+}
+// Lean seat projection: precomputed per-mode arrays, returns only seat totals.
+// Mirrors projectSeat() operation for operation, so zero noise gives identical winners.
+const LEAN={};
+function leanData(){
+  if(LEAN[MODE])return LEAN[MODE];
+  const P=PARTIES.length,rows=SEATS.filter(s=>s[10]);const n=rows.length;
+  const base=new Float64Array(n*P),reg=new Float64Array(n*P),sf=new Float64Array(n*(P+1));
+  const oth=new Float64Array(n),oA=new Float64Array(n),oS=new Float64Array(n);
+  rows.forEach((s,i)=>{
+    const[id,,state,ph,pn,bn,gps,war,grs,muda,tot]=s;
+    const ov=Math.max(0,tot-(ph+pn+bn+gps+war+grs+muda));
+    const b=(MODE==='unity')?SEAT_BASE_UNITY[id]
+      :{PH:ph/tot*100,PN:pn/tot*100,BN:bn/tot*100,GPS:gps/tot*100,WARISAN:war/tot*100,GRS:grs/tot*100,BP:muda/tot*100,BERSAMA:0};
+    PARTIES.forEach((p,j)=>{
+      base[i*P+j]=b[p.id];
+      reg[i*P+j]=REGIONAL[p.id]?(REGIONAL[p.id].includes(state)?REG_SCALE[p.id]:0):1;
+      sf[i*(P+1)+j]=Math.sqrt(Math.max(b[p.id]||0,0.5)/20);
+    });
+    oth[i]=ov/tot*100;
+    sf[i*(P+1)+P]=Math.sqrt(Math.max(oth[i],0.5)/20);
+    const ovc=OTHER_VOTES[id];
+    if(ovc&&ovc.length){oA[i]=ovc[0][1];oS[i]=ovc.reduce((a,c)=>a+c[1],0);}
+  });
+  return LEAN[MODE]={P,n,base,reg,sf,oth,oA,oS,raw:new Float64Array(P),tap:new Float64Array(P),proj:new Float64Array(P)};
+}
+// sw/sc are arrays in PARTIES order; noise(share, scale) returns a perturbed share (or null for none).
+function projectLean(sw,sc,noise,out){
+  const L=leanData(),P=L.P,raw=L.raw,tap=L.tap,proj=L.proj;
+  out.fill(0);
+  for(let i=0;i<L.n;i++){
+    const o=i*P;
+    for(let j=0;j<P;j++){let d=sw[j];const m=L.reg[o+j];if(m!==1)d=m?d*m:0;raw[j]=Math.max(0,L.base[o+j]+d);}
+    let tOut=0;for(let j=0;j<P;j++){tap[j]=raw[j]*sc[j];tOut+=raw[j]-tap[j];}
+    let tTot=0;for(let j=0;j<P;j++)tTot=tTot+tap[j];
+    if(tTot>0&&tOut>0){for(let j=0;j<P;j++)proj[j]=tap[j]+tOut*(tap[j]/tTot);}
+    else{for(let j=0;j<P;j++)proj[j]=tap[j];}
+    let others=L.oth[i];
+    let pt=0;for(let j=0;j<P;j++)pt=pt+proj[j];pt=pt+others;
+    if(pt>0){for(let j=0;j<P;j++)proj[j]=proj[j]/pt*100;others=others/pt*100;}
+    if(noise){
+      const so=i*(P+1);
+      for(let j=0;j<P;j++)if(proj[j]>0)proj[j]=Math.max(0,noise(proj[j],L.sf[so+j]));
+      if(others>0)others=Math.max(0,noise(others,L.sf[so+P]));
     }
-    const ad=[...PARTIES.map(p=>({id:p.id,acr:acrOf(p.id),color:p.color})),{id:'OTHERS',acr:'Others',color:OC}];
-    const vis=ad.filter(p=>sums[p.id]>0).sort((a,b)=>sums[b.id]-sums[a.id]);
-    const gmax=Math.max(...vis.map(p=>maxs[p.id]),1);
-    const pill=pc=>`<span class="pill ${pc>=50?'hi':pc>=15?'mid':'lo'}">${pc.toFixed(0)}%</span>`;
-    document.getElementById('mcBody').innerHTML=vis.map(p=>{
-      const mean=sums[p.id]/N,mn=mins[p.id],mx=maxs[p.id];
-      return `<tr><td><span class="pdot" style="background:${p.color}"></span>${p.acr}</td><td><b>${mean.toFixed(1)}</b></td>`
-        +`<td class="rg"><span class="rgtxt">${mn}&ndash;${mx}</span><div class="rgbar"><i style="left:${mn/gmax*100}%;width:${(mx-mn)/gmax*100}%;background:${p.color}"></i><b style="left:${mean/gmax*100}%"></b></div></td>`
-        +`<td>${pill(largest[p.id]/N*100)}</td><td>${pill(maj[p.id]/N*100)}</td></tr>`;
-    }).join('');
-    document.getElementById('mcStatus').textContent=`1,000 scenarios, σ ±${sd}pp`;
-    btn.disabled=false;
-  },20);
+    const topO=L.oS[i]>0?others*L.oA[i]/L.oS[i]:0;
+    let w=-1,best=-1;
+    for(let j=0;j<P;j++){if(proj[j]>best){best=proj[j];w=j;}}
+    if(topO>best)w=P;
+    out[w]++;
+  }
+  return out;
+}
+function mcInputs(){
+  const means=PARTIES.map(p=>readInput(p.id));
+  const others=Math.max(0,100-means.reduce((a,b)=>a+b,0));
+  return {means,others,key:[MODE,...means,MC.vs,MC.se].join('|')};
+}
+function mcRun(i,ctx,out){
+  const P=PARTIES.length,g=mcRng(i);
+  let ns=ctx.means;
+  if(ctx.vs>0){
+    const sig=ctx.vs/100;ns=new Array(P);let t=0;
+    for(let j=0;j<P;j++){ns[j]=ctx.means[j]*Math.exp(sig*g());t+=ns[j];}
+    t+=ctx.others*Math.exp(sig*g());
+    if(t>0)for(let j=0;j<P;j++)ns[j]=ns[j]/t*100;
+  }
+  const sw=new Array(P),sc=new Array(P);
+  PARTIES.forEach((p,j)=>{sw[j]=ns[j]-(GN[p.id]||0);sc[j]=taper(p.id,ns[j]);});
+  const se=ctx.se;
+  const noise=se>0?(v,f)=>v+se*f*g():null;
+  return projectLean(sw,sc,noise,out);
+}
+function mcSchedule(){
+  MC.job++;clearTimeout(MC.timer);
+  const inp=mcInputs(),d=MC.data;
+  if(d&&d.key===inp.key&&d.done>=MC.runs){mcRender();return;}
+  if(d)document.getElementById('mcOut').classList.add('stale');
+  mcStatus('Updating…',d&&d.key===inp.key?d.done/MC.runs:0);
+  MC.timer=setTimeout(mcStart,MC_DELAY_MS);
+}
+function mcStatus(t,f){
+  document.getElementById('mcStatus').textContent=t;
+  const pct=Math.round(Math.min(1,f||0)*100);
+  document.getElementById('mcProg').style.width=pct+'%';
+  const pg=document.querySelector('.mcprog');pg.setAttribute('aria-valuenow',pct);pg.classList.toggle('done',pct>=100);
+}
+function mcStart(){
+  const job=++MC.job,inp=mcInputs();
+  let d=MC.data;
+  if(!d||d.key!==inp.key){
+    // New inputs: start fresh. Same inputs with more runs: extend the earlier runs unchanged.
+    const ids=[...PARTIES.map(p=>p.id),'OTHERS'];
+    d={key:inp.key,mode:MODE,ids,maj:MAJ,done:0,seats:ids.map(()=>new Int16Array(MC_MAX)),
+       ctx:{means:inp.means,others:inp.others,vs:MC.vs,se:MC.se},
+       meta:ids.map(id=>id==='OTHERS'?{acr:'Others',color:OC}:{acr:acrOf(id),color:(PARTIES.find(p=>p.id===id)||{}).color||OC})};
+    MC.data=d;
+  }
+  const N=MC.runs,out=new Int32Array(d.ids.length);
+  const step=()=>{
+    if(job!==MC.job)return;
+    const t0=performance.now();
+    while(d.done<N&&performance.now()-t0<MC_CHUNK_MS){
+      mcRun(d.done,d.ctx,out);
+      for(let k=0;k<out.length;k++)d.seats[k][d.done]=out[k];
+      d.done++;
+    }
+    if(d.done<N){mcStatus(`Running… ${d.done.toLocaleString()} of ${N.toLocaleString()}`,d.done/N);setTimeout(step,0);}
+    else mcRender();
+  };
+  step();
+}
+function mcRender(){
+  const d=MC.data,N=MC.runs;if(!d)return;
+  const K=d.ids.length,maj=d.maj;
+  const majC=new Array(K).fill(0),plurC=new Array(K).fill(0),largeC=new Array(K).fill(0),winC=new Array(K).fill(0);
+  let ties=0;
+  for(let r=0;r<N;r++){
+    let best=-1,bi=-1,tie=false;
+    for(let k=0;k<K;k++){const v=d.seats[k][r];if(v>0)winC[k]++;if(v>best){best=v;bi=k;tie=false;}else if(v===best)tie=true;}
+    if(tie){ties++;continue;}
+    largeC[bi]++;
+    if(best>=maj)majC[bi]++;else plurC[bi]++;
+  }
+  const pf=v=>v===0?'0%':v<0.1?'<0.1%':v.toFixed(1)+'%';
+  const hatch=c=>`repeating-linear-gradient(135deg,${c} 0 3px,${hexAlpha(c,.38)} 3px 6px)`;
+  // Outcome bar and legend
+  const segs=[];
+  d.ids.forEach((id,k)=>{
+    const m=d.meta[k];
+    if(majC[k])segs.push({c:m.color,p:majC[k]/N*100,bg:m.color,t:`${m.acr} majority`});
+    if(plurC[k])segs.push({c:m.color,p:plurC[k]/N*100,bg:hatch(m.color),t:`${m.acr} largest, no majority`});
+  });
+  if(ties)segs.push({c:OC,p:ties/N*100,bg:hatch(OC),t:'Tied for largest, no majority'});
+  const bar=document.getElementById('mcBar');
+  bar.innerHTML=segs.map(s=>`<i style="width:${s.p}%;background:${s.bg}" title="${s.t}: ${pf(s.p)}"></i>`).join('');
+  bar.setAttribute('aria-label',segs.map(s=>`${s.t} ${pf(s.p)}`).join(', '));
+  document.getElementById('mcLegend').innerHTML=segs.map(s=>`<span><i class="sw" style="background:${s.bg}"></i>${s.t} <b>${pf(s.p)}</b></span>`).join('');
+  // Table: parties that win seats in at least 5% of runs
+  const q=(arr,p)=>arr[Math.min(arr.length-1,Math.max(0,Math.ceil(p*arr.length)-1))];
+  const rows=[];
+  d.ids.forEach((id,k)=>{
+    if(winC[k]/N<0.05)return;
+    const s=Array.from(d.seats[k].subarray(0,N)).sort((a,b)=>a-b);
+    rows.push({k,id,med:q(s,0.5),lo:q(s,0.05),hi:q(s,0.95),lg:largeC[k]/N*100,sorted:s});
+  });
+  rows.sort((a,b)=>b.med-a.med||b.lg-a.lg);
+  const gmax=Math.max(maj,...rows.map(r=>r.hi),1);
+  document.getElementById('mcBody').innerHTML=rows.map(r=>{
+    const m=d.meta[r.k];
+    return `<tr><td><span class="pdot" style="background:${m.color}"></span>${m.acr}</td><td><b>${r.med}</b></td>`
+      +`<td class="rg"><span class="rgtxt">${r.lo}&ndash;${r.hi}</span><div class="rgbar"><i style="left:${r.lo/gmax*100}%;width:${Math.max(0.6,(r.hi-r.lo)/gmax*100)}%;background:${m.color}"></i><b style="left:${r.med/gmax*100}%"></b></div></td></tr>`;
+  }).join('');
+  // Histogram party chips
+  if(!MC.hist||!rows.some(r=>r.id===MC.hist))MC.hist=rows.length?rows[0].id:null;
+  const chips=document.getElementById('mcHistChips');chips.innerHTML='';
+  rows.forEach(r=>{
+    const m=d.meta[r.k],b=document.createElement('button');
+    b.className='btn';b.setAttribute('aria-pressed',String(r.id===MC.hist));
+    b.innerHTML=`<span class="sw" style="background:${m.color}"></span>${m.acr}`;
+    b.addEventListener('click',()=>{if(MC.hist===r.id)return;MC.hist=r.id;[...chips.children].forEach(c=>c.setAttribute('aria-pressed',String(c===b)));mcHistogram(r,d,N);});
+    chips.appendChild(b);
+  });
+  const hr=rows.find(r=>r.id===MC.hist);
+  if(hr)mcHistogram(hr,d,N);else document.getElementById('mcHist').innerHTML='';
+  const out=document.getElementById('mcOut');out.hidden=false;out.classList.remove('stale');
+  const sum=`${N.toLocaleString()} runs · vote share error ${d.ctx.vs}% · seat-level error ${d.ctx.se} pts · ${maj} seats for a majority`;
+  mcStatus(sum,1);
+}
+function mcHistogram(r,d,N){
+  const host=document.getElementById('mcHist'),m=d.meta[r.k],maj=d.maj,s=r.sorted;
+  let lo=Math.min(s[0],maj),hi=Math.max(s[s.length-1],maj);
+  const span=hi-lo+1,bw=Math.max(1,Math.ceil(span/70));
+  lo=Math.floor(lo/bw)*bw;
+  const nb=Math.floor((hi-lo)/bw)+1;
+  const cnt=new Array(nb).fill(0);s.forEach(v=>cnt[Math.floor((v-lo)/bw)]++);
+  // runs at or above each bin's lower bound
+  const cum=new Array(nb).fill(0);let acc=0;for(let b=nb-1;b>=0;b--){acc+=cnt[b];cum[b]=acc;}
+  MC.histArgs=[r,d,N];
+  const W=Math.max(300,Math.round(host.clientWidth||640)),H=190,pl=8,pr=8,pt=8,pb=24,iw=W-pl-pr,ih=H-pt-pb;
+  const cmax=Math.max(...cnt,1),bx=b=>pl+b/nb*iw,bwp=iw/nb;
+  const xOf=v=>pl+(v-lo+0.5*bw)/(nb*bw)*iw;
+  let g='';
+  for(let b=0;b<nb;b++){
+    const h=cnt[b]/cmax*ih;
+    if(cnt[b])g+=`<rect class="hbar" data-b="${b}" x="${(bx(b)+Math.min(1,bwp*.12)).toFixed(2)}" y="${(pt+ih-h).toFixed(2)}" width="${Math.max(0.5,bwp-2*Math.min(1,bwp*.12)).toFixed(2)}" height="${h.toFixed(2)}" rx="1" fill="${m.color}"/>`;
+  }
+  // ticks
+  const raw=(hi-lo)/6,mag=Math.pow(10,Math.floor(Math.log10(Math.max(raw,1))));
+  const tstep=[1,2,5,10].map(x=>x*mag).find(x=>x>=raw)||mag*10;
+  let ticks='';
+  for(let t=Math.ceil(lo/tstep)*tstep;t<=hi;t+=tstep){
+    if(Math.abs(t-maj)<tstep*0.45)continue;
+    ticks+=`<text class="axis" x="${xOf(t).toFixed(1)}" y="${H-6}" text-anchor="middle">${t}</text>`;
+  }
+  const mx=xOf(maj);
+  const hits=[];for(let b=0;b<nb;b++)if(cnt[b])hits.push(`<rect class="hhit" data-b="${b}" x="${bx(b).toFixed(2)}" y="${pt}" width="${bwp.toFixed(2)}" height="${ih}"/>`);
+  host.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribution of ${m.acr} seats across ${N.toLocaleString()} runs; dashed line at ${maj} seats for a majority">`
+    +`${g}<line class="base" x1="${pl}" x2="${W-pr}" y1="${pt+ih+.5}" y2="${pt+ih+.5}"/>`
+    +`<line class="majl" x1="${mx}" x2="${mx}" y1="${pt-2}" y2="${pt+ih+4}"/>`
+    +`<text class="majt" x="${mx}" y="${H-6}" text-anchor="middle">${maj}</text>${ticks}${hits.join('')}</svg>`
+    +`<div class="htip" hidden></div>`;
+  const svg=host.querySelector('svg'),tip=host.querySelector('.htip');
+  const pf=v=>v===0?'0%':v<0.1?'<0.1%':v.toFixed(1)+'%';
+  const show=b=>{
+    MC.hover=b;
+    svg.classList.add('hov');
+    svg.querySelectorAll('.hbar').forEach(e=>e.classList.toggle('on',+e.dataset.b===b));
+    const a=lo+b*bw,z=a+bw-1;
+    const lab=bw===1?`${a} seat${a===1?'':'s'}`:`${a}–${z} seats`;
+    tip.innerHTML=`<b>${lab}</b> / ${pf(cnt[b]/N*100)} of runs (${cnt[b].toLocaleString()})<br><span class="c">${pf(cum[b]/N*100)} of runs at ${a}+</span>`;
+    tip.hidden=false;
+    const sr=svg.getBoundingClientRect(),hr=host.getBoundingClientRect();
+    const cx=sr.left-hr.left+(bx(b)+bwp/2)/W*sr.width;
+    const tw=tip.offsetWidth,half=tw/2;
+    tip.style.left=Math.min(Math.max(cx,half),hr.width-half)+'px';
+  };
+  const hide=()=>{MC.hover=-1;svg.classList.remove('hov');svg.querySelectorAll('.hbar.on').forEach(e=>e.classList.remove('on'));tip.hidden=true;};
+  svg.querySelectorAll('.hhit').forEach(h=>{
+    const b=+h.dataset.b;
+    h.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')show(b);});
+    h.addEventListener('click',e=>{e.stopPropagation();if(MC.hover===b&&!(e.pointerType==='mouse'))hide();else show(b);});
+  });
+  svg.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')hide();});
+}
+function mcBuildControls(){
+  const seg=document.getElementById('mcRuns');
+  [500,1000,5000].forEach(n=>{
+    const b=document.createElement('button');b.className='btn';b.textContent=n.toLocaleString();
+    b.setAttribute('aria-pressed',String(n===MC.runs));
+    b.addEventListener('click',()=>{if(MC.runs===n)return;MC.runs=n;[...seg.children].forEach(c=>c.setAttribute('aria-pressed',String(c===b)));mcSchedule();});
+    seg.appendChild(b);
+  });
+  const bind=(id,outId,key,fmt,max)=>{
+    const el=document.getElementById(id),o=document.getElementById(outId);
+    const upd=()=>{MC[key]=parseFloat(el.value)||0;o.textContent=fmt(MC[key]);el.style.setProperty('--p',(MC[key]/max*100)+'%');};
+    upd();
+    el.addEventListener('input',()=>{upd();mcSchedule();});
+  };
+  bind('mcVs','mcVsOut','vs',v=>v+'%',30);
+  bind('mcSe','mcSeOut','se',v=>v+' pts',10);
+  let rz=null;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(MC.histArgs)mcHistogram(...MC.histArgs);},150);});
+  document.addEventListener('click',e=>{if(MC.hover>=0&&!e.target.closest('#mcHist')){const s=document.querySelector('#mcHist svg');if(s){s.classList.remove('hov');s.querySelectorAll('.hbar.on').forEach(x=>x.classList.remove('on'));}const t=document.querySelector('#mcHist .htip');if(t)t.hidden=true;MC.hover=-1;}});
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────
 buildInputs();
 buildToggles();
+mcBuildControls();
 project();
 </script>
+
 </body></html>
         
         <!-- ============================================================= -->
