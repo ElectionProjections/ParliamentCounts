@@ -87,198 +87,241 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malacca Seat Projector</title>
+<style>:root{color-scheme:light}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
 <style>
-#md-app *{box-sizing:border-box;margin:0;padding:0;}
-#md-app{all:initial;display:block;box-sizing:border-box;line-height:normal;text-align:left;font-family:system-ui,-apple-system,sans-serif;background:#f5f5f3;color:#1a1a18;padding:1.5rem;max-width:960px;margin:0 auto;}
-#md-app h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;text-align:center;margin:0.5rem 0 2rem;line-height:1.2;}
-#md-app .section{margin-bottom:1.5rem;}
-#md-app .inputs-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:1rem;}
-#md-app .input-card{background:#fff;border:0.5px solid #ddddd5;border-radius:12px;padding:0.6rem 1rem;display:flex;align-items:center;gap:18px;}
-#md-app .reset-btn{font-size:12px;font-weight:500;color:#1a1a18;background:#fff;border:0.5px solid #b4b2a9;border-radius:8px;padding:5px 14px;cursor:pointer;white-space:nowrap;transition:background 0.15s,color 0.15s,border-color 0.15s;}
-#md-app .reset-btn:hover{border-color:#8f8d84;}
-#md-app .input-card label{display:block;flex:0 0 230px;font-size:12px;font-weight:500;color:#5f5e5a;margin:0;}
-#md-app .input-row{display:flex;align-items:center;gap:6px;order:3;flex:0 0 96px;}
-#md-app .input-row input[type=number]{flex:1;min-width:0;font-size:14px;border:0.5px solid #ddddd5;border-radius:6px;padding:5px 8px;outline:none;background:#fff;color:#1a1a18;}
-#md-app .input-row input[type=number]:focus{border-color:#888780;}
-#md-app .pct{font-size:13px;color:#888780;}
-#md-app .pdot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:5px;flex-shrink:0;}
-#md-app .total-warn{font-size:12px;margin-bottom:1rem;padding:7px 12px;border-radius:8px;border:0.5px solid #ddddd5;color:#5f5e5a;background:#f1efe8;}
-#md-app .total-warn.bad{color:#a32d2d;background:#fcebeb;border-color:#f09595;}
-#md-app .results-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(76px,1fr);gap:8px;margin-bottom:1rem;overflow-x:auto;}
-#md-app .result-card{background:#f1efe8;border-radius:8px;padding:0.75rem 0.6rem;min-width:0;display:flex;flex-direction:column;}
-#md-app .result-card .pname{font-size:11px;color:#5f5e5a;margin-bottom:3px;display:flex;align-items:flex-start;flex:1 1 auto;}
-#md-app .result-card .pname .pdot{margin-top:3px;}
-#md-app .result-card .seats{font-size:24px;font-weight:500;color:#1a1a18;}
-#md-app .result-card .chg{font-size:11px;margin-top:1px;}
-#md-app .chg.pos{color:#3b6d11;}
-#md-app .chg.neg{color:#a32d2d;}
-#md-app .chg.neu{color:#888780;}
-#md-app .parl-bar{display:flex;height:22px;border-radius:8px;overflow:hidden;margin-bottom:6px;}
-#md-app .bar-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;font-size:11px;color:#5f5e5a;margin-bottom:1rem;}
-#md-app .bar-legend span{display:flex;align-items:center;gap:3px;}
-#md-app .divider{border:none;border-top:0.5px solid #ddddd5;margin:1.5rem 0;}
-#md-app .coalition-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:8px;}
-#md-app .coalition-header h3{font-size:14px;font-weight:500;color:#1a1a18;}
-#md-app .coalition-checks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.75rem;}
-#md-app .coalition-checks label{display:flex;align-items:center;gap:5px;font-size:12px;color:#1a1a18;background:#fff;border:0.5px solid #b4b2a9;border-radius:8px;padding:4px 10px;cursor:pointer;user-select:none;}
-#md-app .coalition-checks label:hover{background:#f1efe8;}
-#md-app .coalition-checks input[type=checkbox]{width:13px;height:13px;}
-#md-app .coalition-result{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:#f1efe8;margin-bottom:0.75rem;flex-wrap:wrap;}
-#md-app .coalition-seats{font-size:22px;font-weight:500;color:#1a1a18;}
-#md-app .coalition-label{font-size:12px;color:#5f5e5a;}
-#md-app .coalition-status{font-size:12px;font-weight:500;padding:3px 10px;border-radius:8px;}
-#md-app .status-maj{background:#eaf3de;color:#3b6d11;}
-#md-app .status-short{background:#faeeda;color:#854f0b;}
-#md-app .status-none{background:#f1efe8;color:#888780;}
-#md-app .parl-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:2px;margin-bottom:8px;}
-#md-app .sq{width:100%;aspect-ratio:1;border-radius:1px;transition:opacity 0.1s;}
-#md-app .grid-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;color:#5f5e5a;margin-bottom:1.5rem;}
-#md-app .grid-legend span{display:flex;align-items:center;gap:4px;}
-#md-app .grid-legend .swatch{width:10px;height:10px;border-radius:2px;display:inline-block;}
-#md-app .map-tooltip{position:absolute;z-index:20;background:#fff;border:0.5px solid #b4b2a9;border-radius:10px;padding:10px 12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);font-size:11px;min-width:170px;max-width:220px;pointer-events:none;}
-#md-app .map-tooltip .mt-title{font-size:12px;font-weight:600;color:#1a1a18;margin-bottom:6px;}
-#md-app .map-tooltip .mt-row{display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:#5f5e5a;}
-#md-app .map-tooltip .mt-row .mt-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;flex-shrink:0;}
-#md-app .map-tooltip .mt-seats{color:#b4b2a9;font-size:10px;margin-left:4px;}
-#md-app .sec-title{font-size:20px;font-weight:500;color:#1a1a18;text-align:center;margin-bottom:1rem;}
-#md-app .sec-title.sub{font-size:14px;margin-bottom:0.75rem;}
-#md-app .vs-slider{-webkit-appearance:none;appearance:none;display:block;order:2;flex:1 1 auto;min-width:0;width:auto;height:6px;margin:0;border-radius:3px;outline:none;cursor:pointer;background:linear-gradient(to right,var(--c,#888780) var(--p,0%),#e3e1da var(--p,0%));}
-#md-app .vs-slider::-webkit-slider-runnable-track{background:transparent;height:6px;}
-#md-app .vs-slider::-moz-range-track{background:transparent;height:6px;}
-#md-app .vs-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin-top:-5px;border-radius:50%;background:var(--c,#888780);border:2px solid #fff;box-shadow:0 0 0 0.5px #888780;}
-#md-app .vs-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--c,#888780);border:2px solid #fff;box-shadow:0 0 0 0.5px #888780;}
-#md-app .map-controls{display:flex;flex-direction:column;gap:12px;margin-bottom:1rem;padding:12px 14px;background:#fff;border:0.5px solid #ddddd5;border-radius:12px;}
-#md-app .map-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-#md-app .mode-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 14px;border:0.5px solid #b4b2a9;border-radius:10px;background:#fff;cursor:pointer;text-align:left;font-family:inherit;}
-#md-app .mode-card strong{font-size:13px;font-weight:600;color:#1a1a18;}
-#md-app .mode-card span{font-size:11px;color:#888780;line-height:1.3;}
-#md-app .mode-card:hover{background:#f1efe8;}
-#md-app .mode-card.on{background:#1a1a18;border-color:#1a1a18;}
-#md-app .mode-card.on strong{color:#fff;}
-#md-app .mode-card.on span{color:#c9c7bd;}
-#md-app .map-options{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding-top:12px;border-top:0.5px solid #ddddd5;}
-#md-app .map-ctl{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:#5f5e5a;}
-#md-app .seg{display:inline-flex;border:0.5px solid #b4b2a9;border-radius:8px;overflow:hidden;}
-#md-app .seg button{font-size:13px;font-weight:500;padding:7px 16px;border:none;background:#fff;color:#1a1a18;cursor:pointer;white-space:nowrap;}
-#md-app .seg button+button{border-left:0.5px solid #b4b2a9;}
-#md-app .seg button:hover{background:#f1efe8;}
-#md-app .seg button.on{background:#1a1a18;color:#fff;}
-#md-app .map-select{font-size:13px;font-weight:500;padding:7px 12px;border:0.5px solid #b4b2a9;border-radius:8px;background:#fff;color:#1a1a18;cursor:pointer;max-width:240px;}
-@media(max-width:600px){#md-app .map-modes{grid-template-columns:1fr;}
-#md-app .input-card{flex-wrap:wrap;gap:8px 12px;}
-#md-app .input-card label{flex:1 0 100%;}
-#md-app .vs-slider{flex:1 1 140px;}}
-#md-app .note{font-size:11px;color:#888780;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid #ddddd5;line-height:1.6;}
+/* Layout: single 760px column of separate cards, ordered by workflow (header, inputs, results, builder, map). */
+:root{
+  --bg:#f3f3f0;--card:#ffffff;--line:#dcdbd3;--fg:#1c1c1a;--muted:#6a6963;--hover:#f1f0ea;
+  --track:#d2d1c9;--land:#c3c2ba;--empty:#e4e3dc;--mapbg:#fafaf7;
+  --pos:#2e7d1f;--neg:#b3261e;--good-bg:#e6f3df;--amber:#d99a1a;--red:#d32f2f;
+  --btn:#ffffff;--btn-on:#1c1c1a;--btn-on-fg:#ffffff;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141413;--card:#1e1e1c;--line:#3a3a36;--fg:#ecebe5;--muted:#9c9b93;--hover:#2a2a27;
+  --track:#8a8981;--land:#5e5d57;--empty:#36362f;--mapbg:#191917;
+  --pos:#6cc24a;--neg:#f2776f;--good-bg:#1f3318;--amber:#e8ab2c;--red:#e5484d;
+  --btn:#1e1e1c;--btn-on:#ecebe5;--btn-on-fg:#141413;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141413;--card:#1e1e1c;--line:#3a3a36;--fg:#ecebe5;--muted:#9c9b93;--hover:#2a2a27;
+  --track:#8a8981;--land:#5e5d57;--empty:#36362f;--mapbg:#191917;
+  --pos:#6cc24a;--neg:#f2776f;--good-bg:#1f3318;--amber:#e8ab2c;--red:#e5484d;
+  --btn:#1e1e1c;--btn-on:#ecebe5;--btn-on-fg:#141413;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14px;line-height:1.4;
+  padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  font-variant-numeric:tabular-nums}
+.page{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px;min-width:0}
+h1{font-size:28px;font-weight:700;letter-spacing:-.02em;text-align:center;line-height:1.2;text-wrap:balance;margin:4px 0 2px}
+h2{font-size:18px;font-weight:600;text-align:center;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.sub{font-size:15px;font-weight:600;text-align:center;margin:2px 0 10px}
+
+/* locator */
+.locator{display:flex;align-items:center;justify-content:center;gap:18px;height:90px}
+.loc-map{width:220px;max-width:62vw;height:auto;display:block}
+.loc-map .land{fill:var(--land)}.loc-map .mel{fill:var(--red)}.loc-map .ring{fill:none;stroke:var(--red);stroke-width:1.3}
+.flag{width:50px;height:25px;border:1px solid var(--line);border-radius:3px;overflow:hidden;display:block;flex:none}
+.flag svg{display:block;width:100%;height:100%}
+
+/* facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;padding:0;text-align:center}
+.facts>div{padding:14px 10px;min-width:0}
+.facts>div+div{border-left:1px solid var(--line)}
+.lbl{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.big{font-size:28px;font-weight:700;line-height:1.15;margin-top:4px}
+.big small{font-size:14px;font-weight:500;color:var(--muted)}
+.note{font-size:11px;color:var(--muted);margin-top:4px}
+.fh-bar{height:6px;border-radius:3px;background:var(--empty);margin:8px auto 0;max-width:180px;overflow:hidden}
+.fh-bar i{display:block;height:100%;border-radius:3px;background:var(--amber)}
+
+/* electoral system */
+details.sys{padding:0}
+details.sys summary{list-style:none;cursor:pointer;text-align:center;font-weight:600;padding:13px 16px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px}
+details.sys summary::-webkit-details-marker{display:none}
+details.sys summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .15s}
+details.sys[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
+.tile{text-align:center;padding:12px 4px;min-width:0}
+.tile+.tile{border-left:1px solid var(--line)}
+.tile .lbl{font-size:8.5px;letter-spacing:.04em;overflow-wrap:anywhere}
+.tile .val{font-size:12px;font-weight:600;margin-top:4px;line-height:1.25}
+@media(min-width:600px){.tile{padding:16px 10px}.tile .lbl{font-size:10px;letter-spacing:.08em}.tile .val{font-size:15px}}
+
+/* inputs */
+.irow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1.6fr) 86px;gap:6px 16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.irow:first-child{padding-top:2px}
+.irow label{font-size:13px;font-weight:500;display:flex;align-items:flex-start;gap:7px;min-width:0}
+.pdot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;margin-top:4px}
+.box{display:flex;align-items:center;gap:5px}
+.box input{width:100%;min-width:0;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:6px;padding:6px 8px;background:var(--card);color:var(--fg);text-align:right;font-variant-numeric:tabular-nums}
+.box span{color:var(--muted);font-size:13px}
+.vs{-webkit-appearance:none;appearance:none;display:block;width:100%;height:8px;margin:0;border-radius:4px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,var(--c,#888) var(--p,0%),var(--track) var(--p,0%))}
+.vs::-webkit-slider-runnable-track{background:transparent;height:8px}
+.vs::-moz-range-track{background:transparent;height:8px}
+.vs::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-5px;border-radius:50%;background:var(--c,#888);border:2px solid var(--card);box-shadow:0 0 0 1px var(--muted);cursor:pointer}
+.vs::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--c,#888);border:2px solid var(--card);box-shadow:0 0 0 1px var(--muted);cursor:pointer}
+.vs:active{cursor:pointer}
+.irow.locked .vs{cursor:not-allowed;opacity:.55;background:repeating-linear-gradient(135deg,var(--track) 0 5px,transparent 5px 10px),linear-gradient(var(--empty),var(--empty))}
+.irow.locked .vs::-webkit-slider-thumb{visibility:hidden}
+.irow.locked .vs::-moz-range-thumb{visibility:hidden}
+.irow.locked .box input{border-style:dashed;background:var(--hover);color:var(--muted);cursor:not-allowed}
+.btn{font-size:12px;font-weight:500;background:var(--btn);border:1px solid var(--line);border-radius:8px;padding:6px 13px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--hover)}
+.btn.on{background:var(--btn-on);color:var(--btn-on-fg);border-color:var(--btn-on)}
+.center{display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
+@media(max-width:600px){.irow{grid-template-columns:minmax(0,1fr) 86px}.irow label{grid-column:1/-1}.irow .vs{grid-column:1}.irow .box{grid-column:2}}
+
+/* results */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font-size:12px;font-weight:500;padding:5px 14px;border:0;background:var(--btn);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--btn-on);color:var(--btn-on-fg)}
+.tabs{display:inline-flex;gap:26px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:6px 2px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer}
+.tabs button:hover{color:var(--fg)}
+.tabs button.on{color:var(--fg);font-weight:700;border-bottom-color:var(--fg)}
+.vswitch{display:inline-flex;align-items:center;gap:10px;font-size:13px}
+.vswitch .lab{background:none;border:0;padding:2px 0;cursor:pointer;color:var(--muted);font-weight:500}
+.vswitch .lab.on{color:var(--fg);font-weight:700}
+.vswitch .trk{position:relative;width:42px;height:24px;border:0;border-radius:12px;background:var(--track);cursor:pointer;padding:0}
+.vswitch .trk i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--card);box-shadow:0 0 0 1px var(--muted);transition:transform .15s}
+.vswitch .trk.party i{transform:translateX(18px)}
+@media(prefers-reduced-motion:reduce){.vswitch .trk i{transition:none}}
+.hemi{max-width:540px;margin:10px auto 0}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:18px;font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.tablewrap{margin-top:18px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;text-align:right;padding:8px 8px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:middle}
+td.seats{font-weight:700}
+tr.alli{cursor:pointer}
+tr.alli:hover td{background:var(--hover)}
+tr.alli td:first-child{font-weight:600}
+tr.part td:first-child{padding-left:28px}
+tr:last-child td{border-bottom:0}
+.chev{display:inline-block;width:6px;height:6px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);margin-right:9px;transition:transform .12s;vertical-align:1px}
+tr.alli.open .chev{transform:rotate(45deg)}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+.pn{display:flex;align-items:center;gap:7px}
+
+/* builder */
+.cbtns{margin-bottom:14px}
+.bar{display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--empty)}
+.bar div{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff}
+.marker{position:relative;height:30px}
+.marker i{position:absolute;top:-26px;height:26px;border-left:2px dashed var(--fg)}
+.marker b{position:absolute;top:4px;transform:translateX(-50%);font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap}
+.cstat{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;font-size:13px;font-weight:600}
+.cstat .ok{color:var(--pos)}
+
+/* map */
+.mbtns{margin:12px 0}
+.mview{position:relative;overflow:hidden;aspect-ratio:600/500;border:1px solid var(--line);border-radius:8px;cursor:grab;background:var(--mapbg);max-width:650px;margin:0 auto;touch-action:none}
+.mwrap{position:absolute;inset:0;transform-origin:0 0}
+.mwrap svg{width:100%;height:100%;display:block}
+.mwrap path{stroke:var(--card);stroke-width:.4;cursor:pointer;outline:none}
+.mwrap path.n{fill:var(--empty)}
+.mwrap path:hover{filter:brightness(.86)}
+.mwrap path.sel{filter:brightness(.74)}
+.mzoom{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px}
+.mzoom button{width:26px;height:26px;padding:0;font-size:15px;line-height:1;background:var(--btn);border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.mzoom button:hover{background:var(--hover)}
+.mbox{position:relative;max-width:650px;margin:0 auto}
+.tip{position:absolute;z-index:20;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 10px;box-shadow:0 4px 16px rgba(0,0,0,.2);font-size:11px;width:176px;pointer-events:none}
+.tip .tt{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:12px;margin-bottom:5px}
+.tip .tt span{font-weight:500;color:var(--muted);white-space:nowrap}
+.tip .tr{display:flex;justify-content:space-between;align-items:center;padding:2px 0;gap:6px}
+.tip .tr span:first-child{display:flex;align-items:center;gap:5px}
+.tip .tr .d{width:8px;height:8px;border-radius:50%;flex:none}
+.tip .tr.w{font-weight:700}
+.mlegend{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;margin-top:14px;font-size:12px}
+.grad{width:170px;height:10px;border-radius:5px;display:inline-block}
+.sources{font-size:11px;color:var(--muted);text-align:center;line-height:1.5;margin-top:6px}
 </style>
-<div id="md-app">
+<div class="page">
 <h1>Malacca State Assembly Seat Projection</h1>
-<div class="section" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-  <button class="reset-btn" id="modeStdBtn" onclick="setMode('standard')" style="background:#1a1a18;color:#fff;border-color:#1a1a18;">Standard (BN / PH / PN)</button>
-  <button class="reset-btn" id="modeUnityBtn" onclick="setMode('unity')">BN + PN merged, BERSATU detached</button>
+
+<div class="locator"><svg class="loc-map" viewBox="0 0 220 77" role="img" aria-label="Map of Malaysia with Melaka marked in red" xmlns="http://www.w3.org/2000/svg"><path class="land" d="M200.0,37.9 L199.3,37.2 L200.0,36.7 L202.3,37.9 L200.0,37.9ZM187.9,36.0 L187.2,35.3 L186.8,36.1 L185.9,36.5 L184.8,35.5 L184.0,35.8 L182.8,35.5 L181.7,36.7 L181.2,36.1 L179.8,35.4 L179.0,37.2 L178.5,37.0 L177.5,38.0 L177.4,37.2 L177.9,36.1 L177.0,35.4 L176.6,33.4 L177.7,30.6 L177.5,29.4 L175.1,29.1 L176.6,28.0 L177.1,26.4 L175.9,26.3 L174.9,25.2 L174.5,25.2 L174.8,24.2 L176.5,22.8 L177.1,21.8 L177.1,23.1 L177.3,22.5 L178.9,23.0 L179.8,22.6 L180.7,20.4 L182.0,19.5 L183.0,17.0 L182.6,16.4 L183.9,15.2 L184.6,15.3 L184.6,14.8 L184.0,14.8 L186.9,12.4 L187.1,11.6 L188.4,10.2 L188.8,8.3 L189.8,6.6 L190.6,7.3 L190.7,8.1 L190.4,8.0 L190.3,8.4 L190.8,8.9 L190.0,11.4 L190.7,11.4 L192.1,10.1 L193.0,8.6 L192.7,7.7 L193.3,7.5 L193.2,7.0 L194.0,6.9 L195.2,7.6 L194.9,8.9 L195.6,10.9 L196.3,11.0 L197.4,11.8 L198.2,11.0 L198.5,11.9 L200.3,12.9 L200.3,15.0 L199.5,15.1 L198.9,15.7 L199.6,16.7 L199.3,17.4 L199.7,18.1 L197.5,19.3 L200.8,18.8 L200.8,18.4 L202.0,18.3 L203.5,17.2 L204.6,19.3 L203.9,19.9 L202.4,19.9 L202.8,21.2 L203.9,20.9 L204.7,21.2 L205.2,19.9 L207.3,19.8 L209.8,21.3 L209.4,23.0 L209.9,22.0 L210.4,21.8 L212.2,23.5 L212.4,23.2 L213.3,23.8 L213.4,24.4 L213.9,24.4 L214.0,24.0 L215.1,24.3 L216.2,23.8 L217.2,24.8 L217.1,26.5 L215.9,27.6 L210.7,29.3 L209.5,29.0 L208.7,29.5 L207.9,28.5 L207.2,28.3 L204.8,30.0 L206.3,32.1 L207.8,33.1 L208.5,33.1 L208.7,34.1 L209.8,34.0 L210.3,34.9 L209.7,35.0 L209.3,35.7 L207.1,35.7 L203.1,37.1 L202.1,36.8 L199.5,35.0 L199.0,35.5 L199.5,36.7 L198.9,37.4 L199.2,37.7 L198.6,37.9 L197.1,37.6 L194.6,35.8 L190.2,36.0 L189.2,35.6 L187.9,36.0ZM205.7,19.4 L205.8,19.7 L205.1,19.7 L205.7,19.4ZM211.2,34.3 L211.5,34.6 L210.6,34.9 L210.3,34.2 L211.2,34.3ZM208.8,32.6 L209.8,32.6 L209.1,33.1 L207.1,32.3 L208.3,32.0 L208.8,32.6ZM197.5,9.5 L197.9,10.5 L197.2,10.9 L196.1,10.7 L197.2,10.2 L196.7,9.8 L197.5,9.5ZM192.4,3.0 L192.5,3.9 L192.1,3.7 L192.2,4.1 L190.7,4.7 L191.3,3.8 L192.4,3.0ZM194.2,3.2 L195.4,3.3 L195.2,4.7 L193.9,5.1 L193.1,5.8 L193.1,3.9 L194.2,3.2ZM9.0,10.1 L9.9,10.2 L10.5,11.7 L11.0,12.1 L10.9,12.8 L9.1,15.0 L8.3,13.0 L9.0,10.1ZM11.0,12.1 L13.8,13.0 L14.9,12.4 L15.7,13.3 L16.0,15.2 L17.5,14.8 L18.7,15.1 L18.8,15.5 L18.4,16.1 L18.8,16.9 L18.7,18.5 L18.0,18.9 L17.3,20.4 L17.6,20.8 L17.0,22.0 L17.1,23.0 L16.5,23.5 L16.2,24.9 L15.2,25.3 L13.1,27.8 L12.4,27.3 L13.0,27.2 L12.7,22.7 L10.8,22.5 L10.7,21.4 L11.1,21.3 L10.7,17.7 L9.1,15.0 L10.9,12.8 L11.0,12.1ZM4.6,15.2 L5.1,14.6 L4.9,15.9 L4.5,15.6 L4.6,15.2ZM5.8,13.8 L6.0,14.2 L5.4,14.6 L5.0,14.3 L3.9,15.0 L3.8,14.0 L3.2,13.9 L3.0,13.1 L4.4,13.2 L5.2,12.7 L6.0,13.6 L5.8,13.8ZM26.4,20.7 L27.8,19.4 L28.0,18.0 L29.4,16.8 L29.5,15.0 L30.5,15.7 L30.9,15.3 L32.2,15.7 L32.9,16.4 L34.6,19.4 L32.9,21.2 L33.0,24.1 L33.5,24.7 L33.2,26.7 L34.5,27.6 L34.2,27.9 L34.3,29.7 L35.7,30.3 L36.0,31.0 L35.3,31.2 L35.3,32.1 L34.8,31.9 L34.3,32.3 L33.1,31.8 L32.5,32.6 L31.2,32.7 L30.0,31.4 L29.2,31.6 L28.4,31.3 L27.8,32.9 L26.6,31.3 L26.2,32.7 L24.9,33.5 L23.5,33.1 L23.0,33.4 L22.0,33.0 L21.6,32.2 L22.0,31.9 L22.3,30.6 L22.9,29.9 L22.6,29.0 L23.6,25.8 L24.5,24.8 L25.2,25.1 L26.0,24.7 L26.0,23.4 L25.1,23.1 L25.1,21.5 L25.6,20.2 L26.4,20.7ZM17.5,20.3 L19.2,21.9 L20.1,21.3 L20.5,20.1 L23.9,18.8 L25.5,20.4 L25.1,23.0 L26.0,23.3 L26.0,24.7 L25.2,25.1 L24.5,24.8 L23.6,25.8 L22.6,29.0 L22.9,29.9 L22.3,30.6 L22.0,31.9 L21.6,32.2 L22.0,34.2 L21.5,34.9 L22.7,35.5 L22.9,37.2 L24.2,38.7 L23.9,39.6 L24.7,42.1 L23.5,43.2 L21.9,41.9 L21.4,42.2 L21.5,43.0 L20.7,43.3 L20.4,42.7 L19.3,42.3 L18.7,42.6 L18.8,42.1 L18.5,42.3 L18.0,41.8 L17.5,42.1 L17.2,41.2 L15.5,41.4 L14.8,41.1 L14.6,39.8 L16.4,39.4 L15.4,39.4 L15.3,38.5 L13.7,37.7 L13.1,36.2 L14.0,33.5 L13.4,33.4 L13.4,33.0 L14.2,32.3 L13.5,32.4 L13.6,31.0 L13.2,30.9 L12.9,30.1 L12.3,30.1 L12.5,29.7 L11.7,29.6 L10.9,27.8 L12.3,27.2 L13.1,27.8 L15.2,25.3 L16.2,24.9 L16.5,23.5 L17.2,22.9 L17.0,22.0 L17.5,21.5 L17.5,20.3ZM174.3,36.2 L174.5,35.8 L173.5,34.5 L173.5,32.7 L172.1,29.7 L172.8,29.2 L174.1,29.8 L175.1,29.1 L177.5,29.4 L177.7,30.6 L176.6,33.3 L176.7,34.2 L177.0,35.4 L177.9,36.2 L177.4,37.2 L177.2,39.7 L176.4,40.5 L177.0,41.2 L176.5,43.7 L177.1,45.9 L176.6,45.9 L176.2,46.6 L175.8,48.3 L176.2,48.8 L175.6,50.2 L173.9,50.7 L173.2,50.1 L171.3,52.4 L171.7,53.1 L171.2,53.7 L171.2,54.8 L172.2,54.9 L172.8,55.9 L169.7,57.6 L169.6,58.4 L168.1,58.8 L167.9,60.0 L168.2,61.1 L168.8,61.0 L168.7,62.5 L167.0,63.2 L166.9,64.8 L165.8,66.5 L165.6,67.6 L163.7,66.8 L161.5,67.8 L160.7,67.3 L158.7,67.5 L155.5,69.9 L154.4,68.9 L153.1,69.2 L149.7,67.7 L148.3,67.8 L149.0,66.8 L148.4,66.1 L147.1,66.0 L146.6,66.4 L143.0,66.2 L139.6,67.6 L139.9,68.2 L138.8,70.8 L136.8,71.1 L135.9,72.3 L133.7,72.0 L132.4,72.8 L132.1,72.1 L131.0,72.3 L129.1,71.5 L125.6,72.2 L124.5,73.4 L123.2,73.8 L122.7,73.5 L122.0,74.0 L121.0,73.7 L120.0,72.6 L118.9,72.4 L117.9,70.5 L116.8,70.2 L115.6,69.1 L115.1,68.1 L114.3,68.0 L113.6,67.4 L112.1,65.6 L112.1,63.8 L111.0,63.3 L110.9,62.5 L112.1,60.5 L112.2,62.1 L112.7,62.8 L114.8,64.1 L115.2,64.8 L118.8,64.7 L119.2,65.0 L119.6,63.6 L120.3,64.7 L121.5,64.3 L121.1,65.6 L121.5,65.5 L123.9,66.4 L124.0,66.9 L123.4,67.5 L124.3,67.1 L124.7,66.1 L125.2,66.2 L128.5,68.3 L129.4,68.1 L130.6,68.7 L131.1,68.5 L130.2,67.9 L128.8,68.0 L127.6,67.3 L127.0,66.3 L127.3,65.0 L128.2,64.8 L128.9,65.5 L129.8,65.5 L128.8,65.2 L128.0,63.9 L128.3,63.7 L128.1,63.2 L129.2,60.7 L129.8,60.7 L129.7,60.1 L130.6,60.2 L131.0,59.7 L130.5,60.1 L128.9,59.9 L128.9,59.3 L129.5,59.1 L128.9,58.7 L129.3,56.9 L129.6,56.7 L130.9,57.7 L131.8,57.4 L132.3,57.7 L131.3,56.2 L132.6,56.1 L131.5,55.6 L131.7,54.0 L134.2,52.3 L138.0,51.8 L148.8,48.8 L149.5,47.5 L151.8,45.3 L153.5,42.3 L156.8,39.6 L159.1,36.6 L159.6,34.9 L159.4,33.1 L160.9,33.5 L162.3,34.4 L162.8,35.7 L162.7,36.7 L164.2,36.8 L164.8,38.1 L166.0,39.4 L166.5,39.5 L168.0,38.2 L168.6,36.8 L168.2,36.5 L168.9,35.3 L168.2,34.6 L167.7,31.7 L169.0,30.8 L170.0,30.7 L170.7,29.6 L170.8,32.4 L171.5,35.2 L174.3,36.2ZM131.4,57.2 L130.9,57.5 L130.3,56.7 L130.4,52.9 L131.1,53.8 L131.4,57.2ZM11.3,27.4 L11.6,25.6 L11.1,24.5 L10.8,22.5 L12.7,22.7 L13.0,27.2 L11.3,27.4ZM10.3,23.8 L10.7,24.2 L10.1,25.9 L8.9,25.8 L8.9,23.7 L10.3,23.8ZM25.7,55.0 L23.7,54.2 L22.2,52.5 L20.9,52.2 L20.9,51.5 L21.9,50.5 L21.1,47.5 L19.0,45.4 L18.3,43.8 L15.8,42.0 L16.1,41.4 L17.2,41.2 L17.5,42.1 L18.0,41.8 L18.5,42.3 L18.8,42.1 L18.7,42.6 L19.3,42.3 L20.4,42.7 L20.7,43.3 L21.5,43.0 L21.4,42.2 L21.8,41.9 L23.4,43.2 L24.7,42.1 L26.2,43.2 L26.7,44.1 L26.2,45.1 L26.2,46.5 L26.9,47.4 L28.0,47.8 L28.3,50.1 L27.4,52.0 L26.1,52.0 L26.2,53.4 L25.7,55.0ZM21.5,50.0 L21.5,50.4 L20.7,50.9 L21.2,49.8 L21.5,50.0ZM28.6,57.2 L27.9,56.8 L27.3,57.2 L26.4,55.2 L25.7,55.0 L26.2,53.4 L26.1,52.0 L27.4,52.0 L28.3,50.2 L28.0,47.5 L29.3,48.1 L29.5,48.7 L30.1,48.4 L33.0,49.3 L33.8,50.2 L36.2,51.7 L36.4,52.3 L35.3,56.9 L32.9,56.1 L31.6,56.4 L30.7,56.1 L28.6,57.2ZM46.6,54.1 L48.0,54.4 L48.8,55.7 L48.8,56.4 L50.0,57.7 L50.3,59.4 L51.8,61.7 L51.9,62.9 L52.7,63.7 L53.3,65.4 L53.7,67.2 L53.6,68.4 L52.4,68.6 L51.7,68.3 L51.2,67.1 L52.2,66.4 L51.1,66.8 L50.2,65.3 L50.7,67.5 L50.3,67.8 L48.8,67.2 L47.2,67.4 L46.2,68.5 L45.6,68.2 L45.3,69.4 L43.6,66.5 L38.9,64.2 L37.8,63.1 L36.4,63.0 L34.1,60.4 L34.6,60.0 L34.0,59.2 L34.4,57.6 L35.5,56.3 L36.4,52.3 L37.6,52.8 L39.6,55.0 L41.3,55.7 L43.6,55.0 L46.4,56.6 L46.2,54.6 L46.6,54.1ZM53.0,52.9 L52.8,53.7 L52.0,53.3 L52.4,51.7 L53.0,52.9ZM44.5,37.8 L43.9,38.6 L44.4,40.2 L43.9,40.3 L43.3,42.5 L44.7,44.7 L44.5,45.0 L44.9,45.0 L44.3,46.5 L44.6,48.3 L44.4,51.4 L46.6,54.1 L46.2,54.6 L46.6,56.2 L46.3,56.6 L43.6,55.0 L41.3,55.7 L39.6,55.0 L37.6,52.8 L36.4,52.3 L36.2,51.7 L33.8,50.2 L33.0,49.3 L30.1,48.4 L29.5,48.7 L29.3,48.1 L28.2,47.5 L26.9,47.4 L26.2,46.5 L26.2,45.1 L26.7,44.0 L26.2,43.2 L24.4,41.9 L23.9,39.6 L24.2,38.7 L22.9,37.2 L22.7,35.5 L21.5,34.9 L22.0,34.2 L21.8,33.4 L22.0,33.0 L23.0,33.4 L23.5,33.1 L25.0,33.5 L26.2,32.7 L26.6,31.3 L27.8,32.9 L28.4,31.3 L29.2,31.6 L30.0,31.4 L31.2,32.7 L32.5,32.6 L33.1,31.8 L34.3,32.3 L34.8,31.9 L35.3,32.1 L35.5,31.1 L36.7,32.1 L37.9,32.3 L38.3,32.9 L37.9,33.7 L38.1,34.2 L39.1,34.7 L39.4,34.5 L39.9,35.1 L39.8,35.9 L38.9,36.7 L38.8,38.4 L39.7,38.2 L42.3,39.4 L43.1,41.0 L43.4,40.2 L42.9,38.8 L43.1,37.5 L44.5,37.8ZM34.6,19.4 L36.0,20.8 L39.4,22.9 L40.9,24.6 L44.5,30.8 L44.6,34.3 L45.1,36.3 L44.5,37.8 L43.1,37.5 L42.9,38.8 L43.4,40.2 L43.1,41.0 L42.3,39.4 L39.7,38.2 L38.7,38.4 L38.9,36.6 L39.8,35.9 L39.8,34.8 L39.3,34.4 L38.4,34.5 L37.9,33.8 L38.2,32.6 L36.3,31.8 L35.7,30.3 L34.3,29.7 L34.5,27.6 L33.2,26.7 L33.5,24.7 L33.0,24.1 L32.9,21.2 L34.6,19.4ZM173.3,24.7 L173.4,25.6 L172.3,26.0 L172.6,25.0 L173.2,24.5 L173.3,24.7ZM25.1,48.0 L26.1,48.5 L25.8,50.3 L25.0,50.1 L24.6,49.0 L25.1,48.0ZM25.6,50.8 L25.8,51.3 L25.2,51.9 L25.1,51.0 L25.6,50.8Z"/><path class="mel" d="M34.1,60.4 L30.4,58.9 L28.6,57.2 L30.7,56.1 L31.6,56.4 L32.9,56.1 L35.3,56.9 L34.4,57.6 L34.0,59.2 L34.6,60.0 L34.1,60.4Z"/><circle class="ring" cx="31.9" cy="58.3" r="7"/></svg><span class="flag" role="img" aria-label="Flag of Melaka"><svg viewBox="0 0 288 144" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><rect width="288" height="144" fill="#fff"/><rect width="288" height="72" fill="#cc0001"/><rect width="128" height="72" fill="#010066"/><circle cx="54" cy="36" r="23" fill="#fc0"/><circle cx="61" cy="36" r="18.5" fill="#010066"/><polygon points="88.0,21.0 91.4,31.4 102.3,31.4 93.4,37.8 96.8,48.1 88.0,41.7 79.2,48.1 82.6,37.8 73.7,31.4 84.6,31.4" fill="#fc0"/></svg></span></div>
+
+<div class="card facts">
+  <div><div class="lbl">Population</div><div class="big">1.06M</div><div class="note">Preliminary estimate, 2026</div></div>
+  <div><div class="lbl">Freedom House</div><div class="big">Not rated</div><div class="note">State is not scored separately to Malaysia</div></div>
 </div>
-<div class="section">
-  <h3 class="sec-title">Vote share input</h3>
-  <div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><button class="reset-btn" onclick="resetInputs()" title="Return every vote share to its 2021 baseline">↺ Reset to baseline</button></div>
-  <div class="inputs-grid" id="inputsGrid"></div>
-  <div class="total-warn" id="totalWarn"></div>
-  <h3 class="sec-title" style="margin-top:0.5rem;">Projected results</h3>
-  <div id="hemicycle" style="max-width:460px;margin:0.5rem auto 0;"></div>
-  <div class="bar-legend" id="barLegend"></div>
-  <div class="results-grid" id="resultsGrid"></div>
-</div>
-<hr class="divider">
-<div class="section">
-  <h3 class="sec-title sub">Component party breakdown</h3>
-  <div id="componentBreakdown" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;"></div>
-</div>
-<hr class="divider">
-<div class="section">
-  <h3 class="sec-title sub">Projected statewide vote share by component party</h3>
-  <div id="voteShareBreakdown"></div>
-</div>
-<hr class="divider">
-<div class="section">
-  <h3 class="sec-title" style="margin-bottom:0.25rem;">Build a coalition</h3>
-  <p style="font-size:11px;color:#888780;text-align:center;margin-bottom:0.75rem;">Tick coalitions to form a government</p>
-  <div class="coalition-checks" id="coalitionChecks"></div>
-  <div id="coalBarWrap" style="margin-top:0.75rem;">
-    <div id="coalBar" style="position:relative;display:flex;height:26px;border-radius:6px;overflow:hidden;"></div>
-    <div id="coalBarMarker" style="position:relative;height:14px;"></div>
+
+<details class="card sys">
+  <summary>How the electoral system works</summary>
+  <div class="tiles">
+    <div class="tile"><div class="lbl">Last election</div><div class="val">20 Nov 2021</div></div>
+    <div class="tile"><div class="lbl">Seats</div><div class="val">28 single-member</div></div>
+    <div class="tile"><div class="lbl">System</div><div class="val">First-past-the-post</div></div>
+    <div class="tile"><div class="lbl">Term</div><div class="val">5 years</div></div>
+    <div class="tile"><div class="lbl">Voting</div><div class="val">18+, voluntary</div></div>
   </div>
-  <div class="coalition-result" style="margin-top:0.5rem;">
-    <span class="coalition-seats" id="coalSeats">0</span>
-    <span class="coalition-label" id="coalLabel">seats — select coalitions above</span>
-    <span class="coalition-status status-none" id="coalStatus">-</span>
+</details>
+
+<section class="card">
+  <h2>Input vote share</h2>
+  <div id="inputsGrid"></div>
+  <div class="center" style="margin-top:14px"><button class="btn" onclick="resetInputs()">Reset</button></div>
+</section>
+
+<section class="card">
+  <h2>Projected results</h2>
+  <div class="center"><div class="seg" data-view="hemi"></div></div>
+  <div class="hemi" id="hemicycle"></div>
+  <div class="legend" id="barLegend"></div>
+  <div class="tablewrap"><table id="resTable"></table></div>
+</section>
+
+<section class="card">
+  <h2>Coalition builder</h2>
+  <div class="center" style="margin-bottom:12px"><div class="seg" data-view="coal"></div></div>
+  <div class="center cbtns" id="coalitionChecks"></div>
+  <div class="bar" id="coalBar"></div>
+  <div class="marker" id="coalBarMarker"></div>
+  <div class="cstat"><span id="coalSeats">0 of 28 seats</span><span class="ok" id="coalOk" hidden>Majority reached</span></div>
+</section>
+
+<section class="card">
+  <h2>Projected results map</h2>
+  <div class="center"><div class="tabs" data-view="map"></div></div>
+  <div class="center mbtns" id="mapBtns"></div>
+  <div class="mbox">
+    <div class="mview" id="constMapViewport"><div class="mwrap" id="constMapWrap"></div></div>
+    <div class="tip" id="constMapTooltip" style="display:none"></div>
+    <div class="mzoom"><button id="constMapZoomIn" aria-label="Zoom in">+</button><button id="constMapZoomOut" aria-label="Zoom out">&minus;</button><button id="constMapZoomReset" style="font-size:9px" aria-label="Reset view">RST</button></div>
   </div>
-  <div class="grid-legend" id="gridLegend"></div>
-</div>
-<hr class="divider">
-<div class="section">
-  <h3 class="sec-title">Projected results map</h3>
-  <div class="map-controls">
-    <div class="map-modes">
-      <button class="mode-card on" id="mapModeWinnersBtn" onclick="setMapMode('winners')"><strong>Winners</strong><span>Who wins each seat</span></button>
-      <button class="mode-card" id="mapModeStrengthBtn" onclick="setMapMode('strength')"><strong>Strength</strong><span>Where a party or alliance polls best</span></button>
-      <button class="mode-card" id="mapModeFlippedBtn" onclick="setMapMode('flipped')"><strong>Flipped</strong><span>Which seats change hands</span></button>
-    </div>
-    <div class="map-options">
-      <div class="map-ctl" id="optColor"><span>Colour by</span>
-        <div class="seg">
-          <button class="on" id="mapColorAllianceBtn" onclick="setMapColor('alliance')">Alliance</button>
-          <button id="mapColorPartyBtn" onclick="setMapColor('party')">Party</button>
-        </div>
-      </div>
-      <div class="map-ctl" id="optStrength" style="display:none;"><span>Show strength of</span>
-        <select id="mapStrengthSel" class="map-select" onchange="setStrength(this.value)"></select>
-      </div>
-      <div class="map-ctl" id="optFocus" style="display:none;"><span>Focus on</span>
-        <select id="mapFocusSel" class="map-select" onchange="setFlipFocus(this.value)"></select>
-      </div>
-    </div>
-  </div>
-  <div style="max-width:560px;margin:0 auto;position:relative;">
-    <div id="constMapViewport" style="position:relative;overflow:hidden;aspect-ratio:600/560;border:0.5px solid #ddddd5;border-radius:8px;cursor:grab;background:#fafaf8;">
-      <div id="constMapWrap" style="transform-origin:0 0;position:absolute;top:0;left:0;width:100%;height:100%;"></div>
-    </div>
-    <div id="constMapTooltip" class="map-tooltip" style="display:none;"></div>
-    <div style="position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px;">
-      <button id="constMapZoomIn" class="reset-btn" style="width:26px;height:26px;padding:0;font-size:15px;line-height:1;margin-bottom:0;">+</button>
-      <button id="constMapZoomOut" class="reset-btn" style="width:26px;height:26px;padding:0;font-size:15px;line-height:1;margin-bottom:0;">−</button>
-      <button id="constMapZoomReset" class="reset-btn" style="width:26px;height:26px;padding:0;font-size:9px;line-height:1;margin-bottom:0;" title="Reset view">RST</button>
-    </div>
-  </div>
-  <div class="grid-legend" id="constMapLegend" style="margin-top:8px;justify-content:center;"></div>
-</div>
+  <div class="mlegend" id="constMapLegend"></div>
+</section>
+
+<p class="sources">Sources: state assembly boundaries and 2026 population estimate, Department of Statistics Malaysia; world and country map, Natural Earth; flag drawn from the Flags of the World specification and melaka.gov.my; voter registration, Malay Mail.</p>
 </div>
 <script>
-const PARTIES_STD=[
-  {id:'BN', label:'Barisan Nasional',  color:'#1a5ea8',ge:38.39},
-  {id:'PH', label:'Pakatan Harapan',   color:'#e84c4c',ge:35.84},
-  {id:'PN', label:'Perikatan Nasional',color:'#16224f',ge:24.31},
-  {id:'BP', label:'MUDA-PSM',          color:'#2b2b2b',ge:0.00},
-  {id:'BERSAMA',label:'BERSAMA',       color:'#4047c4',ge:0.00},
-];
 const MINOR_COLORS={OTH:'#888780',IND:'#888780'};
 const COMP_COLORS={
   UMNO:'#c00000',MCA:'#1a5ea8',MIC:'#8bc34a',
   PKR:'#00adef',DAP:'#e84c4c',AMANAH:'#f28c28',
   PAS:'#2a8c2a',BERSATU:'#f18a8f',GERAKAN:'#16a34a',WAWASAN:'#5b6ee1',
-  MUDA:'#2b2b2b',PSM:'#7b241c',BERSAMA:'#4047c4',
-  OTH:'#888780',IND:'#888780',
+  BERSAMA:'#4047c4',PUTRA:'#d4a017',
+  OTH:'#888780',IND:'#6d4c41',
 };
-// All parties contest all seats (BP and BERSAMA assumed per model spec)
-const BP_CONTEST=new Set(['N01','N02','N03','N04','N05','N06','N07','N08','N09','N10','N11','N12','N13','N14','N15','N16','N17','N18','N19','N20','N21','N22','N23','N24','N25','N26','N27','N28']);
-const BERSAMA_CONTEST=new Set(['N01','N02','N03','N04','N05','N06','N07','N08','N09','N10','N11','N12','N13','N14','N15','N16','N17','N18','N19','N20','N21','N22','N23','N24','N25','N26','N27','N28']);
-// PN contests all seats
-const PN_CONTEST=new Set(['N01','N02','N03','N04','N05','N06','N07','N08','N09','N10','N11','N12','N13','N14','N15','N16','N17','N18','N19','N20','N21','N22','N23','N24','N25','N26','N27','N28']);
-const GS_STD={BN:21,PH:5,PN:2,BP:0,BERSAMA:0,OTHERS:0};
-const GN_STD={BN:38.39,PH:35.84,PN:24.31,BP:0,BERSAMA:0};
-// MODE toggles between the standard GE (separate BN/PH/PN) and the "unity
-// collapse" scenario (BN+PN merged, BERSATU detached as BERSATU+) -- same pattern
-// as the Malaysia national model. PARTIES/GN/GS always point at whichever
-// set is active; everything downstream reads through them.
-let MODE='standard';
-let PARTIES=PARTIES_STD, GN=GN_STD, GS=GS_STD;
+
+// Single scenario: BN and PN field joint candidates (the "BN + PN" ticket), BERSATU stands
+// separately, and BERSAMA is a new entrant. Coalition ids: PH, BNPN, BERSATU, BERSAMA.
 const W21={
   'N01':'BN','N02':'BN','N03':'BN','N04':'BN','N05':'BN',
   'N06':'BN','N07':'BN','N08':'BN','N09':'BN','N10':'BN',
@@ -287,43 +330,49 @@ const W21={
   'N21':'BN','N22':'PH','N23':'BN','N24':'PN','N25':'BN',
   'N26':'BN','N27':'BN','N28':'BN',
 };
+
 // The party that actually won each seat in 2021 (BERSATU took both PN seats: N11 and N24).
 const W21_PARTY={
   N01:'UMNO',N02:'UMNO',N03:'UMNO',N04:'UMNO',N05:'UMNO',N06:'UMNO',N07:'MIC',N08:'MCA',N09:'UMNO',N10:'UMNO',
   N11:'BERSATU',N12:'UMNO',N13:'UMNO',N14:'MCA',N15:'UMNO',N16:'DAP',N17:'AMANAH',N18:'UMNO',N19:'DAP',N20:'DAP',
   N21:'UMNO',N22:'DAP',N23:'UMNO',N24:'BERSATU',N25:'UMNO',N26:'UMNO',N27:'UMNO',N28:'UMNO',
 };
-// 2026 candidate data — which component party each coalition fields
+
+// 2026 nominations. A coalition key is present only where it fields a candidate; the value is
+// the component party. A missing key means "not contested" (or no candidate listed).
 const SEAT_CANDIDATES={
-  'N01':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N02':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N03':{BN:'UMNO', PH:'AMANAH',PN:'BERSATU'},
-  'N04':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N05':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N06':{BN:'UMNO', PH:'PKR',   PN:'PAS'},
-  'N07':{BN:'MIC',  PH:'DAP',   PN:'BERSATU'},
-  'N08':{BN:'MCA',  PH:'PKR',   PN:'BERSATU'},
-  'N09':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N10':{BN:'UMNO', PH:'PKR',   PN:'GERAKAN'},
-  'N11':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N12':{BN:'UMNO', PH:'AMANAH',PN:'BERSATU'},
-  'N13':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N14':{BN:'MCA',  PH:'PKR',   PN:'PAS'},
-  'N15':{BN:'UMNO', PH:'DAP',   PN:'BERSATU'},
-  'N16':{BN:'MCA',  PH:'DAP',   PN:'GERAKAN'},
-  'N17':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N18':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N19':{BN:'MCA',  PH:'DAP',   PN:'GERAKAN'},
-  'N20':{BN:'MCA',  PH:'DAP',   PN:'GERAKAN'},
-  'N21':{BN:'UMNO', PH:'DAP',   PN:'PAS'},
-  'N22':{BN:'MCA',  PH:'DAP',   PN:'GERAKAN'},
-  'N23':{BN:'UMNO', PH:'AMANAH',PN:'BERSATU'},
-  'N24':{BN:'MCA',  PH:'DAP',   PN:'WAWASAN'},
-  'N25':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
-  'N26':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N27':{BN:'UMNO', PH:'AMANAH',PN:'PAS'},
-  'N28':{BN:'UMNO', PH:'PKR',   PN:'BERSATU'},
+  N01:{BNPN:'UMNO',   PH:'AMANAH',BERSAMA:'BERSAMA'},
+  N02:{BNPN:'UMNO',   PH:'PKR'},
+  N03:{BNPN:'UMNO',   PH:'PKR'},
+  N04:{BNPN:'UMNO',   BERSATU:'BERSATU'},
+  N05:{BNPN:'UMNO',   PH:'AMANAH'},
+  N06:{BNPN:'UMNO',   PH:'PKR',   BERSAMA:'BERSAMA'},
+  N07:{BNPN:'MIC',    PH:'DAP',   BERSAMA:'BERSAMA'},
+  N08:{BNPN:'MCA',    PH:'PKR',   BERSAMA:'BERSAMA'},
+  N09:{BNPN:'UMNO',   PH:'AMANAH'},
+  N10:{BNPN:'UMNO',   PH:'PKR'},
+  N11:{BNPN:'UMNO',   BERSAMA:'BERSAMA',BERSATU:'BERSATU'},
+  N12:{BNPN:'UMNO',   BERSATU:'BERSATU'},
+  N13:{BNPN:'PAS',    PH:'PKR',   BERSAMA:'BERSAMA'},
+  N14:{BNPN:'MCA',    PH:'PKR',   BERSAMA:'BERSAMA',BERSATU:'BERSATU'},
+  N15:{BNPN:'UMNO',   PH:'DAP',   BERSAMA:'BERSAMA',BERSATU:'BERSATU'},
+  N16:{BNPN:'GERAKAN',PH:'DAP',   BERSAMA:'BERSAMA',BERSATU:'BERSATU'},
+  N17:{BNPN:'PAS',    PH:'AMANAH',BERSAMA:'BERSAMA'},
+  N18:{BNPN:'UMNO',   PH:'PKR'},
+  N19:{BNPN:'WAWASAN',PH:'DAP',   BERSAMA:'BERSAMA'},
+  N20:{BNPN:'MCA',    PH:'DAP',   BERSAMA:'BERSAMA'},
+  N21:{BNPN:'UMNO',   PH:'DAP'},
+  N22:{BNPN:'MCA',    PH:'DAP',   BERSAMA:'BERSAMA'},
+  N23:{BNPN:'UMNO',   PH:'AMANAH',BERSAMA:'BERSAMA'},
+  N24:{BNPN:'WAWASAN',BERSAMA:'BERSAMA',BERSATU:'BERSATU'},
+  N25:{BNPN:'UMNO',   PH:'PKR'},
+  N26:{BNPN:'UMNO',   PH:'PKR',   BERSAMA:'BERSAMA'},
+  N27:{BNPN:'UMNO',   PH:'AMANAH'},
+  N28:{BNPN:'UMNO',   PH:'AMANAH'},
 };
+// Independents / minor parties on the 2026 ballot. They are fed by the Others remainder (100% minus the sliders).
+const OTHER_CANDIDATES={N07:'PUTRA',N17:'IND',N24:'IND',N28:'IND'};
+
 // SEATS: [id, name, bn, ph, pn, bp, total, {minorVotes}]
 // All 2021 vote counts; OTH = independents/minor parties
 const SEATS=[
@@ -347,7 +396,7 @@ const SEATS=[
   ['N18','Ayer Molek',     6348, 2446, 3546,   0, 12430,{OTH:90}],
   ['N19','Kesidang',       4532,14769, 3124,   0, 22425,{}],
   ['N20','Kota Laksamana', 2014,13508, 1190,   0, 16712,{}],
-  ['N21','Duyong',         4684, 4484, 2874,   0, 12151,{OTH:169}],
+  ['N21','Duyong',         4684, 4484, 2874,   0, 12211,{OTH:169}],
   ['N22','Bandar Hilir',   1313, 9091,  634,   0, 11197,{OTH:159}],
   ['N23','Telok Mas',      6052, 3891, 3976,   0, 14072,{OTH:153}],
   ['N24','Bemban',         3883, 3095, 4211,   0, 12169,{OTH:980}],
@@ -356,770 +405,534 @@ const SEATS=[
   ['N27','Merlimau',       5633, 2385, 1622,   0,  9640,{}],
   ['N28','Sungai Rambai',  3801, 1356, 2664,   0,  7905,{OTH:84}],
 ];
-// ── Unity-collapse mode: BN+PN merged, BERSATU detached as BERSATU+ ─────────────
-// Held seats = the two seats BERSATU actually won in 2021 (N11 and N24; both MLAs have
-// since moved to WAWASAN, but the votes were won on BERSATU's 2021 ticket).
-// Carve fractions: 60% held / 20% default, easy to retune if a better estimate turns up.
-const IPR_HELD=new Set(['N11','N24']);
-const CARVE_HELD=0.60, CARVE_DEFAULT=0.20;
+
+// ── Baseline: 2021 votes re-cast onto the 2026 blocs ─────────────────────────────
+// BERSATU takes 60% of each seat's 2021 PN vote; the BN+PN ticket keeps BN's vote plus the other 40% of PN's.
+// BERSATU's baseline is held in every seat. Where it is not standing, that vote is spread across the blocs
+// that are, in proportion to their votes (see projectSeat).
+const BERSATU_PN_SHARE=0.60;
+// When PH is not standing and BERSATU is, BERSATU takes this share of PH's vote; the rest is spread
+// across the other blocs that are standing, in proportion to their votes.
+const BERSATU_PH_SHARE=0.60;
 const FOLDED_MINORS_G=new Set(['OTH','IND']);
-const SEAT_BASE_UNITY={};
-const GN_UNITY={PH:0,BNPN:0,IPR:0,BP:0,BERSAMA:0};
-const GS_UNITY={PH:0,BNPN:0,IPR:0,BP:0,BERSAMA:0,OTHERS:0};
-(function deriveUnityBaseline(){
-  const sum={PH:0,BNPN:0,IPR:0,BP:0};
-  let grand=0;
+const RAW_GN={BN:38.39,PH:35.84,PN:24.31};   // real raw 2021 statewide shares
+
+const SEAT_BASE={},SEAT_OTH={};
+const GN={PH:RAW_GN.PH,BNPN:RAW_GN.BN+(1-BERSATU_PN_SHARE)*RAW_GN.PN,BERSATU:BERSATU_PN_SHARE*RAW_GN.PN,BERSAMA:0};
+const GS={PH:0,BNPN:0,BERSATU:0,BERSAMA:0,OTHERS:0};
+GN.OTH=100-(GN.PH+GN.BNPN+GN.BERSATU);   // Others baseline: whatever the three sliders leave
+(function deriveBaseline(){
   SEATS.forEach(s=>{
     const[id,name,bn,ph,pn,bp,tot2,minorVotes]=s;
     if(!tot2)return;
-    let baseBN=bn/tot2*100, basePH=ph/tot2*100, basePN=pn/tot2*100, baseBP=bp/tot2*100;
+    let baseBN=bn/tot2*100, basePH=ph/tot2*100, basePN=pn/tot2*100;
     let absentTotal=0;
     Object.entries(minorVotes||{}).forEach(([k,v])=>{if(FOLDED_MINORS_G.has(k))absentTotal+=v/tot2*100;});
-    if(absentTotal>0){
-      const contestBase=baseBN+basePH+basePN+baseBP;
+    // In a seat with a named independent or minor-party candidate in 2026 the 2021 minor vote stays separate and
+    // goes to that candidate; in every other seat it is spread across the main blocs in proportion.
+    SEAT_OTH[id]=OTHER_CANDIDATES[id]?absentTotal:0;
+    if(absentTotal>0&&!OTHER_CANDIDATES[id]){
+      const contestBase=baseBN+basePH+basePN;
       if(contestBase>0){
         baseBN+=absentTotal*(baseBN/contestBase);
         basePH+=absentTotal*(basePH/contestBase);
         basePN+=absentTotal*(basePN/contestBase);
-        baseBP+=absentTotal*(baseBP/contestBase);
       }
     }
-    // Merge BN+PN, then carve BERSATU+ back out of the merged pool.
-    const merged=baseBN+basePN;
-    const f=IPR_HELD.has(id)?CARVE_HELD:CARVE_DEFAULT;
-    const vIPR=merged*f, vBNPN=merged-vIPR;
-    SEAT_BASE_UNITY[id]={PH:basePH,BNPN:vBNPN,IPR:vIPR,BP:baseBP,BERSAMA:0};
-    sum.PH+=basePH*tot2/100; sum.BNPN+=vBNPN*tot2/100; sum.IPR+=vIPR*tot2/100; sum.BP+=baseBP*tot2/100;
-    grand+=tot2;
+    SEAT_BASE[id]={PH:basePH,BNPN:baseBN+(1-BERSATU_PN_SHARE)*basePN,BERSATU:BERSATU_PN_SHARE*basePN,BERSAMA:0};
   });
-  ['PH','BNPN','IPR','BP'].forEach(k=>{GN_UNITY[k]=grand>0?sum[k]/grand*100:0;});
-  GN_UNITY.BERSAMA=0;
-  // The per-seat bases above are POST-redistribution (minor/independent votes
-  // spread proportionally across the contesting blocs), so summing them gives
-  // figures ~1.5% higher than the real raw 2021 result. GN_STD holds the real
-  // raw shares, so anchor to those: PH is untouched by the BN+PN merge and so
-  // must be identical in both modes, and the merged pool's real total is
-  // GN_STD.BN+GN_STD.PN, with the carve setting only the internal split.
-  const derivedMerged=GN_UNITY.BNPN+GN_UNITY.IPR;
-  const realMerged=GN_STD.BN+GN_STD.PN;
-  if(derivedMerged>0){
-    const s=realMerged/derivedMerged;
-    GN_UNITY.BNPN*=s; GN_UNITY.IPR*=s;
-  }
-  GN_UNITY.PH=GN_STD.PH;
-  GN_UNITY.BP=GN_STD.BP;
   SEATS.forEach(s=>{
-    const id=s[0];
-    const w=W21[id];
+    const id=s[0],w=W21[id];
     let bloc=w;
     if(w==='BN')bloc='BNPN';
-    else if(w==='PN'){
-      bloc=(W21_PARTY[id]==='BERSATU')?'IPR':'BNPN';
-    }
-    GS_UNITY[bloc]=(GS_UNITY[bloc]||0)+1;
+    else if(w==='PN')bloc=(W21_PARTY[id]==='BERSATU')?'BERSATU':'BNPN';
+    GS[bloc]=(GS[bloc]||0)+1;
   });
 })();
-const PARTIES_UNITY=[
-  {id:'PH', label:'Pakatan Harapan',   color:'#e84c4c',ge:GN_UNITY.PH},
-  {id:'BNPN', label:'BN + PN',         color:'#1a5ea8',ge:GN_UNITY.BNPN},
-  {id:'IPR', label:'BERSATU+',color:'#f18a8f',ge:GN_UNITY.IPR},
-  {id:'BP', label:'MUDA-PSM',          color:'#2b2b2b',ge:0.00},
-  {id:'BERSAMA',label:'BERSAMA',       color:'#4047c4',ge:0.00},
+
+const PARTIES=[
+  {id:'PH',     label:'Pakatan Harapan', color:'#e84c4c',ge:GN.PH},
+  {id:'BNPN',   label:'BN + PN',         color:'#1a5ea8',ge:GN.BNPN},
+  {id:'BERSATU',label:'BERSATU',         color:'#f18a8f',ge:GN.BERSATU},
+  {id:'BERSAMA',label:'BERSAMA',         color:'#4047c4',ge:0.00},
 ];
-// Maps a component's ORIGINAL standard-mode coalition (BN/PN) onto whichever
-// bloc it belongs to under the active mode. Identity in standard mode.
+
+// Maps a 2021 winner's original coalition (BN/PN) onto its 2026 bloc.
 function mapCoal(origCoal,party){
-  if(MODE!=='unity')return origCoal;
   if(origCoal==='BN')return 'BNPN';
-  if(origCoal==='PN')return party==='BERSATU'?'IPR':'BNPN';
+  if(origCoal==='PN')return party==='BERSATU'?'BERSATU':'BNPN';
   return origCoal;
 }
-// Real 2026 component for a coalition in a seat, in the active mode. PH/BP/
-// BERSAMA are identical in both modes. BNPN's nominee is whichever real 2026
-// party stands there -- PAS/GERAKAN/WAWASAN keep their own identity (they
-// were never BERSATU to begin with), and only genuinely BERSATU seats fall
-// back to BN's real candidate, since BERSATU itself is detached to IPR.
+// The 2026 component party a bloc fields in a seat.
 function resolveComponentParty(coal,id){
-  const cands=SEAT_CANDIDATES[id]||{};
-  if(coal==='PH'||coal==='BP'||coal==='BERSAMA')return cands[coal]||coal;
-  if(MODE==='standard'){
-    if(coal==='BN'||coal==='PN')return cands[coal]||coal;
-    return coal;
-  }
-  // unity mode
-  if(coal==='IPR')return 'BERSATU';
-  if(coal==='BNPN')return (cands.PN&&cands.PN!=='BERSATU')?cands.PN:(cands.BN||'BN');
-  return coal;
+  if(coal==='OTH')return OTHER_CANDIDATES[id]||'OTH';
+  const c=SEAT_CANDIDATES[id]||{};
+  return c[coal]||coal;
 }
-let curDetails=[];
-let inputEls={},sliderEls={};
+// Does this bloc have a candidate in this seat?
+function contests(coal,id){if(coal==='OTH')return !!OTHER_CANDIDATES[id];const c=SEAT_CANDIDATES[id];return !!(c&&c[coal]);}
+
+// The bloc that won each seat in 2021 (reference for "flipped").
+const W21_BLOC={};
+Object.keys(W21).forEach(id=>{W21_BLOC[id]=mapCoal(W21[id],W21_PARTY[id]);});
+
+
+const MEL_MAP_PATHS={N01:"M71.96,180.20 L72.89,181.12 L72.39,182.24 L71.53,181.59 L71.96,180.20 Z M58.05,67.95 L66.44,76.03 L63.87,79.36 L63.40,84.57 L71.50,92.19 L68.98,95.31 L70.90,100.27 L89.72,112.72 L96.57,119.23 L91.47,119.72 L92.30,123.97 L89.16,127.70 L90.16,128.11 L89.97,138.37 L88.28,137.25 L85.17,142.57 L80.85,145.40 L82.75,150.53 L81.07,151.45 L81.36,153.02 L86.54,153.73 L92.19,157.54 L95.02,160.38 L96.03,164.39 L97.36,178.05 L93.02,189.24 L96.12,194.61 L92.80,198.15 L82.30,182.78 L78.15,180.07 L77.20,182.08 L76.13,181.34 L77.47,179.74 L67.71,176.89 L54.19,162.57 L42.80,155.64 L29.19,152.44 L26.17,156.68 L18.73,151.89 L16.85,152.18 L17.03,154.85 L14.46,154.85 L13.90,151.88 L10.85,151.33 L9.57,154.49 L10.08,150.66 L7.38,150.74 L3.92,145.24 L0.32,134.51 L0.00,125.49 L8.39,126.64 L14.66,117.98 L25.97,114.21 L43.53,102.07 L56.52,82.18 L58.05,67.95 Z",N02:"M103.47,119.13 L107.90,123.42 L109.67,123.09 L113.33,128.71 L115.71,128.94 L116.90,136.70 L113.49,146.57 L118.16,160.35 L116.83,160.58 L119.36,164.28 L122.44,164.58 L122.76,167.80 L126.21,168.38 L126.43,166.51 L128.07,168.93 L124.82,172.70 L126.28,174.31 L127.24,172.90 L127.81,175.10 L126.21,174.49 L124.87,177.77 L127.57,177.18 L127.44,178.49 L123.44,180.39 L125.45,183.13 L128.32,182.19 L128.54,184.88 L125.41,185.24 L125.02,187.71 L133.25,195.95 L130.27,197.73 L129.45,201.17 L125.98,201.03 L123.78,206.12 L125.19,207.85 L124.30,209.87 L126.41,211.82 L125.58,214.41 L126.79,217.58 L128.66,218.34 L129.55,226.75 L122.17,225.91 L121.87,233.50 L114.06,234.25 L116.61,242.13 L115.20,243.57 L110.60,242.39 L105.62,238.27 L98.76,212.30 L92.80,198.15 L96.12,194.61 L93.02,189.24 L97.44,177.08 L95.07,160.54 L87.15,154.05 L81.04,152.00 L82.75,150.53 L81.13,144.40 L85.17,142.57 L88.28,137.25 L89.97,138.37 L90.16,128.11 L89.16,127.70 L92.30,123.97 L91.50,119.63 L103.47,119.13 Z",N03:"M150.89,56.20 L149.39,56.42 L148.41,63.66 L151.33,65.73 L146.76,72.98 L142.06,75.95 L143.26,78.68 L142.09,81.08 L135.25,84.98 L139.16,91.79 L140.87,104.87 L136.93,106.73 L137.04,108.50 L146.17,129.21 L148.18,131.38 L148.92,129.86 L153.95,131.97 L158.51,130.43 L161.07,131.54 L164.70,134.66 L164.22,139.74 L161.91,141.24 L161.97,144.40 L159.03,144.08 L157.59,149.33 L151.48,152.54 L146.70,161.60 L144.49,161.06 L143.47,164.74 L138.93,170.05 L135.64,170.49 L132.28,167.17 L122.76,167.80 L122.44,164.58 L119.36,164.28 L116.83,160.58 L118.16,160.35 L113.49,146.57 L116.90,136.70 L115.71,128.94 L113.33,128.71 L109.67,123.09 L107.90,123.42 L102.83,118.48 L96.57,119.23 L84.07,108.62 L75.04,104.26 L70.90,100.27 L68.98,95.31 L71.49,92.19 L75.82,93.35 L78.83,90.79 L77.64,82.87 L80.48,76.13 L88.43,75.60 L90.48,72.90 L92.91,66.39 L90.66,64.47 L89.32,66.60 L87.41,64.41 L89.64,59.20 L88.73,52.97 L91.34,48.46 L94.34,49.85 L97.13,48.15 L104.60,52.59 L108.22,51.59 L113.82,57.12 L115.47,62.81 L116.25,60.12 L146.73,42.92 L145.41,45.98 L150.70,51.42 L150.89,56.20 Z",N04:"M197.79,137.08 L199.02,138.10 L199.23,144.00 L197.13,145.26 L199.19,149.32 L198.12,150.64 L201.00,161.30 L197.33,165.44 L203.40,181.17 L203.69,188.72 L206.69,197.38 L206.46,203.05 L202.67,204.50 L203.19,214.36 L210.20,214.49 L212.22,218.94 L207.47,218.73 L207.07,223.26 L200.46,221.53 L182.85,227.23 L180.45,224.45 L179.55,228.73 L168.55,231.54 L170.95,242.22 L170.10,244.91 L158.55,239.48 L155.26,245.41 L150.56,245.10 L146.78,247.84 L145.60,250.87 L143.48,250.83 L140.25,246.80 L135.86,247.24 L135.53,245.18 L120.37,245.65 L116.61,242.13 L114.06,234.25 L121.87,233.50 L122.17,225.91 L129.55,226.75 L128.66,218.34 L126.79,217.58 L125.58,214.41 L126.41,211.82 L124.30,209.87 L125.19,207.85 L123.78,206.12 L125.98,201.03 L129.45,201.17 L130.27,197.73 L133.25,195.95 L125.02,187.71 L125.41,185.24 L128.54,184.88 L128.32,182.19 L125.45,183.13 L123.44,180.39 L127.44,178.49 L127.57,177.18 L124.87,177.77 L126.21,174.49 L127.85,174.83 L127.24,172.90 L126.28,174.31 L124.82,172.70 L128.07,168.93 L126.65,166.85 L133.79,167.49 L135.64,170.49 L139.87,169.40 L144.49,161.06 L146.70,161.60 L151.48,152.54 L157.59,149.33 L159.27,143.81 L161.97,144.40 L161.91,141.24 L164.99,143.19 L166.59,141.10 L168.51,141.72 L175.08,149.32 L177.62,154.89 L182.98,155.95 L186.53,150.65 L188.19,151.26 L188.81,148.08 L194.35,146.62 L195.90,142.93 L195.63,136.28 L197.79,137.08 Z",N05:"M201.35,1.17 L212.64,6.84 L216.16,14.70 L224.13,18.12 L226.33,21.07 L228.18,25.44 L225.76,26.32 L226.04,32.44 L224.23,35.20 L227.25,35.10 L224.76,42.80 L227.05,42.91 L229.27,49.47 L232.93,53.27 L232.33,60.07 L224.27,65.19 L213.89,68.46 L213.25,78.93 L210.38,84.02 L212.71,84.73 L214.82,91.21 L216.20,91.34 L214.59,95.66 L217.09,102.77 L211.50,109.96 L214.03,113.91 L214.05,120.07 L212.03,120.31 L212.62,124.60 L214.35,125.30 L209.57,129.59 L210.20,133.43 L208.56,134.67 L210.11,134.12 L210.85,136.91 L212.37,133.56 L212.06,137.84 L206.54,136.17 L198.05,137.93 L195.98,135.53 L195.90,142.93 L194.35,146.62 L188.81,148.08 L188.19,151.26 L186.53,150.65 L185.15,154.04 L180.26,156.36 L177.62,154.89 L175.08,149.32 L168.51,141.72 L166.59,141.10 L164.99,143.19 L162.45,141.55 L164.22,139.74 L164.70,134.66 L161.07,131.54 L158.51,130.43 L153.95,131.97 L148.92,129.86 L148.18,131.38 L146.17,129.21 L137.04,108.50 L136.93,106.73 L140.87,104.87 L139.16,91.79 L135.25,84.98 L142.09,81.08 L143.26,78.68 L142.06,75.95 L146.76,72.98 L151.33,65.73 L148.41,63.66 L150.77,52.07 L145.41,45.98 L146.72,42.93 L165.95,48.88 L199.40,0.00 L201.35,1.17 Z",N06:"M221.32,113.80 L223.78,116.47 L224.95,121.82 L223.08,125.80 L226.15,122.72 L229.11,123.76 L229.11,120.90 L236.03,129.04 L254.95,125.86 L253.38,131.91 L257.44,136.07 L254.61,136.04 L250.94,139.62 L250.42,146.94 L243.72,148.79 L244.66,152.67 L240.18,155.89 L242.97,161.40 L243.19,166.11 L250.48,170.22 L252.01,173.03 L256.36,173.52 L259.26,175.91 L257.58,178.59 L259.32,195.49 L256.70,199.02 L257.84,201.02 L256.65,208.15 L255.16,207.63 L254.54,209.12 L259.21,209.14 L258.13,210.48 L260.27,215.56 L260.18,217.81 L257.01,220.19 L260.09,224.87 L258.36,227.41 L258.25,235.02 L256.66,237.82 L250.13,234.11 L247.79,228.76 L245.05,227.60 L245.58,223.97 L242.64,220.72 L238.13,223.21 L229.83,212.92 L217.40,215.65 L216.69,218.05 L213.11,217.79 L208.75,213.84 L203.19,214.36 L202.67,204.50 L206.46,203.05 L206.69,197.38 L203.69,188.72 L203.40,181.17 L197.33,165.44 L201.00,161.30 L198.12,150.64 L199.19,149.32 L197.13,145.26 L199.23,144.00 L198.61,137.37 L206.54,136.17 L212.06,137.84 L212.37,133.56 L210.85,136.91 L210.11,134.12 L208.56,134.67 L210.20,133.43 L209.57,129.59 L214.35,125.30 L212.62,124.60 L212.03,120.31 L214.05,120.07 L213.08,115.27 L219.97,112.36 L221.32,113.80 Z",N07:"M230.82,20.41 L232.62,23.87 L251.95,38.12 L296.14,47.53 L289.87,48.63 L287.59,56.05 L287.49,66.07 L289.25,72.15 L281.77,66.33 L273.18,72.07 L275.34,78.51 L278.59,78.37 L281.45,75.45 L284.67,76.90 L284.67,83.17 L286.10,85.59 L284.34,91.38 L286.86,94.55 L289.21,94.84 L288.83,98.27 L286.67,99.49 L288.42,100.85 L288.87,105.09 L295.60,112.74 L286.21,118.28 L288.08,120.21 L288.12,124.71 L284.43,125.82 L291.55,139.82 L290.76,140.55 L283.86,142.12 L276.06,127.21 L275.80,121.39 L273.60,118.06 L267.58,120.90 L266.96,125.62 L265.34,126.88 L266.61,127.23 L261.44,133.59 L258.62,132.22 L256.55,135.07 L253.38,131.91 L254.95,125.86 L236.03,129.04 L229.11,120.90 L229.11,123.76 L226.15,122.72 L223.08,125.80 L224.95,121.82 L223.78,116.47 L219.97,112.36 L214.03,113.91 L212.45,112.22 L212.72,110.23 L211.50,109.96 L217.09,102.77 L214.59,95.66 L216.20,91.34 L214.82,91.21 L212.71,84.73 L210.38,84.02 L213.25,78.93 L213.92,68.37 L224.27,65.19 L232.33,60.07 L232.93,53.27 L229.27,49.47 L227.05,42.91 L224.76,42.80 L227.25,35.10 L224.23,35.20 L226.04,32.44 L225.76,26.32 L228.18,25.44 L226.33,21.07 L230.82,20.41 Z",N08:"M379.33,13.61 L377.18,30.02 L378.48,30.86 L376.17,39.86 L379.74,39.92 L382.82,37.45 L380.66,44.37 L382.94,46.06 L376.56,53.15 L373.65,61.63 L371.85,61.59 L367.10,69.03 L356.93,76.27 L355.27,79.73 L357.95,84.10 L355.49,87.62 L363.07,102.11 L362.04,105.39 L364.86,115.34 L363.84,122.81 L365.78,123.14 L365.67,135.11 L366.98,139.48 L372.74,136.89 L371.89,141.09 L374.68,154.68 L367.11,158.31 L365.30,166.10 L366.86,165.94 L368.88,170.44 L362.70,189.43 L361.55,189.06 L360.13,204.48 L355.11,202.26 L350.03,203.98 L347.61,207.55 L342.61,207.57 L336.53,200.44 L324.78,196.72 L322.52,190.24 L321.07,189.78 L320.98,182.39 L318.81,188.23 L315.15,188.10 L313.53,183.77 L310.58,181.84 L308.48,182.62 L308.53,179.50 L300.96,178.40 L300.08,176.70 L301.41,176.75 L296.91,174.64 L298.54,170.30 L296.43,165.93 L295.64,169.58 L290.76,170.85 L288.91,164.74 L283.07,164.92 L282.44,167.56 L272.97,162.55 L270.14,166.95 L271.12,170.99 L268.06,172.96 L266.56,171.80 L267.54,169.61 L265.78,169.09 L263.14,175.30 L260.57,176.82 L256.36,173.52 L251.34,172.62 L250.48,170.22 L243.19,166.11 L242.97,161.40 L240.18,155.89 L244.66,152.67 L243.72,148.79 L250.42,146.94 L250.94,139.62 L254.61,136.04 L257.44,136.07 L258.05,132.44 L261.44,133.59 L266.61,127.23 L265.34,126.88 L266.96,125.62 L267.58,120.90 L273.60,118.06 L275.80,121.39 L276.06,127.21 L283.86,142.12 L291.55,139.82 L284.43,125.82 L288.12,124.71 L288.08,120.21 L286.21,118.28 L295.60,112.74 L288.87,105.09 L288.42,100.85 L286.67,99.49 L288.83,98.27 L289.21,94.84 L286.86,94.55 L284.34,91.38 L286.10,85.59 L284.67,83.17 L284.67,76.90 L281.45,75.45 L278.59,78.37 L275.34,78.51 L273.18,72.07 L281.77,66.33 L289.25,72.15 L287.49,66.07 L287.46,56.70 L289.87,48.63 L296.15,47.82 L336.02,22.60 L379.75,10.33 L379.33,13.61 Z",N09:"M275.80,164.85 L282.44,167.56 L283.07,164.92 L288.91,164.74 L290.76,170.85 L295.64,169.58 L296.43,165.93 L298.54,170.30 L296.91,174.64 L301.41,176.75 L300.08,176.70 L300.96,178.40 L308.53,179.50 L308.48,182.62 L310.58,181.84 L313.53,183.77 L315.15,188.10 L318.81,188.23 L320.98,182.39 L321.07,189.78 L322.52,190.24 L324.78,196.72 L336.53,200.44 L343.06,207.80 L347.61,207.55 L350.03,203.98 L355.11,202.26 L360.87,204.48 L359.56,217.27 L357.87,217.75 L353.13,243.64 L349.75,253.01 L341.32,254.12 L330.71,251.99 L324.20,246.19 L313.79,246.90 L296.74,253.33 L294.86,257.54 L289.07,255.77 L287.40,262.76 L284.75,262.50 L283.62,265.81 L281.60,264.42 L281.51,267.38 L278.29,269.03 L262.08,259.40 L273.02,250.54 L282.47,231.84 L279.94,226.93 L275.41,223.84 L276.04,218.35 L273.91,211.91 L276.86,205.43 L277.08,197.72 L270.44,193.84 L267.66,196.02 L259.09,188.75 L257.58,178.59 L259.26,175.91 L263.14,175.30 L265.78,169.09 L267.54,169.61 L266.56,171.80 L268.06,172.96 L271.12,170.99 L270.14,166.95 L272.97,162.55 L275.80,164.85 Z",N10:"M388.09,13.37 L430.85,29.00 L445.72,36.84 L444.41,49.03 L519.21,72.00 L570.36,93.56 L593.20,96.97 L600.00,104.89 L572.29,120.31 L562.25,120.42 L547.91,126.84 L543.27,136.24 L545.68,142.92 L533.23,154.66 L529.72,155.13 L524.95,151.94 L522.62,145.02 L518.21,142.79 L519.16,141.63 L516.99,140.04 L509.87,142.18 L507.42,140.35 L506.47,145.77 L494.49,149.25 L497.20,161.77 L437.45,155.56 L419.28,144.92 L408.42,144.02 L405.88,133.31 L402.08,136.60 L401.51,139.45 L395.60,140.62 L391.57,138.54 L382.48,138.71 L378.80,134.65 L376.03,134.52 L366.98,139.48 L365.10,132.00 L365.78,123.14 L363.84,122.81 L364.86,115.34 L362.07,105.76 L363.07,102.11 L355.49,87.62 L357.95,84.10 L355.27,79.73 L356.93,76.27 L367.10,69.03 L371.85,61.59 L373.65,61.63 L376.56,53.15 L382.94,46.06 L380.66,44.37 L382.82,37.45 L379.74,39.92 L376.17,39.86 L378.48,30.86 L377.18,30.02 L379.63,11.23 L388.09,13.37 Z",N11:"M182.84,227.21 L191.87,224.12 L194.38,239.54 L196.92,242.25 L202.55,236.15 L204.82,237.88 L204.02,240.01 L205.39,241.73 L207.95,242.29 L210.75,235.83 L213.60,235.04 L214.36,241.81 L216.81,240.70 L218.22,243.79 L224.17,244.80 L226.86,252.24 L221.35,252.49 L226.29,262.52 L227.20,273.85 L220.94,273.69 L219.84,268.17 L217.91,267.51 L216.23,270.21 L211.42,265.82 L203.83,269.37 L201.37,274.63 L197.13,269.50 L197.73,265.19 L196.50,264.55 L195.43,266.73 L187.13,258.40 L186.75,268.19 L179.19,264.24 L168.39,275.54 L162.44,276.74 L164.30,285.45 L166.31,286.68 L163.20,288.13 L161.48,293.06 L147.82,272.92 L140.48,266.34 L132.01,262.66 L129.26,266.90 L127.73,265.73 L123.01,256.02 L119.18,253.14 L115.20,243.57 L116.61,242.13 L120.37,245.65 L126.34,244.32 L127.87,246.52 L129.02,244.69 L135.53,245.18 L135.86,247.24 L140.25,246.80 L143.48,250.83 L145.60,250.87 L146.78,247.84 L150.56,245.10 L155.26,245.41 L158.55,239.48 L170.10,244.91 L170.95,242.22 L168.55,231.54 L179.55,228.73 L179.61,225.07 L181.44,224.10 L182.84,227.21 Z",N12:"M193.45,264.72 L195.43,266.73 L196.50,264.55 L197.73,265.19 L197.13,269.50 L199.79,271.69 L199.41,273.96 L194.39,275.91 L186.56,272.73 L184.27,279.21 L187.19,285.61 L183.94,287.27 L183.69,290.70 L184.81,295.04 L191.08,296.57 L190.97,301.83 L196.25,312.23 L199.07,325.87 L189.77,327.34 L187.55,329.02 L188.14,331.03 L178.24,330.73 L161.48,293.06 L163.20,288.13 L166.31,286.68 L164.30,285.45 L162.44,276.74 L168.39,275.54 L179.19,264.24 L186.75,268.19 L187.13,258.40 L193.45,264.72 Z",N13:"M262.88,192.07 L267.66,196.02 L270.44,193.84 L277.08,197.72 L276.86,205.43 L273.91,211.91 L276.04,218.35 L275.41,223.84 L279.94,226.93 L282.47,231.84 L273.02,250.54 L260.09,261.37 L258.34,275.71 L256.49,276.85 L256.34,286.41 L251.58,295.86 L248.56,295.95 L247.97,284.71 L237.04,283.44 L227.89,286.18 L227.90,292.71 L220.62,287.31 L213.19,284.72 L201.37,274.63 L203.83,269.37 L211.42,265.82 L216.23,270.21 L217.91,267.51 L219.84,268.17 L220.94,273.69 L227.20,273.85 L226.29,262.52 L221.35,252.49 L226.86,252.24 L226.74,250.32 L224.17,244.80 L218.22,243.79 L216.81,240.70 L214.36,241.81 L213.60,235.04 L210.75,235.83 L207.95,242.29 L205.39,241.73 L204.02,240.01 L204.82,237.88 L202.55,236.15 L196.92,242.25 L194.38,239.54 L192.22,224.82 L200.46,221.53 L207.07,223.26 L207.74,218.56 L212.22,218.94 L211.89,217.10 L216.69,218.05 L217.40,215.65 L229.83,212.92 L238.13,223.21 L242.64,220.72 L245.58,223.97 L245.05,227.60 L247.79,228.76 L250.13,234.11 L256.66,237.82 L258.25,235.02 L258.36,227.41 L260.09,224.87 L257.01,220.19 L260.18,217.81 L260.27,215.56 L258.13,210.48 L259.21,209.14 L254.54,209.12 L256.65,208.15 L257.84,201.02 L256.70,199.02 L259.32,195.49 L259.09,188.75 L262.88,192.07 Z",N14:"M200.48,273.01 L213.19,284.72 L220.62,287.31 L227.90,292.71 L227.71,290.71 L233.29,308.30 L232.55,309.79 L234.68,310.01 L236.26,313.45 L231.45,320.43 L230.08,325.95 L237.71,329.87 L240.53,329.33 L237.28,342.20 L217.86,329.22 L198.78,326.77 L196.25,312.23 L190.97,301.83 L191.08,296.57 L184.81,295.04 L183.69,290.70 L183.94,287.27 L187.19,285.61 L184.27,279.21 L186.56,272.73 L194.39,275.91 L199.41,273.96 L199.79,271.69 L200.48,273.01 Z",N15:"M270.12,304.15 L270.96,307.07 L279.60,309.81 L280.82,304.64 L285.26,300.54 L290.76,313.88 L288.60,319.46 L284.89,318.80 L281.49,322.02 L284.21,325.96 L285.15,332.79 L293.99,330.74 L294.27,337.35 L297.17,338.74 L295.04,344.23 L287.70,346.23 L282.55,343.64 L281.81,337.47 L263.23,329.54 L262.81,322.64 L254.80,319.65 L249.26,313.54 L254.68,311.48 L259.27,305.44 L262.48,304.44 L262.68,299.39 L265.93,297.07 L269.61,299.64 L270.12,304.15 Z",N16:"M321.98,245.89 L330.71,251.99 L348.13,254.09 L345.09,258.08 L346.67,261.06 L345.45,263.07 L345.75,275.50 L337.21,295.02 L332.86,300.31 L314.60,298.43 L310.45,295.59 L308.87,299.84 L300.51,300.90 L299.46,302.59 L296.26,299.45 L295.92,301.67 L289.17,307.04 L285.17,300.46 L280.82,304.64 L280.59,308.49 L274.59,292.43 L273.26,284.46 L275.42,269.88 L281.51,267.38 L281.60,264.42 L283.62,265.81 L284.75,262.50 L287.40,262.76 L289.07,255.77 L294.86,257.54 L296.74,253.33 L313.79,246.90 L321.98,245.89 Z",N17:"M314.12,298.08 L332.86,300.31 L333.97,305.19 L330.99,306.95 L329.89,313.96 L330.88,317.99 L328.39,325.40 L332.07,335.21 L318.39,337.93 L316.30,334.94 L312.14,335.62 L307.91,332.23 L301.18,331.56 L298.63,339.28 L294.27,337.35 L294.31,331.69 L292.83,329.94 L285.15,332.79 L284.21,325.96 L281.49,322.02 L284.89,318.80 L288.60,319.46 L290.76,313.88 L287.22,304.12 L289.17,307.04 L295.92,301.67 L296.26,299.45 L299.46,302.59 L300.51,300.90 L308.87,299.84 L310.45,295.59 L314.12,298.08 Z",N18:"M402.28,296.26 L402.59,299.00 L404.48,297.78 L405.68,299.45 L404.79,303.50 L408.25,301.21 L409.49,303.79 L406.01,322.50 L413.09,336.39 L408.58,343.01 L409.54,343.59 L404.48,348.31 L404.78,350.76 L400.80,351.66 L400.90,356.37 L395.68,358.61 L392.80,369.48 L387.85,375.04 L388.15,379.28 L386.09,379.67 L379.22,375.60 L376.25,380.37 L376.48,375.17 L374.61,369.08 L373.07,370.36 L373.52,373.69 L362.99,368.98 L361.16,372.03 L355.61,367.32 L352.38,368.86 L350.94,365.29 L348.00,364.40 L346.60,360.52 L344.43,363.99 L342.08,363.82 L341.19,366.57 L338.95,365.35 L336.21,368.55 L334.12,366.11 L328.20,369.11 L325.48,368.95 L325.68,366.48 L314.93,367.19 L310.80,361.52 L314.87,352.99 L318.56,351.48 L323.17,358.99 L328.50,358.67 L331.47,345.92 L329.85,340.11 L332.23,333.85 L328.39,326.75 L331.00,316.56 L338.60,316.99 L339.78,313.74 L346.12,308.81 L353.33,308.74 L357.63,315.38 L357.69,318.54 L368.57,309.33 L372.52,309.38 L380.07,305.45 L386.23,309.20 L392.30,308.34 L397.06,300.26 L402.28,296.26 Z",N19:"M271.64,265.21 L276.72,268.26 L273.01,282.09 L274.59,292.43 L280.59,308.49 L276.49,309.63 L270.96,307.07 L270.00,300.37 L265.93,297.07 L262.68,299.39 L262.48,304.44 L259.27,305.44 L254.68,311.48 L249.38,313.21 L254.80,319.65 L262.81,322.64 L263.41,328.65 L263.01,330.46 L260.35,329.44 L254.58,323.44 L248.39,340.88 L248.36,346.67 L247.19,348.79 L245.68,347.57 L246.54,346.10 L244.48,345.58 L242.64,348.74 L240.24,347.12 L241.35,344.81 L237.28,342.20 L240.53,329.33 L237.71,329.87 L230.08,325.95 L231.45,320.43 L236.26,313.45 L234.68,310.01 L232.55,309.79 L233.29,308.30 L227.71,290.71 L227.72,286.25 L237.04,283.44 L247.97,284.71 L248.56,295.95 L251.58,295.86 L256.34,286.41 L256.49,276.85 L258.34,275.71 L260.09,261.37 L262.09,259.40 L271.64,265.21 Z",N20:"M260.92,329.75 L265.61,330.12 L276.23,335.07 L272.61,341.60 L272.30,350.58 L267.85,349.73 L270.40,355.14 L264.00,363.14 L253.16,357.38 L257.86,351.82 L257.14,349.22 L248.36,346.67 L248.39,340.88 L254.58,323.44 L260.92,329.75 Z",N21:"M302.75,331.82 L307.91,332.23 L312.14,335.62 L316.30,334.94 L318.39,337.93 L332.07,335.21 L329.85,340.11 L331.47,345.92 L328.50,358.67 L323.17,358.99 L318.96,351.68 L315.69,352.21 L309.03,364.82 L306.84,364.65 L304.17,361.58 L303.63,362.85 L293.72,360.14 L297.06,355.69 L284.28,355.38 L284.18,350.99 L281.28,348.50 L280.73,344.86 L276.84,347.42 L272.66,346.17 L272.61,341.60 L276.23,335.07 L282.66,338.36 L282.55,343.64 L287.70,346.23 L291.69,345.97 L295.04,344.23 L297.12,338.50 L298.63,339.28 L300.35,331.97 L302.75,331.82 Z",N22:"M266.85,373.23 L266.23,371.45 L268.81,370.91 L276.27,373.81 L276.47,375.50 L273.75,377.54 L263.80,372.31 L265.39,370.33 L264.82,372.44 L266.85,373.23 Z M281.20,346.91 L284.18,350.99 L284.28,355.38 L286.50,355.91 L283.59,358.58 L282.75,363.83 L293.23,366.35 L291.66,374.52 L284.91,369.82 L284.50,371.67 L280.89,372.39 L277.43,369.61 L276.96,371.56 L271.54,368.60 L271.82,367.22 L263.63,364.92 L270.40,355.14 L267.92,349.55 L272.30,350.58 L272.66,346.17 L276.84,347.42 L279.62,344.64 L281.20,346.91 Z",N23:"M351.67,500.00 L348.27,499.54 L348.92,497.17 L351.34,498.50 L351.67,500.00 Z M356.61,449.10 L357.13,448.65 L356.61,449.10 Z M342.53,447.71 L345.07,449.75 L351.49,449.42 L350.84,453.55 L346.55,458.05 L344.38,464.51 L341.92,464.00 L341.90,457.43 L338.41,457.64 L335.85,453.82 L342.53,447.71 Z M333.15,443.61 L332.36,444.05 L331.20,442.69 L331.91,442.24 L333.15,443.61 Z M291.66,356.21 L297.06,355.69 L293.80,360.18 L303.63,362.85 L304.17,361.58 L306.53,364.51 L309.03,364.82 L310.80,361.52 L314.93,367.19 L325.99,366.53 L325.97,369.14 L331.56,368.52 L334.12,366.11 L336.21,368.55 L338.95,365.35 L341.19,366.57 L342.08,363.82 L344.43,363.99 L346.60,360.52 L348.00,364.40 L350.94,365.29 L352.38,368.86 L355.61,367.32 L361.16,372.03 L357.82,374.33 L354.51,383.90 L354.84,398.15 L352.40,402.95 L346.10,400.78 L342.65,403.20 L342.70,401.40 L340.80,400.46 L333.98,398.99 L333.77,396.55 L328.83,391.15 L320.86,387.40 L308.70,385.07 L291.78,375.13 L293.23,366.35 L282.75,363.83 L283.59,358.58 L286.50,355.91 L291.66,356.21 Z",N24:"M407.68,139.33 L410.47,150.71 L413.24,188.15 L412.09,190.73 L418.21,192.92 L425.31,199.63 L420.63,213.86 L421.78,217.16 L427.29,214.74 L433.10,218.36 L436.07,215.96 L439.52,217.92 L441.19,217.09 L447.67,223.92 L453.08,224.58 L422.05,251.60 L413.09,251.42 L412.73,259.01 L411.69,259.21 L415.75,265.26 L410.81,271.04 L408.09,278.16 L412.54,292.08 L412.01,294.60 L407.45,291.38 L405.90,296.94 L402.59,299.00 L401.71,296.46 L397.06,300.26 L392.30,308.34 L386.23,309.20 L380.07,305.45 L372.52,309.38 L368.57,309.33 L357.69,318.54 L357.63,315.38 L353.33,308.74 L346.12,308.81 L339.78,313.74 L338.60,316.99 L331.00,316.56 L329.89,313.96 L330.99,306.95 L333.97,305.19 L333.08,299.49 L337.41,294.64 L345.75,275.50 L345.45,263.07 L346.67,261.06 L345.09,258.08 L351.52,249.99 L357.87,217.75 L359.56,217.27 L360.14,200.11 L361.88,195.98 L360.21,195.06 L368.88,170.44 L366.86,165.94 L365.30,166.10 L367.11,158.31 L374.68,154.68 L371.89,141.09 L372.74,136.89 L378.80,134.65 L382.48,138.71 L391.57,138.54 L395.60,140.62 L401.51,139.45 L402.08,136.60 L405.88,133.31 L407.68,139.33 Z",N25:"M519.09,141.71 L518.21,142.79 L522.62,145.02 L524.95,151.94 L529.72,155.13 L534.14,154.20 L542.79,146.28 L543.64,149.24 L543.06,151.39 L540.22,151.47 L533.85,157.26 L533.38,164.57 L529.81,165.57 L529.46,167.41 L526.88,166.72 L525.39,169.27 L524.56,167.67 L523.16,169.59 L522.54,168.37 L522.52,170.73 L520.94,171.55 L521.43,177.83 L519.86,177.84 L518.16,186.86 L524.15,198.27 L524.66,204.12 L519.85,208.87 L517.45,217.40 L519.10,227.99 L517.01,229.23 L515.92,237.95 L512.67,240.92 L510.56,246.38 L506.86,269.30 L503.74,275.79 L501.77,292.26 L502.91,295.30 L499.05,296.54 L497.79,298.80 L505.22,309.39 L498.52,307.22 L457.22,303.62 L456.39,298.73 L457.53,296.26 L454.25,291.16 L450.40,277.65 L457.42,275.21 L458.86,273.38 L458.59,269.88 L452.86,261.08 L448.53,260.81 L447.98,258.30 L446.04,258.95 L445.96,257.38 L442.38,257.92 L436.14,251.37 L428.18,246.25 L453.08,224.58 L447.67,223.92 L441.19,217.09 L439.52,217.92 L436.07,215.96 L433.10,218.36 L427.29,214.74 L421.78,217.16 L420.63,213.86 L425.31,199.63 L418.21,192.92 L412.09,190.73 L413.24,188.15 L410.47,150.71 L408.42,144.02 L419.28,144.92 L437.45,155.56 L497.20,161.77 L494.49,149.25 L506.47,145.77 L507.42,140.35 L509.87,142.18 L516.99,140.04 L519.09,141.71 Z",N26:"M428.24,334.61 L429.52,335.75 L429.15,353.42 L426.02,355.41 L425.02,352.97 L423.53,357.28 L421.71,356.45 L420.98,357.82 L420.95,364.14 L422.76,366.75 L419.54,367.83 L417.59,379.79 L414.55,381.16 L414.60,383.30 L416.83,384.03 L417.24,387.84 L415.38,392.99 L413.71,392.69 L413.55,402.24 L416.09,406.55 L414.08,410.52 L415.39,411.70 L413.87,428.80 L393.42,429.66 L382.17,425.97 L369.41,416.37 L360.52,406.62 L352.40,402.95 L355.16,396.51 L354.98,382.07 L358.14,373.80 L362.04,371.57 L362.99,368.98 L373.52,373.69 L373.07,370.36 L374.61,369.08 L376.48,375.17 L376.25,380.37 L379.22,375.60 L386.09,379.67 L388.15,379.28 L387.85,375.04 L392.80,369.48 L395.68,358.61 L400.90,356.37 L401.13,351.30 L404.78,350.76 L404.48,348.31 L409.66,343.14 L421.98,344.45 L422.84,333.17 L425.16,327.68 L428.24,334.61 Z",N27:"M429.38,247.85 L433.24,249.05 L442.38,257.92 L445.96,257.38 L446.04,258.95 L447.98,258.30 L448.53,260.81 L452.86,261.08 L459.04,272.53 L457.42,275.21 L450.40,277.65 L454.25,291.16 L457.53,296.26 L456.73,302.67 L460.82,304.18 L459.84,314.34 L455.78,321.24 L454.44,329.79 L454.36,346.17 L452.70,354.00 L453.70,361.42 L447.68,380.82 L457.66,390.36 L460.76,390.55 L461.92,396.62 L465.45,398.23 L470.11,395.10 L478.60,395.30 L481.27,392.23 L479.66,397.32 L476.13,398.51 L477.05,403.85 L471.49,401.76 L471.98,404.00 L467.28,404.94 L472.01,407.04 L470.06,409.64 L468.02,408.03 L465.65,409.81 L465.68,413.30 L457.17,439.68 L457.33,449.01 L442.32,444.04 L420.86,430.65 L413.87,428.80 L415.39,411.70 L414.08,410.52 L416.09,406.55 L413.55,402.24 L413.71,392.69 L415.38,392.99 L417.24,387.84 L416.83,384.03 L414.60,383.30 L414.55,381.16 L417.59,379.79 L419.54,367.83 L422.76,366.75 L420.95,364.14 L420.98,357.82 L421.71,356.45 L423.53,357.28 L425.02,352.97 L426.02,355.41 L429.15,353.42 L429.52,335.75 L428.07,335.77 L428.40,333.58 L425.16,327.68 L422.84,333.17 L421.98,344.45 L408.58,343.01 L413.07,335.91 L406.01,322.50 L409.49,303.79 L408.25,301.21 L404.79,303.50 L405.68,299.45 L404.48,297.78 L407.45,291.38 L411.32,295.07 L412.37,293.31 L408.09,278.16 L410.81,271.04 L415.75,265.26 L411.69,259.21 L412.73,259.01 L413.09,251.42 L422.05,251.60 L428.18,246.25 L429.38,247.85 Z",N28:"M481.70,305.82 L505.22,309.39 L506.58,317.97 L504.79,326.56 L494.04,334.68 L492.63,339.51 L482.50,344.54 L478.83,351.43 L480.54,353.11 L484.53,353.01 L486.06,356.30 L488.90,365.80 L485.89,369.82 L489.47,373.31 L491.78,373.15 L491.88,375.59 L493.83,377.02 L497.54,376.57 L499.08,372.33 L501.86,370.67 L503.16,373.14 L502.39,378.21 L504.89,382.90 L510.78,380.72 L511.99,384.92 L513.94,384.99 L513.52,388.44 L515.72,390.07 L521.07,390.29 L525.30,387.24 L526.07,393.40 L529.46,392.98 L532.88,389.49 L533.81,393.08 L537.69,389.55 L538.74,392.78 L537.66,398.34 L541.77,400.13 L539.40,407.15 L541.54,409.93 L541.38,412.74 L543.73,414.42 L543.38,418.69 L545.89,420.95 L543.88,422.93 L546.76,424.69 L541.17,431.17 L540.37,435.51 L541.45,438.21 L537.88,441.49 L538.69,447.97 L534.19,444.86 L526.48,452.08 L523.18,452.18 L522.28,449.64 L524.16,444.54 L516.87,444.67 L514.97,438.76 L512.98,437.54 L511.20,439.41 L513.25,443.61 L512.65,446.58 L504.97,446.14 L501.33,443.77 L501.61,447.51 L496.94,448.65 L496.38,446.99 L496.02,448.97 L492.45,449.66 L492.85,451.11 L494.83,450.66 L493.10,453.37 L495.52,455.59 L496.80,455.63 L495.62,452.42 L498.17,453.80 L498.49,451.27 L498.93,453.64 L503.63,456.87 L504.28,461.47 L499.76,461.41 L498.85,467.61 L475.70,454.90 L457.33,449.01 L457.17,439.68 L465.68,413.30 L465.65,409.81 L468.02,408.03 L470.06,409.64 L472.01,407.04 L467.28,404.94 L471.98,404.00 L471.49,401.76 L477.05,403.85 L476.13,398.51 L479.66,397.32 L481.27,392.23 L478.60,395.30 L470.11,395.10 L465.45,398.23 L461.92,396.62 L460.76,390.55 L457.66,390.36 L447.66,380.77 L453.70,361.42 L452.70,354.00 L454.36,346.17 L454.44,329.79 L455.78,321.24 L459.84,314.34 L460.89,303.25 L481.70,305.82 Z"};
+const MEL_MAP_VIEWBOX="0 0 600 500";
+// ── Names ───────────────────────────────────────────────────────────────
+const ACR={PH:'PH',BNPN:'BN+PN',BERSATU:'BERSATU',BERSAMA:'BERSAMA'};
+const FULL={PH:'Pakatan Harapan',BNPN:'Barisan Nasional + Perikatan Nasional',BERSATU:'Malaysian United Indigenous Party',BERSAMA:'Malaysian United Party'};
+const COMP_FULL={UMNO:'United Malays National Organisation',MCA:'Malaysian Chinese Association',MIC:'Malaysian Indian Congress',
+  PKR:"People's Justice Party",DAP:'Democratic Action Party',AMANAH:'National Trust Party',PAS:'Malaysian Islamic Party',
+  GERAKAN:"Malaysian People's Movement Party",BERSATU:FULL.BERSATU,BERSAMA:FULL.BERSAMA,IND:'Independent',PUTRA:'Parti Bumiputera Perkasa Malaysia'};
+const COMP_ORDER={PH:['PKR','DAP','AMANAH'],BNPN:['UMNO','MCA','MIC','PAS','GERAKAN','WAWASAN'],BERSATU:['BERSATU'],BERSAMA:['BERSAMA'],OTH:['PUTRA','IND']};
+const nm=(full,acr)=>full?`${full} (${acr})`:acr;
+const blocName=id=>nm(FULL[id],ACR[id]);
+const compName=c=>nm(COMP_FULL[c],c);
+const TOTAL_SEATS=SEATS.length, MAJ=Math.floor(TOTAL_SEATS/2)+1;
+const MINUS='−';
+
+// 2021 seats per component party under the 2026 blocs (reference for +/-)
+const BASE_COMP={};
+Object.keys(W21).forEach(id=>{
+  const b=mapCoal(W21[id],W21_PARTY[id]),c=W21_PARTY[id];
+  BASE_COMP[b]=BASE_COMP[b]||{};BASE_COMP[b][c]=(BASE_COMP[b][c]||0)+1;
+});
+
+const views={hemi:'alliance',coal:'alliance',map:'alliance'};   // each control keeps its own view
+let curDetails=[],tally={},ptally={},curNS={};
+let inputEls={},sliderEls={},otherBox=null,otherRng=null;
+const expanded=new Set();
+const selSets={alliance:new Set(),party:new Set()};
+let mapView={kind:'winner'};
 let selConst=null;
-// The map has three views, one at a time: Winners, Strength, Flipped.
-let mapMode='winners';      // 'winners' | 'strength' | 'flipped'
-let strengthSel=null;       // {type:'alliance'|'party', key} -- what the Strength view shades by
-let flipFocus='';           // '' = all flips, or 'gain:PH' / 'lose:PH'
 const SLIDER_MAX=70;
-function maxShare(id){return SLIDER_MAX;}
-const LEGEND_ACRONYM={BN:'BN',PH:'PH',PN:'PN',BP:'MUDA-PSM',BERSAMA:'BERSAMA',BNPN:'BN+PN',IPR:'BERSATU+',OTHERS:'Others'};
-// Reads an input box; a value equal to the displayed baseline resolves to the exact baseline.
+
+// ── Inputs ──────────────────────────────────────────────────────────────
 function readInput(id){
   const el=inputEls[id];if(!el)return 0;
   const v=parseFloat(el.value);if(isNaN(v))return 0;
   const ex=parseFloat(el.dataset.exact);
-  if(!isNaN(ex)&&Math.abs(v-parseFloat(ex.toFixed(2)))<1e-9)return ex;
+  if(!isNaN(ex)&&Math.abs(v-parseFloat(ex.toFixed(1)))<1e-9)return ex;
   return v;
 }
-// A party can only go as high as the room left once every other party's share is counted:
-// named parties can never total more than 100%, so the minor-party remainder bottoms out at 0%.
 function clampToRoom(id,v){
   let others=0;
   PARTIES.forEach(q=>{if(q.id!==id)others+=readInput(q.id);});
   const room=Math.max(0,Math.floor((100-others)*10+1e-6)/10);
-  return Math.min(Math.max(0,v),room,maxShare(id));
+  return Math.min(Math.max(0,v),room,SLIDER_MAX);
 }
-// Puts every input and slider back on its baseline.
+function fillOf(r,v){r.style.setProperty('--p',(Math.min(SLIDER_MAX,Math.max(0,v))/SLIDER_MAX*100)+'%');}
 function resetInputs(){
   PARTIES.forEach(p=>{
     const el=inputEls[p.id],r=sliderEls[p.id],b=GN[p.id]||0;
-    if(!el)return;
-    el.value=b.toFixed(2);
-    if(r){r.value=b;r.style.setProperty('--p',(Math.min(maxShare(p.id),Math.max(0,b))/maxShare(p.id)*100)+'%');}
+    el.value=b.toFixed(1);r.value=b;fillOf(r,b);
   });
   project();
 }
 function taper(id,v){
   const base=GN[id]||0;
   if(base===0)return 1;
-  const t=base*0.5;
+  const t=base*0.2;
   if(v>=t)return 1;
   return Math.max(0,v/t);
 }
-function buildInputsAndChecks(){
+function buildInputs(){
   const ig=document.getElementById('inputsGrid');ig.innerHTML='';
-  inputEls={};sliderEls={};
-  // Rows are listed largest-baseline first (stable sort, so ties keep their usual order)
   [...PARTIES].sort((a,b)=>b.ge-a.ge).forEach(p=>{
-    const c=document.createElement('div');c.className='input-card';
-    c.innerHTML=`<label><span class="pdot" style="background:${p.color}"></span>${p.label}</label><div class="input-row"><input type="number" min="0" max="100" step="0.1" id="inp_${p.id}" value="${p.ge.toFixed(2)}"/><span class="pct">%</span></div><input type="range" class="vs-slider" min="0" max="${maxShare(p.id)}" step="0.1" value="${p.ge.toFixed(1)}" style="--c:${p.color};--p:${(p.ge/maxShare(p.id)*100).toFixed(1)}%;" aria-label="${p.label} vote share"/>`;
-    ig.appendChild(c);
-    const num=c.querySelector('input[type=number]'),rng=c.querySelector('input[type=range]');
-    inputEls[p.id]=num;sliderEls[p.id]=rng;num.dataset.exact=String(p.ge);
-    const fill=()=>rng.style.setProperty('--p',(Math.min(maxShare(p.id),Math.max(0,parseFloat(rng.value)||0))/maxShare(p.id)*100)+'%');
+    const row=document.createElement('div');row.className='irow';
+    row.innerHTML=`<label for="inp_${p.id}"><span class="pdot" style="background:${p.color}"></span><span>${blocName(p.id)}</span></label>`
+      +`<input type="range" class="vs" min="0" max="${SLIDER_MAX}" step="0.1" value="${p.ge.toFixed(1)}" style="--c:${p.color}" aria-label="${ACR[p.id]} vote share">`
+      +`<div class="box"><input type="number" min="0" max="100" step="0.1" id="inp_${p.id}" value="${p.ge.toFixed(1)}"><span>%</span></div>`;
+    ig.appendChild(row);
+    const num=row.querySelector('input[type=number]'),rng=row.querySelector('input[type=range]');
+    inputEls[p.id]=num;sliderEls[p.id]=rng;num.dataset.exact=String(p.ge);fillOf(rng,p.ge);
     num.addEventListener('input',()=>{
       const raw=parseFloat(num.value);
-      if(!isNaN(raw)){const c2=clampToRoom(p.id,raw);if(c2!==raw)num.value=c2.toFixed(1);}
-      rng.value=num.value;fill();project();
+      if(!isNaN(raw)){const c2=clampToRoom(p.id,raw);if(c2!==raw)num.value=c2.toFixed(1);rng.value=num.value;fillOf(rng,parseFloat(num.value));}
+      project();
+    });
+    num.addEventListener('change',()=>{
+      const raw=parseFloat(num.value);
+      const c2=isNaN(raw)?0:clampToRoom(p.id,raw);
+      num.value=c2.toFixed(1);rng.value=c2;fillOf(rng,c2);project();
     });
     rng.addEventListener('input',()=>{
       const c2=clampToRoom(p.id,parseFloat(rng.value)||0);
-      rng.value=c2;num.value=c2.toFixed(1);fill();project();
+      rng.value=c2;num.value=c2.toFixed(1);fillOf(rng,c2);project();
     });
   });
-  const cc=document.getElementById('coalitionChecks');cc.innerHTML='';
-  PARTIES.forEach(p=>{
-    const lbl=document.createElement('label');
-    lbl.innerHTML=`<input type="checkbox" id="chk_${p.id}"><span class="pdot" style="background:${p.color}"></span>${p.label}`;
-    lbl.querySelector('input').addEventListener('change',updateCoalition);
-    cc.appendChild(lbl);
+  const row=document.createElement('div');row.className='irow locked';
+  row.innerHTML=`<label for="inp_OTH"><span class="pdot" style="background:#888780"></span><span>Others (OTH)</span></label>`
+    +`<input type="range" class="vs" min="0" max="${SLIDER_MAX}" step="0.1" value="0" disabled style="--c:#888780" aria-label="Others vote share, calculated">`
+    +`<div class="box"><input type="number" id="inp_OTH" value="0.0" readonly tabindex="-1"><span>%</span></div>`;
+  ig.appendChild(row);
+  otherBox=row.querySelector('input[type=number]');otherRng=row.querySelector('input[type=range]');
+}
+
+// ── View toggle (Alliance / Party), shared by hemicycle, builder and map ──
+function buildViewToggles(){
+  document.querySelectorAll('[data-view]').forEach(el=>{
+    el.innerHTML='<button data-v="alliance">Alliance</button><button data-v="party">Party</button>';
+    el.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setView(el.dataset.view,b.dataset.v)));
+  });
+  document.querySelectorAll('[data-vswitch]').forEach(el=>{
+    el.innerHTML='<button type="button" class="lab" data-v="alliance">Alliance</button><button type="button" class="trk" role="switch" aria-label="Show parties instead of alliances"><i></i></button><button type="button" class="lab" data-v="party">Party</button>';
+    el.querySelectorAll('.lab').forEach(b=>b.addEventListener('click',()=>setView(el.dataset.vswitch,b.dataset.v)));
+    el.querySelector('.trk').addEventListener('click',()=>setView(el.dataset.vswitch,views[el.dataset.vswitch]==='alliance'?'party':'alliance'));
+  });
+  syncViewToggles();
+}
+function syncViewToggles(){
+  document.querySelectorAll('[data-vswitch]').forEach(el=>{
+    const v=views[el.dataset.vswitch];
+    el.querySelectorAll('.lab').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+    const t=el.querySelector('.trk');t.classList.toggle('party',v==='party');t.setAttribute('aria-checked',String(v==='party'));
+  });
+  document.querySelectorAll('[data-view]').forEach(el=>{
+    const v=views[el.dataset.view];
+    el.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   });
 }
-function setMode(mode){
-  if(mode===MODE)return;
-  MODE=mode;
-  PARTIES=(mode==='unity')?PARTIES_UNITY:PARTIES_STD;
-  GN=(mode==='unity')?GN_UNITY:GN_STD;
-  GS=(mode==='unity')?GS_UNITY:GS_STD;
-  const stdBtn=document.getElementById('modeStdBtn'),unityBtn=document.getElementById('modeUnityBtn');
-  const active='background:#1a1a18;color:#fff;border-color:#1a1a18;';
-  stdBtn.style.cssText=(mode==='standard')?active:'';
-  unityBtn.style.cssText=(mode==='unity')?active:'';
-  buildInputsAndChecks();
-  project();
+function setView(scope,v){
+  if(views[scope]===v)return;
+  views[scope]=v;
+  if(scope==='map'&&mapView.kind==='str')mapView={kind:'winner'};
+  hideTip();syncViewToggles();renderAll();
 }
-// ── Parliament hemicycle ────────────────────────────────────────────────
-// Lays every seat out as a dot in concentric arcs, ordered left-to-right so
-// blocs sit contiguously the way they would in a real chamber. Row count and
-// dot size scale to the assembly size, so this works unchanged for a 28-seat
-// state assembly or a larger one.
+
+// ── Projection ──────────────────────────────────────────────────────────
+// One seat. Only blocs with a 2026 candidate in the seat receive votes. A bloc that is not standing has its
+// votes handed on: BERSATU's go to the parties that are standing in proportion to their votes; PH's go 60% to
+// BERSATU (if it is standing) with the rest spread across the other standing parties in proportion.
+// A named independent / minor-party candidate (OTH) is fed by the Others remainder, with its own universal swing and taper.
+function projectSeat(s,sw,sc){
+  const[id,name,bn,ph,pn,bp,tot2]=s;
+  const base=SEAT_BASE[id];
+  const hasO=!!OTHER_CANDIDATES[id];
+  const stands={};PARTIES.forEach(p=>{stands[p.id]=contests(p.id,id);});stands.OTH=hasO;
+  const ids=PARTIES.map(p=>p.id).concat(['OTH']);
+  const rawAll={},tapAll={};
+  ids.forEach(k=>{const b=k==='OTH'?(SEAT_OTH[id]||0):base[k];rawAll[k]=Math.max(0,b+sw[k]);tapAll[k]=rawAll[k]*sc[k];});
+  const v={};ids.forEach(k=>{v[k]=stands[k]?tapAll[k]:0;});
+  const standing=ids.filter(k=>stands[k]);
+  const spread=(amount,list)=>{
+    const t=list.reduce((a,k)=>a+v[k],0);if(!(t>0))return;
+    const add=list.map(k=>amount*v[k]/t);list.forEach((k,i)=>{v[k]+=add[i];});
+  };
+  if(!stands.BERSATU)spread(tapAll.BERSATU,standing);
+  if(!stands.PH){
+    const X=tapAll.PH;
+    if(stands.BERSATU){v.BERSATU+=BERSATU_PH_SHARE*X;spread((1-BERSATU_PH_SHARE)*X,standing.filter(k=>k!=='BERSATU'));}
+    else spread(X,standing);
+  }
+  // taper: votes a party loses below its threshold go to the others in proportion
+  const tOut=standing.reduce((a,k)=>a+(rawAll[k]-tapAll[k]),0);
+  const tTot=standing.reduce((a,k)=>a+v[k],0);
+  const proj={};
+  ids.forEach(k=>{proj[k]=stands[k]?(tTot>0&&tOut>0?v[k]+tOut*(v[k]/tTot):v[k]):0;});
+  const projTotal=ids.reduce((a,k)=>a+proj[k],0);
+  if(projTotal>0&&Math.abs(projTotal-100)>0.001){ids.forEach(k=>{proj[k]=proj[k]/projTotal*100;});}
+  let winner=standing.length?standing[0]:'OTHERS';
+  standing.forEach(k=>{if(proj[k]>proj[winner])winner=k;});
+  return {id,name,proj,base,winner,coalW:winner,tot2};
+}
+
+function project(){
+  const ns={};PARTIES.forEach(p=>{ns[p.id]=readInput(p.id);});
+  curNS=ns;
+  const tot=Object.values(ns).reduce((a,b)=>a+b,0);
+  const left=Math.max(0,100-tot);
+  otherBox.value=left.toFixed(1);otherRng.value=left;fillOf(otherRng,left);
+  const sw={},sc={};
+  PARTIES.forEach(p=>{sw[p.id]=ns[p.id]-(GN[p.id]||0);sc[p.id]=taper(p.id,ns[p.id]);});
+  sw.OTH=left-GN.OTH;sc.OTH=taper('OTH',left);
+  const det=[];
+  SEATS.forEach(s=>{if(s[6])det.push(projectSeat(s,sw,sc));});
+  curDetails=det;
+  tally={};PARTIES.forEach(p=>{tally[p.id]=0;});tally.OTH=0;
+  ptally={};
+  det.forEach(d=>{tally[d.coalW]++;const c=resolveComponentParty(d.coalW,d.id);ptally[c]=(ptally[c]||0)+1;});
+  renderAll();
+}
+function renderAll(){renderResults();renderBuilder();renderMapButtons();renderMap();}
+
+// Entries in a fixed order (so parties keep their place on the hemicycle).
+function seatEntries(mode){
+  if(mode==='alliance')return PARTIES.map(p=>({key:p.id,acr:ACR[p.id],color:p.color,count:tally[p.id]||0})).concat(['PUTRA','IND'].map(k=>({key:k,acr:k,color:COMP_COLORS[k],count:ptally[k]||0})));
+  const out=[];
+  Object.keys(COMP_ORDER).forEach(b=>COMP_ORDER[b].forEach(c=>out.push({key:c,acr:c,color:COMP_COLORS[c]||'#888780',count:ptally[c]||0})));
+  return out;
+}
+function colorOf(coal,id){
+  if(coal==='OTH')return COMP_COLORS[OTHER_CANDIDATES[id]]||'#888780';
+  if(views.map==='party')return COMP_COLORS[resolveComponentParty(coal,id)]||'#888780';
+  return (PARTIES.find(p=>p.id===coal)||{}).color||'#888780';
+}
+function keyOf(coal,id){if(coal==='OTH')return OTHER_CANDIDATES[id];return views.map==='party'?resolveComponentParty(coal,id):coal;}
+function acrOf(coal,id){if(coal==='OTH')return OTHER_CANDIDATES[id];return views.map==='party'?resolveComponentParty(coal,id):(ACR[coal]||coal);}
+
+// ── Hemicycle ───────────────────────────────────────────────────────────
+function hemiLayout(total){
+  // Pick the number of rows and inner radius that make the spacing along each arc match the gap between rows.
+  let best=null;
+  for(let rows=2;rows<=9;rows++)for(let rIn=0.30;rIn<=0.56;rIn+=0.02){
+    const gap=(1-rIn)/(rows-1),radii=[];
+    for(let i=0;i<rows;i++)radii.push(rIn+gap*i);
+    const wsum=radii.reduce((a,b)=>a+b,0);
+    const exact=radii.map(r=>total*r/wsum),counts=exact.map(Math.floor);
+    let left=total-counts.reduce((a,b)=>a+b,0);
+    exact.map((e,i)=>[e-Math.floor(e),i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{if(left>0){counts[i]++;left--;}});
+    if(counts.some(c=>c<2))continue;
+    const sp=radii.map((r,i)=>Math.PI*r/(counts[i]-1));
+    const all=sp.concat([gap]);
+    const mean=all.reduce((a,b)=>a+b,0)/all.length;
+    const score=all.reduce((a,b)=>a+(b-mean)*(b-mean),0)/(mean*mean);
+    if(!best||score<best.score)best={score,radii,counts,gap,sp};
+  }
+  return best;
+}
 function renderHemicycle(entries){
   const wrap=document.getElementById('hemicycle');
   const total=entries.reduce((a,e)=>a+e.count,0);
   if(!total){wrap.innerHTML='';return;}
-  const rIn=0.40,rOut=1.0;
-  // Pick the row count from actual packing density rather than a guess: work
-  // out the even spacing that would fit `total` dots across the semi-annulus,
-  // then use however many rows that spacing implies. This keeps the gaps
-  // between rows and the gaps along each arc roughly equal, instead of
-  // leaving wide horizontal gaps on the sparse inner rows.
-  const idealGap=Math.sqrt(Math.PI/2*(rOut*rOut-rIn*rIn)/total);
-  const rows=Math.max(2,Math.min(8,Math.floor((rOut-rIn)/idealGap)+1));
-  const radii=[];
-  for(let i=0;i<rows;i++)radii.push(rows===1?rOut:rIn+(rOut-rIn)*i/(rows-1));
-  const wsum=radii.reduce((a,b)=>a+b,0);
-  const counts=radii.map(r=>Math.floor(total*r/wsum));
-  let assigned=counts.reduce((a,b)=>a+b,0),i=rows-1;
-  while(assigned<total){counts[i]++;assigned++;i=(i-1+rows)%rows;}
+  const L=hemiLayout(total);
   const pos=[];
-  for(let r=0;r<rows;r++){
-    const n=counts[r],rad=radii[r];
+  L.radii.forEach((rad,r)=>{
+    const n=L.counts[r];
     for(let j=0;j<n;j++){
-      const t=n===1?0.5:j/(n-1);
-      const ang=Math.PI*(1-t);
-      pos.push({ang,x:rad*Math.cos(ang),y:-rad*Math.sin(ang)});
+      const t=n===1?0.5:j/(n-1),ang=Math.PI*(1-t);
+      pos.push({ang,x:rad*Math.cos(ang),y:-rad*Math.sin(ang),r});
     }
-  }
-  pos.sort((a,b)=>b.ang-a.ang);
-  // dot radius: small enough not to collide either between rows or along an arc
-  const rowGap=rows>1?(rOut-rIn)/(rows-1):0.4;
-  let dotR=rowGap*0.45;
-  for(let r=0;r<rows;r++){
-    if(counts[r]>1)dotR=Math.min(dotR,(Math.PI*radii[r]/(counts[r]-1))*0.45);
-  }
-  const flat=[];
-  entries.forEach(e=>{for(let k=0;k<e.count;k++)flat.push(e.color);});
-  // viewBox has to allow for the dot radius at every extreme, or the outermost
-  // dots get clipped once dotR grows.
-  const pad=dotR*1.08, ext=rOut+pad;
-  let svg=`<svg viewBox="${-ext} ${-ext} ${ext*2} ${ext+pad}" style="width:100%;height:auto;">`;
-  pos.forEach((p,idx)=>{
-    svg+=`<circle cx="${p.x.toFixed(4)}" cy="${p.y.toFixed(4)}" r="${dotR.toFixed(4)}" fill="${flat[idx]||'#ccc'}"/>`;
   });
-  svg+='</svg>';
-  wrap.innerHTML=svg;
+  pos.sort((a,b)=>b.ang-a.ang||a.r-b.r);
+  const dotR=0.44*Math.min(L.gap,...L.sp);
+  const flat=[];entries.forEach(e=>{for(let k=0;k<e.count;k++)flat.push(e.color);});
+  const pad=dotR*1.08,ext=1+pad;
+  let svg=`<svg viewBox="${-ext} ${-ext} ${ext*2} ${ext+pad}" style="width:100%;height:auto;display:block" role="img" aria-label="Seat hemicycle">`;
+  pos.forEach((p,idx)=>{svg+=`<circle cx="${p.x.toFixed(4)}" cy="${p.y.toFixed(4)}" r="${dotR.toFixed(4)}" fill="${flat[idx]||'#ccc'}"/>`;});
+  wrap.innerHTML=svg+'</svg>';
 }
-// ── Constituency map ──────────────────────────────────────────────────
-// Real DUN boundaries from Malaysia's Department of Statistics
-// (github.com/dosm-malaysia/data-open), same source and method as the NS
-// and Malaysia national models.
-const MEL_MAP_PATHS={N01:"M71.96,180.20 L72.89,181.12 L72.39,182.24 L71.53,181.59 L71.96,180.20 Z M58.05,67.95 L66.44,76.03 L63.87,79.36 L63.40,84.57 L71.50,92.19 L68.98,95.31 L70.90,100.27 L89.72,112.72 L96.57,119.23 L91.47,119.72 L92.30,123.97 L89.16,127.70 L90.16,128.11 L89.97,138.37 L88.28,137.25 L85.17,142.57 L80.85,145.40 L82.75,150.53 L81.07,151.45 L81.36,153.02 L86.54,153.73 L92.19,157.54 L95.02,160.38 L96.03,164.39 L97.36,178.05 L93.02,189.24 L96.12,194.61 L92.80,198.15 L82.30,182.78 L78.15,180.07 L77.20,182.08 L76.13,181.34 L77.47,179.74 L67.71,176.89 L54.19,162.57 L42.80,155.64 L29.19,152.44 L26.17,156.68 L18.73,151.89 L16.85,152.18 L17.03,154.85 L14.46,154.85 L13.90,151.88 L10.85,151.33 L9.57,154.49 L10.08,150.66 L7.38,150.74 L3.92,145.24 L0.32,134.51 L0.00,125.49 L8.39,126.64 L14.66,117.98 L25.97,114.21 L43.53,102.07 L56.52,82.18 L58.05,67.95 Z",N02:"M103.47,119.13 L107.90,123.42 L109.67,123.09 L113.33,128.71 L115.71,128.94 L116.90,136.70 L113.49,146.57 L118.16,160.35 L116.83,160.58 L119.36,164.28 L122.44,164.58 L122.76,167.80 L126.21,168.38 L126.43,166.51 L128.07,168.93 L124.82,172.70 L126.28,174.31 L127.24,172.90 L127.81,175.10 L126.21,174.49 L124.87,177.77 L127.57,177.18 L127.44,178.49 L123.44,180.39 L125.45,183.13 L128.32,182.19 L128.54,184.88 L125.41,185.24 L125.02,187.71 L133.25,195.95 L130.27,197.73 L129.45,201.17 L125.98,201.03 L123.78,206.12 L125.19,207.85 L124.30,209.87 L126.41,211.82 L125.58,214.41 L126.79,217.58 L128.66,218.34 L129.55,226.75 L122.17,225.91 L121.87,233.50 L114.06,234.25 L116.61,242.13 L115.20,243.57 L110.60,242.39 L105.62,238.27 L98.76,212.30 L92.80,198.15 L96.12,194.61 L93.02,189.24 L97.44,177.08 L95.07,160.54 L87.15,154.05 L81.04,152.00 L82.75,150.53 L81.13,144.40 L85.17,142.57 L88.28,137.25 L89.97,138.37 L90.16,128.11 L89.16,127.70 L92.30,123.97 L91.50,119.63 L103.47,119.13 Z",N03:"M150.89,56.20 L149.39,56.42 L148.41,63.66 L151.33,65.73 L146.76,72.98 L142.06,75.95 L143.26,78.68 L142.09,81.08 L135.25,84.98 L139.16,91.79 L140.87,104.87 L136.93,106.73 L137.04,108.50 L146.17,129.21 L148.18,131.38 L148.92,129.86 L153.95,131.97 L158.51,130.43 L161.07,131.54 L164.70,134.66 L164.22,139.74 L161.91,141.24 L161.97,144.40 L159.03,144.08 L157.59,149.33 L151.48,152.54 L146.70,161.60 L144.49,161.06 L143.47,164.74 L138.93,170.05 L135.64,170.49 L132.28,167.17 L122.76,167.80 L122.44,164.58 L119.36,164.28 L116.83,160.58 L118.16,160.35 L113.49,146.57 L116.90,136.70 L115.71,128.94 L113.33,128.71 L109.67,123.09 L107.90,123.42 L102.83,118.48 L96.57,119.23 L84.07,108.62 L75.04,104.26 L70.90,100.27 L68.98,95.31 L71.49,92.19 L75.82,93.35 L78.83,90.79 L77.64,82.87 L80.48,76.13 L88.43,75.60 L90.48,72.90 L92.91,66.39 L90.66,64.47 L89.32,66.60 L87.41,64.41 L89.64,59.20 L88.73,52.97 L91.34,48.46 L94.34,49.85 L97.13,48.15 L104.60,52.59 L108.22,51.59 L113.82,57.12 L115.47,62.81 L116.25,60.12 L146.73,42.92 L145.41,45.98 L150.70,51.42 L150.89,56.20 Z",N04:"M197.79,137.08 L199.02,138.10 L199.23,144.00 L197.13,145.26 L199.19,149.32 L198.12,150.64 L201.00,161.30 L197.33,165.44 L203.40,181.17 L203.69,188.72 L206.69,197.38 L206.46,203.05 L202.67,204.50 L203.19,214.36 L210.20,214.49 L212.22,218.94 L207.47,218.73 L207.07,223.26 L200.46,221.53 L182.85,227.23 L180.45,224.45 L179.55,228.73 L168.55,231.54 L170.95,242.22 L170.10,244.91 L158.55,239.48 L155.26,245.41 L150.56,245.10 L146.78,247.84 L145.60,250.87 L143.48,250.83 L140.25,246.80 L135.86,247.24 L135.53,245.18 L120.37,245.65 L116.61,242.13 L114.06,234.25 L121.87,233.50 L122.17,225.91 L129.55,226.75 L128.66,218.34 L126.79,217.58 L125.58,214.41 L126.41,211.82 L124.30,209.87 L125.19,207.85 L123.78,206.12 L125.98,201.03 L129.45,201.17 L130.27,197.73 L133.25,195.95 L125.02,187.71 L125.41,185.24 L128.54,184.88 L128.32,182.19 L125.45,183.13 L123.44,180.39 L127.44,178.49 L127.57,177.18 L124.87,177.77 L126.21,174.49 L127.85,174.83 L127.24,172.90 L126.28,174.31 L124.82,172.70 L128.07,168.93 L126.65,166.85 L133.79,167.49 L135.64,170.49 L139.87,169.40 L144.49,161.06 L146.70,161.60 L151.48,152.54 L157.59,149.33 L159.27,143.81 L161.97,144.40 L161.91,141.24 L164.99,143.19 L166.59,141.10 L168.51,141.72 L175.08,149.32 L177.62,154.89 L182.98,155.95 L186.53,150.65 L188.19,151.26 L188.81,148.08 L194.35,146.62 L195.90,142.93 L195.63,136.28 L197.79,137.08 Z",N05:"M201.35,1.17 L212.64,6.84 L216.16,14.70 L224.13,18.12 L226.33,21.07 L228.18,25.44 L225.76,26.32 L226.04,32.44 L224.23,35.20 L227.25,35.10 L224.76,42.80 L227.05,42.91 L229.27,49.47 L232.93,53.27 L232.33,60.07 L224.27,65.19 L213.89,68.46 L213.25,78.93 L210.38,84.02 L212.71,84.73 L214.82,91.21 L216.20,91.34 L214.59,95.66 L217.09,102.77 L211.50,109.96 L214.03,113.91 L214.05,120.07 L212.03,120.31 L212.62,124.60 L214.35,125.30 L209.57,129.59 L210.20,133.43 L208.56,134.67 L210.11,134.12 L210.85,136.91 L212.37,133.56 L212.06,137.84 L206.54,136.17 L198.05,137.93 L195.98,135.53 L195.90,142.93 L194.35,146.62 L188.81,148.08 L188.19,151.26 L186.53,150.65 L185.15,154.04 L180.26,156.36 L177.62,154.89 L175.08,149.32 L168.51,141.72 L166.59,141.10 L164.99,143.19 L162.45,141.55 L164.22,139.74 L164.70,134.66 L161.07,131.54 L158.51,130.43 L153.95,131.97 L148.92,129.86 L148.18,131.38 L146.17,129.21 L137.04,108.50 L136.93,106.73 L140.87,104.87 L139.16,91.79 L135.25,84.98 L142.09,81.08 L143.26,78.68 L142.06,75.95 L146.76,72.98 L151.33,65.73 L148.41,63.66 L150.77,52.07 L145.41,45.98 L146.72,42.93 L165.95,48.88 L199.40,0.00 L201.35,1.17 Z",N06:"M221.32,113.80 L223.78,116.47 L224.95,121.82 L223.08,125.80 L226.15,122.72 L229.11,123.76 L229.11,120.90 L236.03,129.04 L254.95,125.86 L253.38,131.91 L257.44,136.07 L254.61,136.04 L250.94,139.62 L250.42,146.94 L243.72,148.79 L244.66,152.67 L240.18,155.89 L242.97,161.40 L243.19,166.11 L250.48,170.22 L252.01,173.03 L256.36,173.52 L259.26,175.91 L257.58,178.59 L259.32,195.49 L256.70,199.02 L257.84,201.02 L256.65,208.15 L255.16,207.63 L254.54,209.12 L259.21,209.14 L258.13,210.48 L260.27,215.56 L260.18,217.81 L257.01,220.19 L260.09,224.87 L258.36,227.41 L258.25,235.02 L256.66,237.82 L250.13,234.11 L247.79,228.76 L245.05,227.60 L245.58,223.97 L242.64,220.72 L238.13,223.21 L229.83,212.92 L217.40,215.65 L216.69,218.05 L213.11,217.79 L208.75,213.84 L203.19,214.36 L202.67,204.50 L206.46,203.05 L206.69,197.38 L203.69,188.72 L203.40,181.17 L197.33,165.44 L201.00,161.30 L198.12,150.64 L199.19,149.32 L197.13,145.26 L199.23,144.00 L198.61,137.37 L206.54,136.17 L212.06,137.84 L212.37,133.56 L210.85,136.91 L210.11,134.12 L208.56,134.67 L210.20,133.43 L209.57,129.59 L214.35,125.30 L212.62,124.60 L212.03,120.31 L214.05,120.07 L213.08,115.27 L219.97,112.36 L221.32,113.80 Z",N07:"M230.82,20.41 L232.62,23.87 L251.95,38.12 L296.14,47.53 L289.87,48.63 L287.59,56.05 L287.49,66.07 L289.25,72.15 L281.77,66.33 L273.18,72.07 L275.34,78.51 L278.59,78.37 L281.45,75.45 L284.67,76.90 L284.67,83.17 L286.10,85.59 L284.34,91.38 L286.86,94.55 L289.21,94.84 L288.83,98.27 L286.67,99.49 L288.42,100.85 L288.87,105.09 L295.60,112.74 L286.21,118.28 L288.08,120.21 L288.12,124.71 L284.43,125.82 L291.55,139.82 L290.76,140.55 L283.86,142.12 L276.06,127.21 L275.80,121.39 L273.60,118.06 L267.58,120.90 L266.96,125.62 L265.34,126.88 L266.61,127.23 L261.44,133.59 L258.62,132.22 L256.55,135.07 L253.38,131.91 L254.95,125.86 L236.03,129.04 L229.11,120.90 L229.11,123.76 L226.15,122.72 L223.08,125.80 L224.95,121.82 L223.78,116.47 L219.97,112.36 L214.03,113.91 L212.45,112.22 L212.72,110.23 L211.50,109.96 L217.09,102.77 L214.59,95.66 L216.20,91.34 L214.82,91.21 L212.71,84.73 L210.38,84.02 L213.25,78.93 L213.92,68.37 L224.27,65.19 L232.33,60.07 L232.93,53.27 L229.27,49.47 L227.05,42.91 L224.76,42.80 L227.25,35.10 L224.23,35.20 L226.04,32.44 L225.76,26.32 L228.18,25.44 L226.33,21.07 L230.82,20.41 Z",N08:"M379.33,13.61 L377.18,30.02 L378.48,30.86 L376.17,39.86 L379.74,39.92 L382.82,37.45 L380.66,44.37 L382.94,46.06 L376.56,53.15 L373.65,61.63 L371.85,61.59 L367.10,69.03 L356.93,76.27 L355.27,79.73 L357.95,84.10 L355.49,87.62 L363.07,102.11 L362.04,105.39 L364.86,115.34 L363.84,122.81 L365.78,123.14 L365.67,135.11 L366.98,139.48 L372.74,136.89 L371.89,141.09 L374.68,154.68 L367.11,158.31 L365.30,166.10 L366.86,165.94 L368.88,170.44 L362.70,189.43 L361.55,189.06 L360.13,204.48 L355.11,202.26 L350.03,203.98 L347.61,207.55 L342.61,207.57 L336.53,200.44 L324.78,196.72 L322.52,190.24 L321.07,189.78 L320.98,182.39 L318.81,188.23 L315.15,188.10 L313.53,183.77 L310.58,181.84 L308.48,182.62 L308.53,179.50 L300.96,178.40 L300.08,176.70 L301.41,176.75 L296.91,174.64 L298.54,170.30 L296.43,165.93 L295.64,169.58 L290.76,170.85 L288.91,164.74 L283.07,164.92 L282.44,167.56 L272.97,162.55 L270.14,166.95 L271.12,170.99 L268.06,172.96 L266.56,171.80 L267.54,169.61 L265.78,169.09 L263.14,175.30 L260.57,176.82 L256.36,173.52 L251.34,172.62 L250.48,170.22 L243.19,166.11 L242.97,161.40 L240.18,155.89 L244.66,152.67 L243.72,148.79 L250.42,146.94 L250.94,139.62 L254.61,136.04 L257.44,136.07 L258.05,132.44 L261.44,133.59 L266.61,127.23 L265.34,126.88 L266.96,125.62 L267.58,120.90 L273.60,118.06 L275.80,121.39 L276.06,127.21 L283.86,142.12 L291.55,139.82 L284.43,125.82 L288.12,124.71 L288.08,120.21 L286.21,118.28 L295.60,112.74 L288.87,105.09 L288.42,100.85 L286.67,99.49 L288.83,98.27 L289.21,94.84 L286.86,94.55 L284.34,91.38 L286.10,85.59 L284.67,83.17 L284.67,76.90 L281.45,75.45 L278.59,78.37 L275.34,78.51 L273.18,72.07 L281.77,66.33 L289.25,72.15 L287.49,66.07 L287.46,56.70 L289.87,48.63 L296.15,47.82 L336.02,22.60 L379.75,10.33 L379.33,13.61 Z",N09:"M275.80,164.85 L282.44,167.56 L283.07,164.92 L288.91,164.74 L290.76,170.85 L295.64,169.58 L296.43,165.93 L298.54,170.30 L296.91,174.64 L301.41,176.75 L300.08,176.70 L300.96,178.40 L308.53,179.50 L308.48,182.62 L310.58,181.84 L313.53,183.77 L315.15,188.10 L318.81,188.23 L320.98,182.39 L321.07,189.78 L322.52,190.24 L324.78,196.72 L336.53,200.44 L343.06,207.80 L347.61,207.55 L350.03,203.98 L355.11,202.26 L360.87,204.48 L359.56,217.27 L357.87,217.75 L353.13,243.64 L349.75,253.01 L341.32,254.12 L330.71,251.99 L324.20,246.19 L313.79,246.90 L296.74,253.33 L294.86,257.54 L289.07,255.77 L287.40,262.76 L284.75,262.50 L283.62,265.81 L281.60,264.42 L281.51,267.38 L278.29,269.03 L262.08,259.40 L273.02,250.54 L282.47,231.84 L279.94,226.93 L275.41,223.84 L276.04,218.35 L273.91,211.91 L276.86,205.43 L277.08,197.72 L270.44,193.84 L267.66,196.02 L259.09,188.75 L257.58,178.59 L259.26,175.91 L263.14,175.30 L265.78,169.09 L267.54,169.61 L266.56,171.80 L268.06,172.96 L271.12,170.99 L270.14,166.95 L272.97,162.55 L275.80,164.85 Z",N10:"M388.09,13.37 L430.85,29.00 L445.72,36.84 L444.41,49.03 L519.21,72.00 L570.36,93.56 L593.20,96.97 L600.00,104.89 L572.29,120.31 L562.25,120.42 L547.91,126.84 L543.27,136.24 L545.68,142.92 L533.23,154.66 L529.72,155.13 L524.95,151.94 L522.62,145.02 L518.21,142.79 L519.16,141.63 L516.99,140.04 L509.87,142.18 L507.42,140.35 L506.47,145.77 L494.49,149.25 L497.20,161.77 L437.45,155.56 L419.28,144.92 L408.42,144.02 L405.88,133.31 L402.08,136.60 L401.51,139.45 L395.60,140.62 L391.57,138.54 L382.48,138.71 L378.80,134.65 L376.03,134.52 L366.98,139.48 L365.10,132.00 L365.78,123.14 L363.84,122.81 L364.86,115.34 L362.07,105.76 L363.07,102.11 L355.49,87.62 L357.95,84.10 L355.27,79.73 L356.93,76.27 L367.10,69.03 L371.85,61.59 L373.65,61.63 L376.56,53.15 L382.94,46.06 L380.66,44.37 L382.82,37.45 L379.74,39.92 L376.17,39.86 L378.48,30.86 L377.18,30.02 L379.63,11.23 L388.09,13.37 Z",N11:"M182.84,227.21 L191.87,224.12 L194.38,239.54 L196.92,242.25 L202.55,236.15 L204.82,237.88 L204.02,240.01 L205.39,241.73 L207.95,242.29 L210.75,235.83 L213.60,235.04 L214.36,241.81 L216.81,240.70 L218.22,243.79 L224.17,244.80 L226.86,252.24 L221.35,252.49 L226.29,262.52 L227.20,273.85 L220.94,273.69 L219.84,268.17 L217.91,267.51 L216.23,270.21 L211.42,265.82 L203.83,269.37 L201.37,274.63 L197.13,269.50 L197.73,265.19 L196.50,264.55 L195.43,266.73 L187.13,258.40 L186.75,268.19 L179.19,264.24 L168.39,275.54 L162.44,276.74 L164.30,285.45 L166.31,286.68 L163.20,288.13 L161.48,293.06 L147.82,272.92 L140.48,266.34 L132.01,262.66 L129.26,266.90 L127.73,265.73 L123.01,256.02 L119.18,253.14 L115.20,243.57 L116.61,242.13 L120.37,245.65 L126.34,244.32 L127.87,246.52 L129.02,244.69 L135.53,245.18 L135.86,247.24 L140.25,246.80 L143.48,250.83 L145.60,250.87 L146.78,247.84 L150.56,245.10 L155.26,245.41 L158.55,239.48 L170.10,244.91 L170.95,242.22 L168.55,231.54 L179.55,228.73 L179.61,225.07 L181.44,224.10 L182.84,227.21 Z",N12:"M193.45,264.72 L195.43,266.73 L196.50,264.55 L197.73,265.19 L197.13,269.50 L199.79,271.69 L199.41,273.96 L194.39,275.91 L186.56,272.73 L184.27,279.21 L187.19,285.61 L183.94,287.27 L183.69,290.70 L184.81,295.04 L191.08,296.57 L190.97,301.83 L196.25,312.23 L199.07,325.87 L189.77,327.34 L187.55,329.02 L188.14,331.03 L178.24,330.73 L161.48,293.06 L163.20,288.13 L166.31,286.68 L164.30,285.45 L162.44,276.74 L168.39,275.54 L179.19,264.24 L186.75,268.19 L187.13,258.40 L193.45,264.72 Z",N13:"M262.88,192.07 L267.66,196.02 L270.44,193.84 L277.08,197.72 L276.86,205.43 L273.91,211.91 L276.04,218.35 L275.41,223.84 L279.94,226.93 L282.47,231.84 L273.02,250.54 L260.09,261.37 L258.34,275.71 L256.49,276.85 L256.34,286.41 L251.58,295.86 L248.56,295.95 L247.97,284.71 L237.04,283.44 L227.89,286.18 L227.90,292.71 L220.62,287.31 L213.19,284.72 L201.37,274.63 L203.83,269.37 L211.42,265.82 L216.23,270.21 L217.91,267.51 L219.84,268.17 L220.94,273.69 L227.20,273.85 L226.29,262.52 L221.35,252.49 L226.86,252.24 L226.74,250.32 L224.17,244.80 L218.22,243.79 L216.81,240.70 L214.36,241.81 L213.60,235.04 L210.75,235.83 L207.95,242.29 L205.39,241.73 L204.02,240.01 L204.82,237.88 L202.55,236.15 L196.92,242.25 L194.38,239.54 L192.22,224.82 L200.46,221.53 L207.07,223.26 L207.74,218.56 L212.22,218.94 L211.89,217.10 L216.69,218.05 L217.40,215.65 L229.83,212.92 L238.13,223.21 L242.64,220.72 L245.58,223.97 L245.05,227.60 L247.79,228.76 L250.13,234.11 L256.66,237.82 L258.25,235.02 L258.36,227.41 L260.09,224.87 L257.01,220.19 L260.18,217.81 L260.27,215.56 L258.13,210.48 L259.21,209.14 L254.54,209.12 L256.65,208.15 L257.84,201.02 L256.70,199.02 L259.32,195.49 L259.09,188.75 L262.88,192.07 Z",N14:"M200.48,273.01 L213.19,284.72 L220.62,287.31 L227.90,292.71 L227.71,290.71 L233.29,308.30 L232.55,309.79 L234.68,310.01 L236.26,313.45 L231.45,320.43 L230.08,325.95 L237.71,329.87 L240.53,329.33 L237.28,342.20 L217.86,329.22 L198.78,326.77 L196.25,312.23 L190.97,301.83 L191.08,296.57 L184.81,295.04 L183.69,290.70 L183.94,287.27 L187.19,285.61 L184.27,279.21 L186.56,272.73 L194.39,275.91 L199.41,273.96 L199.79,271.69 L200.48,273.01 Z",N15:"M270.12,304.15 L270.96,307.07 L279.60,309.81 L280.82,304.64 L285.26,300.54 L290.76,313.88 L288.60,319.46 L284.89,318.80 L281.49,322.02 L284.21,325.96 L285.15,332.79 L293.99,330.74 L294.27,337.35 L297.17,338.74 L295.04,344.23 L287.70,346.23 L282.55,343.64 L281.81,337.47 L263.23,329.54 L262.81,322.64 L254.80,319.65 L249.26,313.54 L254.68,311.48 L259.27,305.44 L262.48,304.44 L262.68,299.39 L265.93,297.07 L269.61,299.64 L270.12,304.15 Z",N16:"M321.98,245.89 L330.71,251.99 L348.13,254.09 L345.09,258.08 L346.67,261.06 L345.45,263.07 L345.75,275.50 L337.21,295.02 L332.86,300.31 L314.60,298.43 L310.45,295.59 L308.87,299.84 L300.51,300.90 L299.46,302.59 L296.26,299.45 L295.92,301.67 L289.17,307.04 L285.17,300.46 L280.82,304.64 L280.59,308.49 L274.59,292.43 L273.26,284.46 L275.42,269.88 L281.51,267.38 L281.60,264.42 L283.62,265.81 L284.75,262.50 L287.40,262.76 L289.07,255.77 L294.86,257.54 L296.74,253.33 L313.79,246.90 L321.98,245.89 Z",N17:"M314.12,298.08 L332.86,300.31 L333.97,305.19 L330.99,306.95 L329.89,313.96 L330.88,317.99 L328.39,325.40 L332.07,335.21 L318.39,337.93 L316.30,334.94 L312.14,335.62 L307.91,332.23 L301.18,331.56 L298.63,339.28 L294.27,337.35 L294.31,331.69 L292.83,329.94 L285.15,332.79 L284.21,325.96 L281.49,322.02 L284.89,318.80 L288.60,319.46 L290.76,313.88 L287.22,304.12 L289.17,307.04 L295.92,301.67 L296.26,299.45 L299.46,302.59 L300.51,300.90 L308.87,299.84 L310.45,295.59 L314.12,298.08 Z",N18:"M402.28,296.26 L402.59,299.00 L404.48,297.78 L405.68,299.45 L404.79,303.50 L408.25,301.21 L409.49,303.79 L406.01,322.50 L413.09,336.39 L408.58,343.01 L409.54,343.59 L404.48,348.31 L404.78,350.76 L400.80,351.66 L400.90,356.37 L395.68,358.61 L392.80,369.48 L387.85,375.04 L388.15,379.28 L386.09,379.67 L379.22,375.60 L376.25,380.37 L376.48,375.17 L374.61,369.08 L373.07,370.36 L373.52,373.69 L362.99,368.98 L361.16,372.03 L355.61,367.32 L352.38,368.86 L350.94,365.29 L348.00,364.40 L346.60,360.52 L344.43,363.99 L342.08,363.82 L341.19,366.57 L338.95,365.35 L336.21,368.55 L334.12,366.11 L328.20,369.11 L325.48,368.95 L325.68,366.48 L314.93,367.19 L310.80,361.52 L314.87,352.99 L318.56,351.48 L323.17,358.99 L328.50,358.67 L331.47,345.92 L329.85,340.11 L332.23,333.85 L328.39,326.75 L331.00,316.56 L338.60,316.99 L339.78,313.74 L346.12,308.81 L353.33,308.74 L357.63,315.38 L357.69,318.54 L368.57,309.33 L372.52,309.38 L380.07,305.45 L386.23,309.20 L392.30,308.34 L397.06,300.26 L402.28,296.26 Z",N19:"M271.64,265.21 L276.72,268.26 L273.01,282.09 L274.59,292.43 L280.59,308.49 L276.49,309.63 L270.96,307.07 L270.00,300.37 L265.93,297.07 L262.68,299.39 L262.48,304.44 L259.27,305.44 L254.68,311.48 L249.38,313.21 L254.80,319.65 L262.81,322.64 L263.41,328.65 L263.01,330.46 L260.35,329.44 L254.58,323.44 L248.39,340.88 L248.36,346.67 L247.19,348.79 L245.68,347.57 L246.54,346.10 L244.48,345.58 L242.64,348.74 L240.24,347.12 L241.35,344.81 L237.28,342.20 L240.53,329.33 L237.71,329.87 L230.08,325.95 L231.45,320.43 L236.26,313.45 L234.68,310.01 L232.55,309.79 L233.29,308.30 L227.71,290.71 L227.72,286.25 L237.04,283.44 L247.97,284.71 L248.56,295.95 L251.58,295.86 L256.34,286.41 L256.49,276.85 L258.34,275.71 L260.09,261.37 L262.09,259.40 L271.64,265.21 Z",N20:"M260.92,329.75 L265.61,330.12 L276.23,335.07 L272.61,341.60 L272.30,350.58 L267.85,349.73 L270.40,355.14 L264.00,363.14 L253.16,357.38 L257.86,351.82 L257.14,349.22 L248.36,346.67 L248.39,340.88 L254.58,323.44 L260.92,329.75 Z",N21:"M302.75,331.82 L307.91,332.23 L312.14,335.62 L316.30,334.94 L318.39,337.93 L332.07,335.21 L329.85,340.11 L331.47,345.92 L328.50,358.67 L323.17,358.99 L318.96,351.68 L315.69,352.21 L309.03,364.82 L306.84,364.65 L304.17,361.58 L303.63,362.85 L293.72,360.14 L297.06,355.69 L284.28,355.38 L284.18,350.99 L281.28,348.50 L280.73,344.86 L276.84,347.42 L272.66,346.17 L272.61,341.60 L276.23,335.07 L282.66,338.36 L282.55,343.64 L287.70,346.23 L291.69,345.97 L295.04,344.23 L297.12,338.50 L298.63,339.28 L300.35,331.97 L302.75,331.82 Z",N22:"M266.85,373.23 L266.23,371.45 L268.81,370.91 L276.27,373.81 L276.47,375.50 L273.75,377.54 L263.80,372.31 L265.39,370.33 L264.82,372.44 L266.85,373.23 Z M281.20,346.91 L284.18,350.99 L284.28,355.38 L286.50,355.91 L283.59,358.58 L282.75,363.83 L293.23,366.35 L291.66,374.52 L284.91,369.82 L284.50,371.67 L280.89,372.39 L277.43,369.61 L276.96,371.56 L271.54,368.60 L271.82,367.22 L263.63,364.92 L270.40,355.14 L267.92,349.55 L272.30,350.58 L272.66,346.17 L276.84,347.42 L279.62,344.64 L281.20,346.91 Z",N23:"M351.67,500.00 L348.27,499.54 L348.92,497.17 L351.34,498.50 L351.67,500.00 Z M356.61,449.10 L357.13,448.65 L356.61,449.10 Z M342.53,447.71 L345.07,449.75 L351.49,449.42 L350.84,453.55 L346.55,458.05 L344.38,464.51 L341.92,464.00 L341.90,457.43 L338.41,457.64 L335.85,453.82 L342.53,447.71 Z M333.15,443.61 L332.36,444.05 L331.20,442.69 L331.91,442.24 L333.15,443.61 Z M291.66,356.21 L297.06,355.69 L293.80,360.18 L303.63,362.85 L304.17,361.58 L306.53,364.51 L309.03,364.82 L310.80,361.52 L314.93,367.19 L325.99,366.53 L325.97,369.14 L331.56,368.52 L334.12,366.11 L336.21,368.55 L338.95,365.35 L341.19,366.57 L342.08,363.82 L344.43,363.99 L346.60,360.52 L348.00,364.40 L350.94,365.29 L352.38,368.86 L355.61,367.32 L361.16,372.03 L357.82,374.33 L354.51,383.90 L354.84,398.15 L352.40,402.95 L346.10,400.78 L342.65,403.20 L342.70,401.40 L340.80,400.46 L333.98,398.99 L333.77,396.55 L328.83,391.15 L320.86,387.40 L308.70,385.07 L291.78,375.13 L293.23,366.35 L282.75,363.83 L283.59,358.58 L286.50,355.91 L291.66,356.21 Z",N24:"M407.68,139.33 L410.47,150.71 L413.24,188.15 L412.09,190.73 L418.21,192.92 L425.31,199.63 L420.63,213.86 L421.78,217.16 L427.29,214.74 L433.10,218.36 L436.07,215.96 L439.52,217.92 L441.19,217.09 L447.67,223.92 L453.08,224.58 L422.05,251.60 L413.09,251.42 L412.73,259.01 L411.69,259.21 L415.75,265.26 L410.81,271.04 L408.09,278.16 L412.54,292.08 L412.01,294.60 L407.45,291.38 L405.90,296.94 L402.59,299.00 L401.71,296.46 L397.06,300.26 L392.30,308.34 L386.23,309.20 L380.07,305.45 L372.52,309.38 L368.57,309.33 L357.69,318.54 L357.63,315.38 L353.33,308.74 L346.12,308.81 L339.78,313.74 L338.60,316.99 L331.00,316.56 L329.89,313.96 L330.99,306.95 L333.97,305.19 L333.08,299.49 L337.41,294.64 L345.75,275.50 L345.45,263.07 L346.67,261.06 L345.09,258.08 L351.52,249.99 L357.87,217.75 L359.56,217.27 L360.14,200.11 L361.88,195.98 L360.21,195.06 L368.88,170.44 L366.86,165.94 L365.30,166.10 L367.11,158.31 L374.68,154.68 L371.89,141.09 L372.74,136.89 L378.80,134.65 L382.48,138.71 L391.57,138.54 L395.60,140.62 L401.51,139.45 L402.08,136.60 L405.88,133.31 L407.68,139.33 Z",N25:"M519.09,141.71 L518.21,142.79 L522.62,145.02 L524.95,151.94 L529.72,155.13 L534.14,154.20 L542.79,146.28 L543.64,149.24 L543.06,151.39 L540.22,151.47 L533.85,157.26 L533.38,164.57 L529.81,165.57 L529.46,167.41 L526.88,166.72 L525.39,169.27 L524.56,167.67 L523.16,169.59 L522.54,168.37 L522.52,170.73 L520.94,171.55 L521.43,177.83 L519.86,177.84 L518.16,186.86 L524.15,198.27 L524.66,204.12 L519.85,208.87 L517.45,217.40 L519.10,227.99 L517.01,229.23 L515.92,237.95 L512.67,240.92 L510.56,246.38 L506.86,269.30 L503.74,275.79 L501.77,292.26 L502.91,295.30 L499.05,296.54 L497.79,298.80 L505.22,309.39 L498.52,307.22 L457.22,303.62 L456.39,298.73 L457.53,296.26 L454.25,291.16 L450.40,277.65 L457.42,275.21 L458.86,273.38 L458.59,269.88 L452.86,261.08 L448.53,260.81 L447.98,258.30 L446.04,258.95 L445.96,257.38 L442.38,257.92 L436.14,251.37 L428.18,246.25 L453.08,224.58 L447.67,223.92 L441.19,217.09 L439.52,217.92 L436.07,215.96 L433.10,218.36 L427.29,214.74 L421.78,217.16 L420.63,213.86 L425.31,199.63 L418.21,192.92 L412.09,190.73 L413.24,188.15 L410.47,150.71 L408.42,144.02 L419.28,144.92 L437.45,155.56 L497.20,161.77 L494.49,149.25 L506.47,145.77 L507.42,140.35 L509.87,142.18 L516.99,140.04 L519.09,141.71 Z",N26:"M428.24,334.61 L429.52,335.75 L429.15,353.42 L426.02,355.41 L425.02,352.97 L423.53,357.28 L421.71,356.45 L420.98,357.82 L420.95,364.14 L422.76,366.75 L419.54,367.83 L417.59,379.79 L414.55,381.16 L414.60,383.30 L416.83,384.03 L417.24,387.84 L415.38,392.99 L413.71,392.69 L413.55,402.24 L416.09,406.55 L414.08,410.52 L415.39,411.70 L413.87,428.80 L393.42,429.66 L382.17,425.97 L369.41,416.37 L360.52,406.62 L352.40,402.95 L355.16,396.51 L354.98,382.07 L358.14,373.80 L362.04,371.57 L362.99,368.98 L373.52,373.69 L373.07,370.36 L374.61,369.08 L376.48,375.17 L376.25,380.37 L379.22,375.60 L386.09,379.67 L388.15,379.28 L387.85,375.04 L392.80,369.48 L395.68,358.61 L400.90,356.37 L401.13,351.30 L404.78,350.76 L404.48,348.31 L409.66,343.14 L421.98,344.45 L422.84,333.17 L425.16,327.68 L428.24,334.61 Z",N27:"M429.38,247.85 L433.24,249.05 L442.38,257.92 L445.96,257.38 L446.04,258.95 L447.98,258.30 L448.53,260.81 L452.86,261.08 L459.04,272.53 L457.42,275.21 L450.40,277.65 L454.25,291.16 L457.53,296.26 L456.73,302.67 L460.82,304.18 L459.84,314.34 L455.78,321.24 L454.44,329.79 L454.36,346.17 L452.70,354.00 L453.70,361.42 L447.68,380.82 L457.66,390.36 L460.76,390.55 L461.92,396.62 L465.45,398.23 L470.11,395.10 L478.60,395.30 L481.27,392.23 L479.66,397.32 L476.13,398.51 L477.05,403.85 L471.49,401.76 L471.98,404.00 L467.28,404.94 L472.01,407.04 L470.06,409.64 L468.02,408.03 L465.65,409.81 L465.68,413.30 L457.17,439.68 L457.33,449.01 L442.32,444.04 L420.86,430.65 L413.87,428.80 L415.39,411.70 L414.08,410.52 L416.09,406.55 L413.55,402.24 L413.71,392.69 L415.38,392.99 L417.24,387.84 L416.83,384.03 L414.60,383.30 L414.55,381.16 L417.59,379.79 L419.54,367.83 L422.76,366.75 L420.95,364.14 L420.98,357.82 L421.71,356.45 L423.53,357.28 L425.02,352.97 L426.02,355.41 L429.15,353.42 L429.52,335.75 L428.07,335.77 L428.40,333.58 L425.16,327.68 L422.84,333.17 L421.98,344.45 L408.58,343.01 L413.07,335.91 L406.01,322.50 L409.49,303.79 L408.25,301.21 L404.79,303.50 L405.68,299.45 L404.48,297.78 L407.45,291.38 L411.32,295.07 L412.37,293.31 L408.09,278.16 L410.81,271.04 L415.75,265.26 L411.69,259.21 L412.73,259.01 L413.09,251.42 L422.05,251.60 L428.18,246.25 L429.38,247.85 Z",N28:"M481.70,305.82 L505.22,309.39 L506.58,317.97 L504.79,326.56 L494.04,334.68 L492.63,339.51 L482.50,344.54 L478.83,351.43 L480.54,353.11 L484.53,353.01 L486.06,356.30 L488.90,365.80 L485.89,369.82 L489.47,373.31 L491.78,373.15 L491.88,375.59 L493.83,377.02 L497.54,376.57 L499.08,372.33 L501.86,370.67 L503.16,373.14 L502.39,378.21 L504.89,382.90 L510.78,380.72 L511.99,384.92 L513.94,384.99 L513.52,388.44 L515.72,390.07 L521.07,390.29 L525.30,387.24 L526.07,393.40 L529.46,392.98 L532.88,389.49 L533.81,393.08 L537.69,389.55 L538.74,392.78 L537.66,398.34 L541.77,400.13 L539.40,407.15 L541.54,409.93 L541.38,412.74 L543.73,414.42 L543.38,418.69 L545.89,420.95 L543.88,422.93 L546.76,424.69 L541.17,431.17 L540.37,435.51 L541.45,438.21 L537.88,441.49 L538.69,447.97 L534.19,444.86 L526.48,452.08 L523.18,452.18 L522.28,449.64 L524.16,444.54 L516.87,444.67 L514.97,438.76 L512.98,437.54 L511.20,439.41 L513.25,443.61 L512.65,446.58 L504.97,446.14 L501.33,443.77 L501.61,447.51 L496.94,448.65 L496.38,446.99 L496.02,448.97 L492.45,449.66 L492.85,451.11 L494.83,450.66 L493.10,453.37 L495.52,455.59 L496.80,455.63 L495.62,452.42 L498.17,453.80 L498.49,451.27 L498.93,453.64 L503.63,456.87 L504.28,461.47 L499.76,461.41 L498.85,467.61 L475.70,454.90 L457.33,449.01 L457.17,439.68 L465.68,413.30 L465.65,409.81 L468.02,408.03 L470.06,409.64 L472.01,407.04 L467.28,404.94 L471.98,404.00 L471.49,401.76 L477.05,403.85 L476.13,398.51 L479.66,397.32 L481.27,392.23 L478.60,395.30 L470.11,395.10 L465.45,398.23 L461.92,396.62 L460.76,390.55 L457.66,390.36 L447.66,380.77 L453.70,361.42 L452.70,354.00 L454.36,346.17 L454.44,329.79 L455.78,321.24 L459.84,314.34 L460.89,303.25 L481.70,305.82 Z"};
-const MEL_MAP_VIEWBOX="0 0 600 500";
+
+// ── Results card ────────────────────────────────────────────────────────
+function chg(d){return d>0?`<td class="pos">+${d}</td>`:d<0?`<td class="neg">${MINUS}${-d}</td>`:'<td>0</td>';}
+function renderResults(){
+  const ents=seatEntries(views.hemi).filter(e=>e.count>0);
+  renderHemicycle(ents);
+  document.getElementById('barLegend').innerHTML=ents.map(e=>`<span><i class="sw" style="background:${e.color}"></i>${e.acr}</span>`).join('');
+  renderTable();
+}
+function renderTable(){
+  const blocs=PARTIES.map(p=>{
+    const share=curNS[p.id]||0,seats=tally[p.id]||0;
+    const contested=curDetails.filter(d=>contests(p.id,d.id));
+    const cnt={};contested.forEach(d=>{const c=resolveComponentParty(p.id,d.id);cnt[c]=(cnt[c]||0)+1;});
+    const subs=Object.keys(cnt).map(c=>({c,share:contested.length?share*cnt[c]/contested.length:0,seats:ptally[c]||0,d:(ptally[c]||0)-((BASE_COMP[p.id]||{})[c]||0)}))
+      .filter(s=>s.share>=1||s.seats>0).sort((a,b)=>b.seats-a.seats||b.share-a.share);
+    return {p,share,seats,d:seats-(GS[p.id]||0),subs};
+  }).filter(b=>b.share>=1||b.seats>0).sort((a,b)=>b.seats-a.seats||b.share-a.share);
+  const tot=PARTIES.reduce((a,p)=>a+(curNS[p.id]||0),0),oth=Math.max(0,100-tot);
+  let h='<thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th>+/-</th></tr></thead><tbody>';
+  blocs.forEach(b=>{
+    const open=expanded.has(b.p.id),has=b.subs.length>0;
+    h+=`<tr class="alli${open?' open':''}" data-k="${b.p.id}"><td><span class="pn">${has?'<i class="chev"></i>':''}<span class="pdot" style="background:${b.p.color};margin-top:0"></span><span>${blocName(b.p.id)}</span></span></td><td>${b.share.toFixed(1)}%</td><td class="seats">${b.seats}</td>${chg(b.d)}</tr>`;
+    if(open)b.subs.forEach(s=>{
+      h+=`<tr class="part"><td><span class="pn"><span class="pdot" style="background:${COMP_COLORS[s.c]||'#888780'};margin-top:0"></span><span>${compName(s.c)}</span></span></td><td>${s.share.toFixed(1)}%</td><td class="seats">${s.seats}</td>${chg(s.d)}</tr>`;
+    });
+  });
+  const cand={};Object.values(OTHER_CANDIDATES).forEach(c=>{cand[c]=(cand[c]||0)+1;});
+  const nC=Object.values(cand).reduce((a,b)=>a+b,0),othSeats=tally.OTH||0;
+  const osubs=Object.keys(cand).map(c=>({c,share:nC?oth*cand[c]/nC:0,seats:ptally[c]||0})).filter(s=>s.share>=1||s.seats>0).sort((a,b)=>b.seats-a.seats||b.share-a.share);
+  if(oth>=1||othSeats>0){
+    const open=expanded.has('OTH');
+    h+=`<tr class="${osubs.length?'alli':''}${open&&osubs.length?' open':''}" data-k="OTH"><td><span class="pn">${osubs.length?'<i class="chev"></i>':''}<span class="pdot" style="background:#888780;margin-top:0"></span><span>Others (OTH)</span></span></td><td>${oth.toFixed(1)}%</td><td class="seats">${othSeats}</td>${chg(othSeats)}</tr>`;
+    if(open)osubs.forEach(s=>{
+      h+=`<tr class="part"><td><span class="pn"><span class="pdot" style="background:${COMP_COLORS[s.c]||'#888780'};margin-top:0"></span><span>${compName(s.c)}</span></span></td><td>${s.share.toFixed(1)}%</td><td class="seats">${s.seats}</td>${chg(s.seats)}</tr>`;
+    });
+  }
+  document.getElementById('resTable').innerHTML=h+'</tbody>';
+}
+
+// ── Coalition builder ───────────────────────────────────────────────────
+function renderBuilder(){
+  const sel=selSets[views.coal];
+  const all=seatEntries(views.coal);
+  const ents=all.filter(e=>e.count>0).sort((a,b)=>b.count-a.count);
+  [...sel].forEach(k=>{if(!ents.some(e=>e.key===k))sel.delete(k);});
+  const box=document.getElementById('coalitionChecks');box.innerHTML='';
+  ents.forEach(e=>{
+    const b=document.createElement('button');b.className='btn'+(sel.has(e.key)?' on':'');b.type='button';
+    b.innerHTML=`<i class="sw" style="background:${e.color};margin-right:6px"></i>${e.acr}`;
+    b.addEventListener('click',()=>{sel.has(e.key)?sel.delete(e.key):sel.add(e.key);renderBuilder();});
+    box.appendChild(b);
+  });
+  const bar=document.getElementById('coalBar');bar.innerHTML='';
+  let n=0;
+  all.filter(e=>sel.has(e.key)&&e.count>0).forEach(e=>{
+    n+=e.count;
+    const seg=document.createElement('div');seg.style.cssText=`width:${e.count/TOTAL_SEATS*100}%;background:${e.color}`;
+    seg.title=e.acr;
+    bar.appendChild(seg);
+  });
+  const mp=MAJ/TOTAL_SEATS*100;
+  document.getElementById('coalBarMarker').innerHTML=`<i style="left:${mp}%"></i><b style="left:${mp}%">${MAJ}</b>`;
+  document.getElementById('coalSeats').textContent=`${n} of ${TOTAL_SEATS} seats`;
+  document.getElementById('coalOk').hidden=n<MAJ;
+}
+
+// ── Map ─────────────────────────────────────────────────────────────────
 let constMapClickBound=false;
-let mapColorMode='alliance'; // 'alliance' | 'party'
-let constMapZoom={scale:1,tx:0,ty:0};
-let constMapDragging=false, constMapDragStart=null, constMapDragMoved=false;
+let constMapZoom={scale:1,tx:0,ty:0},constMapDragging=false,constMapDragStart=null,constMapDragMoved=false;
 function applyConstMapTransform(){
-  const wrap=document.getElementById('constMapWrap');
-  wrap.style.transform=`translate(${constMapZoom.tx}px,${constMapZoom.ty}px) scale(${constMapZoom.scale})`;
+  document.getElementById('constMapWrap').style.transform=`translate(${constMapZoom.tx}px,${constMapZoom.ty}px) scale(${constMapZoom.scale})`;
 }
 function clampConstMapPan(){
-  const rect=document.getElementById('constMapViewport').getBoundingClientRect();
-  const minTx=rect.width-rect.width*constMapZoom.scale, minTy=rect.height-rect.height*constMapZoom.scale;
-  constMapZoom.tx=Math.min(0,Math.max(minTx,constMapZoom.tx));
-  constMapZoom.ty=Math.min(0,Math.max(minTy,constMapZoom.ty));
+  const r=document.getElementById('constMapViewport').getBoundingClientRect();
+  constMapZoom.tx=Math.min(0,Math.max(r.width-r.width*constMapZoom.scale,constMapZoom.tx));
+  constMapZoom.ty=Math.min(0,Math.max(r.height-r.height*constMapZoom.scale,constMapZoom.ty));
 }
-function constMapZoomAt(factor, clientX, clientY){
-  const rect=document.getElementById('constMapViewport').getBoundingClientRect();
-  const cx=clientX-rect.left, cy=clientY-rect.top;
-  const newScale=Math.min(10, Math.max(1, constMapZoom.scale*factor));
-  const actualFactor=newScale/constMapZoom.scale;
-  constMapZoom.tx=cx-(cx-constMapZoom.tx)*actualFactor;
-  constMapZoom.ty=cy-(cy-constMapZoom.ty)*actualFactor;
-  constMapZoom.scale=newScale;
-  clampConstMapPan();
-  applyConstMapTransform();
+function constMapZoomAt(f,cx0,cy0){
+  const r=document.getElementById('constMapViewport').getBoundingClientRect();
+  const cx=cx0-r.left,cy=cy0-r.top,ns=Math.min(10,Math.max(1,constMapZoom.scale*f)),af=ns/constMapZoom.scale;
+  constMapZoom.tx=cx-(cx-constMapZoom.tx)*af;constMapZoom.ty=cy-(cy-constMapZoom.ty)*af;constMapZoom.scale=ns;
+  clampConstMapPan();applyConstMapTransform();
 }
-function resetConstMapZoom(){
-  constMapZoom={scale:1,tx:0,ty:0};
-  applyConstMapTransform();
-}
-function setMapColorMode(mode){
-  if(mode===mapColorMode)return;
-  mapColorMode=mode;
-  renderConstituencyMap();
-}
-// Colour by Alliance | Party (used by the Winners and Flipped views).
-function setMapColor(mode){
-  if(mode===mapColorMode)return;
-  document.getElementById('mapColorAllianceBtn').classList.toggle('on',mode==='alliance');
-  document.getElementById('mapColorPartyBtn').classList.toggle('on',mode==='party');
-  setMapColorMode(mode);
-}
-function activeStrength(){return (mapMode==='strength'&&strengthSel)?strengthSel:null;}
-// Does a seat that moved from `was` to `now` fall inside the chosen focus?
-function flipMatches(was,now){
-  if(!flipFocus)return true;
-  const[kind,key]=flipFocus.split(':');
-  return kind==='gain'?now===key:was===key;
-}
-function flipFocusLabel(){
-  if(!flipFocus)return '';
-  const[kind,key]=flipFocus.split(':');
-  return (kind==='gain'?'gained by ':'lost by ')+(LEGEND_ACRONYM[key]||key);
-}
-// Shows only the options that belong to the chosen view.
-function syncMapControls(){
-  [['winners','Winners'],['strength','Strength'],['flipped','Flipped']].forEach(([m,n])=>document.getElementById('mapMode'+n+'Btn').classList.toggle('on',mapMode===m));
-  document.getElementById('optColor').style.display=(mapMode==='strength')?'none':'flex';
-  document.getElementById('optStrength').style.display=(mapMode==='strength')?'flex':'none';
-  document.getElementById('optFocus').style.display=(mapMode==='flipped')?'flex':'none';
-}
-function setMapMode(m){
-  if(m===mapMode)return;
-  mapMode=m;
+function hideTip(){
   document.getElementById('constMapTooltip').style.display='none';
   selConst=null;
-  syncMapControls();
-  renderConstituencyMap();
-}
-function setStrength(v){
-  const[t,k]=String(v).split(':');
-  strengthSel={type:t==='p'?'party':'alliance',key:k};
-  document.getElementById('constMapTooltip').style.display='none';
-  selConst=null;
-  renderConstituencyMap();
-}
-function setFlipFocus(v){
-  flipFocus=v||'';
-  document.getElementById('constMapTooltip').style.display='none';
-  selConst=null;
-  renderConstituencyMap();
-}
-// Darken a hex colour (#rgb or #rrggbb) by multiplying each channel by f (<1).
-function darkenHex(hex,f){
-  let h=String(hex||'#ccc').replace('#','');
-  if(h.length===3)h=h.split('').map(c=>c+c).join('');
-  const n=parseInt(h,16);
-  return '#'+[(n>>16)&255,(n>>8)&255,n&255].map(v=>Math.round(v*f).toString(16).padStart(2,'0')).join('');
+  document.querySelectorAll('#constMapWrap path.sel').forEach(el=>el.classList.remove('sel'));
 }
 function hexAlpha(hex,a){
   let h=String(hex||'#888780').replace('#','');
   if(h.length===3)h=h.split('').map(c=>c+c).join('');
   const n=parseInt(h,16);
-  return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
 }
-// Highlights the clicked seat in a darker shade of its own colour, and restores the previous one. Works on the live DOM so the map never re-renders mid-click.
-function applyMapHighlight(wrap,attr,id,selStroke){
-  wrap.querySelectorAll('path.sel').forEach(el=>{
-    el.classList.remove('sel');
-    el.setAttribute('fill',el.getAttribute('data-fill'));
-    el.setAttribute('stroke',el.getAttribute('data-stroke')||'#fff');
-    el.setAttribute('stroke-width',el.getAttribute('data-sw'));
-    el.setAttribute('fill-opacity',el.getAttribute('data-fo'));
-  });
-  if(!id)return;
-  const el=wrap.querySelector('path['+attr+'="'+id+'"]');
-  if(!el)return;
-  el.classList.add('sel');
-  el.setAttribute('fill',darkenHex(el.getAttribute('data-fill'),0.6));
-  el.setAttribute('fill-opacity','1');   // darker shade only: no extra border on the clicked area
-}
-// ---- strength filter: shade every seat by one alliance's/party's projected vote share ----
-function filterLabel(key,mode){return mode==='party'?key:((PARTIES.find(p=>p.id===key)||{}).label||key);}
-function filterColor(key,mode){return mode==='party'?(COMP_COLORS[key]||'#888780'):((PARTIES.find(p=>p.id===key)||{}).color||'#888780');}
-function seatShareFor(d,key,mode){
+function seatShareFor(d,key){
   let sh=0;
-  Object.entries(d.proj).forEach(([coal,v])=>{
-    if(v<=0)return;
-    if(mode==='party'){if(resolveComponentParty(coal,d.id)===key)sh+=v;}
-    else if(coal===key)sh+=v;
-  });
+  Object.entries(d.proj).forEach(([coal,v])=>{if(v>0&&contests(coal,d.id)&&keyOf(coal,d.id)===key)sh+=v;});
   return sh;
 }
-function filterLegendHtml(key,mode,color,max){
-  return `<span style="display:inline-flex;align-items:center;gap:8px;"><span>0%</span><span style="width:170px;height:10px;border-radius:5px;background:linear-gradient(to right,${hexAlpha(color,0.15)},${hexAlpha(color,1)});display:inline-block;"></span><span>${max.toFixed(1)}%</span><span style="margin-left:6px;color:#5f5e5a;">${filterLabel(key,mode)} projected vote share</span></span>`;
+function keyColor(key){
+  if(views.map==='party')return COMP_COLORS[key]||'#888780';
+  return (PARTIES.find(p=>p.id===key)||{}).color||COMP_COLORS[key]||'#888780';
 }
-// Rebuilds the two drop-downs: what Strength can shade by, and what Flipped can focus on.
-function refreshMapOptions(){
-  const ssel=document.getElementById('mapStrengthSel'),fsel=document.getElementById('mapFocusSel');
-  if(!ssel||!fsel)return;
-  const aTot={},pTot={};let grand=0;
-  curDetails.forEach(d=>{
-    grand+=d.tot2;
-    Object.entries(d.proj).forEach(([coal,v])=>{
-      if(v<=0.05||coal==='OTHERS')return;
-      aTot[coal]=(aTot[coal]||0)+v/100*d.tot2;
-      const party=resolveComponentParty(coal,d.id);
-      pTot[party]=(pTot[party]||0)+v/100*d.tot2;
-    });
-  });
-  const keep=t=>Object.keys(t).filter(k=>grand>0&&t[k]/grand>=0.0015).sort((a,b)=>t[b]-t[a]);
-  const aKeys=keep(aTot),pKeys=keep(pTot);
-  ssel.innerHTML='<optgroup label="Alliances">'+aKeys.map(k=>`<option value="a:${k}">${filterLabel(k,'alliance')}</option>`).join('')+'</optgroup>'
-    +'<optgroup label="Parties">'+pKeys.map(k=>`<option value="p:${k}">${k}</option>`).join('')+'</optgroup>';
-  const valid=strengthSel&&(strengthSel.type==='party'?pKeys:aKeys).includes(strengthSel.key);
-  if(!valid)strengthSel=aKeys.length?{type:'alliance',key:aKeys[0]}:null;
-  ssel.value=strengthSel?((strengthSel.type==='party'?'p:':'a:')+strengthSel.key):'';
-  fsel.innerHTML='<option value="">All flips</option>'
-    +'<optgroup label="Gained by">'+PARTIES.map(p=>`<option value="gain:${p.id}">${p.label}</option>`).join('')+'</optgroup>'
-    +'<optgroup label="Lost by">'+PARTIES.map(p=>`<option value="lose:${p.id}">${p.label}</option>`).join('')+'</optgroup>';
-  if(flipFocus&&![...fsel.options].some(o=>o.value===flipFocus))flipFocus='';
-  fsel.value=flipFocus;
+function renderMapButtons(){
+  const ents=seatEntries(views.map);
+  const tot={};let grand=0;
+  curDetails.forEach(d=>{grand+=d.tot2;Object.entries(d.proj).forEach(([coal,v])=>{if(v>0&&contests(coal,d.id)){const k=keyOf(coal,d.id);tot[k]=(tot[k]||0)+v/100*d.tot2;}});});
+  const list=ents.filter(e=>grand>0&&(tot[e.key]||0)/grand>=0.0015).sort((a,b)=>b.count-a.count||(tot[b.key]||0)-(tot[a.key]||0));
+  if(mapView.kind==='str'&&!list.some(e=>e.key===mapView.key))mapView={kind:'winner'};
+  const box=document.getElementById('mapBtns');box.innerHTML='';
+  const add=(label,on,fn,color)=>{const b=document.createElement('button');b.type='button';b.className='btn'+(on?' on':'');if(color)b.innerHTML=`<i class="sw" style="background:${color};margin-right:6px"></i>${label}`;else b.textContent=label;b.addEventListener('click',fn);box.appendChild(b);};
+  add('Winner',mapView.kind==='winner',()=>setMapView({kind:'winner'}));
+  add('Gains',mapView.kind==='gains',()=>setMapView({kind:'gains'}));
+  list.forEach(e=>add(e.acr,mapView.kind==='str'&&mapView.key===e.key,()=>setMapView({kind:'str',key:e.key}),e.color));
 }
-// Winner of every seat when all parties sit exactly on their baseline (the reference for "flipped").
-// In standard mode this is the actual 2021 result; in merged mode it is the merged-bloc baseline.
-const NEUTRAL_W={};
-function neutralWinnerMap(){
-  if(!NEUTRAL_W[MODE]){
-    const sw={},sc={};PARTIES.forEach(p=>{sw[p.id]=0;sc[p.id]=1;});
-    const m={};
-    SEATS.forEach(s=>{if(!s[6])return;m[s[0]]=projectSeat(s,sw,sc).coalW;});
-    NEUTRAL_W[MODE]=m;
-  }
-  return NEUTRAL_W[MODE];
-}
-function showConstSeatTooltip(id, evt){
-  const d=curDetails.find(x=>x.id===id);
-  const tip=document.getElementById('constMapTooltip');
+function setMapView(v){mapView=v;hideTip();renderMapButtons();renderMap();}
+
+function showTip(id,evt){
+  const d=curDetails.find(x=>x.id===id),tip=document.getElementById('constMapTooltip');
   if(!d){tip.style.display='none';return;}
-  const ranked=Object.entries(d.proj).filter(([,v])=>v>0.05).sort((a,b)=>b[1]-a[1]);
-  let html=`<div class="mt-title">${d.name} <span class="mt-seats">${id}</span></div>`;
-  if(mapMode==='flipped'){
-    const was=neutralWinnerMap()[id],AC=c=>LEGEND_ACRONYM[c]||c;
-    html+=`<div style="margin:-2px 0 6px;font-size:11px;font-weight:600;color:${was!==d.coalW?'#854f0b':'#888780'};">${was!==d.coalW?`Flipped: ${AC(was)} → ${AC(d.coalW)}`:`Held by ${AC(d.coalW)}`}</div>`;
-  }
-  ranked.forEach(([coal,v])=>{
-    const party=PARTIES.find(p=>p.id===coal);
-    if(mapColorMode==='party'){
-      const comp=resolveComponentParty(coal,id);
-      html+=`<div class="mt-row"><span><span class="mt-dot" style="background:${COMP_COLORS[comp]||'#ccc'};"></span>${comp}</span><span style="font-weight:600;color:#1a1a18;">${v.toFixed(1)}%</span></div>`;
-    } else {
-      html+=`<div class="mt-row"><span><span class="mt-dot" style="background:${party?party.color:'#ccc'};"></span>${party?party.label:coal}</span><span style="font-weight:600;color:#1a1a18;">${v.toFixed(1)}%</span></div>`;
-    }
+  const rows=Object.entries(d.proj).filter(([c,v])=>contests(c,id)&&(v>=1||c===d.coalW)).sort((a,b)=>b[1]-a[1]);
+  let h=`<div class="tt"><div>${id} ${d.name}</div></div>`;
+  rows.forEach(([c,v])=>{
+    h+=`<div class="tr${c===d.coalW?' w':''}"><span><i class="d" style="background:${colorOf(c,id)}"></i>${acrOf(c,id)}</span><span>${v.toFixed(1)}%</span></div>`;
   });
-  tip.innerHTML=html;
-  tip.style.display='block';
-  const wrapRect=document.getElementById('constMapViewport').getBoundingClientRect();
-  let x=evt.clientX-wrapRect.left+10;
-  let y=evt.clientY-wrapRect.top+10;
-  if(x+220>wrapRect.width)x=evt.clientX-wrapRect.left-230;
-  tip.style.left=Math.max(4,x)+'px';
-  tip.style.top=Math.max(4,y)+'px';
+  tip.innerHTML=h;tip.style.display='block';
+  const box=document.getElementById('constMapViewport').parentNode.getBoundingClientRect();
+  let x=evt.clientX-box.left+10,y=evt.clientY-box.top+10;
+  if(x+186>box.width)x=evt.clientX-box.left-186;
+  tip.style.left=Math.max(4,x)+'px';tip.style.top=Math.max(4,y)+'px';
 }
-function renderConstituencyMap(){
+
+function renderMap(){
   const wrap=document.getElementById('constMapWrap');
-  const AS=activeStrength();
-  const FK=AS?AS.key:'',FM=AS?AS.type:'alliance',fColor=FK?filterColor(FK,FM):null;
+  const view=mapView;
   const fShare={};let fMax=0;
-  if(FK)curDetails.forEach(d=>{const v=seatShareFor(d,FK,FM);fShare[d.id]=v;if(v>fMax)fMax=v;});
-  const SHOW=(mapMode==='flipped'),nwMap=SHOW?neutralWinnerMap():null;
-  const AC=c=>LEGEND_ACRONYM[c]||c;
-  const flips=[];
-  let svg=`<svg viewBox="${MEL_MAP_VIEWBOX}" style="width:100%;height:100%;display:block;">`;
-  Object.entries(MEL_MAP_PATHS).forEach(([id,d])=>{
+  if(view.kind==='str')curDetails.forEach(d=>{const v=seatShareFor(d,view.key);fShare[d.id]=v;if(v>fMax)fMax=v;});
+  const gainers=[];let flips=0;
+  let svg=`<svg viewBox="${MEL_MAP_VIEWBOX}" role="img" aria-label="Map of Melaka state constituencies">`;
+  Object.entries(MEL_MAP_PATHS).forEach(([id,dpath])=>{
     const det=curDetails.find(x=>x.id===id);
-    let color='#ccc', title=id;
+    let style='',cls='';
     if(det){
-      const party=PARTIES.find(p=>p.id===det.coalW);
-      if(mapColorMode==='party'){
-        const comp=resolveComponentParty(det.coalW,id);
-        color=COMP_COLORS[comp]||'#ccc';
-        title=`${det.name} (${id}): ${comp} (${det.proj[det.coalW].toFixed(1)}%) — click for full breakdown`;
-      } else {
-        color=party?party.color:'#ccc';
-        title=`${det.name} (${id}): ${party?party.label:det.coalW} (${det.proj[det.coalW].toFixed(1)}%) — click for full breakdown`;
-      }
-    }
-    let fo=0.9;
-    if(FK){const v=fShare[id]||0;if(v>0.05&&fMax>0){color=fColor;fo=(0.15+0.85*(v/fMax)).toFixed(3);}else{color='#e3e1da';fo=1;}title=`${det?det.name:id} (${id}): ${filterLabel(FK,FM)} ${v.toFixed(1)}% — click for full breakdown`;}
-    if(SHOW&&det){
-      const was=nwMap[id],now=det.coalW;
-      if(now!==was&&flipMatches(was,now)){
-        fo=1;flips.push({from:was,to:now});
-        title=`${det.name} (${id}): flipped ${AC(was)} → ${AC(now)} — click for full breakdown`;
+      if(view.kind==='winner')style=`fill:${colorOf(det.coalW,id)};fill-opacity:.92`;
+      else if(view.kind==='str'){
+        const v=fShare[id]||0;
+        if(v>0.05&&fMax>0)style=`fill:${keyColor(view.key)};fill-opacity:${(0.15+0.85*(v/fMax)).toFixed(3)}`;else cls='n';
       }else{
-        color='#e3e1da';fo=1;
-        title=`${det.name} (${id}): ${now!==was?'flipped, outside the chosen focus':'held by '+AC(now)} — click for full breakdown`;
+        if(det.coalW!==W21_BLOC[id]){flips++;style=`fill:${colorOf(det.coalW,id)};fill-opacity:1`;const k=keyOf(det.coalW,id);if(!gainers.some(g=>g.k===k))gainers.push({k,acr:acrOf(det.coalW,id),color:colorOf(det.coalW,id)});}
+        else cls='n';
       }
-    }
-    svg+=`<path data-seat="${id}" data-fill="${color}" data-sw="0.4" data-fo="${fo}" d="${d}" fill="${color}" stroke="#fff" stroke-width="0.4" fill-opacity="${fo}" style="cursor:pointer;"><title>${title}</title></path>`;
+    }else cls='n';
+    svg+=`<path data-seat="${id}"${cls?` class="${cls}"`:''}${style?` style="${style}"`:''} d="${dpath}"/>`;
   });
-  svg+='</svg>';
-  wrap.innerHTML=svg;
-  applyMapHighlight(wrap,'data-seat',selConst,1.6);
+  wrap.innerHTML=svg+'</svg>';
+  if(selConst){const el=wrap.querySelector(`path[data-seat="${selConst}"]`);if(el)el.classList.add('sel');}
   applyConstMapTransform();
+
   if(!constMapClickBound){
-    wrap.addEventListener('click',(evt)=>{
+    wrap.addEventListener('click',evt=>{
       if(constMapDragMoved){constMapDragMoved=false;return;}
-      const path=evt.target.closest && evt.target.closest('path[data-seat]');
-      if(!path){document.getElementById('constMapTooltip').style.display='none';selConst=null;applyMapHighlight(wrap,'data-seat',null,1.6);return;}
-      selConst=path.getAttribute('data-seat');
-      applyMapHighlight(wrap,'data-seat',selConst,1.6);
-      showConstSeatTooltip(selConst, evt);
+      const path=evt.target.closest&&evt.target.closest('path[data-seat]');
+      if(!path){hideTip();return;}
+      wrap.querySelectorAll('path.sel').forEach(el=>el.classList.remove('sel'));
+      selConst=path.getAttribute('data-seat');path.classList.add('sel');
+      showTip(selConst,evt);
     });
-    document.addEventListener('click',(evt)=>{
-      const tip=document.getElementById('constMapTooltip');
-      const inMap=evt.target.closest && (evt.target.closest('#constMapWrap')||evt.target.closest('#constMapTooltip'));
-      if(!inMap){tip.style.display='none';selConst=null;applyMapHighlight(document.getElementById('constMapWrap'),'data-seat',null,1.6);}
+    document.addEventListener('click',evt=>{
+      const inMap=evt.target.closest&&(evt.target.closest('#constMapWrap')||evt.target.closest('#constMapTooltip'));
+      if(!inMap)hideTip();
     });
-    const viewport=document.getElementById('constMapViewport');
-    viewport.addEventListener('wheel',(evt)=>{
-      evt.preventDefault();
-      const factor=evt.deltaY<0?1.2:1/1.2;
-      constMapZoomAt(factor, evt.clientX, evt.clientY);
-    },{passive:false});
-    viewport.addEventListener('mousedown',(evt)=>{
-      constMapDragging=true; constMapDragMoved=false;
-      constMapDragStart={x:evt.clientX,y:evt.clientY,tx:constMapZoom.tx,ty:constMapZoom.ty};
-      viewport.style.cursor='grabbing';
-    });
-    document.addEventListener('mousemove',(evt)=>{
+    const vp=document.getElementById('constMapViewport');
+    vp.addEventListener('wheel',evt=>{evt.preventDefault();constMapZoomAt(evt.deltaY<0?1.2:1/1.2,evt.clientX,evt.clientY);},{passive:false});
+    vp.addEventListener('mousedown',evt=>{constMapDragging=true;constMapDragMoved=false;constMapDragStart={x:evt.clientX,y:evt.clientY,tx:constMapZoom.tx,ty:constMapZoom.ty};vp.style.cursor='grabbing';});
+    document.addEventListener('mousemove',evt=>{
       if(!constMapDragging)return;
-      const dx=evt.clientX-constMapDragStart.x, dy=evt.clientY-constMapDragStart.y;
+      const dx=evt.clientX-constMapDragStart.x,dy=evt.clientY-constMapDragStart.y;
       if(Math.abs(dx)>3||Math.abs(dy)>3)constMapDragMoved=true;
-      constMapZoom.tx=constMapDragStart.tx+dx;
-      constMapZoom.ty=constMapDragStart.ty+dy;
-      clampConstMapPan();
-      applyConstMapTransform();
+      constMapZoom.tx=constMapDragStart.tx+dx;constMapZoom.ty=constMapDragStart.ty+dy;clampConstMapPan();applyConstMapTransform();
     });
-    document.addEventListener('mouseup',()=>{
-      if(constMapDragging){constMapDragging=false; viewport.style.cursor='grab';}
-    });
-    document.getElementById('constMapZoomIn').addEventListener('click',()=>{
-      const r=viewport.getBoundingClientRect();
-      constMapZoomAt(1.4, r.left+r.width/2, r.top+r.height/2);
-    });
-    document.getElementById('constMapZoomOut').addEventListener('click',()=>{
-      const r=viewport.getBoundingClientRect();
-      constMapZoomAt(1/1.4, r.left+r.width/2, r.top+r.height/2);
-    });
-    document.getElementById('constMapZoomReset').addEventListener('click',resetConstMapZoom);
+    document.addEventListener('mouseup',()=>{if(constMapDragging){constMapDragging=false;vp.style.cursor='grab';}});
+    const ctr=f=>{const r=vp.getBoundingClientRect();constMapZoomAt(f,r.left+r.width/2,r.top+r.height/2);};
+    document.getElementById('constMapZoomIn').addEventListener('click',()=>ctr(1.4));
+    document.getElementById('constMapZoomOut').addEventListener('click',()=>ctr(1/1.4));
+    document.getElementById('constMapZoomReset').addEventListener('click',()=>{constMapZoom={scale:1,tx:0,ty:0};applyConstMapTransform();});
     constMapClickBound=true;
   }
+
   const legend=document.getElementById('constMapLegend');
-  if(SHOW){
-    const colOf=c=>((PARTIES.find(p=>p.id===c)||{}).color)||'#888780';
-    const tally={};flips.forEach(f=>{const k=f.from+'>'+f.to;tally[k]=(tally[k]||0)+1;});
-    const items=Object.entries(tally).sort((a,b)=>b[1]-a[1]).map(([k,n])=>{
-      const[a,b]=k.split('>');
-      return `<span><span class="swatch" style="background:${colOf(a)};"></span>→<span class="swatch" style="background:${colOf(b)};"></span>${AC(a)} → ${AC(b)} <strong>${n}</strong></span>`;
-    });
-    const focus=flipFocusLabel();
-    legend.innerHTML=`<span><strong>${flips.length}</strong> of ${curDetails.length} seats flipped${focus?' · '+focus:''}</span>`+items.join('')+`<span><span class="swatch" style="background:#e3e1da;"></span>${focus?'Other seats':'Unchanged'}</span>`;
-    return;
-  }
-  if(FK){
-    legend.innerHTML=filterLegendHtml(FK,FM,fColor,fMax);
-    return;
-  }
-  if(mapColorMode==='party'){
-    const usedParties=[...new Set(curDetails.map(d=>resolveComponentParty(d.coalW,d.id)))];
-    legend.innerHTML=usedParties.map(comp=>
-      `<span><span class="swatch" style="background:${COMP_COLORS[comp]||'#ccc'};"></span>${comp}</span>`
-    ).join('');
-  } else {
-    const usedCoals=[...new Set(curDetails.map(d=>d.coalW))];
-    legend.innerHTML=usedCoals.map(cid=>{
-      const p=PARTIES.find(x=>x.id===cid);
-      return `<span><span class="swatch" style="background:${p?p.color:'#ccc'};"></span>${p?p.label:cid}</span>`;
-    }).join('');
+  if(view.kind==='str'){
+    const c=keyColor(view.key);
+    legend.innerHTML=`<span style="display:inline-flex;align-items:center;gap:8px"><span>0%</span><span class="grad" style="background:linear-gradient(to right,${hexAlpha(c,0.15)},${hexAlpha(c,1)})"></span><span>${fMax.toFixed(1)}%</span></span>`;
+  }else if(view.kind==='gains'){
+    legend.innerHTML=gainers.map(g=>`<span><i class="sw" style="background:${g.color};margin-right:5px"></i>${g.acr}</span>`).join('')+`<span><i class="sw" style="background:var(--empty);margin-right:5px"></i>No change</span>`;
+  }else{
+    const used=[];curDetails.forEach(d=>{const k=keyOf(d.coalW,d.id);if(!used.some(u=>u.k===k))used.push({k,acr:acrOf(d.coalW,d.id),color:colorOf(d.coalW,d.id)});});
+    legend.innerHTML=used.map(u=>`<span><i class="sw" style="background:${u.color};margin-right:5px"></i>${u.acr}</span>`).join('');
   }
 }
-(function(){
-  const start=()=>{buildInputsAndChecks();project();};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
-})();
-function renderComponentBreakdown(){
-  const div=document.getElementById('componentBreakdown');div.innerHTML='';
-  const partyMap={};
-  // Base: 2021 winners, mapped onto the active mode's bloc structure
-  Object.entries(W21).forEach(([sid,origCoal])=>{
-    const origComp=W21_PARTY[sid]||origCoal;
-    const coal=mapCoal(origCoal,origComp);
-    // Historical fact: the real 2021 winning party at this seat, whichever
-    // coalition (BN or PN) actually won it -- NOT the forward-looking
-    // "who's BNPN's merged nominee" rule, which only makes sense for a
-    // single combined 2026 ticket and would misattribute real 2021 BN wins
-    // to whatever PN's 2026 candidate happens to be there.
-    const comp=origComp;
-    if(!partyMap[coal])partyMap[coal]={};
-    if(!partyMap[coal][comp])partyMap[coal][comp]={base:0,now:0};
-    partyMap[coal][comp].base++;
-  });
-  // Projected
-  curDetails.forEach(d=>{
-    const coal=d.coalW;
-    const comp=resolveComponentParty(coal,d.id);
-    if(!partyMap[coal])partyMap[coal]={};
-    if(!partyMap[coal][comp])partyMap[coal][comp]={base:0,now:0};
-    partyMap[coal][comp].now++;
-  });
-  const order=(MODE==='unity')?['PH','BNPN','IPR','BP','BERSAMA']:['BN','PH','PN','BP','BERSAMA'];
-  order.forEach(cid=>{
-    const party=PARTIES.find(p=>p.id===cid);if(!party)return;
-    const cdata=partyMap[cid];if(!cdata)return;
-    const totalNow=Object.values(cdata).reduce((a,b)=>a+b.now,0);
-    if(totalNow===0&&!Object.values(cdata).some(v=>v.base>0))return;
-    const card=document.createElement('div');
-    card.style.cssText='background:#fff;border:0.5px solid #ddddd5;border-radius:10px;padding:0.75rem 1rem;';
-    let rows='';
-    Object.entries(cdata).sort((a,b)=>b[1].now-a[1].now).forEach(([comp,counts])=>{
-      if(counts.now===0&&counts.base===0)return;
-      const delta=counts.now-counts.base;
-      const chgStr=delta>0?`+${delta}`:delta<0?`${delta}`:'—';
-      const chgCol=delta>0?'#3b6d11':delta<0?'#a32d2d':'#888780';
-      rows+=`<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:2px 0;"><span style="color:#5f5e5a;">${comp}</span><span style="font-weight:500;">${counts.now} <span style="color:${chgCol};font-size:10px;">${chgStr}</span></span></div>`;
-    });
-    card.innerHTML=`<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;"><span style="width:9px;height:9px;border-radius:50%;background:${party.color};display:inline-block;flex-shrink:0;"></span><span style="font-size:12px;font-weight:500;">${party.label}</span><span style="margin-left:auto;font-size:13px;font-weight:500;">${totalNow}</span></div>${rows}`;
-    div.appendChild(card);
-  });
-}
-function renderVoteShareBreakdown(){
-  // Split by seat-count ratio (each coalition's input % divided among its
-  // components by how many seats each one contests), not baseline-vote
-  // weighting. Decouples this panel entirely from the swing model, so it
-  // always sums to exactly the input regardless of taper or clamping --
-  // same fix applied to the NS and Malaysia models.
-  const div=document.getElementById('voteShareBreakdown');div.innerHTML='';
-  const ns={};PARTIES.forEach(p=>{ns[p.id]=readInput(p.id);});
-  const coalOrder=(MODE==='unity')?['PH','BNPN','IPR','BP','BERSAMA']:['BN','PH','PN','BP','BERSAMA'];
-  const container=document.createElement('div');
-  container.style.cssText='display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;';
-  coalOrder.forEach(cid=>{
-    const party=PARTIES.find(p=>p.id===cid);if(!party)return;
-    const coalPct=ns[cid]||0;if(!coalPct)return;
-    const contested=curDetails.filter(d=>(d.base[cid]||0)>0);
-    if(contested.length===0)return;
-    const counts={};
-    contested.forEach(d=>{
-      const comp=resolveComponentParty(cid,d.id);
-      counts[comp]=(counts[comp]||0)+1;
-    });
-    const card=document.createElement('div');
-    card.style.cssText='background:#fff;border:0.5px solid #ddddd5;border-radius:10px;padding:0.75rem 1rem;';
-    let rows='';
-    Object.entries(counts).sort((a,b)=>b[1]-a[1]).forEach(([comp,n])=>{
-      const compPct=coalPct*n/contested.length;
-      rows+=`<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:2px 0;"><span style="color:#5f5e5a;">${comp} <span style="color:#b4b2a9;font-size:10px;">${n}</span></span><span style="font-weight:500;">${compPct.toFixed(1)}%</span></div>`;
-    });
-    card.innerHTML=`<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;"><span style="width:9px;height:9px;border-radius:50%;background:${party.color};display:inline-block;flex-shrink:0;"></span><span style="font-size:12px;font-weight:500;">${party.label}</span><span style="margin-left:auto;font-size:13px;font-weight:500;">${coalPct.toFixed(1)}%</span></div>${rows}`;
-    container.appendChild(card);
-  });
-  div.appendChild(container);
-}
-// One seat's projection -- shared by the live projection and the neutral (baseline) projection.
-function projectSeat(s,sw,sc){
-  const[id,name,bn,ph,pn,bp,tot2,minorVotes]=s;
-  let base;
-  if(MODE==='unity'){
-    base=SEAT_BASE_UNITY[id];
-  } else {
-    let baseBN=bn/tot2*100, basePH=ph/tot2*100, basePN=pn/tot2*100, baseBP=bp/tot2*100;
-    let absentTotal=0;
-    Object.entries(minorVotes||{}).forEach(([k,v])=>{if(FOLDED_MINORS_G.has(k))absentTotal+=v/tot2*100;});
-    if(absentTotal>0){
-      const contestBase=baseBN+basePH+basePN+baseBP;
-      if(contestBase>0){
-        baseBN+=absentTotal*(baseBN/contestBase);
-        basePH+=absentTotal*(basePH/contestBase);
-        basePN+=absentTotal*(basePN/contestBase);
-        baseBP+=absentTotal*(baseBP/contestBase);
-      }
-    }
-    base={BN:baseBN,PH:basePH,PN:basePN,BP:baseBP,BERSAMA:0};
-  }
-  const minorPct={};
-  Object.entries(minorVotes||{}).forEach(([k,v])=>{if(!FOLDED_MINORS_G.has(k)){minorPct[k]=v/tot2*100;}});
-  const raw={};PARTIES.forEach(p=>{raw[p.id]=Math.max(0,base[p.id]+sw[p.id]);});
-  const tap={};PARTIES.forEach(p=>{tap[p.id]=raw[p.id]*sc[p.id];});
-  const tOut=PARTIES.reduce((a,p)=>a+(raw[p.id]-tap[p.id]),0);
-  const tTot=PARTIES.reduce((a,p)=>a+tap[p.id],0);
-  const proj={};
-  if(tTot>0&&tOut>0){PARTIES.forEach(p=>{proj[p.id]=tap[p.id]+tOut*(tap[p.id]/tTot);});}
-  else{PARTIES.forEach(p=>{proj[p.id]=tap[p.id];});}
-  // Rescale so every seat sums to exactly 100 (one positive constant, so rankings are unchanged).
-  const projTotal=PARTIES.reduce((a,p)=>a+proj[p.id],0);
-  if(projTotal>0&&Math.abs(projTotal-100)>0.001){
-    PARTIES.forEach(p=>{proj[p.id]=proj[p.id]/projTotal*100;});
-  }
-  const allCands={...proj};
-  Object.entries(minorPct).forEach(([k,v])=>{allCands[k]=v;});
-  const winner=Object.entries(allCands).sort((a,b)=>b[1]-a[1])[0][0];
-  const coalW=PARTIES.find(p=>p.id===winner)?winner:'OTHERS';
-  return {id,name,proj,base,minors:minorPct,winner,coalW,tot2};
-}
-// Seats if every party holds exactly its baseline share (the reference for "change" in merged mode).
-const NEUTRAL={};
-function neutralSeats(){
-  if(!NEUTRAL[MODE]){
-    const sw={},sc={};
-    PARTIES.forEach(p=>{sw[p.id]=0;sc[p.id]=1;});
-    const t={};PARTIES.forEach(p=>{t[p.id]=0;});t.OTHERS=0;
-    SEATS.forEach(s=>{if(!s[6])return;const r=projectSeat(s,sw,sc);t[r.coalW]=(t[r.coalW]||0)+1;});
-    NEUTRAL[MODE]=t;
-  }
-  return NEUTRAL[MODE];
-}
-function project(){
-  const ns={};PARTIES.forEach(p=>{ns[p.id]=readInput(p.id);});
-  const tot=Object.values(ns).reduce((a,b)=>a+b,0);
-  const w=document.getElementById('totalWarn');
-  const left=100-tot;
-  w.innerHTML=`Total: <strong>${tot.toFixed(1)}%</strong> &nbsp;·&nbsp; `+(left>=0
-    ?`<span class="pdot" style="background:#888780;margin-right:4px;"></span>Others/Independents: <strong>${left.toFixed(1)}% left</strong>`
-    :`<strong>${Math.abs(left).toFixed(1)}% over 100%</strong>`);
-  w.className='total-warn'+(Math.abs(tot-100)>5?' bad':'');
-  const sw={},sc={};
-  PARTIES.forEach(p=>{sw[p.id]=ns[p.id]-(GN[p.id]||0);sc[p.id]=taper(p.id,ns[p.id]);});
-  const det=[];
-  SEATS.forEach(s=>{
-    if(!s[6])return;
-    const r=projectSeat(s,sw,sc);
-    det.push({id:r.id,name:r.name,w21:W21[r.id]||'OTHERS',projW:r.winner,coalW:r.coalW,proj:r.proj,base:r.base,minors:r.minors,tot2:r.tot2});
-  });
-  curDetails=det;
-  const tally={};
-  PARTIES.forEach(p=>{tally[p.id]=0;});tally.OTHERS=0;
-  det.forEach(d=>{tally[d.coalW]=(tally[d.coalW]||0)+1;});
-  const baseSeats=(MODE==='unity')?neutralSeats():GS;
-  const rg=document.getElementById('resultsGrid');rg.innerHTML='';
-  PARTIES.forEach(p=>{
-    const n=tally[p.id]||0;
-    const base=baseSeats[p.id]||0;
-    const delta=n-base;
-    const chgStr=delta>0?`+${delta}`:delta<0?`${delta}`:'—';
-    const chgCls=delta>0?'pos':delta<0?'neg':'neu';
-    const card=document.createElement('div');card.className='result-card';
-    card.innerHTML=`<div class="pname"><span class="pdot" style="background:${p.color}"></span>${p.label}</div><div class="seats">${n}</div><div class="chg ${chgCls}">${chgStr} vs 2021</div>`;
-    rg.appendChild(card);
-  });
-  renderHemicycle(PARTIES.filter(p=>(tally[p.id]||0)>0).map(p=>({color:p.color,count:tally[p.id]})));
-  document.getElementById('barLegend').innerHTML=
-    PARTIES.filter(p=>tally[p.id]>0).map(p=>`<span><span style="width:10px;height:10px;border-radius:50%;background:${p.color};display:inline-block;"></span>${LEGEND_ACRONYM[p.id]||p.id}</span>`).join('');
-  renderComponentBreakdown();
-  renderVoteShareBreakdown();
-  refreshMapOptions();
-  renderConstituencyMap();
-  updateCoalition();
-}
-function updateCoalition(){
-  const selected=PARTIES.filter(p=>document.getElementById('chk_'+p.id)?.checked).map(p=>p.id);
-  const total=selected.reduce((a,p)=>a+(curDetails.filter(d=>d.coalW===p).length),0);
-  document.getElementById('coalSeats').textContent=total;
-  const maj=15;
-  const statusEl=document.getElementById('coalStatus');
-  const labelEl=document.getElementById('coalLabel');
-  if(selected.length===0){labelEl.textContent='seats — select coalitions above';statusEl.className='coalition-status status-none';statusEl.textContent='-';}
-  else if(total>=maj){labelEl.textContent=`seats — majority government`;statusEl.className='coalition-status status-maj';statusEl.textContent='Majority';}
-  else{labelEl.textContent=`seats — ${maj-total} short of majority`;statusEl.className='coalition-status status-short';statusEl.textContent='Short';}
-  // Assembling bar: ticked coalitions stack up from the left at full colour; every seat
-  // outside the coalition stays as the grey track, with a marker at the majority line.
-  const bar=document.getElementById('coalBar');bar.innerHTML='';
-  bar.style.background='#e3e1da';
-  const gl=document.getElementById('gridLegend');gl.innerHTML='';
-  const inCoal=new Set(selected);
-  const seatsOf=p=>curDetails.filter(d=>d.coalW===p.id).length;
-  const totalSeats=PARTIES.reduce((a,p)=>a+seatsOf(p),0)||1;
-  PARTIES.filter(p=>inCoal.has(p.id)).forEach(p=>{
-    const n=seatsOf(p);
-    if(!n)return;
-    const seg=document.createElement('div');
-    seg.style.cssText=`width:${n/totalSeats*100}%;background:${p.color};display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;`;
-    seg.title=`${p.label}: ${n}`;
-    if(n/totalSeats>0.07)seg.textContent=n;
-    bar.appendChild(seg);
-  });
-  const mk=document.getElementById('coalBarMarker');
-  const majPct=maj/totalSeats*100;
-  mk.innerHTML=`<div style="position:absolute;left:${majPct}%;top:-26px;height:26px;border-left:2px dashed #1a1a18;"></div>`
-    +`<div style="position:absolute;left:${majPct}%;transform:translateX(-50%);font-size:9px;color:#5f5e5a;white-space:nowrap;padding-top:1px;">majority (${maj})</div>`;
-  PARTIES.forEach(p=>{
-    if(!curDetails.some(d=>d.coalW===p.id))return;
-    const sp=document.createElement('span');
-    sp.innerHTML=`<span class="swatch" style="background:${p.color};"></span>${p.label}`;
-    gl.appendChild(sp);
-  });
-}
+
+// Expand / collapse alliance rows
+document.addEventListener('click',evt=>{
+  const tr=evt.target.closest&&evt.target.closest('tr.alli');
+  if(!tr)return;
+  const k=tr.getAttribute('data-k');
+  expanded.has(k)?expanded.delete(k):expanded.add(k);
+  renderTable();
+});
+
+window.addEventListener('DOMContentLoaded',()=>{
+  buildViewToggles();
+  buildInputs();
+  project();
+});
+
 </script>
+
+</body>
+</html>
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
