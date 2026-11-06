@@ -87,11 +87,7 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>UK Seat Projector</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -245,6 +241,14 @@ td .pcell span:last-child{min-width:0}
 .mc-pick{margin:18px 0 8px}
 .mc-hist svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
 .mc-ax{font-size:10px;fill:var(--mut);font-variant-numeric:tabular-nums}
+.mc-hwrap{position:relative;max-width:520px;margin:0 auto}
+.mc-hwrap svg{max-width:none}
+.mc-hit{cursor:crosshair}
+.mc-tip{position:absolute;bottom:100%;transform:translate(-50%,-6px);white-space:nowrap;pointer-events:none;background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;box-shadow:var(--shadow);font-size:12px;line-height:1.35;z-index:5}
+.mc-tip b{font-weight:600}
+.mc-tip .m{color:var(--mut)}
+.mc-barwrap{position:relative}
+.mc-bar>div{cursor:default}
 .tip-h{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;font-weight:600;font-size:13px;margin-bottom:5px}
 .tip-h button{background:none;border:0;color:var(--mut);font-size:16px;line-height:1;cursor:pointer;padding:0}
 .tip-r{display:flex;align-items:center;gap:6px;font-size:12px;padding:2px 0}
@@ -1368,6 +1372,7 @@ function ParamRow({ label, hint, value, max, step, unit, onChange }) {
       h(NumBox, { value, unit, onCommit: (v) => onChange(Math.min(max, v)) })));
 }
 function Histogram({ draws, n, color }) {
+  const [hov, setHov] = useState(null);
   const a = draws;
   let lo = Infinity, hi = -Infinity;
   for (let i = 0; i < n; i++) { if (a[i] < lo) lo = a[i]; if (a[i] > hi) hi = a[i]; }
@@ -1378,13 +1383,26 @@ function Histogram({ draws, n, color }) {
   const mx = Math.max(...bins);
   const W = 400, H = 110, bw = W / nb;
   const mx326 = MAJORITY >= lo && MAJORITY <= hi + size ? (MAJORITY - lo) / size * bw : null;
+  let tip = null;
+  if (hov !== null && hov < nb) {
+    const b0 = lo + hov * size, b1 = Math.min(hi, b0 + size - 1);
+    let atLeast = 0; for (let k = hov; k < nb; k++) atLeast += bins[k];
+    const cx = Math.min(88, Math.max(12, (hov + 0.5) * bw / W * 100));
+    tip = h("div", { className: "mc-tip", style: { left: cx + "%" } },
+      h("div", null, h("b", { className: "num" }, b0 === b1 ? b0 + " seats" : b0 + "–" + b1 + " seats")),
+      h("div", { className: "num" }, fmt1(bins[hov] / n * 100) + "% ", h("span", { className: "m" }, "(" + bins[hov].toLocaleString("en-GB") + " of " + n.toLocaleString("en-GB") + " sims)")),
+      h("div", { className: "num m" }, fmt1(atLeast / n * 100) + "% chance of " + b0 + "+"));
+  }
   return h("div", { className: "mc-hist" },
-    h("svg", { viewBox: `0 0 ${W} ${H + 18}`, role: "img", "aria-label": "Distribution of simulated seats" },
-      bins.map((c, i) => h("rect", { key: i, x: i * bw + 0.5, y: H - c / mx * H, width: Math.max(0.5, bw - 1), height: c / mx * H, fill: color, rx: 1 })),
-      mx326 !== null && h("line", { x1: mx326, x2: mx326, y1: 0, y2: H, stroke: "var(--fg)", strokeWidth: 1.2, strokeDasharray: "3 3" }),
-      h("text", { x: 0, y: H + 14, className: "mc-ax" }, lo),
-      h("text", { x: W, y: H + 14, textAnchor: "end", className: "mc-ax" }, hi),
-      mx326 !== null && h("text", { x: Math.min(W - 12, Math.max(12, mx326)), y: H + 14, textAnchor: "middle", className: "mc-ax" }, MAJORITY)));
+    h("div", { className: "mc-hwrap", onPointerLeave: () => setHov(null) },
+      tip,
+      h("svg", { viewBox: `0 0 ${W} ${H + 18}`, role: "img", "aria-label": "Distribution of simulated seats" },
+        bins.map((c, i) => h("rect", { key: i, x: i * bw + 0.5, y: H - c / mx * H, width: Math.max(0.5, bw - 1), height: c / mx * H, fill: color, rx: 1, opacity: hov === null || hov === i ? 1 : 0.45 })),
+        mx326 !== null && h("line", { x1: mx326, x2: mx326, y1: 0, y2: H, stroke: "var(--fg)", strokeWidth: 1.2, strokeDasharray: "3 3", pointerEvents: "none" }),
+        h("text", { x: 0, y: H + 14, className: "mc-ax" }, lo),
+        h("text", { x: W, y: H + 14, textAnchor: "end", className: "mc-ax" }, hi),
+        mx326 !== null && h("text", { x: Math.min(W - 12, Math.max(12, mx326)), y: H + 14, textAnchor: "middle", className: "mc-ax" }, MAJORITY),
+        bins.map((c, i) => h("rect", { key: "h" + i, className: "mc-hit", x: i * bw, y: 0, width: bw, height: H, fill: "transparent", onPointerEnter: () => setHov(i), onPointerDown: () => setHov(i) })))));
 }
 function MonteCarlo({ shares, regionShares, nationEnabled }) {
   const [nSims, setNSims] = useState(1000);
@@ -1393,6 +1411,7 @@ function MonteCarlo({ shares, regionShares, nationEnabled }) {
   const [res, setRes] = useState(null);
   const [prog, setProg] = useState(0);
   const [pick, setPick] = useState(null);
+  const [hovO, setHovO] = useState(null);
   React.useEffect(() => {
     let cancelled = false, timer;
     const rng = mulberry32(20240704);
@@ -1423,7 +1442,15 @@ function MonteCarlo({ shares, regionShares, nationEnabled }) {
     const bg = (o) => o.hatch ? `repeating-linear-gradient(135deg, ${o.color} 0 4px, color-mix(in srgb, ${o.color} 30%, transparent) 4px 8px)` : o.color;
     const sel = pick && rows.includes(pick) ? pick : rows[0];
     body = h("div", { className: "mc-res" + (prog < 1 ? " stale" : "") },
-      h("div", { className: "mc-bar", role: "img", "aria-label": "Outcome probabilities" }, outcomes.map((o) => h("div", { key: o.key, style: { width: o.pct + "%", background: bg(o) } }))),
+      (() => {
+        let acc = 0; const segs = outcomes.map((o) => { const mid = acc + o.pct / 2; acc += o.pct; return { o, mid }; });
+        const hs = hovO && segs.find((x) => x.o.key === hovO);
+        return h("div", { className: "mc-barwrap", onPointerLeave: () => setHovO(null) },
+          hs && h("div", { className: "mc-tip", style: { left: Math.min(85, Math.max(15, hs.mid)) + "%" } },
+            h("b", null, hs.o.label), " ", h("span", { className: "num" }, fmt1(hs.o.pct) + "%"),
+            h("div", { className: "num m" }, Math.round(hs.o.pct / 100 * res.n).toLocaleString("en-GB") + " of " + res.n.toLocaleString("en-GB") + " sims")),
+          h("div", { className: "mc-bar", role: "img", "aria-label": "Outcome probabilities" }, segs.map(({ o }) => h("div", { key: o.key, onPointerEnter: () => setHovO(o.key), onPointerDown: () => setHovO(o.key), style: { width: o.pct + "%", background: bg(o), opacity: !hovO || hovO === o.key ? 1 : 0.5 } }))));
+      })(),
       h("div", { className: "legend mc-legend" }, outcomes.map((o) => h("span", { key: o.key, className: "lg" }, h("span", { className: "swatch", style: { background: bg(o) } }), o.label, " ", h("b", { className: "num" }, fmt1(o.pct), "%")))),
       h("table", null,
         h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "r" }, "Median"), h("th", { className: "r" }, "90% range"), h("th", { className: "r" }, "Largest"))),
@@ -1454,8 +1481,7 @@ ReactDOM.createRoot(rootEl).render(React.createElement(SeatProjector));
 
 </script>
 
-</body>
-</html>
+</body></html>
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
