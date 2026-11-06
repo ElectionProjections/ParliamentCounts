@@ -88,16 +88,155 @@
         <!-- ============================================================= -->
         
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Holyrood Seat Projector</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+--bg:#F3F4F8;--card:#FFFFFF;--fg:#161A24;--muted:#667085;--line:#E1E4EC;--track:#CBD1DD;--chip:#F3F4F8;--chipon:#161A24;--chipontext:#FFFFFF;
+--pos:#15803D;--neg:#B91C1C;--land:#C5CBD8;--sco:#D1232A;--mapbg:#EEF0F5;--tipbg:#FFFFFF;--shadow:0 6px 18px rgba(20,24,36,.18);--warn:#B45309;
+color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+--bg:#0F1219;--card:#171B26;--fg:#F1F2F5;--muted:#98A0B3;--line:#2A3040;--track:#4A5369;--chip:#1F2431;--chipon:#F1F2F5;--chipontext:#0F1219;
+--pos:#4ADE80;--neg:#F87171;--land:#3A4256;--sco:#F04348;--mapbg:#10131C;--tipbg:#1D2230;--shadow:0 6px 18px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{
+--bg:#0F1219;--card:#171B26;--fg:#F1F2F5;--muted:#98A0B3;--line:#2A3040;--track:#4A5369;--chip:#1F2431;--chipon:#F1F2F5;--chipontext:#0F1219;
+--pos:#4ADE80;--neg:#F87171;--land:#3A4256;--sco:#F04348;--mapbg:#10131C;--tipbg:#1D2230;--shadow:0 6px 18px rgba(0,0,0,.5);color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px;-webkit-tap-highlight-color:transparent}
+button,input,summary{font:inherit;color:inherit}
+.page{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;min-width:0}
+h1{text-align:center;font-size:24px;line-height:1.2;margin:4px 0 0;font-weight:700;text-wrap:balance}
+h2{text-align:center;font-size:18px;margin:0 0 12px;font-weight:650;text-wrap:balance}
+h3{text-align:center;font-size:15.5px;margin:0 0 10px;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+
+.locator{display:flex;justify-content:center;align-items:center;gap:16px;height:90px}
+.locator svg{display:block;max-width:100%}
+.locator .land{fill:var(--land)}.locator .sco{fill:var(--sco)}
+.locator .flag{border:1px solid var(--line);border-radius:3px;flex:none}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;padding:14px 8px}
+.fcol{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:0 10px;min-width:0}
+.fcol+.fcol{border-left:1px solid var(--line)}
+.flabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.fbig{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.15}
+.fnote{font-size:12px;color:var(--muted)}
+.fbar{width:100%;max-width:150px;height:6px;border-radius:3px;background:var(--track)}
+
+.sys{padding:0}
+.sys summary{list-style:none;cursor:pointer;text-align:center;font-weight:600;padding:12px 16px;border-radius:12px;display:flex;justify-content:center;align-items:center;gap:8px}
+.sys summary::-webkit-details-marker{display:none}
+.sys summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-top:-3px;transition:transform .15s}
+.sys[open] summary::after{transform:rotate(-135deg);margin-top:3px}
+.sys summary:focus-visible{outline:2px solid var(--fg);outline-offset:-3px}
+.sysbody{border-top:1px solid var(--line);display:flex;flex-direction:column}
+.tiles{display:grid;padding:10px 0}
+.tiles+.tiles{border-top:1px solid var(--line)}
+.t5{grid-template-columns:repeat(5,minmax(0,1fr))}.t4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tile{text-align:center;padding:4px 4px;min-width:0}
+.tile+.tile{border-left:1px solid var(--line)}
+.tl{font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:3px;overflow-wrap:anywhere}
+.tv{font-size:12px;font-weight:600;overflow-wrap:break-word;hyphens:auto}
+@media (min-width:600px){.tile{padding:6px 12px}.tl{font-size:11px}.tv{font-size:15px}.tiles{padding:14px 0}}
+
+.scols{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+@media (max-width:560px){.scols{grid-template-columns:1fr;gap:16px}}
+.scol{min-width:0}
+.srow{padding:7px 0}
+.sname{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;margin-bottom:5px}
+.sctl{display:flex;align-items:center;gap:10px}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:20px;margin:0;background:transparent;cursor:pointer}
+input[type=range]:active,input[type=range]::-webkit-slider-thumb:active{cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(to right,var(--fill) 0 var(--pct),var(--track) var(--pct) 100%)}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--track)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--fill)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--fill);margin-top:-5px;cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:#fff;border:3px solid var(--fill);cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+input[type=range]:focus-visible{outline:2px solid var(--muted);outline-offset:2px;border-radius:4px}
+.nbox{display:flex;align-items:center;gap:0;width:68px;flex:none;justify-content:flex-end;background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-variant-numeric:tabular-nums}
+.nbox:focus-within{border-color:var(--muted)}
+.nbox input{width:100%;min-width:0;background:transparent;border:0;outline:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;padding:0}
+.nbox span{color:var(--muted)}
+.locked .sname{color:var(--muted)}
+.ltrack{flex:1;min-width:0;height:6px;border-radius:3px;background:repeating-linear-gradient(135deg,var(--track) 0 4px,transparent 4px 8px);border:1px dashed var(--track);cursor:not-allowed;overflow:hidden}
+.lfill{height:100%;background:repeating-linear-gradient(135deg,var(--muted) 0 3px,transparent 3px 6px);opacity:.55}
+.nlock{background:transparent;border:1px dashed var(--track);color:var(--muted);cursor:not-allowed}
+.nlock .nval{font-weight:600}
+.rrow{display:flex;justify-content:center;margin-top:12px}
+.btn{background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:5px 16px;cursor:pointer;font-size:13px;font-weight:500}
+.btn:hover{border-color:var(--muted)}
+
+.hemiwrap{display:flex;justify-content:center}
+.hemi{width:100%;max-width:650px;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12.5px;font-weight:500}
+.legend.hl{margin:18px 0 14px}
+.lg{display:inline-flex;align-items:center;gap:6px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11.5px;color:var(--muted);font-weight:600;padding:6px 6px 8px;text-align:center;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+th.l,td.l{text-align:left}
+td.l .sw{margin-right:8px;vertical-align:baseline}
+td.seats{font-weight:700}
+.pos{color:var(--pos)}.neg{color:var(--neg)}.zero{color:var(--muted)}
+@media (max-width:480px){table{font-size:12.5px}th{font-size:10.5px;padding-inline:3px}td{padding-inline:3px}}
+
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:500;cursor:pointer}
+.chip:hover{border-color:var(--muted)}
+.chip.on{background:var(--chipon);color:var(--chipontext);border-color:var(--chipon)}
+.chip:focus-visible,.btn:focus-visible,.mtab:focus-visible{outline:2px solid var(--muted);outline-offset:2px}
+.cbar{position:relative;margin:26px 8px 0}
+.ctrack{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--track)}
+.ctrack>div{height:100%}
+.cmark{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.cmark span{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cfoot{text-align:center;margin-top:30px;font-variant-numeric:tabular-nums;font-weight:600}
+.ok{color:var(--pos)}
+
+.mapcard{overflow:hidden}
+.maptabs{display:flex;margin:0 -16px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--chip)}
+.mtab{flex:1;background:transparent;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:12px 8px 10px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer}
+.mtab.on{color:var(--fg);background:var(--card);border-bottom-color:var(--fg)}
+.mtab:not(.on):hover{color:var(--fg)}
+.mapwrap{position:relative;width:100%;display:flex;justify-content:center;margin:0;background:var(--mapbg);border-radius:8px;overflow:hidden}
+.mapwrap svg{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.shape{stroke:var(--card);stroke-width:.6px;cursor:pointer;outline:none;transition:filter .1s}
+.shape:hover,.shape.sel{filter:brightness(.82)}
+.zoom{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:4px}
+.zoom button{width:26px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--card);cursor:pointer;line-height:1;padding:0}
+.zoom button:hover{border-color:var(--muted)}
+.tip{position:absolute;width:190px;background:var(--tipbg);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:8px 10px;font-size:12px;z-index:5}
+.tip-h{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+.tip-h b{flex:1;font-size:13px;line-height:1.25}
+.tip-s{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.tip-h button{background:none;border:0;color:var(--muted);cursor:pointer;padding:0 0 0 2px;font-size:15px;line-height:1}
+.tip-r{padding:3px 0;display:flex;align-items:center;gap:8px}
+.tip.wide{width:250px}
+.tip-l{display:flex;align-items:center;gap:6px;flex:1;min-width:0}
+.tn{flex:1;min-width:0}
+.tp{font-variant-numeric:tabular-nums;color:var(--muted)}
+.tip-r.win .tn,.tip-r.win .tp{font-weight:700;color:var(--fg)}
+.tq{display:flex;flex-wrap:wrap;gap:2px;width:56px;flex:none;justify-content:flex-start}
+.tq i{width:8px;height:8px;border-radius:2px;display:block}
+.legend{margin-top:14px}
+.scale{max-width:300px;margin:14px auto 0}
+.sgrad{height:10px;border-radius:5px;border:1px solid var(--line)}
+.slab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.sources{font-size:11.5px;color:var(--muted);text-align:center;margin:8px 0 0}
+.mapfoot{min-height:48px}
+.mapfoot .legend,.mapfoot .scale{margin-top:14px}
+</style>
 </head>
-<body style="margin:0;background:#0F1219;">
+<body>
 <div id="root"></div>
-<script>
-/**
+<script>/**
  * @license React
  * react.production.min.js
  *
@@ -128,10 +267,8 @@ render:a}};c.isValidElement=M;c.lazy=function(a){return{$$typeof:Aa,_payload:{_s
 c.useEffect=function(a,b){return g.current.useEffect(a,b)};c.useId=function(){return g.current.useId()};c.useImperativeHandle=function(a,b,c){return g.current.useImperativeHandle(a,b,c)};c.useInsertionEffect=function(a,b){return g.current.useInsertionEffect(a,b)};c.useLayoutEffect=function(a,b){return g.current.useLayoutEffect(a,b)};c.useMemo=function(a,b){return g.current.useMemo(a,b)};c.useReducer=function(a,b,c){return g.current.useReducer(a,b,c)};c.useRef=function(a){return g.current.useRef(a)};
 c.useState=function(a){return g.current.useState(a)};c.useSyncExternalStore=function(a,b,c){return g.current.useSyncExternalStore(a,b,c)};c.useTransition=function(){return g.current.useTransition()};c.version="18.3.1"});
 })();
-
 </script>
-<script>
-/**
+<script>/**
  * @license React
  * react-dom.production.min.js
  *
@@ -398,9 +535,9 @@ c,!1,d,e);a[Ja]=b.current;sc(8===a.nodeType?a.parentNode:a);return new Xf(b)};Q.
 var d=null!=c&&c.hydratedSources||null,e=!1,f="",g=aj;null!==c&&void 0!==c&&(!0===c.unstable_strictMode&&(e=!0),void 0!==c.identifierPrefix&&(f=c.identifierPrefix),void 0!==c.onRecoverableError&&(g=c.onRecoverableError));b=Wi(b,null,a,1,null!=c?c:null,e,!1,f,g);a[Ja]=b.current;sc(a);if(d)for(a=0;a<d.length;a++)c=d[a],e=c._getVersion,e=e(c._source),null==b.mutableSourceEagerHydrationData?b.mutableSourceEagerHydrationData=[c,e]:b.mutableSourceEagerHydrationData.push(c,e);return new Ud(b)};Q.render=
 function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmountComponentAtNode=function(a){if(!Vd(a))throw Error(m(40));return a._reactRootContainer?(yb(function(){Wd(null,null,a,!1,function(){a._reactRootContainer=null;a[Ja]=null})}),!0):!1};Q.unstable_batchedUpdates=Tf;Q.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!Vd(c))throw Error(m(200));if(null==a||void 0===a._reactInternals)throw Error(m(38));return Wd(a,b,c,!1,d)};Q.version="18.3.1-next-f1338f8080-20240426"});
 })();
-
 </script>
 <script>
+
 const { useState, useMemo } = React;
 const CONSTITUENCIES = JSON.parse(`[{"n":"Airdrie","r":"Central Scotland and Lothians West","v":{"SNP":10711,"RUK":5821,"LAB":6201,"GRN":0,"CON":1145,"LD":660,"Oth":946},"om":{"BUP":441,"IND1":505},"greenRegPct":9.578},{"n":"Almond Valley","r":"Central Scotland and Lothians West","v":{"SNP":16944,"RUK":6831,"LAB":8035,"GRN":0,"CON":2501,"LD":2307},"greenRegPct":12.495},{"n":"Bathgate","r":"Central Scotland and Lothians West","v":{"SNP":13594,"RUK":7511,"LAB":8007,"GRN":0,"CON":2091,"LD":1937,"Oth":227},"om":{"BUP":227},"greenRegPct":11.177},{"n":"Coatbridge and Chryston","r":"Central Scotland and Lothians West","v":{"SNP":14458,"RUK":5145,"LAB":7682,"GRN":0,"CON":1109,"LD":1048},"greenRegPct":12.93},{"n":"Cumbernauld and Kilsyth","r":"Central Scotland and Lothians West","v":{"SNP":13787,"RUK":4580,"LAB":6472,"GRN":0,"CON":1129,"LD":949,"Oth":226},"om":{"ALS":226},"greenRegPct":13.107},{"n":"Falkirk East and Linlithgow","r":"Central Scotland and Lothians West","v":{"SNP":14465,"RUK":7906,"LAB":9030,"GRN":0,"CON":2861,"LD":2501,"Oth":759},"om":{"IND1":759},"greenRegPct":13.503},{"n":"Falkirk West","r":"Central Scotland and Lothians West","v":{"SNP":14896,"RUK":8160,"LAB":7859,"GRN":0,"CON":2297,"LD":2037,"Oth":865},"om":{"IND1":865},"greenRegPct":12.728},{"n":"Motherwell and Wishaw","r":"Central Scotland and Lothians West","v":{"SNP":11962,"RUK":5692,"LAB":6447,"GRN":0,"CON":1638,"LD":979,"Oth":626},"om":{"ALS":298,"IND1":328},"greenRegPct":11.725},{"n":"Uddingston and Bellshill","r":"Central Scotland and Lothians West","v":{"SNP":11966,"RUK":5646,"LAB":8382,"GRN":0,"CON":1750,"LD":1094},"greenRegPct":11.55},{"n":"East Lothian Coast and Lammermuirs","r":"Edinburgh and Lothians East","v":{"SNP":11677,"RUK":4611,"LAB":11259,"GRN":0,"CON":4719,"LD":2802,"Oth":597},"om":{"IND1":597},"greenRegPct":15.129},{"n":"Edinburgh Central","r":"Edinburgh and Lothians East","v":{"SNP":7702,"RUK":1876,"LAB":8098,"GRN":12680,"CON":2262,"LD":2168,"Oth":455},"om":{"ALS":150,"LBT":56,"IND1":176,"IND2":32,"IND3":41},"greenRegPct":37.559},{"n":"Edinburgh Eastern, Musselburgh and Tranent","r":"Edinburgh and Lothians East","v":{"SNP":14083,"RUK":4120,"LAB":9097,"GRN":0,"CON":1819,"LD":2057,"Oth":305},"om":{"ALS":305},"greenRegPct":20.377},{"n":"Edinburgh North Eastern and Leith","r":"Edinburgh and Lothians East","v":{"SNP":13630,"RUK":2746,"LAB":7894,"GRN":10559,"CON":1297,"LD":1895},"greenRegPct":34.858},{"n":"Edinburgh North Western","r":"Edinburgh and Lothians East","v":{"SNP":9943,"RUK":3342,"LAB":1879,"GRN":0,"CON":1749,"LD":22959,"Oth":268},"om":{"Worker":268},"greenRegPct":13.061},{"n":"Edinburgh Northern","r":"Edinburgh and Lothians East","v":{"SNP":10479,"RUK":2867,"LAB":3744,"GRN":5289,"CON":1900,"LD":12972,"Oth":258},"om":{"Worker":258},"greenRegPct":20.157},{"n":"Edinburgh South Western","r":"Edinburgh and Lothians East","v":{"SNP":11727,"RUK":3936,"LAB":8438,"GRN":0,"CON":4636,"LD":3672},"greenRegPct":15.879},{"n":"Edinburgh Southern","r":"Edinburgh and Lothians East","v":{"SNP":12000,"RUK":3317,"LAB":16963,"GRN":0,"CON":3421,"LD":3334,"Oth":524},"om":{"EELP":524},"greenRegPct":19.173},{"n":"Midlothian North","r":"Edinburgh and Lothians East","v":{"SNP":11250,"RUK":4506,"LAB":8754,"GRN":0,"CON":2032,"LD":2387},"greenRegPct":13.532},{"n":"Glasgow Anniesland","r":"Glasgow","v":{"SNP":13821,"RUK":4839,"LAB":9162,"GRN":0,"CON":1404,"LD":1688},"greenRegPct":21.993},{"n":"Glasgow Baillieston and Shettleston","r":"Glasgow","v":{"SNP":12075,"RUK":6972,"LAB":5885,"GRN":0,"CON":1006,"LD":1082},"greenRegPct":13.176},{"n":"Glasgow Cathcart and Pollok","r":"Glasgow","v":{"SNP":14270,"RUK":5320,"LAB":9107,"GRN":0,"CON":1325,"LD":1407,"Oth":749},"om":{"Common":163,"Worker":586},"greenRegPct":17.646},{"n":"Glasgow Central","r":"Glasgow","v":{"SNP":15085,"RUK":3988,"LAB":5094,"GRN":0,"CON":835,"LD":1262},"greenRegPct":31.48},{"n":"Glasgow Easterhouse and Springburn","r":"Glasgow","v":{"SNP":11926,"RUK":5309,"LAB":6772,"GRN":0,"CON":706,"LD":788,"Oth":301},"om":{"Common":301},"greenRegPct":20.166},{"n":"Glasgow Kelvin and Maryhill","r":"Glasgow","v":{"SNP":11174,"RUK":3592,"LAB":7531,"GRN":9003,"CON":1309,"LD":1324,"Oth":130},"om":{"Common":130},"greenRegPct":30.801},{"n":"Glasgow Southside","r":"Glasgow","v":{"SNP":10947,"RUK":3019,"LAB":7300,"GRN":14048,"CON":1383,"LD":1143,"Oth":659},"om":{"Common":512,"IND1":147},"greenRegPct":36.614},{"n":"Rutherglen and Cambuslang","r":"Glasgow","v":{"SNP":14969,"RUK":6168,"LAB":9125,"GRN":0,"CON":1321,"LD":1833,"Oth":467},"om":{"TUSC":467},"greenRegPct":13.546},{"n":"Argyll and Bute","r":"Highlands and Islands","v":{"SNP":11019,"RUK":3678,"LAB":1740,"GRN":0,"CON":1703,"LD":8468,"Oth":948},"om":{"IND1":769,"IND2":179},"greenRegPct":12.141},{"n":"Caithness, Sutherland and Ross","r":"Highlands and Islands","v":{"SNP":9574,"RUK":3900,"LAB":894,"GRN":0,"CON":1117,"LD":14666,"Oth":376},"om":{"Advance":112,"ALS":264},"greenRegPct":8.185},{"n":"Inverness and Nairn","r":"Highlands and Islands","v":{"SNP":11162,"RUK":3791,"LAB":1723,"GRN":0,"CON":1372,"LD":10735,"Oth":7950},"om":{"Advance":110,"IND1":7840},"greenRegPct":10.394},{"n":"Moray","r":"Highlands and Islands","v":{"SNP":12636,"RUK":5440,"LAB":2395,"GRN":0,"CON":9963,"LD":2064,"Oth":316},"om":{"Advance":106,"ALS":210},"greenRegPct":9.503},{"n":"Na h-Eileanan an Iar","r":"Highlands and Islands","v":{"SNP":4511,"RUK":1625,"LAB":4665,"GRN":0,"CON":594,"LD":812,"Oth":159},"om":{"ALS":159},"greenRegPct":7.506},{"n":"Orkney Islands","r":"Highlands and Islands","v":{"SNP":1661,"RUK":844,"LAB":199,"GRN":0,"CON":358,"LD":7221},"greenRegPct":12.981},{"n":"Shetland Islands","r":"Highlands and Islands","v":{"SNP":5453,"RUK":725,"LAB":169,"GRN":949,"CON":137,"LD":3936,"Oth":115},"om":{"ALS":65,"IND1":50},"greenRegPct":16.159},{"n":"Skye, Lochaber and Badenoch","r":"Highlands and Islands","v":{"SNP":14273,"RUK":4669,"LAB":1751,"GRN":0,"CON":2731,"LD":15223,"Oth":506},"om":{"ALS":506},"greenRegPct":12.803},{"n":"Clackmannanshire and Dunblane","r":"Mid Scotland and Fife","v":{"SNP":12222,"RUK":5181,"LAB":7958,"GRN":0,"CON":3592,"LD":1841,"Oth":1573},"om":{"ALS":1228,"IND1":345},"greenRegPct":14.311},{"n":"Cowdenbeath","r":"Mid Scotland and Fife","v":{"SNP":11994,"RUK":4708,"LAB":6307,"GRN":0,"CON":2201,"LD":1547,"Oth":304},"om":{"ALS":304},"greenRegPct":11.567},{"n":"Dunfermline","r":"Mid Scotland and Fife","v":{"SNP":14206,"RUK":5093,"LAB":8769,"GRN":0,"CON":2209,"LD":3849},"greenRegPct":13.893},{"n":"Fife North East","r":"Mid Scotland and Fife","v":{"SNP":7876,"RUK":2524,"LAB":818,"GRN":0,"CON":936,"LD":21350},"greenRegPct":12.957},{"n":"Kirkcaldy","r":"Mid Scotland and Fife","v":{"SNP":12230,"RUK":5484,"LAB":7483,"GRN":0,"CON":1445,"LD":1607},"greenRegPct":11.598},{"n":"Mid Fife and Glenrothes","r":"Mid Scotland and Fife","v":{"SNP":12461,"RUK":4827,"LAB":3970,"GRN":0,"CON":1414,"LD":3047},"greenRegPct":8.684},{"n":"Perthshire North","r":"Mid Scotland and Fife","v":{"SNP":16414,"RUK":4620,"LAB":2240,"GRN":0,"CON":10171,"LD":2741},"greenRegPct":11.698},{"n":"Perthshire South and Kinross-shire","r":"Mid Scotland and Fife","v":{"SNP":14707,"RUK":5128,"LAB":2599,"GRN":0,"CON":9646,"LD":4329},"greenRegPct":11.656},{"n":"Stirling","r":"Mid Scotland and Fife","v":{"SNP":13608,"RUK":4908,"LAB":5124,"GRN":0,"CON":6166,"LD":2324},"greenRegPct":16.911},{"n":"Aberdeen Central","r":"North East Scotland","v":{"SNP":11974,"RUK":3936,"LAB":5002,"GRN":0,"CON":3688,"LD":2563},"greenRegPct":16.107},{"n":"Aberdeen Deeside and North Kincardine","r":"North East Scotland","v":{"SNP":11788,"RUK":6113,"LAB":2805,"GRN":0,"CON":10544,"LD":2880,"Oth":431},"om":{"IND1":431},"greenRegPct":7.693},{"n":"Aberdeen Donside","r":"North East Scotland","v":{"SNP":11760,"RUK":7029,"LAB":3907,"GRN":0,"CON":4496,"LD":2823,"Oth":481},"om":{"ALS":481},"greenRegPct":7.795},{"n":"Aberdeenshire East","r":"North East Scotland","v":{"SNP":11624,"RUK":7008,"LAB":1487,"GRN":0,"CON":10681,"LD":3999},"greenRegPct":6.781},{"n":"Aberdeenshire West","r":"North East Scotland","v":{"SNP":10113,"RUK":5467,"LAB":1569,"GRN":0,"CON":15897,"LD":3995},"greenRegPct":7.533},{"n":"Angus North and Mearns","r":"North East Scotland","v":{"SNP":11308,"RUK":4844,"LAB":1676,"GRN":0,"CON":8058,"LD":2647,"Oth":468},"om":{"IND1":468},"greenRegPct":8.513},{"n":"Angus South","r":"North East Scotland","v":{"SNP":13289,"RUK":5583,"LAB":3344,"GRN":0,"CON":6681,"LD":2488},"greenRegPct":9.903},{"n":"Banffshire and Buchan Coast","r":"North East Scotland","v":{"SNP":10374,"RUK":10010,"LAB":1049,"GRN":0,"CON":6348,"LD":1162,"Oth":555},"om":{"IND1":555},"greenRegPct":4.512},{"n":"Dundee City East","r":"North East Scotland","v":{"SNP":12969,"RUK":4135,"LAB":4792,"GRN":0,"CON":1999,"LD":2086,"Oth":570},"om":{"Worker":209,"TUSC":361},"greenRegPct":14.249},{"n":"Dundee City West","r":"North East Scotland","v":{"SNP":12722,"RUK":3315,"LAB":6365,"GRN":0,"CON":881,"LD":1980,"Oth":649},"om":{"TUSC":649},"greenRegPct":18.118},{"n":"Ayr","r":"South Scotland","v":{"SNP":12848,"RUK":5355,"LAB":6394,"GRN":0,"CON":8448,"LD":1427,"Oth":820},"om":{"Common":78,"IND1":742},"greenRegPct":8.414},{"n":"Carrick, Cumnock and Doon Valley","r":"South Scotland","v":{"SNP":9610,"RUK":6988,"LAB":6671,"GRN":0,"CON":3680,"LD":1187,"Oth":825},"om":{"IND1":412,"IND2":413},"greenRegPct":6.758},{"n":"Clydesdale","r":"South Scotland","v":{"SNP":13006,"RUK":7898,"LAB":8618,"GRN":0,"CON":4344,"LD":1957},"greenRegPct":9.635},{"n":"Dumfriesshire","r":"South Scotland","v":{"SNP":10262,"RUK":5783,"LAB":3364,"GRN":0,"CON":11370,"LD":1660,"Oth":200},"om":{"Common":200},"greenRegPct":7.439},{"n":"East Kilbride","r":"South Scotland","v":{"SNP":14339,"RUK":5683,"LAB":9395,"GRN":0,"CON":2251,"LD":1424,"Oth":716},"om":{"IND1":716},"greenRegPct":12.68},{"n":"Ettrick, Roxburgh and Berwickshire","r":"South Scotland","v":{"SNP":8206,"RUK":3569,"LAB":1577,"GRN":0,"CON":13483,"LD":2358,"Oth":905},"om":{"ALS":165,"IND1":740},"greenRegPct":7.971},{"n":"Galloway and West Dumfries","r":"South Scotland","v":{"SNP":9903,"RUK":4674,"LAB":2544,"GRN":0,"CON":11502,"LD":1380},"greenRegPct":9.063},{"n":"Hamilton, Larkhall and Stonehouse","r":"South Scotland","v":{"SNP":11825,"RUK":7193,"LAB":9120,"GRN":0,"CON":1617,"LD":1156,"Oth":348},"om":{"AFD":348},"greenRegPct":10.025},{"n":"Kilmarnock and Irvine Valley","r":"South Scotland","v":{"SNP":11919,"RUK":5441,"LAB":7458,"GRN":0,"CON":2780,"LD":1169,"Oth":407},"om":{"ALS":407},"greenRegPct":9.455},{"n":"Midlothian South, Tweeddale and Lauderdale","r":"South Scotland","v":{"SNP":14091,"RUK":4199,"LAB":4614,"GRN":0,"CON":6930,"LD":4649},"greenRegPct":14.406},{"n":"Clydebank and Milngavie","r":"West Scotland","v":{"SNP":12126,"RUK":4510,"LAB":7929,"GRN":0,"CON":1820,"LD":4419,"Oth":647},"om":{"Common":647},"greenRegPct":13.732},{"n":"Cunninghame North","r":"West Scotland","v":{"SNP":11814,"RUK":5404,"LAB":6022,"GRN":0,"CON":4904,"LD":1592,"Oth":411},"om":{"AFD":411},"greenRegPct":11.422},{"n":"Cunninghame South","r":"West Scotland","v":{"SNP":11375,"RUK":7049,"LAB":7208,"GRN":0,"CON":2222,"LD":1442},"greenRegPct":10.275},{"n":"Dumbarton","r":"West Scotland","v":{"SNP":10961,"RUK":5040,"LAB":12747,"GRN":0,"CON":1368,"LD":1196,"Oth":711},"om":{"TUSC":356,"IND1":355},"greenRegPct":11.915},{"n":"Eastwood","r":"West Scotland","v":{"SNP":12722,"RUK":3453,"LAB":8368,"GRN":0,"CON":11990,"LD":1748},"greenRegPct":13.452},{"n":"Inverclyde","r":"West Scotland","v":{"SNP":14193,"RUK":5649,"LAB":8876,"GRN":0,"CON":1351,"LD":1954},"greenRegPct":10.33},{"n":"Paisley","r":"West Scotland","v":{"SNP":13164,"RUK":4620,"LAB":10136,"GRN":0,"CON":940,"LD":1073,"Oth":967},"om":{"FA":212,"TUSC":297,"IND1":458},"greenRegPct":14.906},{"n":"Renfrewshire North and Cardonald","r":"West Scotland","v":{"SNP":14300,"RUK":7083,"LAB":9424,"GRN":0,"CON":1929,"LD":1642,"Oth":610},"om":{"TUSC":610},"greenRegPct":12.731},{"n":"Renfrewshire West and Levern Valley","r":"West Scotland","v":{"SNP":13819,"RUK":5844,"LAB":10548,"GRN":0,"CON":2016,"LD":1610,"Oth":374},"om":{"AFD":374},"greenRegPct":12.322},{"n":"Strathkelvin and Bearsden","r":"West Scotland","v":{"SNP":13125,"RUK":4154,"LAB":4678,"GRN":0,"CON":2122,"LD":15697},"greenRegPct":12.376}]`);
 const REGIONS_DATA = JSON.parse(`[{"n":"Central Scotland and Lothians West","v":{"SNP":86809,"RUK":58334,"LAB":57103,"GRN":34415,"CON":19450,"LD":12830,"Advance":494,"ALS":2692,"BUP":1015,"ISP":1803,"IGV":2637,"SFP":2798,"LBT":285,"SSP":1202,"UKIP":197,"WP":691}},{"n":"Edinburgh and Lothians East","v":{"SNP":69655,"RUK":33341,"LAB":58696,"GRN":67877,"CON":29223,"LD":42937,"Advance":301,"ALS":1508,"Animal":2032,"Commie":672,"EELP":1073,"Equality":276,"ISP":871,"IGV":2357,"SFP":1684,"LBT":341,"SSP":1099,"WP":647,"IND1":2148,"IND2":582,"IND3":330,"IND4":1769,"UKIP":165}},{"n":"Glasgow","v":{"SNP":68669,"RUK":38341,"LAB":47795,"GRN":58881,"CON":10621,"LD":9826,"ALS":3128,"ISP":1130,"IGV":2931,"Christian":765,"SCP":645,"SFP":1758,"SSP":1538,"UKIP":205,"WP":924,"IND1":1979,"IND2":327}},{"n":"Highlands and Islands","v":{"SNP":54011,"RUK":28276,"LAB":14632,"GRN":21935,"CON":20334,"LD":47437,"Advance":418,"ALS":1662,"ISP":1276,"IGV":1577,"Christian":1142,"SFP":1668,"LBT":333,"Rural":772,"SSP":461,"WP":390,"IND1":4587,"IND2":226}},{"n":"Mid Scotland and Fife","v":{"SNP":81018,"RUK":45632,"LAB":41056,"GRN":36286,"CON":37155,"LD":34363,"Advance":467,"ALS":2802,"ISP":1732,"IGV":2490,"SFP":1780,"LBT":409,"SSP":828}},{"n":"North East Scotland","v":{"SNP":88084,"RUK":59823,"LAB":29144,"GRN":30028,"CON":62174,"LD":25380,"Advance":465,"ALS":2270,"ISP":1800,"IGV":2354,"SFP":2380,"SSP":826,"WP":750,"IND1":1397,"IND2":374}},{"n":"South Scotland","v":{"SNP":86446,"RUK":61346,"LAB":52314,"GRN":31170,"CON":60726,"LD":17999,"ALS":2766,"IGV":2908,"AFD":448,"SCP":370,"SFP":2400,"Heritage":471,"LBT":278,"SSP":928,"UKIP":468,"IND1":603,"IND2":904}},{"n":"West Scotland","v":{"SNP":91257,"RUK":58332,"LAB":68045,"GRN":41372,"CON":31867,"LD":24852,"ALS":2490,"ISP":1634,"IGV":2721,"AFD":804,"SCP":542,"SFP":2668,"Liberal":1748,"LBT":263,"SSP":1444,"SocLab":2260,"UKIP":356,"IND1":308,"IND2":290,"IND3":890}}]`);
@@ -553,6 +690,26 @@ function greenConstAdjust(c, input, localBaseShare) {
   }
   return Math.max(0.05, target + (input - GREEN_HIGH_THRESHOLD));
 }
+const REGIONALIST = new Set(["Ind", "EELP", "IND1", "IND2", "IND3", "IND4"]);
+function taperedAdjustF(baseline, input, local, floor) {
+  if (input <= 1e-9) return 0;
+  const threshold = baseline * 0.2;
+  if (baseline <= 0 || input >= threshold) return Math.max(floor, local + (input - baseline));
+  const atThreshold = Math.max(floor, local + (threshold - baseline));
+  return atThreshold * (input / threshold);
+}
+const MINOR_BASE = (() => {
+  const mainKeys = new Set(Object.values(REGION_KEY).filter((k) => k !== "Oth"));
+  const cGrand = CONSTITUENCIES.reduce((a, c) => a + Object.values(c.v).reduce((x, y) => x + y, 0), 0);
+  const lGrand = REGIONS_DATA.reduce((a, r) => a + Object.values(r.v).reduce((x, y) => x + y, 0), 0);
+  const cm = {}, lm = {};
+  for (const c of CONSTITUENCIES) for (const [p, v] of Object.entries(c.om || {})) cm[mergeKey(p)] = (cm[mergeKey(p)] || 0) + v / cGrand * 100;
+  for (const r of REGIONS_DATA) for (const [k, v] of Object.entries(r.v)) {
+    if (mainKeys.has(k) || k === "Oth") continue;
+    lm[k] = (lm[k] || 0) + v / lGrand * 100;
+  }
+  return { cm, lm };
+})();
 function projectSeats(constShares, listShares) {
   const constSwing = {};
   for (const p of SWING_PARTIES) {
@@ -576,19 +733,18 @@ function projectSeats(constShares, listShares) {
         best = p;
       }
     }
-    const omEntries = Object.entries(c.om || {});
-    if (omEntries.length > 0) {
-      const totalMinorBase = omEntries.reduce((sum, [, v]) => sum + v / total * 100, 0);
-      const totalMinorAdj = Math.max(0.05, totalMinorBase + constSwing.Oth);
-      for (const [p, v] of omEntries) {
-        const baseShare = v / total * 100;
-        const share = totalMinorBase > 0 ? baseShare / totalMinorBase : 1 / omEntries.length;
-        const adj = totalMinorAdj * share;
-        adjByParty[mergeKey(p)] = (adjByParty[mergeKey(p)] || 0) + adj;
-        if (adj > bestV) {
-          bestV = adj;
-          best = p;
-        }
+    const sOth = BASELINE_CONST.Oth > 0 ? constShares.Oth / BASELINE_CONST.Oth : 1;
+    const localMinor = {};
+    for (const [p, v] of Object.entries(c.om || {})) localMinor[mergeKey(p)] = (localMinor[mergeKey(p)] || 0) + v / total * 100;
+    for (const [m, b] of Object.entries(MINOR_BASE.cm)) {
+      const local = localMinor[m] || 0;
+      if (REGIONALIST.has(m) && local === 0) continue;
+      const adj = taperedAdjustF(b, b * sOth, local, local > 0 ? 0.05 : 0);
+      if (adj <= 0) continue;
+      adjByParty[m] = (adjByParty[m] || 0) + adj;
+      if (adj > bestV) {
+        bestV = adj;
+        best = m;
       }
     }
     const adjTotal = Object.values(adjByParty).reduce((a, b) => a + b, 0);
@@ -609,10 +765,11 @@ function projectSeats(constShares, listShares) {
       const baseShare = v / total * 100;
       adjustedVotes[p] = taperedAdjust(BASELINE_LIST[p], listShares[p], baseShare);
     }
-    for (const key of Object.keys(region.v)) {
-      if (mainRegionKeys.has(key)) continue;
-      const baseShare = region.v[key] / total * 100;
-      adjustedVotes[key] = baseShare * listOthScale;
+    for (const [k, b] of Object.entries(MINOR_BASE.lm)) {
+      const local = (region.v[k] || 0) / total * 100;
+      if (REGIONALIST.has(k) && local === 0) continue;
+      const adj = taperedAdjustF(b, b * listOthScale, local, local > 0 ? 0.05 : 0);
+      if (adj > 0) adjustedVotes[k] = adj;
     }
     const constSeatsHere = constTallyByRegion[region.n] || {};
     const listSeats = dhondtAMS(adjustedVotes, constSeatsHere, LIST_SEATS_PER_REGION);
@@ -693,1028 +850,403 @@ const HEMICYCLE_ORDER = [
   "RUK",
   "Oth"
 ];
-function StatNumber({ value }) {
-  return /* @__PURE__ */ React.createElement("span", { className: "tabular" }, value);
+
+const h = React.createElement;
+const UK_MAP = {"H":96,"land":"M165.6,87.9L166.7,88.5L166.2,89.1L165.6,89.4L164.3,88.8L165.6,87.9ZM176.2,83.4L175.4,83.4L175.3,82.8L176.2,83.4ZM163.1,49.2L164.0,49.7L164.5,53.2L166.0,57.6L169.0,58.9L170.0,60.7L171.4,61.8L170.7,62.6L172.3,66.2L170.5,64.9L168.3,65.2L170.4,65.1L172.8,67.4L173.4,69.6L171.8,71.6L173.6,72.6L174.2,71.1L176.3,71.0L178.4,71.6L179.8,72.9L180.2,74.8L179.3,77.9L178.1,79.0L177.2,78.3L177.8,78.9L176.8,78.9L177.8,79.0L177.4,79.5L177.8,79.8L176.8,80.3L176.4,79.8L175.0,80.7L176.1,80.5L176.1,81.7L173.6,82.8L175.0,82.6L174.5,83.2L176.4,83.6L178.5,83.2L178.4,84.8L176.6,85.9L176.4,86.8L175.3,86.7L173.0,88.1L170.4,87.5L168.0,88.3L167.3,87.4L166.6,87.9L166.6,87.4L166.2,87.4L166.2,87.9L164.7,86.8L165.5,87.7L164.3,88.3L162.0,88.2L162.4,89.2L160.3,88.9L160.0,89.8L158.1,88.2L155.7,89.1L155.2,88.6L155.1,90.7L154.4,92.0L152.4,91.5L151.7,90.3L151.3,90.7L151.8,91.3L149.4,91.1L147.9,92.6L147.7,92.2L147.4,93.6L147.0,94.0L145.7,92.7L144.7,93.4L144.5,92.7L146.4,91.8L147.9,89.6L148.7,89.9L148.3,89.3L148.9,89.3L149.9,87.9L150.2,86.1L151.2,86.2L152.0,84.6L157.3,84.8L157.6,83.3L160.4,80.4L159.0,81.5L159.1,79.9L157.6,79.3L156.9,78.0L157.6,75.9L156.4,75.2L157.6,74.4L156.9,74.5L157.6,72.9L156.8,72.4L156.8,71.7L157.5,71.1L158.8,71.3L156.6,67.6L157.3,67.3L158.0,68.5L158.9,68.0L157.8,68.0L157.0,66.3L157.9,64.9L157.2,64.6L157.2,63.5L158.1,63.0L157.8,62.5L158.4,60.7L157.7,61.5L157.2,60.9L156.8,62.2L156.3,61.8L156.5,60.6L156.0,61.2L154.4,58.6L155.7,55.4L157.3,54.9L157.3,54.1L161.3,50.8L160.6,49.2L161.9,47.9L163.1,49.2ZM124.3,62.6L124.4,63.6L123.8,63.4L122.9,62.9L124.3,62.6ZM137.8,52.2L138.7,52.7L136.6,54.3L135.8,56.7L134.0,57.1L135.0,57.8L132.8,59.0L134.3,61.0L136.8,61.8L137.7,60.9L137.5,60.0L138.3,59.4L140.1,61.4L140.2,62.4L141.5,61.9L142.7,62.6L141.5,62.6L141.4,63.3L142.8,66.3L142.2,67.1L142.9,67.8L142.1,68.0L142.7,68.5L143.2,71.1L141.4,75.9L140.8,75.7L141.4,76.1L141.5,77.0L140.3,77.2L139.3,76.9L139.5,76.5L138.7,77.6L138.4,76.3L138.3,77.5L135.5,77.8L135.6,78.6L134.4,78.7L133.5,79.9L132.5,80.1L132.8,79.4L131.6,79.5L132.2,80.4L131.0,80.8L131.1,81.6L130.0,81.3L130.3,81.8L128.3,81.9L127.2,82.6L127.3,82.1L127.0,82.4L126.8,82.0L125.0,82.8L126.3,81.6L124.9,82.0L126.8,80.7L126.2,80.4L125.9,81.0L123.4,81.7L126.1,79.5L123.5,80.6L123.0,79.7L122.5,80.2L122.2,79.5L125.3,77.4L122.0,77.8L121.8,77.4L122.8,76.5L123.8,76.6L123.8,76.2L125.0,76.6L125.4,76.6L124.7,76.4L124.9,75.7L124.4,75.4L125.9,74.9L125.8,74.1L130.1,73.3L129.1,73.2L129.2,72.5L127.5,74.0L127.6,73.6L126.1,73.4L124.4,74.2L126.5,72.7L127.2,71.3L126.6,71.2L127.6,69.6L128.5,69.8L128.3,69.5L129.2,69.6L129.4,69.0L128.7,69.0L129.2,68.7L128.8,68.6L126.4,68.9L126.2,68.4L126.0,68.9L126.3,67.7L125.0,68.4L124.6,68.2L125.1,67.4L123.3,67.5L124.1,66.9L123.3,66.3L125.6,66.0L124.6,65.6L124.6,64.7L126.2,64.4L126.2,63.8L124.4,63.7L124.5,63.1L125.1,63.4L124.6,62.5L124.9,61.8L124.3,62.1L124.1,61.0L123.6,62.0L123.6,60.8L124.1,60.3L124.6,61.1L125.2,60.7L125.1,60.0L127.6,60.3L128.2,61.6L128.6,60.4L131.2,61.1L130.7,60.7L131.4,60.5L131.2,60.1L130.5,59.8L131.4,58.9L132.6,58.7L133.1,57.5L131.5,58.1L131.7,57.5L130.4,57.7L129.8,57.1L130.6,56.5L131.5,56.6L131.1,56.3L131.7,56.5L131.0,56.1L131.3,55.8L132.1,55.9L131.5,54.5L132.1,54.3L132.3,53.2L132.9,53.5L133.8,52.7L133.6,53.1L134.3,53.4L134.6,52.4L135.1,53.7L135.1,52.8L134.7,52.7L135.3,52.3L135.9,53.6L135.2,54.9L136.2,54.1L135.9,52.1L137.2,52.2L136.5,51.4L137.8,52.2ZM141.1,52.6L142.9,53.1L143.2,54.7L144.6,56.3L143.6,57.8L145.2,57.2L145.9,59.0L145.5,60.0L145.3,58.6L144.6,58.0L144.9,59.2L144.5,59.9L145.2,59.6L145.3,60.3L144.8,60.9L143.8,60.9L143.0,62.4L141.5,61.9L140.2,62.4L140.0,61.9L140.1,61.4L138.3,59.4L137.5,60.0L137.7,60.9L136.8,61.8L134.3,61.0L132.8,59.0L135.0,57.8L134.0,57.1L135.8,56.7L136.7,54.2L138.1,54.2L138.6,52.9L141.1,52.6ZM156.2,68.3L157.8,69.2L158.8,71.2L158.5,71.5L157.5,71.1L156.8,71.7L156.8,72.4L157.6,72.9L156.9,74.5L157.6,74.4L156.4,75.2L157.6,75.9L156.9,78.0L157.6,79.3L159.1,79.9L159.0,81.5L157.6,81.9L156.1,83.3L154.8,83.1L153.4,81.5L152.6,82.0L151.3,82.0L151.3,81.5L152.3,81.1L151.2,81.1L150.9,80.2L147.8,81.5L147.4,81.0L148.7,80.8L148.8,80.1L148.3,80.7L147.1,81.0L146.7,80.6L147.4,79.8L146.5,79.3L151.2,76.9L152.9,74.3L152.1,73.9L152.7,72.8L152.0,72.2L152.3,71.3L150.7,71.6L150.2,72.4L149.1,72.4L151.1,69.9L153.5,68.5L153.3,68.1L154.0,68.5L155.7,68.0L156.2,68.3ZM151.7,68.4L152.4,68.3L152.2,68.8L151.0,69.7L150.7,69.3L150.0,68.6L150.0,67.6L151.1,67.4L151.7,68.4Z","sco":"M147.4,50.9L146.3,50.5L146.1,49.1L146.5,48.5L147.2,49.1L147.4,50.9ZM147.9,48.4L147.0,47.0L147.5,47.1L147.9,48.4ZM142.7,47.6L143.1,48.8L141.9,49.7L142.0,48.0L141.5,48.1L140.8,48.8L141.0,47.4L141.6,47.1L141.7,47.7L142.5,46.6L142.7,47.6ZM144.2,46.0L143.3,47.8L142.9,47.8L142.8,47.0L143.7,46.4L143.2,46.1L144.4,44.9L144.2,46.0ZM139.0,42.3L138.5,41.8L139.5,41.4L139.0,42.3ZM143.0,40.8L144.8,42.7L144.4,42.6L144.1,43.4L143.8,43.1L141.6,43.8L141.6,43.2L142.0,43.5L143.1,42.9L142.2,42.9L143.1,42.0L141.7,41.5L141.6,40.9L143.0,40.8ZM140.5,41.0L139.8,41.1L140.5,40.4L141.0,40.2L140.5,41.0ZM136.6,37.6L135.8,38.0L136.0,37.5L136.3,37.0L136.6,37.6ZM141.9,37.4L141.8,37.9L141.3,37.7L141.4,37.0L141.9,37.4ZM136.7,33.9L137.3,34.5L136.6,34.4L137.5,34.8L136.7,35.4L137.2,35.9L136.8,36.2L137.4,36.5L136.7,36.7L136.2,35.4L136.7,33.9ZM137.0,33.3L137.2,33.7L136.5,33.6L137.0,33.3ZM143.2,33.1L143.2,34.5L142.8,34.3L143.2,33.1ZM137.5,31.7L138.1,31.9L137.4,31.9L137.9,32.3L136.9,32.7L137.7,32.7L137.3,33.1L135.8,32.2L136.9,31.5L137.5,31.7ZM141.7,31.3L142.4,32.3L142.4,34.8L143.6,35.4L144.8,35.2L143.1,37.3L143.9,35.9L143.2,36.0L143.0,35.5L142.7,36.4L142.6,35.8L141.6,36.1L141.3,35.4L140.9,34.8L141.7,34.9L140.9,34.0L140.4,34.5L139.4,33.5L139.8,33.0L140.3,33.6L140.1,32.2L141.7,33.5L141.2,31.8L141.7,31.3ZM142.2,25.4L141.4,26.5L142.4,26.3L142.4,26.7L141.3,26.8L141.4,27.4L140.2,27.9L141.2,27.7L141.5,28.3L140.6,28.5L141.0,28.9L140.2,29.4L139.8,28.6L140.3,28.1L139.9,28.1L139.5,28.6L140.0,29.7L139.4,29.6L139.7,30.1L139.2,30.3L138.5,31.1L137.8,30.2L139.2,29.5L137.9,28.8L138.7,28.2L138.1,28.3L137.9,27.0L138.3,26.5L138.8,26.7L139.1,27.7L139.0,27.0L139.8,27.0L139.3,26.1L141.9,24.0L142.2,25.4ZM155.8,22.8L157.4,22.9L156.8,25.3L152.7,29.2L152.3,29.0L152.6,29.8L150.8,29.5L152.5,30.3L153.7,30.0L152.7,31.4L152.5,31.0L151.3,31.5L150.6,32.4L152.6,31.5L152.2,32.4L151.4,32.7L151.8,33.2L152.3,32.4L154.6,31.9L155.5,31.1L157.3,31.6L162.2,31.3L163.0,32.1L163.3,33.4L162.3,34.7L161.3,38.3L159.8,41.1L158.7,42.1L155.9,43.0L158.0,42.2L158.4,43.2L159.5,43.8L158.5,44.5L157.6,44.4L155.8,45.9L153.5,45.2L154.3,46.0L157.1,46.6L158.3,45.6L159.2,45.7L161.5,46.9L162.1,47.8L160.6,49.3L161.3,50.8L159.6,51.9L157.2,54.7L154.7,54.6L154.7,55.5L153.6,55.5L152.9,56.4L150.8,55.3L150.8,57.2L148.5,55.7L148.5,57.6L147.1,54.6L147.4,54.3L147.9,55.2L147.9,53.4L149.7,50.4L148.3,48.6L148.5,46.8L150.4,46.8L148.8,45.5L148.6,46.2L149.1,44.4L148.6,45.2L148.3,44.7L148.1,47.2L147.3,46.1L147.5,47.0L147.1,46.4L147.0,47.6L146.5,47.3L146.3,46.2L148.3,43.8L146.2,46.0L145.8,45.9L145.8,46.5L146.4,48.0L145.6,49.2L145.1,51.0L145.5,51.4L144.2,52.0L144.7,48.9L145.8,47.5L145.1,48.1L144.8,47.9L145.2,46.7L144.6,46.9L145.2,45.8L144.6,46.6L145.4,45.4L145.2,43.3L145.8,43.1L145.4,43.1L145.7,42.4L146.9,42.3L147.6,41.3L147.0,42.2L145.8,42.1L145.9,41.5L146.8,41.3L146.0,41.5L146.4,40.5L147.9,40.0L146.8,40.0L147.4,39.1L144.7,41.9L143.1,40.6L145.3,40.2L142.0,40.0L144.3,39.4L143.9,39.0L144.8,38.6L143.5,38.4L144.0,37.5L145.4,37.5L144.2,37.1L144.5,36.5L146.0,36.6L144.7,36.1L145.2,35.2L146.0,35.5L145.5,35.1L145.8,34.7L144.5,34.9L145.8,33.8L144.1,34.4L143.9,32.4L144.9,33.0L145.5,32.8L144.8,32.7L144.1,31.9L144.7,31.3L144.1,31.0L144.1,30.0L144.7,29.9L145.0,30.7L145.0,29.3L145.6,30.0L145.9,29.5L146.9,30.0L146.2,29.2L147.6,30.2L145.8,27.9L146.5,28.0L146.8,27.3L146.1,26.3L148.2,26.7L147.1,25.5L147.2,24.9L147.8,25.2L147.4,24.1L148.0,23.0L148.7,23.2L148.8,23.9L149.0,23.2L149.5,23.6L149.1,24.6L149.9,23.5L150.4,23.5L150.3,24.6L151.2,23.7L154.6,23.0L155.7,23.2L155.8,22.8ZM158.0,21.2L157.7,22.0L157.5,21.5L157.3,21.2L158.0,21.2ZM156.3,20.5L156.6,21.2L156.3,21.5L156.7,21.5L155.8,21.1L155.5,20.4L156.3,20.5ZM156.7,18.2L157.5,18.9L156.8,19.5L158.4,19.6L158.3,20.1L158.7,19.8L158.8,20.2L158.3,20.6L157.5,19.9L156.5,20.3L156.4,19.2L155.9,20.0L155.9,18.4L156.7,18.2ZM157.3,17.9L157.7,17.9L157.3,18.4L156.9,17.9L157.3,17.9ZM160.3,16.8L159.1,17.4L159.3,16.8L160.3,16.8ZM157.7,16.3L158.3,17.2L157.7,16.9L157.1,16.5L157.7,16.3ZM167.9,4.3L167.6,4.6L167.3,4.1L167.9,4.3ZM165.6,4.4L165.2,6.3L165.9,5.4L166.2,6.5L166.8,5.9L166.1,6.9L166.5,7.6L165.9,7.9L166.4,8.7L165.7,11.5L165.4,10.6L165.7,7.8L165.4,8.2L165.0,7.7L165.3,8.2L164.8,8.7L164.6,7.9L164.0,8.1L163.7,7.5L164.7,7.1L164.7,7.5L164.9,7.1L165.2,7.4L165.7,6.8L164.8,5.5L164.1,5.5L164.5,4.8L165.1,5.3L164.7,5.0L165.0,4.3L165.5,4.5L165.5,4.0L165.6,4.4ZM166.6,3.1L167.0,3.1L166.8,5.0L166.5,5.5L166.2,5.1L166.6,3.1ZM168.0,2.5L167.7,3.7L167.1,3.5L167.3,2.8L167.5,2.0L167.5,2.6L167.8,2.0L168.0,2.5Z","W":183};
+const COLFIX = {"SFP": "#39E639", "Commie": "#B239E6", "SCP": "#B2E639", "BUP": "#E67467", "Liberal": "#3939E6", "Common": "#39E67E"};
+for (const k in COLFIX) if (PARTY_META[k]) PARTY_META[k].color = COLFIX[k];
+const DISPLAY = { SNP: "Scottish National Party", Lab: "Labour", Con: "Conservative", RUK: "Reform UK", LD: "Liberal Democrat", Green: "Green" };
+function fullName(p) {
+  const m = partyMeta(p);
+  const n = DISPLAY[p] || m.name;
+  return n === m.short ? n : `${n} (${m.short})`;
 }
-function PartySliderRow({ p, value, frozen, onChange }) {
-  const meta = PARTY_META[p];
-  return /* @__PURE__ */ React.createElement("div", { className: "slider-row" + (frozen ? " frozen" : "") }, /* @__PURE__ */ React.createElement("div", { className: "label-row" }, /* @__PURE__ */ React.createElement("span", { className: "pname" }, /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: meta.color } }), meta.name, frozen && /* @__PURE__ */ React.createElement("span", { className: "frozen-tag" }, "auto"))), /* @__PURE__ */ React.createElement("div", { className: "slider-input-row" }, /* @__PURE__ */ React.createElement(
-    "input",
-    {
-      type: "range",
-      min: "0",
-      max: "60",
-      step: "0.1",
-      value,
-      disabled: frozen,
-      style: { "--thumb": meta.color },
-      onChange: (e) => onChange(parseFloat(e.target.value))
-    }
-  ), /* @__PURE__ */ React.createElement("div", { className: "numbox" }, /* @__PURE__ */ React.createElement(
-    "input",
-    {
-      type: "number",
-      min: "0",
-      max: "100",
-      step: "0.1",
-      value: round1(value),
-      disabled: frozen,
+const plainName = (p) => DISPLAY[p] || partyMeta(p).name;
+const short = (p) => partyMeta(p).short;
+const SLIDER_MAX = 60;
+
+/* ---------- inputs ---------- */
+function NumBox({ value, onChange }) {
+  const [draft, setDraft] = useState(null);
+  return h("div", { className: "nbox" },
+    h("input", {
+      type: "text", inputMode: "decimal", "aria-label": "Vote share",
+      value: draft !== null ? draft : value.toFixed(1),
+      onFocus: (e) => { setDraft(value.toFixed(1)); e.target.select(); },
       onChange: (e) => {
-        const v = e.target.value;
-        if (v === "") return onChange(0);
-        const n = parseFloat(v);
+        const t = e.target.value;
+        setDraft(t);
+        const n = parseFloat(t);
         if (!Number.isNaN(n)) onChange(Math.max(0, Math.min(100, n)));
-      }
-    }
-  ), /* @__PURE__ */ React.createElement("span", null, "%"))));
-}
-function HolyroodProjector() {
-  const [constShares, setConstShares] = useState(() => {
-    const s = {};
-    for (const p of SWING_PARTIES) s[p] = BASELINE_CONST[p];
-    return s;
-  });
-  const [listShares, setListShares] = useState(() => {
-    const s = {};
-    for (const p of SWING_PARTIES) s[p] = BASELINE_LIST[p];
-    return s;
-  });
-  const constSum = SWING_PARTIES.reduce((a, p) => a + constShares[p], 0);
-  const listSum = SWING_PARTIES.reduce((a, p) => a + listShares[p], 0);
-  const { tally, constResults, regionResults } = useMemo(
-    () => projectSeats(constShares, listShares),
-    [constShares, listShares]
-  );
-  const seatBreakdown = useMemo(() => {
-    const breakdown = {};
-    for (const c of constResults) {
-      const key = mergeKey(c.winner);
-      breakdown[key] = breakdown[key] || { const: 0, list: 0 };
-      breakdown[key].const += 1;
-    }
-    for (const r of regionResults) {
-      for (const p of Object.keys(r.listSeats)) {
-        const key = mergeKey(p);
-        breakdown[key] = breakdown[key] || { const: 0, list: 0 };
-        breakdown[key].list += r.listSeats[p];
-      }
-    }
-    return breakdown;
-  }, [constResults, regionResults]);
-  const orderedTally = useMemo(() => {
-    const all = /* @__PURE__ */ new Set([...SWING_PARTIES, ...Object.keys(tally), ...Object.keys(BASELINE_SEATS)]);
-    all.delete("Oth");
-    return [...all].map((p) => ({ p, seats: tally[p] || 0, base: BASELINE_SEATS[p] || 0 })).filter((row) => row.seats > 0 || row.base > 0).sort((a, b) => b.seats - a.seats);
-  }, [tally]);
-  const hemicycleColors = useMemo(() => {
-    const colors = new Array(TOTAL_SEATS);
-    let idx = 0;
-    const placed = /* @__PURE__ */ new Set();
-    for (const p of HEMICYCLE_ORDER) {
-      const n = tally[p] || 0;
-      placed.add(p);
-      for (let i = 0; i < n && idx < TOTAL_SEATS; i++, idx++) colors[idx] = p;
-    }
-    const extras = Object.keys(tally).filter((p) => !placed.has(p) && tally[p] > 0).sort((a, b) => tally[b] - tally[a]);
-    for (const p of extras) {
-      for (let i = 0; i < tally[p] && idx < TOTAL_SEATS; i++, idx++) colors[idx] = p;
-    }
-    while (idx < TOTAL_SEATS) colors[idx++] = "Oth";
-    return colors;
-  }, [tally]);
-  const leader = orderedTally[0];
-  const second = orderedTally[1];
-  const majorityDiff = leader.seats - MAJORITY;
-  const workingMajority = 2 * leader.seats - TOTAL_SEATS;
-  function makeSliderHandler(setFn, baseline) {
-    return function(p, valRaw) {
-      if (p === "Oth") return;
-      setFn((prev) => {
-        const newVal = Math.max(0, Math.min(100, valRaw));
-        const otherRealSum = SWING_PARTIES.filter((x) => x !== p && x !== "Oth").reduce(
-          (a, x) => a + prev[x],
-          0
-        );
-        const maxAllowed = Math.max(0, 100 - otherRealSum);
-        const clamped = Math.max(0, Math.min(maxAllowed, newVal));
-        const next = { ...prev, [p]: clamped };
-        next.Oth = Math.max(0, 100 - otherRealSum - clamped);
-        return next;
-      });
-    };
-  }
-  const handleConstSlider = makeSliderHandler(setConstShares, BASELINE_CONST);
-  const handleListSlider = makeSliderHandler(setListShares, BASELINE_LIST);
-  function resetConst() {
-    const s = {};
-    for (const p of SWING_PARTIES) s[p] = BASELINE_CONST[p];
-    setConstShares(s);
-  }
-  function resetList() {
-    const s = {};
-    for (const p of SWING_PARTIES) s[p] = BASELINE_LIST[p];
-    setListShares(s);
-  }
-  const [coalition, setCoalition] = useState(() => /* @__PURE__ */ new Set());
-  function toggleCoalitionParty(p) {
-    setCoalition((prev) => {
-      const next = new Set(prev);
-      if (next.has(p)) next.delete(p);
-      else next.add(p);
-      return next;
-    });
-  }
-  const coalitionSeats = orderedTally.filter((row) => coalition.has(row.p)).reduce((a, row) => a + row.seats, 0);
-  const coalitionDiff = coalitionSeats - MAJORITY;
-  const coalitionWorkingMajority = 2 * coalitionSeats - TOTAL_SEATS;
-  return /* @__PURE__ */ React.createElement("div", { className: "app" }, /* @__PURE__ */ React.createElement("style", null, `
-        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-        * { box-sizing: border-box; }
-        .app {
-          background: #0F1219;
-          color: #F1F2F5;
-          font-family: 'Inter', sans-serif;
-          min-height: 100vh;
-          padding: 28px 20px 60px;
-        }
-        .wrap { max-width: 1180px; margin: 0 auto; }
-
-        .masthead {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          border-bottom: 1px solid #262B38;
-          padding-bottom: 16px;
-          margin-bottom: 22px;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-        .masthead h1 {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 38px;
-          letter-spacing: 0.5px;
-          margin: 0;
-          text-transform: uppercase;
-          line-height: 1;
-        }
-        .masthead .sub {
-          color: #8B92A5;
-          font-size: 14px;
-          margin-top: 6px;
-          max-width: 580px;
-          line-height: 1.4;
-        }
-
-        .grid {
-          display: grid;
-          grid-template-columns: 300px 1fr;
-          gap: 22px;
-          align-items: start;
-        }
-        @media (max-width: 860px) {
-          .grid { grid-template-columns: 1fr; }
-          .results-panel { position: static !important; }
-        }
-        .results-col { align-self: stretch; }
-        .results-panel { position: sticky; top: 20px; }
-
-        .panel {
-          background: #161A24;
-          border: 1px solid #262B38;
-          border-radius: 10px;
-          padding: 18px;
-        }
-        .list-panel { margin-top: 22px; }
-        .panel h2 {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 15px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          color: #8B92A5;
-          margin: 0 0 14px;
-        }
-
-        .slider-row { margin-bottom: 14px; }
-        .slider-row .label-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
-        .slider-row .pname { display:flex; align-items:center; gap:7px; font-weight: 500;}
-        .swatch { width: 10px; height: 10px; border-radius: 2px; display:inline-block; flex-shrink:0; }
-        .slider-row.frozen { opacity: 0.5; }
-        .frozen-tag {
-          font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.5px;
-          color: #6B7280; border: 1px solid #3A4051; border-radius: 4px; padding: 1px 5px; text-transform: uppercase;
-        }
-        .slider-input-row { display: flex; align-items: center; gap: 10px; }
-        .numbox {
-          display: flex; align-items: center; gap: 3px; background: #F1F2F6; border: 1px solid #D6D9E2;
-          border-radius: 6px; padding: 3px 7px; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(15, 18, 25, 0.06);
-        }
-        .numbox:focus-within { border-color: #A8ADBD; background: #FFFFFF; }
-        .numbox input[type="number"] {
-          width: 40px; background: transparent; border: none; outline: none; color: #14171F;
-          font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 600; text-align: right; -moz-appearance: textfield;
-        }
-        .numbox input[type="number"]::-webkit-inner-spin-button, .numbox input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        .numbox span { color: #5B5F70; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; }
-        input[type="range"] { -webkit-appearance: none; flex: 1; min-width: 0; height: 5px; border-radius: 3px; background: #262B38; outline: none; }
-        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--thumb, #D4AF6A); cursor: pointer; border: 2px solid #0F1219; }
-        input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--thumb, #D4AF6A); cursor: pointer; border: 2px solid #0F1219; }
-
-        .sum-row {
-          display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px;
-          border-top: 1px solid #262B38; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8B92A5;
-        }
-        .reset-btn {
-          background: transparent; border: 1px solid #3A4051; color: #C7CBD6; font-family: 'Inter', sans-serif;
-          font-size: 12.5px; padding: 7px 12px; border-radius: 6px; cursor: pointer; margin-top: 12px; width: 100%;
-        }
-        .reset-btn:hover { border-color: #D4AF6A; color: #D4AF6A; }
-
-        .headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; margin: 0 0 4px; }
-        .headline .n { color: var(--lead-color, #D4AF6A); }
-        .subheadline { color: #8B92A5; font-size: 13.5px; margin-bottom: 18px; }
-        .hemicycle-wrap { display:flex; justify-content:center; }
-        .hemicycle-wrap svg { width: 100%; max-width: 620px; height: auto; }
-
-        .table-panel { margin-top: 22px; }
-        table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-        th {
-          text-align: left; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.5px;
-          color: #8B92A5; font-weight: 600; font-size: 12px; padding: 8px 10px; border-bottom: 1px solid #262B38;
-        }
-        td { padding: 9px 10px; border-bottom: 1px solid #1D212B; vertical-align: middle; }
-        .party-cell { display:flex; align-items:center; gap:8px; }
-        .tabular { font-family: 'JetBrains Mono', monospace; }
-        .seats-minor { color: #5D6376; font-size: 12.5px; }
-        td.seats-total { color: #FFFFFF; font-weight: 700; font-size: 14.5px; }
-        .change-pos { color: #4ADE80; } .change-neg { color: #F87171; } .change-zero { color: #6B7280; }
-        .bar-track { background:#1D212B; border-radius: 3px; height: 8px; width: 130px; overflow:hidden; }
-        .bar-fill { height: 100%; border-radius: 3px; }
-
-        .coalition-panel { margin-top: 22px; }
-        .coalition-sub { color: #8B92A5; font-size: 13px; margin: -6px 0 16px; max-width: 640px; line-height: 1.4; }
-        .coalition-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-        .coalition-chip {
-          display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid #3A4051; border-radius: 999px;
-          padding: 6px 12px 6px 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #F1F2F5;
-          cursor: pointer; transition: background 0.12s, color 0.12s;
-        }
-        .coalition-chip .swatch { width: 9px; height: 9px; border-radius: 50%; }
-        .coalition-chip-seats { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; opacity: 0.75; margin-left: 2px; }
-        .coalition-chip:not(.active):hover { background: #1B202B; }
-        .coalition-empty { color: #5D6376; font-size: 13.5px; padding: 4px 0 2px; }
-        .coalition-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 2px; }
-        .coalition-headline .n { color: var(--lead-color); }
-        .coalition-subheadline { color: #8B92A5; font-size: 13px; margin-bottom: 14px; }
-        .coalition-bar-track { position: relative; display: flex; height: 14px; border-radius: 4px; overflow: hidden; background: #1D212B; }
-        .coalition-bar-seg { height: 100%; }
-        .coalition-majority-mark { position: absolute; top: -4px; bottom: -4px; width: 2px; background: #FFFFFF; }
-
-        .map-panel { margin-top: 22px; }
-        .flip-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 10px;
-          flex-wrap: wrap;
-          max-width: 500px;
-          margin: 0 auto 12px;
-        }
-        .flip-toggle {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: transparent;
-          border: 0;
-          padding: 0;
-          font-family: 'Inter', sans-serif;
-          font-size: 13px;
-          font-weight: 500;
-          color: #C9CEDB;
-          cursor: pointer;
-        }
-        .flip-track {
-          position: relative;
-          width: 32px;
-          height: 18px;
-          border-radius: 9px;
-          background: #262B38;
-          transition: background 0.15s;
-        }
-        .flip-knob {
-          position: absolute;
-          top: 2px;
-          left: 2px;
-          width: 14px;
-          height: 14px;
-          border-radius: 50%;
-          background: #8B92A5;
-          transition: transform 0.15s, background 0.15s;
-        }
-        .flip-toggle.on .flip-track { background: #3B6FD4; }
-        .flip-toggle.on .flip-knob { transform: translateX(14px); background: #FFFFFF; }
-        .flip-count { font-size: 12px; color: #8B92A5; font-family: 'JetBrains Mono', monospace; }
-        .mt-flip { font-size: 12px; font-weight: 600; color: #FFFFFF; margin: 2px 0 8px; }
-        .colour-controls { max-width: 500px; margin: 0 auto 12px; }
-        .colour-seg { display: inline-flex; gap: 2px; background: #10131C; border-radius: 6px; padding: 2px; }
-        .colour-opt {
-          background: transparent; border: 0; border-radius: 5px; padding: 5px 10px;
-          font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: #8B92A5; cursor: pointer;
-        }
-        .colour-opt:hover { color: #FFFFFF; }
-        .colour-opt.active { background: #262B38; color: #FFFFFF; }
-        .party-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .party-chip {
-          display: inline-flex; align-items: center; gap: 6px; background: #10131C; border: 0; border-radius: 14px;
-          padding: 4px 10px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; color: #8B92A5; cursor: pointer;
-        }
-        .party-chip:hover { color: #FFFFFF; }
-        .party-chip.active { background: #262B38; color: #FFFFFF; }
-        .strength-legend { position: absolute; left: 14px; bottom: 14px; width: 120px; pointer-events: none; }
-        .sl-title { font-size: 11px; color: #C9CEDB; margin-bottom: 4px; }
-        .sl-bar { height: 8px; border-radius: 4px; background-color: #1D212B; }
-        .sl-labels { display: flex; justify-content: space-between; font-size: 10px; color: #8B92A5; margin-top: 3px; font-family: 'JetBrains Mono', monospace; }
-        .map-tabs {
-          display: flex;
-          gap: 4px;
-          background: #10131C;
-          border-radius: 8px;
-          padding: 3px;
-          margin: 0 auto 14px;
-          max-width: 500px;
-        }
-        .map-tab {
-          flex: 1;
-          background: transparent;
-          border: 0;
-          border-radius: 6px;
-          padding: 8px 10px;
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 15px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          color: #8B92A5;
-          cursor: pointer;
-        }
-        .map-tab:hover { color: #FFFFFF; }
-        .map-tab.active { background: #262B38; color: #FFFFFF; }
-        .map-wrap {
-          position: relative;
-          max-width: 500px;
-          margin: 0 auto;
-          background: #10131C;
-          border-radius: 8px;
-          padding: 2px;
-          overflow: hidden;
-        }
-        .map-wrap svg {
-          display: block;
-          width: 100%;
-          height: auto;
-          user-select: none;
-          touch-action: none;
-        }
-        .map-zoom-controls {
-          position: absolute;
-          bottom: 18px;
-          right: 18px;
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-        .map-zoom-controls button {
-          width: 26px;
-          height: 26px;
-          border-radius: 5px;
-          border: 1px solid #3A4051;
-          background: #1B202B;
-          color: #F1F2F5;
-          font-size: 15px;
-          line-height: 1;
-          cursor: pointer;
-        }
-        .map-zoom-controls button:hover { border-color: #D4AF6A; color: #D4AF6A; }
-        .map-zoom-controls button.reset { font-size: 13px; color: #8B92A5; }
-        .map-tooltip {
-          position: absolute;
-          width: 208px;
-          background: #171B24;
-          border: 1px solid #3A4051;
-          border-radius: 8px;
-          padding: 10px 12px;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-        }
-        .mt-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 8px;
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 15px;
-          margin-bottom: 2px;
-        }
-        .mt-header button {
-          background: none;
-          border: none;
-          color: #6B7280;
-          font-size: 15px;
-          cursor: pointer;
-          line-height: 1;
-        }
-        .mt-header button:hover { color: #F1F2F5; }
-        .mt-sub {
-          font-size: 11px;
-          color: #6B7280;
-          margin-bottom: 8px;
-        }
-        .mt-row {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 12.5px;
-          padding: 2px 0;
-        }
-        .mt-name { flex: 1; }
-        .mt-pct { font-family: 'JetBrains Mono', monospace; color: #C7CBD6; }
-        .mt-seats-label {
-          font-family: 'Barlow Condensed', sans-serif;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          font-size: 11px;
-          color: #6B7280;
-          margin: 10px 0 5px;
-        }
-        .mt-seat-dots { display: flex; gap: 3px; flex-wrap: wrap; }
-        .mt-seat-dot { width: 10px; height: 10px; border-radius: 2px; }
-      `), /* @__PURE__ */ React.createElement("div", { className: "wrap" }, /* @__PURE__ */ React.createElement("div", { className: "masthead" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", null, "Holyrood Seat Projector"), /* @__PURE__ */ React.createElement("div", { className: "sub" }, `Adjust national vote share and see the resulting Scottish Parliament, using the Additional Member System \u2014 73 first-past-the-post constituencies plus 56 regional "top-up" seats, allocated by corrective D'Hondt across 8 regions \u2014 baselined on the actual 7 May 2026 election.`))), /* @__PURE__ */ React.createElement("div", { className: "grid" }, /* @__PURE__ */ React.createElement("div", { className: "controls-col" }, /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("h2", null, "Constituency vote"), CONST_SLIDER_ORDER.map((p) => /* @__PURE__ */ React.createElement(
-    PartySliderRow,
-    {
-      key: p,
-      p,
-      value: constShares[p],
-      frozen: p === "Oth",
-      onChange: (v) => handleConstSlider(p, v)
-    }
-  )), /* @__PURE__ */ React.createElement("div", { className: "sum-row" }, /* @__PURE__ */ React.createElement("span", null, "TOTAL"), /* @__PURE__ */ React.createElement("span", null, constSum.toFixed(1), "% \xB7 Other absorbs the rest")), /* @__PURE__ */ React.createElement("button", { className: "reset-btn", onClick: resetConst }, "Reset to 2026 result")), /* @__PURE__ */ React.createElement("div", { className: "panel list-panel" }, /* @__PURE__ */ React.createElement("h2", null, "Regional list vote"), LIST_SLIDER_ORDER.map((p) => /* @__PURE__ */ React.createElement(
-    PartySliderRow,
-    {
-      key: p,
-      p,
-      value: listShares[p],
-      frozen: p === "Oth",
-      onChange: (v) => handleListSlider(p, v)
-    }
-  )), /* @__PURE__ */ React.createElement("div", { className: "sum-row" }, /* @__PURE__ */ React.createElement("span", null, "TOTAL"), /* @__PURE__ */ React.createElement("span", null, listSum.toFixed(1), "% \xB7 Other absorbs the rest")), /* @__PURE__ */ React.createElement("button", { className: "reset-btn", onClick: resetList }, "Reset to 2026 result"))), /* @__PURE__ */ React.createElement("div", { className: "results-col" }, /* @__PURE__ */ React.createElement("div", { className: "panel results-panel" }, /* @__PURE__ */ React.createElement("h2", null, "Projected Parliament"), /* @__PURE__ */ React.createElement("div", { className: "headline", style: { "--lead-color": partyMeta(leader.p).color } }, majorityDiff >= 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "n" }, partyMeta(leader.p).name), " majority of", " ", /* @__PURE__ */ React.createElement(StatNumber, { value: workingMajority })) : /* @__PURE__ */ React.createElement(React.Fragment, null, "No overall majority \u2014 ", /* @__PURE__ */ React.createElement("span", { className: "n" }, partyMeta(leader.p).name), " ", "largest party, ", /* @__PURE__ */ React.createElement(StatNumber, { value: Math.abs(majorityDiff) }), " seat", Math.abs(majorityDiff) === 1 ? "" : "s", " short")), /* @__PURE__ */ React.createElement("div", { className: "subheadline" }, partyMeta(leader.p).short, " ", leader.seats, " \xB7 ", partyMeta(second.p).short, " ", second.seats, " \xB7 ", MAJORITY, " needed for a majority of ", TOTAL_SEATS), /* @__PURE__ */ React.createElement("div", { className: "hemicycle-wrap" }, /* @__PURE__ */ React.createElement(Hemicycle, { colors: hemicycleColors })), /* @__PURE__ */ React.createElement("div", { className: "table-panel" }, /* @__PURE__ */ React.createElement("table", null, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", null, "Party"), /* @__PURE__ */ React.createElement("th", null, "Const."), /* @__PURE__ */ React.createElement("th", null, "List"), /* @__PURE__ */ React.createElement("th", null, "Total"), /* @__PURE__ */ React.createElement("th", null, "Change"))), /* @__PURE__ */ React.createElement("tbody", null, orderedTally.map((row) => {
-    const change = row.seats - row.base;
-    const meta = partyMeta(row.p);
-    const bd = seatBreakdown[row.p] || { const: 0, list: 0 };
-    return /* @__PURE__ */ React.createElement("tr", { key: row.p }, /* @__PURE__ */ React.createElement("td", null, /* @__PURE__ */ React.createElement("div", { className: "party-cell" }, /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: meta.color } }), meta.name)), /* @__PURE__ */ React.createElement("td", { className: "tabular seats-minor" }, bd.const), /* @__PURE__ */ React.createElement("td", { className: "tabular seats-minor" }, bd.list), /* @__PURE__ */ React.createElement("td", { className: "tabular seats-total" }, row.seats), /* @__PURE__ */ React.createElement(
-      "td",
-      {
-        className: "tabular " + (change > 0 ? "change-pos" : change < 0 ? "change-neg" : "change-zero")
       },
-      change > 0 ? "+" : "",
-      change
-    ));
-  }))))))), /* @__PURE__ */ React.createElement("div", { className: "panel coalition-panel" }, /* @__PURE__ */ React.createElement("h2", null, "Coalition builder"), /* @__PURE__ */ React.createElement("div", { className: "coalition-sub" }, "Select parties to combine their projected seats and check whether they'd clear a Holyrood majority together."), /* @__PURE__ */ React.createElement("div", { className: "coalition-chips" }, orderedTally.map((row) => {
-    const meta = partyMeta(row.p);
-    const active = coalition.has(row.p);
-    return /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        key: row.p,
-        className: "coalition-chip" + (active ? " active" : ""),
-        style: active ? { background: meta.color, color: meta.text, borderColor: meta.color } : { borderColor: meta.color },
-        onClick: () => toggleCoalitionParty(row.p)
-      },
-      /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: active ? meta.text : meta.color } }),
-      meta.name,
-      /* @__PURE__ */ React.createElement("span", { className: "coalition-chip-seats" }, row.seats)
-    );
-  })), coalition.size === 0 ? /* @__PURE__ */ React.createElement("div", { className: "coalition-empty" }, "Select one or more parties above.") : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      className: "coalition-headline",
-      style: { "--lead-color": coalitionDiff >= 0 ? "#4ADE80" : "#F87171" }
-    },
-    coalitionDiff >= 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "n" }, "Majority"), " of ", /* @__PURE__ */ React.createElement(StatNumber, { value: coalitionWorkingMajority })) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(StatNumber, { value: Math.abs(coalitionDiff) }), " seat", Math.abs(coalitionDiff) === 1 ? "" : "s", " short of a majority")
-  ), /* @__PURE__ */ React.createElement("div", { className: "coalition-subheadline" }, coalitionSeats, " of ", TOTAL_SEATS, " seats \xB7 ", MAJORITY, " needed"), /* @__PURE__ */ React.createElement("div", { className: "coalition-bar-track" }, orderedTally.filter((row) => coalition.has(row.p)).map((row) => {
-    const meta = partyMeta(row.p);
-    return /* @__PURE__ */ React.createElement(
-      "div",
-      {
-        key: row.p,
-        className: "coalition-bar-seg",
-        style: { width: `${row.seats / TOTAL_SEATS * 100}%`, background: meta.color },
-        title: `${meta.name}: ${row.seats}`
-      }
-    );
-  }), /* @__PURE__ */ React.createElement("div", { className: "coalition-majority-mark", style: { left: `${MAJORITY / TOTAL_SEATS * 100}%` } })))), /* @__PURE__ */ React.createElement(MapPanel, { constResults, regionResults })));
+      onBlur: () => setDraft(null),
+      onKeyDown: (e) => { if (e.key === "Enter") e.target.blur(); }
+    }),
+    h("span", null, "%"));
 }
-const STRENGTH_MAIN = CONST_SLIDER_ORDER.filter((p) => p !== "Oth");
+function SliderRow({ p, value, frozen, onChange }) {
+  const meta = partyMeta(p);
+  const pct = Math.min(100, value / SLIDER_MAX * 100);
+  return h("div", { className: "srow" + (frozen ? " locked" : "") },
+    h("div", { className: "sname" }, h("span", { className: "sw", style: { background: meta.color } }), frozen ? "Other" : plainName(p)),
+    h("div", { className: "sctl" },
+      frozen
+        ? h("div", { className: "ltrack", "aria-hidden": "true" }, h("div", { className: "lfill", style: { width: pct + "%" } }))
+        : h("input", {
+          type: "range", min: 0, max: SLIDER_MAX, step: 0.1, value, "aria-label": plainName(p),
+          style: { "--fill": meta.color, "--pct": pct + "%" },
+          onChange: (e) => onChange(parseFloat(e.target.value))
+        }),
+      frozen
+        ? h("div", { className: "nbox nlock", "aria-label": "Other (calculated)" }, h("span", { className: "nval" }, value.toFixed(1)), h("span", null, "%"))
+        : h(NumBox, { value, onChange })));
+}
+
+/* ---------- top of page ---------- */
+function Locator() {
+  return h("div", { className: "locator" },
+    h("svg", { viewBox: `0 0 ${UK_MAP.W} ${UK_MAP.H}`, height: 90, width: Math.round(90 * UK_MAP.W / UK_MAP.H), role: "img", "aria-label": "Map of the United Kingdom and Ireland with Scotland highlighted in red" },
+      h("path", { d: UK_MAP.land, className: "land", fillRule: "evenodd" }),
+      h("path", { d: UK_MAP.sco, className: "sco", fillRule: "evenodd" })),
+    h("svg", { className: "flag", viewBox: "0 0 5 3", width: 50, height: 30, role: "img", "aria-label": "Flag of Scotland (the Saltire)" },
+      h("rect", { width: 5, height: 3, fill: "#005EB8" }),
+      h("path", { d: "M0,0L5,3M5,0L0,3", stroke: "#fff", strokeWidth: 0.6 })));
+}
+function Facts() {
+  return h("div", { className: "card facts" },
+    h("div", { className: "fcol" },
+      h("div", { className: "flabel" }, "Population"),
+      h("div", { className: "fbig" }, "5,545,500"),
+      h("div", { className: "fnote" }, "Estimate, 30 June 2025")),
+    h("div", { className: "fcol" },
+      h("div", { className: "flabel" }, "Freedom House"),
+      h("div", { className: "fbig" }, "Not rated"),
+      h("div", { className: "fbar" }),
+      h("div", { className: "fnote" }, "Part of the United Kingdom")));
+}
+function SystemInfo() {
+  const row1 = [["Last election", "7 May 2026"], ["Seats", "129"], ["System", "Mixed-member: 73 FPTP + 56 list"], ["Term", "5 years"], ["Voting", "16+, voluntary"]];
+  const tiles = (rows, cls) => h("div", { className: "tiles " + cls }, rows.map(([l, v]) => h("div", { className: "tile", key: l }, h("div", { className: "tl" }, l), h("div", { className: "tv" }, v))));
+  return h("details", { className: "card sys" },
+    h("summary", null, "How the electoral system works"),
+    h("div", { className: "sysbody" }, tiles(row1, "t5")));
+}
+
+/* ---------- results ---------- */
+function layoutHemi(n, rows, rMax, rs) {
+  const radiiFor = (g) => Array.from({ length: rows }, (_, k) => rMax - (rows - 1 - k) * g * rs);
+  const rawCounts = (g) => radiiFor(g).map((r) => Math.PI * r / g + 1);
+  let lo = 6, hi = 30;
+  for (let it = 0; it < 60; it++) {
+    const g = (lo + hi) / 2;
+    if (rawCounts(g).reduce((a, c) => a + Math.round(c), 0) > n) lo = g; else hi = g;
+  }
+  const g = (lo + hi) / 2, radii = radiiFor(g), raw = rawCounts(g);
+  const counts = raw.map((c) => Math.floor(c));
+  let diff = n - counts.reduce((a, c) => a + c, 0);
+  const order = raw.map((c, i) => ({ i, f: c - Math.floor(c) })).sort((a, b) => b.f - a.f);
+  for (let j = 0; diff > 0; j = (j + 1) % rows, diff--) counts[order[j].i]++;
+  const pts = [];
+  for (let k = 0; k < rows; k++) for (let i = 0; i < counts[k]; i++) {
+    const t = counts[k] === 1 ? 0.5 : i / (counts[k] - 1), ang = Math.PI - t * Math.PI;
+    pts.push({ x: Math.cos(ang) * radii[k], y: -Math.sin(ang) * radii[k], angle: ang });
+  }
+  return pts.sort((a, b) => b.angle - a.angle);
+}
+const HP = layoutHemi(TOTAL_SEATS, 7, 115, 0.88);
+const HP_R = Math.max(...HP.map((p) => Math.max(Math.abs(p.x), -p.y)));
+function Hemicycle({ colors }) {
+  const dotR = 5, m = dotR + 6;
+  const width = HP_R * 2 + m * 2, height = HP_R + m * 2;
+  const cx = width / 2, cy = height - m;
+  return h("svg", { className: "hemi", viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": "Projected seats" },
+    HP.map((pt, i) => h("circle", { key: i, cx: cx + pt.x, cy: cy + pt.y, r: dotR, fill: partyMeta(colors[i] || "Oth").color })));
+}
+
+/* ---------- maps ---------- */
 function strengthShare(party, entries) {
   const total = entries.reduce((a, e) => a + e.v, 0);
   if (!total) return 0;
-  const merged = {};
-  for (const e of entries) {
-    const k = mergeKey(e.p);
-    merged[k] = (merged[k] || 0) + e.v;
-  }
-  return (merged[party] || 0) / total * 100;
+  let v = 0;
+  for (const e of entries) if (mergeKey(e.p) === party) v += e.v;
+  return v / total * 100;
 }
-function StrengthLegend({ party, max }) {
-  const meta = partyMeta(party);
-  return /* @__PURE__ */ React.createElement("div", { className: "strength-legend" }, /* @__PURE__ */ React.createElement("div", { className: "sl-title" }, meta.name, " vote share"), /* @__PURE__ */ React.createElement("div", { className: "sl-bar", style: { backgroundImage: `linear-gradient(to right, transparent, ${meta.color})` } }), /* @__PURE__ */ React.createElement("div", { className: "sl-labels" }, /* @__PURE__ */ React.createElement("span", null, "0%"), /* @__PURE__ */ React.createElement("span", null, max.toFixed(0), "%")));
-}
-function MapPanel({ constResults, regionResults }) {
-  const [mode, setMode] = useState("const");
-  const [showFlips, setShowFlips] = useState(false);
-  const [colourMode, setColourMode] = useState("winner");
-  const [strengthParty, setStrengthParty] = useState(STRENGTH_MAIN[0]);
-  const activeStrength = colourMode === "strength" ? strengthParty : null;
-  const flipCount = useMemo(() => {
-    const base = {};
-    for (const r of BASELINE_RESULT.constResults) base[r.n] = mergeKey(r.winner);
-    return constResults.filter((r) => base[r.n] !== mergeKey(r.winner)).length;
-  }, [constResults]);
-  const tabs = [
-    { key: "const", label: "Constituencies" },
-    { key: "region", label: "Regions" }
-  ];
-  const colourControls = /* @__PURE__ */ React.createElement("div", { className: "colour-controls" }, /* @__PURE__ */ React.createElement("div", { className: "colour-seg", role: "group", "aria-label": "Colour map by" }, [["winner", "Winner"], ["strength", "Party strength"]].map(([k, label]) => /* @__PURE__ */ React.createElement(
-    "button",
-    {
-      key: k,
-      className: colourMode === k ? "colour-opt active" : "colour-opt",
-      "aria-pressed": colourMode === k,
-      onClick: () => setColourMode(k)
-    },
-    label
-  ))), colourMode === "strength" && /* @__PURE__ */ React.createElement("div", { className: "party-chips" }, STRENGTH_MAIN.map((pk) => {
-    const m = partyMeta(pk);
-    return /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        key: pk,
-        className: strengthParty === pk ? "party-chip active" : "party-chip",
-        "aria-pressed": strengthParty === pk,
-        onClick: () => setStrengthParty(pk)
-      },
-      /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: m.color } }),
-      m.short
-    );
-  })));
-  return /* @__PURE__ */ React.createElement("div", { className: "panel map-panel" }, /* @__PURE__ */ React.createElement("div", { className: "map-tabs", role: "tablist" }, tabs.map((t) => /* @__PURE__ */ React.createElement(
-    "button",
-    {
-      key: t.key,
-      id: `maptab-${t.key}`,
-      role: "tab",
-      "aria-controls": "map-tabpanel",
-      "aria-selected": mode === t.key,
-      className: mode === t.key ? "map-tab active" : "map-tab",
-      onClick: () => setMode(t.key)
-    },
-    t.label
-  ))), colourControls, mode === "const" && colourMode === "winner" && /* @__PURE__ */ React.createElement("div", { className: "flip-bar" }, /* @__PURE__ */ React.createElement(
-    "button",
-    {
-      className: showFlips ? "flip-toggle on" : "flip-toggle",
-      role: "switch",
-      "aria-checked": showFlips,
-      onClick: () => setShowFlips((v) => !v)
-    },
-    /* @__PURE__ */ React.createElement("span", { className: "flip-track" }, /* @__PURE__ */ React.createElement("span", { className: "flip-knob" })),
-    "Show flipped seats"
-  ), /* @__PURE__ */ React.createElement("span", { className: "flip-count" }, flipCount, flipCount === 1 ? " seat" : " seats", " changed hands vs 2026")), /* @__PURE__ */ React.createElement("div", { id: "map-tabpanel", role: "tabpanel", "aria-labelledby": `maptab-${mode}` }, mode === "const" ? /* @__PURE__ */ React.createElement(ConstituencyMap, { constResults, showFlips: showFlips && colourMode === "winner", strengthParty: activeStrength }) : /* @__PURE__ */ React.createElement(RegionMap, { regionResults, strengthParty: activeStrength })));
-}
-function Hemicycle({ colors }) {
-  const dotR = 5;
-  const sideMargin = dotR + 6;
-  const bottomMargin = dotR + 6;
-  const topMargin = dotR + 6;
-  const width = HEMI_MAX_R * 2 + sideMargin * 2;
-  const height = HEMI_MAX_R + topMargin + bottomMargin;
-  const cx = width / 2;
-  const cy = height - bottomMargin;
-  return /* @__PURE__ */ React.createElement("svg", { width, height, viewBox: `0 0 ${width} ${height}` }, HEMICYCLE_POINTS.map((pt, i) => {
-    const meta = partyMeta(colors[i] || "Oth");
-    return /* @__PURE__ */ React.createElement("circle", { key: i, cx: cx + pt.x, cy: cy + pt.y, r: dotR, fill: meta.color });
-  }));
-}
-function ConstituencyMap({ constResults, showFlips, strengthParty }) {
-  const vbWidth = 560;
+const LAST_PW = { v: 480 };
+function MapView({ boundaries, items, tipFor, label, view, setView }) {
+  const vbW = 560;
   const { minX, minY, maxX, maxY } = BOUNDARY_BBOX;
-  const bw = maxX - minX;
-  const bh = maxY - minY;
-  const baseScale = vbWidth / bw;
-  const vbHeight = bh * baseScale;
-  const wrapRef = React.useRef(null);
-  const svgRef = React.useRef(null);
-  const dragRef = React.useRef(null);
-  const movedRef = React.useRef(false);
-  const [view, setView] = useState({ zoom: 1, x: 0, y: 0 });
-  const [selected, setSelected] = useState(null);
-  function clampView(v) {
+  const sc = vbW / (maxX - minX);
+  const vbH = (maxY - minY) * sc;
+  const [pw, setPwState] = useState(LAST_PW.v);
+  const setPw = (v) => { LAST_PW.v = v; setPwState(v); };
+  const SHIFT = 14;
+  const CW = Math.max(vbW + 2 * SHIFT, vbW * pw / 480), ox = (CW - vbW) / 2 - SHIFT;
+  const cwRef = React.useRef(CW);
+  cwRef.current = CW;
+  const wrapRef = React.useRef(null), svgRef = React.useRef(null), tipRef = React.useRef(null);
+  const dragRef = React.useRef(null), movedRef = React.useRef(false);
+  const [sel, setSel] = useState(null);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    setPw(el.clientWidth);
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => setPw(el.clientWidth));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const paths = useMemo(() => {
+    const m = {};
+    for (const b of boundaries) m[b.n] = b.rings.map((ring) => "M" + ring.map(([x, y]) => ((x - minX) * sc).toFixed(1) + "," + ((maxY - y) * sc).toFixed(1)).join("L") + "Z").join(" ");
+    return m;
+  }, [boundaries]);
+  const clampView = (v) => {
     const zoom = Math.max(1, Math.min(8, v.zoom));
-    const minX2 = vbWidth - vbWidth * zoom;
-    const minY2 = vbHeight - vbHeight * zoom;
-    return {
-      zoom,
-      x: zoom === 1 ? 0 : Math.max(minX2, Math.min(0, v.x)),
-      y: zoom === 1 ? 0 : Math.max(minY2, Math.min(0, v.y))
-    };
-  }
-  function zoomAt(px, py, factor) {
-    setView((prev) => {
-      const newZoom = Math.max(1, Math.min(8, prev.zoom * factor));
-      const contentX = (px - prev.x) / prev.zoom;
-      const contentY = (py - prev.y) / prev.zoom;
-      return clampView({
-        zoom: newZoom,
-        x: px - contentX * newZoom,
-        y: py - contentY * newZoom
-      });
-    });
-  }
-  function handleButtonZoom(factor) {
-    zoomAt(vbWidth / 2, vbHeight / 2, factor);
-  }
-  function resetView() {
-    setView({ zoom: 1, x: 0, y: 0 });
-  }
-  const zoomAtRef = React.useRef(zoomAt);
-  zoomAtRef.current = zoomAt;
+    return { zoom, x: zoom === 1 ? 0 : Math.max(cwRef.current - cwRef.current * zoom, Math.min(0, v.x)), y: zoom === 1 ? 0 : Math.max(vbH - vbH * zoom, Math.min(0, v.y)) };
+  };
+  const zoomAt = (px, py, f) => setView((prev) => {
+    const nz = Math.max(1, Math.min(8, prev.zoom * f));
+    const cx = (px - prev.x) / prev.zoom, cy = (py - prev.y) / prev.zoom;
+    return clampView({ zoom: nz, x: px - cx * nz, y: py - cy * nz });
+  });
+  const zoomRef = React.useRef(zoomAt);
+  zoomRef.current = zoomAt;
   React.useEffect(() => {
     const el = svgRef.current;
-    if (!el) return;
-    function onWheel(e) {
+    const onWheel = (e) => {
       e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width * vbWidth;
-      const py = (e.clientY - rect.top) / rect.height * vbHeight;
-      zoomAtRef.current(px, py, e.deltaY < 0 ? 1.2 : 1 / 1.2);
-    }
+      const r = el.getBoundingClientRect();
+      zoomRef.current((e.clientX - r.left) / r.width * cwRef.current, (e.clientY - r.top) / r.height * vbH, e.deltaY < 0 ? 1.2 : 1 / 1.2);
+    };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
-  }, [vbWidth, vbHeight]);
-  function handleMouseDown(e) {
-    dragRef.current = { x: e.clientX, y: e.clientY, panX: view.x, panY: view.y };
-    movedRef.current = false;
-  }
-  function handleMouseMove(e) {
-    if (!dragRef.current) return;
+  }, []);
+  const onDown = (e) => { dragRef.current = { x: e.clientX, y: e.clientY, px: view.x, py: view.y }; movedRef.current = false; };
+  const onMove = (e) => {
     const d = dragRef.current;
-    const dx = e.clientX - d.x;
-    const dy = e.clientY - d.y;
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) movedRef.current = true;
+    if (!d) return;
+    const dx = e.clientX - d.x, dy = e.clientY - d.y;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) movedRef.current = true;
     if (!movedRef.current) return;
-    const rect = svgRef.current.getBoundingClientRect();
-    const sx = dx / rect.width * vbWidth;
-    const sy = dy / rect.height * vbHeight;
-    setView((prev) => clampView({ zoom: prev.zoom, x: d.panX + sx, y: d.panY + sy }));
-  }
-  function handleMouseUp() {
-    dragRef.current = null;
-  }
-  function handleSeatClick(e, name) {
+    const r = svgRef.current.getBoundingClientRect();
+    setView((p) => clampView({ zoom: p.zoom, x: d.px + dx / r.width * CW, y: d.py + dy / r.height * vbH }));
+  };
+  const onUp = () => { dragRef.current = null; };
+  const onShape = (e, name) => {
     e.stopPropagation();
     if (movedRef.current) return;
-    const wrapRect = wrapRef.current.getBoundingClientRect();
-    const TW = 220, TH = 320;
-    let x = e.clientX - wrapRect.left + 12;
-    let y = e.clientY - wrapRect.top + 12;
-    if (x + TW > wrapRect.width) x = e.clientX - wrapRect.left - TW - 12;
-    if (y + TH > wrapRect.height) y = Math.max(4, wrapRect.height - TH - 4);
-    setSelected({ name, x, y });
-  }
-  const tooltipRef = React.useRef(null);
-  React.useEffect(() => {
-    if (!selected || !tooltipRef.current || !wrapRef.current) return;
-    const wrapRect = wrapRef.current.getBoundingClientRect();
-    const ttRect = tooltipRef.current.getBoundingClientRect();
-    let { x, y } = selected;
-    let changed = false;
-    if (ttRect.width && wrapRect.left + x + ttRect.width > wrapRect.right) {
-      x = Math.max(4, wrapRect.width - ttRect.width - 4);
-      changed = true;
-    }
-    if (ttRect.height && wrapRect.top + y + ttRect.height > wrapRect.bottom) {
-      y = Math.max(4, wrapRect.height - ttRect.height - 4);
-      changed = true;
-    }
-    if (changed) setSelected((prev) => prev ? { ...prev, x, y } : prev);
-  }, [selected && selected.name]);
-  const resultByName = useMemo(() => {
-    const m = {};
-    for (const r of constResults) m[r.n] = r;
-    return m;
-  }, [constResults]);
-  function pathFor(rings) {
-    return rings.map((ring) => {
-      const pts = ring.map(([x, y]) => {
-        const sx = (x - minX) * baseScale;
-        const sy = (maxY - y) * baseScale;
-        return `${sx.toFixed(1)},${sy.toFixed(1)}`;
-      });
-      return "M" + pts.join("L") + "Z";
-    }).join(" ");
-  }
-  const strength = useMemo(() => {
-    if (!strengthParty) return null;
-    const shares = {};
-    let max = 0;
-    for (const r of constResults) {
-      const v = strengthShare(strengthParty, r.breakdown.map((row) => ({ p: row.p, v: row.pct })));
-      shares[r.n] = v;
-      if (v > max) max = v;
-    }
-    return { shares, max: Math.max(max, 1) };
-  }, [constResults, strengthParty]);
-  const baselineByName = useMemo(() => {
+    const w = wrapRef.current.getBoundingClientRect();
+    setSel({ name, x: e.clientX - w.left + 10, y: e.clientY - w.top + 10 });
+  };
+  const tip = sel ? tipFor(sel.name) : null;
+  React.useLayoutEffect(() => {
+    if (!sel || !tipRef.current) return;
+    const w = wrapRef.current.getBoundingClientRect(), t = tipRef.current.getBoundingClientRect();
+    let { x, y } = sel;
+    const nx = Math.max(4, Math.min(x, w.width - t.width - 4)), ny = Math.max(4, Math.min(y, w.height - t.height - 4));
+    if (nx !== x || ny !== y) setSel((p) => p && { ...p, x: nx, y: ny });
+  }, [sel && sel.name, sel && Math.round(sel.x), sel && Math.round(sel.y)]);
+  return h("div", { className: "mapwrap", ref: wrapRef, onPointerMove: onMove, onPointerUp: onUp, onPointerLeave: onUp },
+    h("svg", { ref: svgRef, viewBox: `0 0 ${CW} ${vbH}`, role: "img", "aria-label": label, onPointerDown: onDown, onClick: () => setSel(null) },
+      h("g", { transform: `translate(${view.x},${view.y}) scale(${view.zoom})` }, h("g", { transform: `translate(${ox},0)` },
+        items.map((it) => h("path", {
+          key: it.name, d: paths[it.name], fill: it.fill, fillOpacity: it.opacity, fillRule: "evenodd",
+          className: "shape" + (sel && sel.name === it.name ? " sel" : ""), vectorEffect: "non-scaling-stroke",
+          onClick: (e) => onShape(e, it.name)
+        }))))),
+    h("div", { className: "zoom" },
+      h("button", { onClick: () => zoomAt(CW / 2, vbH / 2, 1.4), "aria-label": "Zoom in" }, "+"),
+      h("button", { onClick: () => zoomAt(CW / 2, vbH / 2, 1 / 1.4), "aria-label": "Zoom out" }, "\u2212"),
+      h("button", { onClick: () => setView({ zoom: 1, x: 0, y: 0 }), "aria-label": "Reset zoom" }, "\u27f2")),
+    sel && tip && h("div", { className: "tip" + (tip.seats ? " wide" : ""), ref: tipRef, style: { left: sel.x, top: sel.y }, onClick: (e) => e.stopPropagation(), onPointerDown: (e) => e.stopPropagation() },
+      h("div", { className: "tip-h" },
+        h("b", null, tip.title),
+        tip.seats ? h("span", { className: "tip-s" }, tip.seats + " seats") : null,
+        h("button", { onClick: () => setSel(null), "aria-label": "Close" }, "\u00d7")),
+      tip.rows.map((r) => h("div", { className: "tip-r" + (r.bold ? " win" : ""), key: r.key },
+        h("div", { className: "tip-l" }, h("span", { className: "sw", style: { background: r.color } }), h("span", { className: "tn" }, r.label), h("span", { className: "tp" }, r.pct.toFixed(1) + "%")),
+        tip.seats ? h("div", { className: "tq" }, Array.from({ length: r.seats }, (_, i) => h("i", { key: i, style: { background: r.color } }))) : null))));
+}
+
+const STRENGTH_MAIN = CONST_SLIDER_ORDER.filter((p) => p !== "Oth");
+function MapCard({ constResults, regionResults, tally }) {
+  const [tab, setTab] = useState("const");
+  const [mode, setMode] = useState("winner");
+  const [view, setView] = useState({ zoom: 1, x: 0, y: 0 });
+  const eff = tab === "region" && mode === "gains" ? "winner" : mode;
+  const baseWin = useMemo(() => {
     const m = {};
     for (const r of BASELINE_RESULT.constResults) m[r.n] = mergeKey(r.winner);
     return m;
   }, []);
-  const selSeat = selected ? resultByName[selected.name] : null;
-  const selFlipFrom = selSeat && baselineByName[selSeat.n] !== mergeKey(selSeat.winner) ? baselineByName[selSeat.n] : null;
-  const selRows = useMemo(() => {
-    if (!selSeat) return [];
-    return selSeat.breakdown.map((row) => {
-      const meta = partyMeta(row.p);
-      return { key: row.p, label: meta.name, color: meta.color, pct: row.pct };
-    });
-  }, [selSeat]);
-  return /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      className: "map-wrap",
-      ref: wrapRef,
-      onMouseMove: handleMouseMove,
-      onMouseUp: handleMouseUp,
-      onMouseLeave: handleMouseUp
-    },
-    /* @__PURE__ */ React.createElement(
-      "svg",
-      {
-        ref: svgRef,
-        viewBox: `0 0 ${vbWidth} ${vbHeight}`,
-        xmlns: "http://www.w3.org/2000/svg",
-        onMouseDown: handleMouseDown,
-        onClick: () => setSelected(null),
-        style: { cursor: "pointer" }
-      },
-      /* @__PURE__ */ React.createElement("g", { transform: `translate(${view.x},${view.y}) scale(${view.zoom})` }, CONST_BOUNDARIES.map((b) => {
-        const r = resultByName[b.n];
-        const meta = partyMeta(mergeKey(r ? r.winner : "Oth"));
-        const isSelected = selected && selected.name === b.n;
-        const flipped = !!r && baselineByName[b.n] !== mergeKey(r.winner);
-        const dimmed = showFlips && !flipped;
-        return /* @__PURE__ */ React.createElement(
-          "path",
-          {
-            key: b.n,
-            d: pathFor(b.rings),
-            fill: strength ? partyMeta(strengthParty).color : meta.color,
-            fillOpacity: strength ? Math.min(1, 0.06 + 0.9 * ((strength.shares[b.n] || 0) / strength.max) + (isSelected ? 0.12 : 0)).toFixed(3) : dimmed ? isSelected ? "0.45" : "0.14" : isSelected ? "0.95" : showFlips ? "0.95" : "0.78",
-            fillRule: "evenodd",
-            stroke: "#0F1219",
-            strokeWidth: 0.5 / view.zoom,
-            onClick: (e) => handleSeatClick(e, b.n)
-          },
-          /* @__PURE__ */ React.createElement("title", null, b.n, " \u2014 ", strength ? `${partyMeta(strengthParty).name} ${(strength.shares[b.n] || 0).toFixed(1)}%` : meta.name, !strength && flipped ? ` (gain from ${partyMeta(baselineByName[b.n]).name})` : "")
-        );
-      }))
-    ),
-    /* @__PURE__ */ React.createElement("div", { className: "map-zoom-controls" }, /* @__PURE__ */ React.createElement("button", { onClick: () => handleButtonZoom(1.4), "aria-label": "Zoom in" }, "+"), /* @__PURE__ */ React.createElement("button", { onClick: () => handleButtonZoom(1 / 1.4), "aria-label": "Zoom out" }, "\u2212"), /* @__PURE__ */ React.createElement("button", { onClick: resetView, "aria-label": "Reset zoom", className: "reset" }, "\u27F2")),
-    strength && /* @__PURE__ */ React.createElement(StrengthLegend, { party: strengthParty, max: strength.max }),
-    selected && selSeat && /* @__PURE__ */ React.createElement("div", { ref: tooltipRef, className: "map-tooltip", style: { left: selected.x, top: selected.y } }, /* @__PURE__ */ React.createElement("div", { className: "mt-header" }, /* @__PURE__ */ React.createElement("span", null, selSeat.n), /* @__PURE__ */ React.createElement("button", { onClick: () => setSelected(null) }, "\xD7")), /* @__PURE__ */ React.createElement("div", { className: "mt-sub" }, selSeat.r, " \xB7 Projected vote share"), selFlipFrom && /* @__PURE__ */ React.createElement("div", { className: "mt-flip" }, partyMeta(mergeKey(selSeat.winner)).name, " gain from ", partyMeta(selFlipFrom).name), selRows.map((row) => /* @__PURE__ */ React.createElement("div", { className: "mt-row", key: row.key }, /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: row.color } }), /* @__PURE__ */ React.createElement("span", { className: "mt-name" }, row.label), /* @__PURE__ */ React.createElement("span", { className: "mt-pct" }, row.pct.toFixed(1), "%"))))
-  );
-}
-function RegionMap({ regionResults, strengthParty }) {
-  const vbWidth = 560;
-  const { minX, minY, maxX, maxY } = BOUNDARY_BBOX;
-  const bw = maxX - minX;
-  const bh = maxY - minY;
-  const baseScale = vbWidth / bw;
-  const vbHeight = bh * baseScale;
-  const wrapRef = React.useRef(null);
-  const svgRef = React.useRef(null);
-  const dragRef = React.useRef(null);
-  const movedRef = React.useRef(false);
-  const [view, setView] = useState({ zoom: 1, x: 0, y: 0 });
-  const [selected, setSelected] = useState(null);
-  function clampView(v) {
-    const zoom = Math.max(1, Math.min(8, v.zoom));
-    const minX2 = vbWidth - vbWidth * zoom;
-    const minY2 = vbHeight - vbHeight * zoom;
-    return {
-      zoom,
-      x: zoom === 1 ? 0 : Math.max(minX2, Math.min(0, v.x)),
-      y: zoom === 1 ? 0 : Math.max(minY2, Math.min(0, v.y))
-    };
-  }
-  function zoomAt(px, py, factor) {
-    setView((prev) => {
-      const newZoom = Math.max(1, Math.min(8, prev.zoom * factor));
-      const contentX = (px - prev.x) / prev.zoom;
-      const contentY = (py - prev.y) / prev.zoom;
-      return clampView({
-        zoom: newZoom,
-        x: px - contentX * newZoom,
-        y: py - contentY * newZoom
-      });
-    });
-  }
-  function handleButtonZoom(factor) {
-    zoomAt(vbWidth / 2, vbHeight / 2, factor);
-  }
-  function resetView() {
-    setView({ zoom: 1, x: 0, y: 0 });
-  }
-  const zoomAtRef = React.useRef(zoomAt);
-  zoomAtRef.current = zoomAt;
-  React.useEffect(() => {
-    const el = svgRef.current;
-    if (!el) return;
-    function onWheel(e) {
-      e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width * vbWidth;
-      const py = (e.clientY - rect.top) / rect.height * vbHeight;
-      zoomAtRef.current(px, py, e.deltaY < 0 ? 1.2 : 1 / 1.2);
-    }
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [vbWidth, vbHeight]);
-  function handleMouseDown(e) {
-    dragRef.current = { x: e.clientX, y: e.clientY, panX: view.x, panY: view.y };
-    movedRef.current = false;
-  }
-  function handleMouseMove(e) {
-    if (!dragRef.current) return;
-    const d = dragRef.current;
-    const dx = e.clientX - d.x;
-    const dy = e.clientY - d.y;
-    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) movedRef.current = true;
-    if (!movedRef.current) return;
-    const rect = svgRef.current.getBoundingClientRect();
-    const sx = dx / rect.width * vbWidth;
-    const sy = dy / rect.height * vbHeight;
-    setView((prev) => clampView({ zoom: prev.zoom, x: d.panX + sx, y: d.panY + sy }));
-  }
-  function handleMouseUp() {
-    dragRef.current = null;
-  }
-  function handleSeatClick(e, name) {
-    e.stopPropagation();
-    if (movedRef.current) return;
-    const wrapRect = wrapRef.current.getBoundingClientRect();
-    const TW = 220, TH = 340;
-    let x = e.clientX - wrapRect.left + 12;
-    let y = e.clientY - wrapRect.top + 12;
-    if (x + TW > wrapRect.width) x = e.clientX - wrapRect.left - TW - 12;
-    if (y + TH > wrapRect.height) y = Math.max(4, wrapRect.height - TH - 4);
-    setSelected({ name, x, y });
-  }
-  const tooltipRef = React.useRef(null);
-  React.useEffect(() => {
-    if (!selected || !tooltipRef.current || !wrapRef.current) return;
-    const wrapRect = wrapRef.current.getBoundingClientRect();
-    const ttRect = tooltipRef.current.getBoundingClientRect();
-    let { x, y } = selected;
-    let changed = false;
-    if (ttRect.width && wrapRect.left + x + ttRect.width > wrapRect.right) {
-      x = Math.max(4, wrapRect.width - ttRect.width - 4);
-      changed = true;
-    }
-    if (ttRect.height && wrapRect.top + y + ttRect.height > wrapRect.bottom) {
-      y = Math.max(4, wrapRect.height - ttRect.height - 4);
-      changed = true;
-    }
-    if (changed) setSelected((prev) => prev ? { ...prev, x, y } : prev);
-  }, [selected && selected.name]);
-  const resultByName = useMemo(() => {
-    const m = {};
-    for (const r of regionResults) m[r.n] = r;
-    return m;
-  }, [regionResults]);
-  function leadingParty(region) {
-    let best = null, bestV = -1;
-    for (const [p, v] of Object.entries(region.adjustedVotes)) {
-      if (v > bestV) {
-        bestV = v;
-        best = p;
-      }
-    }
+  const partyOrder = useMemo(() => [...STRENGTH_MAIN].sort((a, b) => (tally[b] || 0) - (tally[a] || 0)), [tally]);
+  const regionLead = (r) => {
+    let best = null, bv = -1;
+    for (const [p, v] of Object.entries(r.adjustedVotes)) if (v > bv) { bv = v; best = mergeKey(p); }
     return best;
-  }
-  function pathFor(rings) {
-    return rings.map((ring) => {
-      const pts = ring.map(([x, y]) => {
-        const sx = (x - minX) * baseScale;
-        const sy = (maxY - y) * baseScale;
-        return `${sx.toFixed(1)},${sy.toFixed(1)}`;
-      });
-      return "M" + pts.join("L") + "Z";
-    }).join(" ");
-  }
-  const strength = useMemo(() => {
-    if (!strengthParty) return null;
-    const shares = {};
-    let max = 0;
-    for (const r of regionResults) {
-      const v = strengthShare(strengthParty, Object.entries(r.adjustedVotes).map(([p, v2]) => ({ p, v: v2 })));
-      shares[r.n] = v;
-      if (v > max) max = v;
-    }
-    return { shares, max: Math.max(max, 1) };
-  }, [regionResults, strengthParty]);
-  const selRegion = selected ? resultByName[selected.name] : null;
-  const selRows = useMemo(() => {
-    if (!selRegion) return [];
-    const total = Object.values(selRegion.adjustedVotes).reduce((a, b) => a + b, 0);
-    return Object.entries(selRegion.adjustedVotes).map(([p, v]) => {
-      const meta = partyMeta(mergeKey(p));
-      return { key: mergeKey(p), label: meta.name, color: meta.color, pct: total ? v / total * 100 : 0 };
-    }).reduce((acc, row) => {
-      const existing = acc.find((r) => r.key === row.key);
-      if (existing) existing.pct += row.pct;
-      else acc.push(row);
-      return acc;
-    }, []).filter((row) => row.pct >= 1).sort((a, b) => b.pct - a.pct);
-  }, [selRegion]);
-  const selSeatList = useMemo(() => {
-    if (!selRegion) return [];
-    const list = [];
-    for (const p of Object.keys(selRegion.listSeats)) {
-      for (let i = 0; i < selRegion.listSeats[p]; i++) list.push(mergeKey(p));
-    }
-    return list.sort((a, b) => {
-      const ca = list.filter((x) => x === a).length;
-      const cb = list.filter((x) => x === b).length;
-      return cb - ca;
-    });
-  }, [selRegion]);
-  return /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      className: "map-wrap",
-      ref: wrapRef,
-      onMouseMove: handleMouseMove,
-      onMouseUp: handleMouseUp,
-      onMouseLeave: handleMouseUp
-    },
-    /* @__PURE__ */ React.createElement(
-      "svg",
-      {
-        ref: svgRef,
-        viewBox: `0 0 ${vbWidth} ${vbHeight}`,
-        xmlns: "http://www.w3.org/2000/svg",
-        onMouseDown: handleMouseDown,
-        onClick: () => setSelected(null),
-        style: { cursor: "pointer" }
-      },
-      /* @__PURE__ */ React.createElement("g", { transform: `translate(${view.x},${view.y}) scale(${view.zoom})` }, REGION_BOUNDARIES.map((b) => {
-        const r = resultByName[b.n];
-        const meta = partyMeta(mergeKey(r ? leadingParty(r) : "Oth"));
-        const isSelected = selected && selected.name === b.n;
-        return /* @__PURE__ */ React.createElement(
-          "path",
-          {
-            key: b.n,
-            d: pathFor(b.rings),
-            fill: strength ? partyMeta(strengthParty).color : meta.color,
-            fillOpacity: strength ? Math.min(1, 0.06 + 0.9 * ((strength.shares[b.n] || 0) / strength.max) + (isSelected ? 0.12 : 0)).toFixed(3) : isSelected ? "0.92" : "0.72",
-            fillRule: "evenodd",
-            stroke: "#0F1219",
-            strokeWidth: 0.8 / view.zoom,
-            onClick: (e) => handleSeatClick(e, b.n)
-          },
-          /* @__PURE__ */ React.createElement("title", null, b.n, " \u2014 ", strength ? `${partyMeta(strengthParty).name} ${(strength.shares[b.n] || 0).toFixed(1)}% of the list vote` : `${meta.name} leads the list vote`)
-        );
-      }))
-    ),
-    /* @__PURE__ */ React.createElement("div", { className: "map-zoom-controls" }, /* @__PURE__ */ React.createElement("button", { onClick: () => handleButtonZoom(1.4), "aria-label": "Zoom in" }, "+"), /* @__PURE__ */ React.createElement("button", { onClick: () => handleButtonZoom(1 / 1.4), "aria-label": "Zoom out" }, "\u2212"), /* @__PURE__ */ React.createElement("button", { onClick: resetView, "aria-label": "Reset zoom", className: "reset" }, "\u27F2")),
-    strength && /* @__PURE__ */ React.createElement(StrengthLegend, { party: strengthParty, max: strength.max }),
-    selected && selRegion && /* @__PURE__ */ React.createElement("div", { ref: tooltipRef, className: "map-tooltip", style: { left: selected.x, top: selected.y } }, /* @__PURE__ */ React.createElement("div", { className: "mt-header" }, /* @__PURE__ */ React.createElement("span", null, selRegion.n), /* @__PURE__ */ React.createElement("button", { onClick: () => setSelected(null) }, "\xD7")), /* @__PURE__ */ React.createElement("div", { className: "mt-sub" }, "Projected regional list vote share"), selRows.map((row) => /* @__PURE__ */ React.createElement("div", { className: "mt-row", key: row.key }, /* @__PURE__ */ React.createElement("span", { className: "swatch", style: { background: row.color } }), /* @__PURE__ */ React.createElement("span", { className: "mt-name" }, row.label), /* @__PURE__ */ React.createElement("span", { className: "mt-pct" }, row.pct.toFixed(1), "%"))), /* @__PURE__ */ React.createElement("div", { className: "mt-seats-label" }, "7 list seats"), /* @__PURE__ */ React.createElement("div", { className: "mt-seat-dots" }, selSeatList.map((p, i) => /* @__PURE__ */ React.createElement(
-      "span",
-      {
-        key: i,
-        className: "mt-seat-dot",
-        style: { background: partyMeta(p).color },
-        title: partyMeta(p).name
+  };
+  const strengthParty = eff.startsWith("party:") ? eff.slice(6) : null;
+  const data = useMemo(() => {
+    const isConst = tab === "const";
+    const areas = isConst ? constResults : regionResults;
+    const winnerOf = (a) => (isConst ? mergeKey(a.winner) : regionLead(a));
+    let shares = null, min = 0, max = 1;
+    if (strengthParty) {
+      shares = {};
+      min = Infinity; max = -Infinity;
+      for (const a of areas) {
+        const entries = isConst ? a.breakdown.map((x) => ({ p: x.p, v: x.pct })) : Object.entries(a.adjustedVotes).map(([p, v]) => ({ p, v }));
+        const v = strengthShare(strengthParty, entries);
+        shares[a.n] = v;
+        if (v < min) min = v;
+        if (v > max) max = v;
       }
-    ))))
-  );
+      if (max - min < 0.01) max = min + 0.01;
+    }
+    const counts = {};
+    const items = areas.map((a) => {
+      const w = winnerOf(a);
+      const gained = isConst && baseWin[a.n] !== w;
+      let fill = partyMeta(w).color, opacity = 0.9;
+      if (strengthParty) { fill = partyMeta(strengthParty).color; opacity = 0.12 + 0.88 * (shares[a.n] - min) / (max - min); }
+      else if (eff === "gains") { opacity = gained ? 0.95 : 0.16; if (gained) counts[w] = (counts[w] || 0) + 1; }
+      if (!strengthParty && eff !== "gains") counts[w] = (counts[w] || 0) + 1;
+      return { name: a.n, fill, opacity: +opacity.toFixed(3) };
+    });
+    return { items, counts, min, max };
+  }, [tab, eff, constResults, regionResults, strengthParty]);
+  const tipFor = (name) => {
+    if (tab === "const") {
+      const r = constResults.find((x) => x.n === name);
+      if (!r) return null;
+      const w = mergeKey(r.winner);
+      const rows = r.breakdown.filter((x) => x.pct >= 1 || mergeKey(x.p) === w).map((x) => {
+        const m = partyMeta(mergeKey(x.p));
+        return { key: x.p, label: m.name, color: m.color, pct: x.pct, bold: mergeKey(x.p) === w, seats: 0 };
+      });
+      return { title: r.n, rows };
+    }
+    const r = regionResults.find((x) => x.n === name);
+    if (!r) return null;
+    const total = Object.values(r.adjustedVotes).reduce((a, b) => a + b, 0);
+    const seats = {}, pcts = {};
+    for (const [p, v] of Object.entries(r.adjustedVotes)) pcts[mergeKey(p)] = (pcts[mergeKey(p)] || 0) + (total ? v / total * 100 : 0);
+    for (const [p, n] of Object.entries(r.constSeats)) seats[mergeKey(p)] = (seats[mergeKey(p)] || 0) + n;
+    for (const [p, n] of Object.entries(r.listSeats)) seats[mergeKey(p)] = (seats[mergeKey(p)] || 0) + n;
+    const keys = new Set([...Object.keys(pcts), ...Object.keys(seats)]);
+    const rows = [...keys].map((k) => ({ key: k, label: partyMeta(k).name, color: partyMeta(k).color, pct: pcts[k] || 0, seats: seats[k] || 0 }))
+      .filter((x) => x.pct >= 1 || x.seats > 0).sort((a, b) => b.pct - a.pct);
+    return { title: r.n, seats: Object.values(seats).reduce((a, b) => a + b, 0), rows };
+  };
+  const btn = (key, text, color) => h("button", { key, className: "chip" + (eff === key ? " on" : ""), "aria-pressed": eff === key, onClick: () => setMode(key) },
+    color ? h("span", { className: "sw", style: { background: color } }) : null, text);
+  const legendParties = Object.keys(data.counts).sort((a, b) => data.counts[b] - data.counts[a]);
+  const sp = strengthParty ? partyMeta(strengthParty).color : null;
+  return h("section", { className: "card mapcard" },
+    h("h2", null, "Projected results map"),
+    h("div", { className: "maptabs", role: "tablist", "aria-label": "Map type" },
+      [["const", "Constituencies"], ["region", "Regions"]].map(([k, t]) => h("button", { key: k, role: "tab", "aria-selected": tab === k, className: "mtab" + (tab === k ? " on" : ""), onClick: () => setTab(k) }, t))),
+    h("div", { className: "chips" },
+      btn("winner", tab === "region" ? "Leading party" : "Winner"),
+      tab === "const" ? btn("gains", "Gains") : null,
+      partyOrder.map((p) => btn("party:" + p, short(p), partyMeta(p).color))),
+    h(MapView, { key: tab, view, setView, boundaries: tab === "const" ? CONST_BOUNDARIES : REGION_BOUNDARIES, items: data.items, tipFor, label: tab === "const" ? "Constituency results map" : "Region results map" }),
+    h("div", { className: "mapfoot" }, strengthParty
+      ? h("div", { className: "scale" },
+        h("div", { className: "sgrad", style: { background: `linear-gradient(to right, ${sp}1F, ${sp})` } }),
+        h("div", { className: "slab" }, h("span", null, data.min.toFixed(1) + "%"), h("span", null, data.max.toFixed(1) + "%")))
+      : h("div", { className: "legend" }, legendParties.map((p) => h("span", { key: p, className: "lg" }, h("span", { className: "sw", style: { background: partyMeta(p).color } }), short(p))))));
+}
+
+/* ---------- app ---------- */
+function HolyroodProjector() {
+  const init = (b) => { const s = {}; for (const p of SWING_PARTIES) s[p] = b[p]; return s; };
+  const [constShares, setConstShares] = useState(() => init(BASELINE_CONST));
+  const [listShares, setListShares] = useState(() => init(BASELINE_LIST));
+  const { tally, constResults, regionResults } = useMemo(() => projectSeats(constShares, listShares), [constShares, listShares]);
+  const seatBreakdown = useMemo(() => {
+    const b = {};
+    for (const c of constResults) { const k = mergeKey(c.winner); b[k] = b[k] || { c: 0, l: 0 }; b[k].c += 1; }
+    for (const r of regionResults) for (const p of Object.keys(r.listSeats)) { const k = mergeKey(p); b[k] = b[k] || { c: 0, l: 0 }; b[k].l += r.listSeats[p]; }
+    return b;
+  }, [constResults, regionResults]);
+  const ordered = useMemo(() => {
+    const all = new Set([...SWING_PARTIES, ...Object.keys(tally), ...Object.keys(BASELINE_SEATS)]);
+    all.delete("Oth");
+    return [...all].map((p) => ({ p, seats: tally[p] || 0, base: BASELINE_SEATS[p] || 0 })).filter((r) => r.seats > 0 || r.base > 0).sort((a, b) => b.seats - a.seats);
+  }, [tally]);
+  const hemiColors = useMemo(() => {
+    const colors = new Array(TOTAL_SEATS);
+    let idx = 0;
+    const placed = new Set();
+    for (const p of HEMICYCLE_ORDER) {
+      placed.add(p);
+      for (let i = 0; i < (tally[p] || 0) && idx < TOTAL_SEATS; i++, idx++) colors[idx] = p;
+    }
+    const extras = Object.keys(tally).filter((p) => !placed.has(p) && tally[p] > 0).sort((a, b) => tally[b] - tally[a]);
+    for (const p of extras) for (let i = 0; i < tally[p] && idx < TOTAL_SEATS; i++, idx++) colors[idx] = p;
+    while (idx < TOTAL_SEATS) colors[idx++] = "Oth";
+    return colors;
+  }, [tally]);
+  const hemiLegend = useMemo(() => {
+    const order = [...HEMICYCLE_ORDER, ...Object.keys(tally).filter((p) => !HEMICYCLE_ORDER.includes(p))];
+    return order.filter((p) => (tally[p] || 0) > 0);
+  }, [tally]);
+  const makeHandler = (setFn) => (p, raw) => {
+    if (p === "Oth") return;
+    setFn((prev) => {
+      const others = SWING_PARTIES.filter((x) => x !== p && x !== "Oth").reduce((a, x) => a + prev[x], 0);
+      const v = Math.max(0, Math.min(100 - others, Math.max(0, Math.min(100, raw))));
+      return { ...prev, [p]: v, Oth: Math.max(0, 100 - others - v) };
+    });
+  };
+  const onConst = makeHandler(setConstShares), onList = makeHandler(setListShares);
+  const reset = () => { setConstShares(init(BASELINE_CONST)); setListShares(init(BASELINE_LIST)); };
+  const [coalition, setCoalition] = useState(() => new Set());
+  const toggle = (p) => setCoalition((prev) => { const n = new Set(prev); n.has(p) ? n.delete(p) : n.add(p); return n; });
+  const seated = ordered.filter((r) => r.seats > 0);
+  const chosen = seated.filter((r) => coalition.has(r.p));
+  const cSeats = chosen.reduce((a, r) => a + r.seats, 0);
+  const col = (title, order, shares, onChange) => h("div", { className: "scol" }, h("h3", null, title),
+    order.map((p) => h(SliderRow, { key: p, p, value: shares[p], frozen: p === "Oth", onChange: (v) => onChange(p, v) })));
+  return h("div", { className: "page" },
+    h("h1", null, "Scottish Parliament Seat Projection"),
+    h(Locator),
+    h(Facts),
+    h(SystemInfo),
+    h("section", { className: "card" },
+      h("h2", null, "Input vote share"),
+      h("div", { className: "scols" }, col("Constituency vote", CONST_SLIDER_ORDER, constShares, onConst), col("Regional list vote", LIST_SLIDER_ORDER, listShares, onList)),
+      h("div", { className: "rrow" }, h("button", { className: "btn", onClick: reset }, "Reset"))),
+    h("section", { className: "card" },
+      h("h2", null, "Projected results"),
+      h("div", { className: "hemiwrap" }, h(Hemicycle, { colors: hemiColors })),
+      h("div", { className: "legend hl" }, hemiLegend.map((p) => h("span", { key: p, className: "lg" }, h("span", { className: "sw", style: { background: partyMeta(p).color } }), short(p)))),
+      h("table", null,
+        h("thead", null, h("tr", null, h("th", { className: "l" }, "Party"), h("th", null, "Constituency seats"), h("th", null, "List seats"), h("th", null, "Seats"), h("th", null, "+/-"))),
+        h("tbody", null, ordered.map((r) => {
+          const bd = seatBreakdown[r.p] || { c: 0, l: 0 };
+          const ch = r.seats - r.base;
+          return h("tr", { key: r.p },
+            h("td", { className: "l" }, h("span", { className: "sw", style: { background: partyMeta(r.p).color } }), plainName(r.p)),
+            h("td", null, bd.c), h("td", null, bd.l), h("td", { className: "seats" }, r.seats),
+            h("td", { className: ch > 0 ? "pos" : ch < 0 ? "neg" : "zero" }, ch > 0 ? "+" + ch : ch < 0 ? "\u2212" + Math.abs(ch) : "0"));
+        })))),
+    h("section", { className: "card" },
+      h("h2", null, "Coalition builder"),
+      h("div", { className: "chips cb" }, seated.map((r) => {
+        const m = partyMeta(r.p), on = coalition.has(r.p);
+        return h("button", { key: r.p, className: "chip" + (on ? " on" : ""), "aria-pressed": on, onClick: () => toggle(r.p) },
+          h("span", { className: "sw", style: { background: m.color } }), m.short);
+      })),
+      h("div", { className: "cbar" },
+        h("div", { className: "ctrack" }, chosen.map((r) => h("div", { key: r.p, style: { width: r.seats / TOTAL_SEATS * 100 + "%", background: partyMeta(r.p).color } }))),
+        h("div", { className: "cmark", style: { left: MAJORITY / TOTAL_SEATS * 100 + "%" } }, h("span", null, MAJORITY))),
+      h("div", { className: "cfoot" }, cSeats + " of " + TOTAL_SEATS + " seats", cSeats >= MAJORITY ? h("span", { className: "ok" }, " \u00b7 Majority") : null)),
+    h(MapCard, { constResults, regionResults, tally }),
+    h("p", { className: "sources" }, "Sources: National Records of Scotland, mid-2025 population estimates; Wikipedia, 2026 Scottish Parliament election; Natural Earth (map subunits, public domain); Scotland flag drawn to the Saltire design (Pantone 300); constituency and regional results and boundaries as supplied in the original ScotlandProjector.html (original source not recorded)."));
 }
 const rootEl = document.getElementById("root");
-const root = ReactDOM.createRoot(rootEl);
-root.render(React.createElement(HolyroodProjector));
+ReactDOM.createRoot(rootEl).render(React.createElement(HolyroodProjector));
 
 </script>
 </body>
