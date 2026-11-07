@@ -87,15 +87,10 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
          
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Bangladesh Seat Projector</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
-:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 :root{
   --bg:#F3F5F7; --card:#FFFFFF; --fg:#1B2128; --muted:#66727F; --line:#DDE2E8; --line-soft:#EBEEF2;
@@ -206,6 +201,9 @@ input[type=range]:disabled::-moz-range-thumb{display:none}
 table.res{width:100%;border-collapse:collapse;font-size:13px}
 table.res th{white-space:nowrap;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;padding:6px 8px;text-align:right;border-bottom:1px solid var(--line)}
 table.res th:first-child{text-align:left}
+#rtable th{white-space:normal;vertical-align:bottom;line-height:1.25}
+#rtable th:last-child{white-space:nowrap}
+@media(max-width:480px){#rtable th{font-size:9.5px;letter-spacing:.02em;hyphens:auto}#rtable{font-size:12px}#rtable td,#rtable th{padding-left:4px;padding-right:4px}}
 table.res td{padding:8px 8px;text-align:right;border-bottom:1px solid var(--line-soft)}
 table.res td:first-child{text-align:left;min-width:0}
 table.res td.seats{font-weight:700}
@@ -233,11 +231,11 @@ table.res tr.pt td.seats{font-weight:700}
 .mbtns{margin-bottom:10px}
 .mapvp{position:relative;margin:0 calc(-1*var(--cp));height:640px;overflow:hidden;background:var(--card);border:solid var(--line);border-width:1px 0;touch-action:none;cursor:grab;user-select:none}
 .mapvp.dragging{cursor:grabbing}
-#geo-map-svg polygon{stroke:var(--map-line);stroke-width:.7;stroke-linejoin:round;cursor:pointer;outline:none;transition:fill .12s}
+#geo-map-svg polygon{stroke:var(--map-line);stroke-width:.45;stroke-linejoin:round;cursor:pointer;outline:none;transition:fill .12s}
 #geo-map-svg polygon:hover{filter:brightness(.88)}
 #geo-map-svg polygon.sel{filter:brightness(.78)}
 #geo-map-svg *{outline:none}
-#geo-map-svg polyline{stroke:var(--map-line);stroke-width:.7;fill:none;pointer-events:none}
+#geo-map-svg polyline{stroke:var(--map-line);stroke-width:.45;fill:none;pointer-events:none}
 .tip{position:absolute;z-index:5;display:none;min-width:150px;max-width:190px;background:var(--tip);border:1px solid var(--line);border-radius:7px;box-shadow:var(--shadow);padding:7px 9px;font-size:12px;pointer-events:none}
 .tip.on{display:block}
 .tip .tt{font-weight:700;margin-bottom:4px;display:flex;justify-content:space-between;gap:8px}
@@ -297,8 +295,6 @@ table.mc th:last-child{text-align:center}
 .sources{font-size:11.5px;color:var(--muted);text-align:center;margin:4px 0 0;overflow-wrap:anywhere}
 
 </style>
-</head>
-<body>
 <div class="sp-page" style="max-width:760px;margin:0 auto">
 <h1>Bangladesh Seat Projection</h1>
 
@@ -540,7 +536,7 @@ function groups(sum,mode){
 }
 
 /* ---------- state ---------- */
-const state = {A:BASE.A, B:BASE.B, mapMode:'alliance', hemiMode:'alliance', coalMode:'alliance', mapView:'winner', coal:new Set(), open:{A:true,B:true,O:true}};
+const state = {A:BASE.A, B:BASE.B, mapMode:'alliance', hemiMode:'alliance', coalMode:'alliance', mapView:'winner', coal:new Set(), open:{A:false,B:false,O:false}};
 const T = ()=>({A:state.A,B:state.B,O:Math.max(0,100-state.A-state.B)});
 const $ = id=>document.getElementById(id);
 const f1 = v=>v.toFixed(1);
@@ -619,7 +615,8 @@ function renderTable(){
   const sum=CUR, t=sum.T;
   const keysBy = {A:new Set(),B:new Set(),O:new Set()};
   [sum.seatsSP,BASESUM.seatsSP,RV0].forEach(o=>Object.keys(o).forEach(k=>keysBy[k[0]].add(k)));
-  let html='<thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th>+/−</th></tr></thead><tbody>';
+  let html='<thead><tr><th>Party</th><th>Vote share</th><th>Constituency seats</th><th>Women\u2019s seats</th><th>Total seats</th><th>+/−</th></tr></thead><tbody>';
+  const cs=k=>sum.dSP[k]||0, csSide=s=>Object.keys(sum.dSP).filter(k=>k[0]===s).reduce((a,k)=>a+sum.dSP[k],0);
   const mk=s=>[...keysBy[s]].map(k=>{ const p=+k.slice(2); const sh=(RV0[k]||0)*sum.ratio[s]; const n=sum.seatsSP[k]||0; return {k,p,sh,n,b:BASESUM.seatsSP[k]||0}; })
       .filter(r=>r.n>0||r.sh>=1).sort((x,y)=>y.n-x.n||y.sh-x.sh);
   // top level: the two alliances and each independent/other party, always ordered by seats (then vote share)
@@ -627,11 +624,11 @@ function renderTable(){
   ['A','B'].forEach(s=>top.push({alliance:s,n:sum.bySide[s],sh:t[s]}));
   mk('O').forEach(r=>top.push({party:r,n:r.n,sh:r.sh}));
   top.sort((x,y)=>y.n-x.n||y.sh-x.sh).forEach(e=>{
-    if(e.party){ const r=e.party; html+=`<tr class="ot"><td><span class="nm"><i class="sw" style="background:${pCol(r.p)}"></i>${pFull(r.p)}</span></td><td>${f1(r.sh)}%</td><td class="seats">${r.n}</td><td>${delta(r.n,r.b)}</td></tr>`; return; }
+    if(e.party){ const r=e.party; html+=`<tr class="ot"><td><span class="nm"><i class="sw" style="background:${pCol(r.p)}"></i>${pFull(r.p)}</span></td><td>${f1(r.sh)}%</td><td>${cs(r.k)}</td><td>${r.n-cs(r.k)}</td><td class="seats">${r.n}</td><td>${delta(r.n,r.b)}</td></tr>`; return; }
     const s=e.alliance, open=state.open[s];
-    html+=`<tr class="al"><td><button class="xbtn" type="button" data-s="${s}" aria-expanded="${open}"><span class="nm"><i class="sw" style="background:${ALL[s].color}"></i>${aFull(s)}</span></button></td><td>${f1(t[s])}%</td><td class="seats">${sum.bySide[s]}</td><td>${delta(sum.bySide[s],BASESUM.bySide[s])}</td></tr>`;
+    html+=`<tr class="al"><td><button class="xbtn" type="button" data-s="${s}" aria-expanded="${open}"><span class="nm"><i class="sw" style="background:${ALL[s].color}"></i>${aFull(s)}</span></button></td><td>${f1(t[s])}%</td><td>${csSide(s)}</td><td>${sum.bySide[s]-csSide(s)}</td><td class="seats">${sum.bySide[s]}</td><td>${delta(sum.bySide[s],BASESUM.bySide[s])}</td></tr>`;
     if(!open) return;
-    mk(s).forEach(r=>{ html+=`<tr class="pt"><td><span class="nm"><i class="sw" style="background:${pCol(r.p)}"></i>${pFull(r.p)}</span></td><td>${f1(r.sh)}%</td><td class="seats">${r.n}</td><td>${delta(r.n,r.b)}</td></tr>`; });
+    mk(s).forEach(r=>{ html+=`<tr class="pt"><td><span class="nm"><i class="sw" style="background:${pCol(r.p)}"></i>${pFull(r.p)}</span></td><td>${f1(r.sh)}%</td><td>${cs(r.k)}</td><td>${r.n-cs(r.k)}</td><td class="seats">${r.n}</td><td>${delta(r.n,r.b)}</td></tr>`; });
   });
   $('rtable').innerHTML=html+'</tbody>';
 }
@@ -749,7 +746,7 @@ function showTip(no,x,y){
   }
   let lastW=0; new ResizeObserver(()=>{ if(vp.clientWidth!==lastW){ lastW=vp.clientWidth; layout(); } }).observe(vp);
   layout();
-  function zoomAt(cx,cy,f){ const r=vp.getBoundingClientRect(),fx=(cx-r.left)/r.width,fy=(cy-r.top)/r.height,sx=vx+fx*vw,sy=vy+fy*vh,nw=vw/f; vx=sx-fx*nw; vy=sy-fy*nw*AS; vw=nw; clamp(); apply(); closeTip(); }
+  function zoomAt(cx,cy,f){ const r=vp.getBoundingClientRect(),fx=(cx-r.left)/r.width,fy=(cy-r.top)/r.height,sx=vx+fx*vw,sy=vy+fy*vh,nw=Math.min(vw0,Math.max(vw0/12,vw/f)); if(Math.abs(nw-vw)<1e-9) return; vx=sx-fx*nw; vy=sy-fy*nw*AS; vw=nw; clamp(); apply(); closeTip(); }
   vp.addEventListener('wheel',e=>{ e.preventDefault(); zoomAt(e.clientX,e.clientY,e.deltaY<0?1.25:.8); },{passive:false});
   const ptrs=new Map(); let last=null,pinch=null,dx0=0,dy0=0,moved=0;
   vp.addEventListener('pointerdown',e=>{ ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); if(ptrs.size===1){ last={x:e.clientX,y:e.clientY}; dx0=e.clientX; dy0=e.clientY; moved=0; vp.classList.add('dragging'); } });
@@ -907,9 +904,7 @@ window.__test = {SEATS,BASE,BASESUM,summarize,evalSeat,reserved,runOnce,T,state}
 
 </script>
 
-</body>
-</html>
-
+</body></html>
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
