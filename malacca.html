@@ -91,11 +91,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Malacca Seat Projector</title>
-<style>:root{color-scheme:light}img{max-width:100%}[hidden]{display:none!important}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 </head>
 <body>
+<title>Malacca Seat Projector</title>
+<style>:root{color-scheme:light}img{max-width:100%}[hidden]{display:none!important}</style>
 <style>
 /* Layout: single 760px column of separate cards, ordered by workflow (header, inputs, results, builder, map). */
 :root{
@@ -251,6 +251,47 @@ tr.alli.open .chev{transform:rotate(45deg)}
 .mlegend{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;margin-top:14px;font-size:12px}
 .grad{width:170px;height:10px;border-radius:5px;display:inline-block}
 .sources{font-size:11px;color:var(--muted);text-align:center;line-height:1.5;margin-top:6px}
+
+/* monte carlo */
+.mc-prog{height:3px;margin:-6px 0 18px}
+.mc-trk{height:3px;border-radius:2px;background:var(--empty);overflow:hidden}
+.mc-trk i{display:block;height:100%;width:0;background:var(--fg)}
+.mc h2{margin-bottom:12px}
+.mc-sec{display:flex;flex-direction:column;gap:18px;min-width:0;transition:opacity .15s}
+.mc-sec+.mc-sec{border-top:1px solid var(--line);margin-top:24px;padding-top:24px}
+.mc h3{font-size:14px;font-weight:600;text-align:center}
+.mc.stale .mc-dim{opacity:.42}
+.mc-sl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px}
+@media(max-width:600px){.mc-sl{grid-template-columns:minmax(0,1fr)}}
+.mc-f{display:flex;flex-direction:column;gap:12px;min-width:0}
+.mc-f label{font-size:13px;font-weight:500;text-align:center;text-wrap:balance}
+.mc-f output{text-align:center;font-weight:700;font-size:14px}
+.mc .legend{margin-top:0;gap:8px 20px}
+.mc .legend span{align-items:center}
+.hat{background-image:repeating-linear-gradient(135deg,var(--hc) 0 4px,transparent 4px 8px)}
+.mc-coal{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px}
+.mc-cres{min-height:40px;text-align:center;font-size:13px;line-height:1.45}
+.mc-cres span{color:var(--muted)}
+#mcTable td{padding:13px 8px}
+#mcTable th.rgc,#mcTable td.rgc{text-align:right}
+.rg{width:150px;margin-left:auto;text-align:center;font-weight:600}
+.rb{position:relative;height:6px;border-radius:3px;background:var(--empty);margin-top:8px}
+.rb i{position:absolute;top:0;height:100%;min-width:3px;border-radius:3px}
+.rb b{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.rb s{position:absolute;top:-2px;height:10px;border-left:1px dashed var(--muted);text-decoration:none}
+@media(max-width:600px){#mcTable td{padding:13px 4px}#mcTable th{padding:8px 4px}}
+.mc-tip{min-height:40px;text-align:center;font-size:13px;line-height:1.45}
+.mc-tip span{color:var(--muted)}
+.hist{width:100%;height:auto;display:block;max-width:560px;margin:0 auto}
+.hist text{fill:var(--muted);font-size:10px;font-family:inherit}
+.hist text.ml{fill:var(--fg);font-weight:600}
+.hist .gl{stroke:var(--line);stroke-width:1}
+.hist .maj{stroke:var(--fg);stroke-width:1.5;stroke-dasharray:4 3}
+.hist .b{transition:opacity .08s}
+.hist.hov .b{opacity:.3}
+.hist.hov .b.on{opacity:1}
+.hist .hit{fill:transparent;cursor:pointer}
+.mc-empty{text-align:center;color:var(--muted);font-size:13px}
 </style>
 <div class="page">
 <h1>Malacca State Assembly Seat Projection</h1>
@@ -306,6 +347,39 @@ tr.alli.open .chev{transform:rotate(45deg)}
     <div class="mzoom"><button id="constMapZoomIn" aria-label="Zoom in">+</button><button id="constMapZoomOut" aria-label="Zoom out">&minus;</button><button id="constMapZoomReset" style="font-size:9px" aria-label="Reset view">RST</button></div>
   </div>
   <div class="mlegend" id="constMapLegend"></div>
+</section>
+
+<section class="card mc" id="mcCard" aria-busy="false">
+  <h2>Probability model</h2>
+  <div class="mc-prog" aria-hidden="true"><div class="mc-trk" id="mcTrk" hidden><i id="mcFill"></i></div></div>
+  <div class="mc-sec">
+    <h3>Settings</h3>
+    <div class="center"><div class="seg" id="mcRuns" role="group" aria-label="Number of runs"></div></div>
+    <div class="mc-sl">
+      <div class="mc-f"><label for="mcV">Vote share error (% of each party’s own share)</label><input type="range" class="vs" id="mcV" min="0" max="30" step="1" value="10" style="--c:var(--fg)"><output id="mcVo" for="mcV">10%</output></div>
+      <div class="mc-f"><label for="mcS">Seat-level error (extra random variation in each seat)</label><input type="range" class="vs" id="mcS" min="0" max="10" step="0.5" value="3" style="--c:var(--fg)"><output id="mcSo" for="mcS">3.0 points</output></div>
+    </div>
+    <div class="center"><div class="seg" data-view="mc"></div></div>
+  </div>
+  <div class="mc-sec mc-dim">
+    <h3>Outcomes</h3>
+    <div class="bar" id="mcBar"></div>
+    <div class="legend" id="mcLegend"></div>
+    <div class="mc-coal">
+      <div class="lbl">Coalition majority chance</div>
+      <div class="center" id="mcCoalChips"></div>
+      <div class="mc-cres" id="mcCoalRes"></div>
+    </div>
+  </div>
+  <div class="mc-sec mc-dim">
+    <div class="tablewrap" style="margin-top:0"><table id="mcTable"></table></div>
+  </div>
+  <div class="mc-sec mc-dim">
+    <h3>Seat distribution</h3>
+    <div class="center" id="mcHistChips"></div>
+    <div class="mc-tip" id="mcTip"></div>
+    <div id="mcHist"></div>
+  </div>
 </section>
 
 <p class="sources">Sources: state assembly boundaries and 2026 population estimate, Department of Statistics Malaysia; world and country map, Natural Earth; flag drawn from the Flags of the World specification and melaka.gov.my; voter registration, Malay Mail.</p>
@@ -499,7 +573,7 @@ Object.keys(W21).forEach(id=>{
   BASE_COMP[b]=BASE_COMP[b]||{};BASE_COMP[b][c]=(BASE_COMP[b][c]||0)+1;
 });
 
-const views={hemi:'alliance',coal:'alliance',map:'alliance'};   // each control keeps its own view
+const views={hemi:'alliance',coal:'alliance',map:'alliance',mc:'alliance'};   // each control keeps its own view
 let curDetails=[],tally={},ptally={},curNS={};
 let inputEls={},sliderEls={},otherBox=null,otherRng=null;
 const expanded=new Set();
@@ -606,14 +680,14 @@ function setView(scope,v){
 // votes handed on: BERSATU's go to the parties that are standing in proportion to their votes; PH's go 60% to
 // BERSATU (if it is standing) with the rest spread across the other standing parties in proportion.
 // A named independent / minor-party candidate (OTH) is fed by the Others remainder, with its own universal swing and taper.
-function projectSeat(s,sw,sc){
+function projectSeat(s,sw,sc,noise,lean){
   const[id,name,bn,ph,pn,bp,tot2]=s;
   const base=SEAT_BASE[id];
   const hasO=!!OTHER_CANDIDATES[id];
   const stands={};PARTIES.forEach(p=>{stands[p.id]=contests(p.id,id);});stands.OTH=hasO;
   const ids=PARTIES.map(p=>p.id).concat(['OTH']);
   const rawAll={},tapAll={};
-  ids.forEach(k=>{const b=k==='OTH'?(SEAT_OTH[id]||0):base[k];rawAll[k]=Math.max(0,b+sw[k]);tapAll[k]=rawAll[k]*sc[k];});
+  ids.forEach(k=>{const b=k==='OTH'?(SEAT_OTH[id]||0):base[k];let r=b+sw[k];if(noise)r+=noise(k,id,b);rawAll[k]=Math.max(0,r);tapAll[k]=rawAll[k]*sc[k];});
   const v={};ids.forEach(k=>{v[k]=stands[k]?tapAll[k]:0;});
   const standing=ids.filter(k=>stands[k]);
   const spread=(amount,list)=>{
@@ -632,9 +706,10 @@ function projectSeat(s,sw,sc){
   const proj={};
   ids.forEach(k=>{proj[k]=stands[k]?(tTot>0&&tOut>0?v[k]+tOut*(v[k]/tTot):v[k]):0;});
   const projTotal=ids.reduce((a,k)=>a+proj[k],0);
-  if(projTotal>0&&Math.abs(projTotal-100)>0.001){ids.forEach(k=>{proj[k]=proj[k]/projTotal*100;});}
+  if(!lean&&projTotal>0&&Math.abs(projTotal-100)>0.001){ids.forEach(k=>{proj[k]=proj[k]/projTotal*100;});}
   let winner=standing.length?standing[0]:'OTHERS';
   standing.forEach(k=>{if(proj[k]>proj[winner])winner=k;});
+  if(lean)return winner;
   return {id,name,proj,base,winner,coalW:winner,tot2};
 }
 
@@ -654,8 +729,9 @@ function project(){
   ptally={};
   det.forEach(d=>{tally[d.coalW]++;const c=resolveComponentParty(d.coalW,d.id);ptally[c]=(ptally[c]||0)+1;});
   renderAll();
+  scheduleMC();
 }
-function renderAll(){renderResults();renderBuilder();renderMapButtons();renderMap();}
+function renderAll(){renderResults();renderBuilder();renderMapButtons();renderMap();renderMC();}
 
 // Entries in a fixed order (so parties keep their place on the hemicycle).
 function seatEntries(mode){
@@ -914,6 +990,210 @@ function renderMap(){
   }
 }
 
+// ── Probability model (Monte Carlo) ─────────────────────────────────────
+const MC_SEED=0x5EED1E5,MC_MAX=5000;
+const MC_KEYS={alliance:PARTIES.map(p=>p.id).concat(['PUTRA','IND']),party:[].concat(...Object.values(COMP_ORDER))};
+const mc={runs:1000,vErr:10,sErr:3,key:null,done:0,n:0,have:false,pending:false,started:false,job:0,timer:null,resA:{},resP:{}};
+MC_KEYS.alliance.forEach(k=>{mc.resA[k]=new Uint8Array(MC_MAX);});
+MC_KEYS.party.forEach(k=>{mc.resP[k]=new Uint8Array(MC_MAX);});
+const mcSel={alliance:new Set(),party:new Set()};
+const mcHistKey={alliance:null,party:null};
+const mcRes=()=>views.mc==='alliance'?mc.resA:mc.resP;
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+function mcCfg(){
+  const ns={};let tot=0;
+  PARTIES.forEach(p=>{ns[p.id]=curNS[p.id]||0;tot+=ns[p.id];});
+  const left=Math.max(0,100-tot);
+  return {ns,left:left<1e-9?0:left,vErr:mc.vErr,sErr:mc.sErr,runs:mc.runs};
+}
+// One run, seeded by its index. Writes each party's seat total into the result arrays.
+function mcRunInto(i,cfg){
+  const rng=mulberry32((MC_SEED+i)>>>0);
+  const gauss=()=>{let u=rng();if(u<1e-12)u=1e-12;return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*rng());};
+  let ns=cfg.ns,left=cfg.left;
+  if(cfg.vErr>0){
+    const sig=cfg.vErr/100,f={};let tot=0;
+    PARTIES.map(p=>p.id).concat(['OTH']).forEach(k=>{const b=k==='OTH'?cfg.left:cfg.ns[k];const v=b*Math.exp(sig*gauss());f[k]=v;tot+=v;});
+    if(tot>0){ns={};PARTIES.forEach(p=>{ns[p.id]=f[p.id]/tot*100;});left=f.OTH/tot*100;}
+  }
+  const sw={},sc={};
+  PARTIES.forEach(p=>{sw[p.id]=ns[p.id]-(GN[p.id]||0);sc[p.id]=taper(p.id,ns[p.id]);});
+  sw.OTH=left-GN.OTH;sc.OTH=taper('OTH',left);
+  const nat=Object.assign({},ns,{OTH:left}),se=cfg.sErr;
+  const noise=se>0?(k,id,b)=>{const z=gauss();return nat[k]>0?z*se*Math.sqrt(Math.max(b,0.5)/20):0;}:null;
+  const ta={},tp={};
+  for(let j=0;j<SEATS.length;j++){
+    const st=SEATS[j];if(!st[6])continue;
+    const w=projectSeat(st,sw,sc,noise,true);
+    const c=resolveComponentParty(w,st[0]);
+    const a=w==='OTH'?c:w;
+    ta[a]=(ta[a]||0)+1;tp[c]=(tp[c]||0)+1;
+  }
+  for(const k in mc.resA)mc.resA[k][i]=ta[k]||0;
+  for(const k in mc.resP)mc.resP[k][i]=tp[k]||0;
+}
+
+function mcProgress(f){
+  const t=document.getElementById('mcTrk');
+  if(f==null){t.hidden=true;return;}
+  t.hidden=false;document.getElementById('mcFill').style.width=(f*100).toFixed(1)+'%';
+}
+function scheduleMC(){
+  clearTimeout(mc.timer);mc.job++;mc.pending=true;
+  document.getElementById('mcCard').classList.toggle('stale',mc.have);
+  mc.timer=setTimeout(startMC,mc.started?500:0);
+}
+function startMC(){
+  mc.started=true;
+  const cfg=mcCfg(),key=JSON.stringify([cfg.ns,cfg.vErr,cfg.sErr]);
+  if(mc.key!==key){mc.key=key;mc.done=0;}
+  const job=++mc.job;
+  const finish=()=>{mc.n=cfg.runs;mc.have=true;mc.pending=false;mcProgress(null);document.getElementById('mcCard').setAttribute('aria-busy','false');renderMC();};
+  if(mc.done>=cfg.runs){finish();return;}
+  document.getElementById('mcCard').setAttribute('aria-busy','true');
+  const step=()=>{
+    if(job!==mc.job)return;
+    const t0=performance.now();
+    while(mc.done<cfg.runs&&performance.now()-t0<25){mcRunInto(mc.done,cfg);mc.done++;}
+    if(mc.done<cfg.runs){mcProgress(mc.done/cfg.runs);setTimeout(step,0);}else finish();
+  };
+  mcProgress(mc.done/cfg.runs);step();
+}
+
+function buildMC(){
+  const box=document.getElementById('mcRuns');
+  box.innerHTML=[500,1000,5000].map(r=>`<button type="button" data-r="${r}">${r.toLocaleString('en-GB')}</button>`).join('');
+  const sync=()=>box.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.r===mc.runs));
+  box.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{mc.runs=+b.dataset.r;sync();scheduleMC();}));
+  sync();
+  const bind=(id,oid,prop,fmt,max)=>{
+    const r=document.getElementById(id),o=document.getElementById(oid);
+    const upd=()=>{r.style.setProperty('--p',(parseFloat(r.value)/max*100)+'%');o.textContent=fmt(parseFloat(r.value));};
+    r.addEventListener('input',()=>{mc[prop]=parseFloat(r.value)||0;upd();scheduleMC();});
+    upd();
+  };
+  bind('mcV','mcVo','vErr',v=>v+'%',30);
+  bind('mcS','mcSo','sErr',v=>v.toFixed(1)+' points',10);
+}
+
+function mcHist(arr,n){const h=new Uint32Array(TOTAL_SEATS+1);for(let i=0;i<n;i++)h[arr[i]]++;return h;}
+function mcStats(h,n){
+  const q=p=>{let c=0;for(let s=0;s<h.length;s++){c+=h[s];if(c/n>=p-1e-9)return s;}return h.length-1;};
+  return {p5:q(0.05),med:q(0.5),p95:q(0.95),any:1-h[0]/n};
+}
+const fmtPct=(c,n)=>{const v=100*c/n;return v>0&&v<0.1?'<0.1%':v.toFixed(1)+'%';};
+const seatsWord=s=>s+(s===1?' seat':' seats');
+
+function renderMC(){
+  const card=document.getElementById('mcCard');
+  card.classList.toggle('stale',mc.pending&&mc.have);
+  if(!mc.have)return;
+  const n=mc.n,res=mcRes();
+  const rows=seatEntries(views.mc).map(e=>{const h=mcHist(res[e.key],n);return Object.assign({},e,{h},mcStats(h,n));}).filter(r=>r.any>0);
+  rows.sort((a,b)=>b.med-a.med||b.any-a.any);
+  renderMCOutcomes(rows,n,res);renderMCTable(rows);renderMCHist(rows,n,res);
+}
+
+function renderMCOutcomes(rows,n,res){
+  const maj={},plu={};let tie=0;
+  for(let i=0;i<n;i++){
+    let best=-1,bk=null,cnt=0;
+    for(const r of rows){const v=res[r.key][i];if(v>best){best=v;bk=r.key;cnt=1;}else if(v===best)cnt++;}
+    if(best>=MAJ)maj[bk]=(maj[bk]||0)+1;else if(cnt>1)tie++;else plu[bk]=(plu[bk]||0)+1;
+  }
+  const segs=[];
+  rows.forEach(r=>{if(maj[r.key])segs.push({c:maj[r.key],color:r.color,hat:false,label:r.acr+' majority'});});
+  rows.forEach(r=>{if(plu[r.key])segs.push({c:plu[r.key],color:r.color,hat:true,label:r.acr+' largest, no majority'});});
+  if(tie)segs.push({c:tie,color:'#888780',hat:true,label:'Tied largest, no majority'});
+  const style=sg=>sg.hat?`--hc:${sg.color};background-color:${hexAlpha(sg.color,0.28)}`:`background:${sg.color}`;
+  document.getElementById('mcBar').innerHTML=segs.map(sg=>`<div class="${sg.hat?'hat':''}" style="width:${sg.c/n*100}%;${style(sg)}" title="${sg.label} ${fmtPct(sg.c,n)}"></div>`).join('');
+  document.getElementById('mcLegend').innerHTML=segs.map(sg=>`<span><i class="sw ${sg.hat?'hat':''}" style="${style(sg)}"></i>${sg.label} ${fmtPct(sg.c,n)}</span>`).join('');
+
+  // coalition majority checker
+  const sel=mcSel[views.mc];
+  [...sel].forEach(k=>{if(!rows.some(r=>r.key===k))sel.delete(k);});
+  const chips=document.getElementById('mcCoalChips');chips.innerHTML='';
+  rows.forEach(r=>{
+    const b=document.createElement('button');b.type='button';b.className='btn'+(sel.has(r.key)?' on':'');
+    b.innerHTML=`<i class="sw" style="background:${r.color};margin-right:6px"></i>${r.acr}`;
+    b.addEventListener('click',()=>{sel.has(r.key)?sel.delete(r.key):sel.add(r.key);renderMC();});
+    chips.appendChild(b);
+  });
+  const out=document.getElementById('mcCoalRes');
+  if(!sel.size){out.innerHTML='<span>Pick parties to see how often they reach a majority together.</span>';return;}
+  const sum=new Uint8Array(n);
+  sel.forEach(k=>{const a=res[k];for(let i=0;i<n;i++)sum[i]+=a[i];});
+  const h=mcHist(sum,n),st=mcStats(h,n);let ok=0;for(let s=MAJ;s<h.length;s++)ok+=h[s];
+  out.innerHTML=`<b>${fmtPct(ok,n)}</b> of runs reach a majority (${MAJ}+ seats)<br><span>Median ${st.med} seats, 90% range ${st.p5}–${st.p95}</span>`;
+}
+
+function renderMCTable(rows){
+  const list=rows.filter(r=>r.any>=0.05);
+  const scale=Math.max(MAJ,...list.map(r=>r.p95));
+  let h='<thead><tr><th>Party</th><th>Median</th><th class="rgc">90% range</th></tr></thead><tbody>';
+  list.forEach(r=>{
+    const pc=v=>(v/scale*100).toFixed(2)+'%';
+    h+=`<tr><td><span class="pn"><span class="pdot" style="background:${r.color};margin-top:0"></span><span>${r.acr}</span></span></td><td class="seats">${r.med}</td>`
+      +`<td class="rgc"><div class="rg"><span>${r.p5}–${r.p95}</span><div class="rb"><s style="left:${pc(MAJ)}"></s><i style="left:${pc(r.p5)};width:${((r.p95-r.p5)/scale*100).toFixed(2)}%;background:${r.color}"></i><b style="left:${pc(r.med)}"></b></div></div></td></tr>`;
+  });
+  document.getElementById('mcTable').innerHTML=h+'</tbody>';
+}
+
+function renderMCHist(rows,n,res){
+  const mode=views.mc;
+  let key=mcHistKey[mode];
+  if(!key||!rows.some(r=>r.key===key))key=mcHistKey[mode]=rows[0].key;
+  const chips=document.getElementById('mcHistChips');chips.innerHTML='';
+  rows.forEach(r=>{
+    const b=document.createElement('button');b.type='button';b.className='btn'+(r.key===key?' on':'');
+    b.innerHTML=`<i class="sw" style="background:${r.color};margin-right:6px"></i>${r.acr}`;
+    b.addEventListener('click',()=>{mcHistKey[mode]=r.key;renderMC();});
+    chips.appendChild(b);
+  });
+  const row=rows.find(r=>r.key===key),h=row.h;
+  let lo=TOTAL_SEATS,hi=0;
+  for(let s=0;s<h.length;s++)if(h[s]){lo=Math.min(lo,s);hi=Math.max(hi,s);}
+  lo=Math.max(0,Math.min(lo,MAJ)-1);hi=Math.min(TOTAL_SEATS,Math.max(hi,MAJ)+1);
+  let maxC=0;for(let s=lo;s<=hi;s++)maxC=Math.max(maxC,h[s]);
+  const ymax=maxC/n*100;
+  let step=[1,2,5,10,20,25].find(x=>ymax/x<=4)||25;
+  const top=Math.max(step,Math.ceil(ymax/step)*step);
+  const W=420,H=236,ml=38,mr=8,mt=22,mb=34,pw=W-ml-mr,ph=H-mt-mb,nb=hi-lo+1,bw=pw/nb;
+  const y=pct=>mt+ph-pct/top*ph;
+  let g=`<svg class="hist" viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribution of seats won by ${row.acr} across ${n} runs">`;
+  for(let v=0;v<=top+1e-9;v+=step)g+=`<line class="gl" x1="${ml}" x2="${W-mr}" y1="${y(v)}" y2="${y(v)}"/><text x="${ml-6}" y="${y(v)+3.5}" text-anchor="end">${v}%</text>`;
+  const xs=nb>20?2:1;
+  for(let s=lo;s<=hi;s++){
+    const x=ml+(s-lo)*bw,hh=h[s]/n*100/top*ph;
+    g+=`<rect class="b" data-s="${s}" x="${(x+0.75).toFixed(2)}" y="${(mt+ph-hh).toFixed(2)}" width="${Math.max(0.5,bw-1.5).toFixed(2)}" height="${hh.toFixed(2)}" fill="${row.color}"/>`;
+    if((s-lo)%xs===0)g+=`<text x="${(x+bw/2).toFixed(2)}" y="${mt+ph+14}" text-anchor="middle">${s}</text>`;
+  }
+  const mx=ml+(MAJ-lo)*bw,right=mx>W*0.7;
+  g+=`<line class="maj" x1="${mx}" x2="${mx}" y1="${mt-6}" y2="${mt+ph}"/><text class="ml" x="${right?mx-4:mx+4}" y="${mt-9}" text-anchor="${right?'end':'start'}">Majority (${MAJ})</text>`;
+  g+=`<text x="${ml+pw/2}" y="${H-4}" text-anchor="middle">Seats won</text>`;
+  for(let s=lo;s<=hi;s++)g+=`<rect class="hit" data-s="${s}" x="${(ml+(s-lo)*bw).toFixed(2)}" y="${mt}" width="${bw.toFixed(2)}" height="${ph}"/>`;
+  g+='</svg>';
+  const wrap=document.getElementById('mcHist');wrap.innerHTML=g;
+  const svg=wrap.firstChild,tip=document.getElementById('mcTip');
+  const idle='<span>Hover or tap a bar to see its share of runs.</span>';
+  tip.innerHTML=idle;
+  const setHover=s=>{
+    svg.classList.toggle('hov',s!=null);
+    svg.querySelectorAll('.b').forEach(r=>r.classList.toggle('on',s!=null&&+r.dataset.s===s));
+    if(s==null){tip.innerHTML=idle;return;}
+    let cum=0;for(let t=s;t<h.length;t++)cum+=h[t];
+    tip.innerHTML=`<b>${seatsWord(s)} / ${fmtPct(h[s],n)} of runs (${h[s]})</b><br><span>${fmtPct(cum,n)} of runs reach ${s}+</span>`;
+  };
+  svg.querySelectorAll('.hit').forEach(r=>{
+    const s=+r.dataset.s;
+    r.addEventListener('pointerenter',()=>setHover(s));
+    r.addEventListener('pointerdown',()=>setHover(s));
+  });
+  svg.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')setHover(null);});
+}
+
 // Expand / collapse alliance rows
 document.addEventListener('click',evt=>{
   const tr=evt.target.closest&&evt.target.closest('tr.alli');
@@ -923,14 +1203,15 @@ document.addEventListener('click',evt=>{
   renderTable();
 });
 
-window.addEventListener('DOMContentLoaded',()=>{
+function boot(){
   buildViewToggles();
   buildInputs();
+  buildMC();
   project();
-});
+}
+if(document.readyState==='loading')window.addEventListener('DOMContentLoaded',boot);else boot();
 
 </script>
-
 </body>
 </html>
         <!-- ============================================================= -->
