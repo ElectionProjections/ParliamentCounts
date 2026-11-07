@@ -220,6 +220,83 @@ td.pn .dot{margin-top:3px}
 .cbar2 i{display:block;width:150px;max-width:50%;height:10px;border-radius:5px;border:1px solid var(--line)}
 .src{font-size:11px;color:var(--muted);text-align:center;margin-top:4px;line-height:1.5}
 .mbtns{margin-bottom:2px}
+  /* ---- probability model ---- */
+  .mc-card{position:relative; overflow:hidden;}
+  .mc-card h2{margin:0;}
+  .mc-progress{position:absolute; top:0; left:0; right:0; height:3px; background:var(--track); display:none;}
+  .mc-progress.on{display:block;}
+  .mc-progress i{display:block; height:100%; width:0; background:var(--fg);}
+  .mc-sec{min-width:0;}
+  .mc-sec + .mc-sec{border-top:1px solid var(--line); margin-top:12px; padding-top:12px;}
+  .mc-sec{padding-bottom:12px;}
+  .mc-sec:last-child{padding-bottom:0;}
+  .mc-sub{font-size:14px; font-weight:600; text-align:center; margin:12px 0 14px;}
+  .mc-results{transition:opacity .15s ease;}
+  .mc-results.stale{opacity:.4;}
+  .mc-seg{display:flex; justify-content:center; gap:6px; margin-top:6px;}
+  .mc-seg button{
+    font:inherit; font-size:12.5px; font-weight:500; padding:5px 14px; border-radius:16px; cursor:pointer;
+    border:1.5px solid var(--line); background:var(--card); color:var(--fg); font-variant-numeric:tabular-nums;
+  }
+  .mc-seg button:hover{border-color:var(--muted);}
+  .mc-seg button[aria-pressed="true"]{border-color:var(--fg); background:var(--none); font-weight:600;}
+  .mc-seg button:focus-visible, .mc-chips button:focus-visible{outline:2px solid var(--focus); outline-offset:2px;}
+  .mc-sliders{display:grid; grid-template-columns:1fr 1fr; gap:24px 36px; margin-top:22px;}
+  @media (max-width:560px){ .mc-sliders{grid-template-columns:1fr;} }
+  .mc-slider{min-width:0; text-align:center;}
+  .mc-slider label{display:block; font-size:12.5px; color:var(--muted); line-height:1.35; margin-bottom:12px; text-wrap:balance;}
+  .mc-slider input[type=range]{--p:0%; --fill:var(--fg);}
+  .mc-slider output{display:block; margin-top:10px; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums;}
+  .mc-bar{display:flex; height:26px; border-radius:6px; overflow:hidden; background:var(--track);}
+  .mc-bar span{display:block; height:100%; min-width:0; border-right:1px solid var(--card);}
+  .mc-bar span:last-child{border-right:0;}
+  .mc-hatch{background-image:repeating-linear-gradient(45deg, var(--c) 0 3px, color-mix(in srgb, var(--c) 28%, var(--card)) 3px 7px);}
+  .mc-legend{display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-top:16px; font-size:12.5px;}
+  .mc-legend .lg{display:inline-flex; align-items:center; gap:7px; font-variant-numeric:tabular-nums;}
+  .mc-legend .lg i{width:14px; height:14px; border-radius:3px; flex-shrink:0; background:var(--c);}
+  .mc-legend .lg i.mc-hatch{background-color:transparent;}
+  .mc-legend .lg b{font-weight:600;}
+  .mc-legend .lg em{font-style:normal; color:var(--muted);}
+  table.mc-table{width:100%; table-layout:fixed; border-collapse:collapse; font-size:14px; margin-top:4px;}
+  table.mc-table col.mcc-m{width:58px;} table.mc-table col.mcc-r{width:150px;}
+  table.mc-table th{font-size:11px; letter-spacing:.05em; text-transform:uppercase; line-height:1.2; 
+    text-align:right; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; font-weight:600;
+    color:var(--muted); padding:0 6px 8px; border-bottom:1px solid var(--line);
+  }
+  table.mc-table td{font-size:14px; padding:13px 6px; border-bottom:1px solid var(--line); text-align:right; font-variant-numeric:tabular-nums; vertical-align:middle;}
+  table.mc-table tr:last-child td{border-bottom:0;}
+  table.mc-table th, table.mc-table td{text-align:right;}
+  table.mc-table th:first-child, table.mc-table td:first-child{text-align:left;}
+  table.mc-table td.mc-med{font-weight:700;}
+  table.mc-table th.mc-range, table.mc-table td.mc-range{min-width:150px; width:150px;}
+  .mc-range-num{font-size:13px; line-height:1; margin-bottom:7px; text-align:center;}
+  .mc-range-bar{position:relative; height:6px; border-radius:3px; background:var(--track);}
+  .mc-range-bar .fill{position:absolute; top:0; bottom:0; border-radius:3px; background:var(--c);}
+  .mc-range-bar .med{position:absolute; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:var(--fg); border-radius:1px;}
+  .mc-range-bar .maj{position:absolute; top:-2px; bottom:-2px; width:0; border-left:1px dashed var(--muted);}
+  .mc-none{font-size:12.5px; color:var(--muted); text-align:center; padding:12px 0;}
+  .mc-chips{display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin:0 0 14px;}
+  .mc-tip{height:40px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:12.5px; color:var(--muted); line-height:1.35; font-variant-numeric:tabular-nums; text-wrap:balance;}
+  .mc-tip b{color:var(--fg);}
+  #mcHist{display:block; width:100%; height:190px; touch-action:pan-y; -webkit-tap-highlight-color:transparent;}
+  #mcHist .bar{fill:var(--c); transition:opacity .1s ease;}
+  #mcHist.hov .bar{opacity:.3;}
+  #mcHist.hov .bar.on{opacity:1;}
+  #mcHist text{fill:var(--muted); font-size:11px; font-family:inherit;}
+  #mcHist .maj-line{stroke:var(--fg); stroke-width:1.5; stroke-dasharray:4 3;}
+  #mcHist .maj-lab{fill:var(--fg);}
+  #mcHist .axis{stroke:var(--line); stroke-width:1;}
+  .mc-coal{text-align:center; font-size:13.5px; line-height:1.5;}
+  .mc-coal .big{display:block; font-size:26px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.2;}
+  .mc-coal .big.good{color:var(--pos);}
+  .mc-coal .big.short{color:var(--amber);}
+  .mc-coal .det{color:var(--muted); font-size:12.5px;}
+
+  .mcp{display:flex; align-items:center; gap:8px; min-width:0; font-weight:600;}
+  .mc-chips .btn .ccs{color:var(--muted); font-size:11.5px;}
+  .mc-chips .btn.on .ccs{color:inherit; opacity:.75;}
+  .mc-slider output, .mc-seg button{font-variant-numeric:tabular-nums;}
+  #mcHist{height:190px;}
 </style>
 </head>
 <body>
@@ -281,6 +358,46 @@ td.pn .dot{margin-top:3px}
   <div id="mlegend" class="legend" style="margin-top:14px"></div>
 </section>
 
+<section class="card mc-card" id="mcCard">
+  <div class="mc-progress" id="mcProgress" aria-hidden="true"><i id="mcProgressFill"></i></div>
+  <h2>Probability model</h2>
+  <div class="mc-sec" id="mcSettings">
+    <div class="mc-sub">Settings</div>
+    <div class="mc-seg" id="mcRuns" role="group" aria-label="Number of runs"></div>
+    <div class="mc-sliders">
+      <div class="mc-slider">
+        <label for="mcVoteErr">Vote share error (% of each party&rsquo;s own share)</label>
+        <input type="range" id="mcVoteErr" min="0" max="30" step="1" value="10">
+        <output id="mcVoteErrVal" for="mcVoteErr">10%</output>
+      </div>
+      <div class="mc-slider">
+        <label for="mcSeatErr">Seat-level error (extra random variation in each seat)</label>
+        <input type="range" id="mcSeatErr" min="0" max="10" step="0.5" value="3">
+        <output id="mcSeatErrVal" for="mcSeatErr">3 points</output>
+      </div>
+    </div>
+  </div>
+  <div class="mc-results" id="mcResults">
+    <div class="mc-sec">
+      <div class="mc-sub">Outcomes</div>
+      <div class="mc-bar" id="mcOutBar" role="img" aria-label="Share of runs by outcome"></div>
+      <div class="mc-legend" id="mcLegend"></div>
+    </div>
+    <div class="mc-sec" id="mcRangeSec"></div>
+    <div class="mc-sec">
+      <div class="mc-sub">Seat distribution</div>
+      <div class="mc-chips" id="mcHistChips"></div>
+      <div class="mc-tip" id="mcTip" aria-live="polite"></div>
+      <svg id="mcHist" role="img" aria-label="Distribution of seats across runs"></svg>
+    </div>
+    <div class="mc-sec">
+      <div class="mc-sub">Coalition majority chance</div>
+      <div class="mc-chips" id="mcCoalChips"></div>
+      <div class="mc-coal" id="mcCoalOut"></div>
+    </div>
+  </div>
+</section>
+
 <p class="src" id="src">Sources: London Elects, Mayor of London and London Assembly election results 2024 (London-wide totals, factsheet and election date); Wikipedia, 2024 London Assembly election (constituency results); London borough boundaries from radoi90/housequest-data (GitHub), merged into the 14 Assembly constituencies; Natural Earth (UK outline); flag-icons (UK flag); Greater London Authority, State of London (ONS mid-2024 estimate).</p>
 </main>
 
@@ -306,7 +423,7 @@ function prep(D) {
   D.baseInp = {}; D.sliders.forEach(p => D.baseInp[p.id] = p.B);
   return D;
 }
-function compute(D, inp) {
+function compute(D, inp, noise, lean) {
   const P = D.parties, K = D.constituencies.length;
   const other = Math.max(0, 100 - D.sliders.reduce((s, p) => s + inp[p.id], 0));
   const Rm = other / D.OB;
@@ -321,8 +438,13 @@ function compute(D, inp) {
   for (let i = 0; i < K; i++) {
     const raw = P.map(p => Math.max(0, p.consShare[i] + swing[p.id]) * mult[p.id]);
     const s = raw.reduce((a, b) => a + b, 0) || 1;
-    const sh = raw.map(v => v * 100 / s);
-    shares.push(sh);
+    let sh = raw.map(v => v * 100 / s);
+    if (noise) {
+      sh = sh.map((v, j) => v > 0 ? Math.max(0, v + noise(P[j].consShare[i])) : 0);
+      const s2 = sh.reduce((a, b) => a + b, 0) || 1;
+      sh = sh.map(v => v * 100 / s2);
+    }
+    if (!lean) shares.push(sh);
     let w = 0;
     for (let j = 1; j < P.length; j++) if (sh[j] > sh[w] + 1e-12) w = j;
     winner.push(w);
@@ -340,6 +462,7 @@ function compute(D, inp) {
     if (best < 0) break;
     list[best]++;
   }
+  if (lean) return { total: P.map((_, j) => cons[j] + list[j]) };
   const w = D.consTot, wt = w.reduce((a, b) => a + b, 0);
   const natCons = P.map((p, j) => shares.reduce((s, sh, i) => s + sh[j] * w[i], 0) / wt);
   return {
@@ -483,10 +606,239 @@ function drawMap(res) {
 function update(skip) {
   syncInputs(skip); const res = compute(D, inp); lastRes = res;
   drawHemi(res); drawTable(res); drawCoal(res); drawMap(res);
+  mcSchedule();
   if (tipI >= 0) { const t = mw.querySelector('.tip'); if (t) { const i = tipI, rr = res; const sh = rr.shares[i], w = rr.winner[i];
     const rws = P.map((p, j) => j).filter(j => sh[j] >= 1 || j === w).sort((a, b) => sh[b] - sh[a]);
     t.innerHTML = `<div class="th"><span>${cons[i]}</span><span>1 seat</span></div>` + rws.map(j => `<div class="tr${j === w ? ' w' : ''}"><i class="dot" style="background:${P[j].color}"></i>${P[j].ab}<span class="pc">${fmt(sh[j])}%</span></div>`).join(''); } }
 }
+/* ============== MONTE CARLO ============== */
+const MC_SEED = 0x5EED1234;
+const mc = {runs:1000, voteErr:10, seatErr:3, token:0, timer:null, results:null, histParty:null, coalition:new Set(), hover:-1, bins:null};
+
+function mulberry32(a){
+  return function(){
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function mcGauss(rng){
+  let u = 0; while(u === 0) u = rng();
+  return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*rng());
+}
+// One simulated election. One factor per party moves its list share, and the constituency vote follows through the
+// model's swing, so each party gets a single error across both votes. "Other" is perturbed too, then all shares sum to 100.
+function mcOneRun(i, input, voteErr, seatErr){
+  const rng = mulberry32((i + MC_SEED) >>> 0);
+  let run = input;
+  if(voteErr > 0){
+    const sigma = voteErr/100, ids = D.sliders.map(p => p.id);
+    const other = Math.max(0, 100 - ids.reduce((s, id) => s + input[id], 0));
+    const f = {}; let sum = 0;
+    ids.forEach(id => { f[id] = input[id]*Math.exp(sigma*mcGauss(rng)); sum += f[id]; });
+    const fo = other*Math.exp(sigma*mcGauss(rng)); sum += fo;
+    run = {}; ids.forEach(id => { run[id] = sum > 0 ? f[id]*100/sum : 0; });
+  }
+  let noise = null;
+  if(seatErr > 0) noise = base => seatErr*Math.sqrt(Math.max(base, 0.5)/20)*mcGauss(rng);
+  return compute(D, run, noise, true).total;
+}
+
+function mcSchedule(){
+  mc.token++;
+  clearTimeout(mc.timer);
+  mcProgress(null);
+  if(mc.results) $('mcResults').classList.add('stale');
+  mc.timer = setTimeout(mcStart, 500);
+}
+function mcProgress(frac){
+  const bar = $('mcProgress');
+  if(frac === null){ bar.classList.remove('on'); return; }
+  bar.classList.add('on');
+  $('mcProgressFill').style.width = (frac*100).toFixed(1) + '%';
+}
+function mcStart(){
+  const token = ++mc.token;
+  const input = Object.assign({}, inp);
+  const N = mc.runs, ve = mc.voteErr, se = mc.seatErr;
+  const totals = new Array(N);
+  let i = 0;
+  mcProgress(0);
+  (function step(){
+    if(token !== mc.token) return;
+    const t0 = performance.now();
+    do { totals[i] = mcOneRun(i, input, ve, se); i++; } while(i < N && performance.now() - t0 < 25);
+    if(i < N){ mcProgress(i/N); setTimeout(step, 0); return; }
+    mcProgress(null);
+    mcFinish(totals, N);
+  })();
+}
+
+function mcPct(sorted, q){ return sorted[Math.round(q*(sorted.length-1))]; }
+function mcMedian(sorted){ const n = sorted.length; return (sorted[Math.floor((n-1)/2)] + sorted[Math.ceil((n-1)/2)])/2; }
+function mcStats(arr){
+  const s = Array.from(arr).sort((a,b)=>a-b);
+  return {lo:mcPct(s,0.05), hi:mcPct(s,0.95), med:mcMedian(s), min:s[0], max:s[s.length-1]};
+}
+
+function mcFinish(totals, N){
+  const seats = P.map(() => new Uint16Array(N));
+  const outMaj = {}, outPlu = {};
+  totals.forEach((t, r) => {
+    let best = -1, leaders = [], majP = -1;
+    t.forEach((v, j) => {
+      seats[j][r] = v;
+      if(v >= MAJ) majP = j;
+      if(v > best){ best = v; leaders = [j]; } else if(v === best) leaders.push(j);
+    });
+    if(majP >= 0) outMaj[majP] = (outMaj[majP]||0) + 1;
+    else leaders.forEach(j => { outPlu[j] = (outPlu[j]||0) + 1/leaders.length; });
+  });
+  const stats = {}, shown = [];
+  P.forEach((p, j) => {
+    let wins = 0; for(let r=0;r<N;r++) if(seats[j][r] > 0) wins++;
+    if(wins/N >= 0.05){ stats[j] = mcStats(seats[j]); shown.push(j); }
+  });
+  shown.sort((a,b) => stats[b].med - stats[a].med);
+  mc.results = {N, seats, outMaj, outPlu, stats, shown};
+  if(mc.histParty === null || !shown.includes(mc.histParty)) mc.histParty = shown.length ? shown[0] : null;
+  Array.from(mc.coalition).forEach(j => { if(!shown.includes(j)) mc.coalition.delete(j); });
+  mc.hover = -1;
+  $('mcResults').classList.remove('stale');
+  mcRender();
+}
+
+function mcFmtPct(v){ return (v < 0.1 && v > 0 ? '<0.1' : (Math.round(v*10)/10).toFixed(1)) + '%'; }
+function mcChip(j, on, extra){
+  const p = P[j];
+  return `<button type="button" class="btn cbtn${on?' on':''}" data-j="${j}" aria-pressed="${on}" title="${p.name}"><i class="dot" style="background:${p.color};box-shadow:0 0 0 1.5px var(--card)"></i>${p.ab} <span class="ccs">${extra}</span></button>`;
+}
+
+function mcRender(){
+  const R = mc.results; if(!R) return;
+  const N = R.N;
+  const segs = [];
+  Object.keys(R.outMaj).forEach(j => segs.push({j:+j, n:R.outMaj[j], hatch:false}));
+  Object.keys(R.outPlu).forEach(j => segs.push({j:+j, n:R.outPlu[j], hatch:true}));
+  segs.sort((a,b) => (a.hatch - b.hatch) || (b.n - a.n));
+  $('mcOutBar').innerHTML = segs.map(s =>
+    `<span class="${s.hatch?'mc-hatch':''}" style="--c:${P[s.j].color}; ${s.hatch?'':'background:'+P[s.j].color+';'} width:${s.n/N*100}%"></span>`).join('');
+  $('mcLegend').innerHTML = segs.map(s =>
+    `<span class="lg" style="--c:${P[s.j].color}"><i class="${s.hatch?'mc-hatch':''}"></i><span><b>${P[s.j].ab}</b> ${s.hatch?'largest, no majority':'majority'} <em>${mcFmtPct(s.n/N*100)}</em></span></span>`).join('');
+
+  const sec = $('mcRangeSec');
+  if(!R.shown.length){ sec.innerHTML = '<div class="mc-none">No party wins seats in 5% or more of runs.</div>'; }
+  else {
+    const scale = Math.max(MAJ, ...R.shown.map(j => R.stats[j].hi));
+    const pos = v => (v/scale*100).toFixed(2) + '%';
+    sec.innerHTML = `<table class="mc-table"><colgroup><col><col class="mcc-m"><col class="mcc-r"></colgroup><thead><tr><th>Party</th><th>Median</th><th class="mc-range">90% range</th></tr></thead><tbody>` +
+      R.shown.map(j => { const s = R.stats[j], p = P[j];
+        return `<tr><td><div class="mcp" title="${p.name}"><i class="dot" style="background:${p.color}"></i><span>${p.ab}</span></div></td>
+          <td class="mc-med">${s.med}</td>
+          <td class="mc-range"><div class="mc-range-num">${s.lo}&ndash;${s.hi}</div>
+            <div class="mc-range-bar" style="--c:${p.color}"><span class="maj" style="left:${pos(MAJ)}"></span><span class="fill" style="left:${pos(s.lo)}; width:${((s.hi-s.lo)/scale*100).toFixed(2)}%"></span><span class="med" style="left:${pos(s.med)}"></span></div></td></tr>`; }).join('') +
+      `</tbody></table>`;
+  }
+
+  const hc = $('mcHistChips');
+  hc.innerHTML = R.shown.map(j => mcChip(j, j === mc.histParty, R.stats[j].med)).join('');
+  hc.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { mc.histParty = +b.dataset.j; mc.hover = -1; mcRender(); }));
+  const cc = $('mcCoalChips');
+  cc.innerHTML = R.shown.map(j => mcChip(j, mc.coalition.has(j), R.stats[j].med)).join('');
+  cc.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    const j = +b.dataset.j; if(mc.coalition.has(j)) mc.coalition.delete(j); else mc.coalition.add(j); mcRender();
+  }));
+  mcRenderCoalition();
+  mcRenderHist();
+}
+
+function mcRenderCoalition(){
+  const R = mc.results, out = $('mcCoalOut');
+  const sel = Array.from(mc.coalition).sort((a,b) => R.stats[b].med - R.stats[a].med);
+  if(sel.length < 2){ out.innerHTML = '<span class="det">Select two or more parties to see how often they reach a majority.</span>'; return; }
+  const sums = new Uint16Array(R.N); let hits = 0;
+  for(let r=0;r<R.N;r++){ let t = 0; sel.forEach(j => { t += R.seats[j][r]; }); sums[r] = t; if(t >= MAJ) hits++; }
+  const st = mcStats(sums), pct = hits/R.N*100;
+  out.innerHTML = `<span class="big ${pct >= 50 ? 'good' : 'short'}">${mcFmtPct(pct)}</span>
+    <span>of runs reach a majority (${MAJ}+ seats)</span>
+    <span class="det" style="display:block;">${sel.map(j => P[j].ab).join(' + ')} &middot; median ${st.med} seats, 90% range ${st.lo}&ndash;${st.hi}</span>`;
+}
+
+function mcRenderHist(){
+  const R = mc.results, svg = $('mcHist'), tip = $('mcTip');
+  const j = mc.histParty;
+  if(j === null){ svg.innerHTML = ''; tip.textContent = ''; return; }
+  const W = Math.max(240, svg.clientWidth || 300), H = 190, L = 6, Rr = 6, T = 22, B = 26;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const arr = R.seats[j], st = R.stats[j];
+  const lo = Math.min(st.min, MAJ), hi = Math.max(st.max, MAJ);
+  const span = hi - lo + 1, bw = Math.max(1, Math.ceil(span/60)), nb = Math.ceil(span/bw);
+  const counts = new Array(nb).fill(0);
+  for(let r=0;r<R.N;r++) counts[Math.floor((arr[r]-lo)/bw)]++;
+  const maxC = Math.max(...counts);
+  const pw = W - L - Rr, ph = H - T - B, slot = pw/nb;
+  mc.bins = {lo, bw, nb, counts};
+  let h = `<line class="axis" x1="${L}" x2="${W-Rr}" y1="${T+ph}" y2="${T+ph}"/>`;
+  counts.forEach((c, k) => {
+    const bh = c/maxC*ph;
+    h += `<rect class="bar" data-k="${k}" style="--c:${P[j].color}" x="${(L+k*slot+Math.min(1,slot*0.12)).toFixed(2)}" y="${(T+ph-bh).toFixed(2)}" width="${Math.max(1,slot-Math.min(2,slot*0.24)).toFixed(2)}" height="${bh.toFixed(2)}" rx="1"/>`;
+  });
+  const step = span > 40 ? 10 : (span > 14 ? 5 : (span > 8 ? 2 : 1));
+  for(let v = Math.ceil(lo/step)*step; v <= hi; v += step){
+    const x = L + ((v-lo)/bw + 0.5)*slot;
+    h += `<text x="${x.toFixed(1)}" y="${H-8}" text-anchor="middle">${v}</text>`;
+  }
+  const mx = L + ((MAJ-lo)/bw)*slot;
+  h += `<line class="maj-line" x1="${mx.toFixed(1)}" x2="${mx.toFixed(1)}" y1="${T-6}" y2="${T+ph}"/>`;
+  const anchor = mx > W*0.7 ? 'end' : 'start';
+  h += `<text class="maj-lab" x="${(mx + (anchor==='end'?-5:5)).toFixed(1)}" y="${T-9}" text-anchor="${anchor}">${MAJ} = majority</text>`;
+  svg.innerHTML = h;
+  mcShowBin(mc.hover);
+}
+
+function mcShowBin(k){
+  const svg = $('mcHist'), tip = $('mcTip'), b = mc.bins;
+  mc.hover = k;
+  svg.classList.toggle('hov', k >= 0);
+  svg.querySelectorAll('.bar').forEach(e => e.classList.toggle('on', +e.dataset.k === k));
+  if(!b || k < 0 || k >= b.nb){ tip.textContent = 'Hover or tap a bar for details'; return; }
+  const N = mc.results.N, a = b.lo + k*b.bw, z = a + b.bw - 1;
+  const label = b.bw > 1 ? `${a}&ndash;${z} seats` : `${a} seat${a === 1 ? '' : 's'}`;
+  let cum = 0; for(let q=k;q<b.nb;q++) cum += b.counts[q];
+  tip.innerHTML = `<span><b>${label}</b> / ${mcFmtPct(b.counts[k]/N*100)} of runs (${b.counts[k].toLocaleString('en-GB')}) &middot; ${Math.round(cum/N*100)}% of runs at ${a}+</span>`;
+}
+
+function mcInit(){
+  const runsEl = $('mcRuns');
+  runsEl.innerHTML = [500,1000,5000].map(n => `<button type="button" data-n="${n}" aria-pressed="${n===mc.runs}">${n.toLocaleString('en-GB')}</button>`).join('');
+  runsEl.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    mc.runs = +b.dataset.n;
+    runsEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    mcSchedule();
+  }));
+  const bindSlider = (id, valId, key, fmt) => {
+    const e = $(id), out = $(valId);
+    const sync = () => { e.style.setProperty('--p', (e.value/e.max*100) + '%'); out.textContent = fmt(+e.value); };
+    e.addEventListener('input', () => { mc[key] = +e.value; sync(); mcSchedule(); });
+    sync();
+  };
+  bindSlider('mcVoteErr', 'mcVoteErrVal', 'voteErr', v => v + '%');
+  bindSlider('mcSeatErr', 'mcSeatErrVal', 'seatErr', v => v + (v === 1 ? ' point' : ' points'));
+  const svg = $('mcHist');
+  const binAt = e => {
+    const r = svg.getBoundingClientRect(), b = mc.bins; if(!b) return -1;
+    const W = Math.max(240, svg.clientWidth || 300), x = (e.clientX - r.left) * (W / r.width) - 6;
+    const k = Math.floor(x / ((W - 12) / b.nb));
+    return k >= 0 && k < b.nb ? k : -1;
+  };
+  svg.addEventListener('pointermove', e => { if(e.pointerType === 'mouse') mcShowBin(binAt(e)); });
+  svg.addEventListener('pointerdown', e => { const k = binAt(e); mcShowBin(k === mc.hover && e.pointerType !== 'mouse' ? -1 : k); });
+  svg.addEventListener('pointerleave', e => { if(e.pointerType === 'mouse') mcShowBin(-1); });
+  let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if(mc.results) mcRenderHist(); }, 120); });
+  $('mcTip').textContent = 'Running simulation…';
+}
+mcInit();
 update();
 </script>
 
