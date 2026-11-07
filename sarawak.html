@@ -226,19 +226,43 @@ tr[hidden]{display:none}
 .mleg span.i{display:inline-flex;align-items:center;gap:5px}
 .grad{display:flex;align-items:center;gap:8px;font-size:12px}
 .grad i{display:block;width:180px;max-width:46vw;height:10px;border-radius:5px}
-/* sim */
-.simc{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;margin-bottom:12px}
-.simc input{width:64px;font:inherit;text-align:right;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 6px}
-.sc{padding:8px 0;border-top:1px solid var(--border)}
-.sc .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.sc .top .a{margin-left:auto;font-weight:700}
-.sc .st{font-size:12px;color:var(--muted)}
-.sc .st b{color:var(--text)}
-.trk{position:relative;height:8px;border-radius:4px;background:var(--track);margin:7px 0 3px}
-.trk .r{position:absolute;top:0;bottom:0;border-radius:4px}
-.trk .av{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--text)}
-.trk .mj{position:absolute;top:-4px;bottom:-4px;border-left:1px dashed var(--muted)}
-.tl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted)}
+/* probability model */
+.prog{height:3px;margin:-6px 0 12px;border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--text);opacity:0;transition:opacity .15s}
+.psec{border-top:1px solid var(--border);margin-top:24px;padding-top:24px}
+.psec.first{border-top:0;margin-top:0;padding-top:0}
+.sh{font-size:14px;font-weight:600;text-align:center;margin:0 0 14px}
+.res{transition:opacity .15s}
+.res.stale{opacity:.45}
+.cbtns.tight{margin:0 auto}
+.cbtns.sp{margin-bottom:14px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-top:22px}
+.sl{min-width:0}
+.sl .sln{font-size:12.5px;color:var(--muted);text-align:center;line-height:1.35;margin-bottom:12px}
+.sl .slv{text-align:center;font-weight:600;font-size:15px;margin-top:10px}
+@media (max-width:560px){.sgrid{grid-template-columns:1fr}}
+.obar{display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--track)}
+.obar i{display:block;height:100%;min-width:0}
+.obar i+i{border-left:1px solid var(--card)}
+.olg{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:16px;font-size:12.5px}
+.olg>span{display:inline-flex;align-items:center;gap:7px}
+.sw{display:block;width:16px;height:12px;border-radius:3px;flex:none;box-sizing:border-box}
+.ptab{margin-top:0}
+.ptab th,.ptab td{padding-left:6px;padding-right:6px}
+.ptab td{padding-top:13px;padding-bottom:13px}
+.ptab .rc{text-align:left;min-width:150px;padding-left:14px}
+.rn{font-weight:600;font-size:13px}
+.rb{position:relative;height:8px;border-radius:4px;background:var(--track);margin-top:7px}
+.rb i{position:absolute;display:block}
+.rb .rr{top:0;bottom:0;border-radius:4px}
+.rb .rm{top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--text)}
+.rb .rj{top:-4px;bottom:-4px;border-left:1px dashed var(--muted)}
+.hTip{min-height:22px;line-height:22px;text-align:center;font-size:13px;margin:0 0 4px}
+.mu{color:var(--muted)}
+#hist{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.cres{text-align:center;min-height:84px}
+.cbig{font-size:26px;font-weight:700;line-height:1.15}
+.cres .sub{margin-top:3px;font-size:12.5px}
 .src{font-size:11px;color:var(--muted);text-align:center;margin:14px 2px 0;line-height:1.5;overflow-wrap:anywhere}
 @media (max-width:420px){main{padding:12px 8px 24px}.card{padding:12px 10px}h1{font-size:19px}.big{font-size:22px}}
 </style>
@@ -322,9 +346,28 @@ tr[hidden]{display:none}
   <div class="mleg" id="mleg"></div>
 </section>
 
-<section class="card" id="cSim"><h2>Monte Carlo simulation</h2>
-  <div class="simc"><label>Std. dev. (pts) <input type="number" id="sd" min="0.5" max="15" step="0.5" value="3"></label><button class="btn" id="runSim">Run 1,000 scenarios</button></div>
-  <div id="simOut"></div>
+<section class="card" id="cSim"><h2>Probability model</h2>
+  <div class="prog" id="prog"><i id="progb"></i></div>
+  <div class="psec first"><h3 class="sh">Settings</h3>
+    <div class="cbtns tight" id="runChips"><button class="cb" data-n="500" aria-pressed="false">500 runs</button><button class="cb" data-n="1000" aria-pressed="true">1,000 runs</button><button class="cb" data-n="5000" aria-pressed="false">5,000 runs</button></div>
+    <div class="sgrid">
+      <div class="sl"><div class="sln" id="veL">Vote share error (% of each party’s own share)</div><input type="range" id="vErr" min="0" max="30" step="1" value="10" style="--c:var(--text)" aria-labelledby="veL"><div class="slv" id="veV">10%</div></div>
+      <div class="sl"><div class="sln" id="seL">Seat-level error (extra random variation in each seat)</div><input type="range" id="sErr" min="0" max="10" step="0.5" value="3" style="--c:var(--text)" aria-labelledby="seL"><div class="slv" id="seV">3 pts</div></div>
+    </div>
+  </div>
+  <div class="res" id="simRes">
+    <div class="psec"><h3 class="sh">Outcomes</h3><div class="obar" id="obar" role="img" aria-label="Share of runs ending in each outcome"></div><div class="olg" id="olg"></div></div>
+    <div class="psec"><table class="ptab"><thead><tr><th>Party</th><th>Median seats</th><th class="rc">90% range</th></tr></thead><tbody id="ptb"></tbody></table></div>
+    <div class="psec"><h3 class="sh">Coalition majority chance</h3>
+      <div class="cbtns tight sp" id="coChips"></div>
+      <div class="cres" id="coRes"></div>
+    </div>
+    <div class="psec"><h3 class="sh">Seat distribution</h3>
+      <div class="cbtns tight sp" id="hChips"></div>
+      <div class="hTip" id="hTip"><span class="mu">Hover or tap a bar</span></div>
+      <svg id="hist" viewBox="0 0 680 204" role="img" aria-label="Distribution of seat counts across simulated runs"></svg>
+    </div>
+  </div>
 </section>
 
 <p class="src">Sources: 2021 results — Election Commission of Malaysia via TindakMalaysia (HISTORICAL-ELECTION-RESULTS); alliance lines and 2026 candidate allocations — Wikipedia, 2026 Sarawak state election, and the supplied candidate list; population — Department of Statistics Malaysia, Current Population Estimates by State 2026 (30 Jul 2026); constituency boundaries — carried over from the original page; country map — Natural Earth (public domain); flag — flag-icons (MIT); voting age — Federal Constitution Art. 119 (Undi18, in force 15 Dec 2021); Freedom House — no subnational rating.</p>
@@ -690,38 +733,189 @@ function run(){
   const inp={};ALI.forEach(a=>inp[a]=readIn(a));
   P=project(inp);TL=tally(P);
   renderResults();renderCoalition();renderMap();
+  simSchedule();
 }
 
-/* ---------- Monte Carlo ---------- */
-function gauss(sd){const u=1-Math.random(),v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)*sd;}
-function simulate(){
-  const base={};ALI.forEach(a=>base[a]=readIn(a));
-  const N=1000,sd=Math.max(.1,parseFloat($('sd').value)||3);
-  const ids=['GPS','PH','GDP','OTH'];
-  const cnt={},lead={},maj={};ids.forEach(k=>{cnt[k]=[];lead[k]=0;maj[k]=0;});
-  for(let i=0;i<N;i++){
-    const inp={};let s=0;ALI.forEach(a=>{inp[a]=Math.max(0,base[a]+gauss(sd));s+=inp[a];});
-    if(s>100)ALI.forEach(a=>inp[a]*=100/s);
-    const t=tally(project(inp)).al;
-    const mx=Math.max(...ids.map(k=>t[k]));
-    const L=ids.filter(k=>t[k]===mx&&mx>0);L.forEach(k=>lead[k]+=1/L.length);
-    ids.forEach(k=>{cnt[k].push(t[k]);if(t[k]>=MAJ)maj[k]++;});
+/* ---------- Probability model ---------- */
+// One state-wide vote, three alliances plus Others, so there are no sub-national blocks (no reduced-error step).
+const SEED0=0x5EED1234;
+const PK=['GPS','PH','GDP','OTH'];
+const NBA=[NB.GPS,NB.PH,NB.GDP];
+const BIDX=BASEW.map(a=>ALI.indexOf(a));
+const PRE=SEATS.map(s=>{
+  const tot=s[2],b=s[3].map(x=>x/tot*100);let oB=0;s[5].forEach(o=>oB+=o[2]);
+  const o=s[5].map(x=>x[2]/tot*100);
+  return{b,oB:oB/tot*100,o,sd:b.map(x=>Math.sqrt(Math.max(x,.5)/20)),osd:o.map(x=>Math.sqrt(Math.max(x,.5)/20))};
+});
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function rngFor(i){let h=Math.imul((i+SEED0)|0,0x9E3779B1);h^=h>>>16;h=Math.imul(h,0x85EBCA6B);h^=h>>>13;return mulberry(h);}
+function gz(r){return Math.sqrt(-2*Math.log(1-r()))*Math.cos(6.283185307179586*r());}
+// Lean projection: same rules as project(), but returns only alliance seat totals [GPS,PH,GDP,Others].
+// sh = [GPS,PH,GDP,Others] vote shares; E = seat-level error (0 = no noise); rnd = random source (only used when E>0).
+function leanTotals(sh,E,rnd){
+  const sc=[scale(sh[0],NB.GPS),scale(sh[1],NB.PH),scale(sh[2],NB.GDP),scale(sh[3],OB)];
+  const cnt=[0,0,0,0],p=[0,0,0,0];
+  for(let i=0;i<NSEAT;i++){
+    const q=PRE[i];let sum=0;
+    for(let k=0;k<3;k++){
+      let x=Math.max(0,q.b[k]+sh[k]-NBA[k])*sc[k];
+      if(E>0)x=Math.max(0,x+gz(rnd)*E*q.sd[k]);
+      p[k]=x;sum+=x;
+    }
+    const vO=q.oB>0?Math.max(0,q.oB+sh[3]-OB)*sc[3]:0;
+    let bo=0;
+    for(let j=0;j<q.o.length;j++){
+      let x=q.o[j]/q.oB*vO;
+      if(E>0)x=Math.max(0,x+gz(rnd)*E*q.osd[j]);
+      if(x>bo)bo=x;sum+=x;
+    }
+    if(sum<1e-9){cnt[BIDX[i]]++;continue;}
+    const f=100/sum;p[0]*=f;p[1]*=f;p[2]*=f;p[3]=bo*f;
+    const mx=Math.max(p[0],p[1],p[2],p[3]);
+    let w=-1,nt=0,inc=false;
+    for(let k=0;k<4;k++)if(mx-p[k]<1e-9){nt++;if(w<0)w=k;if(k===BIDX[i])inc=true;}
+    cnt[nt>1&&inc?BIDX[i]:w]++;
   }
-  let h='';
-  ids.forEach(k=>{
-    const arr=cnt[k].slice().sort((a,b)=>a-b),avg=arr.reduce((a,b)=>a+b,0)/N,p10=arr[Math.floor(N*.1)],p90=arr[Math.floor(N*.9)-1];
-    if(avg===0&&p90===0)return;
-    h+=`<div class="sc"><div class="top"><span class="pn">${dot(COL[k])}${labelOf(k)}</span><span class="a">${avg.toFixed(1)} seats</span></div>
-      <div class="st">Largest <b>${(lead[k]/N*100).toFixed(1)}%</b> · Majority <b>${(maj[k]/N*100).toFixed(1)}%</b></div>
-      <div class="trk"><div class="r" style="left:${p10/NSEAT*100}%;width:${Math.max(.8,(p90-p10)/NSEAT*100)}%;background:${COL[k]}"></div><div class="av" style="left:${avg/NSEAT*100}%"></div><div class="mj" style="left:${MAJ/NSEAT*100}%"></div></div>
-      <div class="tl"><span>0</span><span>${p10}–${p90}</span><span>${NSEAT}</span></div></div>`;
-  });
-  $('simOut').innerHTML=h;
+  return cnt;
 }
+
+let VE=10,SE=3,NR=1000,CACHE=null,SIM=null,simShown=null,simT=0,simTok=0,simFirst=true,histK='GPS',HST=null;
+const coSet=new Set();
+const simKey=()=>JSON.stringify([ALI.map(readIn),VE,SE,NR]);
+function setStale(b){$('simRes').classList.toggle('stale',b);}
+function setProg(f){const e=$('progb');if(f<0){e.style.opacity='0';return;}e.style.opacity='1';e.style.width=(f*100).toFixed(1)+'%';}
+function simSchedule(){
+  const k=simKey();clearTimeout(simT);simTok++;setProg(-1);
+  if(k===simShown){setStale(false);return;}
+  if(SIM)setStale(true);
+  const d=simFirst?0:500;simFirst=false;
+  simT=setTimeout(()=>simStart(k),d);
+}
+function simStart(key){
+  const tok=++simTok;
+  const inp=ALI.map(readIn),oth=Math.max(0,100-inp.reduce((a,b)=>a+b,0)),sh0=[inp[0],inp[1],inp[2],oth];
+  const sig=JSON.stringify([inp,VE,SE]);
+  if(!CACHE||CACHE.sig!==sig)CACHE={sig,done:0,arr:[0,1,2,3].map(()=>new Uint8Array(5000))};
+  const C=CACHE,N=NR,sg=VE/100,E=SE,zero=sg===0&&E===0;
+  const cen=zero?leanTotals(sh0,0,null):null;   // zero error: every run is the central projection, no noise at all
+  function step(){
+    if(tok!==simTok)return;
+    const t0=performance.now();
+    while(C.done<N){
+      const r=C.done;let c;
+      if(zero)c=cen;
+      else{
+        const rnd=rngFor(r);let s=sh0;
+        const z=[gz(rnd),gz(rnd),gz(rnd),gz(rnd)];
+        if(sg>0){s=sh0.map((v,k)=>v*Math.exp(sg*z[k]));const f=100/(s[0]+s[1]+s[2]+s[3]);s=s.map(v=>v*f);}
+        c=leanTotals(s,E,E>0?rnd:null);
+      }
+      for(let k=0;k<4;k++)C.arr[k][r]=c[k];
+      C.done++;
+      if(performance.now()-t0>25)break;
+    }
+    if(C.done<N){setProg(C.done/N);setTimeout(step,0);return;}
+    simShown=key;computeSim(N);setStale(false);setProg(-1);
+  }
+  setProg(Math.min(1,C.done/N));step();
+}
+function computeSim(N){
+  const raw=CACHE.arr.map(a=>a.subarray(0,N)),sorted=raw.map(a=>Uint8Array.from(a).sort());
+  const maj=[0,0,0,0],lead=[0,0,0,0],any=[0,0,0,0];
+  for(let r=0;r<N;r++){
+    let mx=0;
+    for(let k=0;k<4;k++){const v=raw[k][r];if(v>0)any[k]++;if(v>mx)mx=v;}
+    if(mx>=MAJ){for(let k=0;k<4;k++)if(raw[k][r]===mx){maj[k]++;break;}}
+    else{let nt=0;for(let k=0;k<4;k++)if(raw[k][r]===mx)nt++;for(let k=0;k<4;k++)if(raw[k][r]===mx)lead[k]+=1/nt;}
+  }
+  const qf=(a,p)=>a[Math.min(a.length-1,Math.max(0,Math.round(p*(a.length-1))))];
+  const rows=[];
+  PK.forEach((id,k)=>{if(any[k]/N>=.05)rows.push({id,k,med:qf(sorted[k],.5),p5:qf(sorted[k],.05),p95:qf(sorted[k],.95)});});
+  rows.sort((a,b)=>b.med-a.med||b.p95-a.p95);
+  SIM={N,raw,sorted,maj,lead,rows,qf};
+  if(!rows.some(x=>x.id===histK))histK=rows.length?rows[0].id:'GPS';
+  renderSim();
+}
+const hatch=c=>`repeating-linear-gradient(135deg,${c} 0 3px,var(--card) 3px 6px)`;
+const pf=(x,N)=>{if(x<=0)return'0%';const p=x/N*100;return p<.05?'<0.1%':f1(p)+'%';};
+function renderSim(){renderOutcome();renderRange();renderChips();renderHist();renderCo();}
+function renderOutcome(){
+  const S=SIM,N=S.N;let bar='',lg='';
+  PK.forEach((id,k)=>{
+    const c=COL[id];
+    if(S.maj[k]>0){bar+=`<i style="width:${S.maj[k]/N*100}%;background:${c}"></i>`;
+      lg+=`<span><span class="sw" style="background:${c}"></span>${labelOf(id)} majority ${pf(S.maj[k],N)}</span>`;}
+    if(S.lead[k]>0){bar+=`<i style="width:${S.lead[k]/N*100}%;background:${hatch(c)}"></i>`;
+      lg+=`<span><span class="sw" style="background:${hatch(c)};border:1px solid ${c}"></span>${labelOf(id)} largest, no majority ${pf(S.lead[k],N)}</span>`;}
+  });
+  $('obar').innerHTML=bar;$('olg').innerHTML=lg;
+}
+function renderRange(){
+  const S=SIM;let M=MAJ;S.rows.forEach(r=>M=Math.max(M,r.p95));
+  $('ptb').innerHTML=S.rows.map(r=>{
+    const c=COL[r.id],l=r.p5/M*100,w=Math.max(.8,(r.p95-r.p5)/M*100);
+    return `<tr><td><span class="pn">${dot(c)}${labelOf(r.id)}</span></td><td class="s">${r.med}</td><td class="rc"><div class="rn">${r.p5}–${r.p95}</div><div class="rb"><i class="rr" style="left:${l}%;width:${w}%;background:${c}"></i><i class="rj" style="left:${MAJ/M*100}%"></i><i class="rm" style="left:${r.med/M*100}%"></i></div></td></tr>`;
+  }).join('');
+}
+function chipHtml(ids,on){return ids.map(id=>`<button class="cb" data-k="${id}" aria-pressed="${on(id)}">${dot(COL[id])}${labelOf(id)}</button>`).join('');}
+function renderChips(){
+  const ids=SIM.rows.map(r=>r.id);
+  $('hChips').innerHTML=chipHtml(ids,id=>id===histK);
+  $('coChips').innerHTML=chipHtml(ids,id=>coSet.has(id));
+}
+function renderHist(){
+  const S=SIM,N=S.N,raw=S.raw[PK.indexOf(histK)],c=COL[histK];
+  let mn=255,mx=0;for(let r=0;r<N;r++){const v=raw[r];if(v<mn)mn=v;if(v>mx)mx=v;}
+  const lo=Math.min(mn,MAJ),hi=Math.max(mx,MAJ),span=hi-lo+1,w=span<=60?1:Math.ceil(span/60),nb=Math.ceil(span/w);
+  const cnt=new Array(nb).fill(0);for(let r=0;r<N;r++)cnt[Math.floor((raw[r]-lo)/w)]++;
+  const cs=new Array(nb);let a=0;for(let i=nb-1;i>=0;i--){a+=cnt[i];cs[i]=a;}
+  const cmax=Math.max(1,...cnt),W=664,X0=8,top=24,base=178,bw=W/nb,H=base-top;
+  let g='<g id="hbars">';
+  for(let i=0;i<nb;i++){const h=cnt[i]/cmax*H;
+    g+=`<rect x="${(X0+i*bw+(bw>4?.75:.25)).toFixed(1)}" y="${(base-h).toFixed(1)}" width="${Math.max(1,bw-(bw>4?1.5:.5)).toFixed(1)}" height="${h.toFixed(1)}" rx="1" fill="${c}"/>`;}
+  g+='</g>';
+  const xv=v=>X0+((v-lo)+.5)/w*bw;
+  const step=span<=40?5:10;let ticks='';
+  for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step)ticks+=`<line x1="${xv(v).toFixed(1)}" x2="${xv(v).toFixed(1)}" y1="${base}" y2="${base+4}" stroke="var(--muted)" stroke-width="1"/><text x="${xv(v).toFixed(1)}" y="${base+17}" text-anchor="middle" font-size="11" fill="var(--muted)">${v}</text>`;
+  const mxp=xv(MAJ),anc=mxp<60?'start':mxp>W-40?'end':'middle';
+  const thr=`<line x1="${mxp.toFixed(1)}" x2="${mxp.toFixed(1)}" y1="${top-8}" y2="${base}" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="${mxp.toFixed(1)}" y="${top-12}" text-anchor="${anc}" font-size="11" fill="var(--muted)">Majority ${MAJ}</text>`;
+  $('hist').innerHTML=`<line x1="${X0}" x2="${X0+W}" y1="${base}" y2="${base}" stroke="var(--border)"/>${g}${thr}${ticks}`;
+  HST={lo,hi,w,nb,cnt,cs,bw,N,X0,bars:[...$('hist').querySelectorAll('#hbars rect')]};
+  setHover(null);
+}
+function setHover(i){
+  const H=HST;if(!H)return;
+  if(i==null||i<0||i>=H.nb){H.bars.forEach(b=>b.style.opacity='');$('hTip').innerHTML='<span class="mu">Hover or tap a bar</span>';return;}
+  H.bars.forEach((b,j)=>b.style.opacity=j===i?'1':'.3');
+  const a=H.lo+i*H.w,b=Math.min(a+H.w-1,H.hi),n=H.cnt[i],p=n/H.N*100,cu=H.cs[i]/H.N*100;
+  const lab=H.w===1?`${a} seats`:`${a}–${b} seats`;
+  $('hTip').innerHTML=`<b>${lab}</b> / ${f1(p)}% of runs (${n}) · ${cu.toFixed(cu<10?1:0)}% of runs at ${a}+`;
+}
+function renderCo(){
+  const S=SIM,N=S.N,sel=S.rows.map(r=>r.id).filter(id=>coSet.has(id));
+  if(!sel.length){$('coRes').innerHTML='<div class="sub">Pick parties above to see how often together they reach a majority.</div>';return;}
+  const ks=sel.map(id=>PK.indexOf(id)),sum=new Uint8Array(N);let w=0;
+  for(let r=0;r<N;r++){let t=0;for(const k of ks)t+=S.raw[k][r];sum[r]=t;if(t>=MAJ)w++;}
+  sum.sort();
+  $('coRes').innerHTML=`<div class="cbig">${f1(w/N*100)}%</div><div class="sub">chance of a majority (${MAJ}+ of ${NSEAT} seats)</div><div class="sub">Combined seats: median ${S.qf(sum,.5)} · 90% range ${S.qf(sum,.05)}–${S.qf(sum,.95)}</div>`;
+}
+(function(){
+  const sl=(id,vid,fmt)=>{const e=$(id);e.style.setProperty('--p',((+e.value-e.min)/(e.max-e.min)*100)+'%');$(vid).textContent=fmt(+e.value);};
+  sl('vErr','veV',v=>v+'%');sl('sErr','seV',v=>v+' pts');
+  $('vErr').addEventListener('input',()=>{VE=+$('vErr').value;sl('vErr','veV',v=>v+'%');simSchedule();});
+  $('sErr').addEventListener('input',()=>{SE=+$('sErr').value;sl('sErr','seV',v=>v+' pts');simSchedule();});
+  $('runChips').addEventListener('click',e=>{const b=e.target.closest('.cb');if(!b)return;NR=+b.dataset.n;
+    [...$('runChips').children].forEach(c=>c.setAttribute('aria-pressed',c===b));simSchedule();});
+  $('hChips').addEventListener('click',e=>{const b=e.target.closest('.cb');if(!b||!SIM)return;histK=b.dataset.k;renderChips();renderHist();});
+  $('coChips').addEventListener('click',e=>{const b=e.target.closest('.cb');if(!b||!SIM)return;const k=b.dataset.k;coSet.has(k)?coSet.delete(k):coSet.add(k);renderChips();renderCo();});
+  const h=$('hist');
+  const at=e=>{if(!HST)return;const r=h.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*680-HST.X0;setHover(Math.floor(x/HST.bw));};
+  h.addEventListener('pointerdown',at);h.addEventListener('pointermove',at);
+  h.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')setHover(null);});
+})();
 
 buildInputs();buildMap();resetIn();
 $('reset').addEventListener('click',resetIn);
-$('runSim').addEventListener('click',simulate);
 if(window.matchMedia)window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>run());
 
 </script>
