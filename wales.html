@@ -221,6 +221,50 @@ td.seats{font-weight:700}
 .sources a{color:var(--muted)}
 @media (max-width:420px){.tile span{font-size:10.5px}.tile b{font-size:8.5px}}
 @media (max-width:480px){h1{font-size:28px}.card{padding:12px}.sctl{gap:10px;grid-template-columns:minmax(0,1fr) 68px}th,td{padding-left:3px;padding-right:3px}table{font-size:12.5px}}
+
+/* Probability model card */
+.mc{position:relative;display:flex;flex-direction:column;min-width:0}
+.mc-prog{position:absolute;top:-7px;left:0;right:0;height:3px;border-radius:2px;background:var(--track2);overflow:hidden}
+.mc-prog i{display:block;height:100%;background:var(--fg);transition:width .1s linear}
+.mc-sec{display:flex;flex-direction:column;min-width:0}
+.mc-sec+.mc-sec{border-top:1px solid var(--border);margin-top:13px;padding-top:13px}
+.mc-sec h3{font-family:var(--font-b);font-size:14px;font-weight:600;text-align:center;margin:0 0 14px;color:var(--fg)}
+.mc-runs{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:22px}
+.mc-runs-l{font-size:12.5px;color:var(--muted);font-weight:500;margin-right:4px}
+.mc-sliders{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.mc-sl{display:flex;flex-direction:column;gap:14px;min-width:0}
+.mc-sl-l{font-size:12.5px;color:var(--muted);line-height:1.35;text-align:center}
+.mc-sl-v{font-family:var(--font-m);font-size:13px;font-weight:600;text-align:center;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.mc-sliders{grid-template-columns:minmax(0,1fr);gap:26px}}
+.mc-res{transition:opacity .15s}
+.mc-res.dim{opacity:.45}
+.mc-wait{min-height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:13px}
+.mc-bar{display:flex;height:26px;border-radius:5px;overflow:hidden;background:var(--track2)}
+.mc-seg{height:100%;min-width:0;flex:0 0 auto}
+.mc-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:16px}
+.mc-lg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}
+.mc-lg .swatch{width:12px;height:12px}
+.mc-lg b{font-weight:600;font-variant-numeric:tabular-nums}
+.mc-table td{padding-block:13px}
+.mc-table th:last-child,.mc-table td:last-child{min-width:150px;width:150px}
+.rng-num{font-size:12.5px;font-weight:600;margin-bottom:7px;font-variant-numeric:tabular-nums}
+.rng-track{position:relative;height:8px;border-radius:4px;background:var(--track2)}
+.rng-fill{position:absolute;top:0;bottom:0;border-radius:4px;min-width:3px}
+.rng-maj{position:absolute;top:-2px;bottom:-2px;border-left:1px dashed var(--muted)}
+.rng-med{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.mc-tip{height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:12.5px;line-height:1.4;font-variant-numeric:tabular-nums;margin:2px 0 6px}
+.mc-hint{color:var(--muted)}
+.mc-hist{width:100%;min-width:0}
+.mc-hist svg{display:block;max-width:100%}
+.hx-t{font-family:var(--font-m);font-size:10.5px;fill:var(--muted)}
+.hx-ta{font-family:var(--font-b);font-size:11px;fill:var(--muted)}
+.hx-g{stroke:var(--border);stroke-width:1}
+.hx-a{stroke:var(--muted);stroke-width:1}
+.hx-m{stroke:var(--fg);stroke-width:1.5;stroke-dasharray:4 3}
+.hx-mt{font-family:var(--font-b);font-size:11px;font-weight:600;fill:var(--fg)}
+.mc-coal{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;min-height:84px;justify-content:center}
+.mc-coal-big{font-family:var(--font-d);font-weight:700;font-size:34px;line-height:1.15;font-variant-numeric:tabular-nums}
+.mc-coal-sub{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
 </style>
 <main class="page">
 <h1>Wales Senedd Seat Projection</h1>
@@ -656,6 +700,359 @@ function MapPanel(props) {
     h(ConstituencyMap, { results: props.results, strengthParty: mode === "winner" ? null : mode }));
 }
 
+// ---------------------------------------------------------------------------------------------
+// Probability model (Monte Carlo). Re-runs the projection with random error and reports odds.
+// ---------------------------------------------------------------------------------------------
+const MC_SEED = 20260507, MC_MAX_RUNS = 5000, MC_CHUNK_MS = 25, MC_DEBOUNCE_MS = 500;
+const MC_SHARE_KEYS = SLIDER_KEYS.concat("Oth");
+const NP = ALL_VIEW.length;
+const VIEW_OF = {};
+ALL.forEach((p) => VIEW_OF[p] = ALL_VIEW.indexOf(groupKey(p)));
+// parties on the ballot in each constituency, in ALL order (same tie-break order as dhondt())
+const STAND = CONS.map((c) => ALL.filter((p) => SLIDER_KEYS.indexOf(p) >= 0 || c.pct[p] > 0));
+const STAND_VIEW = STAND.map((st) => st.map((p) => VIEW_OF[p]));
+// sqrt(max(baseline share in the seat, 0.5%) / 20): seat-level error is scaled by this
+const STAND_SD = STAND.map((st, ci) => st.map((p) => Math.sqrt(Math.max(CONS[ci].pct[p], 0.5) / 20)));
+const LEAN_RAW = new Float64Array(ALL.length), LEAN_CNT = new Int8Array(ALL.length);
+
+// Lean projection: same maths as projectRaw(), returns only seat totals (by ALL_VIEW index) into out.
+// noise(v, unitSd) is optional and is applied to each party's local share before seats are decided.
+function seatsLean(T, noise, out) {
+  for (let ci = 0; ci < CONS.length; ci++) {
+    const c = CONS[ci], st = STAND[ci], sv = STAND_VIEW[ci], sd = STAND_SD[ci], n = st.length;
+    let s = 0;
+    for (let k = 0; k < n; k++) {
+      const p = st[k];
+      const r = swingShare(c.pct[p], BASE[p], T[p], WGT[p]);
+      LEAN_RAW[k] = r;
+      s += r;
+    }
+    for (let k = 0; k < n; k++) {
+      let v = s > 0 ? LEAN_RAW[k] / s * 100 : 0;
+      if (noise) v = noise(v, sd[k]);
+      LEAN_RAW[k] = v;
+      LEAN_CNT[k] = 0;
+    }
+    for (let seat = 0; seat < SEATS_PER; seat++) {
+      let best = -1, bq = -1;
+      for (let k = 0; k < n; k++) {
+        const v = LEAN_RAW[k];
+        if (v <= 0) continue;
+        const q = v / (LEAN_CNT[k] + 1);
+        if (q > bq + 1e-12) { bq = q; best = k; }
+      }
+      if (best < 0) break;
+      LEAN_CNT[best]++;
+      out[sv[best]]++;
+    }
+  }
+}
+
+// Seeded generator: stream i depends only on i, so more runs extend earlier ones unchanged.
+function mcRng(i) {
+  let s = (i + MC_SEED) >>> 0;
+  s = Math.imul(s ^ (s >>> 16), 0x85ebca6b);
+  s = Math.imul(s ^ (s >>> 13), 0xc2b2ae35);
+  s = (s ^ (s >>> 16)) >>> 0;
+  let spare = null;
+  const next = () => {
+    s = (s + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const normal = () => {
+    if (spare !== null) { const z = spare; spare = null; return z; }
+    let u = next();
+    while (u < 1e-12) u = next();
+    const v = next(), r = Math.sqrt(-2 * Math.log(u));
+    spare = r * Math.sin(2 * Math.PI * v);
+    return r * Math.cos(2 * Math.PI * v);
+  };
+  return { normal };
+}
+
+// One run. volErr is a percentage of each party's own share, seatErr is in points.
+// With both at zero no random numbers are drawn and the central projection is reproduced exactly.
+function mcRunOne(shares, volErr, seatErr, i, out) {
+  const sigma = volErr / 100;
+  const rng = sigma > 0 || seatErr > 0 ? mcRng(i) : null;
+  let sh = shares;
+  if (sigma > 0) {
+    sh = {};
+    let sum = 0;
+    for (const p of MC_SHARE_KEYS) { const v = shares[p] * Math.exp(sigma * rng.normal()); sh[p] = v; sum += v; }
+    if (sum > 0) for (const p of MC_SHARE_KEYS) sh[p] = sh[p] / sum * 100;
+    else sh = shares;
+  }
+  const T = targetsFor(sh);
+  // a party with no votes in a seat stays at zero; the draw is still taken so streams stay aligned
+  const noise = seatErr > 0 ? (v, u) => { const z = rng.normal(); return v > 0 ? Math.max(0, v + seatErr * u * z) : v; } : null;
+  out.fill(0);
+  seatsLean(T, noise, out);
+}
+
+function mcQuant(sorted, n, q) { return sorted[Math.round(q * (n - 1))]; }
+function mcSummarize(data, n) {
+  const cols = [], stats = [];
+  for (let j = 0; j < NP; j++) {
+    const a = new Int16Array(n);
+    let nz = 0;
+    for (let i = 0; i < n; i++) { const v = data[i * NP + j]; a[i] = v; if (v > 0) nz++; }
+    const b = a.slice().sort();
+    cols.push(a);
+    stats.push({ med: (b[(n - 1) >> 1] + b[n >> 1]) / 2, lo: mcQuant(b, n, 0.05), hi: mcQuant(b, n, 0.95), nz: nz / n });
+  }
+  const maj = new Array(NP).fill(0), plu = new Array(NP).fill(0);
+  let tie = 0;
+  for (let i = 0; i < n; i++) {
+    let best = -1, bv = -1, cnt = 0;
+    for (let j = 0; j < NP; j++) {
+      const v = data[i * NP + j];
+      if (v > bv) { bv = v; best = j; cnt = 1; } else if (v === bv) cnt++;
+    }
+    if (bv >= MAJORITY) maj[best]++;
+    else if (cnt === 1) plu[best]++;
+    else tie++;
+  }
+  return { n, cols, stats, maj, plu, tie };
+}
+
+const mcHatch = (c) => ({ backgroundImage: "repeating-linear-gradient(135deg," + c + " 0 3px,var(--card) 3px 6px)" });
+const mcPct = (c, n) => { const v = c / n * 100; return v > 0 && v < 0.05 ? "<0.1%" : fmt1(v) + "%"; };
+const mcNum = (v) => Number.isInteger(v) ? String(v) : v.toFixed(1);
+const mcRange = (lo, hi) => lo === hi ? String(lo) : lo + "–" + hi;
+
+function SeatHist(props) {
+  const { arr, n, color, name } = props;
+  const wrapRef = useRef(null);
+  const [W, setW] = useState(560);
+  const [hi, setHi] = useState(null);
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const m = () => { const w = el.clientWidth; if (w > 0) setW(w); };
+    m();
+    if (typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(m);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  useEffect(() => { setHi(null); }, [arr]);
+  const d = useMemo(() => {
+    let mn = 1e9, mx = -1;
+    for (let i = 0; i < n; i++) { const v = arr[i]; if (v < mn) mn = v; if (v > mx) mx = v; }
+    mn = Math.min(mn, MAJORITY);
+    mx = Math.max(mx, MAJORITY);
+    const w = Math.max(1, Math.ceil((mx - mn + 1) / 36));
+    const lo = MAJORITY - w * Math.ceil((MAJORITY - mn) / w);
+    const nb = Math.ceil((mx - lo + 1) / w);
+    const counts = new Array(nb).fill(0);
+    for (let i = 0; i < n; i++) counts[Math.floor((arr[i] - lo) / w)]++;
+    return { w, lo, nb, counts };
+  }, [arr, n]);
+  const H = 220, ml = 40, mr = 10, mt = 24, mb = 36;
+  const pw = Math.max(60, W - ml - mr), ph = H - mt - mb, span = d.nb * d.w, sw = pw / d.nb;
+  const X = (s) => ml + (s - d.lo) / span * pw;
+  const mp = Math.max.apply(null, d.counts) / n * 100;
+  let ys = 50;
+  for (const s of [0.5, 1, 2, 5, 10, 20, 25, 50]) if (mp / s <= 4) { ys = s; break; }
+  const yMax = Math.max(ys, Math.ceil(mp / ys - 1e-9) * ys);
+  const Y = (v) => mt + ph - v / yMax * ph;
+  const yt = [];
+  for (let v = 0; v <= yMax + 1e-9; v += ys) yt.push(v);
+  const pxSeat = pw / span, xl = [];
+  if (d.w === 1) {
+    let st = 1;
+    for (const s of [1, 2, 5, 10, 20]) { st = s; if (s * pxSeat >= 30) break; }
+    for (let k = 0; k < d.nb; k++) { const b = d.lo + k; if (b >= 0 && b % st === 0) xl.push({ x: X(b) + sw / 2, t: b }); }
+  } else {
+    const k0 = Math.round((MAJORITY - d.lo) / d.w), m = Math.max(1, Math.ceil(30 / (d.w * pxSeat)));
+    for (let k = 0; k < d.nb; k++) { const b = d.lo + k * d.w; if (((k - k0) % m + m) % m === 0 && b >= 0) xl.push({ x: X(b), t: b }); }
+  }
+  const mx = X(MAJORITY), mEnd = mx > W - 96;
+  let tip = null;
+  if (hi !== null && hi < d.nb) {
+    const b = d.lo + hi * d.w, bs = Math.max(0, b), be = b + d.w - 1;
+    let cum = 0;
+    for (let k = hi; k < d.nb; k++) cum += d.counts[k];
+    tip = {
+      range: bs === be ? bs + (bs === 1 ? " seat" : " seats") : bs + "–" + be + " seats",
+      pct: d.counts[hi] / n * 100, count: d.counts[hi], cum: cum / n * 100, from: bs
+    };
+  }
+  const touchHit = (k) => (e) => { if (e.pointerType !== "mouse") setHi((p) => p === k ? null : k); };
+  const mouseIn = (k) => (e) => { if (e.pointerType === "mouse") setHi(k); };
+  const mouseOut = (e) => { if (e.pointerType === "mouse") setHi(null); };
+  return h("div", { className: "mc-hist", ref: wrapRef },
+    h("div", { className: "mc-tip", "aria-live": "polite" }, tip
+      ? [h("span", { key: "a" }, h("b", null, tip.range), " / " + fmt1(tip.pct) + "% of runs (" + tip.count + ")"),
+         h("span", { key: "b", className: "mc-hint" }, fmt1(tip.cum) + "% of runs reach " + tip.from + "+")]
+      : h("span", { className: "mc-hint" }, "Hover or tap a bar for details")),
+    h("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Seat distribution for " + name },
+      yt.map((v) => h("g", { key: "y" + v },
+        h("line", { className: "hx-g", x1: ml, x2: ml + pw, y1: Y(v), y2: Y(v) }),
+        h("text", { className: "hx-t", x: ml - 6, y: Y(v) + 3.5, textAnchor: "end" }, v + "%"))),
+      d.counts.map((c, k) => {
+        if (!c) return null;
+        const y = Y(c / n * 100);
+        return h("rect", { key: "b" + k, x: X(d.lo + k * d.w) + 0.5, y, width: Math.max(1, sw - 1), height: Math.max(0, mt + ph - y), fill: color, fillOpacity: hi === null ? 0.9 : k === hi ? 1 : 0.3 });
+      }),
+      h("line", { className: "hx-a", x1: ml, x2: ml + pw, y1: mt + ph, y2: mt + ph }),
+      xl.map((t) => h("text", { key: "x" + t.t, className: "hx-t", x: t.x, y: mt + ph + 14, textAnchor: "middle" }, t.t)),
+      h("text", { className: "hx-ta", x: ml + pw / 2, y: H - 6, textAnchor: "middle" }, "Seats won"),
+      h("line", { className: "hx-m", x1: mx, x2: mx, y1: mt - 6, y2: mt + ph }),
+      h("text", { className: "hx-mt", x: mEnd ? mx - 5 : mx + 5, y: mt - 9, textAnchor: mEnd ? "end" : "start" }, "Majority " + MAJORITY),
+      d.counts.map((c, k) => h("rect", { key: "h" + k, x: X(d.lo + k * d.w), y: mt, width: sw, height: ph, fill: "transparent", onPointerEnter: mouseIn(k), onPointerLeave: mouseOut, onPointerDown: touchHit(k) }))));
+}
+
+function MonteCarlo(props) {
+  const shares = props.shares;
+  const [runs, setRuns] = useState(1000);
+  const [volErr, setVolErr] = useState(10);
+  const [seatErr, setSeatErr] = useState(3);
+  const [shown, setShown] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [prog, setProg] = useState(0);
+  const [histSel, setHistSel] = useState(null);
+  const [coal, setCoal] = useState(null);
+  const bufRef = useRef(null), metaRef = useRef({ key: null, done: 0, started: false });
+  const key = JSON.stringify([MC_SHARE_KEYS.map((p) => Math.round(shares[p] * 1e6) / 1e6), volErr, seatErr]);
+  const fullKey = key + "|" + runs;
+
+  useEffect(() => {
+    if (!bufRef.current) bufRef.current = new Int16Array(MC_MAX_RUNS * NP);
+    const buf = bufRef.current, m = metaRef.current;
+    let cancelled = false, timer = null;
+    const finish = () => {
+      setShown({ key: fullKey, n: runs, data: buf.slice(0, runs * NP) });
+      setBusy(false);
+      setProg(0);
+    };
+    // same inputs and enough runs already done: just show the first `runs` of them
+    if (m.key === key && m.done >= runs) { finish(); return; }
+    const step = () => {
+      if (cancelled) return;
+      const t0 = performance.now();
+      while (m.done < runs && performance.now() - t0 < MC_CHUNK_MS) {
+        mcRunOne(shares, volErr, seatErr, m.done, buf.subarray(m.done * NP, (m.done + 1) * NP));
+        m.done++;
+      }
+      if (m.done >= runs) finish();
+      else { setProg(m.done / runs); timer = setTimeout(step, 0); }
+    };
+    const begin = () => {
+      if (m.key !== key) { m.key = key; m.done = 0; }
+      setBusy(true);
+      setProg(m.done / runs);
+      step();
+    };
+    if (!m.started) { m.started = true; begin(); }
+    else timer = setTimeout(begin, MC_DEBOUNCE_MS);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [fullKey]);
+
+  const stale = !shown || shown.key !== fullKey;
+  const sum = useMemo(() => shown ? mcSummarize(shown.data, shown.n) : null, [shown]);
+  const rows = useMemo(() => !sum ? [] : ALL_VIEW.map((p, j) => ({ p, j, st: sum.stats[j] }))
+    .filter((r) => r.st.nz >= 0.05)
+    .sort((a, b) => b.st.med - a.st.med || b.st.hi - a.st.hi), [sum]);
+  const hp = rows.some((r) => r.p === histSel) ? histSel : rows[0] ? rows[0].p : null;
+  const coalSel = coal === null ? rows.slice(0, 2).map((r) => r.p) : coal.filter((p) => rows.some((r) => r.p === p));
+  const coalKey = coalSel.join(",");
+  const coalRes = useMemo(() => {
+    if (!sum || !coalSel.length) return null;
+    const n = sum.n, idx = coalSel.map((p) => ALL_VIEW.indexOf(p)), t = new Int16Array(n);
+    let hit = 0;
+    for (let i = 0; i < n; i++) {
+      let s = 0;
+      for (let q = 0; q < idx.length; q++) s += sum.cols[idx[q]][i];
+      t[i] = s;
+      if (s >= MAJORITY) hit++;
+    }
+    const b = t.slice().sort();
+    return { chance: hit / n * 100, med: (b[(n - 1) >> 1] + b[n >> 1]) / 2, lo: mcQuant(b, n, 0.05), hi: mcQuant(b, n, 0.95) };
+  }, [sum, coalKey]);
+
+  const dim = stale ? " dim" : "";
+  const settings = h("div", { className: "mc-sec", key: "set" },
+    h("h3", null, "Settings"),
+    h("div", { className: "mc-runs", role: "group", "aria-label": "Number of runs" },
+      h("span", { className: "mc-runs-l" }, "Runs"),
+      [500, 1000, 5000].map((r) => h("button", { key: r, className: "mbtn" + (runs === r ? " on" : ""), "aria-pressed": runs === r, onClick: () => setRuns(r) }, r.toLocaleString("en-GB")))),
+    h("div", { className: "mc-sliders" },
+      h("div", { className: "mc-sl" },
+        h("label", { className: "mc-sl-l", htmlFor: "mc-vol" }, "Vote share error (% of each party’s own share)"),
+        h("input", { id: "mc-vol", type: "range", min: 0, max: 30, step: 1, value: volErr, style: { "--c": "var(--fg)", "--pct": volErr / 30 * 100 + "%" }, onChange: (e) => setVolErr(parseFloat(e.target.value)) }),
+        h("div", { className: "mc-sl-v" }, volErr + "%")),
+      h("div", { className: "mc-sl" },
+        h("label", { className: "mc-sl-l", htmlFor: "mc-seat" }, "Seat-level error (extra random variation in each seat)"),
+        h("input", { id: "mc-seat", type: "range", min: 0, max: 10, step: 0.5, value: seatErr, style: { "--c": "var(--fg)", "--pct": seatErr / 10 * 100 + "%" }, onChange: (e) => setSeatErr(parseFloat(e.target.value)) }),
+        h("div", { className: "mc-sl-v" }, seatErr + " pts"))));
+
+  const secs = [];
+  if (!sum) {
+    secs.push(h("div", { className: "mc-wait", key: "wait" }, "Running simulation…"));
+  } else {
+    const n = sum.n, segs = [];
+    const add = (arrc, kind) => arrc.map((c, j) => ({ c, j })).filter((x) => x.c > 0).sort((a, b) => b.c - a.c).forEach((x) => {
+      const p = ALL_VIEW[x.j];
+      segs.push({ id: kind + p, c: x.c, color: PARTIES[p].color, hatch: kind === "p", text: label(p) + (kind === "m" ? " majority" : " largest, no majority") });
+    });
+    add(sum.maj, "m");
+    add(sum.plu, "p");
+    if (sum.tie > 0) segs.push({ id: "tie", c: sum.tie, color: "var(--muted)", hatch: true, text: "Tied for largest" });
+    const fill = (sg) => sg.hatch ? mcHatch(sg.color) : { background: sg.color };
+    secs.push(h("div", { className: "mc-sec mc-res" + dim, key: "out" },
+      h("h3", null, "Outcomes"),
+      h("div", { className: "mc-bar", role: "img", "aria-label": "Share of runs by outcome" },
+        segs.map((sg) => h("div", { key: sg.id, className: "mc-seg", title: sg.text + " " + mcPct(sg.c, n), style: Object.assign({ width: sg.c / n * 100 + "%" }, fill(sg)) }))),
+      h("div", { className: "mc-legend" },
+        segs.map((sg) => h("span", { key: sg.id, className: "mc-lg" }, h("span", { className: "swatch", style: fill(sg) }), sg.text, h("b", null, mcPct(sg.c, n)))))));
+
+    const scale = Math.max.apply(null, [MAJORITY].concat(rows.map((r) => r.st.hi)));
+    secs.push(h("div", { className: "mc-sec mc-res" + dim, key: "tab" },
+      h("table", { className: "mc-table" },
+        h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "num" }, "Median"), h("th", null, "90% range"))),
+        h("tbody", null, rows.map((r) => h("tr", { key: r.p },
+          h("td", null, h("span", { className: "party-cell" }, h("span", { className: "swatch", style: { background: PARTIES[r.p].color } }), h("span", null, label(r.p)))),
+          h("td", { className: "num tab seats" }, mcNum(r.st.med)),
+          h("td", null,
+            h("div", { className: "rng-num" }, mcRange(r.st.lo, r.st.hi)),
+            h("div", { className: "rng-track" },
+              h("i", { className: "rng-maj", style: { left: MAJORITY / scale * 100 + "%" } }),
+              h("i", { className: "rng-fill", style: { left: r.st.lo / scale * 100 + "%", width: (r.st.hi - r.st.lo) / scale * 100 + "%", background: PARTIES[r.p].color } }),
+              h("i", { className: "rng-med", style: { left: r.st.med / scale * 100 + "%" } })))))))));
+
+    const hj = ALL_VIEW.indexOf(hp);
+    secs.push(h("div", { className: "mc-sec mc-res" + dim, key: "dist" },
+      h("h3", null, "Seat distribution"),
+      h("div", { className: "chips" }, rows.map((r) => h("button", { key: r.p, className: "mbtn" + (hp === r.p ? " on" : ""), "aria-pressed": hp === r.p, onClick: () => setHistSel(r.p) },
+        h("span", { className: "swatch", style: { background: PARTIES[r.p].color } }), PARTIES[r.p].short))),
+      h(SeatHist, { key: hp, arr: sum.cols[hj], n, color: PARTIES[hp].color, name: label(hp) })));
+
+    secs.push(h("div", { className: "mc-sec mc-res" + dim, key: "coal" },
+      h("h3", null, "Coalition majority chance"),
+      h("div", { className: "chips" }, rows.map((r) => {
+        const on = coalSel.indexOf(r.p) >= 0, c = PARTIES[r.p].color;
+        return h("button", { key: r.p, className: "cbtn" + (on ? " on" : ""), "aria-pressed": on,
+          style: on ? { background: c, borderColor: c, color: textOn(c) } : { borderColor: c },
+          onClick: () => setCoal(on ? coalSel.filter((x) => x !== r.p) : coalSel.concat(r.p)) }, PARTIES[r.p].short);
+      })),
+      coalRes
+        ? h("div", { className: "mc-coal" },
+            h("div", { className: "mc-coal-big" }, fmt1(coalRes.chance) + "%"),
+            h("div", { className: "mc-coal-sub" }, "of runs reach " + MAJORITY + " seats"),
+            h("div", { className: "mc-coal-sub" }, "Median " + mcNum(coalRes.med) + " seats · 90% range " + mcRange(coalRes.lo, coalRes.hi)))
+        : h("div", { className: "mc-coal" }, h("div", { className: "mc-coal-sub" }, "Select parties to see how often they reach a majority."))));
+  }
+
+  return h(Card, { title: "Probability model" },
+    h("div", { className: "mc" },
+      busy ? h("div", { className: "mc-prog", role: "progressbar", "aria-valuemin": 0, "aria-valuemax": 100, "aria-valuenow": Math.round(prog * 100) }, h("i", { style: { width: prog * 100 + "%" } })) : null,
+      settings, ...secs));
+}
+
 function App() {
   const [shares, setShares] = useState(() => ({ ...BASE_SHARES }));
   const { T, tally, results } = useMemo(() => project(shares), [shares]);
@@ -690,7 +1087,8 @@ function App() {
       h("div", { className: "mlegend hl" }, HEMI_ORDER.filter((g) => ALL_VIEW.some((p) => groupKey(p) === g && tally[p] > 0)).map((p) => h("span", { className: "lchip", key: p }, h("span", { className: "swatch", style: { background: PARTIES[p].color } }), PARTIES[p].short))),
       h(ResultsTable, { T, tally, rows: tableRows })),
     h(Coalition, { tally, parties: seated }),
-    h(MapPanel, { results, parties: tableRows }));
+    h(MapPanel, { results, parties: tableRows }),
+    h(MonteCarlo, { shares }));
 }
 const BOUNDARY_BBOX = (() => {
   let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
