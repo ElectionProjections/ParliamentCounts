@@ -87,192 +87,351 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bundestag seat projector</title>
+<title>Germany Seat Projector</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@400;500;700&family=Fira+Sans:wght@400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#F7F7F5;--rule:#D8D8D2;--rule-strong:#9A9A93;--ink:#161615;--ink-soft:#5C5C57;--ink-faint:#8E8E88;--card:#FFFFFF;--flag:#8A5A00}
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{background:var(--paper);color:var(--ink);font-family:"Fira Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 72px}
-  header{border-bottom:2px solid var(--ink);padding-bottom:14px}
-  .eyebrow{font-family:"Fira Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 6px}
-  h1{font-family:"Fira Sans Condensed",sans-serif;font-weight:700;font-size:clamp(32px,5vw,48px);line-height:1.05;letter-spacing:-.01em;margin:0}
-  .sub{color:var(--ink-soft);font-size:15px;max-width:64ch;margin:10px 0 0}
-  .grid{display:grid;grid-template-columns:1fr;gap:32px;margin-top:32px;align-items:start}
-  .panel-label{font-family:"Fira Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:8px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:baseline}
-  .panel-label>span:first-child{font-family:"Fira Sans Condensed",sans-serif;font-size:17px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink)}
-  .ballot{border-left:1px solid var(--rule);border-right:1px solid var(--rule)}
-  .prow{display:grid;grid-template-columns:14px minmax(0,1fr) 88px 76px;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--rule)}
-  .prow:first-child{border-top:1px solid var(--rule)}
-  .prow.out{background:repeating-linear-gradient(135deg,transparent,transparent 6px,rgba(0,0,0,.022) 6px,rgba(0,0,0,.022) 12px)}
-  .swatch{width:14px;height:14px;border-radius:2px}
-  .pname{font-weight:500;font-size:15px;min-width:0}
-  .pname small{display:block;font-weight:400;font-size:11px;color:var(--ink-faint);font-family:"Fira Mono",monospace;letter-spacing:.04em}
-  .prow input[type=range]{grid-column:1/-1;width:100%;margin:6px 0 0;accent-color:var(--ink)}
-  .num{display:flex;align-items:baseline;gap:3px;justify-self:end}
-  .num input{width:62px;font-family:"Fira Mono",monospace;font-size:14px;text-align:right;border:1px solid var(--rule);border-radius:3px;padding:5px 6px;background:var(--card);color:var(--ink)}
-  .num input:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
-  .num span{font-family:"Fira Mono",monospace;font-size:12px;color:var(--ink-faint)}
-  .wk{font-family:"Fira Mono",monospace;font-size:10px;color:var(--ink-faint);justify-self:end;text-align:right;line-height:1.3}
-  .wk b{display:block;font-weight:500;font-size:13px;color:var(--ink)}
-  .wk.clause,.wk.clause b{color:var(--flag)}
-  .tally{display:flex;justify-content:space-between;align-items:center;padding:12px 14px 0;font-family:"Fira Mono",monospace;font-size:12px;color:var(--ink-soft)}
-  .tally.warn{color:#A32D2D}
-  button.ghost{font-family:"Fira Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--rule-strong);border-radius:3px;padding:5px 10px;color:var(--ink);cursor:pointer}
-  button.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  button.ghost:focus-visible,select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .readout{display:flex;align-items:baseline;gap:10px;margin:2px 0 -6px}
-  .readout b{font-family:"Fira Sans Condensed",sans-serif;font-size:40px;font-weight:700;line-height:1}
-  .readout em{font-style:normal;font-family:"Fira Mono",monospace;font-size:12px;color:var(--ink-faint);letter-spacing:.06em}
-  svg{display:block;width:100%;height:auto}
-  #arc{max-width:680px;margin:0 auto}
-  circle.seat{transition:fill 160ms ease,opacity 160ms ease}
-  @media (prefers-reduced-motion:reduce){circle.seat{transition:none}}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
-  .chip{display:flex;align-items:center;gap:7px;border:1px solid var(--rule-strong);border-radius:3px;background:var(--card);padding:6px 10px;font-size:13px;cursor:pointer;font-family:"Fira Sans",sans-serif;color:var(--ink)}
-  .chip[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .chip i{width:9px;height:9px;border-radius:2px;display:block}
-  .bar{position:relative;height:26px;background:var(--card);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
-  .fill{height:100%;display:flex}
-  .fill span{display:block;height:100%}
-  .maj{position:absolute;top:-5px;bottom:-5px;left:50%;width:2px;background:var(--ink)}
-  .coalnote{font-family:"Fira Mono",monospace;font-size:12px;color:var(--ink-soft);margin:9px 0 0}
-  .coalnote b{color:var(--ink)}
-  select{font-family:"Fira Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--card);border:1px solid var(--rule-strong);border-radius:3px;padding:4px 8px;color:var(--ink);cursor:pointer}
-  table.bd{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
-  table.bd th{font-family:"Fira Mono",monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-weight:400;text-align:right;padding:8px 5px;border-bottom:1px solid var(--rule);line-height:1.35;overflow-wrap:break-word;word-break:break-word;vertical-align:bottom}
-  table.bd th:first-child{text-align:left}
-  table.bd td{padding:8px 5px;text-align:right;font-family:"Fira Mono",monospace;border-bottom:1px solid var(--rule)}
-  table.bd td:first-child{text-align:left;font-family:"Fira Sans",sans-serif;font-weight:500}
-  table.bd td:first-child .pcell{display:flex;align-items:center;gap:8px}
-  table.bd td i{width:9px;height:9px;border-radius:2px;display:block;flex:none}
-  table.bd td b{font-weight:500}
-  table.bd tr.sum td{border-bottom:none;color:var(--ink-soft)}
-  table.bd tr.noseat td{color:var(--ink-faint)}
-  table.bd tr.noseat td:first-child{font-weight:400}
-  table.bd th:last-child,table.bd td:last-child{border-left:1px solid var(--rule);background:rgba(22,22,21,.035)}
-  table.bd th:last-child{color:var(--ink);font-weight:500}
-  table.bd td:last-child b{font-size:15.5px;color:var(--ink)}
-  table.bd tr.sum td:last-child{background:rgba(22,22,21,.06)}
-  .clausebox{margin-top:18px;border:1px solid var(--rule);border-radius:3px;background:var(--card);padding:12px 14px}
-  .clausebox p{margin:0;font-size:13px;color:var(--ink-soft);font-family:"Fira Mono",monospace}
-  .clausebox p b{color:var(--ink)}
-  .flip{margin-top:8px;font-size:13px;color:var(--ink-soft);line-height:1.5}
-  .flip b{color:var(--ink);font-weight:500}
-  .flip.flag b{color:var(--flag)}
-  footer{margin-top:44px;border-top:1px solid var(--rule);padding-top:18px;font-size:13px;color:var(--ink-soft);max-width:78ch}
-  footer h2{font-family:"Fira Sans Condensed",sans-serif;font-size:15px;font-weight:700;margin:0 0 6px}
-  footer p{margin:0 0 10px}
-  #mapwrap{max-width:480px;margin:10px auto 0}
-  #map path{stroke:var(--paper);stroke-width:.9;cursor:pointer;transition:opacity 140ms ease}
-  #map path:hover{opacity:.72}
-  #map:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  .maptabs{display:flex;gap:0;margin:0 0 2px}
-  .maptabs button{flex:1;font-family:"Fira Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--rule-strong);border-right:none;padding:6px 4px;color:var(--ink-soft);cursor:pointer}
-  .maptabs button:last-child{border-right:1px solid var(--rule-strong)}
-  .maptabs button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .maptabs button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
-  #wkmapwrap{max-width:440px;margin:10px auto 0}
-  #wkmapwrap{position:relative}
-  #wkmap{touch-action:none;cursor:grab}
-  #wkmap:active{cursor:grabbing}
-  #wkmap path.wk{stroke:var(--paper);stroke-width:.6;cursor:pointer;vector-effect:non-scaling-stroke}
-  #wkmap path.wk:hover{stroke:var(--ink);stroke-width:1.1}
-  #wkmap path.hatch{stroke:none;fill:url(#wkhatch);pointer-events:none}
-  #zoomreset{position:absolute;top:6px;right:6px;font-family:"Fira Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:var(--card);border:1px solid var(--rule-strong);border-radius:3px;padding:4px 8px;color:var(--ink);cursor:pointer;opacity:.9}
-  #zoomreset:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  #zoomreset:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-  #wktip{position:fixed;z-index:60;pointer-events:none;display:none;background:var(--card);border:1px solid var(--ink);border-radius:4px;padding:9px 11px;max-width:230px;box-shadow:0 5px 18px rgba(0,0,0,.14);font-family:"Fira Sans",sans-serif}
-  #wktip h4{margin:0 0 6px;font-family:"Fira Sans Condensed",sans-serif;font-size:14px;font-weight:700;display:flex;justify-content:space-between;gap:10px}
-  #wktip h4 span{font-family:"Fira Mono",monospace;font-size:11px;color:var(--ink-faint);font-weight:400}
-  #wktip .rh{display:grid;column-gap:7px;font-family:"Fira Mono",monospace;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:4px;margin-bottom:3px;border-bottom:1px solid var(--rule)}
-  #wktip .rh span{text-align:right}
-  #wktip .rh span:first-child,#wktip .rh span:nth-child(2){text-align:left}
-  #wktip .r{display:grid;column-gap:7px;align-items:center;font-family:"Fira Mono",monospace;font-size:11px;line-height:1.7;color:var(--ink-soft)}
-  #wktip .r i{width:8px;height:8px;border-radius:2px;flex:none;align-self:center}
-  #wktip .r b{font-weight:500;color:var(--ink);text-align:right}
-  #wktip .r.win{color:var(--ink);font-weight:500}
-  #wktip .tf{margin-top:6px;padding-top:5px;border-top:1px solid var(--rule);font-family:"Fira Mono",monospace;font-size:10px;color:var(--ink-faint)}
-  #wktip .tf .uf{color:var(--flag)}
-  .maplab{font-family:"Fira Mono",monospace;font-size:11px;color:var(--ink-faint);text-align:center;margin:8px 0 0}
-  .hatchtoggle{display:flex;align-items:center;gap:6px;font-family:"Fira Mono",monospace;font-size:11px;color:var(--ink-soft);margin:8px 0 0;cursor:pointer;user-select:none}
-  .hatchtoggle input{accent-color:var(--ink);cursor:pointer}
-  .maplab b{color:var(--ink);font-weight:500}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* Layout: one 760px working column of separate cards, ordered by workflow */
+:root{
+  --bg:#F4F5F6;--card:#FFFFFF;--fg:#16191D;--fg2:#555C66;--fg3:#848B95;
+  --line:#E3E5E8;--line2:#C8CCD2;--track:#CDD2D9;--thumb:#FFFFFF;--soft:#F1F2F4;
+  --good:#1C8A4A;--bad:#C63A34;--partly:#D49A12;--land:#C9CDD3;--red:#D8262C;
+  --font:"Fira Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1013;--card:#181B20;--fg:#ECEEF1;--fg2:#A6ACB5;--fg3:#7A818B;
+    --line:#2A2F37;--line2:#3F4651;--track:#59616D;--thumb:#E9ECEF;--soft:#20242A;
+    --good:#4CC37E;--bad:#F0706A;--partly:#E3B13B;--land:#4A515C;--red:#E5393F;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1013;--card:#181B20;--fg:#ECEEF1;--fg2:#A6ACB5;--fg3:#7A818B;
+  --line:#2A2F37;--line2:#3F4651;--track:#59616D;--thumb:#E9ECEF;--soft:#20242A;
+  --good:#4CC37E;--bad:#F0706A;--partly:#E3B13B;--land:#4A515C;--red:#E5393F;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 var(--font);
+  padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  font-variant-numeric:tabular-nums}
+.page{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px;min-width:0}
+h1{margin:0;text-align:center;font-size:26px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.card h2{margin:0 0 14px;text-align:center;font-size:17px;font-weight:600}
+h3{margin:0 0 12px;text-align:center;font-size:14px;font-weight:600}
+button{font-family:inherit;color:var(--fg)}
+button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* locator */
+.locator{display:flex;justify-content:center;align-items:center;gap:18px;min-height:90px}
+#world{width:220px;max-width:62vw;height:auto;display:block}
+#flag{width:50px;height:30px;display:block;border:1px solid var(--line2);border-radius:3px;flex:none}
+
+/* key facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;padding:0}
+.fcol{padding:14px 10px;text-align:center;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.fcol+.fcol{border-left:1px solid var(--line)}
+.lab{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg3);font-weight:500}
+.big{font-size:28px;font-weight:700;line-height:1.1}
+.big small{font-size:13px;font-weight:500;color:var(--fg3);margin-left:3px}
+.muted{font-size:12px;color:var(--fg3)}
+.fbar{width:min(150px,80%);height:6px;border-radius:3px;background:var(--track);overflow:hidden;margin:2px 0}
+.fbar i{display:block;height:100%;border-radius:3px;background:var(--good)}
+
+/* electoral system dropdown */
+details.sys{padding:0}
+details.sys summary{list-style:none;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:8px;padding:13px 16px;font-weight:600;font-size:14px;border-radius:10px}
+details.sys summary::-webkit-details-marker{display:none}
+details.sys summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--fg2);border-bottom:2px solid var(--fg2);transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+details.sys[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+.tiles.t3{grid-template-columns:repeat(3,1fr)}
+.tile{padding:12px 4px;text-align:center;min-width:0;display:flex;flex-direction:column;gap:4px}
+.tile+.tile{border-left:1px solid var(--line)}
+.tile .lab{font-size:8.5px;letter-spacing:.05em}
+.tile b{font-size:11.5px;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+@media (min-width:600px){.tile{padding:16px 10px}.tile .lab{font-size:10px}.tile b{font-size:14px}}
+
+/* inputs */
+.prow{display:grid;gap:3px;padding:8px 0;border-top:1px solid var(--line)}
+.prow:first-child{border-top:0;padding-top:0}
+.ptop{display:flex;align-items:center;gap:8px;min-width:0}
+.swatch{width:12px;height:12px;border-radius:3px;flex:none}
+.pname{font-weight:500;min-width:0;overflow-wrap:anywhere}
+.pctl{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:20px;margin:0;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--pc,var(--fg2)) var(--p,0%),var(--track) var(--p,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-5px;border-radius:50%;background:var(--thumb);border:2px solid var(--fg2);cursor:pointer}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:var(--track)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--pc,var(--fg2))}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--thumb);border:2px solid var(--fg2);cursor:pointer}
+input[type=range]:active{cursor:pointer}
+.num{display:flex;align-items:baseline;gap:3px}
+.num input{width:60px;font:inherit;font-size:14px;text-align:right;padding:3px 7px;border:1px solid var(--line2);border-radius:5px;background:var(--card);color:var(--fg)}
+.num span{color:var(--fg3);font-size:12px}
+.prow.fixed .pname{color:var(--fg2)}
+.prow.fixed input[type=range]{cursor:not-allowed;pointer-events:none}
+.prow.fixed input[type=range]::-webkit-slider-runnable-track{background:repeating-linear-gradient(135deg,var(--track) 0 5px,var(--line) 5px 10px)}
+.prow.fixed input[type=range]::-webkit-slider-thumb{opacity:.45}
+.prow.fixed input[type=range]::-moz-range-track{background:repeating-linear-gradient(135deg,var(--track) 0 5px,var(--line) 5px 10px)}
+.prow.fixed input[type=range]::-moz-range-progress{background:transparent}
+.prow.fixed input[type=range]::-moz-range-thumb{opacity:.45}
+.prow.fixed .num input{border-style:dashed;background:var(--soft);color:var(--fg2);cursor:not-allowed}
+.actions{display:flex;justify-content:center;margin-top:6px;padding-top:12px;border-top:1px solid var(--line)}
+.btn{font-size:12px;padding:6px 14px;border:1px solid var(--line2);border-radius:6px;background:var(--card);cursor:pointer}
+.btn:hover{background:var(--soft)}
+
+/* hemicycle + table */
+#arc{display:block;width:100%;max-width:650px;height:auto;margin:0 auto}
+circle.seat{transition:opacity .15s}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:16px 0 18px;font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:block}
+.tblwrap{overflow-x:auto}
+table.bd{width:100%;border-collapse:collapse;font-size:13px}
+table.bd th{font-size:10px;font-weight:500;letter-spacing:.03em;color:var(--fg3);text-align:right;padding:6px 5px;border-bottom:1px solid var(--line2);vertical-align:bottom;line-height:1.25}
+table.bd th:first-child,table.bd td:first-child{text-align:left}
+table.bd td{padding:10px 5px;text-align:right;border-bottom:1px solid var(--line)}
+table.bd tr:last-child td{border-bottom:0}
+table.bd td.seats{font-weight:700}
+table.bd .pcell{display:flex;align-items:center;gap:8px}
+table.bd .pcell i{width:10px;height:10px;border-radius:2px;flex:none}
+table.bd .ac::before{content:"("}table.bd .ac::after{content:")"}
+.pos{color:var(--good);font-weight:600}.neg{color:var(--bad);font-weight:600}.zer{color:var(--fg3)}
+@media (max-width:560px){
+  table.bd{font-size:12px}
+  table.bd th{font-size:9px;padding:6px 3px}
+  table.bd td{padding:9px 3px}
+  table.bd .fn{display:none}
+  table.bd .ac::before,table.bd .ac::after{content:""}
+  table.bd .ac{font-weight:600}
+}
+
+/* coalition */
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 20px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px;border:1px solid var(--line2);border-radius:6px;background:var(--card);cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:2px;display:block}
+.chip[aria-pressed=true]{background:var(--fg);color:var(--card);border-color:var(--fg)}
+.cbarw{position:relative;margin:0 0 0}
+.bar{height:22px;background:var(--soft);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex}
+.bar span{display:block;height:100%}
+.maj{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.status{margin:12px 0 0;text-align:center;font-size:13px;color:var(--fg2)}
+.status b{color:var(--fg)}
+.status .ok{color:var(--good);font-weight:600;margin-left:8px}
+
+/* maps */
+.seg{display:flex;justify-content:center;margin:0 0 10px}
+.seg button{font-size:12px;padding:6px 14px;border:1px solid var(--line2);background:var(--card);cursor:pointer}
+.seg button:first-child{border-radius:6px 0 0 6px}.seg button:last-child{border-radius:0 6px 6px 0;border-left:0}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--card);border-color:var(--fg)}
+.mapctl{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 10px}
+.tog{display:flex;justify-content:center;align-items:center;gap:6px;font-size:12px;color:var(--fg2);cursor:pointer;margin:12px 0 0}
+.tog input{accent-color:var(--fg);cursor:pointer}
+#map{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#map:active{cursor:grabbing}
+svg.mapsvg{display:block;width:100%;height:100%}
+.mapframe{position:relative;margin:0 -16px;height:clamp(360px,100vw,640px);overflow:hidden}
+#wkmap{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#wkmap:active{cursor:grabbing}
+#wkmap path.wk{stroke:var(--card);stroke-width:.6;vector-effect:non-scaling-stroke;cursor:pointer}
+#map path{stroke:var(--card);stroke-width:.9;vector-effect:non-scaling-stroke;cursor:pointer}
+#wkmap path.wk:hover,#map path:hover,#wkmap path.sel,#map path.sel{filter:brightness(.86)}
+#wkmap path.hatch{stroke:none;fill:url(#wkhatch);pointer-events:none}
+#wkmap path:focus,#map path:focus{outline:none}
+#zoomreset,#zoomreset2{position:absolute;z-index:2;top:8px;right:16px;font-size:10px;padding:3px 8px;border:1px solid var(--line2);border-radius:5px;background:var(--card);cursor:pointer}
+.maplegend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:14px 0 0;font-size:12px}
+.maplegend span{display:inline-flex;align-items:center;gap:6px}
+.maplegend i{width:10px;height:10px;border-radius:2px;display:block}
+.cbar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:var(--fg2)}
+.cbar div{width:min(240px,50%);height:10px;border-radius:5px;border:1px solid var(--line)}
+#wktip{position:fixed;z-index:60;pointer-events:none;display:none;background:var(--card);color:var(--fg);border:1px solid var(--line2);border-radius:6px;padding:8px 10px;width:148px;box-shadow:0 6px 20px rgba(0,0,0,.18);font-size:12px}
+#wktip h4{margin:0;display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:600}
+#wktip h4 span{font-weight:500;color:var(--fg3);font-size:12px;white-space:nowrap}
+#wktip .sub{color:var(--fg3);font-size:11px;margin-top:1px}
+#wktip .rows{margin-top:6px;display:flex;flex-direction:column;gap:5px}
+#wktip .r{display:grid;grid-template-columns:9px 1fr auto;column-gap:6px;align-items:center}
+#wktip .r i{width:9px;height:9px;border-radius:2px;display:block}
+#wktip .r.win{font-weight:700}
+#wktip.land{width:215px}
+#wktip .r4{grid-template-columns:9px 38px 36px minmax(0,1fr);column-gap:6px;align-items:center}
+#wktip .r4 span:nth-child(3){text-align:right}
+#wktip .sqs{display:flex;flex-wrap:wrap;gap:1px}
+#wktip .sqs u{display:block;width:5px;height:5px;border-radius:1px}
+
+/* probability model */
+.sec{padding-block:24px;border-top:1px solid var(--line)}
+.sec:first-of-type{padding-top:0;border-top:0}
+.sec:last-of-type{padding-bottom:0}
+#mcOut{transition:opacity .2s}
+#mcOut.dim{opacity:.4}
+.rungrp{display:flex;justify-content:center;margin-bottom:20px}
+.rungrp button{font-size:12px;padding:6px 14px;border:1px solid var(--line2);background:var(--card);cursor:pointer}
+.rungrp button:first-child{border-radius:6px 0 0 6px}.rungrp button:last-child{border-radius:0 6px 6px 0}
+.rungrp button+button{border-left:0}
+.rungrp button[aria-pressed=true]{background:var(--fg);color:var(--card);border-color:var(--fg)}
+.sliders2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:560px){.sliders2{grid-template-columns:1fr}}
+.sl2{display:flex;flex-direction:column;gap:10px;text-align:center;min-width:0}
+.sl2 label{font-size:12px;color:var(--fg2)}
+.sl2 output{font-size:15px;font-weight:600}
+.mcprog{height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:16px}
+.mcprog i{display:block;height:100%;width:0;background:var(--fg2)}
+.obar{display:flex;height:26px;border-radius:5px;overflow:hidden;background:var(--soft)}
+.obar span{display:block;height:100%}
+.hat{background-image:repeating-linear-gradient(135deg,var(--c) 0 4px,transparent 4px 8px);background-color:transparent;box-shadow:inset 0 0 0 1px var(--c)}
+.solid{background:var(--c)}
+.olegend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:14px;font-size:12px}
+.olegend span{display:inline-flex;align-items:center;gap:7px}
+.olegend i{width:12px;height:12px;border-radius:2px;display:block}
+.rg{display:grid;grid-template-columns:minmax(70px,1fr) 56px minmax(150px,2fr);column-gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.rg.h{padding:0 0 8px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);border-bottom:1px solid var(--line2)}
+.rg:last-child{border-bottom:0}
+.rg .pn{display:flex;align-items:center;gap:7px;font-weight:500;min-width:0}
+.rg .pn i{width:10px;height:10px;border-radius:2px;flex:none}
+.rg .md{text-align:right;font-weight:600}
+.rg .rr{display:flex;flex-direction:column;gap:5px;min-width:0}
+.rg .rr span{font-size:12px;color:var(--fg2);text-align:left}
+.rtrack{position:relative;height:6px;background:var(--soft);border-radius:3px;border:1px solid var(--line)}
+.rtrack i{position:absolute;top:-1px;bottom:-1px;border-radius:3px}
+.rtrack b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);transform:translateX(-1px);border-radius:1px}
+.cmb{max-width:300px;margin:20px auto 0;padding:18px;border-radius:14px;background:var(--soft);text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cmb .pc{font-size:38px;font-weight:700;line-height:1}
+.cmb .pc small{font-size:18px;font-weight:500;color:var(--fg3);margin-left:2px}
+.cmb .cl{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg3)}
+.cmb .tr{width:100%;height:6px;border-radius:3px;background:var(--line2);overflow:hidden}
+.cmb .tr i{display:block;height:100%;background:var(--good);border-radius:3px}
+.cmb .st{display:grid;grid-template-columns:1fr 1px 1fr;gap:12px;width:100%;margin-top:6px}
+.cmb .st div:nth-child(2){background:var(--line2)}
+.cmb .st b{display:block;font-size:16px}
+.cmb .st span{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3)}
+.mctip{min-height:38px;text-align:center;font-size:12px;line-height:19px;color:var(--fg2);margin:14px 0 6px}
+.mctip b{color:var(--fg)}
+#hist{display:block;width:100%;height:auto;touch-action:pan-y}
+#hist text{fill:var(--fg3);font-size:10px;font-family:var(--font)}
+.src{margin:6px 0 0;text-align:center;font-size:11px;color:var(--fg3);line-height:1.5}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head>
-<body>
-<div class="wrap">
 
-  <header>
-    <p class="eyebrow">Zweitstimmen &rarr; 630 Sitze &middot; Sainte-Laguë &middot; UNS über 299 Wahlkreise</p>
-    <h1>Bundestag seat projector</h1>
-  </header>
-  <p class="sub">Enter a second-vote share for each party. Seats follow the system in force from 2025: every constituency is swung uniformly off the February 2025 result, seats are shared among each party's 16 state lists, and second-vote coverage decides who actually sits.</p>
+<div class="page">
+  <h1>Germany Seat Projection</h1>
 
-  <div class="grid">
-    <section>
-      <p class="panel-label"><span>Vote Input</span><span>Constituencies</span></p>
-      <div class="ballot" id="rows"></div>
-      <div class="tally" id="tally">
-        <span id="tally-text">Total 0.00%</span>
-        <button class="ghost" id="reset" type="button">Reset to 2025</button>
-      </div>
-
-      <div class="clausebox">
-        <p id="clause-line">Threshold: <b>—</b></p>
-        <div class="flip" id="flip"></div>
-      </div>
-    </section>
-
-    <section>
-      <p class="panel-label"><span>Bundestag Projection</span></p>
-      <svg id="arc" viewBox="0 0 680 340" role="img" aria-labelledby="arc-t">
-        <title id="arc-t">Hemicycle showing projected seat distribution</title>
-      </svg>
-
-      <table class="bd">
-        <colgroup>
-          <col style="width:25%"><col style="width:16%"><col style="width:16%">
-          <col style="width:16%"><col style="width:14%"><col style="width:13%">
-        </colgroup>
-        <thead><tr><th>Party</th><th>Direct vote %</th><th>Direct seats</th><th>List vote %</th><th>List seats</th><th>Total seats</th></tr></thead>
-        <tbody id="bd"></tbody>
-      </table>
-
-      <p class="panel-label" style="margin-top:26px"><span>Coalition Builder</span></p>
-      <div class="chips" id="chips"></div>
-      <div class="bar"><div class="fill" id="fill"></div><div class="maj" title="Majority"></div></div>
-      <p class="coalnote" id="coalnote">Select parties to test a majority.</p>
-
-      <p class="panel-label" style="margin-top:26px"><span>Projection Maps</span><span id="map-title">Winning party by constituency</span></p>
-      <div class="maptabs" role="group" aria-label="Map granularity">
-        <button type="button" id="tab-wk" aria-pressed="true">299 constituencies</button>
-        <button type="button" id="tab-land" aria-pressed="false">16 States</button>
-      </div>
-      <label class="hatchtoggle"><input type="checkbox" id="showUnfilled">Show unfilled seats</label>
-      <div id="wkmapwrap">
-        <button type="button" id="zoomreset" aria-label="Reset zoom">Reset</button>
-        <svg id="wkmap" viewBox="0 0 560 760" role="img" aria-label="Map of Germany's 299 constituencies shaded by the projected first-vote winner"></svg>
-      </div>
-      <div id="wktip" role="tooltip" aria-hidden="true"></div>
-      <div id="mapwrap" style="display:none;max-width:480px;margin:10px auto 0">
-        <svg id="map" viewBox="0 0 300 400" role="img" aria-label="Map of Germany shaded by the largest party in each state"></svg>
-      </div>
-      <p class="maplab" id="maplab">Click a constituency for detail · scroll to zoom · drag to pan.</p>
-    </section>
+  <div class="locator">
+    <svg id="world" viewBox="0 0 220 112" role="img" aria-label="World map with Germany highlighted in red"><path d="M216.6,76.4L216.8,76.3L217,76.5L216.8,76.9L216.4,77L216.1,76.9L216.1,76.6L216.4,76.3ZM217.9,75.7L217.5,75.9L217.1,76.1L217.1,75.8L217.4,75.7L217.6,75.6L218,75.4L218,75.4L217.9,75.7ZM2,75.4L2,75.4L2,75.4L2.1,75.4L2.1,75.7L2.1,75.7L2.1,75.7L2,75.4ZM130.6,64.8L130.7,64.8L132.9,66.3L132.9,66.7L133.8,67.4L133.5,68.3L133.5,68.7L133.9,68.9L133.9,69.1L133.7,69.5L133.8,69.7L133.7,70.1L133.9,70.5L134.1,71.2L134.4,71.4L133.9,71.8L133.2,72L132.8,72L132.6,72.2L132.2,72.3L132,72.3L131.3,72.1L130.9,72.2L130.7,71.2L130.5,70.9L130.4,70.7L129.8,70.6L129.5,70.4L129.1,70.3L128.9,70.1L128.6,70L128.3,69.1L128,68.7L127.8,68.3L127.9,67.9L127.8,67.3L128.1,67.2L128.3,67L128.5,66.6L128.7,66.5L128.7,66.2L128.5,66.1L128.5,65.8L128.7,65.7L128.7,65.3L128.5,64.9L128.7,64.8L129.4,64.8ZM104.9,44.6L104.9,44.7L104.9,44.8L104.9,45.9L103,45.8L102.9,47.6L102.4,47.7L102.2,48.1L102.3,49.1L100,49.1L99.9,49.3L99.9,49L99.9,49L101.2,49L101.3,48.7L101.6,48.4L101.8,47.4L102.6,46.7L102.9,45.8L103.1,45.7L103.3,45.2L103.8,45.1L104,45.2L104.3,45.2L104.5,45L104.8,45L104.8,44.6ZM44.3,29.7L44.2,29.7L43.5,29L43.3,28.7L42.5,28.4L42.6,27.8L42.9,27.4L42.4,27.1L42.7,26.6L42.4,26.1L42.6,25.8L43.1,25.4L43.4,25L42.8,24.6L42.9,23.9L42.9,23.4L42.7,23.1L42.5,22.8L42.5,22.5L41.9,22.7L41.1,23.1L41,22.6L40.9,22.4L40.5,22.2L40,22.2L43.2,18.6L45.4,16.4L46.1,16.5L46.5,16.8L47,16.8L47.6,16.6L48.3,16.4L48.9,16.5L49.9,16.2L50.8,16.1L50.9,16.3L51.3,16.2L51.7,15.9L51.9,16L52.2,16.5L53.2,16.1L52.9,16.5L53.5,16.5L53.8,16.3L54.4,16.3L54.8,16.6L55.7,16.8L56.3,16.9L56.8,16.8L57.2,17.1L56.3,17.4L57,17.6L58.3,17.5L58.8,17.4L59,17.8L59.8,17.5L59.5,17.2L59.9,17L60.5,17L60.9,16.9L61.2,17L61.4,17.4L62,17.3L62.6,17.6L63.4,17.5L64.1,17.5L64.3,17.1L64.8,17L65.3,17.2L65,17.8L65.6,17.3L65.9,17.3L66.5,16.7L66.3,16.4L65.9,16.1L66.4,15.5L67.3,15.1L67.8,15.2L68.1,15.4L68.2,16.1L67.6,16.4L68.4,16.5L68,17.1L68.9,16.6L69.2,17L68.8,17.5L69,17.9L69.8,17.4L70.4,16.9L70.9,16.3L71.5,16.3L72.1,16.4L72.6,16.7L72.4,17L71.9,17.3L72,17.6L71.8,17.9L70.7,18.3L69.9,18.4L69.6,18.3L69.2,18.6L68.5,19.1L68.2,19.4L67.4,19.8L66.7,19.8L66.2,20.1L65.9,20.5L65.3,20.6L64.4,21.1L63.5,21.8L63,22.3L62.5,23L63.2,23.1L63.1,23.8L63.1,24.2L63.9,24.1L64.7,24.4L65.1,24.6L65.3,25L65.8,25.1L66.3,25.4L67.1,25.5L67.6,25.5L67.3,26.1L67.2,26.8L67.3,27.5L67.8,28.2L68.3,27.9L68.8,27.2L69,26.2L68.8,25.8L69.7,25.5L70.5,25.1L71,24.6L71.1,24.2L71,23.6L70.6,23.1L71.5,22.5L71.5,21.9L71.8,20.9L72.3,20.7L73,20.9L73.5,21L74,20.8L74.3,21L74.8,21.4L74.8,21.6L75.7,21.7L75.4,22.2L75.3,23L75.7,23.1L75.9,23.5L76.8,23.2L77.5,22.4L78,22.1L78.1,22.7L78.5,23.5L78.8,24.3L78.4,24.7L79,25.1L79.3,25.5L80.1,25.7L80.4,25.9L80.4,26.4L80.8,26.5L80.9,26.8L80.8,27.5L80.3,27.8L79.9,28L78.9,28.3L78.1,28.8L77.2,28.9L76.1,28.8L75.3,28.8L74.7,28.8L74.1,29.3L73.3,29.6L72.3,30.5L71.5,31.2L72,31L73.1,30.1L74.4,29.6L75.2,29.5L75.6,29.8L75,30.3L74.9,31L75,31.6L75.6,31.9L76.5,31.8L77.2,31L77.2,31.5L77.4,31.8L76.7,32.2L75.3,32.6L74.7,32.9L74,33.4L73.6,33.4L73.7,32.8L74.8,32.2L73.9,32.2L73.3,32.3L73.1,31.9L73.3,31L73.1,30.8L72.7,30.9L72.6,30.7L72,31.2L71.7,31.8L71.4,32.1L71.2,32.2L71,32.2L70.9,32.4L69.9,32.4L69,32.4L68.8,32.5L68,33L67.9,33.1L67.7,33.4L67.2,33.4L66.6,33.4L66.4,33.5L66.4,33.6L66.4,33.8L66.4,33.9L65.5,34.2L64.9,34.4L64.2,34.7L64,34.7L63.9,34.6L63.8,34.5L63.9,34.4L64.1,34.2L64.5,33.8L64.7,33.4L64.8,32.8L64.9,32.2L64.5,31.8L64.6,31.7L64.5,31.6L64.4,31.6L64.3,31.5L64.3,31.4L64.2,31.4L64.1,31.4L64.1,31.3L64,31.3L64,31.1L63.7,30.9L63.3,30.6L62.9,30.4L62.5,30.1L62,30.3L61.8,30.3L61.2,30.2L60.7,30.2L60.3,30L59.8,29.9L59.4,29.9L59.3,29.8L59.4,29.4L59.2,29.4L59.1,29.7L58,29.7L56.1,29.7L54.3,29.7L52.7,29.7L51.1,29.7L49.5,29.7L47.9,29.7L47.4,29.7L45.8,29.7ZM69,20.8L69.5,20.5L70.2,20.5L70.1,20.6L69.4,21L69,21ZM74.5,14.6L74.2,14.3L74.3,14.1L74.6,14L75.5,14.1L76.1,14.4L76.1,14.5L75.6,14.5L75.1,14.5L74.6,14.6ZM70.7,21L71,20.8L71.2,20.9L71.2,21L70.9,21.3L70.7,21.3L70.7,21.1ZM69.2,13.3L68.8,13.5L68.2,13.5L67.8,13.4L68.3,13.1L69,13L69.2,13.2ZM70.3,11.9L70.1,12L69.3,11.9L69.3,11.8L70.2,11.8L70.4,11.9ZM69.6,11.3L70,11.5L69.7,11.7L69,11.8L68.7,11.7L68.7,11.5L68.9,11.2L69.4,11.3ZM71.4,13.7L70.7,13.6L69.7,13.4L69.8,13.1L69.9,12.8L69.7,12.6L68.9,12.5L68.5,12.4L68.9,12.1L69.7,12.2L70,12.3L70.9,12.3L71.1,12.5L70.9,12.7L71.3,12.9L71.4,13L72,13L72.6,13.1L73.4,12.9L74.3,12.9L75,12.9L75.3,13.1L75.2,13.4L74.9,13.5L74.1,13.6L73.6,13.6L72.3,13.6ZM63.2,11.6L63.7,11.7L63.4,11.9L62.5,12L62.1,11.8L62.6,11.7ZM63.7,11.3L64.2,11.4L63.5,11.5L62.8,11.5L62.9,11.4L63.5,11.3ZM80.6,28.1L80.3,28.5L79.7,29.1L80.2,28.9L80.5,29L80.2,29.3L80.6,29.4L80.9,29.3L81.4,29.5L81.1,30L81.5,29.9L81.5,30.2L81.6,30.7L81.2,31.3L81,31.3L80.6,31.2L80.9,30.6L80.8,30.5L80,31.1L79.7,31.1L80.1,30.8L79.7,30.6L79.1,30.6L78,30.6L78,30.4L78.4,30.2L78.2,30L78.8,29.6L79.6,28.5L80,28.1L80.6,27.9L80.8,27.9ZM70,19.1L70.4,19.4L70.8,19.6L70.7,19.8L71.1,19.8L71.3,20L70.8,20.2L70.1,20.1L70,19.8L69.3,20.1L68.5,20.4L68.5,20.1L67.8,20.1L68.4,19.8L68.7,19.3L69.2,18.8L69.5,18.8L69.5,19.1L69.8,19ZM74.8,14.8L75.3,14.6L76.2,14.9L76.6,15.2L76.5,15.4L77.5,15.3L77.7,15.7L78.7,15.9L79,16.1L79.2,16.7L78.2,17L79.1,17.3L79.8,17.5L80.2,18L80.9,18.1L80.6,18.5L79.5,19.2L79,19L78.5,18.4L77.8,18.4L77.6,18.8L78,19.1L78.5,19.4L78.6,19.6L78.7,20.2L78.3,20.7L77.8,20.5L76.8,20L77.2,20.5L77.6,20.9L77.6,21.1L76.4,20.9L75.5,20.5L75,20.2L75.3,20L74.7,19.7L74.1,19.4L74.1,19.6L72.6,19.7L72.3,19.5L72.9,19L73.8,19L74.8,18.9L74.7,18.7L75.1,18.4L76,17.8L76,17.5L75.9,17.3L75.3,17.1L74.5,16.8L74.9,16.7L74.6,16.3L74.2,16.3L74,16.1L73.6,16.3L72.7,16.3L71.2,16.2L70.3,16L69.6,15.9L69.4,15.7L70,15.5L69.4,15.5L69.6,14.9L70.3,14.4L70.9,14.1L72.2,14L71.6,14.4L71.7,14.7L72.4,14.3L73.7,14L74.1,14.6L73.8,15ZM68.5,13.8L69.4,13.8L70.1,14L69.1,14.5L68.5,14.6L67.7,15L67.2,15L67.3,14.5L67.5,14.2L67.9,14ZM57.2,12.7L58.3,12.3L59.6,12L60.2,12L60.9,11.9L60.4,12.3L59.9,12.5L59.4,12.5L58.4,12.7L57.6,12.8ZM41.1,26.3L41.7,26.2L41,27L41.1,27.5L40.9,27.5L40.8,27.2L40.8,26.9L40.7,26.7L40.8,26.4L41,26.2ZM66.3,11L67,11.1L68,11.3L68,11.5L68,11.7L67.4,11.7L66.8,11.5L65.9,11.5L66.5,11.3L66.1,11.2ZM43.7,30L43.4,30.1L42.7,29.8L42.7,29.5L42.3,29.3L42.3,29.1L41.9,29L41.9,28.6L42,28.5L42.5,28.6L42.7,28.7L43.2,28.8L43.2,29L43.3,29.3L43.7,29.6ZM56.8,13.6L57.3,13.7L58.4,13.8L58.7,13.9L58.9,14.2L58.2,14.3L56.8,14.7L55.9,15.1L55.6,15.4L54.2,15.7L54.2,15.4L53.4,15.1L53.9,14.9L54.6,14.4L55.3,14.1L55.2,13.7ZM63.5,12.9L64,12.8L64.4,12.8L64.2,13.1L63.7,13.3L62.2,13.4L60.9,13.6L60.2,13.7L60.3,13.5L61.4,13.2L59.4,13.3L58.9,13.2L60,12.7L60.6,12.5L61.6,12.7L62,13L62.8,13.1L62.6,12.5L63.2,12.3L63.6,12.4L63.5,12.7ZM62.7,14.4L63,14.6L62.9,15.2L62.7,15.6L63.2,15.9L63.8,16.2L63.6,16.4L62.8,16.5L62.9,16.7L62.6,16.9L61.9,16.8L61.2,16.7L60.6,16.7L59.6,16.9L58.4,17L57.5,17.1L57.5,16.8L57,16.6L56.5,16.7L56.3,16.2L56.7,16.2L57.5,16.1L58.1,16.1L58.8,16L58,15.8L57,15.9L56.4,15.9L56.3,15.7L57.6,15.4L56.9,15.4L56.2,15.3L57,14.8L57.5,14.6L59,14.3L59.3,14.4L58.9,14.6L60,14.5L60.4,14.8L61.2,14.5L61.4,14.7L61.3,15.2L61.7,15L61.9,14.4L62.4,14.3ZM65.3,14.6L65.1,14.2L65.8,14L66.2,14.1L67.1,14L67.1,14.2L66.4,14.5L66.9,14.7L66.5,15.2L65.6,15.4L65.2,15.4L65,15.2L64.2,14.7L64.4,14.5ZM62.9,14.1L63.5,14.1L63.8,14.2L63.1,14.6L62.7,14.2ZM67.9,12.4L68,12.6L67.8,12.9L67.3,13.3L66.5,13.4L66.1,13.3L66.4,13L65.7,13L66,12.6L66.4,12.6L67.3,12.4L67.8,12.4ZM70.9,10.4L71.3,10.2L71.8,10.2L71.7,10.1L72.7,10.1L72.9,10.3L73.5,10.4L74.1,10.5L74.1,10.8L74.5,11L73.8,11.2L72.6,11.5L71.9,11.6L71.1,11.5L70.8,11.3L71,11.1L71.4,11L70.7,11L70.4,10.8L70.4,10.6ZM73.4,9.8L74.1,9.7L74.5,9.7L75.4,9.6L76.2,9.4L76.6,9.5L76.9,9.6L77.5,9.3L78.1,9.3L78.9,9.2L80.1,9.2L80.2,9.2L81.5,9.2L82.3,9.2L83.1,9.2L84.1,9.3L84.9,9.3L85.5,9.4L85.4,9.6L84.3,9.8L83.2,9.8L82.8,10L83.7,9.9L82.5,10.2L81.7,10.4L80.7,10.8L79.8,10.9L79.4,11L78.1,11L78.7,11.1L78.3,11.2L78.5,11.4L77.9,11.6L77.2,11.7L76.8,12L76.1,12.1L76.1,12.2L76.8,12.2L76.7,12.3L75.4,12.7L74.4,12.5L73,12.6L72.5,12.5L71.7,12.5L71.8,12.3L72.7,12.1L72.8,11.7L73.1,11.7L74,11.9L73.7,11.6L73.1,11.5L73.6,11.3L74.5,11.2L74.8,11L74.3,10.8L74.4,10.5L75.5,10.6L75.8,10.6L76.6,10.4L75.7,10.4L74.3,10.4L73.7,10.3L73.6,10.1L73.3,9.9ZM74.8,17.7L74.4,17.9L73.9,17.9L73.9,17.6L74.3,17.3L74.8,17.2L75,17.4L74.9,17.6ZM65.8,16.5L65.9,16.7L65.5,16.9L65,16.7L64.6,16.8L64.1,16.5L64.7,16.4L65.2,16.1L65.5,16.3L65.7,16.4ZM75.6,29.1L75.8,29L76.5,29.2L77,29.5L76.9,29.6L76.7,29.6L76,29.4ZM75.4,31L75.5,31.3L75.8,31.4L76.3,31.4L76,31.7L75.8,31.7L75.2,31.4L75.1,31.2ZM44.3,29.7L45.8,29.7L47.4,29.7L47.9,29.7L49.5,29.7L51.1,29.7L52.7,29.7L54.3,29.7L56.1,29.7L58,29.7L59.1,29.7L59.2,29.4L59.4,29.4L59.3,29.8L59.4,29.9L59.8,29.9L60.3,30L60.7,30.2L61.2,30.2L61.8,30.3L62,30.3L62.5,30.1L62.9,30.4L63.3,30.6L63.7,30.9L64,31.1L64,31.3L64.1,31.3L64.1,31.4L64.2,31.4L64.3,31.4L64.3,31.5L64.4,31.6L64.5,31.6L64.6,31.7L64.5,31.8L64.9,32.2L64.8,32.8L64.7,33.4L64.5,33.8L64.1,34.2L63.9,34.4L63.8,34.5L63.9,34.6L64,34.7L64.2,34.7L64.9,34.4L65.5,34.2L66.4,33.9L66.4,33.8L66.4,33.6L66.4,33.5L66.6,33.4L67.2,33.4L67.7,33.4L67.9,33.1L68,33L68.8,32.5L69,32.4L69.9,32.4L70.9,32.4L71,32.2L71.2,32.2L71.4,32.1L71.7,31.8L72,31.2L72.6,30.7L72.7,30.9L73.1,30.8L73.3,31L73.1,31.9L73.3,32.3L73.3,32.5L72.7,32.9L72,33.1L71.4,33.3L71,33.7L70.8,33.9L70.7,34.3L70.8,34.6L71.1,34.7L71.1,34.4L71.2,34.6L71.1,34.8L70.7,34.9L70.4,34.9L70,35L69.7,35L69.4,35L68.9,35.2L69.7,35.1L69.9,35.2L69,35.5L68.7,35.5L68.7,35.4L68.5,35.6L68.6,35.6L68.4,36.1L67.8,36.6L67.8,36.5L67.7,36.4L67.6,36.3L67.6,36.6L67.7,36.8L67.7,37L67.4,37.3L67,37.9L66.9,37.8L67.2,37.4L67,37.1L67.1,36.5L66.9,36.8L66.9,37.2L66.5,37.1L66.9,37.4L66.7,38L66.9,38.1L66.9,38.3L66.8,39L66.3,39.6L65.7,39.8L65.2,40.2L64.9,40.2L64.6,40.5L64.4,40.7L63.7,41.2L63.3,41.5L62.9,41.9L62.7,42.4L62.7,42.9L62.8,43.5L63,44L62.9,44.3L63,45.2L62.9,45.6L62.9,45.9L62.6,46.4L62.5,46.4L62.2,46.4L62.1,46L61.9,45.9L61.7,45.3L61.6,44.7L61.5,44.5L61.7,44L61.7,43.6L61.3,43L61.1,42.9L60.5,43.2L60.4,43.2L60.2,42.9L59.8,42.7L59.2,42.8L58.7,42.7L58.2,42.7L57.9,42.8L58,43L57.9,43.3L58,43.5L57.9,43.6L57.7,43.4L57.5,43.6L57,43.6L56.7,43.2L56.2,43.3L55.8,43.1L55.4,43.2L54.9,43.3L54.2,43.9L53.6,44.2L53.2,44.5L53,44.8L52.9,45.3L52.8,45.6L52.9,45.9L52.6,45.9L52.3,45.7L51.8,45.5L51.7,45.2L51.7,44.7L51.5,44.3L51.4,43.9L51.2,43.4L50.9,43.1L50.4,43.1L49.9,43.7L49.4,43.5L49.2,43.3L49.2,42.9L49.1,42.5L48.8,42.2L48.6,42L48.4,41.7L47.4,41.7L47.3,42L46.9,42L45.7,42L44.6,41.5L43.8,41.2L43.9,41L43.1,41.1L42.5,41.2L42.5,40.8L42.2,40.4L42,40.3L42,40.1L41.7,40.1L41.6,39.9L41.1,39.8L40.9,39.7L41,39.3L40.7,38.6L40.6,37.6L40.7,37.5L40.6,37.2L40.4,36.6L40.5,36.1L40.4,35.7L40.8,35.1L41,34.5L41.1,34L41.6,33.3L42,32.7L42.4,32L42.8,31.1L42.9,30.5L43,30.2L43.1,30.1L43.7,30.3L43.7,31L43.9,30.8L44.1,30.2ZM17.4,50L17.5,50L17.6,50.1L17.7,50.4L17.6,50.4L17.4,50.6L17.1,50.7L17,50.8L16.9,50.7L17,50.5L16.9,50.2L17,50.2L17.1,50L17.1,49.9L17.2,49.8L17.2,49.9ZM17.2,49.5L17.1,49.6L16.9,49.6L16.8,49.5L16.8,49.4L16.8,49.4L16.9,49.3L17,49.4ZM16.8,49.2L16.8,49.3L16.4,49.3L16.5,49.2ZM16.2,48.8L16.2,48.9L16.3,49.1L16.3,49.1L16.2,49.1L16,49.1L16,48.9L16,48.9ZM15.5,48.5L15.4,48.6L15.3,48.7L15.2,48.6L15.2,48.5L15.3,48.5ZM27.5,22.1L27.8,22.2L27.6,22.4L27.2,22.5L27,22.4L26.9,22.2ZM32.6,23.7L32.9,23.7L33,23.9L32.3,24.2L31.6,24.5L31.4,24.3L31.6,24L32.3,23.8ZM45.4,16.4L43.2,18.6L40,22.2L40.5,22.2L40.9,22.4L41,22.6L41.1,23.1L41.9,22.7L42.5,22.5L42.5,22.8L42.7,23.1L42.9,23.4L42.9,23.9L42.8,24.6L43.4,25L43.1,25.4L42.6,25.8L42.5,25.5L42.2,25.3L42.5,24.7L42.2,24.2L42.4,23.6L41.9,23.5L41.1,23.5L40.7,23.3L40.2,22.7L39.8,22.5L39.1,22.3L38.4,22.4L37.7,22.1L37.3,21.8L36.7,21.9L36.4,22.4L36.1,22.4L35.4,22.5L34.7,22.8L34.1,22.9L34.3,22.5L35.1,21.9L35.8,21.7L35.8,21.5L34.9,21.9L34.2,22.3L33,22.8L33.1,23.1L32.2,23.6L31.5,23.8L30.8,24L30.4,24.3L29.3,24.7L28.9,25L28,25.2L27.7,25.2L27.1,25.4L26.4,25.6L25.8,25.8L24.7,26L24.7,25.9L25.6,25.6L26.2,25.4L27.1,25L27.8,25L28.3,24.7L29.3,24.3L29.6,24.2L30.1,23.9L30.7,23.4L31.3,23.1L30.5,23.3L30.4,23.1L30,23.4L29.9,23L29.6,23.3L29.7,23L29,23.2L28.6,23.2L29,22.8L29.3,22.6L29.2,22.4L28.4,22.5L28.3,22.2L28.1,22L28.4,21.7L28.3,21.4L28.9,21L29.7,20.7L30.2,20.4L30.6,20.3L30.8,20.4L31.5,20.1L31.8,20.2L32.4,20L32.6,19.7L32.4,19.6L33,19.3L32.7,19.4L32.1,19.5L31.8,19.6L31.6,19.5L30.8,19.6L30.3,19.4L30.3,19.2L30.1,18.8L31.1,18.5L32.5,18.2L32.8,18.2L32.4,18.6L33.5,18.5L33.5,18.2L33.2,17.9L33.2,17.6L33,17.4L32.6,17.2L33.2,16.9L34.1,16.8L35,16.6L35.4,16.3L36.2,16L36.7,15.9L37.9,15.7L38.3,15.7L39.3,15.4L39.9,15.5L39.9,15.8L40.2,15.7L40.9,15.7L40.8,15.8L41.4,15.9L41.9,15.9L42.6,16.1L43.5,16.1L43.7,16.2L44.4,16.1L45,16.3ZM27.1,20L27.3,20.1L27.6,20L27.9,20.2L28.3,20.3L28.1,20.3L27.6,20.5L27.4,20.3L27.3,20.2L26.9,20.3L26.8,20.2ZM156.7,29.5L156.5,30L156.1,30L156.3,30.7L156.1,31L154.9,30.8L155,32L154.8,32.2L153.8,32.5L154.6,33.7L154.3,33.9L154.5,34.3L154.1,34.2L153.8,33.9L152.9,33.8L152,33.8L151.8,33.9L150.9,33.6L150.7,33.7L150.7,34.2L149.7,33.9L149.4,34L149.3,34.3L149.1,34.4L148.5,34.9L148.3,35.4L148.1,35.4L147.9,35.1L147.2,35.1L146.9,34.5L146.7,34.5L146.5,33.8L145.7,33.3L144.8,33.3L144.2,33.5L143.5,32.8L143,32.6L142,32.1L141.9,32L140.6,32.4L141.2,35L140.9,35L140.4,34.5L140,34.3L139.4,34.4L139.2,34.7L139.1,34.5L139.2,34.2L139,33.9L138.3,33.7L138,33.1L137.6,32.9L137.6,32.7L138.1,32.7L138,32.2L138.5,32.1L139,32.2L138.9,31.6L138.7,31.1L138.2,31.2L137.7,31L137.1,31.3L136.7,31.4L136.4,31.3L136.3,31L135.9,30.5L135.5,30.5L135,30.1L135.2,29.6L135,29.4L135.2,28.7L135.9,29.1L135.8,28.6L136.7,27.8L137.6,27.8L138.8,28.3L139.5,28.6L140,28.3L140.9,28.3L141.6,28.6L141.7,28.4L142.5,28.4L142.5,28.1L141.5,27.7L141.9,27.3L141.8,27.1L142.2,27L141.7,26.5L141.9,26.3L143.7,26L143.9,25.9L145.1,25.6L145.5,25.4L146.5,25.5L146.9,26.2L147.4,26L148.1,26.3L148.2,26.6L148.7,26.6L149.8,26L149.7,26.2L150.5,26.7L152.4,28.4L152.5,28L153.4,28.4L154.1,28.3L154.4,28.4L154.8,28.8L155.3,28.9L155.6,29.2L156.3,29.1ZM141.2,35L140.6,32.4L141.9,32L142,32.1L143,32.6L143.5,32.8L144.2,33.5L144.8,33.3L145.7,33.3L146.5,33.8L146.7,34.5L146.9,34.5L147.2,35.1L147.9,35.1L148.1,35.4L148.3,35.4L148.5,34.9L149.1,34.4L149.3,34.3L149.5,34.4L149.2,34.8L149.7,35.1L150,34.9L150.8,35.3L150.2,35.8L149.7,35.7L149.5,35.7L149.4,35.6L149.4,35.2L148.7,35.4L148.6,35.8L148.5,36.2L148,36.2L147.9,36.5L148.4,36.7L148.6,37.2L148.5,37.9L148,37.8L147.7,37.8L147.6,37.3L146.8,37L146.1,36.7L145.7,36.3L144.9,35.9L144.5,35.1L144.3,35L143.7,35L143.4,34.9L143.3,34.3L142.4,34L142.1,34.4L141.6,34.6L141.8,35ZM195.6,65.9L196.6,66.4L197.7,66.8L198.1,67.2L198.5,67.5L198.5,67.9L199.5,68.4L199.6,68.8L199.1,68.8L199.2,69.3L199.7,69.8L200,70.5L200.3,70.5L200.3,70.8L200.7,70.9L200.5,71L201.1,71.3L201,71.5L200.6,71.6L200.5,71.4L200,71.3L199.4,71.2L199,70.8L198.7,70.4L198.4,69.8L197.7,69.5L197.1,69.7L196.7,69.9L196.8,70.4L196.3,70.7L195.9,70.5L195.3,70.5L195.5,68.2ZM202.6,66.7L202.9,66.9L202.9,67.3L202.7,67.5L202.6,67L202.5,66.8L202.2,66.5L201.9,66.2L201.5,66L201.6,65.9L202,66.1L202.2,66.2L202.4,66.4ZM201.7,68.2L201.4,68.4L201.1,68.5L200.8,68.5L200.3,68.3L199.9,68.1L200,67.9L200.5,68L200.9,68L201,67.6L201.1,67.6L201.1,68L201.5,67.9L201.6,67.7L202,67.4L202,67L202.3,67L202.4,67.1L202.4,67.5L202.2,68L201.8,68ZM203.9,67.9L204,68L204.3,68.5L204.6,68.7L204.5,68.9L204.3,69L204,68.7L203.8,68.3L203.7,67.7L203.8,67.6ZM195.6,65.9L195.5,68.2L195.3,70.5L194.8,69.9L194.2,69.8L194.1,70L193.3,70L193.6,69.4L194,69.2L193.9,68.5L193.6,67.9L192.5,67.3L192,67.2L191.1,66.6L190.9,66.9L190.7,67L190.6,66.7L190.6,66.4L190.1,66.1L190.8,65.8L191.2,65.8L191.2,65.7L190.3,65.7L190.1,65.2L189.5,65.1L189.3,64.8L190.1,64.6L190.4,64.4L191.4,64.7L191.5,64.9L191.6,66L192.2,66.5L192.7,65.7L193.5,65.3L194,65.3L194.5,65.5L195,65.8ZM185.6,70.4L185.7,70.5L185.7,70.7L185.2,71.2L184.7,71.4L184.6,71.3L184.7,71.1L185,70.6ZM191.3,68.9L191.3,68.4L191.4,68.2L191.6,67.9L191.7,68.1L191.7,68.5ZM181.5,61.2L181.2,61.8L181.7,62.5L181.6,62.8L182.3,63.5L181.5,63.6L181.3,64L181.4,64.7L180.8,65.1L180.8,65.8L180.5,66.9L180.4,66.7L179.7,67L179.5,66.6L179,66.5L178.7,66.3L178,66.5L177.8,66.2L177.4,66.2L176.9,66.2L176.8,65.2L176.5,65L176.2,64.4L176.2,63.8L176.2,63.2L176.6,62.7L176.7,63.2L177.1,63.6L177.5,63.4L177.9,63.5L178.2,63.1L178.5,63.1L179.1,63.2L179.6,63.1L179.9,62.1L180.1,61.9L180.3,61.1L181,61.1ZM188.5,66.1L189.2,66.3L189.4,66.8L188.9,66.5L188.4,66.5L188.1,66.5L187.6,66.5L187.8,66.1ZM187,66.8L186.6,66.6L186.5,66.3L187.1,66.3L187.2,66.5ZM187.7,62.6L187.7,63L188.1,63L188.1,63.3L188.1,63.9L187.8,63.9L187.7,64.3L188,64.7L187.8,64.7L187.5,64.3L187.4,63.4L187.5,62.8ZM184.7,63.5L185.3,63.5L185.9,62.9L186.1,63.1L185.6,63.8L185.1,63.9L184.5,63.8L183.5,63.8L183,63.9L182.9,64.5L183.4,65.1L183.8,64.8L184.9,64.5L184.9,64.9L184.6,64.8L184.3,65.2L183.8,65.4L184.3,66.3L184.2,66.6L184.7,67.4L184.7,67.9L184.4,68.1L184.1,67.8L184.5,67.2L183.9,67.5L183.7,67.3L183.8,67L183.4,66.6L183.4,66L183,66.2L183.1,67L183,68L182.6,68.1L182.4,67.9L182.6,67.2L182.5,66.6L182.3,66.6L182.1,66.1L182.4,65.6L182.5,65.1L182.8,64L182.9,63.7L183.4,63.2L183.9,63.4ZM182.7,71.3L181.9,70.8L182.5,70.7L182.8,70.9L183,71.1L183,71.3ZM183.4,70.1L183.8,70.1L184.4,69.8L184.3,70.2L183.4,70.4L182.6,70.3L182.6,70L183.1,69.9ZM181.6,70L182,69.9L182.1,70.2L181.4,70.4L181,70.5L180.6,70.5L180.9,70L181.2,70L181.4,69.8ZM175.8,68.6L175.8,68.9L177,68.9L177.1,68.6L178.2,69L178.4,69.4L179.3,69.6L180,70L179.3,70.3L178.7,70L178.1,70L177.5,69.9L177,69.8L176.3,69.5L175.8,69.5L175.6,69.6L174.5,69.3L174.4,69L173.8,68.9L174.3,68.2L175,68.3L175.5,68.6ZM173.4,64.9L173.5,65.4L173.7,65.7L174.1,65.8L174.4,66.3L174.2,67.1L174.2,68.2L173.5,68.2L173,67.6L172.2,67.1L172,66.6L171.6,66.1L171.3,65.5L170.8,64.6L170.3,64L170.1,63.4L169.9,62.8L169.3,62.4L169,61.8L168.5,61.4L167.9,60.6L167.8,60.3L168.2,60.3L169.1,60.4L169.7,61.1L170.2,61.6L170.5,61.9L171.1,62.6L171.7,62.6L172.2,63.1L172.6,63.7L173.1,64L172.8,64.6L173.2,64.8ZM74.1,101L74.4,101.3L74.8,101.8L75.6,102.2L76.4,102.4L76.3,102.7L75.8,102.8L75.5,102.5L75.1,102.5L74.6,102.5ZM76.5,85.4L76.5,86L76.4,86.7L76.5,87.4L76.4,87.6L76.5,88L76.5,88.4L77.3,89L77.3,89.5L77.7,89.8L77.8,90.1L77.4,91L76.6,91.4L75.5,91.6L74.9,91.5L75.1,91.9L75.1,92.4L75.3,92.8L75,93L74.5,93.1L73.9,92.9L73.7,93.1L73.9,93.7L74.4,94L74.6,93.7L74.9,94.1L74.4,94.3L74.1,94.8L74.2,95.5L74.1,95.8L73.6,95.8L73.3,96.2L73.3,96.7L74,97.2L74.5,97.3L74.5,98L74,98.3L73.9,99.1L73.5,99.4L73.4,99.7L73.8,100.4L74.3,100.8L74,100.8L73.5,100.7L72.2,100.6L71.8,100.2L71.7,99.7L71.3,99.7L71.1,99.5L70.8,98.8L71.1,98.5L71.1,98L70.9,97.7L71,97.1L71,96.2L70.8,95.8L71,95.6L70.9,95.4L70.6,95.2L70.7,95L70.3,94.7L70,93.9L70.2,93.7L69.9,92.9L69.8,92.2L69.8,91.5L70.1,91.3L69.8,90.6L69.6,90L69.9,89.5L69.8,88.9L70,88.2L69.8,87.6L69.7,87.4L69.2,86.2L69.4,85.5L69.2,84.8L69.3,84.2L69.6,83.5L69.9,83.1L69.7,82.8L69.8,82.6L69.6,81.4L70.2,81L70.3,80.3L70.2,80.1L70.7,79.5L71.4,79.6L71.9,80.2L72,79.6L72.7,79.6L72.8,79.8L74,80.9L74.5,81L75.3,81.6L76,81.8L76.1,82.1L75.6,83.2L76.3,83.4L76.9,83.5L77.4,83.4L77.8,82.9L77.9,82.2L78.1,82.1L78.5,82.5L78.5,83.1L78.1,83.5L77.7,83.8L77.2,84.4ZM74.1,101L74.6,102.5L75.1,102.5L75.5,102.5L75.4,102.8L75,103L74.8,103L74.4,102.9L74,102.7L73.4,102.6L72.6,102.3L72,101.9L71,101.1L71.4,101.3L72.3,101.7L73.1,102L73.3,101.7L73.3,101.2L73.7,100.9ZM68.3,76.5L68.7,77L68.8,77.5L69.2,77.8L69.1,78.4L69.5,79.2L69.8,80.2L70.2,80.1L70.3,80.3L70.2,81L69.6,81.4L69.8,82.6L69.7,82.8L69.9,83.1L69.6,83.5L69.3,84.2L69.2,84.8L69.4,85.5L69.2,86.2L69.7,87.4L69.8,87.6L70,88.2L69.8,88.9L69.9,89.5L69.6,90L69.8,90.6L70.1,91.3L69.8,91.5L69.8,92.2L69.9,92.9L70.2,93.7L70,93.9L70.3,94.7L70.7,95L70.6,95.2L70.9,95.4L71,95.6L70.8,95.8L71,96.2L71,97.1L70.9,97.7L71.1,98L71.1,98.5L70.8,98.8L71.1,99.5L71.3,99.7L71.7,99.7L71.8,100.2L72.2,100.6L73.5,100.7L74,100.8L73.6,100.8L73.4,100.9L73,101.2L73.1,101.8L72.9,101.8L72.2,101.6L71.5,101.1L70.7,100.8L70.3,100.3L70.4,99.9L69.9,99.5L69.5,98.3L69.5,97.7L69.9,97.1L69,96.9L69.3,96.3L69.1,95.2L69.8,95.4L69.7,94L69.3,93.8L69.4,94.7L69,94.6L68.9,93.6L68.7,92.3L68.8,91.8L68.5,91.1L68.3,90.3L68.5,90.3L68.6,89.1L68.8,88L68.8,87L68.5,85.9L68.5,85.3L68.3,84.4L68.5,83.6L68.4,82.2L68.4,80.7L68.3,79.2L68.2,78L67.9,77L68.2,76.8ZM127.8,67.3L127.9,67.9L127.8,68.3L128,68.7L128.3,69.1L128.6,70L128.4,69.9L127.6,70L127.4,70.1L127.2,70.5L127.3,70.9L127.2,71.7L127.1,72.4L127.3,72.5L127.7,72.8L127.9,72.7L127.9,73.4L127.4,73.4L127.2,73L127,72.7L126.5,72.6L126.4,72.3L126,72.5L125.5,72.4L125.3,72.1L125,72L124.7,72L124.7,71.8L124.4,71.8L124.2,71.7L123.8,71.8L123.5,71.8L123.4,71.9L123.4,71.1L123.2,70.8L123.2,70.4L123.3,69.9L123.2,69.7L123.2,69.2L122.4,69.2L122.5,69L122.2,69L122.1,69.1L121.8,69.1L121.6,69.5L121.5,69.7L121.2,69.6L121,69.7L120.6,69.8L120.4,69.4L120.2,69.2L120,68.8L119.9,68.2L118.1,68.2L117.9,68.3L117.7,68.3L117.5,68.4L117.4,68.2L117.5,68.1L117.6,67.8L117.7,67.6L117.9,67.5L118,67.5L118.3,67.3L118.6,67.3L118.6,67.5L118.8,67.6L119.2,67.2L119.6,66.8L119.7,66.6L119.7,66L120,65.3L120.2,65L120.6,64.6L120.7,64.4L120.7,64.1L120.8,63.9L120.8,63.5L120.9,62.9L121,62.4L121.2,62.1L121.2,61.6L121.3,61.2L121.5,60.8L121.8,60.6L122.3,60.8L122.7,61.1L123.1,61.1L123.6,61.3L123.8,60.8L123.9,60.8L124.1,60.9L124.8,60.5L125,60.7L125.2,60.6L125.3,60.5L125.6,60.4L126,60.5L126.4,60.5L126.6,60.4L127,61L127.2,61.1L127.4,61L127.7,61L128,60.9L128.2,61.2L128.7,61.6L128.7,62.5L128.9,62.6L128.7,62.8L128.5,63L128.3,63.4L128.1,63.7L128.1,64.2L128,64.5L128,65L127.8,65.2L127.8,65.7L127.7,65.7L127.6,66.1L127.8,66.4ZM135.3,65.3L134.9,64.7L134.9,62.1L135.4,61.4L135.6,61.1L136,61.1L136.5,60.6L137.3,60.6L138.9,58.5L139.3,57.9L139.6,57.5L139.6,57.1L139.6,56.4L139.5,56.1L139.5,56.1L139.7,56.1L140,56L140.3,55.9L140.6,55.7L140.8,55.7L140.9,55.8L140.8,56.3L140.8,56.6L140.7,56.9L140.6,57.6L140.3,58.4L140,59.3L139.5,60.4L139,61.1L138.3,62.1L137.7,62.7L136.8,63.4L136.2,63.9L135.5,64.7L135.4,65.1ZM133.8,67.4L132.9,66.7L132.9,66.3L130.7,64.8L130.6,64.8L130.6,64L130.8,63.7L131.1,63.3L131.3,62.8L131,62L130.9,61.6L130.6,61.1L131,60.7L131.4,60.2L131.7,60.4L131.7,60.7L131.9,61L132.4,61L133.1,61.6L133.3,61.6L133.5,61.6L133.6,61.6L134,61.7L134.2,61.4L134.7,61.1L135,61.4L135.4,61.4L134.9,62.1L134.9,64.7L135.3,65.3L134.8,65.6L134.7,65.9L134.4,65.9L134.4,66.4L134.2,66.7L134,67.2ZM124.9,58.3L124.4,58L124.2,57.8L124.2,57.6L124.2,57.3L124.2,57L123.9,56.6L123.8,56.3L123.8,56.1L123.6,55.9L123.6,55.5L123.4,55.2L123.2,55.3L123.3,55L123.4,54.7L123.4,54.4L123.5,54.2L123.4,54L123.6,53.6L123.8,53.1L124.3,53.1L124.2,50.3L124.2,50L124.9,50L124.8,48.6L127.2,48.6L129.5,48.6L131.9,48.6L132.1,49.3L132,49.4L132.1,50.2L132.4,51L132.6,51.2L133,51.4L132.7,51.8L132.3,52L132.1,52.2L132,52.6L131.8,53.7L131.9,54L131.8,54.6L131.6,55.3L131.3,55.6L131,56.1L131,56.4L130.7,56.6L130.5,57.4L130.6,58L130.5,57.5L130.5,57.4L130.5,57.1L130.4,56.8L130.1,56.6L130,56.1L130,55.5L129.7,55.5L129.7,55.7L129.3,55.7L129.5,55.9L129.6,56.3L129.2,56.7L129,57.2L128.6,57.3L128.1,56.9L127.9,57L127.8,57.2L127.5,57.4L127.5,57.5L126.9,57.5L126.8,57.4L126.4,57.3L126.2,57.5L126,57.4L125.7,57L125.6,56.8L125.1,56.9L125,57.2L124.8,57.8L124.6,58L124.5,58ZM124.2,50.3L124.3,53.1L123.8,53.1L123.6,53.6L123.4,54L123.5,54.2L123.4,54.4L123.4,54.7L123.3,55L123.2,55.3L123.4,55.2L123.6,55.5L123.6,55.9L123.8,56.1L123.8,56.3L123.4,56.4L123.1,56.7L122.7,57.4L122.1,57.8L121.6,57.7L121.4,57.8L121.4,58L121.1,58.3L120.9,58.6L120.1,58.8L120,58.7L119.9,58.7L119.8,58.8L119.3,58.9L119.3,58.7L119.2,58.2L119.1,57.9L118.8,57.8L118.4,57.4L118.6,57.1L118.8,57.1L119,57.1L119.4,57.1L119,56.4L119,56L119,55.5L118.7,55.1L118.8,54.7L118.4,54.7L118.4,54.3L118.1,54L118.4,53.1L119.1,52.4L119.2,51.5L119.3,50.1L119.5,49.8L119.2,49.5L119.2,49.3L119,49.1L118.8,48L119.4,47.6L121.8,49ZM67.2,50.2L67.2,50.6L67.2,50.9L67,51L67.1,51.2L67.1,51.4L66.7,51.3L66.4,51.3L66.1,51.3L65.8,51.4L65.5,51.2L65.6,51L66.1,51.1L66.6,51.1L66.8,51L66.5,50.7L66.6,50.4L66.2,50.3L66.4,50.1L66.7,50.1ZM67.1,51.4L67.1,51.2L67,51L67.2,50.9L67.2,50.6L67.2,50.2L67.3,50.1L67.8,50.1L68.1,50.3L68.3,50.3L68.4,50.5L68.7,50.5L68.7,50.7L68.9,50.7L69.2,51L68.9,51.3L68.7,51.1L68.4,51.2L68.2,51.1L68.1,51.3L67.8,51.3L67.8,51.1L67.6,51.2L67.3,51.7L67.1,51.6ZM148,10.2L148.7,10.1L149.8,10.3L151.3,10.8L151.6,11.2L150.8,11.3L149.5,11.2L148.6,11L147.9,10.6L147.3,10.5ZM152.6,11L154,11.3L154.1,11.5L151.9,11.7L152,11.1L152.3,11ZM169.7,12.7L170.9,12.7L172.8,13L172.9,13.4L171.3,13.4L170.7,13.5L169.5,13.2L169.2,12.8ZM174.3,13.1L175.5,13.3L175.3,13.5L174.6,13.4L173.5,13.2L173.4,13ZM171.9,14.2L172.1,14L172.6,14L173.4,14.2L173.7,14.3L173,14.3L172,14.3ZM128.3,10.4L129,10.3L129.6,10.3L129.8,10.4L130,10.3L130.3,10.2L131,10.3L130.9,10.4L130.3,10.5L130,10.5L130,10.6L129.5,10.7L129,10.6L129.2,10.4ZM121.8,26.1L120.8,26.1L120.2,26L120.3,25.7L120.9,25.5L121.5,25.6L121.7,25.7L121.7,25.9ZM133.6,14L134.4,13.5L134.2,13.3L135,13L136.3,12.6L137.6,12.5L138.3,12.3L139,12.3L139.5,12.5L139.3,12.6L137.9,12.9L136.7,13.2L135.6,13.7L135.2,14.3L134.8,14.8L135.1,15.3L136.1,15.8L135.9,15.8L134.4,15.7L134.1,15.5L133.3,15.3L133.1,15L133.5,14.9L133.3,14.6L134,14.1ZM184.3,26.5L185,27.1L185.4,27.8L186.1,28.5L187.4,29.7L186.5,29.4L186.8,30.4L187.8,31.1L188,31.6L187.4,31.2L187.3,31.7L186.9,31.2L186.5,30.5L186,29.8L185.8,29.2L185.2,28.3L184.5,27.7L183.9,26.7L184.1,26.4L183.7,26.1L183.9,26ZM26.9,16.8L26.9,16.8L27.5,17.3L28,17.9L27.5,18.2L27.6,18.4L28,18L29.2,18L29.5,18.6L28.7,18.9L27.9,18.9L27.2,19.5L26.8,19.7L26.4,19.7L26.3,19.4L25.9,19.3L26.1,19L25.7,18.9L25.1,19L25.1,18.8L25.4,18.5L24.7,18.7L24.6,19L24,19.2L24,19.2L26.9,16.8ZM196,19.2L196,19.2L195.7,19.5L195,19.5L195.9,19.8L196.7,20.3L197.1,20.5L197.5,20.7L197.6,20.9L196.5,20.8L195.6,21.2L195.3,21.3L195,21.8L194.7,22.1L194.8,22.4L193.6,22L192.8,22.5L192.4,22.3L192.2,22.5L191.4,22.4L191.7,22.9L191.6,23.5L191.9,23.8L192.6,23.9L193.4,24.9L192.9,24.9L193.2,25.4L193.7,25.7L193,26.1L193.5,26.8L192.8,27L193.2,27.7L192.9,28.3L192.4,27.8L191.4,26.8L189.9,25.4L189.4,24.5L189.5,24.1L189.2,23.8L189.9,23.6L190.1,22.8L190.3,22.1L190.7,21.6L190.2,20.7L189.6,20.8L189.9,21.3L189.3,22L188.1,21.2L187.1,21.4L186.8,22.5L187.6,22.9L186.6,23.1L185.9,23.1L185.5,22.7L184.7,22.6L184.3,22.9L182.7,22.8L181.2,23L180.6,24.2L179.8,25.8L180.7,25.9L181.2,26.3L181.8,26.4L181.9,26.1L182.5,26.2L183.8,26.9L184.2,27.5L184.3,28.1L184.8,28.9L185.2,30L185,31L185.1,31.5L184.8,32.3L184.5,33.1L184.4,33.5L183.8,33.9L183.5,33.9L183,33.6L182.5,34.1L182.5,34.3L182.5,34.3L182.4,34.2L182.2,33.9L182.5,33.9L182.1,33L181.7,32.4L182,32.2L182.8,32.3L182.8,31.6L182.5,30.9L182.6,30.6L182.5,30L181.7,30.2L181.4,30.5L180.6,30.5L180,29.8L179.1,29.4L178,29.1L177.4,28.5L177,28.1L176.6,27.8L175.9,27.1L175.3,26.8L174.4,26.6L173.7,26.7L173.1,26.8L172.9,27.1L173.3,27.3L173.5,27.6L173.3,27.9L173.2,28.6L173.4,28.9L172.9,29.3L172.1,29.1L171.5,29.1L171.1,28.9L170.8,28.8L170.2,29.3L169.6,29.4L169.2,29.6L168.5,29.5L168,29.5L167.5,29.1L166.8,28.8L166.2,28.7L165.6,28.8L165.1,28.9L164.2,28.6L163.9,28.1L163.2,27.9L162.7,27.9L162,27.6L161.7,28.3L162.1,28.7L161.8,29.2L161,29L160.4,29L160,28.7L159.4,28.6L158.8,28.4L158.2,28.8L157.4,29.3L156.9,29.5L156.7,29.5L156.3,29.1L155.6,29.2L155.3,28.9L154.8,28.8L154.4,28.4L154.1,28.3L153.4,28.4L152.5,28L152.4,28.4L150.5,26.7L149.7,26.2L149.8,26L148.7,26.6L148.2,26.6L148.1,26.3L147.4,26L146.9,26.2L146.5,25.5L145.5,25.4L145.1,25.6L143.9,25.9L143.7,26L141.9,26.3L141.7,26.5L142.2,27L141.8,27.1L141.9,27.3L141.5,27.7L142.5,28.1L142.5,28.4L141.7,28.4L141.6,28.6L140.9,28.3L140,28.3L139.5,28.6L138.8,28.3L137.6,27.8L136.7,27.8L135.8,28.6L135.9,29.1L135.2,28.7L135,29.4L135.2,29.6L135,30.1L135.5,30.5L135.9,30.5L136.3,31L136.4,31.3L136.7,31.4L136.5,31.9L136,32L135.6,32.7L136.2,33.3L136.2,33.8L137,34.6L136.7,34.9L136.6,35.1L136.4,35L135.9,34.6L135.8,34.6L135.4,34.4L135.2,34.1L134.6,34L134.3,34.1L134.2,34L133.4,33.6L132.6,33.5L132.1,33.4L132,33.5L131.2,32.9L130.6,32.6L130,32.2L130.4,32.1L130.8,31.6L130.4,31.3L131.2,31L131.1,30.8L130.7,31L130.6,30.7L130.9,30.5L131.4,30.4L131.4,30.2L131.3,29.8L131.4,29.4L131.4,29.2L130.5,29L130.2,29L129.9,28.7L129.5,28.8L128.7,28.6L128.7,28.5L128.5,28.2L128.1,28.1L128,27.9L128.1,27.8L127.7,27.4L127.2,27.5L127,27.4L126.9,27.6L126.7,27.6L126.5,27.1L126.3,26.9L126.4,26.8L126.9,26.9L127,26.7L126.9,26.5L126.5,26.4L126.5,26.3L126.3,26.2L125.9,25.7L126,25.6L125.9,25.3L125.3,25.1L125.1,25.2L125,25L124.4,24.8L124.2,24.5L124.1,24.1L123.8,24L124,23.8L123.8,23.2L124.1,22.8L124,22.7L124.5,22.3L123.9,22L124.8,21.2L125.2,20.9L125.3,20.5L124.5,20.1L124.6,19.7L124.1,19.2L124.3,18.7L123.7,18L124,17.6L123.2,17.2L123.2,16.7L123.5,16.7L124.3,16.5L124.7,16.2L125.5,16.6L126.8,16.7L128.8,17.4L129.2,17.7L129.4,18.1L128.9,18.4L128.2,18.6L126,18.1L125.6,18.2L126.5,18.7L126.6,18.9L126.8,19.6L127.4,19.8L127.9,19.9L127.8,19.6L127.5,19.4L127.7,19.1L129,19.5L129.4,19.4L128.9,18.9L129.9,18.3L130.3,18.3L130.8,18.6L131,18.1L130.5,17.8L130.6,17.4L130.1,17L131.5,17.2L131.9,17.6L131.3,17.6L131.4,18L131.8,18.2L132.5,18.1L132.5,17.7L133.4,17.4L134.8,16.9L135.2,16.9L134.9,17.3L135.5,17.3L135.7,17.1L136.6,17.1L137.2,16.9L137.8,17.2L138.2,16.8L137.6,16.5L137.7,16.3L139.2,16.5L139.9,16.6L141.9,17.3L142,17L141.4,16.7L141.3,16.6L140.8,16.5L140.8,16.2L140.3,15.8L140.2,15.6L140.8,15.1L140.8,14.5L141.1,14.4L142.3,14.6L142.6,14.9L142.4,15.4L142.8,15.6L143.2,16L143.5,16.8L144.2,17.1L144.2,17.5L143.7,18.4L144.3,18.5L144.3,18.3L144.8,18.1L144.8,17.8L145,17.5L144.6,17.2L144.6,16.8L144,16.7L143.8,16.4L143.8,15.8L143,15.3L143.6,15L143.2,14.5L143.4,14.5L143.9,14.8L144,15.4L144.5,15.5L144.1,15.1L144.7,14.9L145.6,14.8L146.6,15.2L146,14.7L145.5,14.1L146.2,14L147.3,14L148.2,13.9L147.6,13.6L147.9,13.3L148.4,13.2L149,13L150.1,12.9L150.1,12.7L151.2,12.7L151.7,12.8L152.4,12.5L153.2,12.5L153.1,12.3L153.3,12.1L154.1,11.9L155,12L154.5,12.2L155.6,12.2L155.9,12.5L156.2,12.4L157.5,12.4L158.7,12.6L159.2,12.9L159.4,13.1L159.1,13.3L158.2,13.6L158,13.8L158.6,13.9L159.4,14L159.7,13.9L160.3,14.3L160.3,14.1L161,14L162.5,14.1L162.8,14.4L164.7,14.5L164.4,14L165.4,14.1L166.1,14.1L167.1,14.4L167.7,14.8L167.6,15L168.6,15.5L169.6,15.7L169.4,15.1L170.4,15.4L171,15.2L172.1,15.4L172.2,15.2L173.1,15.3L172.2,14.8L172.5,14.5L176.9,14.9L177.7,15.3L179.4,15.7L181.1,15.6L182.1,15.7L182.8,15.9L183.2,16.4L184,16.5L184.4,16.4L185.2,16.4L186.2,16.5L187,16.4L188.5,17L188.8,16.8L188,16.4L187.9,16.1L189.5,16.3L190.4,16.3L192.1,16.5L193.1,16.8L196,19.2ZM191.7,15.7L191.2,15.7L190.9,15.5L191.1,15.3L191.7,15.7ZM28.9,15.3L28.9,15.3L28.9,15.3L29,15.3L29.3,15.3L29.8,15.4L29.6,15.5L29,15.7L28.3,15.7L28.3,15.7L28.9,15.3ZM128.2,31.7L128.3,31.6L128.7,31.7L128.9,31.7L129,31.9L129.1,31.9L129.1,32L129.4,32.1L129.9,32.1L129.9,32.3L129.3,32.5L128.6,32.9L128.3,32.7L128.3,32.4L127.7,32.2L127.8,32.1L128.3,31.8ZM63.7,45.2L63.9,45.2L64.3,45.2L64.3,45.4L63.7,45.5ZM64.4,45.1L64.8,45.4L64.6,45.9L64.5,45.8L64.6,45.4L64.4,45.1ZM63.9,46.3L64.1,46.4L64.2,47L64.2,47.4L64,47.4L63.9,47L63.7,46.8ZM77.8,100.5L78.3,100.1L78.8,100.2L79.1,100L79.6,100.3L79.5,100.5L78.8,100.7L78.5,100.5L78.2,100.8ZM116.2,10.8L116.4,10.7L117,10.6L117.5,10.8L119,11.2L118,11.4L117.8,11.8L117.4,11.9L117.3,12.3L116.8,12.3L115.8,12L116.2,11.8L115.5,11.7L114.7,11.2L114.3,10.8L115.4,10.7L115.7,10.8ZM124.3,16.5L123.5,16.7L123.2,16.7L123.3,16.3L122.7,16.1L122,16.3L121.8,16.7L121.4,17L120.9,16.9L120.3,16.9L119.8,16.6L119.5,16.7L119.2,16.7L119.2,17.1L118.3,17L118.3,17.4L117.8,17.4L117.5,17.8L117.1,18.5L116.5,19.3L116.7,19.6L116.5,19.8L116.1,19.8L115.8,20.4L115.9,21.2L116.2,21.5L116.1,22.3L115.7,22.7L115.5,23.1L115.2,22.7L114.2,23.4L113.6,23.6L112.8,23.3L112.6,22.6L112.4,21.1L112.9,20.7L114.1,20.2L115.1,19.5L115.9,18.7L116.9,17.5L117.6,17L118.8,16.3L119.8,16L120.5,16.1L121.1,15.6L121.9,15.6L122.7,15.5L124.2,15.9L123.7,16.1ZM121.2,10.6L120.7,10.9L119.5,11L118.3,10.9L118.2,10.8L117.6,10.7L117.1,10.5L118.3,10.4L119,10.5L119.3,10.4L120.4,10.5ZM120.4,11.8L119.5,12L118.8,11.9L119,11.7L118.7,11.6L119.6,11.5L119.8,11.7ZM91.5,9.4L93,9.2L94.3,9.2L94.9,9L96.3,9L99.4,9.1L101.8,9.4L101,9.6L99.5,9.6L97.3,9.6L97.5,9.7L98.9,9.7L100,9.8L100.9,9.7L101.1,9.8L100.6,10.1L101.7,9.9L103.7,9.8L104.9,9.8L105.1,10L103.4,10.4L103.1,10.5L101.8,10.6L102.7,10.6L102.2,11L101.8,11.3L101.7,11.9L102.1,12.2L101.5,12.3L100.7,12.4L101.5,12.7L101.5,13.2L101,13.2L101.5,13.7L100.5,13.8L101,14L100.8,14.2L100.2,14.3L99.6,14.3L100.1,14.7L100,14.9L99.2,14.7L98.9,14.8L99.5,15L100,15.3L100.1,15.8L99.3,15.9L99,15.7L98.5,15.4L98.6,15.7L98,16.1L99.2,16.1L99.8,16.1L98.5,16.6L97.1,17.1L95.7,17.3L95.2,17.3L94.7,17.5L93.9,18.2L92.8,18.6L92.4,18.6L91.8,18.8L91.1,18.9L90.5,19.3L90.4,19.7L90.1,20.2L89.1,20.7L89.2,21.2L88.9,21.7L88.4,22.3L87.7,22.3L87.1,21.8L86.2,21.8L85.8,21.5L85.6,20.8L85,20.1L84.9,19.7L85.1,19.1L84.6,18.5L84.9,18.1L84.7,17.9L85.4,17.2L86.2,16.9L86.5,16.7L86.7,16.2L86.1,16.4L85.8,16.5L85.4,16.6L84.9,16.4L85,16L85.3,15.7L85.8,15.7L86.6,15.9L86,15.5L85.7,15.3L85.2,15.4L84.9,15.2L85.6,14.7L85.4,14.5L85.2,14.1L85,13.5L84.5,13.3L84.6,13L83.6,12.7L82.8,12.7L81.6,12.7L80.5,12.7L80.1,12.6L79.6,12.2L80.8,12.1L81.7,12L80,11.9L79.2,11.7L79.4,11.5L81.1,11.2L82.8,11L83.1,10.8L82.1,10.6L82.6,10.4L84.3,10.1L84.9,10L84.9,9.8L85.9,9.7L87.2,9.6L88.4,9.6L88.8,9.8L90,9.5L90.8,9.7L91.4,9.7L92.1,9.9L91.3,9.6ZM147,98.3L147.3,98.5L147.7,98.6L147.7,98.7L147.5,99L146.6,99.1L146.7,98.7L146.9,98.4ZM185.6,70.4L185.7,70.2L186.2,70L186.7,70L186.9,69.9L187.1,70L186.8,70.2L186.2,70.5L185.7,70.7L185.7,70.5ZM119.5,84.2L119.8,83.9L120.1,84.1L120.1,84.4L120.4,84.4L120.8,84.6L121.1,84.5L121.6,84.2L121.7,81.5L121.9,81.7L122.2,82.3L122.1,82.8L122.3,83L122.7,82.9L123,82.6L123.3,82.4L123.4,82.1L123.7,81.9L124,82L124.2,82.2L124.7,82.2L125.1,82.1L125.2,81.8L125.3,81.5L125.6,81.4L125.8,81.2L126,80.7L126.6,80.2L127.5,79.7L127.7,79.7L128,79.8L128.2,79.7L128.5,79.8L128.7,80.8L128.8,81.3L128.7,82.1L128.7,82.3L128.4,82.2L128.3,82.2L128.2,82.4L128,82.7L128,82.9L128.3,83.3L128.7,83.3L128.8,82.9L129.3,82.9L129.1,83.5L129,84L128.8,84.4L128.4,84.7L128.2,84.8L128,85.2L127.8,85.6L127.4,86.1L126.7,86.8L126.3,87.2L125.8,87.5L125.2,87.8L124.9,87.8L124.8,88L124.5,87.9L124.2,88.1L123.5,87.9L123.2,88L123,88L122.3,88.3L121.9,88.4L121.5,88.6L121.2,88.7L121,88.4L120.8,88.4L120.6,88.1L120.5,88.2L120.5,88L120.5,87.6L120.3,87.1L120.5,87L120.5,86.4L120.2,85.8L119.9,85.2L119.9,85.2ZM126.9,84.5L126.7,84.3L126.4,84.4L126,84.7L125.7,85.2L126.1,85.7L126.3,85.6L126.4,85.4L126.8,85.3L126.9,85.1L127.1,84.7ZM126.9,84.5L127.1,84.7L126.9,85.1L126.8,85.3L126.4,85.4L126.3,85.6L126.1,85.7L125.7,85.2L126,84.7L126.4,84.4L126.7,84.3ZM42.5,41.2L43.1,41.1L43.9,41L43.8,41.2L44.6,41.5L45.7,42L46.9,42L47.3,42L47.4,41.7L48.4,41.7L48.6,42L48.8,42.2L49.1,42.5L49.2,42.9L49.2,43.3L49.4,43.5L49.9,43.7L50.4,43.1L50.9,43.1L51.2,43.4L51.4,43.9L51.5,44.3L51.7,44.7L51.7,45.2L51.8,45.5L52.3,45.7L52.6,45.9L52.9,45.9L52.5,46.5L52.3,47L52.1,48L52,48.3L52,48.7L52.1,49L52.2,49.6L52.5,50.1L52.5,50.5L52.7,50.9L53.3,51L53.5,51.3L54.1,51.1L54.6,51.1L55,50.9L55.4,50.8L55.8,50.5L56,50.1L56.2,49.5L56.3,49.3L56.7,49.1L57.4,49L57.9,49L58.3,48.9L58.4,49.1L58.3,49.4L58,49.8L57.7,50.3L57.8,50.4L57.7,50.7L57.5,51.3L57.4,51.1L57.2,51.1L57.1,51.1L56.8,51.5L56.7,51.4L56.7,51.5L56.7,51.6L56.1,51.6L55.6,51.6L55.5,52L55.2,52L55.4,52.2L55.6,52.4L55.7,52.5L55.8,52.6L55.7,52.8L55,52.8L54.6,53.4L54.7,53.5L54.6,53.7L54.5,53.9L53.9,53.1L53.7,52.9L53.2,52.7L52.9,52.8L52.3,53L52,53.1L51.6,52.9L51.2,52.8L50.7,52.5L50.2,52.4L49.6,52L49.2,51.7L49,51.5L48.7,51.5L48.1,51.2L47.9,50.9L47.3,50.5L47.1,50.1L47,49.7L47.3,49.7L47.2,49.5L47.4,49.3L47.4,49L47.3,48.7L47.3,48.4L47.2,48.1L46.8,47.4L46.3,46.8L46.1,46.4L45.7,46.1L45.6,45.9L45.8,45.5L45.6,45.3L45.3,45L45.3,44.5L45,44.4L44.7,44L44.6,43.7L44.6,43.5L44.4,42.9L44.4,42.4L44.5,42.1L44.1,41.8L43.9,41.9L43.7,41.7L43.5,42L43.5,42.3L43.4,42.8L43.5,43.1L43.8,43.6L43.8,43.8L43.9,43.8L43.9,44.1L44,44.1L44,44.5L44.2,44.7L44.2,45L44.5,45.3L44.5,46L44.6,46.3L44.7,46.6L44.7,47L44.9,47L45.1,47.3L45.3,47.7L45.2,47.8L44.9,48L44.8,48L44.7,47.6L44.4,47.2L44.1,46.9L43.8,46.7L44,46.2L44,45.8L43.8,45.6L43.4,45.2L43.3,45.3L43.2,45.2L42.9,45L42.7,44.6L42.7,44.5L43,44.6L43.2,44.3L43.3,44L43,43.5L42.8,43.3L42.7,42.8L42.6,42.4L42.5,41.8ZM76.5,85.4L76.9,85.3L77.6,85.9L77.8,85.9L78.4,86.3L78.9,86.7L79.3,87.2L79.1,87.5L79.4,87.9L79.2,88.4L78.6,88.8L78.1,88.6L77.8,88.7L77.3,88.4L76.9,88.4L76.5,88L76.4,87.6L76.5,87.4L76.4,86.7L76.5,86ZM79.4,87.9L79.1,87.5L79.3,87.2L78.9,86.7L78.4,86.3L77.8,85.9L77.6,85.9L76.9,85.3L76.5,85.4L77.2,84.4L77.7,83.8L78.1,83.5L78.5,83.1L78.5,82.5L78.1,82.1L77.9,82.2L77.9,81.8L78,81.4L77.9,81L77.7,80.9L77.5,81L77.3,81L77.2,80.7L77,80.1L76.9,79.8L76.5,79.7L76.3,79.8L75.6,79.7L75.6,78.7L75.3,78.3L75.5,78.2L75.4,77.8L75.6,77.4L75.6,76.9L75.4,76.5L75.1,76.3L75,76L75.1,75.6L73.9,75.5L73.6,74.7L73.8,74.7L73.8,74.4L73.6,74.2L73.6,73.8L73.2,73.6L72.8,73.6L72.6,73.4L72.2,73.2L71.9,73L71.2,72.9L70.5,72.2L70.5,71.8L70.5,71.5L70.5,71L69.7,71.1L69.4,71.3L68.9,71.6L68.8,71.8L68.5,71.9L68,71.8L67.7,71.9L67.4,71.8L67.4,70.8L66.9,71.2L66.4,71.2L66.1,70.8L65.7,70.8L65.8,70.5L65.5,70L65.2,69.4L65.3,69.3L65.3,69L65.7,68.8L65.6,68.4L65.8,68.1L65.8,67.8L66.5,67.3L67,67.2L67,67.1L67.6,67.1L67.8,65.2L67.8,64.9L67.7,64.5L67.5,64.2L67.5,63.7L67.8,63.6L67.9,63.7L68,63.4L67.6,63.3L67.6,62.9L68.8,62.9L69,62.7L69.2,62.9L69.3,63.3L69.4,63.2L69.7,63.6L70.2,63.5L70.3,63.3L70.8,63.2L71,63.1L71.1,62.8L71.5,62.6L71.5,62.4L71,62.4L70.9,61.9L70.9,61.4L70.7,61.3L70.8,61.2L71.2,61.3L71.7,61.5L71.9,61.3L72.3,61.2L73,60.9L73.2,60.6L73.2,60.5L73.5,60.4L73.6,60.6L73.5,60.9L73.7,61L73.9,61.3L73.7,61.6L73.6,62.2L73.7,62.5L73.8,62.8L74.2,63.2L74.5,63.2L74.5,63.1L74.7,63L75,62.9L75.2,62.7L75.5,62.8L75.7,62.8L76,62.8L76.1,62.7L76,62.5L76,62.3L76.3,62.4L76.5,62.3L76.9,62.5L77.2,62.6L77.3,62.4L77.5,62.5L77.6,62.7L77.9,62.6L78.1,62.3L78.3,61.8L78.7,61.2L78.9,61.2L79,61.5L79.3,62.8L79.7,62.9L79.7,63.4L79.2,63.9L79.4,64.2L80.5,64.3L80.5,65L81,64.5L81.7,64.8L82.7,65.2L83,65.6L82.9,66L83.6,65.8L84.8,66.2L85.7,66.1L86.6,66.7L87.4,67.5L87.9,67.7L88.4,67.7L88.6,67.9L88.9,68.8L89,69.3L88.7,70.4L88.5,70.9L87.6,71.9L87.3,72.7L86.8,73.3L86.7,73.3L86.6,73.8L86.7,75.1L86.5,76.2L86.5,76.7L86.3,77L86.3,77.9L85.7,78.8L85.7,79.5L85.2,79.9L85.1,80.3L84.5,80.3L83.6,80.5L83.2,80.9L82.5,81.1L81.9,81.6L81.5,82.3L81.4,82.9L81.6,83.3L81.6,84L81.5,84.3L81.1,84.7L80.6,85.9L80.2,86.5L79.8,86.8L79.7,87.5ZM68,71.8L68.5,71.9L68.8,71.8L68.9,71.6L69.4,71.3L69.7,71.1L70.5,71L70.5,71.5L70.5,71.8L70.5,72.2L71.2,72.9L71.9,73L72.2,73.2L72.6,73.4L72.8,73.6L73.2,73.6L73.6,73.8L73.6,74.2L73.8,74.4L73.8,74.7L73.6,74.7L73.9,75.5L75.1,75.6L75,76L75.1,76.3L75.4,76.5L75.6,76.9L75.6,77.4L75.4,77.8L75.5,78.2L75.3,78.3L75.3,78.1L74.7,77.7L74.2,77.7L73.2,77.9L72.9,78.5L73,78.9L72.8,79.8L72.7,79.6L72,79.6L71.9,80.2L71.4,79.6L70.7,79.5L70.2,80.1L69.8,80.2L69.5,79.2L69.1,78.4L69.2,77.8L68.8,77.5L68.7,77L68.3,76.5L68.7,75.7L68.3,75.1L68.5,74.9L68.3,74.6L68.5,74.3L68.5,73.7L68.5,73.2L68.6,72.9ZM67.6,67.1L67,67.1L67,67.2L66.5,67.3L65.8,67.8L65.8,68.1L65.6,68.4L65.7,68.8L65.3,69L65.3,69.3L65.2,69.4L65.5,70L65.8,70.5L65.7,70.8L66.1,70.8L66.4,71.2L66.9,71.2L67.4,70.8L67.4,71.8L67.7,71.9L68,71.8L68.6,72.9L68.5,73.2L68.5,73.7L68.5,74.3L68.3,74.6L68.5,74.9L68.3,75.1L68.7,75.7L68.3,76.5L68.2,76.8L67.9,77L67.3,76.6L67.2,76.3L66,75.6L64.8,74.8L64.3,74.4L64,73.8L64.1,73.6L63.5,72.7L62.8,71.4L62.2,70L61.9,69.7L61.7,69.2L61.2,68.7L60.7,68.4L60.9,68.1L60.6,67.4L60.8,66.9L61.3,66.5L61.3,66.8L61.2,67L61.2,67.2L61.4,67.2L61.7,67.2L62,67.6L62.3,67.3L62.4,66.8L62.7,66.2L63.5,65.9L64.1,65.2L64.3,64.7L64.2,64.2L64.4,64.1L64.8,64.5L65,64.8L65.3,65L65.6,65.7L66.1,65.8L66.4,65.6L66.6,65.8L67,65.7L67.5,66L67.1,66.7L67.3,66.8ZM69.4,63.2L69.3,63.3L69.2,62.9L69,62.7L68.8,62.9L67.6,62.9L67.6,63.3L68,63.4L67.9,63.7L67.8,63.6L67.5,63.7L67.5,64.2L67.7,64.5L67.8,64.9L67.8,65.2L67.6,67.1L67.3,66.8L67.1,66.7L67.5,66L67,65.7L66.6,65.8L66.4,65.6L66.1,65.8L65.6,65.7L65.3,65L65,64.8L64.8,64.5L64.4,64.1L64.2,64.2L64,64L63.7,63.8L63.5,63.9L63,63.8L62.8,63.5L62.7,63.5L62.1,63.1L62,62.9L62.3,62.9L62.2,62.5L62.4,62.3L62.7,62.2L63,61.8L63.2,61.4L63,61.2L63.1,60.8L63,60.2L63.1,60L63,59.4L62.8,59L62.9,58.7L63.1,58.7L63.2,58.5L63.1,58.1L63.2,58L63.5,58L64,57.5L64.2,57.5L64.3,57.2L64.4,56.6L64.8,56.3L65.1,56.3L65.2,56.2L65.7,56.2L66.2,55.9L66.4,55.7L66.7,55.4L66.9,55.4L67.1,55.6L67,55.8L66.6,55.9L66.4,56.3L66.1,56.5L65.9,56.8L65.8,57.3L65.7,57.7L66,57.7L66,58L66.2,58.2L66.2,58.5L66.1,58.7L66.1,58.9L66.3,58.9L66.4,59.2L67.2,59.1L67.5,59.2L67.9,59.8L68.2,59.7L68.6,59.8L69,59.7L69.2,59.8L69.1,60.2L68.9,60.4L68.8,60.9L69,61.4L69.1,61.6L69.1,61.8L68.8,62.1L69.1,62.3L69.2,62.5ZM63.2,58L63.1,58.1L63.2,58.5L63.1,58.7L62.9,58.7L62.8,59L62.6,58.8L62.5,58.4L62.7,58.3L62.5,58.2L62.4,58L62.1,57.8L61.9,57.8L61.7,58.1L61.5,58.2L61.3,58.3L61.3,58.4L61.5,58.8L61.4,58.9L61.3,59L61,59L60.9,58.6L60.8,58.7L60.6,58.7L60.5,58.4L60.3,58.4L60.1,58.3L59.9,58.3L59.8,58.4L59.8,58.3L59.8,58.2L59.9,58L59.9,57.9L59.9,57.8L59.8,57.7L59.8,57.4L60.1,57.4L60.3,57.6L60.3,57.8L60.5,57.8L60.6,57.8L60.7,57.9L61,57.9L61.3,57.7L61.7,57.6L61.9,57.3L62.2,57.4L62.2,57.5L62.5,57.5L62.8,57.6L63,57.8ZM60.1,57.4L59.8,57.4L59.8,57.7L59.9,57.8L59.9,57.9L59.9,58L59.8,58.2L59.8,58.3L59.5,58.2L59.3,58L59.4,57.9L59.4,57.7L59.2,57.6L59,57.4L58.8,57.3L58.8,57.1L58.6,57L58.7,57.2L58.5,57.4L58.4,57.2L58.2,57.1L58.1,57L58.2,56.8L58.3,56.5L58.1,56.4L58.2,56.3L58.3,56.2L58.7,56.4L58.9,56.3L59.1,56.4L59.1,56.5L59.3,56.6L59.5,56.4L59.6,56.8L59.8,57.1ZM59.5,56.4L59.3,56.6L59.1,56.5L59.1,56.4L58.9,56.3L58.7,56.4L58.3,56.2L58.2,56.3L58.1,56.1L57.8,55.8L57.7,55.6L57.4,55.3L57.2,55L57.2,54.9L57.3,55L57.4,55L57.6,54.9L57.7,54.8L57.8,54.8L57.8,54.4L57.9,54.4L58,54.4L58.2,54.2L58.4,54.4L58.4,54.3L58.5,54.2L58.8,54L58.8,53.9L58.9,53.9L59,53.7L59,53.7L59.1,53.8L59.2,53.8L59.4,53.7L59.5,53.7L59.7,53.6L59.8,53.5L60,53.6L60,53.6L59.9,53.8L60,54L59.8,54.3L59.7,54.6L59.7,54.9L59.7,55.1L59.7,55.4L59.6,55.4L59.5,55.7L59.5,55.9L59.4,56.1L59.4,56.3ZM60,53.6L59.8,53.5L59.7,53.6L59.5,53.7L59.4,53.7L59.2,53.8L59.1,53.8L59,53.7L59,53.7L58.9,53.9L58.8,53.9L58.8,54L58.5,54.2L58.4,54.3L58.4,54.4L58.2,54.2L58,54.4L57.9,54.4L57.8,54.4L57.8,54.8L57.7,54.8L57.6,54.9L57.4,55L57.3,54.8L57.1,54.7L57.2,54.4L57.1,54.3L57,54.3L56.7,54.4L56.7,54.3L56.5,54.2L56.4,54L56.3,54L56.4,53.8L56.4,53.6L56.4,53.5L56.7,53.3L57,53L57.1,53.1L57.2,52.9L57.4,52.9L57.5,53L57.6,53L57.8,53L58.1,53L58.3,52.9L58.4,52.8L58.6,52.9L58.7,52.9L58.9,52.9L59,52.9L59.3,53L59.4,53L59.5,53.1L59.7,53.3L59.9,53.4ZM56.3,54L56.4,54L56.5,54.2L56.7,54.3L56.7,54.4L57,54.3L57.1,54.3L57.2,54.4L57.1,54.7L57,54.9L56.7,54.8L56.5,54.8L56.3,54.6L55.9,54.6L55.8,54.4L55.8,54.3L56,54.2L56.1,54.1L56.1,54ZM54.5,53.9L54.6,53.7L54.7,53.5L54.6,53.4L55,52.8L55.7,52.8L55.8,52.6L55.7,52.5L55.6,52.4L55.4,52.2L55.2,52L55.5,52L55.6,51.6L56.1,51.6L56.7,51.6L56.6,52.1L56.4,52.9L56.6,52.9L56.8,53.1L56.9,53L57,53L56.7,53.3L56.4,53.5L56.4,53.6L56.4,53.8L56.3,54L56.1,54L56.1,54.1L56,54.2L55.8,54.3L55.8,54.4L55.5,54.3L55.1,54.3L54.8,54.2ZM56.7,51.6L56.7,51.5L56.7,51.4L56.8,51.5L57.1,51.1L57.2,51.1L57.2,51.2L57.3,51.2L57.3,51.4L57.2,51.7L57.2,51.8L57.1,52.1L57.1,52.1L57,52.5L56.9,52.7L56.8,52.7L56.6,52.9L56.4,52.9L56.6,52.1ZM73.2,60.5L73.2,60.6L73,60.9L72.3,61.2L71.9,61.3L71.7,61.5L71.2,61.3L70.8,61.2L70.7,61.3L70.9,61.4L70.9,61.9L71,62.4L71.5,62.4L71.5,62.6L71.1,62.8L71,63.1L70.8,63.2L70.3,63.3L70.2,63.5L69.7,63.6L69.4,63.2L69.2,62.5L69.1,62.3L68.8,62.1L69.1,61.8L69.1,61.6L69,61.4L68.8,60.9L68.9,60.4L69.1,60.2L69.2,59.8L69,59.7L68.6,59.8L68.2,59.7L67.9,59.8L67.5,59.2L67.2,59.1L66.4,59.2L66.3,58.9L66.1,58.9L66.1,58.7L66.2,58.5L66.2,58.2L66,58L66,57.7L65.7,57.7L65.8,57.3L65.9,56.8L66.1,56.5L66.4,56.3L66.6,55.9L67,55.8L66.9,56L66.6,56.1L66.7,56.4L66.7,56.8L66.4,57.2L66.6,57.7L66.9,57.7L67.1,57.2L66.9,56.9L66.9,56.4L67.7,56.1L67.6,55.8L67.8,55.6L68,56L68.4,56.1L68.8,56.5L68.8,56.7L69.3,56.7L70,56.6L70.3,56.9L70.8,57L71.1,56.8L71.1,56.6L71.9,56.6L72.6,56.6L72.1,56.8L72.3,57.1L72.8,57.2L73.2,57.5L73.3,58.1L73.6,58.1L73.8,58.2L73.3,58.6L73.3,58.9L73.5,59.2L73.3,59.3L72.9,59.4L72.9,59.7L72.8,59.9ZM75.7,62.8L75.5,62.8L75.2,62.7L75,62.9L74.7,63L74.5,63.1L74.5,63.2L74.2,63.2L73.8,62.8L73.7,62.5L73.6,62.2L73.7,61.6L73.9,61.3L73.7,61L73.5,60.9L73.6,60.6L73.5,60.4L73.2,60.5L72.8,59.9L72.9,59.7L72.9,59.4L73.3,59.3L73.5,59.2L73.3,58.9L73.3,58.6L73.8,58.2L74.2,58.5L74.6,58.9L74.6,59.3L74.8,59.3L75.1,59.7L75.4,59.9L75.2,60.5L74.9,60.7L74.9,60.9L74.8,61.3L75,61.8L75.2,61.8L75.3,62.2ZM76.9,62.5L76.5,62.3L76.3,62.4L76,62.3L76,62.5L76.1,62.7L76,62.8L75.7,62.8L75.3,62.2L75.2,61.8L75,61.8L74.8,61.3L74.9,60.9L74.9,60.7L75.2,60.5L75.4,59.9L76.1,60L76.1,59.9L76.6,59.9L77.3,60.1L77,60.7L77,61.1L77.2,61.6L77.1,61.9L77.1,62.2ZM78.7,61.2L78.3,61.8L78.1,62.3L77.9,62.6L77.6,62.7L77.5,62.5L77.3,62.4L77.2,62.6L76.9,62.5L77.1,62.2L77.1,61.9L77.2,61.6L77,61.1L77,60.7L77.3,60.1L77.5,60.1L77.9,60.3L78.6,60.9ZM113.3,29.3L113.6,29.5L114.3,29.6L114.1,30.1L114,30.6L113.9,30.7L113.6,30.7L113.7,30.8L113.3,31.2L113.3,31.5L113.5,31.4L113.7,31.7L113.7,31.9L113.9,32.2L113.7,32.4L113.8,32.9L114.1,33L114.1,33.3L113.6,33.7L112.5,33.5L111.7,33.8L111.7,34.2L111,34.3L110.4,33.9L110.2,34.1L109.2,33.8L109,33.5L109.2,33.1L109.4,31.7L108.8,31L108.4,30.6L107.6,30.4L107.5,29.9L108.2,29.7L109.1,29.9L109,29.1L109.5,29.4L110.7,28.9L110.9,28.3L111.3,28.2L111.4,28.4L111.7,28.4L111.9,28.7L112.3,29L112.6,29L113,29.3L113.1,29.4ZM114.8,34.1L115.2,33.8L115.3,34.4L115.1,34.9L114.9,34.8L114.7,34.3ZM64.2,64.2L64.3,64.7L64.1,65.2L63.5,65.9L62.7,66.2L62.4,66.8L62.3,67.3L62,67.6L61.7,67.2L61.4,67.2L61.2,67.2L61.2,67L61.3,66.8L61.3,66.5L61.6,66L61.4,65.7L61.2,66L60.8,65.7L61,65.5L60.9,64.8L61.1,64.7L61.2,64.3L61.4,63.9L61.4,63.6L61.7,63.4L62.1,63.1L62.7,63.5L62.8,63.5L63,63.8L63.5,63.9L63.7,63.8L64,64ZM70.4,51.1L70.7,51.1L70.8,51.3L70.6,51.5L70.2,51.5L69.8,51.5L69.8,51.2L69.9,51.1ZM63.6,51.1L64,51.2L64.3,51.3L64.4,51.5L64,51.5L63.8,51.7L63.5,51.5L63.2,51.3L63.3,51.1L63.5,51.1ZM61.3,47.8L61.8,47.8L62.3,47.8L62.8,48.1L63,48.3L63.6,48.3L63.7,48.4L64.2,48.9L64.5,49.2L64.7,49.2L65,49.3L65,49.5L65.4,49.5L65.8,49.8L65.7,50L65.3,50.1L64.9,50.1L64.5,50.1L63.6,50.1L64.1,49.7L63.9,49.6L63.5,49.5L63.3,49.3L63.2,48.9L62.9,48.9L62.4,48.7L62.2,48.6L61.5,48.5L61.3,48.3L61.5,48.2L60.9,48.1L60.5,48.5L60.2,48.5L60.1,48.7L59.8,48.8L59.6,48.7L59.9,48.5L60.1,48.2L60.4,48.1L60.7,47.9L61.1,47.9ZM128.5,79.8L128.2,79.7L128,79.8L127.7,79.7L127.5,79.7L127.1,79.3L126.6,79.2L126.5,78.8L126.5,78.5L126.3,78.5L125.6,77.7L125.4,77.3L125.3,77.1L125.1,76.6L125.8,76.7L126,76.7L126.2,76.7L126.5,76.3L127.1,75.7L127.3,75.6L127.4,75.4L127.7,75.1L128.2,75L128.2,75.3L128.7,75.3L129,75.4L129.1,75.6L129.4,75.6L129.7,75.9L129.6,76.8L129.5,77.2L129.5,77.8L129.5,78L129.5,78.4L129.4,78.5L129.2,79ZM127.5,79.7L126.6,80.2L126,80.7L125.8,81.2L125.6,81.4L125.3,81.5L125.2,81.8L125.1,82.1L124.7,82.2L124.2,82.2L124,82L123.7,81.9L123.4,82.1L123.3,82.4L123,82.6L122.7,82.9L122.3,83L122.1,82.8L122.2,82.3L121.9,81.7L121.7,81.5L121.8,79.5L122.4,79.5L122.5,76.9L122.9,76.9L123.9,76.7L124.1,77L124.5,76.7L124.7,76.7L125,76.5L125.1,76.6L125.3,77.1L125.4,77.3L125.6,77.7L126.3,78.5L126.5,78.5L126.5,78.8L126.6,79.2L127.1,79.3ZM121.7,81.5L121.6,84.2L121.1,84.5L120.8,84.6L120.4,84.4L120.1,84.4L120.1,84.1L119.8,83.9L119.5,84.2L119.1,83.7L118.9,83.2L118.8,82.5L118.7,82L118.5,80.9L118.5,80.1L118.5,79.7L118.2,79.4L117.9,78.8L117.6,77.9L117.5,77.5L117.1,76.8L117,76.3L117.3,76.1L117.7,76L118.1,76L118.4,76.4L118.5,76.3L120.9,76.3L121.3,76.6L122.8,76.7L123.9,76.4L124.4,76.3L124.8,76.3L125,76.5L125,76.5L124.7,76.7L124.5,76.7L124.1,77L123.9,76.7L122.9,76.9L122.5,76.9L122.4,79.5L121.8,79.5ZM99.9,54.5L99.7,54L99.4,53.7L99.7,53.6L100,53.1L100.1,52.8L100.3,52.5L100.6,52.6L100.9,52.4L101.3,52.4L101.5,52.6L101.9,52.8L102.3,53.3L102.7,53.8L102.7,54.3L102.8,54.7L103,54.9L103.1,55.1L103.1,55.4L103,55.4L102.6,55.3L102.6,55.4L102.5,55.4L102,55.3L101.7,55.3L100.6,55.2L100.5,55.3L100.3,55.3L99.9,55.4L99.9,54.9L100.4,54.9L100.5,54.8L100.7,54.8L100.9,54.6L101.1,54.8L101.4,54.8L101.7,54.6L101.5,54.4L101.3,54.5L101.2,54.5L100.9,54.3L100.7,54.4L100.6,54.5ZM103.1,55.4L103.1,55.1L103,54.9L102.8,54.7L102.7,54.3L102.7,53.8L102.9,53.7L103,53.3L103.2,53.3L103.6,53.5L103.9,53.3L104.2,53.4L104.3,53.2L106.7,53.2L106.8,52.7L106.7,52.6L106.4,49.6L106.2,46.5L107.1,46.5L109.1,48.1L111.1,49.6L111.2,49.9L111.6,50.1L111.9,50.2L111.9,50.7L112.5,50.6L112.6,52.3L112.2,52.7L112.2,53.2L111.7,53.3L110.8,53.3L110.6,53.6L110.2,53.6L109.8,53.6L109.7,53.5L109.4,53.6L108.8,53.9L108.7,54.1L108.2,54.4L108.1,54.6L107.9,54.7L107.6,54.6L107.4,54.8L107.3,55.3L106.8,55.9L106.9,56.1L106.7,56.4L106.7,56.8L106.5,56.9L106.3,57L106.3,56.7L106.1,56.8L106,56.8L105.9,57L105.4,57L105.2,56.9L105.1,56.9L105,56.7L105,56.5L104.9,56.4L104.8,56.5L104.8,56.3L104.9,56.1L104.7,55.8L104.6,55.6L104.5,55.5L104.4,55.4L104.2,55.5L104,55.6L103.9,55.8L103.6,55.7L103.4,55.5L103.3,55.5L103.2,55.6L103.1,55.6ZM99.9,49.3L100,49.1L102.3,49.1L102.2,48.1L102.4,47.7L102.9,47.6L103,45.8L104.9,45.9L104.9,44.8L107.1,46.5L106.2,46.5L106.4,49.6L106.7,52.6L106.8,52.7L106.7,53.2L104.3,53.2L104.2,53.4L103.9,53.3L103.6,53.5L103.2,53.3L103,53.3L102.9,53.7L102.7,53.8L102.3,53.3L101.9,52.8L101.5,52.6L101.3,52.4L100.9,52.4L100.6,52.6L100.3,52.5L100.1,52.8L100.1,52.4L100.3,52L100.3,51.4L100.3,50.7L100.2,50.3L100.3,50L100.2,49.6ZM111.6,59.7L111.1,59.8L111,59.3L111,57.7L110.9,57.5L110.9,57.2L110.7,57L110.5,56.7L110.5,56.4L110.8,56.3L110.9,56L111.2,55.9L111.3,55.7L111.5,55.5L111.7,55.5L112.2,55.9L112.2,56.1L112.3,56.6L112.2,56.8L112.2,57L111.9,57.5L111.8,57.7L111.6,58.1L111.7,58.6ZM118.8,48L119,49.1L119.2,49.3L119.2,49.5L119.5,49.8L119.3,50.1L119.2,51.5L119.1,52.4L118.4,53.1L118.1,54L118.4,54.3L118.4,54.7L118.8,54.7L118.7,55.1L118.6,55.1L118.6,55.3L118.4,55.3L118,54.6L117.9,54.5L117.4,54.9L116.9,54.7L116.6,54.7L116.4,54.8L116.1,54.8L115.7,55.1L115.4,55.1L114.7,54.7L114.4,54.9L114.1,54.9L113.9,54.6L113.3,54.4L112.6,54.4L112.5,54.6L112.4,55L112.2,55.3L112.2,55.9L111.7,55.5L111.5,55.5L111.3,55.7L111.3,55.2L110.6,55.1L110.6,54.7L110.3,54.3L110.2,53.9L110.2,53.6L110.6,53.6L110.8,53.3L111.7,53.3L112.2,53.2L112.2,52.7L112.6,52.3L112.5,50.6L113.4,50.3L115.1,48.9L117.1,47.6L118,47.9L118.4,48.3ZM111.6,59.7L111.7,58.6L111.6,58.1L111.8,57.7L111.9,57.5L112.2,57L112.2,56.8L112.3,56.6L112.2,56.1L112.2,55.9L112.2,55.3L112.4,55L112.5,54.6L112.6,54.4L113.3,54.4L113.9,54.6L114.1,54.9L114.4,54.9L114.7,54.7L115.4,55.1L115.7,55.1L116.1,54.8L116.4,54.8L116.6,54.7L116.9,54.7L117.4,54.9L117.9,54.5L118,54.6L118.4,55.3L118.6,55.3L118.8,55.6L118.7,55.7L118.7,56L118.2,56.5L118,57L118,57.3L117.8,57.5L117.7,58L117.4,58.3L117.3,58.6L117.2,58.9L117.1,59.2L116.7,59.4L116.4,59.1L116.1,59.2L115.8,59.6L115.6,59.6L115.3,60.3L115.2,60.8L114.5,61L114.3,61L114.1,61.1L113.6,61.1L113.3,60.7L113.1,60.2L112.6,59.7L112.2,59.7ZM118.7,55.1L119,55.5L119,56L119,56.4L119.4,57.1L119,57.1L118.8,57.1L118.6,57.1L118.4,57.4L118.8,57.8L119.1,57.9L119.2,58.2L119.3,58.7L119.3,58.9L119,59.6L118.8,59.7L118.8,60.3L118.8,60.6L118.8,60.8L119.1,61.1L119.1,61.4L119.4,61.8L119.6,62L119.7,62.3L119.7,62.5L119.7,62.9L119.2,62.7L118.7,62.5L117.9,62.5L117.9,62.5L117.5,62.6L117.1,62.5L116.8,62.5L115.9,62.5L115.9,61.9L115.7,61.5L115.4,61.4L115.3,61L115.1,60.9L115.2,60.8L115.3,60.3L115.6,59.6L115.8,59.6L116.1,59.2L116.4,59.1L116.7,59.4L117.1,59.2L117.2,58.9L117.3,58.6L117.4,58.3L117.7,58L117.8,57.5L118,57.3L118,57L118.2,56.5L118.7,56L118.7,55.7L118.8,55.6L118.6,55.3L118.6,55.1ZM110.5,56.4L110.5,56.7L110.7,57L110.9,57.2L110.9,57.5L111,57.7L111,59.3L111.1,59.8L110.6,59.9L110.5,59.7L110.3,59.2L110.3,58.9L110.4,58.3L110.3,58L110.2,57.5L110.2,56.9L110,56.6L110,56.4ZM110,56.4L110,56.6L110.2,56.9L110.2,57.5L110.3,58L110.4,58.3L110.3,58.9L110.3,59.2L110.5,59.7L110.6,59.9L109.7,60.3L109.4,60.6L108.8,60.8L108.3,60.6L108.3,60.3L108,59.7L108.2,58.9L108.4,58.3L108.3,57.3L108.2,56.8L108.2,56.4L109.3,56.4L109.5,56.4L109.7,56.3ZM105.1,56.9L105.2,56.9L105.4,57L105.9,57L106,56.8L106.1,56.8L106.3,56.7L106.3,57L106.5,56.9L106.7,56.8L107,57L107.1,57.2L107.4,57.3L107.6,57.2L107.9,57.1L108.3,57.3L108.4,58.3L108.2,58.9L108,59.7L108.3,60.3L108.3,60.6L108,60.6L107.6,60.5L107.2,60.5L106.5,60.6L106,60.8L105.4,61.1L105.3,61L105.4,60.5L105.4,60.4L105.4,60.1L105.2,59.8L105,59.8L104.8,59.6L104.9,59.2L104.9,58.9L104.9,58.7L105,58.7L105,58.4L105,58.3L105,58.2L105.3,58.1L105.1,57.5L105,57.2L105,57ZM101.7,55.3L102,55.3L102.5,55.4L102.6,55.4L102.6,55.3L103,55.4L103.1,55.4L103.1,55.6L103.2,55.6L103.3,55.5L103.4,55.5L103.6,55.7L103.9,55.8L104,55.6L104.2,55.5L104.4,55.4L104.5,55.5L104.6,55.6L104.7,55.8L104.9,56.1L104.8,56.3L104.8,56.5L104.9,56.4L105,56.5L105,56.7L105.1,56.9L105,57L105,57.2L105.1,57.5L105.3,58.1L105,58.2L105,58.3L105,58.4L105,58.7L104.9,58.7L104.7,58.7L104.6,59L104.4,59L104.3,58.8L104.3,58.5L104.1,58.1L103.9,58.2L103.8,58.2L103.6,58.2L103.6,58L103.6,57.8L103.6,57.6L103.4,57.3L103.3,57L102.8,57L102.7,57.2L102.5,57.2L102.4,57.3L102.3,57.5L102,57.8L101.7,57.4L101.5,57.2L101.3,57.1L101.2,56.9L101.1,56.6L101,56.5L100.9,56.3L101.1,56L101.3,56L101.5,55.9L101.6,55.9L101.7,55.8L101.7,55.6L101.7,55.5ZM99.9,55.4L100.3,55.3L100.5,55.3L100.6,55.2L101.7,55.3L101.7,55.5L101.7,55.6L101.7,55.8L101.6,55.9L101.5,55.9L101.3,56L101.1,56L100.9,56.3L100.5,56L100.3,56L100.2,55.8L100.2,55.7L100,55.5ZM104.9,58.7L104.9,58.9L104.9,59.2L104.8,59.6L105,59.8L105.2,59.8L105.4,60.1L105.4,60.4L105.4,60.5L105.3,61L105.2,61L104.5,60.7L104,60.2L103.5,59.8L103.1,59.3L103.2,59.1L103.2,58.9L103.5,58.5L103.8,58.2L103.9,58.2L104.1,58.1L104.3,58.5L104.3,58.8L104.4,59L104.6,59L104.7,58.7ZM102,57.8L102.3,57.5L102.4,57.3L102.5,57.2L102.7,57.2L102.8,57L103.3,57L103.4,57.3L103.6,57.6L103.6,57.8L103.6,58L103.6,58.2L103.8,58.2L103.5,58.5L103.2,58.9L103.2,59.1L103.1,59.3L102.9,59.3L102.5,59L102.2,58.6L102.1,58.4ZM106.7,56.8L106.7,56.4L106.9,56.1L106.8,55.9L107.3,55.3L107.4,54.8L107.6,54.6L107.9,54.7L108.1,54.6L108.2,54.4L108.7,54.1L108.8,53.9L109.4,53.6L109.7,53.5L109.8,53.6L110.2,53.6L110.2,53.9L110.3,54.3L110.6,54.7L110.6,55.1L111.3,55.2L111.3,55.7L111.2,55.9L110.9,56L110.8,56.3L110.5,56.4L110,56.4L109.7,56.3L109.5,56.4L109.3,56.4L108.2,56.4L108.2,56.8L108.3,57.3L107.9,57.1L107.6,57.2L107.4,57.3L107.1,57.2L107,57ZM126.6,60.4L126.4,60.5L126,60.5L125.6,60.4L125.3,60.5L125.2,60.6L125,60.7L124.8,60.5L124.1,60.9L123.9,60.8L123.8,60.8L123.6,61.3L123.1,61.1L122.7,61.1L122.3,60.8L121.8,60.6L121.5,60.8L121.3,61.2L121.2,61.6L120.8,61.6L120.4,61.5L120,61.9L119.7,62.5L119.7,62.3L119.6,62L119.4,61.8L119.1,61.4L119.1,61.1L118.8,60.8L118.8,60.6L118.8,60.3L118.8,59.7L119,59.6L119.3,58.9L119.8,58.8L119.9,58.7L120,58.7L120.1,58.8L120.9,58.6L121.1,58.3L121.4,58L121.4,57.8L121.6,57.7L122.1,57.8L122.7,57.4L123.1,56.7L123.4,56.4L123.8,56.3L123.9,56.6L124.2,57L124.2,57.3L124.2,57.6L124.2,57.8L124.4,58L124.9,58.3L125.2,58.6L125.2,58.8L125.6,59.2L125.9,59.5L126,59.9L126.5,60.2ZM121.2,61.6L121.2,62.1L121,62.4L120.9,62.9L120.8,63.5L120.8,63.9L120.7,64.1L120.7,64.4L120.6,64.6L120.2,65L120,65.3L119.7,66L119.7,66.6L119.6,66.8L119.2,67.2L118.8,67.6L118.6,67.5L118.6,67.3L118.3,67.3L118,67.5L117.9,67.5L117.7,67.2L117.5,67.3L117.2,67.6L116.7,66.9L117.2,66.5L117,66L117.2,65.9L117.6,65.8L117.6,65.5L118,65.8L118.5,65.8L118.7,65.5L118.8,65L118.7,64.5L118.4,64.1L118.7,63.3L118.5,63.1L118.1,63.2L117.9,62.8L117.9,62.5L118.7,62.5L119.2,62.7L119.7,62.9L119.7,62.5L120,61.9L120.4,61.5L120.8,61.6ZM116.8,62.5L117.1,62.5L117.5,62.6L117.9,62.5L117.9,62.5L117.9,62.8L118.1,63.2L118.5,63.1L118.7,63.3L118.4,64.1L118.7,64.5L118.8,65L118.7,65.5L118.5,65.8L118,65.8L117.6,65.5L117.6,65.8L117.2,65.9L117,66L117.2,66.5L116.7,66.9L116.1,66.2L115.7,65.6L115.3,64.9L115.4,64.7L115.5,64.4L115.6,63.9L115.8,63.4L116,63.4L116.9,63.4ZM115.9,62.5L116.8,62.5L116.9,63.4L116,63.4L115.8,63.4L115.7,63.3ZM128.6,70L128.9,70.1L129.1,70.3L129.5,70.4L129.8,70.6L130.1,70.9L130.2,71.5L130.1,71.7L130,72.3L130.1,72.8L129.9,73.1L129.7,73.7L130,73.9L128.1,74.5L128.2,75L127.7,75.1L127.4,75.4L127.3,75.6L127.1,75.7L126.5,76.3L126.2,76.7L126,76.7L125.8,76.7L125.1,76.6L125,76.5L125,76.5L124.8,76.3L124.4,76.3L123.9,76.4L123.5,76L123.1,75.4L123.2,73.2L124.5,73.2L124.4,72.9L124.5,72.7L124.4,72.3L124.5,72L124.4,71.8L124.7,71.8L124.7,72L125,72L125.3,72.1L125.5,72.4L126,72.5L126.4,72.3L126.5,72.6L127,72.7L127.2,73L127.4,73.4L127.9,73.4L127.9,72.7L127.7,72.8L127.3,72.5L127.1,72.4L127.2,71.7L127.3,70.9L127.2,70.5L127.4,70.1L127.6,70L128.4,69.9ZM129.8,70.6L130.4,70.7L130.5,70.9L130.7,71.2L130.9,72.2L130.7,72.7L130.8,73.7L131,73.6L131.2,73.9L131.5,74.4L131.5,75.3L131.2,75.4L131,75.9L130.6,75.5L130.6,75L130.7,74.7L130.7,74.4L130.5,74.2L130.3,74.3L130,73.9L129.7,73.7L129.9,73.1L130.1,72.8L130,72.3L130.1,71.7L130.2,71.5L130.1,70.9ZM130.9,72.2L131.3,72.1L132,72.3L132.2,72.3L132.6,72.2L132.8,72L133.2,72L133.9,71.8L134.4,71.4L134.4,71.7L134.4,72.4L134.4,73L134.4,74.1L134.5,74.4L134.3,74.9L134.1,75.4L133.6,75.9L133.1,76.1L132.4,76.5L131.7,77.2L131.4,77.4L131,77.9L130.7,78L130.7,78.5L130.9,79.1L131,79.5L131,79.7L131.1,79.7L131,80.3L130.9,80.7L131.1,80.8L130.9,81.1L130.7,81.3L130.2,81.6L129.4,82L129.2,82.2L129.2,82.5L129.3,82.6L129.3,82.9L128.8,82.9L128.8,82.6L128.7,82.3L128.7,82.1L128.8,81.3L128.7,80.8L128.5,79.8L129.2,79L129.4,78.5L129.5,78.4L129.5,78L129.5,77.8L129.5,77.2L129.6,76.8L129.7,75.9L129.4,75.6L129.1,75.6L129,75.4L128.7,75.3L128.2,75.3L128.2,75L128.1,74.5L130,73.9L130.3,74.3L130.5,74.2L130.7,74.4L130.7,74.7L130.6,75L130.6,75.5L131,75.9L131.2,75.4L131.5,75.3L131.5,74.4L131.2,73.9L131,73.6L130.8,73.7L130.7,72.7ZM128.8,82.9L128.7,83.3L128.3,83.3L128,82.9L128,82.7L128.2,82.4L128.3,82.2L128.4,82.2L128.7,82.3L128.8,82.6ZM117.9,67.5L117.7,67.6L117.6,67.8L117.5,68.1L117.4,68.2L117.2,67.6L117.5,67.3L117.7,67.2ZM117.5,68.4L117.7,68.3L117.9,68.3L118.1,68.2L119.9,68.2L120,68.8L120.2,69.2L120.4,69.4L120.6,69.8L121,69.7L121.2,69.6L121.5,69.7L121.6,69.5L121.8,69.1L122.1,69.1L122.2,69L122.5,69L122.4,69.2L123.2,69.2L123.2,69.7L123.3,69.9L123.2,70.4L123.2,70.8L123.4,71.1L123.4,71.9L123.5,71.8L123.8,71.8L124.2,71.7L124.4,71.8L124.5,72L124.4,72.3L124.5,72.7L124.4,72.9L124.5,73.2L123.2,73.2L123.1,75.4L123.5,76L123.9,76.4L122.8,76.7L121.3,76.6L120.9,76.3L118.5,76.3L118.4,76.4L118.1,76L117.7,76L117.3,76.1L117,76.3L117,75.8L117.1,75.2L117.3,74.6L117.3,74.3L117.5,73.6L117.7,73.3L118,72.9L118.2,72.6L118.3,72L118.3,71.6L118.1,71.4L117.9,71L117.8,70.5L117.8,70.4L118,70.1L117.8,69.4L117.7,69L117.4,68.5ZM128.5,65.8L128.5,66.1L128.7,66.2L128.7,66.5L128.5,66.6L128.3,67L128.1,67.2L127.8,67.3L127.8,66.4L127.6,66.1L128,66.2L128.2,65.8ZM130.6,41L130.5,41.3L130.3,41.2L130.2,41.6L130.4,41.7L130.2,41.8L130.2,42L130.5,41.9L130.5,42.2L130.3,43.3L130.3,43.1L129.8,42.1L130,41.9L129.9,41.8L130.1,41.5L130.1,41L130.2,40.8L130.2,40.8L130.4,40.8L130.4,40.6L130.6,40.6L130.6,40.9L130.6,41ZM130.6,40.6L130.4,40.6L130.4,40.8L130.2,40.8L130.4,40.2L130.6,39.7L130.6,39.7L130.9,39.7L131,40L130.7,40.3ZM139.9,72.9L140,73.2L140.1,73.6L140.2,74.5L140.3,74.8L140.2,75.2L140.1,75.4L139.9,74.9L139.8,75.2L139.9,75.7L139.8,76L139.7,76.1L139.6,76.7L139.3,77.6L138.9,78.5L138.4,79.9L138.1,80.9L137.8,81.7L137.3,81.8L136.7,82.1L136.4,82L136,81.7L135.8,81.3L135.8,80.7L135.7,80.1L135.7,79.6L135.8,79.1L136.1,79L136.1,78.8L136.4,78.2L136.5,77.8L136.4,77.4L136.3,77L136.3,76.4L136.6,76L136.7,75.5L137,75.5L137.3,75.3L137.5,75.2L137.8,75.2L138.2,74.8L138.7,74.4L138.9,74L138.8,73.7L139.1,73.8L139.4,73.3L139.5,72.9L139.7,72.6ZM130.5,41.9L130.2,42L130.2,41.8L130.4,41.7L130.2,41.6L130.3,41.2L130.5,41.3L130.5,41.7ZM99.9,54.5L100.6,54.5L100.7,54.4L100.9,54.3L101.2,54.5L101.3,54.5L101.5,54.4L101.7,54.6L101.4,54.8L101.1,54.8L100.9,54.6L100.7,54.8L100.5,54.8L100.4,54.9L99.9,54.9ZM115.5,42.7L115.2,41.5L114.9,41.2L114.9,41L114.4,40.6L114.3,40.1L114.7,39.7L114.8,39.1L114.7,38.4L114.8,38L115.4,37.8L115.8,37.8L115.8,38.2L116.3,37.9L116.3,38.1L116,38.4L116,38.8L116.2,38.9L116.2,39.5L115.8,39.9L115.9,40.3L116.2,40.3L116.4,40.6L116.6,40.7L116.6,41.3L116.3,41.5L116.1,41.7L115.8,42L115.8,42.3L115.8,42.6ZM104.9,44.8L104.9,44.7L104.9,44.6L104.9,43.8L105.9,43.3L106.5,43.1L107,43L107.2,42.6L107.9,42.3L107.9,41.8L108.2,41.7L108.5,41.5L109.2,41.4L109.4,41.1L109.2,40.9L109,40.2L109,39.8L108.8,39.3L109.3,38.9L109.9,38.8L110.3,38.5L110.8,38.3L111.8,38.2L112.7,38.1L113,38.2L113.6,37.9L114.2,37.9L114.4,38.1L114.8,38L114.7,38.4L114.8,39.1L114.7,39.7L114.3,40.1L114.4,40.6L114.9,41L114.9,41.2L115.2,41.5L115.5,42.7L115.7,43.4L115.7,43.7L115.7,44.3L115.7,44.6L115.6,45L115.7,45.4L115.5,45.7L115.8,46.2L115.9,46.5L116.1,46.9L116.4,46.8L116.8,47.1L117.1,47.6L115.1,48.9L113.4,50.3L112.5,50.6L111.9,50.7L111.9,50.2L111.6,50.1L111.2,49.9L111.1,49.6L109.1,48.1L107.1,46.5ZM130.5,41.3L130.6,41L131.3,41.3L132.3,40.6L132.6,41.4L132.5,41.5L131.4,41.9L132.1,42.6L131.9,42.7L131.8,43L131.4,43.1L131.3,43.3L131,43.5L130.4,43.4L130.3,43.3L130.5,42.2L130.5,41.9L130.5,41.7ZM140.5,47L140.6,47L140.6,47.2L141.1,47.1L141.5,47.1L141.9,47.1L142.3,46.6L142.6,46.2L143,45.7L143.1,46L143.2,46.5L142.9,46.6L142.9,47L143.1,47.1L142.8,47.3L142.8,47.5L142.7,47.8L142.7,48.1L142.6,48.3L140.8,47.9L140.5,47.2ZM140,46.7L139.9,46.2L140,45.8L140.1,45.7L140.3,45.9L140.4,46.3L140.3,46.8L140.2,46.8ZM137.9,43L138.1,43.3L138,43.4L138.3,44L137.9,44L137.7,43.7L137.1,43.6L137.5,42.9ZM132.6,41.4L132.3,40.6L133.5,39.8L133.6,39L133.5,38.5L133.8,38.3L134,37.8L134.2,37.7L134.9,37.8L135.1,38L135.4,37.9L135.9,38.7L136.3,38.9L136.4,39.4L136.1,39.6L136.1,40.2L136.5,40.8L137.3,41.2L137.7,41.7L137.6,42.3L137.8,42.3L137.9,42.6L138.2,43L137.9,43L137.5,42.9L137.1,43.6L136.1,43.5L134.3,42.1L133.3,41.6ZM142.7,48.1L142.7,47.8L142.8,47.5L142.8,47.3L143.1,47.1L142.9,47L142.9,46.6L143.2,46.5L143.6,47L143.9,47.3L144.4,47.4L144.7,47.5L145,47.9L145.2,48.2L145.5,48.2L145.5,48.4L145.3,48.8L145.2,49L145,49.2L144.8,49.7L144.6,49.7L144.4,49.9L144.4,50.2L144.5,50.7L144.5,50.8L144.2,50.8L143.8,51L143.8,51.4L143.7,51.5L143.3,51.5L143.1,51.7L143.1,52L142.8,52.2L142.5,52.1L142.1,52.4L141.8,52.4L141.6,51.9L141,50.7L142.8,50L143,48.6ZM143.1,46L143,45.7L143.1,45.5L143.2,45.6L143.2,45.9ZM210.4,75.3L210.6,75.7L210.4,75.8L210.3,75.5ZM210.1,75.1L210.1,74.9L210.2,74.4L210.4,74.6L210.4,75.2L210.3,75.1ZM171.9,55.5L171.6,54.7L172,54.1L172.7,54L173.3,54.1L173.8,54.3L174,53.9L174.6,54.1L174.8,54.6L174.8,55.4L173.9,56L174.2,56.4L173.5,56.5L173,56.7L172.5,56.6L172.2,56.3ZM173.3,54.1L172.7,54L172,54.1L171.6,54.7L171.9,55.5L171.3,55.2L170.8,55.2L170.8,54.7L170.3,54.7L170.3,55.5L170.1,56.5L169.9,57.1L170,57.6L170.4,57.6L170.7,58.3L170.9,58.9L171.2,59.3L171.6,59.4L171.9,59.7L171.7,60L171.3,60.1L171.3,59.7L170.8,59.4L170.7,59.6L170.4,59.3L170.3,58.9L169.9,58.5L169.6,58.2L169.6,58.6L169.4,58.2L169.4,57.8L169.6,57.1L169.8,56.4L170.1,55.7L169.8,55.1L169.8,54.8L169.6,54.4L169.2,53.8L169,53.5L169.2,53.3L169.3,52.7L169,52.3L168.6,51.7L168.2,51.1L168.4,51L168.6,50.2L169,50.2L169.3,49.9L169.6,49.7L169.9,50L170,50.4L170.4,50.4L170.4,51.2L170.5,51.8L171.1,51.4L171.3,51.5L171.6,51.5L171.7,51.2L172.2,51.3L172.7,51.8L172.8,52.5L173.4,53.2L173.5,53.8ZM174.6,54.1L174,53.9L173.8,54.3L173.3,54.1L173.5,53.8L173.4,53.2L172.8,52.5L172.7,51.8L172.2,51.3L171.7,51.2L171.6,51.5L171.3,51.5L171.1,51.4L170.5,51.8L170.4,51.2L170.4,50.4L170,50.4L169.9,50L169.6,49.7L169.7,49.5L170.1,49L170.2,49.2L170.5,49.2L170.3,48.4L170.6,48.3L171,48.8L171.4,49.5L172.1,49.5L172.5,50.1L172.1,50.3L172,50.5L172.8,51L173.4,51.8L173.9,52.4L174.4,52.9L174.6,53.4ZM169.6,49.7L169.3,49.9L169,50.2L168.6,50.2L168.4,51L168.2,51.1L168.6,51.7L169,52.3L169.3,52.7L169.2,53.3L169,53.5L169.2,53.8L169.6,54.4L169.8,54.8L169.8,55.1L170.1,55.7L169.8,56.4L169.6,57.1L169.5,56.6L169.6,56.1L169.4,55.6L169.3,54.9L169.1,54.5L168.8,53.7L168.6,52.8L168.2,52.2L167.9,52.6L167.3,53.1L166.9,53L166.5,52.8L166.6,52L166.4,51.3L165.8,50.5L165.8,50.2L165.5,50.1L165,49.6L164.8,49L165.1,49.1L165,48.6L165.3,48.4L165.1,48.1L165.2,47.9L165.1,47.1L165.6,47.3L165.8,46.7L165.7,46.4L165.9,45.8L165.8,45.4L166.5,44.9L166.9,45L166.8,44.6L167,44.5L166.9,44.2L167.2,44.1L167.5,44.6L167.8,44.7L167.9,45.3L168,45.8L167.6,46.4L167.7,47.3L168.3,47.2L168.6,47.8L169,47.9L168.9,48.5L169.4,48.8L169.7,48.9L170.1,48.7L170.1,49L169.7,49.5ZM173,56.7L173.5,56.5L174.2,56.4L173.9,56L174.8,55.4L174.8,54.6L174.6,54.1L174.6,53.4L174.4,52.9L173.9,52.4L173.4,51.8L172.8,51L172,50.5L172.1,50.3L172.5,50.1L172.1,49.5L171.4,49.5L171,48.8L170.6,48.3L170.9,48.1L171.3,48.1L171.9,48L172.3,47.7L172.7,47.9L173.2,48.1L173.2,48.5L173.6,48.7L174.2,48.9L173.5,49.5L173.1,50.2L173.1,50.7L173.7,51.4L174.4,52.4L175,52.8L175.4,53.4L175.8,54.7L175.9,55.9L175.4,56.4L174.8,56.8L174.3,57.4L173.6,58.1L173.4,57.6L173.5,57.1ZM182.5,34.3L182.5,34.3L182.5,34.3ZM182.4,34.2L182.5,34.3L182.3,34.3L182.2,34.5L182.1,34.8L182.4,35.3L182.2,35.4L182.1,35.6L182,35.8L181.7,35.9L181.5,36.1L181.6,36.4L181.6,36.5L181.9,36.6L182.3,36.9L182.3,37L182.1,37.1L181.7,37.1L181.6,37.4L181.4,37.4L181.4,37.5L181,37.3L181,37.5L180.9,37.5L180.8,37.4L180.6,37.3L180.4,37.2L180.5,36.9L180.6,36.8L180.4,36.7L180.4,36.3L180.3,36.2L180,36.1L179.6,36L179.9,35.5L180.3,35.1L180.5,34.6L180.9,34.8L181.4,34.9L181.1,34.5L181.8,34.2L181.8,33.8ZM181.4,37.5L181.4,37.4L181.6,37.4L181.7,37.1L182.1,37.1L182.3,37L182.3,36.9L183.2,37.7L183.5,38.2L183.8,39L183.8,39.4L183.3,39.5L183,39.8L182.5,39.9L182.3,39.5L182.2,38.9L181.6,38.2L182,38.1ZM156.9,29.5L157.4,29.3L158.2,28.8L158.8,28.4L159.4,28.6L160,28.7L160.4,29L161,29L161.8,29.2L162.1,28.7L161.7,28.3L162,27.6L162.7,27.9L163.2,27.9L163.9,28.1L164.2,28.6L165.1,28.9L165.6,28.8L166.2,28.7L166.8,28.8L167.5,29.1L168,29.5L168.5,29.5L169.2,29.6L169.6,29.4L170.2,29.3L170.8,28.8L171.1,28.9L171.5,29.1L172.1,29.1L172.1,29.6L172.1,30.3L172.4,30.5L172.7,30.4L173.2,30.6L173.5,30.3L174.1,30.5L174.8,31L174.9,31.2L174.4,31.2L173.7,31.3L173.4,31.5L173.2,31.9L172.5,32.2L172.1,32.5L171.5,32.4L171.2,32.3L171.1,32.8L171.4,33.1L171.6,33.3L171.3,33.5L171,33.9L170.5,34.1L169.7,34.2L168.9,34.4L168.4,34.8L168.1,34.6L167.4,34.6L166.4,34.1L165.8,34L165.1,34.1L163.9,34L163.3,34L162.8,33.6L162.3,32.9L162,32.9L161.1,32.4L160.4,32.3L159.7,32.2L159.4,31.9L159.3,31.1L158.7,30.6L157.8,30.3L157.2,29.9ZM166.9,44.2L167,44.5L166.8,44.6L166.9,45L166.5,44.9L165.8,45.4L165.9,45.8L165.7,46.4L165.8,46.7L165.6,47.3L165.1,47.1L165.2,47.9L165.1,48.1L165.3,48.4L165,48.6L164.5,47.5L164.3,47.5L164.3,47.9L163.9,47.6L164,47.2L164.3,47.1L164.5,46.5L164.1,46.4L163.5,46.4L163,46.3L162.8,45.8L162.5,45.8L162,45.5L161.9,46L162.4,46.3L162.1,46.6L162,46.8L162.4,47L162.4,47.5L162.6,48L162.8,48.6L162.8,48.8L162.4,48.8L161.7,49L161.8,49.5L161.5,49.9L160.7,50.4L160.2,51.2L159.8,51.7L159.2,52.1L159.3,52.5L159,52.6L158.5,52.9L158.2,52.9L158.1,53.5L158.3,54.4L158.4,55L158.2,55.6L158.3,56.8L157.9,56.9L157.7,57.4L157.9,57.6L157.4,57.8L157.2,58.3L157,58.5L156.3,57.8L156,56.9L155.7,56.2L155.5,55.8L155.1,55.1L154.9,54.3L154.8,53.8L154.1,52.9L153.7,51.5L153.5,50.6L153.4,49.7L153.2,49.1L152.4,49.5L151.9,49.4L151,48.6L151.3,48.3L151.1,48L150.3,47.4L150.6,46.9L151.9,47L151.7,46.3L151.4,46L151.2,45.4L150.8,45.1L151.3,44.4L152,44.4L152.5,43.7L152.7,43L153.1,42.3L153,41.8L153.4,41.4L152.9,41L152.6,40.5L152.3,39.9L152.5,39.6L153.4,39.8L154,39.7L154.4,39.1L155.2,39.9L155.3,40.5L155.6,40.8L155.7,41.2L155.2,41.1L155.6,41.9L156.2,42.3L157.1,42.8L156.8,43.1L156.7,43.8L157.3,44.1L158,44.4L158.8,44.8L159.6,44.9L160,45.3L160.5,45.3L161.2,45.5L161.7,45.5L161.7,45.2L161.6,44.8L161.5,44.5L161.9,44.3L162,44.9L162.1,45L162.7,45.3L163,45.2L163.5,45.2L164,45.2L163.9,44.8L163.7,44.5L164.1,44.4L164.5,43.9L165.1,43.5L165.6,43.6L166,43.3L166.3,43.8L166.2,44.1ZM165,48.6L165.1,49.1L164.8,49L165,49.6L164.7,49.2L164.7,48.8L164.5,48.5L164.2,48.1L163.6,48L163.7,48.3L163.6,48.7L163.3,48.6L163.3,48.7L163.1,48.6L162.8,48.6L162.6,48L162.4,47.5L162.4,47L162,46.8L162.1,46.6L162.4,46.3L161.9,46L162,45.5L162.5,45.8L162.8,45.8L163,46.3L163.5,46.4L164.1,46.4L164.5,46.5L164.3,47.1L164,47.2L163.9,47.6L164.3,47.9L164.3,47.5L164.5,47.5ZM163.7,44.5L163.9,44.8L164,45.2L163.5,45.2L163,45.2L162.7,45.3L162.1,45L162,44.9L162.3,44.3L162.6,44.2L163,44.3L163.4,44.3ZM161.5,44.5L161.6,44.8L161.7,45.2L161.7,45.5L161.2,45.5L160.5,45.3L160,45.3L159.6,44.9L158.8,44.8L158,44.4L157.3,44.1L156.7,43.8L156.8,43.1L157.1,42.8L157.3,42.7L157.8,42.9L158.5,43.3L158.9,43.4L159.1,43.8L159.6,43.9L160.2,44.2L160.9,44.4ZM154.4,39.1L154,39.7L153.4,39.8L152.5,39.6L152.3,39.9L152.6,40.5L152.9,41L153.4,41.4L153,41.8L153.1,42.3L152.7,43L152.5,43.7L152,44.4L151.3,44.4L150.8,45.1L151.2,45.4L151.4,46L151.7,46.3L151.9,47L150.6,46.9L150.3,47.4L149.9,47.2L149.6,46.7L149.1,46.2L148,46.3L147.1,46.3L146.2,46.4L146.4,45.6L147.2,45.3L147.1,44.9L146.8,44.8L146.7,44.2L146,43.9L145.8,43.5L145.4,43.1L146.4,43.4L147,43.3L147.4,43.4L147.5,43.3L147.9,43.3L148.6,43L148.5,42.4L148.8,42L149.2,42L149.2,41.8L149.6,41.7L149.9,41.8L150.1,41.6L149.9,41.2L150.1,40.8L150.4,40.6L150.1,40.1L150.7,40.1L150.8,39.9L150.7,39.6L150.9,39.3L150.8,39L150.6,38.7L150.8,38.4L151.4,38.2L152,38.1L152.3,38L152.6,37.9L153.1,38.2L153.4,38.8ZM147.7,37.8L148,37.8L148.5,37.9L148.6,38L149,37.8L149.2,37.9L149.3,37.6L149.7,37.6L149.7,37.5L149.7,37.2L149.9,37L150.3,37.1L150.3,37.3L150.4,37.4L150.5,38L150.8,38.2L151,38L151.2,38L151.5,37.7L151.9,37.7L152.5,37.7L152.6,37.9L152.3,38L152,38.1L151.4,38.2L150.8,38.4L150.6,38.7L150.8,39L150.9,39.3L150.7,39.6L150.8,39.9L150.7,40.1L150.1,40.1L150.4,40.6L150.1,40.8L149.9,41.2L150.1,41.6L149.9,41.8L149.6,41.7L149.2,41.8L149.2,42L148.8,42L148.5,42.4L148.6,43L147.9,43.3L147.5,43.3L147.4,43.4L147,43.3L146.4,43.4L145.4,43.1L145.8,42.4L145.7,42L145.3,41.9L145.1,41.4L144.9,40.8L145,40.5L144.8,40.4L144.8,39.8L144.9,39L145.5,39.2L145.9,39.1L146,38.8L146.4,38.7L146.7,38.5L146.7,37.9L147.2,37.8L147.2,37.5L147.5,37.7ZM148.5,37.9L148.6,37.2L148.4,36.7L147.9,36.5L148,36.2L148.5,36.2L148.6,35.8L148.7,35.4L149.4,35.2L149.4,35.6L149.5,35.7L149.7,35.7L149.6,35.9L148.9,35.8L149,36.2L149.6,36.2L150.3,36.4L151.4,36.3L151.7,37L151.8,36.9L152.2,37L152.3,37.3L152.5,37.7L151.9,37.7L151.5,37.7L151.2,38L151,38L150.8,38.2L150.5,38L150.4,37.4L150.3,37.3L150.3,37.1L149.9,37L149.7,37.2L149.7,37.5L149.7,37.6L149.3,37.6L149.2,37.9L149,37.8L148.6,38ZM149.3,34.3L149.4,34L149.7,33.9L150.7,34.2L150.7,33.7L150.9,33.6L151.8,33.9L152,33.8L152.9,33.8L153.8,33.9L154.1,34.2L154.5,34.3L154.5,34.4L153.7,34.8L153.6,35.1L152.9,35.2L152.8,35.6L152.2,35.5L151.8,35.6L151.4,36L151.5,36.1L151.4,36.3L150.3,36.4L149.6,36.2L149,36.2L148.9,35.8L149.6,35.9L149.7,35.7L150.2,35.8L150.8,35.3L150,34.9L149.7,35.1L149.2,34.8L149.5,34.4ZM139.2,34.7L139.4,34.4L140,34.3L140.4,34.5L140.9,35L141.2,35L141.8,35L141.6,34.6L142.1,34.4L142.4,34L143.3,34.3L143.4,34.9L143.7,35L144.3,35L144.5,35.1L144.9,35.9L145.7,36.3L146.1,36.7L146.8,37L147.6,37.3L147.7,37.8L147.5,37.7L147.2,37.5L147.2,37.8L146.7,37.9L146.7,38.5L146.4,38.7L146,38.8L145.9,39.1L145.5,39.2L144.9,39L144.7,38.4L144.3,38.3L143.5,37.7L143.1,37.6L142.4,37.3L142,37.2L141.7,37.4L141.4,37.3L141,37.7L140.6,37.9L140.4,37.4L140.3,36.6L139.8,36.4L139.9,35.9L139.5,35.9L139.5,35.3L140.1,35.5L140.5,35.2L140,34.8L139.8,34.4L139.4,34.6L139.4,35.1ZM138.2,43L137.9,42.6L137.8,42.3L137.6,42.3L137.7,41.7L137.3,41.2L136.5,40.8L136.1,40.2L136.1,39.6L136.4,39.4L136.3,38.9L135.9,38.7L135.4,37.9L135,37.3L135.1,37.1L134.8,36.3L135.1,36.1L135.3,36.4L135.6,36.7L136,36.8L136.2,36.8L136.8,36.2L137,36.2L137.2,36.4L137,36.7L137.4,37.1L137.6,37.1L137.8,37.6L138.4,37.7L138.9,38.1L139.7,38.2L140.5,38L140.6,37.9L141,37.7L141.4,37.3L141.7,37.4L142,37.2L142.4,37.3L143.1,37.6L143.5,37.7L144.3,38.3L144.7,38.4L144.9,39L144.8,39.8L144.8,40.4L145,40.5L144.9,40.8L145.1,41.4L145.3,41.9L145.7,42L145.8,42.4L145.4,43.1L145.8,43.5L146,43.9L146.7,44.2L146.8,44.8L147.1,44.9L147.2,45.3L146.4,45.6L146.2,46.4L145.1,46.2L144.4,46.1L143.8,46L143.4,45.1L143.1,45L142.7,45.1L142.1,45.4L141.4,45.2L140.7,44.7L140.1,44.5L139.7,43.8L139.1,42.9L138.8,43L138.4,42.7ZM130.6,41L130.6,41L130.6,40.9L130.6,40.6L130.7,40.3L131,40L130.9,39.7L130.6,39.7L130.5,39.1L130.6,38.8L130.7,38.7L130.9,38.5L130.9,38.1L131.1,38.3L131.7,38.1L132,38.2L132.4,38.2L133.1,37.9L133.4,38L134,37.8L133.8,38.3L133.5,38.5L133.6,39L133.5,39.8L132.3,40.6L131.3,41.3ZM136.2,36.8L136,36.8L135.7,36.4L135.7,36.3L135.4,36.3L135.2,36.1L135.1,36.1L134.9,35.9L134.4,35.7L134.4,35.4L134.3,35.1L135.1,35L135.2,35.2L135.4,35.3L135.3,35.5L135.7,35.7L135.6,36L135.8,36.2L136.1,36.3ZM115.5,23.1L115.7,22.7L116.1,22.3L116.2,21.5L115.9,21.2L115.8,20.4L116.1,19.8L116.5,19.8L116.7,19.6L116.5,19.3L117.1,18.5L117.5,17.8L117.8,17.4L118.3,17.4L118.3,17L119.2,17.1L119.2,16.7L119.5,16.7L120.2,17L121,17.4L121.1,18.4L121.3,18.6L120.5,18.8L120.1,19.2L120.3,19.6L119.6,20.1L118.7,20.6L118.4,21.5L118.8,22L119.3,22.3L119,23L118.4,23.2L118.4,24.3L118.1,24.9L117.5,24.8L117.2,25.3L116.7,25.4L116.4,24.8L116,24ZM124.4,24.8L125,25L125.1,25.2L125.3,25.1L125.9,25.3L126,25.6L125.9,25.7L126.3,26.2L126.5,26.3L126.5,26.4L126.9,26.5L127,26.7L126.9,26.9L126.4,26.8L126.3,26.9L126.5,27.1L126.7,27.6L126.3,27.6L126.1,27.7L126.1,28.1L125.9,28L125.4,28L125.3,27.9L125.1,28L124.9,27.9L124.5,27.9L123.9,27.7L123.3,27.7L122.9,27.7L122.6,27.9L122.4,27.9L122.4,27.6L122.2,27.3L122.5,27.2L122.4,26.9L122.3,26.6L122.2,26.3L122.7,26.3L123.2,26.1L123.3,25.7L123.7,25.5L123.6,25.2L123.9,25.1ZM126.7,27.6L126.9,27.6L127,27.4L127.2,27.5L127.7,27.4L128.1,27.8L128,27.9L128.1,28.1L128.5,28.2L128.7,28.5L128.7,28.6L129.5,28.8L129.9,28.7L130.2,29L130.5,29L131.4,29.2L131.4,29.4L131.3,29.8L131.4,30.2L131.4,30.4L130.9,30.5L130.6,30.7L130.7,31L130.3,31L129.9,31.2L129.4,31.3L129,31.5L129.1,31.9L129,31.9L128.9,31.7L128.7,31.7L128.3,31.6L128.2,31.7L128.1,31.7L127.2,31.5L127.2,31.2L126.7,31.3L126.5,31.7L126.2,32.2L125.9,32.1L125.7,32.2L125.4,32.1L125.5,32L125.6,31.8L125.7,31.5L125.7,31.4L125.8,31.4L125.8,31.5L126.2,31.5L126.3,31.4L126.2,31.4L126.2,31.3L126,31.1L125.9,30.8L125.7,30.7L125.7,30.4L125.4,30.3L125.2,30.2L124.8,30L124.4,30.1L124.3,30.2L124.1,30.2L124,30.4L123.6,30.4L123.4,30.5L123.1,30.4L122.8,30.4L122.5,30.3L122.2,30.4L122.2,30.2L121.9,30.1L121.9,29.8L122.1,29.6L122.2,29.6L122,29.3L122.4,28.8L122.7,28.7L122.7,28.5L122.4,27.9L122.6,27.9L122.9,27.7L123.3,27.7L123.9,27.7L124.5,27.9L124.9,27.9L125.1,28L125.3,27.9L125.4,28L125.9,28L126.1,28.1L126.1,27.7L126.3,27.6ZM122.2,26.3L122.3,26.6L122.4,26.9L122.5,27.2L122.2,27.3L122.4,27.6L122.4,27.9L122.7,28.5L122.7,28.7L122.4,28.8L122,29.3L122.2,29.6L122.1,29.6L121.5,29.3L121.2,29.4L120.9,29.4L120.6,29.5L120.3,29.3L120.1,29.4L120.1,29.3L119.8,29L119.4,28.9L119.3,28.7L119,28.7L118.9,28.8L118.6,28.7L118.6,28.5L118.2,28.4L117.9,28.2L117.7,27.8L117.7,27.6L117.6,27.2L117.4,27L117.5,26.8L117.3,26.4L117.7,26.2L118.5,25.9L119.1,25.7L119.6,25.8L119.7,26L120.2,26L120.8,26.1L121.8,26.1L122,26.1ZM119.1,30.3L119.1,30.5L118.8,30.5L118.9,30.7L118.8,31.1L118.7,31.2L118.2,31.3L117.9,31.4L117.5,31.4L116.7,31.2L116.6,31L116,31.1L116,31.2L115.7,31.1L115.4,31.1L115.1,31L115.2,30.8L115.2,30.7L115.3,30.6L115.6,30.8L115.7,30.6L116.2,30.7L116.5,30.5L116.8,30.6L117,30.7L117,30.6L116.9,30.1L117.1,30.1L117.3,29.7L117.7,30L118,29.7L118.2,29.6L118.6,29.8L118.8,29.8L119.1,29.9L119.1,30ZM121.9,30.1L122.2,30.2L122.2,30.4L121.9,30.6L121.7,31L121.4,31.5L121,31.6L120.7,31.6L120.3,31.8L120.1,31.9L119.6,31.8L119.2,31.5L119,31.4L118.9,31.1L118.8,31.1L118.9,30.7L118.8,30.5L119.1,30.5L119.1,30.3L119.4,30.4L119.6,30.5L120.1,30.4L120.1,30.3L120.3,30.3L120.6,30.2L120.6,30.2L120.9,30.1L121,30L121.2,29.9L121.8,30.1ZM124.3,30.2L124.4,30.1L124.8,30L125.2,30.2L125.4,30.3L125.7,30.4L125.7,30.7L125.9,30.8L126,31.1L126.2,31.3L126.2,31.4L126.3,31.4L126.2,31.5L125.8,31.5L125.8,31.4L125.7,31.4L125.7,31.5L125.6,31.8L125.5,32L125.4,32.1L125.3,31.8L125.3,31.5L125.2,31.2L124.9,30.8L124.7,30.5L124.5,30.3ZM125.4,32.1L125.7,32.2L125.9,32.1L126.2,32.2L126.2,32.4L126,32.5L125.8,32.5L125.7,33.3L125.4,33.2L125,33L124.3,33.1L124.1,33.3L123.3,33.3L122.8,33.2L122.6,33.2L122.4,32.9L122.3,32.8L122.4,32.7L122.3,32.6L122.1,32.8L121.8,32.6L121.7,32.3L121.4,32.1L121.3,31.9L121,31.6L121.4,31.5L121.7,31L121.9,30.6L122.2,30.4L122.5,30.3L122.8,30.4L123.1,30.4L123.4,30.5L123.6,30.4L124,30.4L124.1,30.2L124.3,30.2L124.5,30.3L124.7,30.5L124.9,30.8L125.2,31.2L125.3,31.5L125.3,31.8ZM123.6,25.2L123.7,25.5L123.3,25.7L123.2,26.1L122.7,26.3L122.2,26.3L122,26.1L121.8,26.1L121.7,25.9L121.7,25.7L121.5,25.6L120.9,25.5L120.8,24.9L121.3,24.7L122.2,24.8L122.7,24.7L122.8,24.9L123.1,24.9ZM123.8,24L124.1,24.1L124.2,24.5L124.4,24.8L123.9,25.1L123.6,25.2L123.1,24.9L122.8,24.9L122.7,24.7L122.2,24.8L121.3,24.7L120.8,24.9L120.7,24.4L120.9,24L121.4,23.8L121.9,24.3L122.3,24.3L122.3,23.8L122.7,23.7L122.9,23.8L123.4,24ZM124,22.7L124.1,22.8L123.8,23.2L124,23.8L123.8,24L123.4,24L122.9,23.8L122.7,23.7L122.3,23.8L122.3,23.4L122.1,23.5L121.8,23.3L121.7,22.9L122.3,22.7L122.9,22.6L123.5,22.7ZM117.3,26.4L117.5,26.8L117.4,27L117.6,27.2L117.7,27.6L117.7,27.8L117.9,28.2L117.7,28.3L117.6,28.2L117.4,28.3L117.1,28.5L116.9,28.6L116.5,28.8L116.6,29L116.7,29.3L117,29.4L117.3,29.7L117.1,30.1L116.9,30.1L117,30.6L117,30.7L116.8,30.6L116.5,30.5L116.2,30.7L115.7,30.6L115.6,30.8L115.3,30.6L115.2,30.7L114.6,30.5L114.5,30.6L114,30.6L114.1,30.1L114.3,29.6L113.6,29.5L113.3,29.3L113.3,29L113.2,28.9L113.3,28.4L113.2,27.7L113.5,27.7L113.6,27.5L113.7,26.9L113.6,26.6L113.7,26.5L114.1,26.5L114.2,26.6L114.6,26.3L114.4,26L114.4,25.6L114.8,25.7L115.1,25.6L115.1,25.9L115.7,26L115.7,26.3L116.2,26.2L116.5,26L117.1,26.2ZM122.4,32.9L122.6,33.2L122.8,33.2L123.3,33.3L124.1,33.3L124.3,33.1L125,33L125.4,33.2L125.7,33.3L125.5,33.6L125.3,34.1L125.5,34.5L125.1,34.4L124.5,34.6L124.5,35L124,35L123.6,34.8L123.2,35L122.8,35L122.7,34.5L122.4,34.3L122.5,34.2L122.4,34.1L122.5,33.9L122.7,33.7L122.4,33.4L122.3,33.1ZM125,39.2L125,39.4L124.1,39.5L124.1,39.4L123.4,39.2L123.5,38.9L123.8,39.2L124.3,39.1L124.7,39.2L124.7,39.3ZM122.8,35L123.2,35L123.6,34.8L124,35L124.5,35L124.5,34.6L124.8,34.8L124.7,35.2L124.5,35.3L124.2,35.3L123.9,35.2L123.2,35.4L123.7,35.8L123.4,35.9L123.1,35.9L122.8,35.6L122.7,35.7L122.8,36.1L123.1,36.5L122.9,36.6L123.3,36.9L123.6,37.2L123.6,37.5L123.1,37.4L123.3,37.7L122.9,37.8L123.2,38.4L122.8,38.4L122.3,38.1L122,37.6L121.9,37.1L121.7,36.8L121.4,36.4L121.3,36.2L121.5,35.8L121.6,35.6L121.7,35.5L121.7,35.3L122.1,35.2L122.3,35.1L122.6,35.1L122.7,35ZM135.4,37.9L135.1,38L134.9,37.8L134.2,37.7L134,37.8L133.4,38L133.1,37.9L132.4,38.2L132,38.2L131.7,38.1L131.1,38.3L130.9,38.1L130.9,38.5L130.7,38.7L130.6,38.8L130.4,38.5L130.5,38.3L130.2,38.3L129.7,38.2L129.4,38.6L128.5,38.6L128,38.3L127.4,38.2L127.3,38.5L126.9,38.6L126.3,38.2L125.7,38.3L125.3,37.6L124.9,37.2L125.1,36.6L124.7,36.3L125.3,35.6L126.1,35.6L126.3,35L127.4,35.1L128,34.7L128.6,34.5L129.5,34.5L130.6,35L131.4,35.2L132,35.1L132.5,35.2L133.1,34.8L133.7,34.8L134.3,35.1L134.4,35.4L134.4,35.7L134.9,35.9L135.1,36.1L134.8,36.3L135.1,37.1L135,37.3ZM124.5,34.6L125.1,34.4L125.5,34.5L125.6,34.8L126.1,35L126.1,35.2L125.4,35.2L125.2,35.4L124.8,35.8L124.6,35.5L124.5,35.3L124.7,35.2L124.8,34.8ZM121.7,35.3L121.7,35.5L121.6,35.6L121.5,35.8L121.3,36.2L121.2,36.1L121.2,36L120.9,35.7L120.8,35.4L120.8,34.9L120.9,34.7L120.8,34.6L120.7,34.4L120.9,34L121,34.2L121.1,34.1L121.2,34.3L121.4,34.3L121.4,34.6L121.4,34.8L121.5,35.1ZM119,31.4L119.2,31.5L119.6,31.8L120.1,31.9L120.3,31.8L120.4,32.1L120.6,32.2L120.4,32.5L120.1,32.4L119.8,32.4L119.3,32.2L119,32.3L118.9,32.4L118.7,32.2L118.6,32.5L118.9,32.9L119,33.1L119.3,33.3L119.5,33.5L119.8,33.8L120.3,34L120.2,34.2L119.7,33.9L119.3,33.7L118.8,33.4L118.3,32.9L118.4,32.9L118.2,32.6L118.1,32.4L117.8,32.2L117.6,32.5L117.5,32.3L117.5,32.1L117.5,32.1L117.9,32.1L118,32L118.2,32.1L118.4,32.1L118.4,31.9L118.5,31.8L118.6,31.6ZM115.2,30.7L115.2,30.8L115.1,31L115.4,31.1L115.7,31.1L115.6,31.4L115.4,31.5L115,31.4L114.9,31.7L114.6,31.7L114.5,31.6L114.2,31.8L114,31.9L113.7,31.7L113.5,31.4L113.3,31.5L113.3,31.2L113.7,30.8L113.6,30.7L113.9,30.7L114,30.6L114.5,30.6L114.6,30.5ZM113.2,28.9L113.3,29L113.3,29.3L113.1,29.4L113,29.3L113.1,28.9ZM113.3,28.4L113.2,28.9L113.1,28.9L113,29.3L112.6,29L112.3,29L111.9,28.7L111.7,28.4L111.4,28.4L111.3,28.2L111.7,28.1L112.1,28.1L112.6,28L113,28.3ZM113.6,26.6L113.7,26.9L113.6,27.5L113.5,27.7L113.2,27.7L113.3,28.4L113,28.3L112.6,28L112.1,28.1L111.7,28.1L112,27.9L112.5,26.9L113.2,26.6ZM105,34.6L105.2,34.4L105.4,34.3L105.5,34.6L105.9,34.6L106,34.6L106.3,34.6L106.4,34.9L106.2,35.1L106.2,35.7L106.1,35.8L106,36.1L105.8,36.2L106,36.6L105.8,37L106,37.3L105.9,37.4L105.7,37.7L105.8,37.9L105.5,38.1L105.2,38L105,38.1L105.1,37.6L105,37.1L104.8,37.1L104.6,36.8L104.7,36.3L104.9,36.1L105,35.8L105.1,35.4L105.1,35.1L105,34.8ZM105.8,37.9L105.7,37.7L105.9,37.4L106,37.3L105.8,37L106,36.6L105.8,36.2L106,36.1L106.1,35.8L106.2,35.7L106.2,35.1L106.4,34.9L106.3,34.6L106,34.6L105.9,34.6L105.5,34.6L105.4,34.3L105.2,34.4L105,34.6L105,34.1L104.8,33.8L105.6,33.3L106.3,33.4L107,33.4L107.6,33.5L108.1,33.5L109,33.5L109.2,33.8L110.2,34.1L110.4,33.9L111,34.3L111.7,34.2L111.7,34.6L111.2,35L110.5,35.2L110.4,35.4L110.1,35.8L109.8,36.4L110.1,36.8L109.7,37.1L109.6,37.6L109.2,37.7L108.8,38.2L108.1,38.3L107.5,38.2L107.2,38.5L106.9,38.8L106.7,38.7L106.5,38.5L106.3,38.1ZM106.8,26.4L106.9,26.8L106.4,27.4L105.5,27.8L104.7,27.7L105.2,27L105,26.4L105.7,25.8L106.1,25.5L106.2,25.9L106.1,26.2L106.4,26.2ZM208.6,78.9L208.9,79.4L209.2,79.7L208.9,79.9L208.6,79.7L208.3,79.4L208,79L207.7,78.5L207.7,78.3L208,78.3L208.3,78.5L208.4,78.7ZM208,71.5L208.1,71.7L207.7,71.7L207.5,71.3L207.8,71.4ZM207.8,70.9L207.7,71L207.3,70.4L207.2,70L207.4,70L207.6,70.5ZM207.2,71L207,71.1L206.6,71L206.5,70.9L206.6,70.6L207,70.7L207.2,70.9ZM206.7,69.7L206.8,70L206.8,70.1L206.3,69.8L206,69.6L205.8,69.3L205.9,69.2L206.2,69.4ZM205.2,69L205.4,69.3L205.3,69.3L205.1,69.1L204.8,68.9L204.9,68.7ZM209.1,92.4L208.6,92.7L208,93.2L207.4,93.5L207.4,93.3L207.3,93.2L208,92.6L208,92.2L207.6,92L207.8,91.7L208.3,91.5L208.7,90.9L208.9,90.5L209,90L209.1,89.9L209,89.6L208.8,89L208.9,88.5L209.1,88.4L209.2,88.8L209.6,89L209.4,89.6L209.4,90.3L209.7,89.9L209.8,90.1L209.6,90.6L209.9,90.8L210.3,90.9L210.7,90.6L211,90.7L210.5,91.3L210.1,91.7L209.6,91.7L209.4,91.9L209.2,92.2ZM203.5,94.8L204.2,94.4L204.8,94.1L205.4,93.5L205.7,93.4L206,93L206.6,92.7L206.5,93L206.5,93.2L207.1,93L207,93.3L206.8,93.5L206.4,93.9L205.7,94.4L205.3,94.7L205.2,95L204.8,95L204.2,95.3L203.7,95.7L202.9,96.4L202.2,96.7L201.8,96.9L201.3,96.9L201.2,96.7L200.6,96.6L200.7,96.4L201.3,95.9L202.5,95.2L202.9,95.1ZM192.4,92.9L192.7,92.9L192.3,93.8L192,94L191.6,94.6L191.6,94.4L190.9,94.8L190.8,94.8L190.5,94.8L190.5,94.2L190.6,93.7L190.7,93.1L190.8,92.8L191.2,92.9L191.6,93.1L191.9,93ZM182.8,86.8L182.1,87.2L181.5,87.3L181.3,87.7L181,88L180.5,88L180.1,88.1L179.6,88L179.2,88L178.8,88.1L178.3,88.4L178.2,88.4L177.8,88.6L177.5,88.8L177,88.8L176.7,88.8L176.2,88.4L175.9,88.2L176.1,87.8L176.4,87.7L176.6,87.6L176.6,87.3L176.8,86.8L176.9,86.4L176.8,85.7L176.8,85.3L177,84.9L176.9,84.4L176.9,84.2L176.7,83.9L176.8,83.4L176.6,82.8L176.6,82.5L176.8,82.8L176.8,82.2L177,82.4L177.1,82.6L177.2,82.3L177,81.7L177,81.5L176.9,81.3L177.1,80.9L177.3,80.7L177.4,80.3L177.4,79.9L177.8,79.4L177.7,80L178.1,79.5L178.6,79.2L179,78.9L179.5,78.7L179.7,78.6L179.9,78.7L180.4,78.4L180.8,78.4L180.9,78.2L181.1,78.1L181.4,78.2L182.1,78L182.5,77.6L182.7,77.3L183.1,76.9L183.2,76.6L183.2,76.2L183.8,75.6L183.9,76.3L184.2,76.1L184,75.8L184.3,75.4L184.5,75.6L184.7,75.1L185.1,74.7L185.3,74.4L185.6,74.3L185.6,74.1L185.9,74.2L185.9,74L186.2,73.9L186.5,73.8L186.9,74.1L187.2,74.6L187.5,74.6L187.9,74.6L187.8,74.2L188.2,73.7L188.5,73.5L188.4,73.3L188.7,72.9L189.1,72.7L189.4,72.8L190,72.6L190,72.3L189.6,72L189.9,71.9L190.3,72.1L190.6,72.4L191.1,72.6L191.2,72.5L191.6,72.7L192,72.5L192.2,72.6L192.4,72.4L192.6,72.8L192.4,73.2L192.1,73.4L191.9,73.5L191.9,73.8L191.7,74.1L191.4,74.5L191.4,74.7L191.8,75L192.3,75.3L192.5,75.5L192.9,75.9L193.1,75.9L193.3,76.1L193.4,76.3L193.9,76.6L194.3,76.3L194.5,75.9L194.7,75.6L194.9,75.2L195.2,74.7L195.1,74.3L195.2,74.1L195.2,73.7L195.4,73.2L195.5,73.1L195.4,72.8L195.6,72.5L195.8,72.1L195.8,71.9L196.1,71.6L196.2,71.9L196.2,72.4L196.3,72.5L196.3,72.8L196.5,73.1L196.5,73.5L196.4,73.8L196.5,74.3L197,74.1L197.1,74.4L197.4,74.6L197.2,75L197.3,75.6L197.3,75.9L197.4,76L197.5,76.6L197.3,77L197.4,77.4L198,77.8L198.3,78.1L198.6,78.5L198.5,78.6L198.7,79.1L198.8,79.8L199,79.7L199.2,80L199.4,79.9L199.3,80.6L199.6,81.1L199.8,81.3L200,81.9L200,82.5L199.9,82.9L199.7,83.3L199.8,83.9L199.5,84.5L199.3,84.9L198.9,85.5L198.7,85.9L198.4,86.4L197.9,87.1L197.3,87.4L196.9,88L196.5,88.3L196.1,88.9L195.7,89.3L195.3,89.8L195,90.3L194.9,90.5L194.5,90.7L193.9,90.8L193.2,91.1L192.8,91.3L192.3,91.6L192,91.3L191.7,91.2L192,90.8L191.6,91L190.9,91.5L190.5,91.3L190.2,91.2L189.9,91.1L189.5,90.9L189.3,90.5L189.4,89.9L189.4,89.6L189.3,89.3L188.8,89.2L189.1,88.9L189.2,88.4L188.7,88.8L188.1,89L188.6,88.6L188.9,88.2L189.2,87.8L189.4,87.3L188.7,87.9L188.2,88.1L187.8,88.7L187.4,88.4L187.6,88L187.4,87.5L187.2,87.3L187.4,87.1L186.8,86.7L186.4,86.7L186,86.3L184.9,86.4L184.1,86.6L183.4,86.9ZM159.5,58.8L159.5,59.6L159.2,59.8L158.7,59.9L158.4,59.4L158.2,58.3L158.5,57.2L158.9,57.6L159.2,58.1ZM175.5,51.3L174.9,51.1L174.8,50.5L175.1,50.2L175.7,50L176,50L176.2,50.2L176,50.6L175.9,51ZM154.5,34.3L154.3,33.9L154.6,33.7L153.8,32.5L154.8,32.2L155,32L154.9,30.8L156.1,31L156.3,30.7L156.1,30L156.5,30L156.7,29.5L156.9,29.5L157.2,29.9L157.8,30.3L158.7,30.6L159.3,31.1L159.4,31.9L159.7,32.2L160.4,32.3L161.1,32.4L162,32.9L162.3,32.9L162.8,33.6L163.3,34L163.9,34L165.1,34.1L165.8,34L166.4,34.1L167.4,34.6L168.1,34.6L168.4,34.8L168.9,34.4L169.7,34.2L170.5,34.1L171,33.9L171.3,33.5L171.6,33.3L171.4,33.1L171.1,32.8L171.2,32.3L171.5,32.4L172.1,32.5L172.5,32.2L173.2,31.9L173.4,31.5L173.7,31.3L174.4,31.2L174.9,31.2L174.8,31L174.1,30.5L173.5,30.3L173.2,30.6L172.7,30.4L172.4,30.5L172.1,30.3L172.1,29.6L172.1,29.1L172.9,29.3L173.4,28.9L173.2,28.6L173.3,27.9L173.5,27.6L173.3,27.3L172.9,27.1L173.1,26.8L173.7,26.7L174.4,26.6L175.3,26.8L175.9,27.1L176.6,27.8L177,28.1L177.4,28.5L178,29.1L179.1,29.4L180,29.8L180.6,30.5L181.4,30.5L181.7,30.2L182.5,30L182.6,30.6L182.5,30.9L182.8,31.6L182.8,32.3L182,32.2L181.7,32.4L182.1,33L182.5,33.9L182.2,33.9L182.4,34.2L181.8,33.8L181.8,34.2L181.1,34.5L181.4,34.9L180.9,34.8L180.5,34.6L180.3,35.1L179.9,35.5L179.6,36L178.9,36.2L178.7,36.5L178.1,36.7L178.3,36.3L178.1,36.1L178.3,35.6L177.9,35.2L177.5,35.5L177.1,36L176.9,36.4L176.4,36.5L176.2,36.8L176.7,37.3L177.2,37.4L177.3,37.7L177.9,37.9L178.3,37.4L178.9,37.7L179.3,37.7L179.5,38.1L178.8,38.3L178.7,38.6L178.2,39L178.1,39.5L178.9,39.9L179.4,40.6L179.9,41.2L180.5,41.8L180.7,42.3L180.3,42.5L180.6,42.9L181,43.1L181.1,43.7L181.1,44.2L180.8,44.3L180.6,45L180.4,46L180,46.8L179.4,47.5L178.7,48.1L178,48.1L177.7,48.5L177.5,48.2L177.2,48.6L176.4,48.9L175.8,49L175.8,49.8L175.5,49.8L175.2,49.3L175.3,49L174.4,48.8L174.2,48.9L173.6,48.7L173.2,48.5L173.2,48.1L172.7,47.9L172.3,47.7L171.9,48L171.3,48.1L170.9,48.1L170.6,48.3L170.3,48.4L170.5,49.2L170.2,49.2L170.1,49L170.1,48.7L169.7,48.9L169.4,48.8L168.9,48.5L169,47.9L168.6,47.8L168.3,47.2L167.7,47.3L167.6,46.4L168,45.8L167.9,45.3L167.8,44.7L167.5,44.6L167.2,44.1L166.9,44.2L166.2,44.1L166.3,43.8L166,43.3L165.6,43.6L165.1,43.5L164.5,43.9L164.1,44.4L163.7,44.5L163.4,44.3L163,44.3L162.6,44.2L162.3,44.3L162,44.9L161.9,44.3L161.5,44.5L160.9,44.4L160.2,44.2L159.6,43.9L159.1,43.8L158.9,43.4L158.5,43.3L157.8,42.9L157.3,42.7L157.1,42.8L156.2,42.3L155.6,41.9L155.2,41.1L155.7,41.2L155.6,40.8L155.3,40.5L155.2,39.9L154.4,39.1L153.4,38.8L153.1,38.2L152.6,37.9L152.5,37.7L152.3,37.3L152.2,37L151.8,36.9L151.7,37L151.4,36.3L151.5,36.1L151.4,36L151.8,35.6L152.2,35.5L152.8,35.6L152.9,35.2L153.6,35.1L153.7,34.8L154.5,34.4ZM181.9,46.9L181.8,48.1L181.7,48.6L181.2,48L181,47.5L181.2,46.8L181.6,46.3L181.9,46.5ZM115.7,31.1L116,31.2L116,31.1L116.6,31L116.7,31.2L117.5,31.4L117.5,31.7L117.6,32L117.2,31.9L116.7,32.1L116.8,32.5L116.7,32.7L116.9,33L117.5,33.4L117.8,34L118.4,34.5L118.8,34.5L119,34.7L118.8,34.8L119.4,35.1L119.8,35.3L120.3,35.7L120.3,35.8L120.3,36L119.9,35.7L119.4,35.6L119.2,36L119.6,36.3L119.6,36.7L119.4,36.7L119.1,37.3L118.9,37.4L118.9,37.2L119,36.8L119.1,36.6L118.8,36.2L118.6,35.9L118.4,35.8L118.2,35.5L117.8,35.3L117.6,35.1L117.2,35L116.7,34.7L116.2,34.3L115.8,33.9L115.6,33.2L115.3,33.1L114.9,32.9L114.6,32.9L114.3,33.3L114.1,33.3L114.1,33L113.8,32.9L113.7,32.4L113.9,32.2L113.7,31.9L113.7,31.7L114,31.9L114.2,31.8L114.5,31.6L114.6,31.7L114.9,31.7L115,31.4L115.4,31.5L115.6,31.4ZM118.3,37.2L118.8,37.1L118.6,37.7L118.7,37.9L118.6,38.3L118.1,38L117.8,37.9L117,37.6L117.1,37.2L117.8,37.3ZM114.9,35.3L115.1,35.1L115.5,35.6L115.4,36.5L115.2,36.4L115,36.7L114.7,36.5L114.7,35.6L114.6,35.2ZM115.1,25.6L114.8,25.7L114.4,25.6L114.2,25.3L114.1,24.6L114.2,24.4L114.3,24.2L114.8,24.2L115,24L115.4,23.8L115.4,24.2L115.2,24.4L115.3,24.6L115.6,24.7L115.5,24.9L115.3,24.8L115,25.3ZM116.3,24.9L116.5,25.2L116.2,25.8L115.7,25.4L115.6,25.1ZM106.8,26.4L106.4,26.2L106.1,26.2L106.2,25.9L106.1,25.5L106.5,25.5L107.1,25.9ZM108.4,26.7L108.4,26.7L108.5,26.3L108.1,25.9L108.1,25.9L107.5,25.8L107.4,25.6L107.6,25.3L107.4,25.1L107.1,25.4L107.1,24.8L106.9,24.4L107.1,23.8L107.5,23.2L107.9,23.3L108.5,23.2L107.9,23.9L108.5,23.9L109,23.9L108.9,24.4L108.4,25L108.9,25L109,25.1L109.4,25.9L109.8,26L110.1,26.7L110.2,27L110.9,27.1L110.8,27.6L110.6,27.8L110.8,28.1L110.3,28.5L109.6,28.5L108.7,28.6L108.4,28.5L108.1,28.8L107.6,28.7L107.2,29L106.9,28.9L107.7,28.2L108.2,28L108.2,28L107.4,27.9L107.2,27.6L107.8,27.4L107.5,27.1L107.6,26.6ZM103.2,18.3L103,18.7L103.5,19.1L102.8,19.6L101.4,20L101,20.1L100.3,20.1L99,19.9L99.5,19.6L98.5,19.3L99.4,19.2L99.4,19L98.4,18.8L98.8,18.4L99.5,18.3L100.2,18.8L101,18.4L101.6,18.6L102.4,18.3ZM135.8,34.6L135.9,34.6L136.4,35L136.6,35.1L136.7,34.9L137,34.6L137.4,35L137.7,35.5L138,35.5L138.2,35.7L137.7,35.8L137.7,36.3L137.7,36.6L137.5,36.7L137.6,37.1L137.4,37.1L137,36.7L137.2,36.4L137,36.2L136.8,36.2L136.2,36.8L136.1,36.3L135.8,36.2L135.6,36L135.7,35.7L135.3,35.5L135.4,35.3L135.2,35.2L135.1,35L135.2,34.9L135.6,35.1L135.9,35.2L136,35.1L135.7,34.7ZM136,36.8L135.6,36.7L135.3,36.4L135.1,36.1L135.2,36.1L135.4,36.3L135.7,36.3L135.7,36.4ZM132,33.5L132.1,33.4L132.6,33.5L133.4,33.6L134.2,34L134.3,34.1L134.6,34L135.2,34.1L135.4,34.4L135.8,34.6L135.7,34.7L136,35.1L135.9,35.2L135.6,35.1L135.2,34.9L135.1,35L134.3,35.1L133.7,34.8L133.1,34.8L133.2,34.5L132.9,34.1L132.6,33.8L132.3,33.7ZM182.8,55.2L182.5,54.6L183,54.7L183.2,54.9L183.1,55.5ZM184.1,57.1L184.2,56.9L184.3,56.5L184.6,56.4L184.5,56.9L184.9,56.2L184.9,56.9L184.7,57.1L184.6,57.6L184.4,57.8L184,57.3ZM186.5,58.2L186.6,58.7L186.7,59.1L186.5,59.7L186.2,59L186,59.3L186.2,59.9L186,60.2L185.3,59.8L185.1,59.3L185.3,58.9L184.9,58.6L184.7,58.9L184.4,58.9L184,59.3L183.9,59.1L184.1,58.5L184.4,58.3L184.7,58L185,58.3L185.4,58.1L185.5,57.8L185.9,57.8L185.8,57.2L186.3,57.6L186.4,57.9ZM181.7,57.6L180.9,58.2L181.2,57.7L181.6,57.3L181.9,56.8L182.1,56.1L182.3,56.7L182,57.1ZM183.1,51.3L183.1,51.6L183.4,52.1L183.3,52.7L183,52.9L183,53.5L183.2,54L183.6,54.1L183.8,54L184.6,54.4L184.6,54.8L184.8,55L184.8,55.3L184.3,54.9L184,54.6L183.9,54.8L183.5,54.4L182.9,54.5L182.6,54.4L182.6,54.1L182.8,53.9L182.6,53.7L182.5,54L182.2,53.6L182,53.3L181.9,52.6L182.2,52.8L182.1,51.7L182.1,51.1L182.5,51.1L182.9,51.3L183.1,51.1ZM183.7,56.1L183.5,55.7L183.9,56L184.3,56L184.3,56.3L184.1,56.6L183.7,56.8L183.7,56.4ZM185.7,55.6L186,56.3L185.5,56.2L185.5,56.4L185.7,56.8L185.4,57L185.4,56.5L185.2,56.4L185,56L185.4,56.1L185.3,55.8L184.9,55.3L185.5,55.3ZM170.7,59.6L170.8,59.4L171.3,59.7L171.3,60.1L171.7,60L171.9,59.7L172.1,59.8L172.4,60.2L172.7,60.7L172.8,61.2L172.7,61.5L172.8,61.7L172.8,62.1L173.1,62.3L173.3,63L173.3,63.2L172.9,63.2L172.3,62.7L171.6,62.2L171.5,61.8L171.1,61.3L171,60.8L170.8,60.4L170.8,59.9ZM181.5,61.2L181,61.1L180.3,61.1L180.1,61.9L179.9,62.1L179.6,63.1L179.1,63.2L178.5,63.1L178.2,63.1L177.9,63.5L177.5,63.4L177.1,63.6L176.7,63.2L176.6,62.7L177,62.9L177.5,62.8L177.6,62.2L177.9,62.1L178.6,61.9L179,61.4L179.3,60.9L179.6,61.3L179.7,61L180,61.1L180,60.6L180,60.3L180.5,59.8L180.7,59.2L181,59.2L181.3,59.6L181.4,59.9L181.8,60.1L182.3,60.3L182.3,60.6L181.8,60.6L182,61ZM180,60.3L180,60.6L180,61.1L179.7,61L179.6,61.3L179.3,60.9L179.5,60.7ZM117.5,31.4L117.9,31.4L118.2,31.3L118.7,31.2L118.8,31.1L118.9,31.1L119,31.4L118.6,31.6L118.5,31.8L118.4,31.9L118.4,32.1L118.2,32.1L118,32L117.9,32.1L117.5,32.1L117.6,32L117.5,31.7ZM123.2,16.7L123.2,17.2L124,17.6L123.7,18L124.3,18.7L124.1,19.2L124.6,19.7L124.5,20.1L125.3,20.5L125.2,20.9L124.8,21.2L123.9,22L123,22.1L122.2,22.3L121.4,22.5L121.1,22.1L120.5,21.9L120.6,21.3L120.3,20.7L120.4,20.3L120.8,19.9L121.8,19.3L122.1,19.1L122,18.9L121.3,18.6L121.1,18.4L121,17.4L120.2,17L119.5,16.7L119.8,16.6L120.3,16.9L120.9,16.9L121.4,17L121.8,16.7L122,16.3L122.7,16.1L123.3,16.3ZM122.1,29.6L121.9,29.8L121.9,30.1L121.8,30.1L121.2,29.9L121,30L120.9,30.1L120.6,30.2L120.6,30.2L120.3,30.3L120.1,30.3L120.1,30.4L119.6,30.5L119.4,30.4L119.1,30.3L119.1,30L119.1,29.9L119.2,29.8L119.4,29.8L119.6,29.7L119.6,29.7L119.7,29.6L119.7,29.5L119.8,29.4L119.9,29.3L120.1,29.3L120.1,29.4L120.3,29.3L120.6,29.5L120.9,29.4L121.2,29.4L121.5,29.3ZM117.9,28.2L118.2,28.4L118.6,28.5L118.6,28.7L118.9,28.8L119,28.7L119.3,28.7L119.4,28.9L119.8,29L120.1,29.3L119.9,29.3L119.8,29.4L119.7,29.5L119.7,29.6L119.6,29.7L119.6,29.7L119.4,29.8L119.2,29.8L119.1,29.9L118.8,29.8L118.6,29.8L118.2,29.6L118,29.7L117.7,30L117.3,29.7L117,29.4L116.7,29.3L116.6,29L116.5,28.8L116.9,28.6L117.1,28.5L117.4,28.3L117.6,28.2L117.7,28.3ZM131.9,54L131.8,53.7L132,52.6L132.1,52.2L132.3,52L132.7,51.8L133,51.4L133.4,52.3L133.6,52.9L133.9,53.2L134.8,53.9L135.1,54.3L135.5,54.7L135.7,55L136,55.2L135.8,55.3L135.5,55.3L135.3,55.1L135.1,54.6L134.8,54.4L134.6,54.2L134.1,53.9L133.7,53.9L133.5,53.7L133.2,53.9L132.8,53.6L132.6,54.1ZM189.8,36.5L189.6,37.2L189.9,37.9L190,38.5L190.2,38.8L190.1,39.3L189.5,39.7L188.6,39.7L188.1,40.5L187.6,40.2L187.3,39.7L186.4,39.9L185.8,40.2L185.2,40.2L186,40.7L186,41.9L185.7,42.2L185.4,42L185.3,41.3L184.8,41.1L184.4,40.6L184.9,40.4L185,40L185.5,39.6L185.7,39.1L186.7,38.9L187.4,39.1L187.5,37.8L188,38.1L188.5,37.4L188.7,37.2L188.7,36.3L188.2,35.5L188.2,35.1L188.7,34.9L189.5,35.9ZM189.5,33.1L189.7,32.8L190.3,33.6L189.6,33.8L189.5,34.5L188.4,34L188.5,34.8L187.9,34.8L187.4,34.1L187.4,33.6L188,33.5L187.6,32.6L187.4,32L188.5,32.8L189.1,33ZM186.1,40.5L186.2,40.1L186.6,40.2L186.7,39.9L187.2,40L187.4,40.3L187.2,40.7L186.9,40.5L186.7,40.6L186.7,41L186.2,40.8ZM75.3,78.3L75.6,78.7L75.6,79.7L76.3,79.8L76.5,79.7L76.9,79.8L77,80.1L77.2,80.7L77.3,81L77.5,81L77.7,80.9L77.9,81L78,81.4L77.9,81.8L77.9,82.2L77.8,82.9L77.4,83.4L76.9,83.5L76.3,83.4L75.6,83.2L76.1,82.1L76,81.8L75.3,81.6L74.5,81L74,80.9L72.8,79.8L73,78.9L72.9,78.5L73.2,77.9L74.2,77.7L74.7,77.7L75.3,78.1ZM141,50.7L141.6,51.9L141.8,52.4L141.4,52.6L141.3,52.9L141.3,53.1L140.7,53.4L139.8,53.8L139.3,54.3L139,54.3L138.8,54.3L138.5,54.5L138.1,54.7L137.6,54.7L137.5,54.8L137.4,54.9L137.2,55L137.1,55.2L136.8,55.2L136.6,55.3L136.2,55.2L136,54.8L136,54.4L135.9,54.2L135.8,53.7L135.6,53.4L135.7,53.4L135.6,53L135.7,52.9L135.7,52.6L135.9,52.4L135.8,52.1L136,51.7L136.2,51.9L136.4,51.9L137.1,51.8L137.2,51.9L137.8,52L138,51.9L138.2,52.2L138.4,52.1L138.8,51.3L139.3,51ZM130.4,43.4L131,43.5L131.3,43.3L131.4,43.1L131.8,43L131.9,42.7L132.1,42.6L131.4,41.9L132.5,41.5L132.6,41.4L133.3,41.6L134.3,42.1L136.1,43.5L137.1,43.6L137.7,43.7L137.9,44L138.3,44L138.6,44.6L138.9,44.8L139,45L139.4,45.3L139.5,45.6L139.5,45.8L139.6,46.1L139.8,46.3L139.9,46.5L140,46.7L140.2,46.8L140.3,46.8L140.5,47L140.5,47.2L140.8,47.9L142.6,48.3L142.7,48.1L143,48.6L142.8,50L141,50.7L139.3,51L138.8,51.3L138.4,52.1L138.2,52.2L138,51.9L137.8,52L137.2,51.9L137.1,51.8L136.4,51.9L136.2,51.9L136,51.7L135.8,52.1L135.9,52.4L135.7,52.6L135.6,52.3L135.4,52.1L135.3,51.8L135,51.6L134.6,51L134.4,50.4L134,49.9L133.7,49.8L133.3,49.1L133.2,48.6L133.2,48.2L132.8,47.4L132.5,47.1L132.1,47L131.9,46.6L131.9,46.4L131.7,46.1L131.6,45.9L131.3,45.4L130.9,44.8L130.5,44.3L130.2,44.3L130.3,43.9L130.3,43.7ZM128.7,39.3L128.7,39.3L128.8,39.1L129.2,39.2L129.7,38.9L129.4,39.2L129.4,39.4L129.4,39.4L129.2,39.4L129.2,39.4L129.1,39.4L129.1,39.4L129.1,39.3L129,39.3L128.8,39.4ZM128.7,39.3L128.8,39.4L129,39.3L129.1,39.3L129.1,39.4L129.1,39.4L129.2,39.4L129.2,39.4L129.4,39.4L129.4,39.4L129.4,39.4L128.9,39.7L128.6,39.6L128.4,39.4ZM108.8,39.3L109,39.8L109,40.2L109.2,40.9L109.4,41.1L109.2,41.4L108.5,41.5L108.2,41.7L107.9,41.8L107.9,42.3L107.2,42.6L107,43L106.5,43.1L105.9,43.3L104.9,43.8L104.9,44.6L104.8,44.6L104.8,45L104.5,45L104.3,45.2L104,45.2L103.8,45.1L103.3,45.2L103.1,45.7L102.9,45.8L102.6,46.7L101.8,47.4L101.6,48.4L101.3,48.7L101.2,49L99.9,49L99.9,49L99.9,48.7L100.2,48.5L100.4,48.1L100.3,47.9L100.6,47.4L100.9,46.9L101.1,46.8L101.3,46.4L101.3,46L101.5,45.6L101.9,45.4L102.3,44.6L102.3,44.6L102.6,44.3L103.2,44.3L103.6,43.8L103.9,43.6L104.4,43L104.3,42.1L104.6,41.5L104.6,41.1L105,40.7L105.6,40.3L106,40.1L106.4,39.3L106.6,38.9L107,38.9L107.4,39.2L107.9,39.1L108.5,39.3ZM131.9,48.6L129.5,48.6L127.2,48.6L124.8,48.6L124.7,46L124.6,43.5L124.4,42.9L124.5,42.5L124.4,42.2L124.6,41.8L125.3,41.8L125.9,42L126.5,42.2L126.8,42.3L127.2,42.1L127.4,41.9L127.9,41.9L128.3,41.9L128.5,42.3L128.6,42.1L129.1,42.2L129.6,42.3L129.8,42.1L130.3,43.1L130.3,43.3L130.2,43.6L130.1,44.1L130,44.5L129.9,44.6L129.6,44.4L129.4,44.1L128.9,43.1L128.8,43.1L129.1,43.9L129.5,44.6L130,45.7L130.3,46.1L130.5,46.5L131.1,47.3L131,47.4L131,47.8L131.8,48.5ZM124.8,48.6L124.9,50L124.2,50L124.2,50.3L121.8,49L119.4,47.6L118.8,48L118.4,48.3L118,47.9L117.1,47.6L116.8,47.1L116.4,46.8L116.1,46.9L115.9,46.5L115.8,46.2L115.5,45.7L115.7,45.4L115.6,45L115.7,44.6L115.7,44.3L115.7,43.7L115.7,43.4L115.5,42.7L115.8,42.6L115.8,42.3L115.8,42L116.1,41.7L116.3,41.5L116.6,41.3L116.6,40.7L117.3,41L117.5,40.9L118,41L118.8,41.4L119.1,42L119.6,42.1L120.5,42.4L121.1,42.8L121.4,42.6L121.6,42.3L121.5,41.7L121.6,41.4L122,41L122.4,40.9L123.2,41.1L123.4,41.4L123.6,41.4L123.8,41.5L124.4,41.6L124.6,41.8L124.4,42.2L124.5,42.5L124.4,42.9L124.6,43.5L124.7,46ZM138.9,58.5L137.3,60.6L136.5,60.6L136,61.1L135.6,61.1L135.4,61.4L135,61.4L134.7,61.1L134.2,61.4L134,61.7L133.6,61.6L133.5,61.6L133.3,61.6L133.1,61.6L132.4,61L131.9,61L131.7,60.7L131.7,60.4L131.4,60.2L131,59.5L130.8,59.3L130.6,59L130.3,58.7L130,58.6L130.2,58.2L130.5,58.2L130.6,58L130.5,57.4L130.7,56.6L131,56.4L131,56.1L131.3,55.6L131.6,55.3L131.8,54.6L131.9,54L132.6,54.1L132.8,53.6L133.2,53.9L133.5,53.7L133.7,53.9L134.1,53.9L134.6,54.2L134.8,54.4L135.1,54.6L135.3,55.1L135.5,55.3L135.3,55.6L135.1,55.9L135.2,56.1L135.2,56.3L135.6,56.3L135.7,56.3L135.8,56.4L135.7,56.7L135.9,57.1L136.2,57.4L136.4,57.6L138.4,58.5ZM135.5,55.3L135.8,55.3L136,55.2L136.1,55.4L136.1,55.7L135.8,55.9L136,56L135.8,56.4L135.7,56.3L135.6,56.3L135.2,56.3L135.2,56.1L135.1,55.9L135.3,55.6ZM139.5,56.1L139.5,56.1L139.6,56.4L139.6,57.1L139.6,57.5L139.3,57.9L138.9,58.5L138.4,58.5L136.4,57.6L136.2,57.4L135.9,57.1L135.7,56.7L135.8,56.4L136,56L136.2,56.2L136.4,56.5L136.7,56.8L137,56.8L137.5,56.6L138.2,56.5L138.7,56.3L139,56.2L139.2,56.1ZM130.6,64.8L129.4,64.8L128.7,64.8L128.5,64.9L128.1,65.1L128,65L128,64.5L128.1,64.2L128.1,63.7L128.3,63.4L128.5,63L128.7,62.8L128.9,62.6L128.7,62.5L128.7,61.6L129,61.4L129.3,61.6L129.8,61.4L130.3,61.4L130.6,61.1L130.9,61.6L131,62L131.3,62.8L131.1,63.3L130.8,63.7L130.6,64ZM128.5,64.9L128.7,65.3L128.7,65.7L128.5,65.8L128.2,65.8L128,66.2L127.6,66.1L127.7,65.7L127.8,65.7L127.8,65.2L128,65L128.1,65.1ZM120.3,34L119.8,33.8L119.5,33.5L119.3,33.3L119,33.1L118.9,32.9L118.6,32.5L118.7,32.2L118.9,32.4L119,32.3L119.3,32.2L119.8,32.4L120.1,32.4L120.4,32.5L120.6,32.5L120.5,32.8L120.8,33.1L120.7,33.4L120.6,33.4L120.5,33.5L120.3,33.7ZM122.4,34.3L122.7,34.5L122.8,35L122.7,35L122.6,35.1L122.3,35.1L122.1,35.2L121.7,35.3L121.5,35.1L121.4,34.8L121.4,34.6L121.5,34.6L121.5,34.5L121.8,34.4L122,34.3L122.2,34.3ZM120.3,31.8L120.7,31.6L121,31.6L121.3,31.9L121.4,32.1L121.7,32.3L121.8,32.6L122.1,32.8L122.3,32.6L122.4,32.7L122.3,32.8L122.4,32.9L122.3,33.1L122.4,33.4L122.7,33.7L122.5,33.9L122.4,34.1L122.5,34.2L122.4,34.3L122.2,34.3L122,34.3L121.9,34.3L122,34.2L122,34L122,34L121.9,33.9L121.8,33.9L121.7,33.8L121.6,33.7L121.5,33.6L121.4,33.7L121.3,33.9L121.2,33.9L121.2,33.9L121,33.7L120.8,33.7L120.7,33.6L120.6,33.4L120.7,33.4L120.8,33.1L120.5,32.8L120.6,32.5L120.4,32.5L120.6,32.2L120.4,32.1ZM121.1,34.1L121,34.2L120.9,34L120.7,34.4L120.8,34.6L120.6,34.5L120.5,34.3L120.2,34.2L120.3,34L120.3,33.7L120.5,33.5L120.6,33.4L120.7,33.6L120.8,33.7L121,33.7L121.2,33.9L121.2,33.9ZM121.4,34.6L121.4,34.3L121.2,34.3L121.1,34.1L121.2,33.9L121.3,33.9L121.4,33.7L121.5,33.6L121.6,33.7L121.7,33.8L121.8,33.9L121.9,33.9L122,34L122,34L122,34.2L121.9,34.3L122,34.3L121.8,34.4L121.5,34.5L121.5,34.6ZM72.7,56.5L73.1,56.4L73.2,56.5L73.2,57L72.7,57.1L72.6,57L72.7,56.8ZM128.7,61.6L128.2,61.2L128,60.9L127.7,61L127.4,61L127.2,61.1L127,61L126.6,60.4L126.5,60.2L126,59.9L125.9,59.5L125.6,59.2L125.2,58.8L125.2,58.6L124.9,58.3L124.5,58L124.6,58L124.8,57.8L125,57.2L125.1,56.9L125.6,56.8L125.7,57L126,57.4L126.2,57.5L126.4,57.3L126.8,57.4L126.9,57.5L127.5,57.5L127.5,57.4L127.8,57.2L127.9,57L128.1,56.9L128.6,57.3L129,57.2L129.2,56.7L129.6,56.3L129.5,55.9L129.3,55.7L129.7,55.7L129.7,55.5L130,55.5L130,56.1L130.1,56.6L130.4,56.8L130.5,57.1L130.5,57.4L130.5,57.5L130.6,58L130.5,58.2L130.2,58.2L130,58.6L130.3,58.7L130.6,59L130.8,59.3L131,59.5L131.4,60.2L131,60.7L130.6,61.1L130.3,61.4L129.8,61.4L129.3,61.6L129,61.4Z" fill="var(--land)"/><path d="M117.3,26.4L117.5,26.8L117.4,27L117.6,27.2L117.7,27.6L117.7,27.8L117.9,28.2L117.7,28.3L117.6,28.2L117.4,28.3L117.1,28.5L116.9,28.6L116.5,28.8L116.6,29L116.7,29.3L117,29.4L117.3,29.7L117.1,30.1L116.9,30.1L117,30.6L117,30.7L116.8,30.6L116.5,30.5L116.2,30.7L115.7,30.6L115.6,30.8L115.3,30.6L115.2,30.7L114.6,30.5L114.5,30.6L114,30.6L114.1,30.1L114.3,29.6L113.6,29.5L113.3,29.3L113.3,29L113.2,28.9L113.3,28.4L113.2,27.7L113.5,27.7L113.6,27.5L113.7,26.9L113.6,26.6L113.7,26.5L114.1,26.5L114.2,26.6L114.6,26.3L114.4,26L114.4,25.6L114.8,25.7L115.1,25.6L115.1,25.9L115.7,26L115.7,26.3L116.2,26.2L116.5,26L117.1,26.2Z" fill="var(--red)"/></svg>
+    <svg id="flag" viewBox="0 0 5 3" role="img" aria-label="Flag of Germany"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg>
   </div>
 
+  <div class="card facts">
+    <div class="fcol"><span class="lab">Population</span><span class="big">83.5<small>million</small></span><span class="muted">Official update, end of 2025</span></div>
+    <div class="fcol"><span class="lab">Freedom House</span><span class="big">95<small>/100</small></span><div class="fbar" role="img" aria-label="95 out of 100"><i style="width:95%"></i></div><span class="muted">Free, 2026 edition</span></div>
+  </div>
 
+  <details class="card sys">
+    <summary>How the electoral system works</summary>
+    <div class="tiles">
+      <div class="tile"><span class="lab">Last election</span><b>23 Feb 2025</b></div>
+      <div class="tile"><span class="lab">Seats</span><b>630</b></div>
+      <div class="tile"><span class="lab">System</span><b>Mixed-member PR</b></div>
+      <div class="tile"><span class="lab">Term</span><b>4 years</b></div>
+      <div class="tile"><span class="lab">Voting</span><b>18+, voluntary</b></div>
+    </div>
+    <div class="tiles t3">
+      <div class="tile"><span class="lab">Threshold</span><b>5% or 3 direct seats</b></div>
+      <div class="tile"><span class="lab">Allocation</span><b>Sainte-Laguë</b></div>
+      <div class="tile"><span class="lab">Constituency winners</span><b>Seated only if their party’s second votes cover them</b></div>
+    </div>
+  </details>
+
+  <section class="card">
+    <h2>Input vote share</h2>
+    <div id="rows"></div>
+    <div class="actions"><button class="btn" id="reset" type="button">Reset</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Projected results</h2>
+    <svg id="arc" viewBox="0 0 680 340" role="img" aria-labelledby="arc-t"><title id="arc-t">Hemicycle of projected seats</title></svg>
+    <div class="legend" id="arcleg"></div>
+    <div class="tblwrap">
+    <table class="bd">
+      <thead><tr><th>Party</th><th>Direct vote share</th><th>Direct seats</th><th>List vote share</th><th>List seats</th><th>Total seats</th><th>+/-</th></tr></thead>
+      <tbody id="bd"></tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Coalition builder</h2>
+    <div class="chips" id="chips"></div>
+    <div class="cbarw"><div class="bar" id="fill"></div><div class="maj" id="majmark"></div></div>
+    <p class="status" id="coalnote"></p>
+  </section>
+
+  <section class="card">
+    <h2>Projected results map</h2>
+    <div class="seg" role="group" aria-label="Map detail">
+      <button type="button" id="tab-wk" aria-pressed="true">Constituencies</button>
+      <button type="button" id="tab-land" aria-pressed="false">States</button>
+    </div>
+    <div class="mapctl" id="mapparty"></div>
+    <div id="wkmapwrap" class="mapframe">
+      <button type="button" id="zoomreset" aria-label="Reset zoom">Reset</button>
+      <svg id="wkmap" class="mapsvg" viewBox="0 0 560 760" role="img" aria-label="Map of the 299 constituencies"></svg>
+    </div>
+    <div id="mapwrap" class="mapframe" style="display:none">
+      <button type="button" id="zoomreset2" class="zr" aria-label="Reset zoom">Reset</button>
+      <svg id="map" class="mapsvg" viewBox="0 0 300 400" role="img" aria-label="Map of the 16 states"></svg>
+    </div>
+    <div class="maplegend" id="maplegend"></div>
+    <label class="tog" id="unfilledTog"><input type="checkbox" id="showUnfilled">Unfilled seats</label>
+    <div id="wktip" role="tooltip" aria-hidden="true"></div>
+  </section>
+
+  <section class="card">
+    <h2>Probability model</h2>
+    <div class="sec">
+      <h3>Settings</h3>
+      <div class="rungrp" id="mcRuns" role="group" aria-label="Runs">
+        <button type="button" data-r="500" aria-pressed="false">500</button>
+        <button type="button" data-r="1000" aria-pressed="true">1,000</button>
+        <button type="button" data-r="5000" aria-pressed="false">5,000</button>
+      </div>
+      <div class="sliders2">
+        <div class="sl2"><label for="mcV">Vote share error (% of each party’s own share)</label><input type="range" id="mcV" min="0" max="30" step="1" value="10"><output id="mcVo" for="mcV">10%</output></div>
+        <div class="sl2"><label for="mcS">Seat-level error (extra random variation in each seat)</label><input type="range" id="mcS" min="0" max="10" step="1" value="3"><output id="mcSo" for="mcS">3 pts</output></div>
+      </div>
+      <div class="mcprog" id="mcprog" hidden><i id="mcprogi"></i></div>
+    </div>
+    <div id="mcOut">
+      <div class="sec">
+        <h3>Outcomes</h3>
+        <div class="obar" id="obar"></div>
+        <div class="olegend" id="olegend"></div>
+      </div>
+      <div class="sec" id="rangeSec"></div>
+      <div class="sec">
+        <h3>Coalition majority chance</h3>
+        <div class="chips" id="cchips"></div>
+        <div class="cmb" id="cmb"></div>
+      </div>
+      <div class="sec">
+        <h3>Seat distribution</h3>
+        <div class="chips" id="hchips"></div>
+        <div class="mctip" id="mctip"></div>
+        <svg id="hist" viewBox="0 0 640 190" role="img" aria-label="Seat distribution histogram"></svg>
+      </div>
+    </div>
+  </section>
+
+  <p class="src">Sources: supplied election results and boundaries (Bundestag election 2025, presumed Der Bundeswahlleiter); Bundestag (electoral law); Grundgesetz Art. 38–39; Destatis (population, end of 2025); Freedom House (Freedom in the World 2026); Natural Earth via world-atlas (world map); official flag colours.</p>
 </div>
 
 <script>
@@ -282,425 +441,541 @@ const WKMAP = {"w":560,"h":760,"p":{"298":"M88 540L86 534L82 536L80 532L75 532L7
 </script>
 <script>
 (function(){
-  const SEATS=630, MAJ=Math.floor(SEATS/2)+1, K=BASE.keys;
-  const META={
-    cdu:{n:'CDU',t:'Christlich Demokratische Union',c:'#4A4A46'},
-    csu:{n:'CSU',t:'Christlich-Soziale Union',c:'#2C5F7C'},
-    afd:{n:'AfD',t:'Alternative für Deutschland',c:'#3D8BDB'},
-    spd:{n:'SPD',t:'Sozialdemokraten',c:'#DE3B39'},
-    gru:{n:'Grüne',t:'Bündnis 90/Die Grünen',c:'#5E9421'},
-    lin:{n:'Linke',t:'Die Linke',c:'#CE4B79'},
-    bsw:{n:'BSW',t:'Bündnis Sahra Wagenknecht',c:'#7A72D6'},
-    fdp:{n:'FDP',t:'Freie Demokraten',c:'#E8A118'},
-    fw:{n:'Freie Wähler',t:'Freie Wähler',c:'#1B9A72'},
-    ssw:{n:'SSW',t:'Minderheitenpartei',c:'#7E7E77'}
-  };
-  const INPUT=['union','afd','spd','gru','lin','bsw','fdp','fw','ssw'];
-  const OUT=['cdu','csu','afd','spd','gru','lin','bsw','fdp','fw','ssw'];
-  const LR={lin:1,spd:2,gru:3,ssw:4,bsw:5,fw:6,fdp:7,cdu:8,csu:9,afd:10};
-  const IN_META={union:{n:'CDU/CSU',t:'Union',c:'#4A4A46'}};
-  INPUT.forEach(k=>{ if(!IN_META[k]) IN_META[k]=META[k]; });
+'use strict';
+const SEATS=630, MAJ=316, K=BASE.keys;
+const META={
+  cdu:{n:'CDU',t:'Christian Democratic Union',c:'#6B7280'},
+  csu:{n:'CSU',t:'Christian Social Union',c:'#0E6AA8'},
+  afd:{n:'AfD',t:'Alternative for Germany',c:'#38A3E8'},
+  spd:{n:'SPD',t:'Social Democratic Party',c:'#D93A36'},
+  gru:{n:'Grüne',t:'Alliance 90/The Greens',c:'#5BA02E'},
+  lin:{n:'Linke',t:'The Left',c:'#C8387B'},
+  bsw:{n:'BSW',t:'Sahra Wagenknecht Alliance',c:'#8A5BD6'},
+  fdp:{n:'FDP',t:'Free Democratic Party',c:'#EFC21A'},
+  fw:{n:'FW',t:'Free Voters',c:'#E8781E'},
+  ssw:{n:'SSW',t:"South Schleswig Voters' Association",c:'#4560D6'}
+};
+const INPUT=['union','afd','spd','gru','lin','bsw','fdp','fw','ssw'];
+const OUT=['cdu','csu','afd','spd','gru','lin','bsw','fdp','fw','ssw'];
+const LR={lin:1,spd:2,gru:3,ssw:4,bsw:5,fw:6,fdp:7,cdu:8,csu:9,afd:10};
+// Seats actually won in 2025 (Bundeswahlleiter), used for the +/- column
+const ACT={cdu:164,csu:44,afd:152,spd:120,gru:85,lin:64,bsw:0,fdp:0,fw:0,ssw:1};
+const IN_META={union:{n:'CDU/CSU',t:'Christian Democratic Union / Christian Social Union',c:META.cdu.c}};
+INPUT.forEach(k=>{ if(!IN_META[k]) IN_META[k]=META[k]; });
 
-  const WK=BASE.wk.map(r=>{const o={nr:r[0],name:r[1],land:r[2],valid:r[3],s:{}};K.forEach((k,i)=>o.s[k]=r[4+i]/r[3]*100);return o;});
-  const LAND=BASE.laender.map(l=>{const o={id:l[0],name:l[1],valid:l[2],s:{}};K.forEach((k,i)=>o.s[k]=l[3+i]);return o;});
-  const TOTV=LAND.reduce((a,l)=>a+l.valid,0);
-  const P=INPUT.map(k=>({k,...IN_META[k],v:+BASE.bund[k].toFixed(2),base:BASE.bund[k]}));
-  const DEF=P.map(p=>p.v);
-  const coal=new Set();
-  let mapMode='wk', wkInfo={}, landInfo={}, vb={x:0,y:0,w:560,h:760}, zScale=1, showUnfilled=false;
+const WK=BASE.wk.map(r=>{const o={nr:r[0],name:r[1],land:r[2],valid:r[3],s:{}};K.forEach((k,i)=>o.s[k]=r[4+i]/r[3]*100);o.o=Math.max(0,100-K.reduce((a,k)=>a+o.s[k],0));return o;});
+const LAND=BASE.laender.map(l=>{const o={id:l[0],name:l[1],valid:l[2],s:{}};K.forEach((k,i)=>o.s[k]=l[3+i]);return o;});
+const BASE_SUM=INPUT.reduce((a,k)=>a+BASE.bund[k],0);
+const NL=LAND.length, LI={}; LAND.forEach((l,j)=>LI[l.id]=j);
+const TOTV=LAND.reduce((a,l)=>a+l.valid,0);
+const P=INPUT.map(k=>({k,...IN_META[k],v:BASE.bund[k],base:BASE.bund[k]}));
+const $=id=>document.getElementById(id);
+const fmt1=x=>x.toFixed(1);
+const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const AX=50; // all sliders share one 0-50 axis
 
-  const rows=document.getElementById('rows');
+/* ---------- seat allocation ---------- */
+function sl(w,total){
+  const s=w.map(()=>0), q=w.map(x=>x/0.5);
+  for(let i=0;i<total;i++){
+    let b=0; for(let j=1;j<q.length;j++) if(q[j]>q[b]) b=j;
+    if(q[b]<=0) break;
+    s[b]++; q[b]=w[b]/(s[b]+0.5);
+  }
+  return s;
+}
+
+/* Universal swing with taper below 20% of baseline; regionalists (SSW) only where they stood.
+   o.lean returns seat totals only; o.noise(c,k) adds seat-level noise before winners are decided. */
+function project(vals,o){
+  const lean=!!(o&&o.lean), noise=o&&o.noise;
+  const sw={},factor={};
+  INPUT.forEach((k,i)=>{
+    const base=BASE.bund[k], v=vals[i], th=0.2*base;
+    if(th<=0||v>=th){ sw[k]=v-base; factor[k]=1; } else { sw[k]=th-base; factor[k]=v/th; }
+  });
+  const swO=BASE_SUM-vals.reduce((a,b)=>a+b,0);   // Others take the remainder of the national change
+  const lv={}; OUT.forEach(k=>lv[k]=new Float64Array(NL));
+  for(let j=0;j<NL;j++){
+    const l=LAND[j];
+    for(const k of INPUT){
+      let share=Math.max(0,l.s[k]+sw[k])*factor[k];
+      if(k==='ssw'&&l.s[k]<=0) share=0;
+      const ok=k==='union'?(l.id==='BY'?'csu':'cdu'):k;
+      lv[ok][j]=share/100*l.valid;
+    }
+  }
+  const nat={}; OUT.forEach(k=>{ let s=0; const a=lv[k]; for(let j=0;j<NL;j++) s+=a[j]; nat[k]=s/TOTV*100; });
+  const dir={}; OUT.forEach(k=>dir[k]=new Int32Array(NL));
+  const wkWin=lean?null:{}, fvVotes={}; let fvTotal=0;
+  if(!lean) OUT.forEach(k=>fvVotes[k]=0);
+  for(const c of WK){
+    const j=LI[c.land]; let b=null,bv=-1,sv=-1, tot=0; const xs=lean?null:[];
+    for(const k of INPUT){
+      let x=Math.max(0,c.s[k]+sw[k])*factor[k];
+      if(k==='ssw'&&c.s[k]<=0) x=0;
+      if(noise&&x>0) x=Math.max(0,x+noise(c,k));
+      if(!lean){ xs.push(x); tot+=x; }
+      if(x>bv){ sv=bv; bv=x; b=k; } else if(x>sv){ sv=x; }
+    }
+    const key=b==='union'?(c.land==='BY'?'csu':'cdu'):b;
+    dir[key][j]++;
+    if(!lean){
+      // Others take the remainder; floor at zero, then rescale so the seat sums to exactly 100%
+      const oth=Math.max(0,c.o+swO); tot+=oth; const sc=tot>0?100/tot:0, row={};
+      INPUT.forEach((k,i)=>{ const fk=k==='union'?(c.land==='BY'?'csu':'cdu'):k, xv=xs[i]*sc; fvVotes[fk]+=xv/100*c.valid; row[fk]=xv; });
+      row.oth=oth*sc; fvTotal+=c.valid;
+      wkWin[c.nr]={nr:c.nr,k:key,name:c.name,land:c.land,margin:(bv-sv)*sc,row};
+    }
+  }
+  const wins={}; OUT.forEach(k=>{ let s=0; for(let j=0;j<NL;j++) s+=dir[k][j]; wins[k]=s; });
+  const qual=OUT.filter(k=>nat[k]>0.0001&&(nat[k]>=5||k==='ssw'||wins[k]>=3));
+  const seats=qual.length?sl(qual.map(k=>nat[k]),SEATS):[];
+  if(lean){ const tot={}; OUT.forEach(k=>tot[k]=0); qual.forEach((k,i)=>tot[k]=seats[i]); return {tot}; }
+  const R={};
+  qual.forEach((k,i)=>{
+    const per=sl(Array.from(lv[k]),seats[i]);
+    const e={k,...META[k],share:nat[k],total:seats[i],direct:0,list:0,uncovered:0,byLand:{}};
+    LAND.forEach((l,j)=>{
+      const s=per[j], d=dir[k][j], seated=Math.min(d,s);
+      e.byLand[l.id]={seats:s,direct:seated,list:s-seated,uncovered:d-seated};
+      e.direct+=seated; e.list+=s-seated; e.uncovered+=d-seated;
+    });
+    R[k]=e;
+  });
+  OUT.forEach(k=>{ if(!R[k]&&wins[k]) R[k]={k,...META[k],share:nat[k],total:0,direct:0,list:0,uncovered:wins[k],byLand:{}}; });
+  const fvShare={}; OUT.forEach(k=>fvShare[k]=fvTotal?fvVotes[k]/fvTotal*100:0);
+  return {R,wins,nat,wkWin,fvShare,lv};
+}
+
+/* ---------- state ---------- */
+const BASEWIN={}; { const r0=project(P.map(p=>p.base)); Object.keys(r0.wkWin).forEach(nr=>BASEWIN[nr]=r0.wkWin[nr].k); }
+const coal=new Set();
+let mapMode='wk', shade=null, wkInfo={}, landInfo={}, showUnfilled=false;
+let vb={x:0,y:0,w:560,h:760}, zScale=1, pinnedNr=null, pinnedLand=null, tipX=0, tipY=0, last=null;
+
+/* ---------- inputs ---------- */
+const rows=$('rows');
+P.forEach((p,i)=>{
+  const r=document.createElement('div'); r.className='prow'; r.dataset.k=p.k;
+  r.style.setProperty('--pc',p.c);
+  r.innerHTML='<div class="ptop"><span class="swatch" style="background:'+p.c+'"></span><span class="pname">'+p.t+' ('+p.n+')</span></div>'+
+    '<div class="pctl"><input class="sl" data-i="'+i+'" type="range" min="0" max="'+AX+'" step="0.1" aria-label="'+p.n+' slider">'+
+    '<span class="num"><input class="nm" data-i="'+i+'" type="number" min="0" max="100" step="0.1" inputmode="decimal" aria-label="'+p.n+' vote share"><span>%</span></span></div>';
+  rows.appendChild(r);
+});
+const oth=document.createElement('div'); oth.className='prow fixed'; oth.id='otherRow';
+oth.innerHTML='<div class="ptop"><span class="swatch" style="background:var(--track)"></span><span class="pname">Other (remainder, fixed)</span></div>'+
+  '<div class="pctl"><input id="othSl" type="range" min="0" max="'+AX+'" step="0.1" disabled aria-label="Other slider, fixed">'+
+  '<span class="num"><input id="othNm" type="number" readonly tabindex="-1" aria-label="Other vote share, fixed"><span>%</span></span></div>';
+rows.appendChild(oth);
+const sliderOf=i=>rows.querySelector('.sl[data-i="'+i+'"]'), boxOf=i=>rows.querySelector('.nm[data-i="'+i+'"]');
+function setFill(el,v){ el.style.setProperty('--p',Math.min(100,v/AX*100)+'%'); }
+function syncInputs(skipBox){
+  let tot=0;
   P.forEach((p,i)=>{
-    const r=document.createElement('div');
-    r.className='prow'; r.dataset.k=p.k;
-    r.innerHTML='<span class="swatch" style="background:'+p.c+'"></span>'+
-      '<span class="pname">'+p.n+'<small>'+p.t+'</small></span>'+
-      '<span class="num"><label class="sr" for="n-'+p.k+'">'+p.n+' second-vote share</label>'+
-      '<input id="n-'+p.k+'" class="nm" data-i="'+i+'" type="number" min="0" max="100" step="0.01" value="'+p.v.toFixed(2)+'"><span>%</span></span>'+
-      '<span class="wk" id="wk-'+p.k+'"><b>0</b></span>'+
-      '<input class="sl" data-i="'+i+'" type="range" min="0" max="50" step="0.1" value="'+p.v+'" aria-label="'+p.n+' slider">';
-    rows.appendChild(r);
+    tot+=p.v;
+    const s=sliderOf(i); s.value=Math.min(AX,p.v); setFill(s,p.v);
+    if(skipBox!==i) boxOf(i).value=fmt1(p.v);
   });
-
-  function sl(w,total){
-    const s=w.map(()=>0), q=w.map(x=>x/0.5);
-    for(let i=0;i<total;i++){
-      let b=0; for(let j=1;j<q.length;j++) if(q[j]>q[b]) b=j;
-      if(q[b]<=0) break;
-      s[b]++; q[b]=w[b]/(s[b]+0.5);
-    }
-    return s;
-  }
-
-  function project(){
-    // Below 20% of a party's 2025 result, taper its swung share smoothly to zero
-    // (rather than the flat percentage-point swing, which can leave residual
-    // share in former strongholds even once the party is set to 0%).
-    const TAPER=0.2;
-    const sw={}, factor={};
-    P.forEach(p=>{
-      const thresh=TAPER*p.base;
-      if(thresh<=0 || p.v>=thresh){ sw[p.k]=p.v-p.base; factor[p.k]=1; }
-      else { sw[p.k]=thresh-p.base; factor[p.k]=p.v/thresh; }
-    });
-
-    const landVotes={};
-    OUT.forEach(k=>landVotes[k]={});
-    LAND.forEach(l=>{
-      INPUT.forEach(k=>{
-        const share=Math.max(0,l.s[k]+sw[k])*factor[k];
-        const votes=share/100*l.valid;
-        if(k==='union'){ landVotes[l.id==='BY'?'csu':'cdu'][l.id]=votes; }
-        else landVotes[k][l.id]=votes;
-      });
-    });
-
-    const nat={};
-    OUT.forEach(k=>{ nat[k]=Object.values(landVotes[k]).reduce((a,b)=>a+b,0)/TOTV*100; });
-
-    const direct={}; OUT.forEach(k=>direct[k]={});
-    const wkWin={};
-    const fvVotes={}; OUT.forEach(k=>fvVotes[k]=0);
-    let fvTotal=0;
-    for(const c of WK){
-      let b=null,bv=-1,sv=-1;
-      for(const k of INPUT){
-        const x=Math.max(0,c.s[k]+sw[k])*factor[k];
-        const fvKey = k==='union' ? (c.land==='BY'?'csu':'cdu') : k;
-        fvVotes[fvKey]+=x/100*c.valid;
-        if(x>bv){ sv=bv; bv=x; b=k; } else if(x>sv){ sv=x; }
-      }
-      fvTotal+=c.valid;
-      const key = b==='union' ? (c.land==='BY'?'csu':'cdu') : b;
-      direct[key][c.land]=(direct[key][c.land]||0)+1;
-      const rk=INPUT.map(k=>({k:k==='union'?(c.land==='BY'?'csu':'cdu'):k, v:Math.max(0,c.s[k]+sw[k])*factor[k]})).filter(o=>o.v>0.05).sort((a,b)=>b.v-a.v);
-      wkWin[c.nr]={nr:c.nr, k:key, name:c.name, land:c.land, margin:bv-sv, share:bv, ranked:rk};
-    }
-    const fvShare={}; OUT.forEach(k=>fvShare[k]=fvTotal?fvVotes[k]/fvTotal*100:0);
-    const wins={}; OUT.forEach(k=>wins[k]=Object.values(direct[k]).reduce((a,b)=>a+b,0));
-
-    const qual=OUT.filter(k=>nat[k]>0.0001 && (nat[k]>=5 || k==='ssw' || wins[k]>=3));
-    const seats=qual.length?sl(qual.map(k=>nat[k]),SEATS):[];
-    const R={};
-    qual.forEach((k,i)=>{
-      const w=LAND.map(l=>landVotes[k][l.id]||0);
-      const per=sl(w,seats[i]);
-      const e={k,...META[k],share:nat[k],fv:fvShare[k]||0,total:seats[i],direct:0,list:0,uncovered:0,byLand:{}};
-      LAND.forEach((l,j)=>{
-        const s=per[j], d=direct[k][l.id]||0, seated=Math.min(d,s);
-        e.byLand[l.id]={seats:s,direct:seated,list:s-seated,uncovered:d-seated,
-                        share:(landVotes[k][l.id]||0)/l.valid*100};
-        e.direct+=seated; e.list+=s-seated; e.uncovered+=d-seated;
-      });
-      R[k]=e;
-    });
-    OUT.forEach(k=>{ if(!R[k] && wins[k]) R[k]={k,...META[k],share:nat[k],fv:fvShare[k]||0,total:0,direct:0,list:0,uncovered:wins[k],byLand:{}}; });
-    return {R,wins,nat,wkWin,fvShare};
-  }
-
-  function nationalView(R){
-    return Object.values(R).filter(e=>e.total>0)
-      .map(e=>({...e,s:e.total,d:e.direct,l:e.list,u:e.uncovered}))
-      .sort((a,b)=>b.s-a.s);
-  }
-
-  function drawArc(res){
-    const seated=[...res].sort((a,b)=>LR[a.k]-LR[b.k]);
-    const flat=[]; seated.forEach(p=>{for(let i=0;i<p.s;i++) flat.push(p);});
-    const cx=340,cy=318,n=flat.length;
-    const ROWS=Math.max(3,Math.min(13,Math.round(Math.sqrt(n/3.6))));
-    let out='<title id="arc-t">Hemicycle: '+n+' seats</title>';
-    if(n){
-      const radii=[]; for(let r=0;r<ROWS;r++) radii.push(110+r*(196/Math.max(1,ROWS-1)));
-      const ws=radii.reduce((a,b)=>a+b,0);
-      const counts=radii.map(rad=>Math.floor(n*rad/ws));
-      const rem=n-counts.reduce((a,b)=>a+b,0);
-      const frac=radii.map((rad,r)=>({r,f:(n*rad/ws)%1})).sort((a,b)=>b.f-a.f);
-      for(let i=0;i<rem;i++) counts[frac[i%ROWS].r]++;
-      const pos=[];
-      for(let r=0;r<ROWS;r++){
-        const rad=radii[r],c=counts[r];
-        for(let j=0;j<c;j++){
-          const t=(c===1)?0.5:j/(c-1), a=Math.PI-t*Math.PI;
-          pos.push({x:cx+rad*Math.cos(a),y:cy-rad*Math.sin(a),a,rad});
-        }
-      }
-      pos.sort((p1,p2)=>p2.a===p1.a?p1.rad-p2.rad:p2.a-p1.a);
-      const r=Math.max(3,Math.min(6.5,240/Math.sqrt(n*3)));
-      pos.forEach((q,i)=>{
-        const p=flat[i], dim=coal.size&&!coal.has(p.k);
-        out+='<circle class="seat" cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+p.c+'" opacity="'+(dim?0.22:1)+'"></circle>';
-      });
-    }
-    document.getElementById('arc').innerHTML=out;
-  }
-
-  function drawCoalition(res,pool){
-    document.getElementById('chips').innerHTML=res.map(p=>
-      '<button class="chip" type="button" data-k="'+p.k+'" aria-pressed="'+coal.has(p.k)+'">'+
-      '<i style="background:'+p.c+'"></i>'+p.n+' &middot; '+p.s+'</button>').join('');
-    const picked=res.filter(p=>coal.has(p.k));
-    const sum=picked.reduce((a,p)=>a+p.s,0);
-    document.getElementById('fill').innerHTML=picked.map(p=>
-      '<span style="width:'+(p.s/pool*100)+'%;background:'+p.c+'"></span>').join('');
-    const note=document.getElementById('coalnote');
-    if(!picked.length){ note.textContent='Select parties to test a majority.'; return; }
-    const d=sum-MAJ;
-    note.innerHTML='<b>'+sum+'</b> of '+SEATS+' seats &middot; '+(d>=0?'majority with '+d+' to spare':(MAJ-sum)+' short of '+MAJ);
-  }
-
-  const COV={};  // land -> whether party's direct wins are all covered
-  function drawWkMap(R,wkWin){
-    // per-Land coverage: a win is "seated" only if the party's Land contingent covers its direct count
-    const seatCap={};
-    Object.values(R).forEach(e=>{ Object.keys(e.byLand).forEach(l=>{
-      seatCap[e.k+'|'+l]=e.byLand[l].seats; }); });
-    const used={};
-    // rank each Land's winners by margin so the covered ones are the strongest (mirrors real seating order)
-    const byLand={};
-    Object.keys(wkWin).forEach(nr=>{ const w=wkWin[nr]; (byLand[w.land]=byLand[w.land]||[]).push({nr,...w}); });
-    const seated={};
-    Object.keys(byLand).forEach(l=>{
-      byLand[l].sort((a,b)=>b.margin-a.margin);
-      byLand[l].forEach(w=>{
-        const cap=seatCap[w.k+'|'+l]||0, u=(used[w.k+'|'+l]||0);
-        seated[w.nr] = u<cap; used[w.k+'|'+l]=u+1;
-      });
-    });
-    const svg=document.getElementById('wkmap');
-    let out='';
-    wkInfo={};
-    for(const nr in WKMAP.p){
-      const w=wkWin[nr];
-      const col = w ? (META[w.k]?META[w.k].c:'#B4B2A9') : '#D8D8D2';
-      const unc = w && !seated[nr];
-      if(w) wkInfo[nr]={...w, uncov:unc, seats:seated[nr]};
-      out+='<path d="'+WKMAP.p[nr]+'" fill="'+col+'" class="wk" data-nr="'+nr+'" data-l="'+(w?w.land:'')+'"></path>';
-      if(unc && showUnfilled) out+='<path d="'+WKMAP.p[nr]+'" class="hatch"></path>';
-    }
-    svg.innerHTML='<defs><pattern id="wkhatch" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="5" stroke="#161615" stroke-width="1.6" stroke-opacity=".55"/></pattern></defs>'+out;
-  }
-
-  function drawMap(R){
-    const svg=document.getElementById('map');
-    let out='';
-    landInfo={};
-    LAND.forEach(l=>{
-      const runners=Object.values(R).filter(e=>e.byLand[l.id] && e.byLand[l.id].seats>0)
-        .map(e=>({k:e.k,n:e.n,c:e.c,s:e.byLand[l.id].seats,v:e.byLand[l.id].share}))
-        .sort((a,b)=> b.s-a.s || b.v-a.v);
-      const top=runners[0];
-      const tied=top && runners[1] && runners[1].s===top.s;
-      const fill=top?top.c:'#D8D8D2';
-      landInfo[l.id]={name:l.name,runners,tied,total:runners.reduce((a,r)=>a+r.s,0)};
-      out+='<path d="'+MAP[l.id]+'" fill="'+fill+'" data-l="'+l.id+'"></path>';
-    });
-    svg.innerHTML=out;
-  }
-
-  function landTipHTML(id){
-    const info=landInfo[id]; if(!info) return '';
-    const cols='10px 1fr 42px 34px';
-    const head='<div class="rh" style="grid-template-columns:'+cols+'"><span></span><span>Party</span><span>Vote %</span><span>Seats</span></div>';
-    const rows=info.runners.map((r,i)=>
-      '<div class="r'+(i===0?' win':'')+'" style="grid-template-columns:'+cols+'"><i style="background:'+r.c+'"></i>'+r.n+'<b>'+r.v.toFixed(1)+'%</b><b>'+r.s+'</b></div>').join('');
-    return '<h4>'+info.name+' <span>'+info.total+' seats</span></h4>'+head+rows+
-      (info.tied?'<div class="tf">Tied on seats, split by votes</div>':'');
-  }
-
-  function render(){
-    const {R,wins,nat,wkWin,fvShare}=project();
-    const res=nationalView(R);
-    const total=P.reduce((a,p)=>a+p.v,0);
-    const pool=res.reduce((a,p)=>a+p.s,0);
-    const unfilled=Object.values(R).reduce((a,e)=>a+e.uncovered,0);
-
-    P.forEach(p=>{
-      const keys = p.k==='union' ? ['cdu','csu'] : [p.k];
-      const seatsSum = keys.reduce((a,k)=>a+(R[k]?R[k].total:0),0);
-      const winSum = keys.reduce((a,k)=>a+wins[k],0);
-      const row=rows.querySelector('.prow[data-k="'+p.k+'"]');
-      row.classList.toggle('out', p.v>0 && seatsSum===0);
-      const clause = keys.some(k=>R[k] && R[k].total>0 && nat[k]<5 && k!=='ssw' && wins[k]>=3);
-      const cell=document.getElementById('wk-'+p.k);
-      cell.className='wk'+(clause?' clause':'');
-      cell.innerHTML='<b>'+winSum+'</b>'+(clause?'clause met':'');
-    });
-
-
-    const tally=document.getElementById('tally');
-    document.getElementById('tally-text').textContent='Total '+total.toFixed(2)+'%'+(total>100.05?' — over 100':'');
-    tally.classList.toggle('warn',total>100.05);
-
-    const belowThreshold=OUT.filter(k=>!(R[k]&&R[k].total>0));
-    const missedRows=belowThreshold.map(k=>({c:META[k].c,n:META[k].n,share:nat[k],fv:fvShare[k],s:0,d:0,l:0}))
-      .sort((a,b)=>b.share-a.share);
-    const tableRows=[...res,...missedRows];
-    document.getElementById('bd').innerHTML=tableRows.map(p=>
-      '<tr'+(p.s===0?' class="noseat"':'')+'><td><span class="pcell"><i style="background:'+p.c+'"></i>'+p.n+'</span></td><td>'+p.fv.toFixed(2)+'</td><td>'+p.d+'</td><td>'+p.share.toFixed(2)+'</td><td>'+p.l+'</td><td><b>'+p.s+'</b></td></tr>').join('')+
-      '<tr class="sum"><td>Germany</td><td></td><td>'+res.reduce((a,p)=>a+p.d,0)+'</td><td></td><td>'+res.reduce((a,p)=>a+p.l,0)+'</td><td>'+pool+'</td></tr>';
-
-    const missed=belowThreshold.filter(k=>nat[k]>0.0001);
-    const saved=OUT.filter(k=>R[k]&&R[k].total>0 && nat[k]<5 && k!=='ssw' && wins[k]>=3);
-    const lost=missed.reduce((a,k)=>a+nat[k],0);
-    document.getElementById('clause-line').innerHTML=missed.length
-      ? 'No seats: <b>'+missed.map(k=>META[k].n+' '+nat[k].toFixed(2)+'%').join(', ')+'</b> — '+lost.toFixed(2)+'% of votes discarded'
-      : 'Threshold: <b>every listed party wins seats</b>';
-    const flip=document.getElementById('flip');
-    const bits=[];
-    saved.forEach(k=>bits.push('<b>'+META[k].n+'</b> is on '+nat[k].toFixed(2)+'% but holds '+wins[k]+' constituencies, so the basic-mandate clause admits it at full strength.'));
-    if(unfilled) bits.push('<b>'+unfilled+'</b> constituency winner'+(unfilled===1?' misses':'s miss')+' out on a seat — '+(unfilled===1?'its party':'their parties')+' won more districts in that state than '+(unfilled===1?'its second-vote share entitles it':'their second-vote share entitles them')+' to.');
-    flip.className='flip'+(saved.length?' flag':'');
-    flip.innerHTML=bits.join('<br>');
-
-    const lab=document.getElementById('maplab');
-    lab.innerHTML = mapMode==='wk'
-      ? 'Click a constituency for detail · scroll to zoom · drag to pan.'+(showUnfilled?' Hatched = seat unfilled.':'')
-      : 'Click a state for its vote share and seats.';
-
-    const natRes=res;
-    for(const k of [...coal]) if(!natRes.some(p=>p.k===k)) coal.delete(k);
-    if(mapMode==='wk') drawWkMap(R,wkWin); else drawMap(R);
-    if((mapMode==='wk' && pinnedNr) || (mapMode==='land' && pinnedLand)) refreshTip();
-    drawArc(natRes);
-    drawCoalition(natRes, SEATS);
-  }
-
-  rows.addEventListener('input',e=>{
-    const i=+e.target.dataset.i; if(Number.isNaN(i)) return;
-    let v=parseFloat(e.target.value); if(!isFinite(v)) v=0;
-    v=Math.max(0,Math.min(100,Math.round(v*100)/100));
-    P[i].v=v;
-    rows.querySelector('.sl[data-i="'+i+'"]').value=Math.min(50,v);
-    if(e.target.classList.contains('sl')) rows.querySelector('.nm[data-i="'+i+'"]').value=v.toFixed(2);
-    render();
-  });
-  const wkmap=document.getElementById('wkmap');
-  const tip=document.getElementById('wktip');
-  let pinnedNr=null, pinnedLand=null, tipX=0, tipY=0;
-  const landMapEl=document.getElementById('map');
-  landMapEl.addEventListener('click',e=>{
-    const p=e.target.closest('path');
-    if(!p || !landInfo[p.dataset.l]){ hideTip(); return; }
-    const id=p.dataset.l;
-    if(pinnedLand===id){ hideTip(); return; }
-    pinnedLand=id; tipX=e.clientX; tipY=e.clientY;
-    tip.innerHTML=landTipHTML(id); tip.style.display='block'; positionTip();
-  });
-  function applyVB(){ wkmap.setAttribute('viewBox', vb.x.toFixed(1)+' '+vb.y.toFixed(1)+' '+vb.w.toFixed(1)+' '+vb.h.toFixed(1)); }
-  function clampVB(){
-    vb.w=560/zScale; vb.h=760/zScale;
-    vb.x=Math.max(0,Math.min(560-vb.w, vb.x));
-    vb.y=Math.max(0,Math.min(760-vb.h, vb.y));
-  }
-  function tipHTML(w){
-    const cols='10px 1fr 44px';
-    const head='<div class="rh" style="grid-template-columns:'+cols+'"><span></span><span>Party</span><span>Vote %</span></div>';
-    const rows=(w.ranked||[]).slice(0,5).map((r,i)=>{
-      const m=META[r.k]||{n:r.k,c:'#999'};
-      return '<div class="r'+(i===0?' win':'')+'" style="grid-template-columns:'+cols+'"><i style="background:'+m.c+'"></i>'+m.n+'<b>'+r.v.toFixed(1)+'%</b></div>';
-    }).join('');
-    return '<h4>'+w.name+' <span>'+w.nr+'</span></h4>'+head+rows+
-      '<div class="tf">Lead +'+w.margin.toFixed(1)+' pts'+(w.uncov?' · <span class="uf">seat unfilled</span>':'')+'</div>';
-  }
-  function positionTip(){
-    const pad=14, tw=tip.offsetWidth, th=tip.offsetHeight;
-    let x=tipX+pad, y=tipY+pad;
-    if(x+tw>window.innerWidth-8) x=tipX-pad-tw;
-    if(y+th>window.innerHeight-8) y=tipY-pad-th;
-    tip.style.left=Math.max(8,x)+'px'; tip.style.top=Math.max(8,y)+'px';
-  }
-  function pinTip(nr,cx,cy){
-    if(!wkInfo[nr]){ hideTip(); return; }
-    pinnedNr=nr; tipX=cx; tipY=cy;
-    tip.innerHTML=tipHTML(wkInfo[nr]); tip.style.display='block'; positionTip();
-  }
-  function refreshTip(){
-    if(pinnedNr && wkInfo[pinnedNr]){ tip.innerHTML=tipHTML(wkInfo[pinnedNr]); positionTip(); }
-    else if(pinnedLand && landInfo[pinnedLand]){ tip.innerHTML=landTipHTML(pinnedLand); positionTip(); }
-  }
-  function hideTip(){ tip.style.display='none'; pinnedNr=null; pinnedLand=null; }
-
-  // Dismiss the pinned tooltip if the map it belongs to scrolls out of view.
-  if('IntersectionObserver' in window){
-    const mapVisibilityObserver=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{ if(!entry.isIntersecting) hideTip(); });
-    }, {threshold:0});
-    mapVisibilityObserver.observe(document.getElementById('wkmapwrap'));
-    mapVisibilityObserver.observe(document.getElementById('mapwrap'));
-  }
-
-  wkmap.addEventListener('wheel', e=>{
-    e.preventDefault();
-    const r=wkmap.getBoundingClientRect();
-    const px=vb.x+(e.clientX-r.left)/r.width*vb.w;
-    const py=vb.y+(e.clientY-r.top)/r.height*vb.h;
-    zScale=Math.max(1,Math.min(9, zScale*(e.deltaY<0?1.18:1/1.18)));
-    vb.w=560/zScale; vb.h=760/zScale;
-    vb.x=px-(e.clientX-r.left)/r.width*vb.w;
-    vb.y=py-(e.clientY-r.top)/r.height*vb.h;
-    clampVB(); applyVB(); hideTip();
-  }, {passive:false});
-
-  let dragging=false, moved=false, sx=0, sy=0, ox=0, oy=0, downPath=null;
-  wkmap.addEventListener('pointerdown', e=>{
-    dragging=true; moved=false; sx=e.clientX; sy=e.clientY; ox=vb.x; oy=vb.y;
-    downPath=e.target.closest('path');
-    try{ wkmap.setPointerCapture(e.pointerId); }catch(_){}
-  });
-  wkmap.addEventListener('pointermove', e=>{
-    if(!dragging) return;
-    const r=wkmap.getBoundingClientRect();
-    if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>4){ if(!moved) hideTip(); moved=true; }
-    vb.x=ox-(e.clientX-sx)/r.width*vb.w;
-    vb.y=oy-(e.clientY-sy)/r.height*vb.h;
-    clampVB(); applyVB();
-  });
-  wkmap.addEventListener('pointerup', e=>{
-    dragging=false;
-    const p=downPath; downPath=null;
-    if(moved) return;                       // a drag, not a click
-    if(!p||!p.dataset.nr){ hideTip(); return; }
-    const nr=p.dataset.nr;
-    if(pinnedNr===nr){ hideTip(); }         // clicking the pinned one again clears it
-    else pinTip(nr, e.clientX, e.clientY);
-  });
-  wkmap.addEventListener('dblclick', e=>{ e.preventDefault(); zScale=1; vb={x:0,y:0,w:560,h:760}; applyVB(); });
-  document.getElementById('zoomreset').addEventListener('click', ()=>{ zScale=1; vb={x:0,y:0,w:560,h:760}; applyVB(); });
-  function setMode(m){
-    mapMode=m;
-    document.getElementById('tab-wk').setAttribute('aria-pressed', m==='wk');
-    document.getElementById('tab-land').setAttribute('aria-pressed', m==='land');
-    document.getElementById('wkmapwrap').style.display = m==='wk'?'block':'none';
-    document.getElementById('mapwrap').style.display = m==='land'?'block':'none';
-    document.getElementById('map-title').textContent = m==='wk'?'Winning party by constituency':'Largest party by state';
-    document.querySelector('.hatchtoggle').style.display = m==='wk'?'flex':'none';
-    hideTip();
-    render();
-  }
-  document.getElementById('tab-wk').addEventListener('click',()=>setMode('wk'));
-  document.getElementById('tab-land').addEventListener('click',()=>setMode('land'));
-  document.getElementById('showUnfilled').addEventListener('change',e=>{ showUnfilled=e.target.checked; render(); });
-  document.getElementById('chips').addEventListener('click',e=>{
-    const b=e.target.closest('.chip'); if(!b) return;
-    coal.has(b.dataset.k)?coal.delete(b.dataset.k):coal.add(b.dataset.k);
-    render();
-  });
-  document.getElementById('reset').addEventListener('click',()=>{
-    P.forEach((p,i)=>{
-      p.v=DEF[i];
-      rows.querySelector('.sl[data-i="'+i+'"]').value=Math.min(50,p.v);
-      rows.querySelector('.nm[data-i="'+i+'"]').value=p.v.toFixed(2);
-    });
-    coal.clear();
-    render();
-  });
-
+  const o=Math.max(0,100-tot), os=$('othSl'); os.value=Math.min(AX,o); setFill(os,o); $('othNm').value=fmt1(o);
+}
+function setVal(i,v){
+  const others=P.reduce((a,p,j)=>a+(j===i?0:p.v),0);
+  const max=Math.max(0,Math.floor((100-others)*10+1e-6)/10);
+  v=Math.max(0,Math.round(v*10)/10);
+  const clamped=v>max; P[i].v=Math.min(v,max); return clamped;
+}
+rows.addEventListener('input',e=>{
+  const t=e.target; if(!t.dataset.i&&t.dataset.i!=='0') return;
+  const i=+t.dataset.i; let v=parseFloat(t.value); if(!isFinite(v)) v=0;
+  const clamped=setVal(i,v);
+  syncInputs(t.classList.contains('nm')&&!clamped?i:undefined);
   render();
+});
+rows.addEventListener('change',e=>{ if(e.target.classList.contains('nm')){ syncInputs(); } });
+$('reset').addEventListener('click',()=>{ P.forEach(p=>p.v=p.base); coal.clear(); shade=null; syncInputs(); render(); });
+
+/* ---------- hemicycle ---------- */
+function drawArc(res){
+  const seated=[...res].sort((a,b)=>LR[a.k]-LR[b.k]);
+  const flat=[]; seated.forEach(p=>{for(let i=0;i<p.s;i++) flat.push(p);});
+  const cx=340,cy=318,n=flat.length, IN=105, OUTR=306;
+  let out='<title id="arc-t">Hemicycle: '+n+' seats</title>';
+  if(n){
+    // Even spacing: pick the row count whose row gap matches the seat gap along the arcs
+    let ROWS=3,bd=Infinity;
+    for(let R=3;R<=24;R++){ const g=(OUTR-IN)/(R-1), est=Math.PI*R*((IN+OUTR)/2)/g, dd=Math.abs(est-n); if(dd<bd){bd=dd;ROWS=R;} }
+    const gap=(OUTR-IN)/(ROWS-1);
+    const radii=[]; for(let r=0;r<ROWS;r++) radii.push(IN+r*gap);
+    const tot=d=>radii.reduce((a,rad)=>a+Math.max(2,Math.round(Math.PI*rad/d)+1),0);
+    let lo=0.5,hi=200; for(let it=0;it<50;it++){ const mid=(lo+hi)/2; if(tot(mid)>n) lo=mid; else hi=mid; }
+    const counts=radii.map(rad=>Math.max(2,Math.round(Math.PI*rad/hi)+1));
+    const sp=r=>Math.PI*radii[r]/(counts[r]-1);
+    let sum=counts.reduce((a,b)=>a+b,0);
+    while(sum<n){ let b=0; for(let r=1;r<ROWS;r++) if(sp(r)>sp(b)) b=r; counts[b]++; sum++; }
+    while(sum>n){ let b=0; for(let r=1;r<ROWS;r++) if(sp(r)<sp(b)) b=r; counts[b]--; sum--; }
+    const pos=[];
+    for(let r=0;r<ROWS;r++){
+      const rad=radii[r],c=counts[r];
+      for(let j=0;j<c;j++){ const t=(c===1)?0.5:j/(c-1), a=Math.PI-t*Math.PI; pos.push({x:cx+rad*Math.cos(a),y:cy-rad*Math.sin(a),a,rad}); }
+    }
+    pos.sort((p1,p2)=>p2.a===p1.a?p1.rad-p2.rad:p2.a-p1.a);
+    const rr=Math.max(2.5,Math.min(gap,...radii.map((rad,r)=>Math.PI*rad/Math.max(1,counts[r]-1)))*0.43);
+    pos.forEach((q,i)=>{
+      const p=flat[i];
+      out+='<circle class="seat" cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+rr.toFixed(1)+'" fill="'+p.c+'"></circle>';
+    });
+  }
+  $('arc').innerHTML=out;
+  $('arcleg').innerHTML=seated.map(p=>'<span><i style="background:'+p.c+'"></i>'+p.n+'</span>').join('');
+}
+
+/* ---------- coalition ---------- */
+function drawCoalition(res){
+  $('chips').innerHTML=res.map(p=>'<button class="chip" type="button" data-k="'+p.k+'" aria-pressed="'+coal.has(p.k)+'"><i style="background:'+p.c+'"></i>'+p.n+'</button>').join('');
+  const picked=res.filter(p=>coal.has(p.k)), sum=picked.reduce((a,p)=>a+p.s,0);
+  $('fill').innerHTML=picked.map(p=>'<span style="width:'+(p.s/SEATS*100)+'%;background:'+p.c+'"></span>').join('');
+  $('majmark').style.left=(MAJ/SEATS*100)+'%';
+  $('coalnote').innerHTML='<b>'+sum+'</b> of '+SEATS+' seats'+(sum>=MAJ?'<span class="ok">Majority</span>':'');
+}
+$('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  coal.has(b.dataset.k)?coal.delete(b.dataset.k):coal.add(b.dataset.k); render();
+});
+
+/* ---------- table ---------- */
+function drawTable(R,nat,fvShare){
+  const list=OUT.map(k=>({k,...META[k],fv:fvShare[k],share:nat[k],s:R[k]?R[k].total:0,d:R[k]?R[k].direct:0,l:R[k]?R[k].list:0}))
+    .filter(p=>p.s>0||p.fv>=1||p.share>=1).sort((a,b)=>b.s-a.s||b.share-a.share);
+  $('bd').innerHTML=list.map(p=>{
+    const ch=p.s-ACT[p.k], cls=ch>0?'pos':ch<0?'neg':'zer', txt=ch>0?'+'+ch:ch<0?'−'+(-ch):'0';
+    return '<tr><td><span class="pcell"><i style="background:'+p.c+'"></i><span><span class="fn">'+p.t+' </span><span class="ac">'+p.n+'</span></span></span></td>'+
+      '<td>'+fmt1(p.fv)+'%</td><td>'+p.d+'</td><td>'+fmt1(p.share)+'%</td><td>'+p.l+'</td><td class="seats">'+p.s+'</td><td class="'+cls+'">'+txt+'</td></tr>';
+  }).join('');
+}
+
+/* ---------- maps ---------- */
+function drawWkMap(R,wkWin){
+  const seatCap={};
+  Object.values(R).forEach(e=>Object.keys(e.byLand).forEach(l=>seatCap[e.k+'|'+l]=e.byLand[l].seats));
+  const used={}, byLand={}, seated={};
+  Object.keys(wkWin).forEach(nr=>{ const w=wkWin[nr]; (byLand[w.land]=byLand[w.land]||[]).push(w); });
+  Object.keys(byLand).forEach(l=>{
+    byLand[l].sort((a,b)=>b.margin-a.margin);
+    byLand[l].forEach(w=>{ const key=w.k+'|'+l, cap=seatCap[key]||0, u=used[key]||0; seated[w.nr]=u<cap; used[key]=u+1; });
+  });
+  let mn=Infinity,mx=-Infinity;
+  if(shade) Object.values(wkWin).forEach(w=>{ const v=w.row[shade]; if(v>0){ mn=Math.min(mn,v); mx=Math.max(mx,v); } });
+  let out=''; wkInfo={}; const winners=new Set();
+  for(const nr in WKMAP.p){
+    const w=wkWin[nr]; if(!w){ out+='<path d="'+WKMAP.p[nr]+'" class="wk" style="fill:var(--line)"></path>'; continue; }
+    const unc=!seated[nr]; wkInfo[nr]={...w,uncov:unc,seats:seated[nr]}; let st;
+    if(shade==='gains'){ if(w.k!==BASEWIN[nr]){ st='fill:'+META[w.k].c; winners.add(w.k); } else st='fill:var(--line)'; }
+    else if(!shade){ st='fill:'+META[w.k].c; winners.add(w.k); }
+    else { const v=w.row[shade]; st=v>0?'fill:'+META[shade].c+';fill-opacity:'+(0.12+0.88*((v-mn)/((mx-mn)||1))).toFixed(3):'fill:var(--line)'; }
+    out+='<path d="'+WKMAP.p[nr]+'" style="'+st+'" class="wk'+(pinnedNr===nr?' sel':'')+'" data-nr="'+nr+'"></path>';
+    if(unc&&showUnfilled) out+='<path d="'+WKMAP.p[nr]+'" class="hatch"></path>';
+  }
+  $('wkmap').innerHTML='<defs><pattern id="wkhatch" width="5" height="5" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="5" stroke="#161615" stroke-width="1.6" stroke-opacity=".55"/></pattern></defs>'+out;
+  return {mn,mx,winners};
+}
+function drawMap(R,lv){
+  let out=''; landInfo={}; const winners=new Set(); let mn=Infinity,mx=-Infinity;
+  const share=(k,j)=>lv[k][j]/LAND[j].valid*100;
+  if(shade) LAND.forEach((l,j)=>{ const v=share(shade,j); if(v>0){ mn=Math.min(mn,v); mx=Math.max(mx,v); } });
+  LAND.forEach((l,j)=>{
+    const runners=OUT.map(k=>({k,n:META[k].n,c:META[k].c,v:share(k,j),s:R[k]&&R[k].byLand[l.id]?R[k].byLand[l.id].seats:0}))
+      .filter(r=>r.v>=1||r.s>0).sort((a,b)=>b.v-a.v);
+    const top=[...runners].sort((a,b)=>b.s-a.s||b.v-a.v)[0];
+    landInfo[l.id]={name:l.name,runners,total:runners.reduce((a,r)=>a+r.s,0)};
+    let st;
+    if(!shade){ st='fill:'+(top?top.c:'var(--line)'); if(top) winners.add(top.k); }
+    else { const v=share(shade,j); st=v>0?'fill:'+META[shade].c+';fill-opacity:'+(0.12+0.88*((v-mn)/((mx-mn)||1))).toFixed(3):'fill:var(--line)'; }
+    out+='<path d="'+MAP[l.id]+'" style="'+st+'" data-l="'+l.id+'"'+(pinnedLand===l.id?' class="sel"':'')+'></path>';
+  });
+  $('map').innerHTML=out; return {mn,mx,winners};
+}
+function drawMapChrome(res,info){
+  $('mapparty').innerHTML='<button class="chip" type="button" data-k="" aria-pressed="'+(shade===null)+'">'+(mapMode==='wk'?'Winner':'Largest party')+'</button>'+(mapMode==='wk'?'<button class="chip" type="button" data-k="gains" aria-pressed="'+(shade==='gains')+'">Gains</button>':'')+res.map(p=>'<button class="chip" type="button" data-k="'+p.k+'" aria-pressed="'+(shade===p.k)+'"><i style="background:'+p.c+'"></i>'+p.n+'</button>').join('');
+  if(shade&&shade!=='gains'&&isFinite(info.mn)){
+    const [r,g,b]=rgb(META[shade].c);
+    $('maplegend').innerHTML='<div class="cbar"><span>'+fmt1(info.mn)+'%</span><div style="background:linear-gradient(90deg,rgba('+r+','+g+','+b+',.12),rgba('+r+','+g+','+b+',1))"></div><span>'+fmt1(info.mx)+'%</span></div>';
+  } else {
+    const w=OUT.filter(k=>info.winners.has(k)).sort((a,b)=>LR[a]-LR[b]);
+    $('maplegend').innerHTML=w.map(k=>'<span><i style="background:'+META[k].c+'"></i>'+META[k].n+'</span>').join('');
+  }
+}
+$('mapparty').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  const k=b.dataset.k; shade=(k===''||shade===k)?null:k; render();
+});
+
+/* tooltip */
+const tip=$('wktip');
+function wkTipHTML(w){
+  const rows=OUT.map(k=>({k,v:w.row[k]||0})).filter(r=>r.v>=1||r.k===w.k);
+  if(w.row.oth>=1) rows.push({k:'oth',v:w.row.oth});
+  rows.sort((a,b)=>b.v-a.v);
+  return '<h4>Wahlkreis '+w.nr+'</h4><div class="sub">'+w.name+'</div><div class="rows">'+
+    rows.map(r=>'<div class="r'+(r.k===w.k?' win':'')+'"><i style="background:'+(r.k==='oth'?'var(--track)':META[r.k].c)+'"></i><span>'+(r.k==='oth'?'Other':META[r.k].n)+'</span><span>'+fmt1(r.v)+'%</span></div>').join('')+'</div>';
+}
+function landTipHTML(id){
+  const info=landInfo[id]; if(!info) return '';
+  return '<h4>'+info.name+' <span>'+info.total+' seats</span></h4><div class="rows">'+
+    info.runners.map(r=>'<div class="r r4"><i style="background:'+r.c+'"></i><span>'+r.n+'</span><span>'+fmt1(r.v)+'%</span>'+
+      '<div class="sqs">'+('<u style="background:'+r.c+'"></u>').repeat(r.s)+'</div></div>').join('')+'</div>';
+}
+function positionTip(){
+  const pad=14, tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=tipX+pad, y=tipY+pad;
+  if(x+tw>window.innerWidth-8) x=tipX-pad-tw;
+  if(y+th>window.innerHeight-8) y=tipY-pad-th;
+  tip.style.left=Math.max(8,x)+'px'; tip.style.top=Math.max(8,y)+'px';
+}
+function hideTip(){ tip.style.display='none'; const had=pinnedNr||pinnedLand; pinnedNr=null; pinnedLand=null; if(had&&last) drawMaps(); }
+function refreshTip(){
+  if(pinnedNr&&wkInfo[pinnedNr]){ tip.className=''; tip.innerHTML=wkTipHTML(wkInfo[pinnedNr]); positionTip(); }
+  else if(pinnedLand&&landInfo[pinnedLand]){ tip.className='land'; tip.innerHTML=landTipHTML(pinnedLand); positionTip(); }
+  else tip.style.display='none';
+}
+function pin(kind,id,cx,cy){
+  pinnedNr=kind==='wk'?id:null; pinnedLand=kind==='land'?id:null; tipX=cx; tipY=cy;
+  tip.style.display='block'; refreshTip(); drawMaps();
+}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(!en.isIntersecting&&(pinnedNr||pinnedLand)) hideTip(); }),{threshold:0});
+  io.observe($('wkmapwrap')); io.observe($('mapwrap'));
+}
+/* Zoomable maps: the viewBox always has the frame's aspect, so a zoomed map fills the frame edge to edge without stretching */
+function makeZoom(svg,frame,cw,ch,hooks){
+  const S={z:1,cx:cw/2,cy:ch/2};
+  function size(){
+    const r=frame.getBoundingClientRect(), A=(r.width>0&&r.height>0)?r.width/r.height:cw/ch;
+    let w,h; if(A>cw/ch){ h=ch; w=ch*A; } else { w=cw; h=cw/A; }
+    return {w:w/S.z,h:h/S.z};
+  }
+  const cl=(c,len,full)=>len>=full?full/2:Math.max(len/2,Math.min(full-len/2,c));
+  function apply(){
+    const s=size(); S.cx=cl(S.cx,s.w,cw); S.cy=cl(S.cy,s.h,ch);
+    svg.setAttribute('viewBox',(S.cx-s.w/2).toFixed(1)+' '+(S.cy-s.h/2).toFixed(1)+' '+s.w.toFixed(1)+' '+s.h.toFixed(1));
+  }
+  function reset(){ S.z=1; S.cx=cw/2; S.cy=ch/2; apply(); }
+  svg.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const r=svg.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height, s=size();
+    const px=S.cx-s.w/2+fx*s.w, py=S.cy-s.h/2+fy*s.h;
+    S.z=Math.max(1,Math.min(9,S.z*(e.deltaY<0?1.18:1/1.18)));
+    const n=size(); S.cx=px-(fx-0.5)*n.w; S.cy=py-(fy-0.5)*n.h; apply(); hooks.onMove();
+  },{passive:false});
+  let down=false,moved=false,sx=0,sy=0,ox=0,oy=0,path=null,pid=null;
+  function end(e){ down=false; path=null; if(pid!==null){ try{svg.releasePointerCapture(pid);}catch(_){ } pid=null; } }
+  svg.addEventListener('pointerdown',e=>{
+    if(e.button!==undefined&&e.button!==0) return;
+    down=true; moved=false; sx=e.clientX; sy=e.clientY; ox=S.cx; oy=S.cy; path=e.target.closest('path'); pid=e.pointerId;
+    try{svg.setPointerCapture(e.pointerId);}catch(_){ }
+  });
+  svg.addEventListener('pointermove',e=>{
+    if(!down) return;
+    if(e.pointerType==='mouse'&&e.buttons===0){ end(e); return; }   // button was released somewhere we missed
+    const r=svg.getBoundingClientRect(), s=size();
+    if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>4){ if(!moved) hooks.onMove(); moved=true; }
+    if(!moved) return;
+    S.cx=ox-(e.clientX-sx)/r.width*s.w; S.cy=oy-(e.clientY-sy)/r.height*s.h; apply();
+  });
+  svg.addEventListener('pointerup',e=>{ if(!down) return; const p=path, m=moved; end(e); if(!m) hooks.onTap(p,e); });
+  svg.addEventListener('pointercancel',end);
+  svg.addEventListener('lostpointercapture',end);
+  svg.addEventListener('dragstart',e=>e.preventDefault());
+  svg.addEventListener('dblclick',e=>{ e.preventDefault(); reset(); hooks.onMove(); });
+  return {apply,reset,S,cw,ch};
+}
+const zoomWk=makeZoom($('wkmap'),$('wkmapwrap'),560,760,{
+  onMove:()=>{ if(pinnedNr) hideTip(); },
+  onTap:(p,e)=>{
+    if(!p||!p.dataset.nr){ hideTip(); return; }
+    if(pinnedNr===p.dataset.nr) hideTip(); else pin('wk',p.dataset.nr,e.clientX,e.clientY);
+  }
+});
+const zoomLand=makeZoom($('map'),$('mapwrap'),300,400,{
+  onMove:()=>{ if(pinnedLand) hideTip(); },
+  onTap:(p,e)=>{
+    if(!p||!landInfo[p.dataset.l]){ hideTip(); return; }
+    if(pinnedLand===p.dataset.l) hideTip(); else pin('land',p.dataset.l,e.clientX,e.clientY);
+  }
+});
+$('zoomreset').addEventListener('click',()=>{ zoomWk.reset(); if(pinnedNr) hideTip(); });
+$('zoomreset2').addEventListener('click',()=>{ zoomLand.reset(); if(pinnedLand) hideTip(); });
+if('ResizeObserver' in window){ const ro=new ResizeObserver(()=>{ zoomWk.apply(); zoomLand.apply(); }); ro.observe($('wkmapwrap')); ro.observe($('mapwrap')); }
+function setMode(m){
+  mapMode=m; $('tab-wk').setAttribute('aria-pressed',m==='wk'); $('tab-land').setAttribute('aria-pressed',m==='land');
+  $('wkmapwrap').style.display=m==='wk'?'block':'none'; $('mapwrap').style.display=m==='land'?'block':'none';
+  $('unfilledTog').style.display=m==='wk'?'flex':'none';
+  const from=m==='wk'?zoomLand:zoomWk, to=m==='wk'?zoomWk:zoomLand;
+  to.S.z=from.S.z; to.S.cx=from.S.cx/from.cw*to.cw; to.S.cy=from.S.cy/from.ch*to.ch;   // keep zoom level and focus
+  to.apply();
+  if(m==='land'&&shade==='gains') shade=null;
+  pinnedNr=null; pinnedLand=null; tip.style.display='none'; render();
+}
+$('tab-wk').addEventListener('click',()=>setMode('wk'));
+$('tab-land').addEventListener('click',()=>setMode('land'));
+$('showUnfilled').addEventListener('change',e=>{ showUnfilled=e.target.checked; render(); });
+
+function drawMaps(){
+  if(!last) return;
+  const info=mapMode==='wk'?drawWkMap(last.R,last.wkWin):drawMap(last.R,last.lv);
+  drawMapChrome(last.res,info);
+}
+
+/* ---------- main render ---------- */
+function render(){
+  const out=project(P.map(p=>p.v)); last=out;
+  const {R,nat,fvShare}=out;
+  const res=Object.values(R).filter(e=>e.total>0).map(e=>({...e,s:e.total})).sort((a,b)=>b.s-a.s);
+  out.res=res;
+  for(const k of [...coal]) if(!res.some(p=>p.k===k)) coal.delete(k);
+  if(shade&&shade!=='gains'&&!res.some(p=>p.k===shade)) shade=null;
+  drawTable(R,nat,fvShare);
+  drawArc(res); drawCoalition(res);
+  drawMaps(); refreshTip();
+  mcSchedule();
+}
+
+/* ---------- probability model ---------- */
+const MCK=INPUT.slice(), MCN=MCK.map(k=>IN_META[k].n), MCC=MCK.map(k=>IN_META[k].c);
+const mc={runs:1000,v:10,s:3,data:null,n:0,st:null,sel:new Set(),hist:0};
+let mcTimer=null, mcTok=0;
+const seats9=t=>[t.cdu+t.csu,t.afd,t.spd,t.gru,t.lin,t.bsw,t.fdp,t.fw,t.ssw];
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return((t^t>>>14)>>>0)/4294967296; }; }
+function gaussFn(rng){ let spare=null; return function(){ if(spare!==null){const s=spare;spare=null;return s;} let u=0; while(u===0) u=rng(); const v=rng(), m=Math.sqrt(-2*Math.log(u)); spare=m*Math.sin(2*Math.PI*v); return m*Math.cos(2*Math.PI*v); }; }
+function runOnce(i,vals,vErr,sErr){
+  const g=gaussFn(mulberry32((Math.imul(i,2654435761)+0x5EED1234)|0));
+  let v=vals;
+  if(vErr>0){
+    const sig=vErr/100, other=Math.max(0,100-vals.reduce((a,b)=>a+b,0));
+    const f=vals.map(x=>x*Math.exp(sig*g())), fo=other*Math.exp(sig*g());
+    const tot=f.reduce((a,b)=>a+b,0)+fo;
+    v=f.map(x=>x/tot*100);
+  }
+  const noise=sErr>0?(c,k)=>sErr*Math.sqrt(Math.max(c.s[k],0.5)/20)*g():null;
+  return seats9(project(v,{lean:true,noise}).tot);
+}
+function mcSchedule(){
+  $('mcOut').classList.add('dim'); clearTimeout(mcTimer); mcTok++; $('mcprog').hidden=true;
+  mcTimer=setTimeout(mcStart,500);
+}
+function mcStart(){
+  clearTimeout(mcTimer);
+  const tok=++mcTok, runs=mc.runs, vErr=mc.v, sErr=mc.s, vals=P.map(p=>p.v);
+  const data=MCK.map(()=>new Int16Array(runs));
+  if(vErr===0&&sErr===0){
+    const t=seats9(project(vals,{lean:true}).tot);
+    data.forEach((a,j)=>a.fill(t[j])); mcFinish(data,runs); return;
+  }
+  const prog=$('mcprog'), pi=$('mcprogi'); prog.hidden=false; pi.style.width='0%';
+  let i=0;
+  (function chunk(){
+    if(tok!==mcTok) return;
+    const t0=performance.now();
+    while(i<runs&&performance.now()-t0<25){ const t=runOnce(i,vals,vErr,sErr); for(let j=0;j<t.length;j++) data[j][i]=t[j]; i++; }
+    pi.style.width=(i/runs*100)+'%';
+    if(i<runs) setTimeout(chunk,0); else { prog.hidden=true; mcFinish(data,runs); }
+  })();
+}
+function pstat(arr){
+  const s=Int16Array.from(arr).sort(), n=s.length;
+  return {med:s[Math.floor(n/2)],p5:s[Math.floor(.05*n)],p95:s[Math.min(n-1,Math.ceil(.95*n)-1)],pos:s.reduce((a,x)=>a+(x>0?1:0),0)/n};
+}
+function mcFinish(data,runs){
+  mc.data=data; mc.n=runs; mc.st=data.map(pstat);
+  const order=MCK.map((k,j)=>j).filter(j=>mc.st[j].pos>=0.05).sort((a,b)=>mc.st[b].med-mc.st[a].med);
+  mc.order=order;
+  mc.sel=new Set([...mc.sel].filter(j=>order.includes(j)));
+  if(!order.includes(mc.hist)) mc.hist=order[0]!==undefined?order[0]:0;
+  $('mcOut').classList.remove('dim'); mcRender();
+}
+function mcRender(){
+  if(!mc.data) return;
+  const n=mc.n, cnt={};
+  for(let r=0;r<n;r++){
+    let b=0; for(let j=1;j<MCK.length;j++) if(mc.data[j][r]>mc.data[b][r]) b=j;
+    const key=(mc.data[b][r]>=MAJ?'M':'L')+b; cnt[key]=(cnt[key]||0)+1;
+  }
+  const cats=[]; ['M','L'].forEach(t=>MCK.forEach((k,j)=>{ if(cnt[t+j]) cats.push({t,j,p:cnt[t+j]/n*100}); }));
+  $('obar').innerHTML=cats.map(c=>'<span class="'+(c.t==='M'?'solid':'hat')+'" style="--c:'+MCC[c.j]+';width:'+c.p+'%"></span>').join('');
+  $('olegend').innerHTML=cats.map(c=>'<span><i class="'+(c.t==='M'?'solid':'hat')+'" style="--c:'+MCC[c.j]+'"></i>'+MCN[c.j]+(c.t==='M'?' majority ':' largest ')+(c.p<1?'<1':Math.round(c.p))+'%</span>').join('');
+  const ord=mc.order, maxP=Math.max(MAJ,...ord.map(j=>mc.st[j].p95));
+  $('rangeSec').innerHTML='<div class="rg h"><span>Party</span><span style="text-align:right">Median</span><span>90% range</span></div>'+
+    ord.map(j=>{ const s=mc.st[j];
+      return '<div class="rg"><span class="pn"><i style="background:'+MCC[j]+'"></i>'+MCN[j]+'</span><span class="md">'+s.med+'</span>'+
+        '<span class="rr"><span>'+s.p5+'–'+s.p95+'</span><span class="rtrack"><i style="left:'+(s.p5/maxP*100)+'%;width:'+Math.max(0.8,(s.p95-s.p5)/maxP*100)+'%;background:'+MCC[j]+'"></i><b style="left:'+(s.med/maxP*100)+'%"></b></span></span></div>'; }).join('');
+  const chipsFor=(sel,multi)=>ord.map(j=>'<button class="chip" type="button" data-j="'+j+'" aria-pressed="'+(multi?sel.has(j):sel===j)+'"><i style="background:'+MCC[j]+'"></i>'+MCN[j]+'</button>').join('');
+  $('cchips').innerHTML=chipsFor(mc.sel,true);
+  $('hchips').innerHTML=chipsFor(mc.hist,false);
+  drawCmb(); drawHist();
+}
+function drawCmb(){
+  const sel=[...mc.sel], n=mc.n; let pc=0, extra='';
+  if(sel.length){
+    const sum=new Int16Array(n); let hit=0;
+    for(let r=0;r<n;r++){ let s=0; for(const j of sel) s+=mc.data[j][r]; sum[r]=s; if(s>=MAJ) hit++; }
+    pc=hit/n*100; const st=pstat(sum);
+    extra='<div class="st"><div><b>'+st.med+'</b><span>median seats</span></div><div></div><div><b>'+st.p5+'–'+st.p95+'</b><span>90% range</span></div></div>';
+  }
+  $('cmb').innerHTML='<div class="pc">'+fmt1(pc)+'<small>%</small></div><div class="cl">chance of a majority</div><div class="tr"><i style="width:'+pc+'%"></i></div>'+extra;
+}
+const HW=640,HH=190,ML=8,MR=8,MT=8,MB=24;
+function drawHist(){
+  const j=mc.hist, arr=mc.data[j], n=mc.n, counts={}; let mn=Infinity,mx=-Infinity,peak=0;
+  for(let r=0;r<n;r++){ const v=arr[r]; counts[v]=(counts[v]||0)+1; if(v<mn)mn=v; if(v>mx)mx=v; }
+  Object.values(counts).forEach(c=>{ if(c>peak) peak=c; });
+  const lo=Math.max(0,Math.min(mn,MAJ)-2), hi=Math.max(mx,MAJ)+2, nb=hi-lo+1, bw=(HW-ML-MR)/nb, ph=HH-MT-MB;
+  let s='<line x1="'+ML+'" x2="'+(HW-MR)+'" y1="'+(HH-MB)+'" y2="'+(HH-MB)+'" stroke="currentColor" stroke-opacity=".25"/>';
+  for(let v=lo;v<=hi;v++){
+    const c=counts[v]||0; if(!c) continue;
+    const h=c/peak*ph, gap=bw>3?0.6:0;
+    s+='<rect data-v="'+v+'" x="'+(ML+(v-lo)*bw+gap/2).toFixed(2)+'" y="'+(HH-MB-h).toFixed(2)+'" width="'+Math.max(0.5,bw-gap).toFixed(2)+'" height="'+h.toFixed(2)+'" fill="'+MCC[j]+'"></rect>';
+  }
+  const range=hi-lo, step=[5,10,20,25,50,100].find(x=>range/x<=8)||100;
+  for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step){
+    const x=ML+(v-lo+0.5)*bw; s+='<text x="'+x.toFixed(1)+'" y="'+(HH-8)+'" text-anchor="middle">'+v+'</text>';
+  }
+  const mxp=ML+(MAJ-lo+0.5)*bw;
+  s+='<line x1="'+mxp.toFixed(1)+'" x2="'+mxp.toFixed(1)+'" y1="'+MT+'" y2="'+(HH-MB)+'" stroke="currentColor" stroke-opacity=".7" stroke-dasharray="4 3"/>';
+  const lx=mxp>HW-40?mxp-4:mxp+4;
+  s+='<text x="'+lx.toFixed(1)+'" y="'+(MT+9)+'" text-anchor="'+(mxp>HW-40?'end':'start')+'">Majority '+MAJ+'</text>';
+  const svg=$('hist'); svg.innerHTML=s; svg.style.color='var(--fg)';
+  const bars=[...svg.querySelectorAll('rect')], tipEl=$('mctip');
+  tipEl.innerHTML='&nbsp;';
+  function show(v){
+    bars.forEach(b=>b.setAttribute('fill-opacity',v==null||+b.dataset.v===v?1:0.3));
+    if(v==null||!counts[v]){ bars.forEach(b=>b.setAttribute('fill-opacity',1)); tipEl.innerHTML='&nbsp;'; return; }
+    let ge=0; for(let r=0;r<n;r++) if(arr[r]>=v) ge++;
+    tipEl.innerHTML='<div><b>'+v+' seats</b> / '+fmt1(counts[v]/n*100)+'% of runs ('+counts[v]+')</div><div>'+Math.round(ge/n*100)+'% of runs at '+v+'+</div>';
+  }
+  function at(e){ const r=svg.getBoundingClientRect(), x=(e.clientX-r.left)/r.width*HW; const v=lo+Math.floor((x-ML)/bw); show(v>=lo&&v<=hi?v:null); }
+  svg.onpointermove=at;
+  svg.onpointerdown=at;
+  svg.onpointerleave=e=>{ if(e.pointerType==='mouse') show(null); };
+}
+$('cchips').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; const j=+b.dataset.j; mc.sel.has(j)?mc.sel.delete(j):mc.sel.add(j); mcRender(); });
+$('hchips').addEventListener('click',e=>{ const b=e.target.closest('.chip'); if(!b) return; mc.hist=+b.dataset.j; mcRender(); });
+document.addEventListener('pointerdown',e=>{ if(!e.target.closest('#hist')){ const t=$('mctip'); if(t&&mc.data) { $('hist').querySelectorAll('rect').forEach(b=>b.setAttribute('fill-opacity',1)); t.innerHTML='&nbsp;'; } } });
+$('mcRuns').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return; mc.runs=+b.dataset.r;
+  $('mcRuns').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); mcSchedule();
+});
+function mcSlider(id,out,key,suffix){
+  const el=$(id); const upd=()=>{ el.style.setProperty('--p',(el.value/el.max*100)+'%'); $(out).textContent=el.value+suffix; };
+  el.addEventListener('input',()=>{ mc[key]=+el.value; upd(); mcSchedule(); }); upd();
+}
+mcSlider('mcV','mcVo','v','%'); mcSlider('mcS','mcSo','s',' pts');
+
+window.__dbg={project,P,INPUT,OUT,runOnce,seats9,MAJ,ACT,META,get mc(){return mc;},mcStart};
+syncInputs(); render(); zoomWk.apply(); clearTimeout(mcTimer); mcStart();
 })();
+
 </script>
-</body>
-</html>
         
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
