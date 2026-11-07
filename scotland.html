@@ -87,12 +87,9 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Holyrood Seat Projector</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -201,6 +198,9 @@ td.seats{font-weight:700}
 .cmark span{position:absolute;top:calc(100% + 2px);left:50%;transform:translateX(-50%);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
 .cfoot{text-align:center;margin-top:30px;font-variant-numeric:tabular-nums;font-weight:600}
 .ok{color:var(--pos)}
+.codds{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;margin-top:4px}
+.cometer{width:100%;max-width:220px;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
+.cometer>div{height:100%;background:var(--pos)}
 
 .mapcard{overflow:hidden}
 .maptabs{display:flex;margin:0 -16px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--chip)}
@@ -247,8 +247,6 @@ td.seats{font-weight:700}
 .mapfoot .legend,.mapfoot .scale{margin-top:14px}
 </style>
 
-</head>
-<body>
 <div id="root"></div>
 <script>/**
  * @license React
@@ -1242,7 +1240,7 @@ function summarise(tallies, n) {
   }
   rows.sort((a, b) => b.median - a.median || b.largest - a.largest);
   const outs = Object.entries(outcomes).map(([k, c]) => { const [p, kind] = k.split(":"); return { p, maj: kind === "maj", pct: c / n * 100 }; }).sort((a, b) => b.pct - a.pct);
-  return { n, rows, outs };
+  return { n, rows, outs, seatsBy };
 }
 function Histogram({ row, n }) {
   const [hov, setHov] = useState(null);
@@ -1253,8 +1251,11 @@ function Histogram({ row, n }) {
   const bw = Math.max(1, Math.ceil((hi - lo + 1) / 48)), nb = Math.floor((hi - lo) / bw) + 1;
   const bins = new Array(nb).fill(0);
   for (let i = 0; i < n; i++) bins[Math.floor((arr[i] - lo) / bw)]++;
-  const maxB = Math.max(...bins), W = 600, H = 214, L = 34, R = 10, T = 38, B = 34;
+  const maxB = Math.max(...bins), W = 600, H = 228, L = 34, R = 10, T = 52, B = 34;
   const iw = W - L - R, ih = H - T - B, x = (s) => L + (s - lo) / (nb * bw) * iw;
+  // cumulative: atLeast[i] = P(seats >= start of bin i), atMost[i] = P(seats <= end of bin i)
+  const atLeast = new Array(nb);
+  { let a = 0; for (let i = nb - 1; i >= 0; i--) { a += bins[i]; atLeast[i] = a / n; } }
   const col = partyMeta(row.p).color;
   const ticks = []; const step = (hi - lo) > 80 ? 20 : 10;
   for (let s = Math.ceil(lo / step) * step; s <= hi; s += step) ticks.push(s);
@@ -1269,12 +1270,35 @@ function Histogram({ row, n }) {
     bins.map((c, i) => h("rect", { key: "hit" + i, x: x(lo + i * bw), y: T, width: iw / nb, height: ih, fill: "transparent", onPointerEnter: () => setHov(i), onPointerMove: () => setHov(i), onPointerDown: () => setHov(i), onPointerLeave: () => setHov(null) })),
     hov !== null ? (() => {
       const s0 = lo + hov * bw, s1 = Math.min(s0 + bw - 1, TOTAL_SEATS), c = bins[hov];
-      const tw = 150, tx = Math.max(L, Math.min(W - R - tw, x(s0) + iw / nb / 2 - tw / 2));
+      const tw = 196, tx = Math.max(L, Math.min(W - R - tw, x(s0) + iw / nb / 2 - tw / 2));
+      const fp = (p) => p > 0 && p < 0.001 ? "<0.1%" : p < 1 && p > 0.999 ? ">99.9%" : (p * 100).toFixed(1) + "%";
+      const range = s0 === s1 ? String(s0) : s0 + "\u2013" + s1;
       return h("g", { pointerEvents: "none" },
-        h("rect", { x: tx, y: 2, width: tw, height: 32, rx: 5, fill: "var(--tipbg)", stroke: "var(--line)" }),
-        h("text", { x: tx + 8, y: 15, fontSize: 11, fontWeight: 600, fill: "var(--fg)" }, (s0 === s1 ? s0 : s0 + "\u2013" + s1) + " seats"),
-        h("text", { x: tx + 8, y: 28, fontSize: 11, fill: "var(--muted)" }, (c / n * 100).toFixed(1) + "% of runs (" + c + ")"));
+        h("rect", { x: tx, y: 2, width: tw, height: 50, rx: 5, fill: "var(--tipbg)", stroke: "var(--line)" }),
+        h("text", { x: tx + 8, y: 15, fontSize: 11, fontWeight: 600, fill: "var(--fg)" }, short(row.p) + " on " + range + " seats"),
+        h("text", { x: tx + 8, y: 29, fontSize: 11, fill: "var(--muted)" }, (s0 === s1 ? "Chance of exactly " + s0 : "Chance of " + range) + ": " + fp(c / n)),
+        h("text", { x: tx + 8, y: 43, fontSize: 11, fill: "var(--muted)" }, "Chance of " + s0 + " or more: " + fp(atLeast[hov])));
     })() : null);
+}
+// Error slider that only commits its value (and so re-runs the simulation) when released
+function MCSlider({ label, val, set, max, unit }) {
+  const [draft, setDraft] = useState(val);
+  useEffect(() => setDraft(val), [val]);
+  const commit = (e) => { const v = parseInt(e.target.value, 10); if (v !== val) set(v); };
+  return h("div", { className: "srow" },
+    h("div", { className: "sname" }, label),
+    h("div", { className: "sctl" },
+      h("input", { type: "range", min: 0, max, step: 1, value: draft, "aria-label": label, style: { "--fill": "var(--fg)", "--pct": draft / max * 100 + "%" },
+        onChange: (e) => setDraft(parseInt(e.target.value, 10)), onPointerUp: commit, onTouchEnd: commit, onKeyUp: commit, onBlur: commit }),
+      h("div", { className: "nbox nlock" }, h("span", { className: "nval" }, draft), h("span", null, unit))));
+}
+function coalitionOdds(res, parties) {
+  if (!res || !parties.length) return null;
+  const n = res.n, sums = new Uint16Array(n);
+  for (const p of parties) { const a = res.seatsBy[p]; if (a) for (let i = 0; i < n; i++) sums[i] += a[i]; }
+  let maj = 0; for (let i = 0; i < n; i++) if (sums[i] >= MAJORITY) maj++;
+  const s = Array.from(sums).sort((a, b) => a - b);
+  return { n, pct: maj / n * 100, median: pctile(s, 0.5), lo: pctile(s, 0.05), hi: pctile(s, 0.95) };
 }
 function MonteCarlo({ constShares, listShares }) {
   const [runs, setRuns] = useState(1000);
@@ -1283,6 +1307,9 @@ function MonteCarlo({ constShares, listShares }) {
   const [res, setRes] = useState(null);
   const [prog, setProg] = useState(0);
   const [sel, setSel] = useState(null);
+  const [coal, setCoal] = useState(() => new Set());
+  const toggleCoal = (p) => setCoal((prev) => { const s = new Set(prev); s.has(p) ? s.delete(p) : s.add(p); return s; });
+  const odds = useMemo(() => coalitionOdds(res, [...coal]), [res, coal]);
   useEffect(() => {
     let dead = false, timer = null;
     setProg(0);
@@ -1305,11 +1332,7 @@ function MonteCarlo({ constShares, listShares }) {
   const rows = res ? res.rows : [];
   const row = rows.find((r) => r.p === sel) || rows[0];
   const hatch = (c, plur) => plur ? { backgroundColor: c, backgroundImage: "repeating-linear-gradient(135deg, var(--card) 0 2px, transparent 2px 5px)" } : { background: c };
-  const slider = (label, val, set, max, unit) => h("div", { className: "srow" },
-    h("div", { className: "sname" }, label),
-    h("div", { className: "sctl" },
-      h("input", { type: "range", min: 0, max, step: 1, value: val, "aria-label": label, style: { "--fill": "var(--fg)", "--pct": val / max * 100 + "%" }, onChange: (e) => set(parseInt(e.target.value, 10)) }),
-      h("div", { className: "nbox nlock" }, h("span", { className: "nval" }, val), h("span", null, unit))));
+  const slider = (label, val, set, max, unit) => h(MCSlider, { label, val, set, max, unit });
   return h("section", { className: "card mc" },
     h("h2", null, "Monte Carlo simulation"),
     h("div", { className: "mcctl" },
@@ -1327,6 +1350,18 @@ function MonteCarlo({ constShares, listShares }) {
         h("tbody", null, rows.map((r) => h("tr", { key: r.p },
           h("td", { className: "l" }, h("span", { className: "sw", style: { background: partyMeta(r.p).color } }), plainName(r.p)),
           h("td", { className: "seats" }, Math.round(r.median)), h("td", null, Math.round(r.lo) + "–" + Math.round(r.hi)), h("td", null, r.largest.toFixed(1) + "%"))))),
+      h("h3", { className: "mch3" }, "Coalition majority chance"),
+      h("div", { className: "chips" }, rows.map((r) => {
+        const on = coal.has(r.p);
+        return h("button", { key: r.p, className: "chip" + (on ? " on" : ""), "aria-pressed": on, onClick: () => toggleCoal(r.p) }, h("span", { className: "sw", style: { background: partyMeta(r.p).color } }), short(r.p));
+      })),
+      h("div", { className: "codds" },
+        odds
+          ? [h("div", { key: "p", className: "fbig" + (odds.pct >= 50 ? " ok" : "") }, odds.pct < 0.1 && odds.pct > 0 ? "<0.1%" : odds.pct > 99.9 && odds.pct < 100 ? ">99.9%" : odds.pct.toFixed(1) + "%"),
+             h("div", { key: "l", className: "fnote" }, "of runs where " + [...coal].map(short).join(" + ") + " reach " + MAJORITY + "+ seats"),
+             h("div", { key: "m", className: "cometer" }, h("div", { style: { width: odds.pct + "%" } })),
+             h("div", { key: "n", className: "fnote" }, "Median " + Math.round(odds.median) + " seats · 90% range " + Math.round(odds.lo) + "–" + Math.round(odds.hi))]
+          : h("div", { className: "fnote" }, "Pick parties to see how often they reach " + MAJORITY + " seats together across the simulated runs.")),
       h("h3", { className: "mch3" }, "Seat distribution"),
       h("div", { className: "chips" }, rows.map((r) => h("button", { key: r.p, className: "chip" + (row && row.p === r.p ? " on" : ""), "aria-pressed": row && row.p === r.p, onClick: () => setSel(r.p) }, h("span", { className: "sw", style: { background: partyMeta(r.p).color } }), short(r.p)))),
       row ? h(Histogram, { row, n: res.n }) : null,
@@ -1380,8 +1415,7 @@ function HolyroodProjector() {
   const toggle = (p) => setCoalition((prev) => { const n = new Set(prev); n.has(p) ? n.delete(p) : n.add(p); return n; });
   const seated = ordered.filter((r) => r.seats > 0);
   const chosen = seated.filter((r) => coalition.has(r.p));
-  const cSeats = chosen.reduce((a, r) => a + r.seats, 0);
-  const col = (title, order, shares, onChange) => h("div", { className: "scol" }, h("h3", null, title),
+  const cSeats = chosen.reduce((a, r) => a + r.seats, 0);  const col = (title, order, shares, onChange) => h("div", { className: "scol" }, h("h3", null, title),
     order.map((p) => h(SliderRow, { key: p, p, value: shares[p], frozen: p === "Oth", onChange: (v) => onChange(p, v) })));
   return h("div", { className: "page" },
     h("h1", null, "Scottish Parliament Seat Projection"),
@@ -1426,8 +1460,7 @@ ReactDOM.createRoot(rootEl).render(React.createElement(HolyroodProjector));
 
 </script>
 
-</body>
-</html>
+</body></html>
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
