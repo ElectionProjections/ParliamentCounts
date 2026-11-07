@@ -260,6 +260,38 @@ td .pcell span:last-child{min-width:0}
 .cnums{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:3px}
 .sources{margin:4px 0 0;font-size:11.5px;line-height:1.5;color:var(--mut);text-align:center}
 button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.mc-card{position:relative;overflow:hidden}
+.mc-card .mc-prog{position:absolute;left:0;right:0;top:0;height:3px;margin:0;border-radius:0}
+.mc-card h2{margin-bottom:20px}
+.mc-h{font-size:14px;font-weight:600;text-align:center;margin:0 0 14px}
+.mc-card .mc-sec{margin-top:24px;padding-top:24px;border-top:1px solid var(--bd)}
+.mc-card .mc-sec.first{margin-top:0;padding-top:0;border-top:0}
+.mc-runs{margin-bottom:22px}
+.mc-set{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:560px){.mc-set{grid-template-columns:1fr;gap:26px}}
+.mc-par{display:flex;flex-direction:column;gap:12px;min-width:0}
+.mc-plabel{font-size:13px;font-weight:500;line-height:1.35;text-align:center}
+.mc-par input[type=range]{width:100%;flex:none;margin:4px 0}
+.mc-pval{display:flex;justify-content:center}
+.mc-bar{height:26px;border-radius:6px}
+.mc-barwrap{margin-top:6px}
+.mc-legend{margin:16px 0 0;gap:8px 20px}
+.mc-tbl td{padding:7px 6px;white-space:nowrap}.mc-tbl .mc-rng{gap:3px}
+.mc-tbl th:last-child,.mc-tbl td:last-child{min-width:150px;width:40%}
+.mc-tbl{table-layout:auto;width:100%}.mc-tbl td:first-child{overflow-wrap:normal;word-break:normal;min-width:90px}
+.mc-rng{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.mc-rngtxt{font-size:13px}
+.mc-rbar{position:relative;width:100%;height:6px;border-radius:99px;background:var(--soft)}
+.mc-rfill{position:absolute;top:0;height:100%;border-radius:99px;opacity:.85}
+.mc-rtick{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.mc-rmaj{position:absolute;top:-2px;height:10px;width:0;border-left:1px dashed var(--mut)}
+.mc-co{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:96px}
+.mc-big{font-size:28px;font-weight:700;line-height:1.1}
+.mc-cor{width:100%;max-width:300px;margin:6px 0 2px}
+.mc-tl{height:44px;text-align:center;font-size:13px;line-height:1.4;margin-bottom:6px;font-weight:600;display:flex;flex-direction:column;justify-content:center}
+.mc-tl.idle{color:var(--mut);font-weight:500}
+.mc-tl .m{color:var(--mut);font-weight:500;font-size:12px}
+.mc-hist .mc-hwrap{margin-top:0}
 </style>
 <div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
@@ -465,7 +497,7 @@ function computeTaper(x, baseline) {
   const factor = T > 0 ? Math.max(0, x) / T : 0;
   return { factor, clipped };
 }
-function projectSeatsCombined(nationalShares, regionShares, nationEnabled, jit) {
+function projectSeatsCombined(nationalShares, regionShares, nationEnabled, jit, lean) {
   const mainTaperFactor = {};
   const clippedNationalShares = { ...nationalShares };
   for (const p of SWING_PARTIES) {
@@ -531,7 +563,7 @@ function projectSeatsCombined(nationalShares, regionShares, nationEnabled, jit) 
         const sk = swing[p] !== void 0 || !SWING_ALIAS[p] ? p : SWING_ALIAS[p];
         const s = swing[sk] !== void 0 ? swing[sk] : 0;
         const factor = taperFactor[sk] !== void 0 ? taperFactor[sk] : 1;
-        const raw = baseShare + s + (jit ? jit(seat, p, baseShare + s) : 0);
+        const raw = baseShare + s + (jit ? jit(seat, p, baseShare) : 0);
         const v = factor < 1 ? Math.max(0, raw * factor) : Math.max(0.05, raw);
         adjByParty[p] = (adjByParty[p] || 0) + v;
         if (v > bestV) {
@@ -542,7 +574,7 @@ function projectSeatsCombined(nationalShares, regionShares, nationEnabled, jit) 
       for (const [p, v] of seat.om || []) {
         if (candidateParties.has(p)) continue;
         const baseShare = v / total * 100;
-        const raw = baseShare + otherSwing + (jit ? jit(seat, p, baseShare + otherSwing) : 0);
+        const raw = baseShare + otherSwing + (jit ? jit(seat, p, baseShare) : 0);
         const adj = otherFactor < 1 ? Math.max(0, raw * otherFactor) : Math.max(0.05, raw);
         adjByParty[p] = (adjByParty[p] || 0) + adj;
         if (adj > bestV) {
@@ -551,11 +583,13 @@ function projectSeatsCombined(nationalShares, regionShares, nationEnabled, jit) 
         }
       }
       winner = best;
+      if (!lean) {
       const adjTotal = Object.values(adjByParty).reduce((a, b) => a + b, 0);
       breakdown = Object.entries(adjByParty).map(([p, v]) => ({ p, pct: adjTotal ? v / adjTotal * 100 : 0 })).sort((a, b) => b.pct - a.pct);
+      }
     }
     tally[winner] = (tally[winner] || 0) + 1;
-    results.push({ ...seat, winner, breakdown });
+    if (!lean) results.push({ ...seat, winner, breakdown });
   }
   return { tally, results };
 }
@@ -1317,6 +1351,7 @@ function ConstituencyMap({ results, seatOrder }) {
 }
 
 // ---- Monte Carlo ----
+const MC_SEED = 20240704;
 function mulberry32(a) {
   return function () {
     a |= 0; a = a + 0x6D2B79F5 | 0;
@@ -1329,22 +1364,31 @@ function gauss(rng) {
   let u = 0; while (u === 0) u = rng();
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * rng());
 }
-// multiplicative log-normal noise on each share, renormalised to 100
-function perturbShares(sh, rel, rng) {
+// log-normal factor exp(sigma * z) on each share, renormalised to 100
+function perturbShares(sh, sigma, rng) {
+  if (sigma === 0) return { ...sh };
   const out = {}; let s = 0;
-  for (const p in sh) { const v = sh[p] * Math.exp(rel * gauss(rng) - rel * rel / 2); out[p] = v; s += v; }
+  for (const p in sh) { const v = sh[p] * Math.exp(sigma * gauss(rng)); out[p] = v; s += v; }
   for (const p in out) out[p] = out[p] / s * 100;
   return out;
 }
-function runSim(ctx, rng) {
-  const g = toGB(perturbShares(ctx.shares, ctx.rel, rng));
-  const rs = {};
-  for (const k of REGION_KEYS) {
-    const base = ctx.nationEnabled[k] ? ctx.regionShares[k] : impliedRegion(k, g, ctx.regionShares, ctx.nationEnabled);
-    rs[k] = perturbShares(base, ctx.rel * 0.75, rng);
+// one run, seeded from its index so results are reproducible and extendable
+function runSim(ctx, idx) {
+  if (ctx.rel === 0 && ctx.seatSD === 0) return ctx.central;
+  const rng = mulberry32(MC_SEED + idx);
+  let g, rs, en;
+  if (ctx.rel === 0) { g = toGB(ctx.shares); rs = ctx.regionShares; en = ctx.nationEnabled; }
+  else {
+    g = toGB(perturbShares(ctx.shares, ctx.rel, rng));
+    rs = {};
+    for (const k of REGION_KEYS) {
+      const base = ctx.nationEnabled[k] ? ctx.regionShares[k] : impliedRegion(k, g, ctx.regionShares, ctx.nationEnabled);
+      rs[k] = perturbShares(base, ctx.rel * 0.75, rng);
+    }
+    en = { Scotland: true, Wales: true, NI: true };
   }
-  const jit = (seat, p, b) => ctx.seatSD * Math.sqrt(Math.max(b, 0.5) / 20) * gauss(rng);
-  return projectSeatsCombined(g, rs, { Scotland: true, Wales: true, NI: true }, jit).tally;
+  const jit = ctx.seatSD > 0 ? (seat, p, baseShare) => ctx.seatSD * Math.sqrt(Math.max(baseShare, 0.5) / 20) * gauss(rng) : null;
+  return projectSeatsCombined(g, rs, en, jit, true).tally;
 }
 function summarise(draws, n) {
   const parties = Object.keys(draws);
@@ -1353,55 +1397,58 @@ function summarise(draws, n) {
     const a = Array.from(draws[p]).sort((x, y) => x - y);
     stats[p] = { median: a[Math.floor(n / 2)], lo: a[Math.floor(n * 0.05)], hi: a[Math.min(n - 1, Math.floor(n * 0.95))], any: a.filter((v) => v > 0).length / n };
   }
-  const largest = {}, major = {}, plural = {}; let hung = 0;
+  const major = {}, plural = {};
   for (let i = 0; i < n; i++) {
     let best = null, bv = -1;
     for (const p of parties) { const v = draws[p][i]; if (v > bv) { bv = v; best = p; } }
-    largest[best] = (largest[best] || 0) + 1;
-    if (bv >= MAJORITY) major[best] = (major[best] || 0) + 1; else { hung++; plural[best] = (plural[best] || 0) + 1; }
+    if (bv >= MAJORITY) major[best] = (major[best] || 0) + 1; else plural[best] = (plural[best] || 0) + 1;
   }
-  return { n, parties, stats, largest, major, plural, hung, draws };
+  return { n, parties, stats, major, plural, draws };
 }
-function ParamRow({ label, hint, value, max, step, unit, onChange }) {
+function McParam({ label, value, max, step, unit, onChange }) {
   const pct = Math.max(0, Math.min(100, value / max * 100));
-  return h("div", { className: "srow" },
-    h("div", { className: "slabel" }, h("span", { className: "sname" }, label)),
-    hint && h("div", { className: "hint" }, hint),
-    h("div", { className: "sctl" },
-      h("input", { type: "range", min: 0, max, step, value, "aria-label": label, style: { "--thumb": "var(--fg)", "--pct": pct + "%" }, onChange: (e) => onChange(parseFloat(e.target.value)) }),
-      h(NumBox, { value, unit, onCommit: (v) => onChange(Math.min(max, v)) })));
+  return h("div", { className: "mc-par" },
+    h("div", { className: "mc-plabel" }, label),
+    h("input", { type: "range", min: 0, max, step, value, "aria-label": label, style: { "--thumb": "var(--fg)", "--pct": pct + "%" }, onChange: (e) => onChange(parseFloat(e.target.value)) }),
+    h("div", { className: "mc-pval" }, h(NumBox, { value, unit, onCommit: (v) => onChange(Math.min(max, v)) })));
+}
+function RangeBar({ lo, hi, med, scale, color }) {
+  const pc = (v) => Math.min(100, v / scale * 100) + "%";
+  return h("div", { className: "mc-rng" },
+    h("div", { className: "num mc-rngtxt" }, lo, "–", hi),
+    h("div", { className: "mc-rbar" },
+      h("div", { className: "mc-rmaj", style: { left: pc(MAJORITY) } }),
+      h("div", { className: "mc-rfill", style: { left: pc(lo), width: Math.max(0.8, (hi - lo) / scale * 100) + "%", background: color } }),
+      h("div", { className: "mc-rtick", style: { left: pc(med) } })));
 }
 function Histogram({ draws, n, color }) {
   const [hov, setHov] = useState(null);
   const a = draws;
-  let lo = Infinity, hi = -Infinity;
+  let lo = MAJORITY, hi = MAJORITY;
   for (let i = 0; i < n; i++) { if (a[i] < lo) lo = a[i]; if (a[i] > hi) hi = a[i]; }
   const size = Math.max(1, Math.ceil((hi - lo + 1) / 40));
   const nb = Math.floor((hi - lo) / size) + 1;
   const bins = new Array(nb).fill(0);
   for (let i = 0; i < n; i++) bins[Math.floor((a[i] - lo) / size)]++;
-  const mx = Math.max(...bins);
+  const mx = Math.max(...bins, 1);
   const W = 400, H = 110, bw = W / nb;
-  const mx326 = MAJORITY >= lo && MAJORITY <= hi + size ? (MAJORITY - lo) / size * bw : null;
-  let tip = null;
+  const xMaj = (MAJORITY - lo) / size * bw;
+  let line1 = "Hover or tap a bar", line2 = "";
   if (hov !== null && hov < nb) {
     const b0 = lo + hov * size, b1 = Math.min(hi, b0 + size - 1);
     let atLeast = 0; for (let k = hov; k < nb; k++) atLeast += bins[k];
-    const cx = Math.min(88, Math.max(12, (hov + 0.5) * bw / W * 100));
-    tip = h("div", { className: "mc-tip", style: { left: cx + "%" } },
-      h("div", null, h("b", { className: "num" }, b0 === b1 ? b0 + " seats" : b0 + "–" + b1 + " seats")),
-      h("div", { className: "num" }, fmt1(bins[hov] / n * 100) + "% ", h("span", { className: "m" }, "(" + bins[hov].toLocaleString("en-GB") + " of " + n.toLocaleString("en-GB") + " sims)")),
-      h("div", { className: "num m" }, fmt1(atLeast / n * 100) + "% chance of " + b0 + "+"));
+    line1 = (b0 === b1 ? b0 + " seats" : b0 + "–" + b1 + " seats") + " / " + fmt1(bins[hov] / n * 100) + "% of runs (" + bins[hov].toLocaleString("en-GB") + ")";
+    line2 = fmt1(atLeast / n * 100) + "% of runs reach " + b0 + "+";
   }
   return h("div", { className: "mc-hist" },
+    h("div", { className: "mc-tl num" + (hov === null ? " idle" : "") }, h("div", null, line1), h("div", { className: "m" }, line2 || "\u00A0")),
     h("div", { className: "mc-hwrap", onPointerLeave: () => setHov(null) },
-      tip,
       h("svg", { viewBox: `0 0 ${W} ${H + 18}`, role: "img", "aria-label": "Distribution of simulated seats" },
-        bins.map((c, i) => h("rect", { key: i, x: i * bw + 0.5, y: H - c / mx * H, width: Math.max(0.5, bw - 1), height: c / mx * H, fill: color, rx: 1, opacity: hov === null || hov === i ? 1 : 0.45 })),
-        mx326 !== null && h("line", { x1: mx326, x2: mx326, y1: 0, y2: H, stroke: "var(--fg)", strokeWidth: 1.2, strokeDasharray: "3 3", pointerEvents: "none" }),
+        bins.map((c, i) => h("rect", { key: i, x: i * bw + 0.5, y: H - c / mx * H, width: Math.max(0.5, bw - 1), height: c / mx * H, fill: color, rx: 1, opacity: hov === null || hov === i ? 1 : 0.4 })),
+        h("line", { x1: xMaj, x2: xMaj, y1: 0, y2: H, stroke: "var(--fg)", strokeWidth: 1.2, strokeDasharray: "3 3", pointerEvents: "none" }),
         h("text", { x: 0, y: H + 14, className: "mc-ax" }, lo),
         h("text", { x: W, y: H + 14, textAnchor: "end", className: "mc-ax" }, hi),
-        mx326 !== null && h("text", { x: Math.min(W - 12, Math.max(12, mx326)), y: H + 14, textAnchor: "middle", className: "mc-ax" }, MAJORITY),
+        h("text", { x: Math.min(W - 14, Math.max(14, xMaj)), y: H + 14, textAnchor: "middle", className: "mc-ax" }, MAJORITY),
         bins.map((c, i) => h("rect", { key: "h" + i, className: "mc-hit", x: i * bw, y: 0, width: bw, height: H, fill: "transparent", onPointerEnter: () => setHov(i), onPointerDown: () => setHov(i) })))));
 }
 function MonteCarlo({ shares, regionShares, nationEnabled }) {
@@ -1412,67 +1459,100 @@ function MonteCarlo({ shares, regionShares, nationEnabled }) {
   const [prog, setProg] = useState(0);
   const [pick, setPick] = useState(null);
   const [hovO, setHovO] = useState(null);
+  const [coal, setCoal] = useState(() => /* @__PURE__ */ new Set());
+  const first = React.useRef(true);
   React.useEffect(() => {
     let cancelled = false, timer;
-    const rng = mulberry32(20240704);
-    const ctx = { shares, regionShares, nationEnabled, rel: rel / 100, seatSD };
+    const ctx = {
+      shares, regionShares, nationEnabled, rel: rel / 100, seatSD,
+      central: projectSeatsCombined(toGB(shares), regionShares, nationEnabled, null, true).tally
+    };
     const draws = {}; let done = 0, lastShown = 0;
     function step() {
       if (cancelled) return;
       const t0 = performance.now();
-      while (done < nSims && performance.now() - t0 < 40) {
-        const tally = runSim(ctx, rng);
+      while (done < nSims && performance.now() - t0 < 25) {
+        const tally = runSim(ctx, done);
         for (const p in tally) (draws[p] || (draws[p] = new Int16Array(nSims)))[done] = tally[p];
         done++;
       }
-      if (done / nSims - lastShown > 0.05 || done === nSims) { lastShown = done / nSims; setProg(lastShown); }
+      if (done / nSims - lastShown > 0.03 || done === nSims) { lastShown = done / nSims; setProg(lastShown); }
       if (done < nSims) timer = setTimeout(step, 0); else setRes(summarise(draws, nSims));
     }
     setProg(0);
-    timer = setTimeout(step, 500);
+    timer = setTimeout(step, first.current ? 0 : 500);
+    first.current = false;
     return () => { cancelled = true; clearTimeout(timer); };
   }, [shares, regionShares, nationEnabled, nSims, rel, seatSD]);
+
+  const co = useMemo(() => {
+    if (!res || !coal.size) return null;
+    const ps = [...coal].filter((p) => res.draws[p]);
+    if (!ps.length) return { ps: [], chance: 0, median: 0, lo: 0, hi: 0 };
+    const n = res.n, sum = new Int16Array(n);
+    for (const p of ps) { const d = res.draws[p]; for (let i = 0; i < n; i++) sum[i] += d[i]; }
+    const arr = Array.from(sum).sort((x, y) => x - y);
+    let c = 0; for (let i = 0; i < n; i++) if (sum[i] >= MAJORITY) c++;
+    return { ps, chance: c / n, median: arr[Math.floor(n / 2)], lo: arr[Math.floor(n * 0.05)], hi: arr[Math.min(n - 1, Math.floor(n * 0.95))] };
+  }, [res, coal]);
+
+  const chipBtn = (p, on, onClick) => {
+    const meta = partyMeta(p);
+    return h("button", { key: p, className: "chip sm" + (on ? " on" : ""), "aria-pressed": on, style: on ? { background: meta.color, borderColor: meta.color, color: meta.text } : { borderColor: meta.color }, onClick },
+      h("span", { className: "swatch", style: { background: on ? meta.text : meta.color } }), meta.short);
+  };
 
   let body = null;
   if (res) {
     const rows = res.parties.filter((p) => res.stats[p].any >= 0.05).sort((a, b) => res.stats[b].median - res.stats[a].median || res.stats[b].any - res.stats[a].any);
+    const scale = Math.max(MAJORITY, ...rows.map((p) => res.stats[p].hi));
     const outcomes = Object.keys(res.major).map((p) => ({ key: p, label: fullName(p) + " majority", color: partyMeta(p).color, pct: res.major[p] / res.n * 100 }))
       .concat(Object.keys(res.plural).map((p) => ({ key: "pl-" + p, label: fullName(p) + " plurality", color: partyMeta(p).color, hatch: true, pct: res.plural[p] / res.n * 100 })))
       .filter((o) => o.pct >= 0.05).sort((a, b) => (!!a.hatch - !!b.hatch) || b.pct - a.pct);
     const bg = (o) => o.hatch ? `repeating-linear-gradient(135deg, ${o.color} 0 4px, color-mix(in srgb, ${o.color} 30%, transparent) 4px 8px)` : o.color;
     const sel = pick && rows.includes(pick) ? pick : rows[0];
+    let acc = 0; const segs = outcomes.map((o) => { const mid = acc + o.pct / 2; acc += o.pct; return { o, mid }; });
+    const hs = hovO && segs.find((x) => x.o.key === hovO);
     body = h("div", { className: "mc-res" + (prog < 1 ? " stale" : "") },
-      (() => {
-        let acc = 0; const segs = outcomes.map((o) => { const mid = acc + o.pct / 2; acc += o.pct; return { o, mid }; });
-        const hs = hovO && segs.find((x) => x.o.key === hovO);
-        return h("div", { className: "mc-barwrap", onPointerLeave: () => setHovO(null) },
+      h("div", { className: "mc-sec" },
+        h("h3", { className: "mc-h" }, "Outcomes"),
+        h("div", { className: "mc-barwrap", onPointerLeave: () => setHovO(null) },
           hs && h("div", { className: "mc-tip", style: { left: Math.min(85, Math.max(15, hs.mid)) + "%" } },
             h("b", null, hs.o.label), " ", h("span", { className: "num" }, fmt1(hs.o.pct) + "%"),
-            h("div", { className: "num m" }, Math.round(hs.o.pct / 100 * res.n).toLocaleString("en-GB") + " of " + res.n.toLocaleString("en-GB") + " sims")),
-          h("div", { className: "mc-bar", role: "img", "aria-label": "Outcome probabilities" }, segs.map(({ o }) => h("div", { key: o.key, onPointerEnter: () => setHovO(o.key), onPointerDown: () => setHovO(o.key), style: { width: o.pct + "%", background: bg(o), opacity: !hovO || hovO === o.key ? 1 : 0.5 } }))));
-      })(),
-      h("div", { className: "legend mc-legend" }, outcomes.map((o) => h("span", { key: o.key, className: "lg" }, h("span", { className: "swatch", style: { background: bg(o) } }), o.label, " ", h("b", { className: "num" }, fmt1(o.pct), "%")))),
-      h("table", null,
-        h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "r" }, "Median"), h("th", { className: "r" }, "90% range"), h("th", { className: "r" }, "Largest"))),
-        h("tbody", null, rows.map((p) => h("tr", { key: p },
-          h("td", null, h("span", { className: "pcell" }, h("span", { className: "swatch", style: { background: partyMeta(p).color } }), h("span", null, pLabel(p)))),
-          h("td", { className: "r num seats" }, res.stats[p].median),
-          h("td", { className: "r num" }, res.stats[p].lo, "–", res.stats[p].hi),
-          h("td", { className: "r num" }, res.largest[p] ? fmt1(res.largest[p] / res.n * 100) + "%" : "–"))))),
-      h("div", { className: "chips mc-pick" }, rows.map((p) => {
-        const meta = partyMeta(p), on = p === sel;
-        return h("button", { key: p, className: "chip sm" + (on ? " on" : ""), "aria-pressed": on, style: on ? { background: meta.color, borderColor: meta.color, color: meta.text } : { borderColor: meta.color }, onClick: () => setPick(p) },
-          h("span", { className: "swatch", style: { background: on ? meta.text : meta.color } }), meta.short);
-      })),
-      sel && h(Histogram, { draws: res.draws[sel], n: res.n, color: partyMeta(sel).color }));
+            h("div", { className: "num m" }, Math.round(hs.o.pct / 100 * res.n).toLocaleString("en-GB") + " of " + res.n.toLocaleString("en-GB") + " runs")),
+          h("div", { className: "mc-bar", role: "img", "aria-label": "Outcome probabilities" }, segs.map(({ o }) => h("div", { key: o.key, onPointerEnter: () => setHovO(o.key), onPointerDown: () => setHovO(o.key), style: { width: o.pct + "%", background: bg(o), opacity: !hovO || hovO === o.key ? 1 : 0.5 } })))),
+        h("div", { className: "legend mc-legend" }, outcomes.map((o) => h("span", { key: o.key, className: "lg" }, h("span", { className: "swatch", style: { background: bg(o) } }), o.label, " ", h("b", { className: "num" }, fmt1(o.pct), "%"))))),
+      h("div", { className: "mc-sec" },
+        h("table", { className: "mc-tbl" },
+          h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "r" }, "Median"), h("th", { className: "r" }, "90% range"))),
+          h("tbody", null, rows.slice(0, 10).map((p) => h("tr", { key: p },
+            h("td", null, h("span", { className: "pcell" }, h("span", { className: "swatch", style: { background: partyMeta(p).color } }), h("span", { title: pLabel(p) }, p))),
+            h("td", { className: "r num seats" }, res.stats[p].median),
+            h("td", { className: "r" }, h(RangeBar, { lo: res.stats[p].lo, hi: res.stats[p].hi, med: res.stats[p].median, scale, color: partyMeta(p).color }))))))),
+      h("div", { className: "mc-sec" },
+        h("h3", { className: "mc-h" }, "Coalition majority chance"),
+        h("div", { className: "chips" }, rows.map((p) => chipBtn(p, coal.has(p), () => setCoal((prev) => { const n = new Set(prev); n.has(p) ? n.delete(p) : n.add(p); return n; })))),
+        h("div", { className: "mc-co" },
+          co && co.ps.length ? h(React.Fragment, null,
+            h("div", { className: "mc-big num" }, fmt1(co.chance * 100), "%"),
+            h("div", { className: "fsub" }, "of runs reach a majority (", MAJORITY, "+ seats)"),
+            h("div", { className: "mc-cor" }, h(RangeBar, { lo: co.lo, hi: co.hi, med: co.median, scale: Math.max(scale, co.hi), color: "var(--fg)" })),
+            h("div", { className: "fsub num" }, "Median ", co.median, " seats, 90% range ", co.lo, "–", co.hi))
+            : h("div", { className: "fsub" }, "Pick two or more parties to test a coalition."))),
+      h("div", { className: "mc-sec" },
+        h("h3", { className: "mc-h" }, "Seat distribution"),
+        h("div", { className: "chips" }, rows.map((p) => chipBtn(p, p === sel, () => setPick(p)))),
+        sel && h(Histogram, { draws: res.draws[sel], n: res.n, color: partyMeta(sel).color })));
   }
-  return h("section", { className: "card" },
-    h("h2", null, "Monte Carlo simulation"),
-    h("div", { className: "chips" }, [500, 1000, 5000].map((k) => h("button", { key: k, className: "chip sm plain" + (nSims === k ? " on" : ""), "aria-pressed": nSims === k, onClick: () => setNSims(k) }, k.toLocaleString("en-GB")))),
-    h("div", { className: "sliders mc-ctl" },
-      h(ParamRow, { label: "Vote share error", hint: "How far each party's national share could miss, as a % of its own share.", value: rel, max: 30, step: 0.5, unit: "%", onChange: setRel }),
-      h(ParamRow, { label: "Seat-level error", hint: "Random local variation on top of the national swing.", value: seatSD, max: 10, step: 0.1, unit: "pts", onChange: setSeatSD })),
+  return h("section", { className: "card mc-card" },
     prog < 1 && h("div", { className: "mc-prog", role: "progressbar", "aria-valuenow": Math.round(prog * 100) }, h("div", { style: { width: prog * 100 + "%" } })),
+    h("h2", null, "Probability model"),
+    h("div", { className: "mc-sec first" },
+      h("h3", { className: "mc-h" }, "Settings"),
+      h("div", { className: "chips mc-runs" }, [500, 1000, 5000].map((k) => h("button", { key: k, className: "chip sm plain" + (nSims === k ? " on" : ""), "aria-pressed": nSims === k, onClick: () => setNSims(k) }, k.toLocaleString("en-GB") + " runs"))),
+      h("div", { className: "mc-set" },
+        h(McParam, { label: "Vote share error (% of each party\u2019s own share)", value: rel, max: 30, step: 0.5, unit: "%", onChange: setRel }),
+        h(McParam, { label: "Seat-level error (extra random variation in each seat)", value: seatSD, max: 10, step: 0.1, unit: "pts", onChange: setSeatSD }))),
     body);
 }
 
@@ -1482,6 +1562,7 @@ ReactDOM.createRoot(rootEl).render(React.createElement(SeatProjector));
 </script>
 
 </body></html>
+
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
