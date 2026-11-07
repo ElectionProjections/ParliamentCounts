@@ -87,10 +87,9 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
-<!doctype html> 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>France Seat Projector</title>
-</head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
 <style>
 :root{--bg:#f2f4f7;--card:#ffffff;--fg:#14181e;--muted:#66707c;--line:#e0e4ea;--soft:#f5f6f8;--track:#d3d8df;--good:#1d8a4b;--bad:#c62f2a;--warn:#d89a00;--land:#cdd3da;--france:#d62b2b;--tipbg:#ffffff;--acc:#3b6fb6;--hatch:rgba(255,255,255,.55);--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1116;--card:#181d24;--fg:#e8ebef;--muted:#97a1ad;--line:#2a313a;--soft:#202630;--track:#5a6471;--good:#45c07b;--bad:#f0706a;--warn:#f0b43c;--land:#39424d;--france:#e24848;--tipbg:#1f252d;--acc:#6fa0e0;--hatch:rgba(0,0,0,.45);color-scheme:dark}}
@@ -201,14 +200,15 @@ svg.mapsvg{display:block;width:100%;height:auto}
 .maplegend span{display:inline-flex;align-items:center;gap:5px}
 .maplegend i{width:10px;height:10px;border-radius:2px;display:inline-block}
 .maplegend .grad{width:130px;height:10px;border-radius:2px;border:1px solid var(--line)}
-.tip{position:absolute;display:none;z-index:20;width:228px;background:var(--tipbg);border:1px solid var(--fg);border-radius:6px;padding:9px 10px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}
-.tip .tt{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:12.5px;margin-bottom:6px}
-.tip .rl{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:7px 0 3px}
-.tip .tr{display:flex;align-items:center;gap:6px;padding:2px 0}
+.tip{position:absolute;display:none;z-index:20;width:max-content;min-width:120px;max-width:260px;background:var(--tipbg);border:1px solid var(--fg);border-radius:6px;padding:7px 9px;font-size:12px;line-height:1.3;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}
+.tip .tt{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:12.5px;margin-bottom:3px}
+.tip .rl{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:5px 0 1px}
+.tip .tr{display:flex;align-items:center;gap:6px;padding:1px 0}
 .tip .tr.w{font-weight:700}
 .tip .tr i.dot{width:8px;height:8px;border-radius:50%;flex:none}
-.tip .tr .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tip .tr .pc{font-variant-numeric:tabular-nums}
+.tip .tr .nm{flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tip .tr .pc{font-variant-numeric:tabular-nums;margin-left:auto;padding-left:8px}
+.tip .rds{display:flex;gap:16px}.tip .rds>div{flex:none}.tip .rds>div+div{border-left:1px solid var(--line);padding-left:12px}
 .tip .pips{display:inline-flex;gap:2px;flex-wrap:wrap;justify-content:flex-end;max-width:70px}
 .tip .pips b{width:6px;height:6px;border-radius:1px;display:inline-block}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
@@ -283,7 +283,7 @@ svg.hist{display:block;width:100%;height:auto;touch-action:none}
 
 @media(max-width:520px){.rng .pf{display:none}}
 
-.tip .sub2{font-size:11px;color:var(--muted);margin:-4px 0 6px}
+.tip .sub2{font-size:11px;color:var(--muted);margin:-2px 0 3px}
 .dlabel{font-size:9px}
 
 table.res th{line-height:1.2;vertical-align:bottom}
@@ -727,9 +727,10 @@ function showTip(k,ev){
   const ab=s.k.startsWith('ZZ-')?ABROAD[+s.k.slice(3)-1]:'';
   let h=`<div class="tt"><span>${esc(ab?ord(+s.k.slice(3))+' constituency abroad':seatTitle(s))}</span></div>`+(ab?`<div class="sub2">${esc(ab)}</div>`:'');
   const r1=s.t1.slice().sort((a,b)=>b.votes-a.votes).filter((t,i)=>100*t.votes/s.e>=1||isWin(t)||(s.t2&&s.t2.some(x=>x.g===t.g&&x.name===t.name)));
-  h+=`<div class="rl">Round 1</div>`+r1.map(t=>rowHTML(t.g,t.name,100*t.votes/s.e,s.mode==='r1'&&isWin(t))).join('');
+  h+=`<div class="rds"><div><div class="rl">Round 1</div>`+r1.map(t=>rowHTML(t.g,t.name,100*t.votes/s.e,s.mode==='r1'&&isWin(t))).join('')+`</div>`;
   if(s.t2){const tot=s.t2.reduce((a,t)=>a+t.votes,0)||1;
-    h+=`<div class="rl">Round 2</div>`+s.t2.slice().sort((a,b)=>b.votes-a.votes).map(t=>rowHTML(t.g,t.name,100*t.votes/tot,isWin(t))).join('');}
+    h+=`<div><div class="rl">Round 2</div>`+s.t2.slice().sort((a,b)=>b.votes-a.votes).map(t=>rowHTML(t.g,t.name,100*t.votes/tot,isWin(t))).join('')+`</div>`;}
+  h+=`</div>`;
   tip.innerHTML=h;tip.style.display='block';
   const wr=$('mapwrap').getBoundingClientRect();let x=ev.clientX-wr.left+12,y=ev.clientY-wr.top+12;
   const tw=tip.offsetWidth,th=tip.offsetHeight;
@@ -856,6 +857,7 @@ buildSliders();initMap();render();
 </script>
 
 </body></html>
+        
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
