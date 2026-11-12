@@ -87,6 +87,8 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grenada Seat Projector</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
@@ -210,7 +212,51 @@ td.seats{font-weight:700}
 .grad{width:200px;height:10px;border-radius:5px;border:1px solid var(--line)}
 .mleg .n{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:500}
 .src{text-align:center;font-size:11.5px;color:var(--muted);margin:2px 4px 0;overflow-wrap:anywhere}
+/* probability model */
+.mc{position:relative;overflow:hidden}
+.mcprog{position:absolute;top:0;left:0;right:0;height:3px}
+.mcprog i{display:block;height:100%;width:0;background:var(--accent);transition:width .1s}
+.sh{font-size:14px;font-weight:600;text-align:center;margin:0 0 12px}
+.mdiv{border-top:1px solid var(--line);margin:24px 0}
+#mcruns{margin-bottom:20px}
+.mcset{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
+@media (max-width:520px){.mcset{grid-template-columns:1fr}}
+.mcc{min-width:0}
+.mcc label{display:block;text-align:center;font-size:12.5px;margin-bottom:12px;text-wrap:balance}
+.mcval{text-align:center;font-weight:650;margin-top:10px;font-variant-numeric:tabular-nums}
+#mcres{transition:opacity .2s}
+#mcres.stale{opacity:.4}
+.obar{display:flex;height:26px;border-radius:6px;overflow:hidden}
+.obar i{display:block;height:100%}
+.mleg2{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-top:14px;font-size:12.5px;font-weight:550}
+.mleg2 span{display:inline-flex;align-items:center;gap:6px}
+.rg{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(150px,1.6fr);gap:8px;align-items:center;padding:13px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.rg.hd{padding:7px 0;border-top:0;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rg.hd+.rg{border-top:0}
+.rg>*:nth-child(2),.rg>*:nth-child(3){text-align:center}
+.rg .pn{display:flex;align-items:center;gap:8px;font-weight:550}
+.rg b{font-weight:700}
+.rt{font-size:12.5px;margin-bottom:6px}
+.rbar{position:relative;height:6px;border-radius:3px;background:var(--track)}
+.rbar i{position:absolute;top:0;bottom:0;border-radius:3px}
+.rbar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.cc{background:var(--shade);border-radius:12px;padding:18px 16px;text-align:center;margin-top:18px}
+.cc .pct{font-size:36px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.cc .pct small{font-size:20px;font-weight:500;color:var(--muted);margin-left:2px}
+.cc .cl{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.cc .cb{height:6px;border-radius:3px;background:var(--track);margin:12px auto 0;max-width:260px;overflow:hidden}
+.cc .cb i{display:block;height:100%;background:var(--good);border-radius:3px}
+.cc .st{display:grid;grid-template-columns:1fr 1fr;margin-top:18px}
+.cc .st>div{padding:2px 8px;min-width:0}
+.cc .st>div+div{border-left:1px solid var(--line)}
+.cc .st b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.cc .st span{font-size:11.5px;color:var(--muted)}
+#htip{height:38px;margin:12px 0 4px;text-align:center;font-size:12.5px;line-height:19px;font-variant-numeric:tabular-nums;overflow:hidden}
+#htip div+div{color:var(--muted)}
+#hsvg{display:block;width:100%;height:auto;max-width:650px;margin:0 auto;touch-action:pan-y;user-select:none}
+#hsvg text{fill:var(--muted);font-size:9px;font-family:var(--font);text-anchor:middle}
 </style>
+</head><body>
 
 <main>
 <h1>Grenada Seat Projection</h1>
@@ -228,7 +274,7 @@ td.seats{font-weight:700}
 <details class="card sys">
   <summary>How the electoral system works<i class="chev"></i></summary>
   <div class="tiles">
-    <div class="tile"><div class="lab">Last election</div><b>23 Jun 2022</b></div>
+    <div class="tile"><div class="lab">Last election</div><b>5 Nov 2026</b></div>
     <div class="tile"><div class="lab">Seats</div><b>15 single-member</b></div>
     <div class="tile"><div class="lab">System</div><b>First-past-the-post</b></div>
     <div class="tile"><div class="lab">Term</div><b>5 years</b></div>
@@ -259,41 +305,72 @@ td.seats{font-weight:700}
   <div class="mleg" id="mleg"></div>
 </section>
 
-<p class="src">Sources: Grenada Elections 2022 results (Parliamentary Electoral Office) via Wikipedia; constituency map, Wikimedia Commons (Grenadian general election map, 2022); Freedom House, Freedom in the World 2026; UN World Population Prospects 2024 via Worldometer; ACE Electoral Knowledge Network; IPU Parline; Natural Earth via world-atlas; flag-icons; party colours from Wikipedia party pages.</p>
+<section class="card mc" id="mc"><div class="mcprog" id="mcprog" hidden><i id="mcpbar"></i></div>
+  <h2>Probability model</h2>
+  <div class="sh">Settings</div>
+  <div class="mbs" id="mcruns"></div>
+  <div class="mcset">
+    <div class="mcc"><label for="mcv">Vote share error (% of each party’s own share)</label><input type="range" id="mcv" min="0" max="30" step="1" value="10" style="--c:var(--accent)"><div class="mcval" id="mcvv"></div></div>
+    <div class="mcc"><label for="mcs">Seat-level error (extra random variation in each seat)</label><input type="range" id="mcs" min="0" max="10" step="0.5" value="3" style="--c:var(--accent)"><div class="mcval" id="mcsv"></div></div>
+  </div>
+  <div id="mcres" hidden>
+    <div class="mdiv"></div>
+    <div class="sh">Outcomes</div>
+    <div class="obar" id="mcbar" role="img" aria-label="Share of runs by outcome"></div>
+    <div class="mleg2" id="mcleg"></div>
+    <div class="mdiv"></div>
+    <div id="mcrange"></div>
+    <div class="mdiv"></div>
+    <div class="sh">Coalition majority chance</div>
+    <div class="pbs" id="mcchips"></div>
+    <div class="cc" id="mccard"></div>
+    <div class="mdiv"></div>
+    <div class="sh">Seat distribution</div>
+    <div class="pbs" id="hchips"></div>
+    <div id="htip"></div>
+    <svg id="hsvg" viewBox="0 0 320 130" role="img" aria-label="Seat distribution histogram"></svg>
+  </div>
+</section>
+
+<p class="src">Sources: Grenada 2026 general election provisional results (Parliamentary Elections Office) via NOW Grenada, CMC and The Rio Times (not yet certified); baseline for sliders is the 2026 result; constituency map, Wikimedia Commons (Grenadian general election map, 2022); Freedom House, Freedom in the World 2026; UN World Population Prospects 2024 via Worldometer; ACE Electoral Knowledge Network; IPU Parline; Natural Earth via world-atlas; flag-icons; party colours from Wikipedia party pages (NDC, NNP, GULP, DPM); PNP, GSDP, GRP and CHGCP colours are my own choice.</p>
 </main>
 
 <script>
-// ---- DATA: 2022 constituency results (Grenada Elections 2022 / Parliamentary Electoral Office) ----
+// ---- DATA: 2026 constituency results (provisional, Parliamentary Elections Office) ----
 var PARTIES=[
-  {id:'NDC',name:'National Democratic Congress',col:'#f4c20d',slider:true,s22:9},
-  {id:'NNP',name:'New National Party',col:'#10a653',slider:true,s22:6},
+  {id:'NDC',name:'National Democratic Congress',col:'#f4c20d',slider:true,s22:14},
+  {id:'NNP',name:'New National Party',col:'#10a653',slider:true,s22:1},
+  {id:'DPM',name:'Democratic People\'s Movement',col:'#f28a1e',s22:0},
+  {id:'PNP',name:'People\'s National Party',col:'#2f6fdb',s22:0},
   {id:'GULP',name:'Grenada United Labour Party',col:'#d6392f',s22:0},
-  {id:'IFP',name:'Independent Freedom Party',col:'#2f6fdb',s22:0},
-  {id:'GRP',name:'Grenada Renaissance Party',col:'#8b50c9',s22:0},
-  {id:'IND',name:'Independents',col:'#8b919b',s22:0}
+  {id:'GSDP',name:'Grenada Social Democratic Party',col:'#8b50c9',s22:0},
+  {id:'GRP',name:'Grenada Renaissance Party',col:'#1aa6b7',s22:0},
+  {id:'CHGCP',name:'Change of Hope for Grenada, Carriacou and Petite Martinique',col:'#8d5a3b',s22:0}
 ];
+// Provisional 2026 results (PEO). Winner and runner-up totals per seat; runner-ups are NNP (verified: sums match national NDC 37,369 / NNP 22,567).
+// Minor-party votes are placed in a seat only where reported by name; the rest are unlocated and enter only through the official national totals (baseline).
 var CONS=[
-  {id:'Carriacou',name:'Carriacou and Petite Martinique',v:{NDC:1954,NNP:1805}},
-  {id:'Saint_Andrew_North_East',name:'St. Andrew North East',v:{NNP:2190,NDC:1864,IFP:10}},
-  {id:'Saint_Andrew_North_West',name:'St. Andrew North West',v:{NNP:1898,NDC:1767}},
-  {id:'Saint_Andrew_South_East',name:'St. Andrew South East',v:{NNP:1893,NDC:1660}},
-  {id:'Saint_Andrew_South_West',name:'St. Andrew South West',v:{NDC:2129,NNP:1704}},
-  {id:'Saint_David',name:'St. David',v:{NDC:4414,NNP:2742,IFP:18}},
-  {id:'Saint_George_North_East',name:'St. George North East',v:{NDC:3220,NNP:2133,GRP:15}},
-  {id:'Saint_George_North_West',name:'St. George North West',v:{NNP:2211,NDC:773}},
-  {id:'Saint_George_South',name:'St. George South',v:{NDC:4029,NNP:2961,GRP:12}},
-  {id:'Saint_George_South_East',name:'St. George South East',v:{NDC:2122,NNP:1634,IFP:32,GRP:4}},
-  {id:'Saint_John',name:'St. John',v:{NDC:2216,NNP:2209,GULP:19}},
-  {id:'Saint_Mark',name:'St. Mark',v:{NNP:1470,NDC:995,GULP:18}},
-  {id:'Saint_Patrick_East',name:'St. Patrick East',v:{NDC:1443,NNP:1322,GULP:18}},
-  {id:'Saint_Patrick_West',name:'St. Patrick West',v:{NDC:1726,NNP:1458,IND:86,GULP:9}},
-  {id:'Town_of_Saint_George',name:'Town of St. George',v:{NNP:1329,NDC:1118}}
+  {id:'Carriacou',name:'Carriacou and Petite Martinique',v:{NDC:2392,NNP:1416}},
+  {id:'Saint_Andrew_North_East',name:'St. Andrew North East',v:{NDC:2171,NNP:1851,DPM:45}},
+  {id:'Saint_Andrew_North_West',name:'St. Andrew North West',v:{NDC:2242,NNP:1457}},
+  {id:'Saint_Andrew_South_East',name:'St. Andrew South East',v:{NDC:2011,NNP:1849,DPM:19}},
+  {id:'Saint_Andrew_South_West',name:'St. Andrew South West',v:{NDC:2428,NNP:1334}},
+  {id:'Saint_David',name:'St. David',v:{NDC:5318,NNP:2138}},
+  {id:'Saint_George_North_East',name:'St. George North East',v:{NDC:3575,NNP:1548}},
+  {id:'Saint_George_North_West',name:'St. George North West',v:{NNP:2052,NDC:810,PNP:69}},
+  {id:'Saint_George_South',name:'St. George South',v:{NDC:4637,NNP:1845}},
+  {id:'Saint_George_South_East',name:'St. George South East',v:{NDC:2464,NNP:1170}},
+  {id:'Saint_John',name:'St. John',v:{NDC:2540,NNP:1967}},
+  {id:'Saint_Mark',name:'St. Mark',v:{NDC:1538,NNP:1277}},
+  {id:'Saint_Patrick_East',name:'St. Patrick East',v:{NDC:1729,NNP:1042}},
+  {id:'Saint_Patrick_West',name:'St. Patrick West',v:{NDC:2245,NNP:1085}},
+  {id:'Town_of_Saint_George',name:'Town of St. George',v:{NDC:1269,NNP:536,DPM:730}}
 ];
 var MAJORITY=8, NSEATS=15;
-var MINORS=['GULP','IFP','GRP','IND'];
+var MINORS=['DPM','PNP','GULP','GSDP','GRP','CHGCP'];
 
 // ---- BASELINE ----
-var TOT={},VALID=0;
+var TOT={},VALID=0,OFFICIAL={NDC:37369,NNP:22567,DPM:1189,PNP:69,GULP:34,GSDP:27,GRP:4,CHGCP:5};
 PARTIES.forEach(function(p){TOT[p.id]=0});
 CONS.forEach(function(c){
   c.valid=0;
@@ -301,7 +378,7 @@ CONS.forEach(function(c){
   c.s0={};PARTIES.forEach(function(p){c.s0[p.id]=100*(c.v[p.id]||0)/c.valid;TOT[p.id]+=c.v[p.id]||0});
   VALID+=c.valid;
 });
-var N={};PARTIES.forEach(function(p){N[p.id]=100*TOT[p.id]/VALID});
+var N={};PARTIES.forEach(function(p){N[p.id]=100*OFFICIAL[p.id]/61264});
 var MINOR_BASE=MINORS.reduce(function(a,id){return a+N[id]},0);
 
 function leader(shares){var best=null;PARTIES.forEach(function(p){if(best===null||shares[p.id]>shares[best]+1e-9)best=p.id});return best}
@@ -513,11 +590,212 @@ function render(editing){
   var cr=ctl.OTH;cr.rg.value=o;cr.rg.style.setProperty('--p',o.toFixed(2)+'%');cr.nb.value=f1(o);
   var res=project(st.ndc,st.nnp);
   drawResults(res);drawBuilder(res);drawMap(res);
+  if(window.scheduleMC)scheduleMC(MC.res?500:0);
 }
+// ---- probability model ----
+// MC-PURE-START
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){var u=1-r(),v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function seedFor(i){return (0x1F2E3D4C+Math.imul(i,0x9E3779B1))>>>0}
+// log-normal factor per party, then renormalise to 100
+function perturbX(x0,sigma,rng){
+  var x={},s=0;
+  PARTIES.forEach(function(p){var z=gauss(rng),v=x0[p.id]>0?x0[p.id]*Math.exp(sigma*z):0;x[p.id]=v;s+=v});
+  if(s>0)PARTIES.forEach(function(p){x[p.id]=100*x[p.id]/s});
+  return x;
+}
+// lean projection: seat totals only; optional seat-level noise on parties that still hold a share after the swing
+function seatsLean(x,rng,sErr){
+  var np=PARTIES.length,seats=[],k,ci;
+  for(k=0;k<np;k++)seats.push(0);
+  for(ci=0;ci<CONS.length;ci++){
+    var c=CONS[ci],raw=[],sum=0,best=-1,bv=0;
+    for(k=0;k<np;k++){var id=PARTIES[k].id;raw[k]=swing(c.s0[id],N[id],x[id]);sum+=raw[k]}
+    for(k=0;k<np;k++){
+      var sh=sum>0?100*raw[k]/sum:0;
+      if(rng&&sErr>0&&raw[k]>0){
+        sh+=sErr*Math.sqrt(Math.max(c.s0[PARTIES[k].id],0.5)/20)*gauss(rng);
+        if(sh<0)sh=0;
+      }
+      if(best<0||sh>bv+1e-9){best=k;bv=sh}
+    }
+    seats[best]++;
+  }
+  return seats;
+}
+function runOne(x0,i,sig,sErr){
+  var rng=mulberry(seedFor(i)),x=sig>0?perturbX(x0,sig,rng):x0;
+  return seatsLean(x,rng,sErr);
+}
+// MC-PURE-END
+
+var MC={runs:1000,vErr:10,sErr:3,sel:{},hist:null,res:null,token:0,timer:null,key:'',hi:null};
+function mcKey(){return [st.ndc,st.nnp,MC.runs,MC.vErr,MC.sErr].join('|')}
+function showProg(on,f){var p=$('mcprog');p.hidden=!on;if(on)$('mcpbar').style.width=(100*f).toFixed(1)+'%'}
+function scheduleMC(delay){
+  var k=mcKey();if(k===MC.key)return;MC.key=k;
+  MC.token++;clearTimeout(MC.timer);
+  $('mcres').classList.add('stale');showProg(false);
+  MC.timer=setTimeout(startMC,delay);
+}
+function startMC(){
+  var tok=++MC.token,x0=fullInputs(st.ndc,st.nnp),n=MC.runs,np=PARTIES.length,sig=MC.vErr/100,sErr=MC.sErr,k;
+  var seats=PARTIES.map(function(){return new Uint8Array(n)});
+  if(sig===0&&sErr===0){
+    var cs=seatsLean(x0,null,0);
+    for(k=0;k<np;k++)seats[k].fill(cs[k]);
+    finishMC(seats,n);return;
+  }
+  var i=0;showProg(true,0);
+  (function step(){
+    if(tok!==MC.token)return;
+    var t=performance.now();
+    while(i<n&&performance.now()-t<25){
+      var s=runOne(x0,i,sig,sErr);
+      for(k=0;k<np;k++)seats[k][i]=s[k];
+      i++;
+    }
+    if(i<n){showProg(true,i/n);MC.timer=setTimeout(step,0)}else finishMC(seats,n);
+  })();
+}
+function pct1(v){return v.toFixed(1)}
+function analyse(seats,n){
+  var np=PARTIES.length,o={seats:seats,n:n,cnt:[],med:[],lo:[],hi:[],share:[],any:[],cats:{}},k,i;
+  function pc(c,p){var cum=0,t=p*n;for(var s=0;s<c.length;s++){cum+=c[s];if(cum>=t-1e-9)return s}return c.length-1}
+  for(k=0;k<np;k++){
+    var c=new Uint32Array(NSEATS+1);
+    for(i=0;i<n;i++)c[seats[k][i]]++;
+    o.cnt.push(c);o.med.push(pc(c,0.5));o.lo.push(pc(c,0.05));o.hi.push(pc(c,0.95));
+    o.share.push((n-c[0])/n);o.any.push(c[0]<n);
+  }
+  for(i=0;i<n;i++){
+    var m=-1,cm=0,w=-1;
+    for(k=0;k<np;k++){var v=seats[k][i];if(v>m){m=v;w=k;cm=1}else if(v===m)cm++}
+    var key=m>=MAJORITY?'M'+w:cm===1?'L'+w:'T';
+    o.cats[key]=(o.cats[key]||0)+1;
+  }
+  return o;
+}
+function finishMC(seats,n){
+  MC.res=analyse(seats,n);
+  $('mcres').hidden=false;$('mcres').classList.remove('stale');showProg(false);
+  renderMC();
+}
+function hatch(col){return 'background:repeating-linear-gradient(135deg,'+col+' 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px '+col}
+function pTxt(c,n){var v=100*c/n;return v<1?'<1%':Math.round(v)+'%'}
+function ordered(o,pred){
+  var l=[];PARTIES.forEach(function(p,k){if(pred(k))l.push(k)});
+  l.sort(function(a,b){return (o.med[b]-o.med[a])||(a-b)});
+  return l;
+}
+function chips(el,list,isOn,onClick){
+  el.innerHTML='';
+  list.forEach(function(k){
+    var p=PARTIES[k],b=document.createElement('button');b.type='button';b.className='pb';b.setAttribute('aria-pressed',isOn(k)?'true':'false');
+    b.innerHTML='<i class="sw" style="background:'+p.col+'"></i>'+p.id;
+    b.addEventListener('click',function(){onClick(k)});
+    el.appendChild(b);
+  });
+}
+function renderMC(){
+  var o=MC.res,n=o.n,np=PARTIES.length,k;
+  // outcomes
+  var keys=[];
+  for(k=0;k<np;k++)if(o.cats['M'+k])keys.push('M'+k);
+  for(k=0;k<np;k++)if(o.cats['L'+k])keys.push('L'+k);
+  if(o.cats.T)keys.push('T');
+  var bar='',leg='';
+  keys.forEach(function(key){
+    var c=o.cats[key],t=key[0],col=t==='T'?'var(--muted)':PARTIES[+key.slice(1)].col,st2=t==='M'?'background:'+col:hatch(col);
+    var lab=t==='T'?'Tied':PARTIES[+key.slice(1)].id+(t==='M'?' majority':' largest');
+    bar+='<i style="width:'+(100*c/n).toFixed(3)+'%;'+st2+'"></i>';
+    leg+='<span><i class="sw" style="'+st2+'"></i>'+lab+' '+pTxt(c,n)+'</span>';
+  });
+  $('mcbar').innerHTML=bar;$('mcleg').innerHTML=leg;
+  // seat range
+  var rows=ordered(o,function(k){return o.share[k]>=0.05}),mx=MAJORITY;
+  rows.forEach(function(k){if(o.hi[k]>mx)mx=o.hi[k]});
+  var h='<div class="rg hd"><span>Party</span><span>Median</span><span>90% range</span></div>';
+  rows.forEach(function(k){
+    var p=PARTIES[k],l=100*o.lo[k]/mx,w=Math.max(100*(o.hi[k]-o.lo[k])/mx,1.5),m=100*o.med[k]/mx;
+    h+='<div class="rg"><span class="pn"><i class="sw" style="background:'+p.col+'"></i>'+p.id+'</span><b>'+o.med[k]+'</b><div class="rc"><div class="rt">'+o.lo[k]+'–'+o.hi[k]+'</div><div class="rbar"><i style="left:'+l.toFixed(2)+'%;width:'+w.toFixed(2)+'%;background:'+p.col+'"></i><u style="left:'+m.toFixed(2)+'%"></u></div></div></div>';
+  });
+  $('mcrange').innerHTML=h;
+  renderCoal();renderHist();
+}
+function avail(){var o=MC.res;return ordered(o,function(k){return o.any[k]})}
+function renderCoal(){
+  var o=MC.res,n=o.n,list=avail();
+  Object.keys(MC.sel).forEach(function(id){if(!o.any[PARTIES.findIndex(function(p){return p.id===id})])delete MC.sel[id]});
+  chips($('mcchips'),list,function(k){return MC.sel[PARTIES[k].id]},function(k){var id=PARTIES[k].id;if(MC.sel[id])delete MC.sel[id];else MC.sel[id]=true;renderCoal()});
+  var picked=list.filter(function(k){return MC.sel[PARTIES[k].id]}),cnt=new Uint32Array(NSEATS+1),i,maj=0;
+  if(picked.length){
+    for(i=0;i<n;i++){var s=0;picked.forEach(function(k){s+=o.seats[k][i]});cnt[s]++;if(s>=MAJORITY)maj++}
+  }
+  var ch=picked.length?100*maj/n:0;
+  var h='<div class="pct">'+pct1(ch)+'<small>%</small></div><div class="cl">chance of a majority</div><div class="cb"><i style="width:'+ch.toFixed(2)+'%"></i></div>';
+  if(picked.length){
+    var pc=function(p){var cum=0,t=p*n;for(var s=0;s<cnt.length;s++){cum+=cnt[s];if(cum>=t-1e-9)return s}return cnt.length-1};
+    h+='<div class="st"><div><b>'+pc(0.5)+'</b><span>median combined seats</span></div><div><b>'+pc(0.05)+'–'+pc(0.95)+'</b><span>90% range</span></div></div>';
+  }
+  $('mccard').innerHTML=h;
+}
+function renderHist(){
+  var o=MC.res,list=avail();
+  if(MC.hist===null||list.indexOf(MC.hist)<0)MC.hist=list.length?list[0]:null;
+  chips($('hchips'),list,function(k){return k===MC.hist},function(k){MC.hist=k;MC.hi=null;renderHist()});
+  drawHist();
+}
+function drawHist(){
+  var o=MC.res,k=MC.hist,svg=$('hsvg'),tip=$('htip');
+  if(k===null){svg.innerHTML='';tip.innerHTML='';return}
+  var c=o.cnt[k],n=o.n,nb=NSEATS+1,w=320/nb,top=8,base=108,mx=0,i;
+  for(i=0;i<nb;i++)if(c[i]>mx)mx=c[i];
+  var col=PARTIES[k].col,h='';
+  for(i=0;i<nb;i++){
+    var bh=mx?(base-top)*c[i]/mx:0,dim=MC.hi!==null&&MC.hi!==i;
+    h+='<rect x="'+(i*w+1.5).toFixed(2)+'" y="'+(base-bh).toFixed(2)+'" width="'+(w-3).toFixed(2)+'" height="'+bh.toFixed(2)+'" rx="1.5" fill="'+col+'" opacity="'+(dim?0.3:1)+'"/>';
+    h+='<text x="'+((i+0.5)*w).toFixed(2)+'" y="122">'+i+'</text>';
+  }
+  h+='<line x1="'+(MAJORITY*w).toFixed(2)+'" x2="'+(MAJORITY*w).toFixed(2)+'" y1="2" y2="'+base+'" stroke="var(--fg)" stroke-width="1.2" stroke-dasharray="3 3"/>';
+  h+='<line x1="0" x2="320" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/>';
+  svg.innerHTML=h;
+  if(MC.hi===null){tip.innerHTML=''}else{
+    var s=MC.hi,cum=0,j;for(j=s;j<nb;j++)cum+=c[j];
+    tip.innerHTML='<div>'+s+(s===1?' seat':' seats')+' / '+pct1(100*c[s]/n)+'% of runs ('+c[s]+')</div><div>'+Math.round(100*cum/n)+'% of runs at '+s+'+</div>';
+  }
+}
+(function(){
+  var rb=$('mcruns');
+  [500,1000,5000].forEach(function(v){
+    var b=document.createElement('button');b.type='button';b.className='mb';b.textContent=v.toLocaleString('en-GB');
+    b.setAttribute('aria-pressed',v===MC.runs?'true':'false');
+    b.addEventListener('click',function(){MC.runs=v;Array.prototype.forEach.call(rb.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});scheduleMC(150)});
+    rb.appendChild(b);
+  });
+  function wire(id,vid,key,fmt){
+    var r=$(id),vv=$(vid);
+    function upd(){vv.textContent=fmt(parseFloat(r.value));r.style.setProperty('--p',(100*(r.value-r.min)/(r.max-r.min)).toFixed(2)+'%')}
+    r.addEventListener('input',function(){MC[key]=parseFloat(r.value);upd();scheduleMC(500)});
+    upd();
+  }
+  wire('mcv','mcvv','vErr',function(v){return v.toFixed(0)+'%'});
+  wire('mcs','mcsv','sErr',function(v){return v.toFixed(1)+' pts'});
+  var svg=$('hsvg');
+  function at(e){
+    var r=svg.getBoundingClientRect(),i=Math.floor((e.clientX-r.left)/r.width*(NSEATS+1));
+    MC.hi=Math.max(0,Math.min(NSEATS,i));drawHist();
+  }
+  svg.addEventListener('pointermove',at);
+  svg.addEventListener('pointerdown',at);
+  svg.addEventListener('pointerleave',function(e){if(e.pointerType!=='touch'){MC.hi=null;if(MC.res)drawHist()}});
+  document.addEventListener('pointerdown',function(e){if(MC.hi!==null&&!(e.target.closest&&e.target.closest('#hsvg'))){MC.hi=null;if(MC.res)drawHist()}});
+})();
+
 render();
 
 </script>
-
+</body></html>
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
