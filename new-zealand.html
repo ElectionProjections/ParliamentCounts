@@ -301,6 +301,55 @@
     th:first-child, td:first-child{ width:48px; }
     td:first-child .pn{ font-size:.66rem; gap:3px; }
   }
+
+  /* probability model */
+  .mc{ position:relative; }
+  .mc-prog{ position:absolute; left:0; right:0; top:0; height:3px; border-radius:10px 10px 0 0; overflow:hidden; pointer-events:none; }
+  .mc-prog i{ display:block; height:100%; width:0; background:var(--focus); opacity:0; }
+  .mc-prog.on i{ opacity:1; }
+  .mc h3{ font-size:.875rem; font-weight:600; text-align:center; margin:0 0 12px; }
+  .mc-hr{ border:0; border-top:1px solid var(--line); margin:24px 0; }
+  .mc .lab{ display:block; text-align:center; margin-bottom:6px; }
+  .mc-sets{ display:grid; grid-template-columns:1fr 1fr; gap:22px 28px; margin-top:20px; }
+  .mc-set{ min-width:0; text-align:center; }
+  .mc-set label{ display:block; font-size:.78rem; line-height:1.35; margin-bottom:12px; }
+  .mc-set output{ display:block; margin-top:10px; font-weight:600; font-variant-numeric:tabular-nums; }
+  #mcOut{ transition:opacity .15s; }
+  #mcOut.busy{ opacity:.4; pointer-events:none; }
+  .mc-bar{ display:flex; height:26px; border-radius:6px; overflow:hidden; background:var(--empty); box-shadow:inset 0 0 0 1px var(--line-strong); }
+  .mc-bar i{ display:block; height:100%; min-width:0; }
+  .mc-leg{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-top:16px; font-size:.76rem; font-weight:600; font-variant-numeric:tabular-nums; }
+  .mc-leg span{ display:inline-flex; align-items:center; gap:6px; }
+  .mc-leg .sw{ width:12px; height:12px; }
+  .mc-grid{ display:grid; grid-template-columns:minmax(0,1fr) 62px clamp(150px,45%,190px); column-gap:0; align-items:stretch; font-variant-numeric:tabular-nums; }
+  .mc-th{ display:contents; }
+  .mc-th > span{ display:flex; flex-direction:column; justify-content:flex-end; font-size:.62rem; text-transform:uppercase; letter-spacing:.04em; padding-left:4px; padding-right:4px; white-space:nowrap; color:var(--muted); font-weight:600; text-align:center; padding-bottom:8px; border-bottom:1px solid var(--line-strong); }
+  .mc-th > span:first-child{ text-align:left; padding-left:2px; }
+  .mc-tr{ display:contents; }
+  .mc-tr > span{ display:flex; flex-direction:column; justify-content:center; padding:13px 4px; border-bottom:1px solid var(--line); text-align:center; min-width:0; }
+  .mc-tr:last-child > span{ border-bottom:none; }
+  .mc-tr > span:first-child{ text-align:left; padding-left:2px; }
+  .mc-tr .pn{ display:flex; flex-direction:row; justify-content:flex-start; align-items:center; gap:8px; font-weight:500; }
+  .mc-tr .med{ font-weight:700; }
+  .mc-tr .rg b{ display:block; font-weight:500; font-size:.8rem; margin-bottom:5px; }
+  .mc-trk{ display:block; position:relative; height:6px; border-radius:3px; background:var(--track); margin:0 auto; width:100%; }
+  .mc-trk i{ position:absolute; top:0; bottom:0; border-radius:3px; box-shadow:inset 0 0 0 1px var(--seat-line); }
+  .mc-trk u{ position:absolute; top:-3px; bottom:-3px; width:2px; margin-left:-1px; background:var(--ink); text-decoration:none; }
+  .mc-chips{ margin-bottom:18px; }
+  .mc-res{ background:var(--btn); border-radius:12px; padding:18px 16px 16px; text-align:center; font-variant-numeric:tabular-nums; }
+  .mc-pct{ font-size:2.3rem; font-weight:700; line-height:1.1; }
+  .mc-pct small{ font-size:1.2rem; font-weight:500; color:var(--muted); margin-left:2px; }
+  .mc-res .lab{ margin:6px 0 10px; }
+  .mc-meter{ height:6px; border-radius:3px; background:var(--track); overflow:hidden; max-width:260px; margin:0 auto; }
+  .mc-meter i{ display:block; height:100%; background:var(--pos); border-radius:3px; }
+  .mc-stats{ display:grid; grid-template-columns:1fr 1fr; margin-top:16px; padding-top:14px; border-top:1px solid var(--line-strong); }
+  .mc-stats > div + div{ border-left:1px solid var(--line-strong); }
+  .mc-stats b{ display:block; font-size:1.05rem; }
+  .mc-tip{ margin-top:10px; height:38px; line-height:19px; text-align:center; font-size:.78rem; color:var(--muted); font-variant-numeric:tabular-nums; margin-bottom:4px; overflow:hidden; }
+  .mc-tip b{ color:var(--ink); }
+  #mcHist{ display:block; width:100%; max-width:650px; margin:0 auto; height:auto; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+  #mcHist text{ fill:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }
+  @media (max-width:520px){ .mc-sets{ grid-template-columns:1fr; } }
   .src{ text-align:center; font-size:.7rem; color:var(--muted); margin:4px 0 0; line-height:1.5; }
 </style>
 
@@ -418,6 +467,43 @@
       <div class="tip" id="mapTooltip"></div>
     </div>
     <div class="mlegend" id="mapLegend"></div>
+  </section>
+
+  <section class="card mc" id="mcCard">
+    <div class="mc-prog" id="mcProgWrap" aria-hidden="true"><i id="mcProg"></i></div>
+    <h2>Probability model</h2>
+    <h3>Settings</h3>
+    <span class="lab">Runs</span>
+    <div class="rollrow"><div class="seg" id="mcRuns" role="group" aria-label="Runs"></div></div>
+    <div class="mc-sets">
+      <div class="mc-set">
+        <label for="mcVoteErr">Vote share error (% of each party’s own share)</label>
+        <input type="range" id="mcVoteErr" min="0" max="30" step="1" value="10">
+        <output id="mcVoteErrV" for="mcVoteErr">10%</output>
+      </div>
+      <div class="mc-set">
+        <label for="mcSeatErr">Seat-level error (extra random variation in each seat)</label>
+        <input type="range" id="mcSeatErr" min="0" max="10" step="0.5" value="3">
+        <output id="mcSeatErrV" for="mcSeatErr">3.0 pts</output>
+      </div>
+    </div>
+    <div id="mcOut">
+      <hr class="mc-hr">
+      <h3>Outcomes</h3>
+      <div class="mc-bar" id="mcBar" role="img" aria-label="Share of runs by outcome"></div>
+      <div class="mc-leg" id="mcLeg"></div>
+      <hr class="mc-hr">
+      <div class="mc-grid" id="mcTable"></div>
+      <hr class="mc-hr">
+      <h3>Coalition majority chance</h3>
+      <div class="btns mc-chips" id="mcCoalChips"></div>
+      <div class="mc-res" id="mcCoalRes"></div>
+      <hr class="mc-hr">
+      <h3>Seat distribution</h3>
+      <div class="btns" id="mcHistChips"></div>
+      <div class="mc-tip" id="mcTip" aria-live="polite"></div>
+      <svg id="mcHist" viewBox="0 0 600 190" role="img" aria-label="Seat distribution histogram" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
   </section>
 
   <p class="src">Sources: Electoral Commission (2023 general election results and Port Waikato by-election); Stats NZ (General and Māori electorate boundaries 2020; national population estimates at 30 June 2026); Freedom House (Freedom in the World 2026); Natural Earth via world-atlas (world map); flag-icons (flag).</p>
@@ -542,7 +628,7 @@ function allocateSeats(weights, totalSeats){
 // 2023 candidate vote (identified name-by-name against the official candidate list, per
 // electorate) is the base this scales from.
 const TAPER_THRESHOLD = 0.2;
-function electorateResult(ename, shares){
+function electorateResult(ename, shares, noise, lean){
   const rec = DATA[ename];
   const cvT = rec.cvT;
   const ALL = ELECTORATE_PARTIES.concat(['OTH','IND']);
@@ -583,11 +669,23 @@ function electorateResult(ename, shares){
     minorShares[m] = share;
     if(share>topVal){ topVal=share; topMinor=m; }
   }
+  // Optional per-seat noise (probability model only). One draw per party per seat in a fixed
+  // order, applied only to parties already polling above zero here (so a party that does not
+  // contest a seat never appears in it), clamped at zero. sd = seatErr * sqrt(max(base%,0.5)/20).
+  if(noise){
+    const hit = (b, v)=>{ const d = noise(Math.sqrt(Math.max(b*100, 0.5)/20)); return v > 0 ? Math.max(0, v + d/100) : v; };
+    for(const p of ELECTORATE_PARTIES.concat(['IND'])) adj[p] = hit((rec.cv[p]||0)/cvT, adj[p]);
+    const othBase = (rec.cv.OTH||0)/cvT;
+    for(const m of MINOR_PARTIES){
+      minorShares[m] = hit(sumMinorPV>0 ? othBase*((minorPV[m]||0)/sumMinorPV) : 0, minorShares[m]);
+    }
+  }
   // Winner: compare individual parties only. The combined "Other" bucket is never a
   // contestant; it is already split into the ten named minor parties above.
   let displayWinner = null, bestV = -1;
   for(const p of ELECTORATE_PARTIES.concat(['IND'])){ if(adj[p] > bestV){ bestV = adj[p]; displayWinner = p; } }
   for(const mp of MINOR_PARTIES){ if(minorShares[mp] > bestV){ bestV = minorShares[mp]; displayWinner = mp; } }
+  if(lean) return displayWinner;
   return {winner: displayWinner, adj, minorShares};
 }
 
@@ -597,7 +695,8 @@ function electorateResult(ename, shares){
 // Casey Costello of NZ First by 11,432 votes / 61.0%) rather than being left out.
 const BY_ELECTION_SEATS = [];
 
-function computeAll(inputShares){
+function computeAll(inputShares, opts){
+  const noise = opts && opts.noise, lean = !!(opts && opts.lean);
   const s = inputShares || shares;
   const oth = 100 - MODELLED.reduce((a,p)=>a+s[p],0);
   const effShares = Object.assign({}, s, {OTH: oth});
@@ -610,12 +709,13 @@ function computeAll(inputShares){
   for(const e in DATA){
     if(BY_ELECTION_SEATS.includes(e)) continue;
     electorateCount++;
-    const res = electorateResult(e, effShares);
-    electorateSeats[res.winner] = (electorateSeats[res.winner]||0)+1;
-    electorateWinners[e] = res;
-    const orig = DATA[e].winner;
-    if(res.winner !== orig){
-      flips.push({e, from:orig, to:res.winner});
+    const res = electorateResult(e, effShares, noise, lean);
+    const win = lean ? res : res.winner;
+    electorateSeats[win] = (electorateSeats[win]||0)+1;
+    if(!lean){
+      electorateWinners[e] = res;
+      const orig = DATA[e].winner;
+      if(win !== orig) flips.push({e, from:orig, to:win});
     }
   }
 
@@ -669,6 +769,37 @@ function computeAll(inputShares){
 
   return {shares:s, oth, electorateSeats, electorateWinners, flips, entitlement, listSeats, totalSeats, houseSize:finalHouseSize, overhangTotal, electorateCount, minorNatShares};
 }
+
+
+// ==MC ENGINE==
+// Probability model. Seeded per run (index + constant) so identical inputs give identical output and
+// raising the run count only appends runs. Every run uses the unchanged seat projection above.
+const MC_PARTIES = MODELLED.concat(MINOR_PARTIES, ['IND']);
+const MC_SEED = 0x2545F491;
+const MC_CAP = 260;
+function mcRng(seed){
+  let a = seed >>> 0;
+  return ()=>{ a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t>>>15), t|1); t ^= t + Math.imul(t ^ (t>>>7), t|61); return ((t ^ (t>>>14))>>>0)/4294967296; };
+}
+function mcGauss(rng){ const u1 = 1 - rng(), u2 = rng(); return Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2); }
+// one run: perturb national shares (log-normal, renormalised), then project with per-seat noise
+function mcRun(i, central, voteErr, seatErr){
+  const rng = mcRng(i + MC_SEED);
+  let s = central;
+  if(voteErr > 0){
+    const sig = voteErr/100, keys = MODELLED.concat(['OTH']);
+    const oth = 100 - MODELLED.reduce((a,p)=>a+central[p],0);
+    const vals = keys.map(k=>(k==='OTH' ? Math.max(0,oth) : central[k]) * Math.exp(sig*mcGauss(rng)));
+    const tot = vals.reduce((a,b)=>a+b,0);
+    s = {};
+    MODELLED.forEach((p,j)=>{ s[p] = vals[j]/tot*100; });
+  }
+  const noise = seatErr > 0 ? (f)=> mcGauss(rng)*seatErr*f : null;
+  return computeAll(s, {noise, lean:true});
+}
+function mcSeatsOf(r){ return MC_PARTIES.map(p=> p==='IND' ? (r.electorateSeats.IND||0) : (r.totalSeats[p]||0)); }
+function mcPct(counts, N, q){ let c = 0; for(let v=0; v<counts.length; v++){ c += counts[v]; if(c >= q*N) return v; } return counts.length-1; }
+// ==MC ENGINE END==
 
 // baseline (2023 actual) seat totals, computed once, used for the "Δ vs 2023" column
 const BASE_RESULT = computeAll(BASE.pct);
@@ -1118,6 +1249,196 @@ function renderMap(r){
   }
 }
 
+
+// ---- probability model UI ----
+const mc = {runs:1000, voteErr:10, seatErr:3, sig:'', timer:null, job:null, res:null, coal:new Set(), histP:null, hover:null};
+const mcf0 = v => v >= 1 ? String(Math.round(v)) : '<1';
+function mcSignature(){ return JSON.stringify([MODELLED.map(p=>shares[p].toFixed(6)), mc.runs, mc.voteErr, mc.seatErr]); }
+function mcSetBusy(on){ $('mcOut').classList.toggle('busy', on); $('mcProgWrap').classList.toggle('on', on); if(!on) $('mcProg').style.width = '0'; }
+function mcSchedule(){
+  const sig = mcSignature();
+  if(sig === mc.sig) return;
+  const first = mc.sig === '';
+  mc.sig = sig;
+  clearTimeout(mc.timer);
+  if(mc.job) mc.job.cancel = true;
+  if(mc.res) mcSetBusy(true);
+  mc.timer = setTimeout(mcStart, first ? 0 : 500);
+}
+function mcStart(){
+  const central = Object.assign({}, shares);
+  const N = mc.runs, voteErr = mc.voteErr, seatErr = mc.seatErr, P = MC_PARTIES.length;
+  const base = computeAll(central, {lean:true});            // the single projection
+  const need = Math.floor(base.houseSize/2) + 1;
+  const job = {cancel:false, i:0};
+  mc.job = job;
+  const seats = new Int16Array(N*P), house = new Int16Array(N);
+  const put = (i, r)=>{ const v = mcSeatsOf(r); for(let k=0;k<P;k++) seats[i*P+k] = v[k]; house[i] = r.houseSize; };
+  mcSetBusy(true);
+  if(voteErr === 0 && seatErr === 0){                        // zero error: compute once, reuse
+    for(let i=0;i<N;i++) put(i, base);
+    return mcFinish(job, {N, P, seats, house, need});
+  }
+  (function step(){
+    if(job.cancel) return;
+    const t0 = performance.now();
+    while(job.i < N && performance.now() - t0 < 25){ put(job.i, mcRun(job.i, central, voteErr, seatErr)); job.i++; }
+    $('mcProg').style.width = (job.i/N*100) + '%';
+    if(job.i < N) setTimeout(step, 0); else mcFinish(job, {N, P, seats, house, need});
+  })();
+}
+function mcFinish(job, d){
+  if(job.cancel) return;
+  const {N, P, seats, house} = d;
+  const hist = MC_PARTIES.map(()=>new Uint32Array(MC_CAP));
+  const outcomes = new Map();
+  for(let i=0;i<N;i++){
+    let best = -1, bk = 0;
+    for(let k=0;k<P;k++){ const v = seats[i*P+k]; hist[k][v]++; if(v > best){ best = v; bk = k; } }
+    const key = bk*2 + (best >= Math.floor(house[i]/2)+1 ? 1 : 0);   // ties for largest: first in fixed party order
+    outcomes.set(key, (outcomes.get(key)||0) + 1);
+  }
+  const rows = [];
+  MC_PARTIES.forEach((p,k)=>{
+    const h = hist[k];
+    if((N - h[0])/N < 0.05) return;
+    rows.push({k, p5:mcPct(h,N,0.05), med:mcPct(h,N,0.5), p95:mcPct(h,N,0.95)});
+  });
+  rows.sort((a,b)=> b.med-a.med || b.p95-a.p95 || a.k-b.k);
+  mc.res = Object.assign(d, {hist, outcomes, rows});
+  const keep = new Set(rows.map(r=>r.k));
+  [...mc.coal].forEach(k=>{ if(!keep.has(k)) mc.coal.delete(k); });
+  if(mc.histP === null || !keep.has(mc.histP)) mc.histP = rows.length ? rows[0].k : null;
+  mc.hover = null;
+  mcSetBusy(false);
+  mcRender();
+}
+
+const mcSw = (p, hatch)=>{
+  const c = hexOf(p);
+  return hatch ? `repeating-linear-gradient(45deg, ${c} 0 3px, color-mix(in srgb, ${c} 30%, var(--card)) 3px 6px)` : c;
+};
+function mcRender(){
+  const r = mc.res; if(!r) return;
+  const {N, P} = r;
+  // outcomes bar + legend
+  const cats = [...r.outcomes.entries()].map(([key,c])=>({k:key>>1, maj:key&1, c})).filter(x=>x.c/N >= 0.005).sort((a,b)=>b.c-a.c);
+  $('mcBar').innerHTML = cats.map(x=>`<i style="flex:0 0 ${x.c/N*100}%;background:${mcSw(MC_PARTIES[x.k], !x.maj)}"></i>`).join('');
+  $('mcLeg').innerHTML = cats.map(x=>{
+    const p = MC_PARTIES[x.k];
+    return `<span><i class="sw" style="background:${mcSw(p, !x.maj)}"></i>${PARTY_INFO[p].abbr} ${x.maj?'majority':'largest'} ${mcf0(x.c/N*100)}%</span>`;
+  }).join('');
+  // seat range table
+  const hiScale = Math.max(r.need, ...r.rows.map(x=>x.p95)) || 1;
+  const pos = v => (v/hiScale*100) + '%';
+  $('mcTable').innerHTML = `<div class="mc-th"><span>Party</span><span>Median</span><span>90% range</span></div>` +
+    r.rows.map(x=>{
+      const p = MC_PARTIES[x.k];
+      return `<div class="mc-tr"><span class="pn"><i class="sw" style="background:${hexOf(p)}"></i><span class="nm">${lbl(p)}</span><span class="ab" title="${PARTY_INFO[p].name}">${PARTY_INFO[p].abbr}</span></span>` +
+        `<span class="med">${x.med}</span>` +
+        `<span class="rg"><b>${x.p5}–${x.p95}</b><span class="mc-trk"><i style="left:${pos(x.p5)};width:${(x.p95-x.p5)/hiScale*100}%;background:${hexOf(p)}"></i><u style="left:${pos(x.med)}"></u></span></span></div>`;
+    }).join('');
+  mcRenderCoal();
+  mcRenderHist();
+}
+function mcChips(boxId, list, isOn, onClick){
+  const box = $(boxId); box.innerHTML = '';
+  list.forEach(k=>{
+    const p = MC_PARTIES[k], b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn';
+    b.innerHTML = `<i class="sw" style="background:${hexOf(p)}"></i>${PARTY_INFO[p].abbr}`;
+    b.title = lbl(p);
+    b.setAttribute('aria-pressed', isOn(k) ? 'true' : 'false');
+    b.addEventListener('click', ()=>onClick(k));
+    box.appendChild(b);
+  });
+}
+function mcRenderCoal(){
+  const r = mc.res, {N, P, seats, house} = r;
+  const list = r.rows.map(x=>x.k).filter(k=>MC_PARTIES[k] !== 'IND');
+  mcChips('mcCoalChips', list, k=>mc.coal.has(k), k=>{ mc.coal.has(k) ? mc.coal.delete(k) : mc.coal.add(k); mcRenderCoal(); });
+  const sel = [...mc.coal];
+  let win = 0; const cnt = new Uint32Array(MC_CAP*2);
+  if(sel.length){
+    for(let i=0;i<N;i++){
+      let t = 0; for(const k of sel) t += seats[i*P+k];
+      cnt[t]++; if(t >= Math.floor(house[i]/2)+1) win++;
+    }
+  }
+  const pc = win/N*100;
+  $('mcCoalRes').innerHTML = `<div class="mc-pct">${pc.toFixed(1)}<small>%</small></div><span class="lab">chance of a majority</span><div class="mc-meter"><i style="width:${pc}%"></i></div>` +
+    (sel.length ? `<div class="mc-stats"><div><span class="lab">Median seats</span><b>${mcPct(cnt,N,0.5)}</b></div><div><span class="lab">90% range</span><b>${mcPct(cnt,N,0.05)}–${mcPct(cnt,N,0.95)}</b></div></div>` : '');
+}
+function mcRenderHist(){
+  const r = mc.res, {N} = r, k = mc.histP;
+  mcChips('mcHistChips', r.rows.map(x=>x.k), j=>j===k, j=>{ mc.histP = j; mc.hover = null; mcRenderHist(); });
+  const svg = $('mcHist');
+  if(k === null){ svg.innerHTML = ''; $('mcTip').innerHTML = ''; return; }
+  const h = r.hist[k], row = r.rows.find(x=>x.k===k);
+  let mn = MC_CAP, mx = 0;
+  for(let v=0; v<MC_CAP; v++) if(h[v]){ mn = Math.min(mn, v); mx = Math.max(mx, v); }
+  const lo = Math.max(0, Math.min(mn, r.need) - 2), hi = Math.max(mx, r.need) + 2, n = hi - lo + 1;
+  const W = Math.max(240, Math.round(svg.getBoundingClientRect().width || 600)), H = 190;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const X0 = 6, X1 = W - 6, Y0 = 28, Y1 = 160, bw = (X1-X0)/n;
+  let top = 1; for(let v=lo; v<=hi; v++) top = Math.max(top, h[v]);
+  const col = hexOf(MC_PARTIES[k]);
+  const step = n > 60 ? 10 : n > 28 ? 5 : n > 14 ? 2 : 1;
+  let out = '';
+  for(let v=lo; v<=hi; v++){
+    const ht = h[v]/top*(Y1-Y0), dim = mc.hover !== null && mc.hover !== v;
+    out += `<rect x="${X0+(v-lo)*bw+0.5}" y="${Y1-ht}" width="${Math.max(bw-1,0.5)}" height="${ht}" fill="${col}" stroke="var(--seat-line)" stroke-width=".6" data-v="${v}" opacity="${dim?0.3:1}"/>`;
+    if(v % step === 0) out += `<text x="${X0+(v-lo+0.5)*bw}" y="${Y1+17}" text-anchor="middle">${v}</text>`;
+  }
+  const mx_ = X0 + (r.need-lo)*bw;
+  out += `<line x1="${X0}" x2="${X1}" y1="${Y1}" y2="${Y1}" stroke="var(--line-strong)"/>` +
+    `<line x1="${mx_}" x2="${mx_}" y1="${Y0-6}" y2="${Y1}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 3"/>` +
+    `<text x="${mx_}" y="${Y0-13}" text-anchor="middle" style="fill:var(--ink);font-weight:600">${r.need}</text>` +
+    `<rect id="mcHit" x="${X0}" y="0" width="${X1-X0}" height="${Y1+4}" fill="transparent"/>`;
+  svg.innerHTML = out;
+  const tip = $('mcTip');
+  const show = v=>{
+    if(v === null){ tip.innerHTML = ''; return; }
+    let cum = 0; for(let u=v; u<MC_CAP; u++) cum += h[u];
+    tip.innerHTML = `<b>${v} seat${v===1?'':'s'}</b> / ${(h[v]/N*100).toFixed(1)}% of runs (${h[v]})<br>${Math.round(cum/N*100)}% of runs at ${v}+`;
+  };
+  show(mc.hover);
+  const bin = e=>{
+    const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left)/rc.width*W;
+    return Math.min(hi, Math.max(lo, lo + Math.floor((x - X0)/bw)));
+  };
+  const hit = $('mcHit');
+  const paint = ()=>{ svg.querySelectorAll('rect[data-v]').forEach(el=>{ el.setAttribute('opacity', mc.hover !== null && +el.dataset.v !== mc.hover ? 0.3 : 1); }); show(mc.hover); };
+  const set = e=>{ const v = bin(e); if(v === mc.hover) return; mc.hover = v; paint(); };
+  hit.addEventListener('pointermove', set);
+  hit.addEventListener('pointerdown', set);
+  hit.addEventListener('pointerleave', e=>{ if(e.pointerType === 'mouse' && mc.hover !== null){ mc.hover = null; paint(); } });
+}
+let mcW = 0;
+window.addEventListener('resize', ()=>{ const w = Math.round($('mcHist').getBoundingClientRect().width); if(mc.res && w !== mcW){ mcW = w; mcRenderHist(); } });
+document.addEventListener('pointerdown', e=>{
+  if(mc.hover !== null && !e.target.closest('#mcHist')){ mc.hover = null; if(mc.res) mcRenderHist(); }
+});
+
+(function mcSetup(){
+  const seg = $('mcRuns');
+  [500,1000,5000].forEach(n=>{
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn'; b.textContent = n.toLocaleString('en-GB');
+    b.setAttribute('aria-pressed', n === mc.runs ? 'true' : 'false');
+    b.addEventListener('click', ()=>{ mc.runs = n; [...seg.children].forEach(c=>c.setAttribute('aria-pressed', c===b ? 'true':'false')); mcSchedule(); });
+    seg.appendChild(b);
+  });
+  const bind = (id, key, fmt)=>{
+    const el = $(id), out = $(id+'V');
+    const upd = ()=>{ el.style.setProperty('--fill', (el.value/el.max*100) + '%'); out.textContent = fmt(+el.value); };
+    el.addEventListener('input', ()=>{ mc[key] = +el.value; upd(); mcSchedule(); });
+    upd();
+  };
+  bind('mcVoteErr', 'voteErr', v=>v + '%');
+  bind('mcSeatErr', 'seatErr', v=>v.toFixed(1) + ' pts');
+})();
+
 // ---- main render ----
 function render(){
   syncInputs();
@@ -1126,6 +1447,7 @@ function render(){
   renderTable(r);
   renderCoalition(r);
   renderMap(r);
+  mcSchedule();
 }
 
 buildSliders();
