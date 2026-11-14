@@ -94,191 +94,309 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Botswana Seat Projector</title>
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:100%;max-width:100%;overflow-x:hidden}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f0efec;min-height:100vh;padding:2rem 1rem}
-  .card{width:100%;max-width:900px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.10)}
-  .header{background:#003580;color:#fff;padding:1.25rem 1.5rem 1rem}
-  .header h1{font-size:18px;font-weight:500}
-  .header p{font-size:13px;opacity:.75;margin-top:3px}
-  .header-inner{display:flex;justify-content:space-between;align-items:center}
-  .flag{font-size:28px;opacity:.9}
-  .body{background:#fff;padding:1.25rem 1.5rem}
-  .section-label{font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#6b6a66;margin-bottom:12px;text-align:center}
-  .top-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-bottom:12px}
-  .top-row .reset-btn{justify-self:end;white-space:nowrap}
-  @media (max-width:560px){.top-row{grid-template-columns:1fr;gap:8px}.top-row>span:first-child{display:none}.top-row .reset-btn{justify-self:center}}
-  .input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:1rem}
-  .input-cell{display:flex;flex-direction:column;gap:5px}
-  .input-label{font-size:12px;font-weight:500;display:flex;align-items:center;gap:5px;color:#3d3d3a}
-  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
-  .vote-input-wrap{position:relative}
-  .vote-input{width:100%;padding:6px 22px 6px 8px;border:.5px solid #aaa;border-radius:8px;font-size:14px;font-family:inherit;color:#0b0b0b;background:#fff;-moz-appearance:textfield;transition:border-color .15s,box-shadow .15s}
-  .vote-input::-webkit-inner-spin-button,.vote-input::-webkit-outer-spin-button{-webkit-appearance:none}
-  .vote-input:focus{outline:none;border-color:#003580;box-shadow:0 0 0 2px rgba(0,53,128,.15)}
-  .pct-symbol{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:13px;color:#898781;pointer-events:none}
-  .swing-badge{font-size:11px;height:16px}
-  .vote-slider{-webkit-appearance:none;appearance:none;width:100%;height:18px;margin:0;background:transparent;cursor:pointer;--c:#888780;--p:0%}
-  .vote-slider:focus{outline:none}
-  .vote-slider::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--c) var(--p),#e4e2dc var(--p))}
-  .vote-slider::-moz-range-track{height:6px;border-radius:3px;background:#e4e2dc}
-  .vote-slider::-moz-range-progress{height:6px;border-radius:3px;background:var(--c)}
-  .vote-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin-top:-5px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 .5px rgba(0,0,0,.3),0 1px 3px rgba(0,0,0,.25)}
-  .vote-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 .5px rgba(0,0,0,.3),0 1px 3px rgba(0,0,0,.25)}
-  .vote-slider:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(0,53,128,.25)}
-  .total-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#52514e;margin-bottom:1.25rem}
-  .total-val{font-weight:500}.total-val.bad{color:#c8102e}.total-val.good{color:#1a7a4a}
-  .divider{height:.5px;background:rgba(11,11,11,.10);margin:0 0 1.25rem}
-  .bar-legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:.75rem}
-  .legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#52514e}
-  .legend-sq{width:10px;height:10px;border-radius:2px}
-  .seat-bar{display:flex;height:36px;border-radius:6px;overflow:hidden;gap:2px;margin-bottom:.4rem}
-  .seat-seg{transition:flex .3s ease;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:rgba(255,255,255,.92);min-width:0;overflow:hidden;white-space:nowrap}
-  .majority-tick-wrap{position:relative;height:18px;margin-bottom:.75rem}
-  .majority-tick{position:absolute;top:0;width:2px;height:10px;background:#898781;transform:translateX(-50%)}
-  .majority-tick-label{position:absolute;top:11px;font-size:10px;color:#898781;transform:translateX(-50%);white-space:nowrap}
-  .results-grid{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:8px;margin-bottom:1rem;align-items:start}
-  .party-card{display:flex;flex-direction:column}
-  .card-foot{margin-top:auto;padding-top:12px}
-  .share-bar{height:6px;border-radius:3px;background:#eceae4;overflow:hidden}
-  .share-bar>div{height:100%;border-radius:3px;transition:width .3s ease}
-  .share-lbl{font-size:10px;color:#898781;margin-top:4px}
-  .sub-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:1px;margin:10px 0 8px;background:#eceae4}
-  .sub-chips{display:flex;flex-direction:column;gap:4px}
-  .sub-chip{display:grid;grid-template-columns:1fr auto 26px;align-items:center;column-gap:6px;font-size:11px;color:#52514e;min-width:0}
-  .sub-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0;box-shadow:inset 0 0 0 .5px rgba(11,11,11,.18)}
-  .sub-name{display:flex;align-items:center;gap:5px;white-space:nowrap}
-  .sub-n{font-size:12px;font-weight:500;color:#0b0b0b;text-align:right;font-variant-numeric:tabular-nums}
-  .sub-d{font-size:10px;text-align:right;font-variant-numeric:tabular-nums}
-  .party-card{background:#f9f8f4;border:.5px solid rgba(11,11,11,.10);border-radius:10px;padding:8px 10px}
-  .card-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:2px}
-  .card-party{font-size:11px;font-weight:500;color:#52514e;margin-bottom:3px}
-  .card-seats{font-size:20px;font-weight:500;color:#0b0b0b;line-height:1}
-  .card-change{font-size:11px;margin-top:2px}
-  .card-vote{font-size:10px;color:#898781}
-  .udc-breakdown{background:#f9f8f4;border:.5px solid rgba(11,11,11,.10);border-radius:10px;padding:10px 12px;margin-bottom:1rem}
-  .udc-breakdown-title{font-size:11px;font-weight:500;color:#52514e;margin-bottom:8px}
-  .udc-sub-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:.5px solid rgba(11,11,11,.10)}
-  .udc-sub-row:last-child{border-bottom:none}
-  .udc-sub-row.total-row-sub{font-weight:500}
-  .udc-sub-name{display:flex;align-items:center;gap:6px;color:#52514e}
-  .udc-sub-seats{font-weight:500;color:#0b0b0b}
-  .udc-sub-change{font-size:11px;min-width:44px;text-align:right}
-  .reset-btn{background:transparent;border:.5px solid #888;border-radius:8px;padding:5px 12px;font-size:12px;cursor:pointer;color:#52514e;font-family:inherit;transition:background .1s}
-  .reset-btn:hover{background:#f9f8f4}
-  .note{font-size:11px;color:#898781;line-height:1.5;border-top:.5px solid rgba(11,11,11,.10);padding-top:10px;margin-top:4px}
-  .note strong{color:#52514e}
-  .coalition{background:#f9f8f4;border:.5px solid rgba(11,11,11,.10);border-radius:10px;padding:12px 12px 10px;margin-bottom:1rem}
-  .coalition-parties{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-  .coal-chip{display:flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px 5px 8px;border-radius:20px;border:1px solid rgba(11,11,11,.14);background:#fff;cursor:pointer;transition:all .12s;user-select:none}
-  .coal-chip:hover{border-color:rgba(11,11,11,.35)}
-  .coal-chip.on{color:#fff;border-color:transparent;font-weight:500}
-  .coal-chip .cc-seats{opacity:.7;font-variant-numeric:tabular-nums}
-  .coal-chip.on .cc-seats{opacity:.9}
-  .coal-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-  .coal-meter{height:26px;border-radius:6px;background:#eceae4;position:relative;overflow:hidden;margin-bottom:8px}
-  .coal-fill{height:100%;transition:width .35s ease,background .3s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px;font-weight:500;color:#fff;white-space:nowrap;min-width:0}
-  .coal-maj-line{position:absolute;top:-3px;bottom:-3px;width:2px;background:#0b0b0b;left:50%}
-  .coal-maj-flag{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:9px;color:#52514e;white-space:nowrap}
-  .coal-status{font-size:13px;font-weight:500;text-align:center;padding-top:6px}
-  .cartogram-wrap{position:relative;margin:0 0 .5rem}
-  #cartogram{width:100%;height:640px;display:block}
-  #cartogram path{transition:fill .25s ease}
-  #tiles path{cursor:pointer}
-  #tiles path:hover{filter:brightness(1.18)}
-  .hex-tip{position:absolute;pointer-events:none;background:#0b0b0b;color:#fff;font-size:11px;line-height:1.6;padding:8px 11px;border-radius:7px;opacity:0;transition:opacity .12s;white-space:nowrap;z-index:10;transform:translate(-50%,-100%);text-align:left;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-  .hex-tip.on{opacity:1}
-  .hex-tip .tip-name{font-weight:500}
-  .hex-tip .tip-sub{opacity:.72}
-  .hex-tip .tip-row{display:inline-flex;gap:5px;min-width:180px}
-  .hex-tip .tip-val{margin-left:auto;padding-left:12px;font-weight:500;font-variant-numeric:tabular-nums}
-  .hex-tip .tip-dim{opacity:.5}
-  .hex-tip .tip-dim .tip-val{font-weight:400;font-style:italic}
-  .map-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;font-size:12px;color:#52514e;margin:4px 0 1rem}
-  .ml-item{display:inline-flex;align-items:center;gap:6px}
-  .ml-sq{width:10px;height:10px;border-radius:2px}
-  .map-modes{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:10px}
-  .seg{display:inline-flex;border-radius:999px;background:#eceae4;padding:2px}
-  .seg button{border:0;background:transparent;border-radius:999px;padding:5px 14px;font-size:12px;font-family:inherit;color:#52514e;cursor:pointer;transition:background .15s,color .15s}
-  .seg button.on{background:#0b0b0b;color:#fff}
-  .mode-parties{display:none;flex-wrap:wrap;justify-content:center;gap:6px}
-  .mode-parties.show{display:flex}
-  .mp-chip{display:inline-flex;align-items:center;gap:6px;border:.5px solid rgba(11,11,11,.2);background:#fff;border-radius:999px;padding:4px 11px;font-size:12px;font-family:inherit;color:#52514e;cursor:pointer}
-  .mp-chip.on{color:#fff;border-color:transparent;font-weight:500}
-  .mp-dot{width:9px;height:9px;border-radius:50%}
-  .ml-grad{display:inline-block;width:150px;height:10px;border-radius:5px;box-shadow:inset 0 0 0 .5px rgba(11,11,11,.15)}
-
-  .hemi-wrap{max-width:650px;margin:0 auto .6rem}
-  .party-legend{margin:0 0 1.25rem}
-  #hemicycle{width:100%;height:auto;display:block}
-  #hemicycle circle{transition:fill .3s ease}
-  #hemicycle .hemi-big{font-size:26px;font-weight:500;text-anchor:middle;fill:#0b0b0b;font-variant-numeric:tabular-nums}
-  #hemicycle .hemi-small{font-size:9px;text-anchor:middle;fill:#898781}
-  #tiles path.sel{stroke:#0b0b0b;stroke-width:2}
-  #tiles path:focus{outline:none}
-  #tiles path:focus-visible{stroke:#0b0b0b;stroke-width:3}
-  .map-zoom{position:absolute;top:8px;right:8px;z-index:5;display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 0 0 .5px rgba(11,11,11,.2),0 2px 6px rgba(0,0,0,.08)}
-  .map-zoom button{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#fff;border:0;border-bottom:.5px solid rgba(11,11,11,.12);font-size:17px;line-height:1;font-family:inherit;color:#0b0b0b;cursor:pointer;padding:0}
-  .map-zoom button:last-child{border-bottom:0}
-  .map-zoom button:hover{background:#f4f3ef}
-  .map-zoom button:disabled{color:#c9c7c1;cursor:default;background:#fff}
-  #cartogram{touch-action:none;cursor:grab;background:#fff;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
-  #cartogram *{-webkit-user-drag:none}
-  #cartogram.dragging{cursor:grabbing}
-  #tiles path{stroke:#fff;stroke-width:.8;stroke-linejoin:round;vector-effect:non-scaling-stroke;paint-order:normal}
-  @media (max-width:480px){body{padding:1rem .5rem}.input-grid{grid-template-columns:repeat(3,1fr)}.results-grid{grid-template-columns:repeat(2,1fr)}.party-card.udc-card{grid-column:span 2}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{color-scheme:light dark;--bg:#f3f2ee;--card:#fff;--fg:#141413;--mut:#6f6e69;--line:rgba(20,20,19,.14);--soft:#f6f5f1;--track:#d6d4cc;--track2:#e6e4de;--good:#1a7a4a;--bad:#c8102e;--land:#c4c2ba;--stroke:#fff;--tipbg:#141413;--tipfg:#f4f3ee}
+@media(prefers-color-scheme:dark){:root{--bg:#141413;--card:#1f1f1d;--fg:#ecebe6;--mut:#a19f98;--line:rgba(255,255,255,.16);--soft:#292927;--track:#5a5852;--track2:#3a3935;--good:#4cc27f;--bad:#ff7a7a;--land:#5c5a54;--stroke:#1f1f1d;--tipbg:#f4f3ee;--tipfg:#141413}}
+html,body{max-width:100%;overflow-x:hidden}
+body{font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg);padding:16px 10px 30px;font-variant-numeric:tabular-nums}
+.page{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+h1{text-align:center;font-size:22px;font-weight:600;margin:6px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;min-width:0}
+.card>h2{text-align:center;font-size:16px;font-weight:600;margin-bottom:12px}
+h3.sub{text-align:center;font-size:14px;font-weight:600;margin:0 0 10px}
+.hr{height:1px;background:var(--line);margin:24px 0}
+button{font:inherit;color:inherit}
+/* locator */
+.loc{display:flex;justify-content:center;align-items:center;gap:18px;min-height:90px}
+.loc svg{display:block;flex:none}
+.loc .flag{width:50px;height:auto;border:1px solid var(--line);border-radius:3px}
+.worldmap .land{fill:var(--land)}
+/* facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;padding:14px 8px}
+.facts>div{text-align:center;padding:0 8px;min-width:0}
+.facts>div+div{border-left:1px solid var(--line)}
+.lab{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut)}
+.big{font-size:26px;font-weight:700;line-height:1.2;margin:3px 0}
+.big small{font-size:13px;font-weight:400;color:var(--mut)}
+.mut{font-size:12px;color:var(--mut)}
+.fh-bar{height:6px;border-radius:3px;background:var(--track2);overflow:hidden;margin:6px auto 6px;max-width:150px}
+.fh-bar>div{height:100%;border-radius:3px;background:var(--good)}
+/* system */
+details.sys{padding:0}
+details.sys summary{list-style:none;cursor:pointer;text-align:center;font-weight:600;padding:13px 14px;display:flex;justify-content:center;align-items:center;gap:8px;border-radius:12px}
+details.sys summary::-webkit-details-marker{display:none}
+details.sys summary:focus-visible{outline:2px solid var(--fg);outline-offset:-3px}
+details.sys summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(45deg) translate(-2px,-2px);transition:transform .15s}
+details.sys[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--line)}
+.tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{text-align:center;padding:12px 2px;min-width:0;overflow-wrap:normal}
+@media(max-width:420px){.tile .lab{font-size:7.5px;letter-spacing:.02em}.tile .val{font-size:10px}}
+.tile+.tile{border-left:1px solid var(--line)}
+.tile .lab{font-size:8px;letter-spacing:.03em;margin-bottom:4px}
+.tile .val{font-size:11px;font-weight:600;line-height:1.25}
+@media(min-width:600px){.tile{padding:14px 10px}.tile .lab{font-size:10px;letter-spacing:.07em}.tile .val{font-size:14px}}
+/* inputs */
+.rows{display:flex;flex-direction:column;gap:18px}
+.row .nm{display:flex;align-items:center;gap:7px;font-size:13px;margin-bottom:6px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
+.row{display:grid;grid-template-columns:minmax(190px,250px) minmax(0,1fr) 78px;column-gap:16px;align-items:center}
+.row .ctl{display:contents}
+.row .nm{margin-bottom:0!important}
+@media(max-width:620px){.row{grid-template-columns:minmax(0,1fr) 78px}.row .nm{grid-column:1/-1;margin-bottom:6px!important}}
+.nbox{position:relative}
+.nbox input{width:100%;padding:6px 22px 6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit;font-size:14px;text-align:right;-moz-appearance:textfield}
+.nbox input::-webkit-inner-spin-button,.nbox input::-webkit-outer-spin-button{-webkit-appearance:none}
+.nbox input:focus{outline:2px solid var(--fg);outline-offset:0}
+.nbox .pc{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--mut);pointer-events:none}
+.sl{-webkit-appearance:none;appearance:none;width:100%;height:20px;background:transparent;cursor:pointer;--c:#888;--p:0%;margin:0}
+.sl:focus{outline:none}
+.sl::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--c) var(--p),var(--track) var(--p))}
+.sl::-moz-range-track{height:8px;border-radius:4px;background:var(--track)}
+.sl::-moz-range-progress{height:8px;border-radius:4px;background:var(--c)}
+.sl::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-5px;border-radius:50%;background:var(--c);border:2px solid var(--card);box-shadow:0 0 0 1px var(--line),0 1px 3px rgba(0,0,0,.3);cursor:pointer}
+.sl::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--c);border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.sl:active{cursor:grabbing}.sl:active::-webkit-slider-thumb{cursor:grabbing}.sl:active::-moz-range-thumb{cursor:grabbing}
+.sl:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--fg)}
+.row.other .nm{color:var(--mut)}
+.row.other .sl{cursor:not-allowed;pointer-events:none}
+.row.other .sl::-webkit-slider-runnable-track{background:repeating-linear-gradient(135deg,var(--track) 0 4px,var(--track2) 4px 8px)}
+.row.other .sl::-moz-range-track{background:repeating-linear-gradient(135deg,var(--track) 0 4px,var(--track2) 4px 8px)}
+.row.other .sl::-moz-range-progress{background:transparent}
+.row.other .sl::-webkit-slider-thumb{visibility:hidden}.row.other .sl::-moz-range-thumb{visibility:hidden}
+.row.other .nbox input{border-style:dashed;background:var(--soft);color:var(--mut);cursor:not-allowed}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 14px;font-size:12px;cursor:pointer}
+.btn:hover{background:var(--soft)}
+.center{display:flex;justify-content:center;margin-top:16px}
+/* segmented + chips */
+.seg{display:flex;justify-content:center;margin-bottom:12px}
+.seg>div{display:inline-flex;border-radius:999px;background:var(--track2);padding:2px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:4px 14px;font-size:12px;cursor:pointer;color:var(--mut)}
+.seg button.on{background:var(--fg);color:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.chip:hover{border-color:var(--mut)}
+.chip.on{background:var(--c);color:var(--ink);border-color:transparent;font-weight:600}
+.chip .dot{width:8px;height:8px}
+.chip .n{opacity:.7;font-weight:400}
+/* hemicycle */
+.hemi{max-width:650px;margin:0 auto}
+#hemicycle{width:100%;height:auto;display:block}
+#hemicycle circle{transition:fill .3s}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;font-size:12px;color:var(--mut);margin:16px 0 14px}
+.legend .it{display:inline-flex;align-items:center;gap:6px}
+.legend .sq{width:10px;height:10px;border-radius:2px;flex:none}
+/* table */
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:500;color:var(--mut);padding:6px 6px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}
+td.seats{font-weight:700}
+.pos{color:var(--good)}.neg{color:var(--bad)}.zero{color:var(--mut)}
+td .nm{display:flex;align-items:center;gap:7px}
+td .nm span.t{min-width:0}
+.xp{border:0;background:none;cursor:pointer;width:18px;height:18px;flex:none;position:relative;padding:0}
+.xp::after{content:"";position:absolute;left:5px;top:4px;width:6px;height:6px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .15s}
+.xp.open::after{transform:rotate(45deg);top:3px}
+tr.bloc td{background:var(--soft)}
+tr.subr td{font-size:12px;color:var(--mut)}
+tr.subr td:first-child{padding-left:30px}
+/* coalition */
+.cbar{position:relative;height:24px;border-radius:6px;background:var(--track2);overflow:hidden;margin-top:18px}
+.cfill{height:100%;transition:width .3s}
+.cmaj{position:absolute;top:0;bottom:0;width:2px;background:var(--fg);transform:translateX(-1px)}
+.cmajlab{position:relative;height:16px;margin-bottom:4px}
+.cmajlab span{position:absolute;top:2px;transform:translateX(-50%);font-size:10px;color:var(--mut)}
+.cstat{text-align:center;font-size:13px;font-weight:600;min-height:20px}
+.cstat.ok{color:var(--good)}
+/* map */
+.mapwrap{position:relative;max-width:580px;margin:0 auto}
+#cartogram{width:100%;height:620px;display:block;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#cartogram.dragging{cursor:grabbing}
+#cartogram *{-webkit-user-drag:none}
+#tiles path{cursor:pointer;stroke:var(--stroke);stroke-width:.8;stroke-linejoin:round;vector-effect:non-scaling-stroke;transition:fill .25s}
+#tiles path:hover,#tiles path.sel,#tiles path:focus-visible{filter:brightness(.86)}
+#tiles path:focus{outline:none}
+.mapzoom{position:absolute;top:8px;right:8px;z-index:5;display:flex;flex-direction:column;border-radius:8px;overflow:hidden;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.mapzoom button{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--card);border:0;border-bottom:1px solid var(--line);font-size:17px;line-height:1;cursor:pointer;padding:0}
+.mapzoom button:last-child{border-bottom:0}
+.mapzoom button:hover{background:var(--soft)}
+.mapzoom button:disabled{opacity:.35;cursor:default}
+.tip{position:absolute;pointer-events:none;background:var(--tipbg);color:var(--tipfg);font-size:11px;line-height:1.55;padding:7px 10px;border-radius:7px;opacity:0;transition:opacity .12s;white-space:nowrap;z-index:10;transform:translate(-50%,-100%);box-shadow:0 4px 14px rgba(0,0,0,.25);min-width:128px}
+.tip.on{opacity:1}
+.tip .tt{font-weight:600;margin-bottom:2px}
+.tip .tr{display:flex;align-items:center;gap:6px}
+.tip .tr b{font-weight:700}
+.tip .tr .v{margin-left:auto;padding-left:14px}
+.tip .dot{width:8px;height:8px}
+.mapleg{margin:10px 0 0}
+.grad{display:inline-block;width:150px;height:10px;border-radius:5px;box-shadow:inset 0 0 0 1px var(--line)}
+/* probability model */
+.mc .stale{opacity:.45;transition:opacity .2s}
+.mcprog{height:3px;border-radius:2px;background:var(--track2);margin:0 0 14px;visibility:hidden;overflow:hidden}
+.mcprog.on{visibility:visible}
+.mcprog>div{height:100%;width:0;background:var(--fg)}
+.sliders2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+@media(max-width:560px){.sliders2{grid-template-columns:1fr}}
+.sl2{text-align:center}
+.sl2 .l{font-size:12px;color:var(--mut);margin-bottom:8px}
+.sl2 .val{font-size:14px;font-weight:600;margin-top:8px}
+.obar{display:flex;height:26px;border-radius:6px;overflow:hidden;gap:2px;background:var(--track2)}
+.obar>div{min-width:0;height:100%}
+.olegend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:12px;font-size:12px}
+.olegend .it{display:inline-flex;align-items:center;gap:6px}
+.olegend .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.rtbl{display:grid;grid-template-columns:minmax(0,max-content) 54px minmax(150px,1fr);align-items:stretch;column-gap:18px}
+.rtbl>*{display:flex;flex-direction:column;justify-content:center}
+.rtbl>.pn{flex-direction:row;align-items:center;justify-content:flex-start}
+.rtbl>.c{align-items:center}
+.rtbl>.rng{align-items:stretch}
+.rtbl>*{padding:13px 0;border-bottom:1px solid var(--line);min-width:0}
+.rtbl .h{font-size:11px;color:var(--mut);padding:4px 0 8px;font-weight:500}
+.rtbl .c{text-align:center}
+.rtbl .pn{white-space:nowrap;display:flex;align-items:center;gap:7px;font-weight:600;font-size:13px}
+.rtbl .sub.pn{font-weight:500;padding-left:22px;color:var(--mut)}
+.rng{text-align:center;font-size:12px}
+.rbar{position:relative;height:7px;border-radius:4px;background:var(--track2);margin-top:6px}
+.rbar .f{position:absolute;top:0;bottom:0;border-radius:4px}
+.rbar .m{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.cc{background:var(--soft);border-radius:14px;padding:18px 14px;text-align:center;margin-top:16px}
+.cc .pct{font-size:40px;font-weight:700;line-height:1}
+.cc .pct small{font-size:20px;font-weight:600;color:var(--mut);margin-left:2px}
+.cc .lab{margin-top:6px}
+.cc .tbar{height:6px;border-radius:3px;background:var(--track2);margin:12px auto 0;max-width:260px;overflow:hidden}
+.cc .tbar>div{height:100%;background:var(--good);border-radius:3px;width:0}
+.cc .stats[hidden]{display:none}
+.cc .stats{display:grid;grid-template-columns:1fr 1fr;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.cc .stats>div+div{border-left:1px solid var(--line)}
+.cc .stats b{display:block;font-size:16px}
+.hstat{height:38px;text-align:center;font-size:12px;line-height:19px;color:var(--mut);margin:12px 0 4px}
+.hstat b{color:var(--fg)}
+#hist{width:100%;height:auto;display:block;touch-action:pan-y}
+#hist .bar{transition:opacity .1s}
+#hist.hv .bar{opacity:.35}#hist.hv .bar.hi{opacity:1}
+#hist text{fill:var(--mut);font-size:11px;text-anchor:middle}
+.src{font-size:11px;color:var(--mut);line-height:1.5;text-align:center;padding:0 4px}
+.src a{color:inherit}
+@media(max-width:480px){.card{padding:12px 10px 14px}.legend,.olegend{gap:6px 12px}}
 </style>
 </head>
 <body>
+<div class="page">
+<h1>Botswana Seat Projection</h1>
+
+<div class="loc">
+  <svg class="worldmap" viewBox="0 0 220 98" width="220" height="98" role="img" aria-label="World map with Botswana in southern Africa highlighted in red"><path class="land" d="M218.6,68.7L218.8,68.5L218.9,68.8L218.7,69.1L218.3,69.2L218,69.1L218.1,68.8L218.3,68.6ZM219.9,68L219.5,68.2L219.1,68.3L219,68L219.4,67.9L219.6,67.9L220,67.6L220,67.6L219.9,68ZM0,67.6L0,67.6L0,67.6L0.1,67.6L0.1,67.9L0.1,68L0.1,68L0,67.6ZM138.1,28.6L138.4,29.1L138.9,29.3L139.4,29.6L140.2,29.8L141.1,29.6L141.1,29.4L140.9,28.9L140.9,28.1L140.4,27.9L140.4,27.4L140.1,27.4L140.1,26.8L140.6,26.9L141.1,26.7L140.6,26.3L140.4,25.9L139.9,26.1L140,26.6L139.7,26.1L139.7,25.9L139.7,25.7L139.6,25.4L138.9,25.2L138.5,24.5L138.1,24.3L138.1,24.1L138.6,24.2L138.6,23.7L139,23.6L139.5,23.7L139.5,23L139.3,22.5L138.7,22.6L138.2,22.4L137.6,22.7L137.2,22.9L137,23.3L136.5,23.4L136.1,24.1L136.7,24.8L136.7,25.3L137.5,26.1L137.9,26.5L138.2,27L138.5,27L138.7,27.2L138.3,27.3L138.3,27.8L138.2,28.1L138,28.2ZM25.4,7.9L25.4,7.9L26,8.4L26.5,9L26,9.4L26.1,9.6L26.5,9.1L27.7,9.2L28,9.8L27.2,10.1L26.3,10.1L25.6,10.7L25.3,10.9L24.9,10.8L24.7,10.6L24.3,10.4L24.5,10.2L24.1,10.1L23.5,10.2L23.5,9.9L23.9,9.7L23.1,9.8L23,10.1L22.4,10.4L22.4,10.4L25.4,7.9ZM197.6,10.4L197.6,10.4L197.3,10.7L196.6,10.6L197.5,11L198.3,11.5L198.8,11.7L199.1,11.9L199.2,12.1L198.1,12L197.2,12.5L196.9,12.5L196.6,13L196.2,13.4L196.4,13.7L195.2,13.2L194.4,13.7L193.9,13.5L193.7,13.8L192.9,13.7L193.2,14.1L193.1,14.8L193.4,15L194.1,15.2L194.9,16.1L194.5,16.2L194.7,16.7L195.2,17L194.6,17.4L195,18.1L194.4,18.3L194.7,19L194.5,19.6L193.9,19.2L192.9,18.2L191.4,16.7L190.9,15.7L191,15.3L190.7,15L191.4,14.9L191.5,14.1L191.8,13.4L192.2,12.9L191.7,12L191.1,12L191.4,12.5L190.8,13.2L189.6,12.5L188.5,12.7L188.3,13.8L189,14.2L188.1,14.3L187.3,14.4L186.9,13.9L186.1,13.8L185.7,14.1L184.1,14L182.5,14.2L181.9,15.5L181.1,17.1L182,17.2L182.5,17.6L183.1,17.8L183.2,17.4L183.9,17.5L185.2,18.2L185.6,18.8L185.6,19.5L186.1,20.3L186.6,21.4L186.4,22.4L186.5,22.9L186.2,23.7L185.9,24.6L185.8,25L185.2,25.4L184.9,25.4L184.3,25.1L183.8,25.6L183.9,25.8L183.6,25.8L183.5,26L183.5,26.3L183.7,26.8L183.5,26.9L183.5,27L183.3,27.3L183,27.4L182.8,27.6L183,27.9L182.9,28L183.2,28.1L183.7,28.4L184.5,29.2L184.9,29.7L185.2,30.5L185.1,30.9L184.7,31.1L184.3,31.4L183.8,31.4L183.6,31L183.5,30.5L182.9,29.7L183.3,29.6L182.7,29L182.3,28.9L182.3,29L182.2,29.1L182.1,28.9L181.9,28.9L181.7,28.7L181.8,28.4L181.9,28.3L181.8,28.2L181.7,27.8L181.6,27.7L181.3,27.6L180.9,27.4L180.2,27.7L179.9,28L179.4,28.2L179.6,27.8L179.3,27.6L179.6,27.1L179.1,26.7L178.7,27L178.3,27.5L178.1,27.9L177.6,28L177.4,28.3L177.9,28.8L178.4,28.9L178.6,29.2L179.1,29.4L179.6,28.9L180.2,29.2L180.6,29.2L180.8,29.6L180.1,29.8L179.9,30.2L179.5,30.5L179.4,31L180.2,31.4L180.6,32.1L181.2,32.8L181.8,33.4L182,33.9L181.7,34.1L181.9,34.5L182.3,34.7L182.4,35.3L182.4,35.9L182.1,35.9L181.9,36.7L181.7,37.7L181.3,38.5L180.6,39.2L179.9,39.8L179.3,39.9L179,40.2L178.7,39.9L178.4,40.3L177.7,40.7L177.1,40.8L177,41.5L176.7,41.6L176.4,41.1L176.5,40.8L175.6,40.5L175.4,40.7L174.7,41.3L174.3,42L174.2,42.5L174.8,43.2L175.5,44.2L176.2,44.6L176.6,45.2L177.1,46.5L177.1,47.8L176.7,48.2L176,48.7L175.5,49.3L174.8,50L174.6,49.5L174.7,49L174.2,48.6L173.7,48.5L173.4,48.1L173,47.4L172.4,47.1L171.9,47.1L171.9,46.5L171.4,46.5L171.4,47.3L171.2,48.4L171,49L171.1,49.5L171.5,49.5L171.8,50.2L172,50.8L172.3,51.2L172.7,51.3L173.1,51.7L173.2,51.7L173.6,52.2L173.9,52.6L173.9,53.1L173.9,53.5L173.9,53.7L174,54.1L174.2,54.3L174.5,55L174.5,55.2L174,55.2L173.4,54.7L172.7,54.1L172.6,53.8L172.2,53.3L172.1,52.7L171.9,52.3L171.9,51.8L171.8,51.5L171.5,51.2L171.4,50.9L171.1,50.5L170.7,50.1L170.7,50.5L170.5,50.1L170.6,49.7L170.7,49L170.6,48.5L170.7,47.9L170.5,47.5L170.4,46.7L170.2,46.3L169.9,45.5L169.6,44.6L169.3,44L168.9,44.4L168.3,44.9L168,44.8L167.6,44.6L167.7,43.7L167.4,43.1L166.8,42.2L166.9,42L166.5,41.9L166,41.3L165.8,40.9L165.7,40.6L165.5,40.2L165.2,39.8L164.6,39.8L164.7,40.1L164.6,40.5L164.3,40.3L164.2,40.4L164.1,40.4L163.8,40.3L163.8,40.6L163.4,40.6L162.6,40.7L162.7,41.2L162.5,41.7L161.7,42.2L161.1,43L160.7,43.5L160.2,43.9L160.2,44.3L159.9,44.4L159.4,44.7L159.1,44.7L159,45.3L159.2,46.2L159.3,46.8L159.1,47.5L159.2,48.7L158.8,48.7L158.6,49.3L158.8,49.5L158.2,49.7L158.1,50.2L157.8,50.4L157.2,49.7L156.9,48.7L156.6,48L156.3,47.7L156,47L155.7,46.1L155.6,45.6L154.9,44.7L154.5,43.3L154.3,42.4L154.2,41.5L154,40.8L153.1,41.2L152.7,41.2L151.8,40.3L152.1,40L151.8,39.7L151.1,39.1L150.6,38.9L150.3,38.4L149.8,37.9L148.7,38L147.7,38L146.9,38.1L145.8,37.9L145.1,37.7L144.4,37.7L144,36.8L143.7,36.6L143.3,36.8L142.7,37.1L142,36.9L141.3,36.3L140.7,36.1L140.2,35.4L139.7,34.5L139.4,34.6L138.9,34.4L138.8,34.6L138.4,34.6L138.6,34.9L138.5,35.1L138.8,35.6L139.1,36.2L139.4,36.4L139.5,36.7L140,37L140,37.3L140,37.5L140.1,37.7L140.3,37.9L140.4,38.2L140.5,38.4L140.4,37.8L140.5,37.5L140.7,37.4L140.9,37.6L141,38L140.9,38.5L141,38.7L141.1,38.7L141.2,38.9L141.6,38.8L142.1,38.8L142.5,38.8L142.9,38.3L143.2,37.9L143.6,37.4L143.7,37.2L143.8,37.2L143.8,37.5L143.7,37.7L143.9,38.2L144.2,38.7L144.6,39L145,39.1L145.4,39.2L145.7,39.6L145.9,39.9L146.1,40L146.1,40.1L146,40.5L145.9,40.8L145.6,41L145.5,41.5L145.2,41.4L145.1,41.6L145,42L145.1,42.5L145.1,42.5L144.8,42.5L144.5,42.8L144.4,43.2L144.3,43.3L143.9,43.3L143.7,43.5L143.7,43.8L143.4,44L143.1,43.9L142.7,44.1L142.4,44.2L142,44.4L141.9,44.7L141.9,44.9L141.3,45.2L140.4,45.6L139.8,46.1L139.6,46.1L139.4,46.1L139,46.4L138.7,46.5L138.1,46.6L138,46.6L137.9,46.8L137.7,46.8L137.6,47L137.3,47L137.1,47.1L136.7,47.1L136.5,46.7L136.5,46.3L136.4,46L136.3,45.5L136.1,45.2L136.2,45.2L136.1,44.9L136.2,44.7L136.1,44.4L136,44.1L135.8,43.9L135.8,43.6L135.4,43.3L135.1,42.7L134.9,42.2L134.4,41.7L134.1,41.5L133.7,40.9L133.6,40.4L133.6,39.9L133.2,39.1L132.9,38.8L132.5,38.7L132.3,38.3L132.3,38.1L132.1,37.8L132,37.6L131.7,37.1L131.3,36.5L130.9,36L130.6,36L130.7,35.6L130.7,35.3L130.7,35L130.7,34.9L130.6,35.2L130.5,35.8L130.4,36.1L130.2,36.3L130,36L129.7,35.7L129.2,34.7L129.2,34.8L129.5,35.5L129.9,36.2L130.4,37.4L130.7,37.8L130.9,38.2L131.5,39L131.4,39.1L131.4,39.6L132.2,40.2L132.3,40.3L132.5,41.1L132.4,41.2L132.5,41.9L132.8,42.8L133.1,43L133.4,43.2L133.8,44.1L134,44.7L134.4,45.1L135.2,45.7L135.6,46.1L135.9,46.6L136.1,46.8L136.4,47L136.6,47.2L136.6,47.5L136.3,47.7L136.5,47.9L136.7,48L136.9,48.3L137.2,48.6L137.5,48.6L138,48.5L138.7,48.4L139.2,48.2L139.5,48.1L139.7,48L140.1,47.9L140.3,47.9L140.6,47.8L140.9,47.8L141.2,47.5L141.4,47.5L141.4,47.7L141.4,48.1L141.4,48.5L141.3,48.8L141.1,49.5L140.9,50.3L140.5,51.2L140,52.3L139.5,53.1L138.8,54.1L138.2,54.7L137.3,55.4L136.7,55.9L136,56.8L135.9,57.2L135.7,57.3L135.3,57.6L135.1,57.9L134.9,58L134.8,58.5L134.6,58.8L134.5,59.2L134.2,59.5L134.2,59.5L133.9,60.3L134,60.8L134.3,61L134.4,61.2L134.2,61.6L134.2,61.9L134.2,62.2L134.4,62.6L134.6,63.3L134.8,63.5L134.9,63.8L134.9,64.5L134.9,65.2L134.9,66.3L135,66.6L134.8,67.2L134.5,67.7L134.1,68.1L133.5,68.4L132.8,68.7L132.1,69.5L131.8,69.6L131.4,70.1L131.1,70.3L131,70.8L131.3,71.4L131.4,71.8L131.4,72L131.5,72L131.4,72.7L131.3,73L131.4,73.1L131.3,73.4L131.1,73.7L130.6,73.9L129.8,74.3L129.5,74.6L129.6,74.9L129.7,74.9L129.6,75.3L129.4,75.8L129.3,76.4L129.1,76.8L128.7,77.1L128.6,77.2L128.3,77.6L128.1,78L127.7,78.5L127,79.2L126.6,79.7L126.1,80L125.5,80.3L125.2,80.3L125.1,80.5L124.7,80.4L124.4,80.5L123.8,80.4L123.4,80.5L123.2,80.4L122.6,80.7L122.1,80.8L121.7,81.1L121.4,81.1L121.2,80.9L121,80.9L120.8,80.5L120.7,80.6L120.7,80.4L120.7,80L120.5,79.5L120.7,79.4L120.7,78.9L120.4,78.2L120.1,77.6L120.1,77.6L119.7,76.6L119.3,76.1L119.1,75.6L119,74.9L118.8,74.3L118.7,73.2L118.7,72.4L118.6,72L118.4,71.7L118.1,71.1L117.8,70.2L117.7,69.8L117.2,69.1L117.2,68.5L117.1,68.1L117.2,67.4L117.4,66.8L117.5,66.5L117.7,65.8L117.8,65.5L118.2,65.1L118.4,64.7L118.4,64.2L118.4,63.8L118.2,63.5L118.1,63.1L117.9,62.7L118,62.5L118.2,62.2L118,61.6L117.9,61.1L117.5,60.6L117.6,60.5L117.5,60.3L117.4,59.7L116.9,59L116.2,58.2L115.8,57.7L115.4,56.9L115.5,56.7L115.6,56.4L115.7,55.9L115.9,55.4L115.8,55.3L116,54.5L116.1,53.9L115.8,53.4L115.5,53.3L115.4,53L115.2,52.9L115.3,52.7L114.6,53L114.4,52.9L114.1,53.1L113.6,53.1L113.3,52.6L113.1,52.1L112.7,51.6L112.2,51.6L111.7,51.6L111.2,51.7L110.7,51.9L109.7,52.3L109.3,52.5L108.8,52.7L108.2,52.5L108,52.6L107.5,52.4L107.1,52.4L106.4,52.5L106,52.8L105.4,53L105.2,53L105.1,53L104.4,52.7L103.9,52.1L103.4,51.7L102.9,51.3L102.8,51.2L102.3,50.9L102,50.5L101.9,50.3L101.8,49.7L101.6,49.3L101.3,49L101.2,48.9L101,48.8L101,48.5L100.9,48.3L100.7,48.2L100.4,47.9L100.1,47.9L100,47.7L100,47.6L99.8,47.4L99.8,47.3L99.7,46.7L99.8,46.4L99.5,45.8L99.2,45.6L99.5,45.4L99.8,44.9L99.9,44.6L99.9,44.2L100.1,43.8L100.2,43.1L100.1,42.4L100.1,42.1L100.1,41.7L100,41.4L99.7,41.1L99.7,40.8L99.7,40.4L100,40.2L100.2,39.9L100.2,39.6L100.4,39.1L100.7,38.6L100.9,38.5L101.1,38.1L101.1,37.7L101.4,37.3L101.8,37L102.2,36.3L102.2,36.3L102.5,36L103,35.9L103.5,35.4L103.8,35.2L104.3,34.6L104.2,33.7L104.5,33.1L104.5,32.7L104.9,32.2L105.5,31.9L106,31.6L106.4,30.9L106.6,30.4L107,30.4L107.3,30.7L107.9,30.7L108.5,30.9L108.7,30.9L109.3,30.5L109.9,30.3L110.3,30L110.8,29.8L111.8,29.7L112.8,29.6L113.1,29.7L113.6,29.5L114.2,29.5L114.5,29.6L114.9,29.6L115.5,29.3L115.9,29.4L115.9,29.7L116.4,29.5L116.4,29.6L116.1,30L116.1,30.3L116.4,30.5L116.3,31.1L115.9,31.5L116,31.9L116.3,31.9L116.5,32.2L116.7,32.3L117.4,32.6L117.7,32.5L118.2,32.6L119,32.9L119.3,33.6L119.8,33.7L120.6,34L121.3,34.4L121.6,34.2L121.8,33.9L121.7,33.3L121.8,33L122.2,32.6L122.6,32.5L123.4,32.7L123.7,33L123.9,33L124.1,33.1L124.7,33.2L124.8,33.5L125.6,33.4L126.2,33.6L126.8,33.8L127.1,34L127.5,33.7L127.7,33.5L128.3,33.5L128.7,33.6L128.9,33.9L129,33.7L129.5,33.8L129.9,33.9L130.2,33.7L130.4,33.5L130.3,33.4L130.4,33.1L130.5,32.5L130.6,32.4L130.6,32.4L130.7,31.8L131,31.3L131,31.2L130.9,30.7L131,30.4L130.7,30.1L130.9,29.8L130.6,29.9L130.1,29.7L129.7,30.1L128.8,30.2L128.3,29.8L127.7,29.8L127.6,30.1L127.2,30.2L126.6,29.8L126,29.8L125.6,29.1L125.1,28.7L125.4,28.1L125,27.8L125.5,27.1L126.4,27.1L126.6,26.5L127.7,26.6L128.3,26.2L128.9,26L129.9,25.9L130.9,26.4L131.8,26.7L132.4,26.6L132.9,26.7L133.5,26.3L133.6,26L133.4,25.5L133,25.2L132.7,25.2L132.4,24.9L131.6,24.3L131,24.1L130.4,23.7L130.8,23.6L131.2,23L130.8,22.7L131.6,22.4L131.5,22.2L131.1,22.4L130.6,22.4L130.3,22.6L129.8,22.7L129.4,22.9L129.4,23.3L129.4,23.4L129.7,23.5L130.3,23.5L130.2,23.8L129.6,23.9L128.9,24.3L128.6,24.1L128.7,23.8L128.1,23.6L128.1,23.5L128.6,23.2L128.5,23.2L128.4,23.1L127.6,22.9L127.5,22.6L127,22.7L126.8,23.1L126.5,23.6L126.5,23.8L126.3,24L126.1,23.9L126,24.8L125.8,25L125.6,25.6L125.8,26L125.9,26.2L126.4,26.5L126.4,26.6L125.7,26.7L125.5,26.9L125,27.3L124.8,27L124.8,26.8L124.5,26.8L124.2,26.7L123.5,26.9L123.9,27.3L123.6,27.4L123.3,27.4L123,27.1L122.9,27.2L123.1,27.6L123.4,28L123.2,28.1L123.5,28.5L123.8,28.7L123.9,29.1L123.3,28.9L123.5,29.2L123.1,29.3L123.4,30L123,30L122.5,29.7L122.3,29.1L122.1,28.6L121.9,28.3L121.6,27.9L121.5,27.7L121.4,27.6L121.4,27.5L121.1,27.2L121,26.9L121,26.4L121.1,26.2L121,26.1L120.8,26L120.7,25.8L120.4,25.6L119.9,25.4L119.5,25.1L119,24.9L118.5,24.4L118.6,24.3L118.3,24L118.3,23.8L117.9,23.7L117.8,24L117.6,23.7L117.6,23.5L117.6,23.5L117.7,23.4L117.3,23.3L116.9,23.6L116.9,23.9L116.8,24.1L117,24.5L117.6,24.8L117.9,25.4L118.6,26L119,26L119.2,26.2L119,26.3L119.5,26.6L120,26.8L120.5,27.1L120.5,27.3L120.4,27.5L120.1,27.2L119.6,27.1L119.4,27.5L119.8,27.8L119.8,28.2L119.5,28.2L119.3,28.8L119,28.9L119,28.7L119.1,28.3L119.2,28.1L119,27.7L118.8,27.4L118.6,27.3L118.4,27L118,26.8L117.7,26.5L117.3,26.5L116.9,26.2L116.3,25.7L115.9,25.3L115.7,24.6L115.4,24.5L115,24.3L114.7,24.4L114.4,24.7L114.2,24.8L113.7,25.2L112.6,25L111.7,25.2L111.7,25.6L111.7,26L111.2,26.5L110.5,26.7L110.4,26.9L110.1,27.3L109.8,27.9L110.1,28.3L109.7,28.6L109.6,29.1L109.2,29.2L108.8,29.8L108,29.8L107.5,29.8L107.1,30L106.9,30.3L106.6,30.2L106.4,30L106.2,29.6L105.7,29.5L105.5,29.7L105.2,29.6L104.9,29.6L105,29.1L104.9,28.6L104.7,28.6L104.5,28.3L104.6,27.8L104.8,27.6L104.9,27.3L105,26.8L105,26.5L104.9,26.3L104.9,26.1L104.9,25.5L104.7,25.2L105.5,24.7L106.2,24.9L107,24.8L107.6,25L108,24.9L108.9,25L109.2,24.5L109.3,23.1L108.8,22.4L108.4,22L107.5,21.8L107.5,21.3L108.2,21.1L109.1,21.3L108.9,20.5L109.5,20.8L110.7,20.3L110.9,19.7L111.4,19.5L111.8,19.4L112.1,19.2L112.5,18.2L113.2,17.9L113.7,17.9L113.8,17.8L114.2,17.8L114.3,17.9L114.7,17.6L114.5,17.3L114.5,16.9L114.2,16.6L114.2,15.9L114.3,15.7L114.4,15.5L114.9,15.5L115,15.3L115.4,15.1L115.5,15.4L115.3,15.7L115.4,15.8L115.7,15.9L115.6,16.2L115.4,16.1L115.1,16.6L115.2,16.9L115.2,17.2L115.8,17.4L115.8,17.6L116.3,17.5L116.6,17.3L117.2,17.5L117.5,17.8L117.8,17.6L118.6,17.3L119.3,17L119.8,17.1L119.9,17.3L120.4,17.3L120.5,17L121.2,16.8L121,16.2L120.9,15.7L121.1,15.3L121.6,15.1L122.1,15.6L122.5,15.6L122.5,15.1L122.5,14.7L122.3,14.7L122,14.5L121.9,14.1L122.5,14L123.1,13.9L123.7,14L124.2,13.9L124.7,13.6L124.2,13.3L123.3,13.3L122.4,13.6L121.6,13.7L121.3,13.3L120.7,13.1L120.8,12.5L120.5,11.9L120.6,11.5L121,11.1L122,10.5L122.3,10.3L122.3,10.1L121.5,9.8L120.7,9.9L120.3,10.4L120.5,10.8L119.7,11.3L118.8,11.8L118.6,12.7L119,13.2L119.5,13.5L119.1,14.3L118.6,14.4L118.5,15.6L118.3,16.2L117.6,16.1L117.4,16.6L116.8,16.7L116.6,16L116.1,15.3L115.6,14.4L115.3,13.9L114.3,14.7L113.6,14.9L112.9,14.5L112.7,13.8L112.5,12.3L112.9,11.9L114.2,11.4L115.1,10.7L116,9.8L117,8.6L117.8,8.2L118.9,7.4L119.9,7.2L120.7,7.2L121.3,6.7L122.2,6.7L123,6.6L124.5,7L123.9,7.2L124.5,7.6L125,7.4L125.8,7.7L127.1,7.9L129.1,8.6L129.6,8.9L129.7,9.3L129.3,9.6L128.5,9.8L126.3,9.3L125.9,9.4L126.8,9.8L126.9,10.1L127.1,10.8L127.8,11L128.2,11.1L128.2,10.8L127.8,10.5L128.1,10.3L129.3,10.7L129.7,10.5L129.3,10.1L130.2,9.5L130.7,9.5L131.2,9.7L131.3,9.3L130.8,8.9L131,8.6L130.5,8.2L131.9,8.4L132.3,8.7L131.7,8.8L131.8,9.1L132.2,9.4L132.9,9.2L132.9,8.8L133.8,8.5L135.3,8L135.6,8L135.3,8.4L135.9,8.5L136.2,8.3L137.1,8.2L137.7,8L138.4,8.4L138.7,8L138.1,7.6L138.2,7.4L139.7,7.6L140.4,7.8L142.5,8.5L142.6,8.2L142,7.8L141.9,7.7L141.3,7.6L141.3,7.4L140.9,6.9L140.8,6.7L141.3,6.2L141.4,5.6L141.6,5.5L142.9,5.7L143.2,6L143,6.5L143.4,6.7L143.8,7.1L144.1,7.9L144.8,8.3L144.8,8.7L144.3,9.6L144.9,9.7L145,9.4L145.4,9.3L145.4,9L145.7,8.7L145.2,8.3L145.2,7.9L144.7,7.9L144.4,7.5L144.4,6.9L143.6,6.5L144.2,6.1L143.8,5.6L144.1,5.6L144.5,6L144.6,6.5L145.2,6.6L144.7,6.2L145.4,6L146.3,5.9L147.3,6.3L146.6,5.8L146.2,5.2L146.9,5L148,5.1L148.9,5L148.3,4.7L148.6,4.3L149.1,4.3L149.7,4L150.8,4L150.9,3.8L152,3.8L152.4,3.9L153.2,3.6L154,3.6L153.9,3.4L154.1,3.1L154.9,2.9L155.8,3.1L155.4,3.2L156.4,3.3L156.8,3.6L157.1,3.4L158.3,3.4L159.6,3.7L160.1,3.9L160.3,4.2L160,4.4L159.1,4.7L158.9,4.9L159.5,4.9L160.3,5.1L160.6,5L161.2,5.3L161.3,5.2L161.9,5.1L163.4,5.2L163.8,5.5L165.8,5.6L165.4,5.1L166.4,5.2L167.1,5.2L168.2,5.5L168.7,5.9L168.7,6.1L169.7,6.6L170.7,6.8L170.5,6.2L171.5,6.5L172.1,6.3L173.2,6.5L173.4,6.3L174.2,6.4L173.3,5.9L173.6,5.6L178.2,6L179,6.4L180.7,6.8L182.4,6.7L183.4,6.8L184.1,7L184.6,7.5L185.3,7.7L185.8,7.5L186.6,7.5L187.7,7.6L188.5,7.6L189.9,8.1L190.3,7.9L189.4,7.5L189.3,7.3L191,7.4L191.9,7.4L193.6,7.7L194.6,7.9L197.6,10.4ZM44.2,7.5L44.9,7.6L45.4,7.9L45.8,8L46.4,7.7L47.2,7.5L47.8,7.6L48.8,7.4L49.7,7.2L49.8,7.5L50.2,7.3L50.6,7L50.9,7.1L51.2,7.6L52.1,7.2L51.8,7.7L52.5,7.6L52.8,7.4L53.3,7.4L53.8,7.7L54.7,7.9L55.3,8L55.8,8L56.2,8.3L55.3,8.6L56,8.7L57.4,8.7L57.9,8.5L58.1,8.9L58.8,8.6L58.5,8.3L59,8.1L59.6,8.1L60,8L60.3,8.2L60.5,8.5L61.1,8.5L61.7,8.8L62.5,8.7L63.2,8.7L63.4,8.3L63.9,8.2L64.5,8.4L64.1,9L64.8,8.5L65.1,8.5L65.7,7.9L65.5,7.5L65.1,7.3L65.6,6.6L66.5,6.2L67,6.3L67.3,6.5L67.5,7.2L66.9,7.5L67.6,7.6L67.2,8.2L68.2,7.8L68.5,8.2L68.1,8.6L68.3,9L69,8.6L69.7,8.1L70.1,7.4L70.8,7.4L71.4,7.5L71.9,7.8L71.7,8.1L71.2,8.5L71.3,8.8L71.1,9.1L69.9,9.5L69.2,9.6L68.8,9.4L68.5,9.7L67.7,10.3L67.4,10.5L66.6,11L65.9,11L65.3,11.3L65.1,11.7L64.5,11.8L63.5,12.3L62.6,13L62.1,13.5L61.7,14.3L62.4,14.4L62.3,15L62.2,15.5L63,15.4L63.8,15.7L64.2,15.9L64.5,16.2L65,16.4L65.5,16.7L66.3,16.8L66.8,16.8L66.5,17.4L66.4,18.1L66.5,18.9L67,19.5L67.5,19.3L68.1,18.6L68.2,17.5L68,17.1L69,16.8L69.8,16.4L70.2,15.9L70.4,15.4L70.3,14.9L69.9,14.4L70.8,13.7L70.8,13.1L71.1,12.1L71.6,12L72.3,12.1L72.8,12.2L73.3,12L73.7,12.2L74.1,12.6L74.2,12.9L75,12.9L74.8,13.5L74.6,14.3L75.1,14.4L75.3,14.8L76.2,14.4L76.9,13.7L77.4,13.4L77.5,14L77.9,14.8L78.2,15.6L77.8,16L78.4,16.4L78.8,16.8L79.5,17L79.8,17.2L79.9,17.7L80.2,17.8L80.4,18.1L80.2,18.9L79.8,19.1L79.3,19.4L78.3,19.6L77.5,20.2L76.6,20.3L75.4,20.1L74.6,20.1L74.1,20.2L73.5,20.7L72.7,21L71.6,21.9L70.8,22.6L71.3,22.4L72.4,21.5L73.7,20.9L74.6,20.9L75,21.2L74.3,21.7L74.3,22.4L74.3,23L74.9,23.3L75.9,23.2L76.6,22.4L76.5,22.9L76.8,23.2L76,23.7L74.7,24.1L74.1,24.4L73.3,24.9L72.9,24.8L73,24.2L74.2,23.6L73.3,23.7L72.6,23.7L72.7,24L72,24.3L71.3,24.6L70.7,24.8L70.3,25.2L70.1,25.4L70,25.7L70.1,26.1L70.3,26.1L70.3,25.9L70.5,26L70.4,26.2L70,26.3L69.7,26.3L69.2,26.5L69,26.5L68.6,26.5L68.1,26.7L69,26.6L69.1,26.7L68.3,26.9L67.9,26.9L67.9,26.9L67.7,27.1L67.9,27.1L67.6,27.6L67.1,28.2L67.1,28L67,27.9L66.8,27.8L66.8,28.1L66.9,28.3L66.9,28.5L66.6,28.8L66.2,29.4L66.1,29.4L66.4,28.9L66.2,28.6L66.3,28L66.1,28.3L66.1,28.8L65.7,28.7L66.1,28.9L65.9,29.6L66.1,29.6L66.1,29.9L66,30.6L65.5,31.1L64.9,31.3L64.4,31.8L64.1,31.8L63.7,32.1L63.6,32.3L62.8,32.8L62.4,33.1L62.1,33.5L61.9,34.1L61.9,34.6L61.9,35.2L62.1,35.7L62,36L62.2,36.8L62.1,37.3L62,37.6L61.8,38L61.6,38.1L61.3,38L61.3,37.7L61.1,37.6L60.8,36.9L60.7,36.4L60.6,36.1L60.9,35.6L60.8,35.2L60.4,34.6L60.2,34.5L59.5,34.8L59.5,34.8L59.2,34.5L58.9,34.3L58.2,34.4L57.7,34.3L57.2,34.4L57,34.5L57,34.7L57,34.9L57.1,35.1L56.9,35.2L56.7,35.1L56.5,35.2L56.1,35.2L55.7,34.8L55.2,34.9L54.8,34.7L54.4,34.8L53.8,35L53.2,35.5L52.5,35.8L52.1,36.1L51.9,36.5L51.8,37L51.7,37.3L51.8,37.6L51.4,38.2L51.2,38.7L51,39.7L50.9,40L50.9,40.4L51.1,40.8L51.1,41.3L51.4,41.9L51.5,42.3L51.7,42.6L52.3,42.8L52.5,43.1L53.1,42.9L53.5,42.8L54,42.7L54.4,42.6L54.8,42.3L55,41.9L55.2,41.3L55.3,41.1L55.8,40.9L56.4,40.7L56.9,40.7L57.3,40.7L57.4,40.8L57.4,41.2L57,41.6L56.8,42L56.9,42.2L56.7,42.5L56.5,43L56.4,42.8L56.3,42.9L56.2,43L56.4,43L56.3,43.2L56.2,43.5L56.2,43.6L56.1,43.8L56.2,43.9L56,44.3L55.9,44.5L55.8,44.5L55.6,44.7L55.8,44.9L55.9,44.8L56.1,44.9L56.1,44.9L56.3,44.8L56.4,44.7L56.5,44.8L56.6,44.8L56.9,44.8L57.2,44.8L57.4,44.7L57.4,44.7L57.6,44.7L57.8,44.7L57.9,44.7L58.1,44.7L58.3,44.8L58.4,44.8L58.6,44.9L58.8,45.1L59,45.2L59.1,45.4L59,45.4L59,45.6L59,45.9L58.9,46.1L58.8,46.4L58.7,46.7L58.8,46.9L58.7,47.2L58.6,47.3L58.6,47.6L58.6,47.8L58.4,48L58.5,48.2L58.5,48.3L58.7,48.7L58.9,49L59.2,49.3L59.4,49.5L59.3,49.7L59.6,49.7L59.6,49.7L59.8,49.8L60.1,49.8L60.4,49.6L60.8,49.5L61,49.2L61.3,49.3L61.3,49.4L61.6,49.4L61.9,49.5L62.1,49.7L62.3,49.9L62.6,49.9L63.1,49.4L63.4,49.4L63.4,49.1L63.6,48.5L63.9,48.2L64.3,48.2L64.4,48L64.9,48.1L65.4,47.7L65.6,47.6L65.9,47.2L66.1,47.3L66.3,47.4L66.2,47.7L66.1,47.9L65.8,47.9L65.9,48.3L65.9,48.6L65.6,49.1L65.8,49.6L66.1,49.6L66.3,49.1L66.1,48.8L66.1,48.3L66.9,48L66.8,47.6L67,47.4L67.2,47.9L67.7,47.9L68,48.3L68,48.6L68.6,48.6L69.3,48.5L69.6,48.8L70.1,48.9L70.4,48.7L70.4,48.5L71.2,48.5L71.9,48.4L71.4,48.7L71.6,49L72.1,49.1L72.5,49.4L72.6,50L72.9,50L73.2,50.1L73.6,50.4L73.9,50.9L73.9,51.2L74.2,51.2L74.5,51.6L74.7,51.8L75.4,52L75.5,51.9L76,51.8L76.7,52L76.9,52.1L77.3,52.2L78,52.9L78.1,53.1L78.3,53.1L78.4,53.5L78.8,54.8L79.1,54.9L79.1,55.4L78.6,56L78.8,56.2L79.9,56.3L80,57L80.4,56.5L81.2,56.8L82.2,57.2L82.5,57.6L82.4,58L83.2,57.8L84.4,58.2L85.3,58.2L86.2,58.8L87,59.6L87.5,59.8L88,59.8L88.2,60L88.5,60.9L88.6,61.4L88.4,62.6L88.1,63L87.2,64L86.9,64.8L86.4,65.5L86.3,65.5L86.1,66L86.2,67.3L86.1,68.4L86.1,68.9L85.9,69.2L85.8,70.2L85.3,71.1L85.2,71.8L84.8,72.2L84.7,72.6L84,72.6L83.1,72.9L82.7,73.2L82,73.4L81.4,74L81,74.7L80.9,75.2L81.1,75.6L81,76.3L80.9,76.7L80.6,77.1L80.1,78.4L79.6,78.9L79.3,79.3L79.1,80L78.8,80.4L78.6,80.8L78,81.2L77.6,81.1L77.3,81.2L76.7,80.8L76.3,80.9L75.8,80.5L75.9,80.8L76.7,81.5L76.7,82L77.1,82.3L77.2,82.6L76.8,83.5L76,83.9L74.9,84.1L74.3,84L74.5,84.4L74.5,85L74.6,85.3L74.4,85.6L73.8,85.7L73.2,85.4L73,85.6L73.3,86.3L73.7,86.5L74,86.3L74.2,86.7L73.7,86.9L73.4,87.3L73.5,88L73.5,88.4L73,88.4L72.6,88.8L72.6,89.3L73.3,89.8L73.9,90L73.8,90.6L73.3,91L73.2,91.8L72.8,92.1L72.7,92.4L73.1,93.1L73.6,93.5L73.4,93.5L72.9,93.5L72.7,93.6L72.3,93.9L72.4,94.5L72.2,94.5L71.5,94.3L70.7,93.8L69.9,93.5L69.6,93L69.6,92.6L69.2,92.2L68.7,91L68.7,90.3L69.1,89.8L68.2,89.6L68.5,88.9L68.4,87.8L69.1,88L69,86.5L68.5,86.4L68.6,87.2L68.2,87.1L68.1,86.1L68,84.8L68.1,84.3L67.7,83.6L67.5,82.8L67.7,82.8L67.8,81.6L68,80.5L68,79.4L67.7,78.3L67.8,77.7L67.5,76.8L67.7,76L67.6,74.6L67.6,73.1L67.6,71.5L67.4,70.3L67.2,69.3L66.5,68.9L66.4,68.6L65.1,67.8L64,67.1L63.5,66.6L63.1,66L63.2,65.8L62.6,64.9L61.9,63.5L61.3,62.1L61,61.8L60.8,61.3L60.3,60.8L59.8,60.5L60,60.2L59.7,59.5L59.9,59L60.4,58.6L60.7,58L60.5,57.7L60.3,58L59.9,57.7L60.1,57.5L59.9,56.9L60.2,56.8L60.3,56.3L60.5,55.9L60.5,55.6L60.8,55.4L61.2,55.1L61.1,54.9L61.4,54.9L61.4,54.5L61.5,54.2L61.8,54.2L62.1,53.7L62.3,53.4L62.1,53.2L62.2,52.8L62.1,52.1L62.2,51.9L62.2,51.3L61.9,50.9L61.7,50.7L61.6,50.4L61.8,50.2L61.6,50.1L61.5,49.9L61.2,49.7L61,49.7L60.8,50L60.6,50.2L60.4,50.2L60.4,50.3L60.6,50.7L60.5,50.8L60.4,50.9L60.1,51L60,50.5L59.9,50.6L59.7,50.6L59.6,50.3L59.4,50.3L59.2,50.2L58.9,50.2L58.9,50.3L58.8,50.2L58.5,50.1L58.4,49.9L58.5,49.8L58.5,49.6L58.3,49.5L58.1,49.3L57.9,49.2L57.8,49L57.7,48.9L57.7,49.1L57.6,49.3L57.4,49.1L57.3,49L57.2,48.9L57.2,48.6L57.3,48.4L57.1,48.3L57.3,48.2L57.1,48L56.8,47.7L56.7,47.4L56.5,47.2L56.2,46.9L56.3,46.8L56.4,46.9L56.4,46.8L56.3,46.6L56.1,46.5L56.1,46.7L55.7,46.7L55.5,46.6L55.3,46.5L54.9,46.4L54.8,46.3L54.5,46.2L54.1,46.1L53.8,46L53.5,45.7L52.9,44.9L52.6,44.7L52.1,44.5L51.8,44.6L51.3,44.8L51,44.9L50.5,44.7L50.1,44.6L49.6,44.3L49.1,44.1L48.5,43.8L48,43.5L47.9,43.3L47.6,43.2L47,43L46.8,42.7L46.2,42.3L46,41.8L45.9,41.5L46.1,41.4L46.1,41.2L46.2,41L46.3,40.8L46.1,40.4L46.1,40.2L46,39.8L45.6,39.1L45.1,38.5L44.9,38.1L44.5,37.8L44.4,37.6L44.6,37.1L44.4,37L44.1,36.6L44.1,36.1L43.8,36.1L43.5,35.7L43.3,35.3L43.4,35.1L43.2,34.6L43.2,34L43.2,33.7L42.9,33.5L42.7,33.5L42.4,33.3L42.2,33.6L42.2,33.9L42.1,34.5L42.3,34.8L42.6,35.3L42.6,35.4L42.7,35.5L42.7,35.7L42.8,35.7L42.8,36.2L42.9,36.4L43,36.6L43.3,37L43.3,37.7L43.4,38L43.5,38.3L43.5,38.7L43.7,38.7L43.9,39L44.1,39.4L44,39.5L43.7,39.8L43.6,39.8L43.5,39.3L43.2,38.9L42.9,38.6L42.6,38.4L42.8,37.8L42.8,37.5L42.5,37.2L42.2,36.9L42.1,37L42,36.8L41.7,36.6L41.4,36.2L41.5,36.2L41.7,36.2L42,35.9L42.1,35.6L41.8,35.1L41.5,34.9L41.4,34.5L41.3,34L41.2,33.4L41.2,32.8L41.2,32.4L41,32L40.7,31.9L40.8,31.7L40.4,31.6L40.3,31.4L39.8,31.4L39.7,31.3L39.7,30.9L39.4,30.1L39.4,29.1L39.4,29L39.3,28.7L39.1,28.1L39.3,27.6L39.1,27.2L39.5,26.6L39.8,26L39.8,25.4L40.4,24.8L40.8,24.1L41.2,23.5L41.5,22.5L41.7,21.9L41.7,21.6L41.9,21.5L42.5,21.7L42.5,22.4L42.7,22.2L42.9,21.6L43,21L43,21L42.3,20.4L42.1,20.1L41.3,19.8L41.3,19.2L41.7,18.7L41.2,18.4L41.5,17.9L41.1,17.4L41.4,17.1L41.3,16.8L40.9,16.6L41.2,16L40.9,15.5L41.1,14.8L40.7,14.8L39.9,14.8L39.4,14.6L38.9,13.9L38.5,13.8L37.8,13.5L37.1,13.6L36.3,13.3L36,13L35.3,13.2L35,13.6L34.7,13.7L34,13.8L33.3,14L32.7,14.2L32.9,13.8L33.7,13.1L34.4,12.9L34.5,12.8L33.5,13.1L32.8,13.6L31.6,14L31.7,14.3L30.8,14.8L30,15.1L29.3,15.3L28.9,15.6L27.8,15.9L27.4,16.3L26.5,16.5L26.2,16.5L25.6,16.7L24.8,16.9L24.2,17.1L23.1,17.3L23.1,17.2L24,16.9L24.7,16.7L25.6,16.3L26.3,16.2L26.8,16L27.8,15.6L28.1,15.4L28.7,15.2L29.2,14.7L29.8,14.3L29,14.5L29,14.4L28.5,14.6L28.5,14.3L28.1,14.5L28.2,14.2L27.5,14.5L27.1,14.5L27.5,14.1L27.8,13.8L27.7,13.6L26.9,13.7L26.8,13.4L26.6,13.3L26.9,12.9L26.8,12.6L27.4,12.3L28.2,11.9L28.7,11.6L29.1,11.5L29.4,11.6L30.1,11.3L30.4,11.4L31,11.2L31.2,10.9L31,10.8L31.6,10.5L31.3,10.5L30.6,10.7L30.4,10.8L30.1,10.7L29.3,10.7L28.8,10.6L28.9,10.3L28.6,10L29.6,9.7L31,9.4L31.4,9.4L31,9.7L32.1,9.7L32.1,9.3L31.8,9.1L31.8,8.8L31.6,8.5L31.2,8.3L31.8,8L32.7,8L33.6,7.7L34,7.4L34.8,7.1L35.4,7L36.6,6.8L36.9,6.8L38,6.5L38.6,6.6L38.6,6.9L38.9,6.8L39.7,6.8L39.5,7L40.1,7.1L40.6,7L41.4,7.2L42.2,7.2L42.5,7.3L43.2,7.2L43.8,7.4ZM68.3,12L68.8,11.7L69.5,11.7L69.4,11.8L68.6,12.2L68.3,12.2ZM73.8,5.7L73.5,5.3L73.7,5.1L73.9,5.1L74.9,5.2L75.5,5.5L75.4,5.6L75,5.6L74.5,5.6L73.9,5.7ZM70,12.3L70.3,12.1L70.5,12.1L70.5,12.2L70.2,12.5L70,12.5L69.9,12.3ZM68.5,4.4L68.1,4.6L67.5,4.6L67,4.4L67.5,4.2L68.2,4L68.5,4.2ZM69.5,3L69.3,3L68.5,3L68.6,2.8L69.4,2.8L69.6,2.9ZM68.9,2.3L69.2,2.5L68.9,2.7L68.2,2.8L68,2.7L68,2.5L68.1,2.3L68.7,2.3ZM70.7,4.7L70,4.7L69,4.5L69,4.2L69.2,3.9L69,3.7L68.1,3.6L67.8,3.4L68.1,3.2L69,3.2L69.3,3.4L70.2,3.4L70.4,3.6L70.1,3.8L70.5,3.9L70.7,4L71.3,4.1L71.9,4.1L72.7,4L73.6,4L74.3,4L74.6,4.2L74.6,4.4L74.2,4.6L73.5,4.7L72.9,4.6L71.6,4.7ZM62.4,2.7L62.9,2.7L62.6,2.9L61.6,3.1L61.2,2.9L61.7,2.7ZM62.9,2.3L63.3,2.4L62.7,2.5L62,2.5L62.1,2.4L62.7,2.3ZM80.1,19.4L79.7,19.9L79.2,20.5L79.6,20.2L79.9,20.4L79.7,20.6L80.1,20.8L80.4,20.6L80.9,20.9L80.6,21.4L81,21.3L81,21.6L81.1,22.1L80.7,22.7L80.4,22.7L80.1,22.6L80.4,22L80.2,21.9L79.4,22.5L79.1,22.5L79.6,22.2L79.1,22L78.5,22L77.4,22L77.4,21.8L77.8,21.6L77.6,21.4L78.2,20.9L79,19.8L79.5,19.5L80,19.2L80.3,19.2ZM69.2,10.3L69.6,10.5L70.1,10.7L70,11L70.4,11L70.6,11.2L70.1,11.4L69.4,11.2L69.2,11L68.6,11.3L67.7,11.6L67.7,11.3L67,11.3L67.6,11L68,10.5L68.5,9.9L68.8,10L68.7,10.3L69,10.2ZM74.1,5.9L74.7,5.7L75.5,6L76,6.3L75.9,6.5L76.8,6.4L77.1,6.8L78.1,7L78.4,7.2L78.6,7.8L77.6,8.1L78.5,8.5L79.2,8.6L79.6,9.2L80.4,9.2L80,9.7L78.9,10.4L78.4,10.1L77.9,9.5L77.3,9.6L77,10L77.4,10.3L77.9,10.6L78,10.8L78.1,11.4L77.7,11.9L77.2,11.7L76.2,11.2L76.6,11.7L77,12.1L77,12.3L75.7,12.1L74.8,11.7L74.4,11.4L74.6,11.2L74,10.9L73.5,10.6L73.4,10.8L71.9,10.9L71.6,10.7L72.2,10.2L73.1,10.2L74.1,10.1L74.1,9.9L74.4,9.6L75.3,9L75.3,8.7L75.3,8.5L74.7,8.2L73.8,8L74.2,7.8L73.9,7.5L73.5,7.4L73.3,7.2L72.9,7.4L72,7.5L70.4,7.3L69.6,7.2L68.9,7.1L68.6,6.9L69.3,6.6L68.6,6.6L68.9,6L69.6,5.5L70.2,5.2L71.5,5.1L70.9,5.4L71,5.8L71.7,5.3L73,5.1L73.4,5.7L73.1,6.1ZM67.7,4.9L68.6,4.9L69.4,5L68.4,5.6L67.7,5.7L66.9,6.1L66.4,6.1L66.5,5.6L66.7,5.3L67.2,5ZM56.2,3.8L57.4,3.4L58.6,3L59.3,3L60,2.9L59.5,3.3L58.9,3.5L58.5,3.6L57.4,3.8L56.7,3.9ZM39.9,17.6L40.4,17.5L39.7,18.3L39.8,18.8L39.6,18.8L39.5,18.5L39.5,18.2L39.4,18L39.5,17.7L39.7,17.5ZM65.5,2.1L66.2,2.1L67.2,2.3L67.3,2.6L67.2,2.8L66.6,2.7L66,2.6L65.1,2.5L65.7,2.4L65.3,2.3ZM42.5,21.4L42.2,21.5L41.4,21.2L41.4,20.9L41.1,20.7L41.1,20.5L40.6,20.3L40.6,20L40.8,19.8L41.2,20L41.5,20.1L42,20.1L42,20.4L42.1,20.7L42.5,21ZM55.8,4.7L56.3,4.8L57.4,4.9L57.7,5L58,5.3L57.3,5.4L55.8,5.8L54.9,6.2L54.6,6.5L53.2,6.8L53.2,6.5L52.4,6.2L52.8,6L53.5,5.5L54.3,5.1L54.2,4.8ZM62.6,3.9L63.1,3.8L63.5,3.8L63.4,4.1L62.9,4.4L61.3,4.5L59.9,4.7L59.3,4.7L59.4,4.6L60.5,4.3L58.5,4.4L57.9,4.3L59.1,3.7L59.6,3.6L60.7,3.8L61.2,4.1L61.9,4.1L61.8,3.6L62.4,3.4L62.7,3.5L62.6,3.7ZM61.8,5.5L62.2,5.7L62,6.3L61.8,6.7L62.4,7L63,7.3L62.7,7.6L61.9,7.6L62.1,7.9L61.8,8.1L61,8L60.3,7.8L59.7,7.9L58.7,8.1L57.4,8.1L56.5,8.2L56.5,7.9L56,7.8L55.5,7.8L55.3,7.3L55.7,7.3L56.5,7.2L57.1,7.2L57.8,7.1L57,7L56,7L55.4,7L55.3,6.8L56.6,6.5L55.9,6.5L55.2,6.4L56,5.9L56.5,5.7L58,5.4L58.4,5.5L57.9,5.7L59.1,5.6L59.5,5.9L60.2,5.6L60.5,5.8L60.4,6.3L60.8,6.1L61,5.5L61.5,5.4ZM64.4,5.7L64.2,5.3L65,5.1L65.4,5.2L66.3,5.1L66.3,5.3L65.6,5.5L66.1,5.8L65.7,6.3L64.7,6.6L64.3,6.5L64.2,6.3L63.4,5.8L63.6,5.6ZM62.1,5.2L62.7,5.2L62.9,5.3L62.2,5.7L61.8,5.3ZM67.1,3.4L67.3,3.7L67,4L66.5,4.4L65.7,4.4L65.3,4.4L65.6,4L64.8,4.1L65.2,3.6L65.6,3.7L66.5,3.5L67,3.5ZM70.2,1.4L70.6,1.2L71.1,1.2L71,1.1L72,1.1L72.2,1.3L72.8,1.4L73.4,1.5L73.4,1.9L73.8,2L73.1,2.2L72,2.6L71.2,2.6L70.3,2.6L70.1,2.3L70.3,2.2L70.7,2L69.9,2L69.7,1.8L69.6,1.6ZM72.7,0.8L73.4,0.7L73.9,0.7L74.8,0.6L75.6,0.4L76,0.5L76.3,0.6L76.9,0.3L77.5,0.3L78.3,0.2L79.5,0.2L79.7,0.2L80.9,0.2L81.8,0.2L82.6,0.2L83.6,0.3L84.4,0.3L85.1,0.4L85,0.6L83.8,0.8L82.7,0.9L82.3,1L83.2,1L82,1.3L81.2,1.4L80.1,1.8L79.2,1.9L78.9,2L77.5,2L78.1,2.1L77.7,2.2L77.9,2.5L77.3,2.6L76.6,2.8L76.2,3L75.5,3.2L75.5,3.3L76.2,3.3L76.1,3.4L74.7,3.7L73.7,3.6L72.4,3.7L71.8,3.6L71,3.6L71.1,3.3L72,3.2L72.1,2.8L72.4,2.8L73.4,3L73.1,2.6L72.4,2.5L73,2.3L73.8,2.2L74.1,2L73.7,1.8L73.8,1.6L74.9,1.6L75.2,1.6L76,1.5L75.1,1.4L73.6,1.4L73,1.3L72.9,1.1L72.6,0.9ZM74.2,8.9L73.8,9.1L73.2,9.1L73.2,8.8L73.6,8.4L74.1,8.4L74.4,8.5L74.3,8.8ZM65,7.6L65.1,7.9L64.7,8.1L64.1,7.9L63.7,8L63.3,7.7L63.8,7.5L64.3,7.2L64.7,7.4L64.9,7.5ZM75,20.4L75.2,20.4L75.9,20.5L76.3,20.8L76.3,21L76.1,21L75.4,20.8ZM74.7,22.4L74.8,22.7L75.2,22.8L75.7,22.8L75.4,23.1L75.1,23.2L74.5,22.9L74.4,22.6ZM15.7,41.7L15.8,41.8L15.9,41.9L15.9,42.1L15.9,42.2L15.6,42.3L15.4,42.4L15.3,42.6L15.2,42.5L15.2,42.3L15.2,42L15.3,41.9L15.4,41.8L15.4,41.7L15.4,41.6L15.5,41.6ZM15.5,41.2L15.4,41.3L15.2,41.4L15.1,41.2L15,41.2L15.1,41.1L15.1,41.1L15.3,41.1ZM15.1,40.9L15,41L14.7,41L14.8,40.9ZM14.4,40.5L14.5,40.6L14.6,40.8L14.5,40.9L14.5,40.9L14.3,40.8L14.2,40.7L14.2,40.6ZM13.7,40.2L13.7,40.4L13.6,40.4L13.4,40.3L13.5,40.2L13.6,40.2ZM25.9,13.4L26.3,13.4L26.1,13.7L25.7,13.8L25.4,13.6L25.3,13.5ZM31.2,14.9L31.5,15L31.6,15.2L30.8,15.5L30.1,15.8L30,15.6L30.2,15.3L30.8,15ZM25.6,11.2L25.7,11.3L26.1,11.2L26.3,11.4L26.7,11.5L26.6,11.5L26.1,11.7L25.9,11.5L25.8,11.4L25.3,11.5L25.3,11.4ZM197.2,58L198.2,58.5L199.4,58.9L199.8,59.2L200.1,59.6L200.2,60L201.2,60.5L201.3,60.9L200.7,60.9L200.8,61.4L201.3,61.9L201.6,62.6L202,62.6L201.9,62.9L202.4,63.1L202.2,63.2L202.8,63.5L202.7,63.7L202.3,63.7L202.2,63.6L201.7,63.5L201.1,63.4L200.6,62.9L200.3,62.5L200.1,61.9L199.3,61.6L198.7,61.8L198.4,62L198.4,62.5L197.9,62.8L197.5,62.7L196.9,62.6L196.4,62.1L195.8,61.9L195.6,62.1L194.8,62.1L195.2,61.6L195.6,61.4L195.5,60.6L195.2,60L194,59.4L193.5,59.3L192.6,58.7L192.4,59L192.2,59.1L192.1,58.8L192.1,58.5L191.6,58.1L192.3,57.9L192.7,57.9L192.7,57.7L191.8,57.7L191.5,57.3L191,57.1L190.7,56.8L191.6,56.6L191.9,56.4L192.9,56.7L193,56.9L193.1,58.1L193.7,58.5L194.3,57.8L195,57.3L195.6,57.3L196.1,57.6L196.5,57.8ZM204.4,58.7L204.6,59L204.6,59.3L204.4,59.5L204.3,59.1L204.2,58.8L203.9,58.6L203.6,58.3L203.2,58.1L203.3,57.9L203.7,58.1L203.9,58.3L204.1,58.4ZM203.4,60.3L203.1,60.5L202.8,60.6L202.4,60.6L201.9,60.4L201.6,60.2L201.7,60L202.2,60.1L202.6,60.1L202.7,59.7L202.8,59.7L202.8,60.1L203.2,60L203.3,59.8L203.7,59.5L203.7,59.1L204,59.1L204.1,59.2L204.1,59.6L203.9,60L203.6,60.1ZM205.6,59.9L205.8,60.1L206,60.6L206.3,60.8L206.2,61L206,61.1L205.8,60.8L205.6,60.3L205.5,59.8L205.5,59.7ZM187.1,62.8L186.6,63.4L186.1,63.5L186,63.4L186.1,63.2L186.4,62.8L187,62.5L187.1,62.3L187.6,62.2L188.1,62.1L188.3,62L188.5,62.1L188.3,62.3L187.6,62.6ZM192.8,61.1L192.8,60.5L192.9,60.3L193.1,60L193.2,60.2L193.2,60.6ZM181.3,52.2L181.8,51.7L182,51.2L182.3,51.2L182.6,51.5L182.7,51.8L183.1,52L183.6,52.2L183.6,52.5L183.2,52.6L183.3,52.9L182.9,53.2L182.5,53.8L183,54.5L182.9,54.8L183.6,55.5L182.9,55.6L182.7,56L182.7,56.7L182.1,57.2L182.1,57.9L181.8,59L181.7,58.7L181,59.1L180.8,58.6L180.3,58.6L180,58.4L179.3,58.6L179.1,58.3L178.7,58.3L178.2,58.2L178.1,57.3L177.8,57.1L177.5,56.4L177.4,55.8L177.5,55.2L177.8,54.7L178.3,54.9L178.8,54.8L178.9,54.2L179.1,54.1L179.9,53.9L180.3,53.3L180.6,52.9L180.8,52.6ZM190,58.1L190.7,58.3L190.9,58.9L190.4,58.6L189.8,58.5L189.5,58.6L189.1,58.5L189.2,58.2ZM188.4,58.8L188,58.7L187.9,58.4L188.5,58.4L188.7,58.6ZM189.1,54.6L189.2,55L189.5,55L189.6,55.3L189.6,55.9L189.2,55.9L189.2,56.3L189.4,56.7L189.2,56.8L189,56.3L188.8,55.4L188.9,54.8ZM186,55.5L186.7,55.5L187.3,54.9L187.5,55.1L187,55.8L186.5,55.9L185.9,55.8L184.9,55.8L184.3,55.9L184.3,56.5L184.8,57.1L185.1,56.8L186.3,56.6L186.2,56.9L186,56.8L185.7,57.2L185.1,57.5L185.7,58.4L185.6,58.6L186.1,59.5L186.1,59.9L185.7,60.2L185.5,59.9L185.8,59.3L185.2,59.6L185.1,59.4L185.2,59.1L184.7,58.7L184.8,58L184.4,58.2L184.4,59.1L184.4,60.1L184,60.2L183.7,60L183.9,59.3L183.9,58.6L183.6,58.6L183.4,58.1L183.7,57.7L183.8,57.1L184.1,56L184.2,55.7L184.8,55.2L185.3,55.4ZM184,63.5L183.3,63L183.9,62.8L184.2,63L184.4,63.3L184.3,63.4ZM184.8,62.2L185.2,62.2L185.8,61.9L185.7,62.3L184.7,62.5L183.9,62.4L183.9,62.2L184.4,62ZM182.9,62.1L183.3,62L183.4,62.4L182.7,62.5L182.3,62.6L181.9,62.6L182.2,62.2L182.5,62.2L182.7,61.9ZM177,60.7L177,61L178.2,61L178.4,60.7L179.5,61.1L179.7,61.6L180.6,61.7L181.3,62.1L180.6,62.4L180,62.1L179.4,62.1L178.8,62.1L178.2,61.9L177.5,61.7L177.1,61.6L176.8,61.7L175.7,61.4L175.6,61.1L175,61L175.5,60.3L176.2,60.4L176.7,60.7ZM174.6,56.9L174.7,57.4L174.9,57.8L175.3,57.9L175.6,58.3L175.4,59.2L175.3,60.3L174.7,60.3L174.2,59.7L173.4,59.1L173.2,58.7L172.7,58.1L172.4,57.6L171.9,56.6L171.4,56L171.2,55.4L171,54.8L170.4,54.4L170.1,53.8L169.6,53.4L168.9,52.6L168.9,52.2L169.3,52.2L170.2,52.4L170.8,53.1L171.3,53.5L171.6,53.8L172.2,54.6L172.9,54.6L173.4,55.1L173.8,55.7L174.2,56L174,56.6L174.3,56.9ZM73.4,93.7L73.7,94L74.2,94.5L75,94.9L75.8,95.1L75.7,95.5L75.2,95.5L74.8,95.2L74.7,95.5L74.4,95.7L74.1,95.7L73.8,95.7L73.3,95.5L72.7,95.4L71.9,95L71.3,94.6L70.2,93.8L70.7,94L71.6,94.4L72.4,94.7L72.6,94.4L72.6,93.9L73,93.6ZM66.3,43.2L65.9,43.1L65.6,43.1L65.3,43.1L65,43.2L64.7,43L64.7,42.7L65.3,42.8L65.7,42.9L66,42.7L65.7,42.4L65.8,42.2L65.4,42L65.6,41.8L65.9,41.9L66.4,42L66.5,41.9L67,41.9L67.4,42.1L67.5,42L67.6,42.3L67.9,42.3L67.9,42.5L68.2,42.5L68.4,42.8L68.2,43.1L67.9,42.9L67.6,42.9L67.4,42.9L67.3,43L67.1,43.1L67,42.9L66.8,43L66.5,43.5L66.3,43.4ZM148.7,1.2L149.5,1.1L150.5,1.3L152,1.8L152.4,2.3L151.5,2.3L150.2,2.2L149.3,2L148.6,1.6L148,1.5ZM153.4,2.1L154.8,2.4L154.9,2.6L152.7,2.8L152.8,2.1L153.1,2ZM170.8,3.8L172,3.8L173.9,4.1L174.1,4.5L172.4,4.5L171.9,4.6L170.6,4.2L170.3,3.9ZM175.5,4.2L176.8,4.3L176.5,4.6L175.8,4.5L174.7,4.3L174.5,4.1ZM173,5.3L173.2,5.1L173.7,5L174.6,5.3L174.8,5.4L174.2,5.4L173.2,5.4ZM128.6,1.4L129.4,1.3L130,1.3L130.2,1.4L130.3,1.3L130.7,1.2L131.4,1.3L131.2,1.4L130.7,1.5L130.4,1.5L130.3,1.6L129.9,1.7L129.4,1.6L129.5,1.4ZM134,5.1L134.9,4.6L134.6,4.3L135.5,4L136.8,3.7L138.2,3.6L138.8,3.4L139.6,3.3L140,3.5L139.8,3.7L138.4,4L137.2,4.2L136.1,4.8L135.7,5.3L135.2,5.9L135.5,6.4L136.6,6.9L136.4,6.9L134.8,6.9L134.6,6.6L133.7,6.4L133.5,6.1L133.9,6L133.8,5.7L134.5,5.2ZM185.7,17.8L186.3,18.5L186.8,19.1L187.5,19.8L188.9,21.1L187.9,20.8L188.2,21.8L189.2,22.5L189.5,23L188.8,22.6L188.8,23.2L188.3,22.6L188,21.9L187.4,21.1L187.2,20.6L186.6,19.7L185.8,19L185.2,18.1L185.5,17.8L185.1,17.4L185.2,17.3ZM193.2,6.8L192.7,6.9L192.4,6.7L192.6,6.4L193.2,6.8ZM27.4,6.4L27.4,6.4L27.4,6.4L27.5,6.4L27.8,6.4L28.3,6.6L28.1,6.6L27.5,6.8L26.8,6.8L26.8,6.8L27.4,6.4ZM62.8,36.9L63.1,36.8L63.5,36.9L63.5,37L62.8,37.2ZM63.5,36.7L64,37L63.8,37.6L63.7,37.5L63.8,37.1L63.5,36.8ZM63.1,38L63.3,38.1L63.4,38.7L63.3,39.1L63.2,39.1L63.1,38.7L62.9,38.5ZM77.2,93.2L77.7,92.8L78.2,92.9L78.5,92.7L79,93L78.9,93.2L78.2,93.4L77.9,93.2L77.6,93.5ZM116.4,1.9L116.5,1.7L117.1,1.7L117.7,1.8L119.1,2.2L118.1,2.4L117.9,2.8L117.6,2.9L117.4,3.4L116.9,3.4L115.9,3.1L116.3,2.9L115.6,2.7L114.8,2.3L114.4,1.9L115.5,1.7L115.8,1.9ZM121.5,1.7L120.9,1.9L119.7,2L118.4,1.9L118.3,1.8L117.7,1.8L117.2,1.5L118.5,1.4L119.1,1.5L119.5,1.4L120.6,1.5ZM120.6,2.8L119.7,3L118.9,2.9L119.2,2.8L118.9,2.6L119.8,2.5L120,2.7ZM91.2,0.4L92.7,0.2L94.1,0.2L94.7,0L96.1,0L99.2,0.1L101.6,0.4L100.8,0.6L99.3,0.6L97.1,0.6L97.2,0.7L98.7,0.7L99.9,0.8L100.7,0.7L101,0.9L100.5,1.1L101.6,1L103.6,0.8L104.8,0.9L105,1.1L103.2,1.4L103,1.5L101.6,1.6L102.6,1.6L102,2L101.6,2.3L101.5,2.9L102,3.3L101.3,3.3L100.6,3.5L101.3,3.8L101.3,4.3L100.9,4.3L101.3,4.8L100.3,4.8L100.8,5.1L100.6,5.3L100,5.4L99.4,5.4L99.9,5.8L99.8,6L99,5.8L98.7,5.9L99.3,6.1L99.8,6.4L99.9,6.9L99.1,7L98.8,6.8L98.3,6.5L98.3,6.9L97.8,7.2L99,7.2L99.6,7.2L98.3,7.8L96.9,8.2L95.5,8.5L94.9,8.5L94.4,8.7L93.6,9.3L92.5,9.8L92.1,9.8L91.4,10L90.7,10.1L90.2,10.5L90.1,10.9L89.7,11.4L88.8,11.9L88.8,12.4L88.5,12.9L88,13.5L87.3,13.6L86.7,13L85.7,13L85.3,12.7L85.2,12.1L84.6,11.3L84.5,10.9L84.6,10.3L84.1,9.7L84.5,9.3L84.2,9L85,8.3L85.7,8.1L86,7.8L86.3,7.4L85.7,7.6L85.4,7.7L84.9,7.8L84.4,7.6L84.6,7.1L84.9,6.8L85.3,6.8L86.2,7L85.5,6.6L85.2,6.4L84.7,6.5L84.4,6.3L85.1,5.8L85,5.6L84.8,5.2L84.5,4.6L84.1,4.3L84.2,4.1L83.2,3.8L82.3,3.7L81.1,3.8L80,3.8L79.6,3.6L79,3.3L80.3,3.1L81.2,3.1L79.4,2.9L78.6,2.7L78.8,2.5L80.6,2.3L82.3,2L82.6,1.8L81.6,1.6L82.1,1.4L83.8,1.1L84.4,1L84.4,0.8L85.5,0.7L86.8,0.6L88,0.6L88.4,0.8L89.6,0.5L90.5,0.7L91,0.7L91.8,0.9L91,0.6ZM147.7,90.9L147.9,91.2L148.4,91.2L148.4,91.4L148.2,91.7L147.3,91.7L147.4,91.4L147.6,91.1ZM114.9,25.5L115.3,25.2L115.4,25.9L115.2,26.4L115,26.3L114.8,25.8ZM69.7,42.9L70,42.9L70.1,43.1L69.9,43.2L69.4,43.2L69.1,43.3L69.1,43L69.2,42.8ZM62.8,42.9L63.2,42.9L63.5,43.1L63.6,43.3L63.1,43.3L62.9,43.4L62.6,43.3L62.3,43.1L62.4,42.9L62.6,42.8ZM60.4,39.5L60.9,39.5L61.4,39.5L61.9,39.8L62.1,40.1L62.7,40L62.9,40.1L63.3,40.6L63.7,40.9L63.9,40.9L64.2,41.1L64.1,41.3L64.6,41.3L65,41.6L64.9,41.7L64.5,41.8L64.1,41.9L63.7,41.8L62.8,41.9L63.2,41.5L63,41.3L62.6,41.3L62.5,41L62.4,40.6L62,40.7L61.5,40.5L61.3,40.3L60.6,40.2L60.4,40.1L60.6,39.9L60,39.8L59.5,40.2L59.3,40.2L59.2,40.4L58.9,40.5L58.6,40.4L59,40.2L59.1,39.9L59.4,39.8L59.8,39.6L60.2,39.6ZM140.4,65L140.6,65.4L140.7,65.8L140.7,66.7L140.9,67L140.8,67.4L140.7,67.6L140.5,67.2L140.4,67.4L140.5,67.9L140.4,68.2L140.2,68.4L140.1,69L139.8,69.8L139.4,70.8L138.9,72.2L138.6,73.2L138.3,74L137.8,74.2L137.2,74.5L136.9,74.3L136.4,74L136.3,73.7L136.3,73L136.2,72.5L136.1,71.9L136.3,71.4L136.6,71.3L136.6,71.1L136.9,70.5L137,70L136.9,69.7L136.8,69.3L136.8,68.6L137,68.2L137.2,67.7L137.5,67.7L137.8,67.6L138,67.4L138.3,67.4L138.7,67L139.2,66.6L139.4,66.2L139.4,65.9L139.6,66L140,65.5L140,65.1L140.2,64.7ZM212.2,67.5L212.5,67.9L212.3,68L212.2,67.7ZM212,67.3L211.9,67.1L212,66.6L212.3,66.8L212.3,67.4L212.1,67.3ZM125.3,30.8L125.2,31L124.4,31L124.4,30.9L123.7,30.8L123.8,30.5L124.1,30.7L124.5,30.7L125,30.7L125,30.8ZM106.7,17.7L106.8,18.2L106.4,18.8L105.4,19.2L104.7,19.1L105.1,18.4L104.9,17.7L105.6,17.1L106,16.8L106.5,16.8L107,17.2ZM210.4,71.2L210.8,71.7L211,72L210.7,72.2L210.4,72L210.1,71.7L209.8,71.3L209.6,70.8L209.5,70.5L209.8,70.5L210.1,70.8L210.3,71ZM209.8,63.6L209.9,63.9L209.5,63.9L209.3,63.4L209.6,63.6ZM209.6,63L209.5,63.1L209.1,62.5L209,62.1L209.2,62.1L209.4,62.6ZM209,63.2L208.8,63.2L208.4,63.1L208.3,63L208.4,62.7L208.8,62.8L209,63ZM208.5,61.9L208.6,62.1L208.6,62.2L208.1,61.9L207.8,61.7L207.6,61.4L207.7,61.4L208,61.5ZM207,61.1L207.2,61.4L207.1,61.4L206.8,61.3L206.6,61L206.6,60.8ZM210.9,84.9L210.4,85.3L209.9,85.8L209.2,86L209.3,85.9L209.1,85.8L209.8,85.2L209.8,84.8L209.4,84.5L209.6,84.2L210.1,84L210.5,83.4L210.8,83L210.8,82.5L210.9,82.4L210.8,82.1L210.7,81.4L210.7,80.9L210.9,80.9L211,81.3L211.4,81.4L211.2,82.1L211.2,82.8L211.5,82.4L211.7,82.6L211.4,83.1L211.8,83.3L212.1,83.4L212.6,83.1L212.9,83.2L212.3,83.8L211.9,84.2L211.5,84.2L211.2,84.5L211.1,84.8ZM205.2,87.4L205.9,87L206.5,86.6L207.1,86.1L207.4,85.9L207.8,85.5L208.4,85.2L208.3,85.5L208.3,85.8L208.8,85.5L208.8,85.8L208.6,86.1L208.2,86.4L207.5,87L207,87.2L207,87.6L206.6,87.6L205.9,87.9L205.4,88.3L204.6,89L204,89.4L203.5,89.6L203,89.5L202.8,89.3L202.3,89.3L202.4,89L203,88.5L204.2,87.8L204.6,87.6ZM194,85.4L194.3,85.5L193.9,86.3L193.5,86.6L193.2,87.1L193.1,86.9L192.4,87.4L192.3,87.4L192,87.4L192,86.8L192.1,86.3L192.1,85.7L192.3,85.3L192.7,85.4L193.1,85.7L193.5,85.6ZM184.2,79.3L183.4,79.6L182.8,79.8L182.6,80.2L182.3,80.5L181.8,80.5L181.4,80.5L180.9,80.4L180.5,80.5L180.1,80.5L179.6,80.9L179.4,80.9L179.1,81.1L178.7,81.3L178.3,81.3L177.9,81.3L177.4,80.8L177.2,80.7L177.3,80.3L177.6,80.2L177.8,80L177.9,79.7L178.1,79.2L178.2,78.8L178.1,78.1L178.1,77.7L178.2,77.3L178.1,76.8L178.2,76.6L178,76.3L178.1,75.7L177.9,75.2L177.8,74.9L178,75.2L178,74.5L178.2,74.7L178.4,75L178.4,74.6L178.3,74.1L178.3,73.8L178.2,73.6L178.3,73.2L178.5,73L178.7,72.7L178.7,72.2L179,71.7L179,72.3L179.3,71.8L179.9,71.5L180.2,71.2L180.7,71L181,70.9L181.2,71L181.7,70.7L182.1,70.6L182.2,70.5L182.4,70.4L182.7,70.4L183.4,70.2L183.8,69.9L184,69.5L184.4,69.2L184.5,68.9L184.6,68.5L185.1,67.9L185.3,68.5L185.6,68.3L185.4,68L185.7,67.7L185.9,67.8L186.1,67.3L186.5,66.9L186.6,66.6L187,66.5L187,66.3L187.3,66.4L187.3,66.2L187.6,66.1L187.9,66L188.3,66.3L188.6,66.8L189,66.8L189.3,66.8L189.3,66.4L189.6,65.9L190,65.7L189.9,65.5L190.2,65.1L190.6,64.8L190.9,64.9L191.4,64.8L191.5,64.4L191.1,64.2L191.4,64.1L191.8,64.3L192.1,64.6L192.6,64.7L192.8,64.7L193.1,64.9L193.5,64.7L193.7,64.7L193.9,64.6L194.1,65L193.9,65.3L193.6,65.6L193.4,65.7L193.4,65.9L193.2,66.3L192.9,66.7L192.9,66.9L193.4,67.3L193.8,67.5L194.1,67.7L194.4,68.2L194.6,68.2L194.9,68.3L194.9,68.6L195.5,68.8L195.9,68.6L196.1,68.2L196.3,67.9L196.4,67.5L196.7,66.9L196.7,66.5L196.8,66.3L196.8,65.9L196.9,65.4L197.1,65.2L197,65L197.2,64.6L197.4,64.2L197.4,64L197.7,63.8L197.8,64.1L197.8,64.6L197.9,64.6L197.9,64.9L198.1,65.3L198.1,65.7L198,66L198.1,66.5L198.6,66.3L198.7,66.6L199,66.9L198.9,67.2L198.9,67.8L198.9,68.1L199,68.2L199.1,68.8L198.9,69.2L199,69.7L199.6,70.1L199.9,70.4L200.3,70.7L200.2,70.9L200.4,71.4L200.4,72.1L200.7,72L200.9,72.3L201,72.2L200.9,72.9L201.2,73.4L201.4,73.7L201.7,74.2L201.7,74.8L201.6,75.2L201.4,75.7L201.4,76.3L201.2,76.9L200.9,77.3L200.5,77.9L200.4,78.3L200.1,78.8L199.5,79.5L198.9,79.8L198.5,80.4L198.1,80.8L197.7,81.4L197.3,81.7L196.9,82.3L196.6,82.8L196.5,83L196.1,83.2L195.4,83.3L194.7,83.6L194.3,83.8L193.8,84.2L193.5,83.8L193.2,83.7L193.5,83.3L193.1,83.5L192.4,84L192,83.8L191.7,83.7L191.4,83.6L190.9,83.4L190.8,83L190.9,82.4L190.9,82.1L190.8,81.8L190.2,81.7L190.6,81.3L190.6,80.8L190.2,81.3L189.6,81.4L190.1,81L190.3,80.6L190.7,80.3L190.8,79.7L190.1,80.4L189.7,80.6L189.2,81.2L188.9,80.9L189,80.5L188.9,80L188.7,79.7L188.8,79.5L188.2,79.1L187.8,79.1L187.4,78.7L186.3,78.8L185.5,79.1L184.7,79.3ZM160.5,50.7L160.4,51.5L160.1,51.7L159.6,51.8L159.3,51.3L159.1,50.2L159.4,49.1L159.8,49.5L160.1,50ZM176.7,43.1L176.1,42.9L176,42.2L176.3,41.9L176.9,41.7L177.2,41.7L177.4,42L177.2,42.3L177.1,42.7ZM183.2,38.6L183.1,39.8L183,40.4L182.5,39.8L182.4,39.2L182.5,38.5L182.9,38L183.2,38.2ZM118.5,28.7L118.9,28.7L118.7,29.2L118.8,29.4L118.7,29.8L118.3,29.5L118,29.5L117.2,29.1L117.2,28.7L117.9,28.8ZM115,26.8L115.2,26.5L115.6,27L115.5,28L115.3,27.9L115,28.2L114.8,28L114.8,27.1L114.6,26.7ZM116.4,16.2L116.6,16.5L116.4,17.1L115.8,16.7L115.7,16.4ZM108.4,18L108.4,18L108.4,17.6L108.1,17.2L108.1,17.2L107.5,17.1L107.3,16.9L107.5,16.6L107.4,16.4L107.1,16.7L107.1,16.1L106.8,15.7L107,15L107.4,14.5L107.8,14.6L108.5,14.5L107.9,15.2L108.4,15.1L109,15.1L108.8,15.7L108.4,16.3L108.9,16.3L109,16.4L109.4,17.2L109.8,17.3L110.1,18.1L110.3,18.3L110.9,18.5L110.8,18.9L110.6,19.1L110.8,19.4L110.3,19.8L109.6,19.8L108.7,20L108.4,19.9L108,20.2L107.5,20.1L107.2,20.4L106.9,20.2L107.7,19.5L108.2,19.4L108.2,19.4L107.3,19.2L107.2,19L107.7,18.8L107.5,18.4L107.6,17.9ZM103,9.5L102.9,9.9L103.4,10.3L102.7,10.8L101.2,11.2L100.8,11.3L100.2,11.3L98.8,11.1L99.3,10.8L98.3,10.5L99.2,10.3L99.2,10.2L98.2,10L98.6,9.6L99.4,9.5L100,9.9L100.8,9.6L101.4,9.8L102.2,9.4ZM184.2,47L183.8,46.5L184.3,46.5L184.6,46.8L184.5,47.4ZM185.5,49L185.6,48.8L185.6,48.3L186,48.3L185.9,48.8L186.3,48.1L186.3,48.8L186.1,49L186,49.4L185.8,49.7L185.4,49.2ZM187.9,50.1L188,50.6L188.1,51L187.9,51.6L187.6,50.9L187.4,51.3L187.6,51.8L187.5,52.1L186.7,51.7L186.5,51.2L186.7,50.9L186.2,50.5L186.1,50.8L185.8,50.8L185.3,51.2L185.2,51L185.4,50.4L185.8,50.2L186.1,49.9L186.4,50.2L186.8,50L186.9,49.7L187.3,49.7L187.2,49.1L187.8,49.5L187.8,49.8ZM183,49.4L182.2,50.1L182.5,49.6L182.9,49.2L183.2,48.7L183.5,48L183.7,48.6L183.3,49ZM184.5,43.1L184.5,43.4L184.7,43.9L184.7,44.5L184.4,44.7L184.4,45.3L184.6,45.9L184.9,45.9L185.2,45.9L186,46.2L186,46.6L186.2,46.8L186.2,47.1L185.7,46.8L185.4,46.4L185.3,46.7L184.8,46.2L184.3,46.4L183.9,46.2L183.9,45.9L184.1,45.7L183.9,45.5L183.9,45.8L183.5,45.4L183.4,45.1L183.2,44.4L183.5,44.6L183.4,43.5L183.5,42.9L183.8,42.9L184.3,43.1L184.4,42.9ZM185,47.9L184.9,47.6L185.3,47.8L185.7,47.8L185.7,48.1L185.5,48.4L185.1,48.6L185,48.3ZM187.1,47.4L187.4,48.2L186.9,48L186.9,48.3L187.1,48.7L186.8,48.9L186.8,48.4L186.6,48.3L186.4,47.9L186.8,47.9L186.7,47.7L186.3,47.1L186.9,47.1ZM191.2,28L191.1,28.7L191.4,29.4L191.4,30L191.7,30.4L191.6,30.9L191,31.2L190,31.3L189.5,32.1L189,31.8L188.8,31.3L187.8,31.4L187.2,31.8L186.6,31.8L187.4,32.3L187.4,33.5L187.1,33.8L186.7,33.6L186.7,32.9L186.2,32.7L185.8,32.2L186.3,32L186.4,31.5L186.9,31.2L187.1,30.7L188.2,30.5L188.8,30.6L188.9,29.3L189.4,29.7L190,28.9L190.2,28.7L190.1,27.8L189.6,27L189.6,26.5L190.2,26.4L191,27.4ZM191,24.6L191.2,24.3L191.8,25.1L191.1,25.3L191,26L189.8,25.5L189.9,26.3L189.3,26.3L188.8,25.6L188.8,25L189.4,25L189,24L188.9,23.5L190,24.2L190.5,24.4ZM187.5,32.1L187.7,31.7L188,31.7L188.1,31.4L188.6,31.6L188.8,31.8L188.6,32.3L188.3,32L188.1,32.2L188.1,32.6L187.6,32.4ZM129,30.9L129.1,30.9L129.2,30.7L129.6,30.7L130.1,30.5L129.7,30.8L129.8,30.9L129.8,31L129.2,31.3L128.9,31.2L128.8,30.9ZM72.1,48.4L72.4,48.3L72.5,48.3L72.5,48.9L72,49L71.9,48.9L72.1,48.7Z"/><path d="M127.8,72L126.9,72.5L126.3,73L126.1,73.5L125.9,73.8L125.6,73.8L125.5,74.2L125.4,74.4L125,74.6L124.5,74.5L124.2,74.3L124,74.2L123.7,74.4L123.5,74.8L123.2,75L122.9,75.3L122.5,75.4L122.4,75.1L122.4,74.7L122.1,74L122,73.9L122,71.8L122.6,71.8L122.7,69.2L123.2,69.2L124.1,68.9L124.4,69.2L124.8,68.9L124.9,68.9L125.3,68.8L125.4,68.8L125.6,69.4L125.7,69.5L125.9,69.9L126.6,70.7L126.8,70.8L126.8,71.1L127,71.5L127.4,71.6Z" fill="#d9262c"/></svg>
+  <svg class="flag" viewBox="0 0 78 52" role="img" aria-label="Flag of Botswana: light blue with a black horizontal band edged in white"><rect width="78" height="52" fill="#75AADB"/><rect y="18" width="78" height="16" fill="#fff"/><rect y="20" width="78" height="12" fill="#000"/></svg>
+</div>
+
+<div class="card facts">
+  <div><div class="lab">Population</div><div class="big">2,603,388</div><div class="mut">UN projection, 1 July 2026</div></div>
+  <div><div class="lab">Freedom House</div><div class="big">75<small>/100</small></div><div class="fh-bar"><div style="width:75%"></div></div><div class="mut">Free, 2026 edition</div></div>
+</div>
+
+<details class="card sys">
+  <summary>How the electoral system works</summary>
+  <div class="tiles">
+    <div class="tile"><div class="lab">Last election</div><div class="val">30 Oct 2024</div></div>
+    <div class="tile"><div class="lab">Seats</div><div class="val">61 single-member</div></div>
+    <div class="tile"><div class="lab">System</div><div class="val">First-past-the-post</div></div>
+    <div class="tile"><div class="lab">Term</div><div class="val">5 years</div></div>
+    <div class="tile"><div class="lab">Voting</div><div class="val">18+, voluntary</div></div>
+    <div class="tile"><div class="lab">Nominated</div><div class="val">6 members</div></div>
+  </div>
+</details>
+
 <div class="card">
-  <div class="header"><div class="header-inner">
-    <div><h1>Botswana seat projector</h1></div>
-  </div></div>
-  <div class="body">
-    <div class="top-row"><span></span><div class="section-label" style="margin:0">Input vote share</div>
-      <button class="reset-btn" onclick="resetAll()">Reset to 2024</button></div>
-    <div class="input-grid" id="inputs"></div>
-    <div class="total-row"><span>Total</span><span class="total-val" id="total-display">100.0%</span></div>
-    <div class="divider"></div>
-    <div class="section-label">Projected seats</div>
-    <div class="hemi-wrap"><svg id="hemicycle" viewBox="-112 -112 224 122" role="img" aria-label="Hemicycle of 61 projected seats"></svg></div>
-    <div class="map-legend party-legend" id="hemi-legend"></div>
-    <div class="results-grid" id="results"></div>
-    <div class="section-label">Coalition builder</div>
-    <div class="coalition" id="coalition"></div>
-    <div class="section-label">Projected constituency map</div>
-    <div class="map-modes" id="map-modes">
-      <div class="seg" id="mode-seg"><button data-m="winner" class="on">Winner</button><button data-m="strength">Party strength</button><button data-m="flips">Flipped seats</button></div>
-      <div class="mode-parties" id="mode-parties"></div>
-    </div>
-    <div class="cartogram-wrap">
-      <div class="map-zoom" id="map-zoom"><button data-z="in" aria-label="Zoom in" title="Zoom in">+</button><button data-z="out" aria-label="Zoom out" title="Zoom out">&minus;</button><button data-z="all" aria-label="Reset zoom" title="Show whole country" class="zoom-reset"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg></button></div>
-      <svg id="cartogram" viewBox="0 0 8962 9457" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Botswana's 61 constituencies, coloured by projected winner"><g id="tiles"></g></svg>
-      <div class="hex-tip" id="hex-tip"></div>
-    </div>
-    <div class="map-legend" id="map-legend"></div>
-    <p class="note"><strong>Sources:</strong> 2024 constituency results from the Independent Electoral Commission, as published by the Botswana Daily News and <a href="https://en.wikipedia.org/wiki/2024_Botswana_general_election" target="_blank" rel="noopener">Wikipedia</a>. Boundary map adapted from <a href="https://commons.wikimedia.org/wiki/File:2024_Botswana_National_Assembly_election_-_Results_by_constituency.svg" target="_blank" rel="noopener">&ldquo;2024 Botswana National Assembly election &ndash; Results by constituency&rdquo;</a> by WikiBunny2K1 (base map from the Humanitarian Data Exchange), licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Changes made: original shading and insets removed, outlines simplified, and recoloured to show projections. The adapted boundary shapes here are shared under the same licence.</p>
+  <h2>Input vote share</h2>
+  <div class="rows" id="inputs"></div>
+  <div class="center"><button class="btn" id="reset">Reset</button></div>
+</div>
+
+<div class="card">
+  <h2>Projected results</h2>
+  <div class="hemi"><svg id="hemicycle" viewBox="-92 -92 184 100" role="img" aria-label="Hemicycle of 61 projected seats"></svg></div>
+  <div class="legend" id="hemi-legend"></div>
+  <table id="restbl"><thead><tr><th>Party</th><th>Vote share</th><th>Seats</th><th title="Change in seats from the 2024 result">+/&minus;</th></tr></thead><tbody></tbody></table>
+</div>
+
+<div class="card">
+  <h2>Coalition builder</h2>
+  <div class="chips" id="coal-udc"></div>
+  <div class="chips" id="coal-chips" style="margin-top:8px"></div>
+  <div class="cbar"><div class="cfill" id="coal-fill"></div><div class="cmaj" id="coal-maj"></div></div>
+  <div class="cmajlab"><span id="coal-majlab">31</span></div>
+  <div class="cstat" id="coal-stat"></div>
+</div>
+
+<div class="card">
+  <h2>Projected results map</h2>
+  <div class="seg" data-view><div><button data-v="alliance" class="on">Alliance</button><button data-v="party">Party</button></div></div>
+  <div class="chips" id="map-chips" style="margin-bottom:12px"></div>
+  <div class="mapwrap" id="mapwrap">
+    <div class="mapzoom" id="map-zoom"><button data-z="in" aria-label="Zoom in" title="Zoom in">+</button><button data-z="out" aria-label="Zoom out" title="Zoom out">&minus;</button><button data-z="all" aria-label="Reset zoom" title="Show whole country"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg></button></div>
+    <svg id="cartogram" viewBox="0 0 8962 9457" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Botswana's 61 constituencies coloured by projected result"><g id="tiles"></g></svg>
+    <div class="tip" id="tip" role="status" aria-live="polite"></div>
+  </div>
+  <div class="legend mapleg" id="map-legend"></div>
+</div>
+
+<div class="card mc">
+  <h2>Probability model</h2>
+  <h3 class="sub">Settings</h3>
+  <div class="mcprog" id="mc-prog"><div></div></div>
+  <div class="chips" id="mc-runs"></div>
+  <div class="sliders2">
+    <div class="sl2"><div class="l">Vote share error (% of each party's own share)</div><input class="sl" id="mc-verr" type="range" min="0" max="30" step="1" value="10" style="--c:#6f6e69;--p:33.3%" aria-label="Vote share error"><div class="val" id="mc-verr-v">10%</div></div>
+    <div class="sl2"><div class="l">Seat-level error (extra random variation in each seat)</div><input class="sl" id="mc-serr" type="range" min="0" max="10" step="0.5" value="3" style="--c:#6f6e69;--p:30%" aria-label="Seat-level error"><div class="val" id="mc-serr-v">3.0</div></div>
+  </div>
+  <div id="mc-out">
+  <div class="hr"></div>
+  <h3 class="sub">Outcomes</h3>
+  <div class="obar" id="mc-obar"></div>
+  <div class="olegend" id="mc-oleg"></div>
+  <div class="hr"></div>
+  <div class="rtbl" id="mc-tbl"></div>
+  <div class="hr"></div>
+  <h3 class="sub">Coalition majority chance</h3>
+  <div class="chips" id="mc-cchips"></div>
+  <div class="cc"><div class="pct"><span id="mc-cp">0.0</span><small>%</small></div><div class="lab">chance of a majority</div><div class="tbar"><div id="mc-cb"></div></div><div class="stats" id="mc-cs" hidden><div><b id="mc-cmed"></b><span class="mut">median seats</span></div><div><b id="mc-crng"></b><span class="mut">90% range</span></div></div></div>
+  <div class="hr"></div>
+  <h3 class="sub">Seat distribution</h3>
+  <div class="chips" id="mc-hchips"></div>
+  <div class="hstat" id="mc-hstat"></div>
+  <svg id="hist" viewBox="0 0 600 190" role="img" aria-label="Distribution of seats across simulated runs"></svg>
   </div>
 </div>
-<script>
-const PARTIES=[
- {id:'udc',name:'UDC',color:'#2656d9',baseVote:37.4,baseSeats:36},
- {id:'bcp',name:'BCP',color:'#6fa81c',baseVote:20.0,baseSeats:15},
- {id:'bpf',name:'BPF',color:'#d9a400',baseVote:8.1,baseSeats:5},
- {id:'bdp',name:'BDP',color:'#d9262c',baseVote:30.6,baseSeats:4},
- {id:'ind',name:'Ind',color:'#888780',baseVote:3.9,baseSeats:1},
- // minor parties: no slider; they share whatever the five inputs leave out of 100%
- {id:'brp',name:'BRP',color:'#7a6f9b',baseVote:0,baseSeats:0,minor:true},
- {id:'bmd',name:'BMD',color:'#3a8fa8',baseVote:0,baseSeats:0,minor:true},
- {id:'rap',name:'RAP',color:'#8a6a3b',baseVote:0,baseSeats:0,minor:true}];
-const MAIN=PARTIES.filter(p=>!p.minor);
-const PCOL={},PNAME={};PARTIES.forEach(p=>{PCOL[p.id]=p.color;PNAME[p.id]=p.name});
-// minor parties that contested individual seats
-const TOTAL_SEATS=61,MAJORITY=31,R=14.0;
-const UDC_SUB_BASE={BNF:23,AP:6,BPP:4,'UDC-Ind':3};
-const UDC_SUB_COLORS={BNF:'#1b3c98',AP:'#4a73e0',BPP:'#8fa9ee','UDC-Ind':'#c9d6f6'};
 
-// wp/rp/op = winner, runner-up and combined other-party vote share (%), 2024 official
+<p class="src">Sources: constituency results from the Independent Electoral Commission of Botswana, as published by the Botswana Daily News and <a href="https://en.wikipedia.org/wiki/2024_Botswana_general_election" target="_blank" rel="noopener">Wikipedia</a>; constituency map adapted from <a href="https://commons.wikimedia.org/wiki/File:2024_Botswana_National_Assembly_election_-_Results_by_constituency.svg" target="_blank" rel="noopener">WikiBunny2K1</a> (base map: Humanitarian Data Exchange), <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, simplified and recoloured, shared under the same licence; world map from <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> via world-atlas; flag drawn from the description on <a href="https://en.wikipedia.org/wiki/Flag_of_Botswana" target="_blank" rel="noopener">Wikipedia</a>; population: UN World Population Prospects 2024 (medium variant) via <a href="https://www.worldometers.info/world-population/botswana-population/" target="_blank" rel="noopener">Worldometer</a>; <a href="https://freedomhouse.org/country/botswana/freedom-world/2026" target="_blank" rel="noopener">Freedom House, Freedom in the World 2026</a>; electoral system: <a href="https://www.parliament.gov.bw/" target="_blank" rel="noopener">Parliament of Botswana</a> and Freedom House.</p>
+</div>
+
+<script>
+//#ENGINE_START
+const PARTIES=[
+ {id:'udc',acr:'UDC',name:'Umbrella for Democratic Change',color:'#1f48b4',baseVote:37.2,baseSeats:36},
+ {id:'bcp',acr:'BCP',name:'Botswana Congress Party',color:'#5aa52b',baseVote:21.1,baseSeats:15},
+ {id:'bpf',acr:'BPF',name:'Botswana Patriotic Front',color:'#e0a800',baseVote:8.3,baseSeats:5},
+ {id:'bdp',acr:'BDP',name:'Botswana Democratic Party',color:'#d9262c',baseVote:30.5,baseSeats:4},
+ {id:'ind',acr:'Ind',name:'Independents',color:'#8a8984',baseVote:2.4,baseSeats:1},
+ {id:'brp',acr:'BRP',name:'Botswana Republican Party',color:'#e46f2c',baseVote:0,baseSeats:0,minor:true},
+ {id:'bmd',acr:'BMD',name:'Botswana Movement for Democracy',color:'#c4468e',baseVote:0,baseSeats:0,minor:true},
+ {id:'rap',acr:'RAP',name:'Real Alternative Party',color:'#8a6a3b',baseVote:0,baseSeats:0,minor:true}];
+const SUBS=[
+ {id:'bnf',key:'BNF',acr:'BNF',name:'Botswana National Front',color:'#14265e',baseSeats:23},
+ {id:'ap',key:'AP',acr:'AP',name:'Alliance for Progressives',color:'#38a3e6',baseSeats:6},
+ {id:'bpp',key:'BPP',acr:'BPP',name:"Botswana People's Party",color:'#7b6bd6',baseSeats:4},
+ {id:'udcind',key:'UDC-Ind',acr:'UDC-Ind',name:'UDC independents',color:'#9fb0d8',baseSeats:3}];
+const PI={};PARTIES.forEach((p,i)=>PI[p.id]=i);
+const SUBI={};SUBS.forEach((s,i)=>SUBI[s.key]=i);
+const MAIN=PARTIES.filter(p=>!p.minor);
+const UMETA={};PARTIES.forEach(p=>UMETA[p.id]=p);SUBS.forEach(p=>UMETA[p.id]=p);
+const ORDER_A=['udc','bcp','bpf','bdp','ind','brp','bmd','rap'];
+const ORDER_P=['bnf','ap','bpp','udcind','bcp','bpf','bdp','ind','brp','bmd','rap'];
+const TOTAL_SEATS=61,MAJORITY=31;
+const MINOR_W=[0,0,0,0,0,0.781,0.215,0.004];
+
 const SEATS=[
   { n:'Chobe',                       win:'bcp', ru:'bdp', m:34.49, wp:63.31, rp:28.82, op:7.87, sub:'BNF',     d:'M4937 0l4 1 4 1 2-1 3 1 7 4 6 1 11 5 6 2 5 0 9 3 14-3 18 4 3-1 2-4 1 1 1 7-1 9 1 4 0 4 1 2 0 1-11 27-7 10-3 15-3 8-1 5 1 6-1 7 5 8-5 10-1 1 0 5 7 13 1 5 6 12 7 7 6 1 15 45-1 4 0 13 4 6 4 16 6 10 3 7 7 10 7 7 6 13 0 7 15 5 5 4 5 1 10 4 8 8 1 4 1 10 4 6 8 2 8-1 6 3 18 30 4 4 7 15 3 12 6 11 8 10 3 10 2 8 2 6 3 1 4 5 2 18 7 17 7 10 17 31 17 43 8 28 0 11 5 8 22 24 11 14 13 12 5 8 1 4 18 28 8 11 7 6 25 10 7 1 4 2 1 8 3 7 0 3 3 8 7 5 5 12 2 5 10 19 4 4 2 3 5 7 8 5 16 16 4 1 4-1 9 3 4 2 1 2 2 0 7 2 7 4 4 3 2 4 6 4 6 3 2 5 4 2 6 19 0 6 2 15 2 7 3 3 2 8 4 3 2 4-1 1-10 8-1 5 2 7-2 7-1 8 4 22 1 11 1 4 2 5 1 5 1 5 5 22 3 6 4 4 6 10 2 11 0 10 4 9 8 6 4 3 5 1 6 3 4 6 4 1 2-1 6 4 2 0 32 26 4 5 12 7 5 5 4 1 10 0 8 8 4 5 3 8 13 23 7 20 6 11 3 2 4 29-1988 0 2-781 3-2 0-5 3 0-1-3 0-1 2 1 1 3 2 0 0-3 2-2-1-3 2 0 3 2 1-1-2-1 0-3 3-2 0-3-1-2 2-4-4-1 1-3-3-4-9-4 3-1 0-1 1-2-2-2 4-2-1-5 5-1 2-8 4 0 1-1 1 1 3-1-1 3 2-1 1-2 0-3 4 0 2-5 3-3 3 0 0-3 3 0 1-2-3-2 4-2 2 2 1 5 3-1 3 1 1-2-2-2 1-1 2 4 3 2 0-4 7-3 1-3-3 0 0-1 4-5 4 0-2-3 1 0 2 2 1-1-2-2 1-4-2-2 2-2 1 0 0 4 1 1 2-1 2-2 2 3 1-1-1-3 3 0-3-1 0-2 7 3 0-3 2-4-1-2 3 0-1-4 4 0 3-2 0-1-3-1 2-3 2 1 2-2-1 4 0 1 2 0 2-8 2 1 1 4 2-1 4-1-2-7 6-2 3 1 2-2 4 0 0-1 2 2 2 0 0-1-1-3 5 1 0-3 3-3-1-1 2 0 0-3-2 0-1 2-1-1 1-1 0-2 1-2 6 1-3-1-1-5-1 2-1 0 0-5 1 0-3-2-2-3 5 3 3-2-1 3 2-1 3 0-1 4 2-2 0-3 3 4 3-1 1 2 1-2 2 2 2-1 1 2 2 2 3-1 0-3 0 3 2 1 0 1 4 0 2 0 1-2 2 0 0-2 3-2 1 0 0-1 1-2 3 1 1-2-1 0 0-2 4 2 1-1-1-3 2 0 3-1 2-3-2-1-1-1 6 0-1-3 4-1-1-5 2 0 2 2-1-3 2-3 0 2 1 0 1-4 4-1-1-2 1-1 4 2 0-3 2-2 1 1 3-1 1-5 3 1-1 3 2-1 2-4-1-3 2 0-1-1 3-1-3-4 4 1 1-3 4-2-2-1 0-1 3-1 1-4-1-4 3-1 3-4 4-2 1 1 0 2 2-1-1-3 1-3-6-3 1-3 3 0 5 2 1-1 1 3 1 1 5-6 2-1 1-3 2-3 0-4 1 0 3 1 1 0 0-3-4-1 1-3 4-1 0 4 1 1 3-6 1-1 2 2 5-1 2-1 1 0 0 3 1 0 1 1 1-1 0 1 2-1 2 0 0 2 3 1 1 2 3-2 2 2 6-1 2 3 5-2 2 0 2-2-1-4 2 1 1-2 4 0 1-2 2 3 4-4 4 0 4-4 6 2 1 2 2 2 2 0 0 3 3 2 0 4 3 6 2 1 1 2 1 1 1-1 2 3 1 0 1-1-2-6 2 0 1-5 6-8 1-11 3-2 3-5 5-1 2-3 3 1 6 0-1-3 4-3 1-4 4-2 5-9 2-1 2-5 2 0 1-2 3 0-1-2 1-3 1 0 0-3 2 0 2-2 2 2 2-1 2-5 3-2 2-4 4-3 4 1 2 0 5 1 3-4 2 0 1 2 0 4 2 3 3 2 5 1 2 0 1-2 1-6 4 0 2 1 0 1 3 1 2 5 3 1 2-2 0-5 3-1 2 1 4 6 8 3 5 4 4 8 2 1 1-1 1-1 0-2-2-2 0-2 3-3 4 0 0 9-2 2 1 4 2 3 1-1 0 3-4 1-1 2 2 1 6 2 3 2 1 4-1 3 1 0 3 0 1-2 0 5 1 3-2 4 1 1 3 1 1-1 2 2 2-1 0 3 3 0 2 5 3 0-4 4 0 3 2-1 1 2-5 3 4 2-1 3-2 2 2 1-3 2 2 3 3-2 1 2 3 1-1 3-1 2 1 0 2-2 1 1-2 2-2 1 0 1 2-1 2-1 2 0-1-2 2 0 1-1 2 1 0 11-3 2-1 1 4 0 6 5 0 4 3 2 0-2 3-1-3-6 1-1 2-1 3 4 2 0-1 3 2 1 4-5 2-1-2-2 0-5 6 4 3 0-3 5 3 1 1-2 1 0 1 2-2 3 3 1 1 5 1 0 1 2 1-1-1-3 2-2 1 0 2 4 0 2 2-2 3 2 0-4 2-1 2 3 3 0 3-2 2 2 2 0 3 3 2-3 3 0 2 1 0 4 1 1 4-5-1-5 4-2-1-6 6 0 0-3 1-1 4-1 2-3 3-1 0-3-1-4 4 0 0-3-2-4 3-1 4 2 2-2-1-2-2-2 2-1 0-2 3-2-3-3 3 0 2-2 1-2 2 1 0-2-2-1 2-1-2-1 0-2-1 2-1-1 3-4-3-4 4 1 0-2 3-3-3 0 1-1 0-2 1-2-2-2 1-3 1 0 1 3 3-2 2 1 0-4 2 3 2 0 0-5-1-6 0-1 4-2 1 2 2 1-1-6 2-1 4 1 1 1 2-2 3 0 3-9 0-2 5 0 4-5 4-2 1-4 0-7 2-1 3 2 3-6 1 1 1-2 2 3 4 0 0-3 5-1 3-2 2-4 3-2 1 0 1 2-3 2 0 2 2 2 4-2 7-11 2-5-1-4-1 0 1-2 4 1 2-3 3 3 2 0 1-3-2-5 3-1 3 2 2-4 0-5-3-2 0-2 4-5 6-1 0-1-3-2 0-1 1-2 1 1 1-1 1-5 4 0-1-2 1-2 5 1 2 2 3 5 0 5 7-2 3-2 1-3 3 1 1-4 1 0 1 1 2-1 1-2 0-4 3 1 1 0 0-3-4-5 0-3 3 0 4 5 7-2 2-2 2 1 4-4 2 1 0 5 5-5 3-1 4-7 4-3 9-9 1-3 0-4 4 3 4-1-1 3 5-3 0 1 1 1 6-3 2 2 5-2-1 4 4 0 4-3 8-4 8-6 3 0 11-10 4 1 4-2 2 3 1-1 4-4 3-10 3-7 2 0 2 4 1 1 5-4 4 3 2 0 1-2-2-3 2 0 2 2 0 4 3 2-3 2 0 2 1-1 3-2 4-7 10-8 4-2 0-6 4-6 3-3 7 2 7-1 4 1 2 3 0 4-1 2-2 1-5 0-3 2-3 0-2 2 0 2 0 4 3 3 2 0 3-1 3 0 3 2 1 1 0 3-4 2-2 3 2 6 10 0 5 4 2 0 1-2 2-11 2-1 4-1 5 3 1 4 0 4-2 1-2-2-2 0-3 3-1 4 4 3 1 4 3 0 5 0 6-3 1-5 15-10 8-10 6-4 3-1 3 2 3 4 2 10-1 4 0 2-2 2-3 1-2-3-2 0-2 1 0 2 5 6 7 4 4 1 12-3 20-9 16-4 2-3 6-12 2-8 2-3 4 0 6 6 3 1 1 0 4-9 6-11 3-9 2-2z' },
   { n:'Okavango East',               win:'bcp', ru:'bdp', m:9.34, wp:50.11, rp:40.77, op:9.12, sub:'BNF',     d:'M3160 239l-2 2-4-2-6 5 0-1 1-4-190 0-830 180-679 144 1 3 11 8 8 9 1 4-2 8 5 7-1 6 4 5 3 6 5 25 4 8 6 4 3 5 1 4-5 2-6 8-6 10 5 2 3 0 6-7 79-43 27 1 9-14 34-11-1-5 2-2 0-2 3-1 18-10 9-2 2-3 1-3 11 3 10-1 0-3 9-7 2-3 2 1 2-2-4-4 17-17 1 1 4-1 3-5 2-2 2 0 2 2 1 3 0 7-3 6 5 13 0 7 10 7 0 4-3 3-4 1 0 4 4 1 1 3-2 3 4 9 24 7 2 3-5 7 1 9 2 5 0 6 2 6 4 1 8 0 2 3 0 3-3 3 0 2 3 2 5-3 3 1 1 1-1 5 2 1 6-1 2 2 2 8 4 1 1 1-1 1-3 2 0 2 2 2 5 0 2-2 5-6 0-2 2 0 2-1 1 1 6 0 4-5 2 0 2-1 0-5 3 0 3 5 3 1 4-2 0-5 2 0 2 5 4 4 2-1 2-3 1 0 1 2-2 3 1 2 2 0 3-1 1 1-3 4 1 3 3 0 1 0 1-4 2 0 6 1 4 3 1 0 3-5 1-1 3 0 4 6 5 1 2-3 1-3 2-1 9-2 5 2 3 4-2 3-3 2-4 1-3 3 0 4 2 3 4 1 3 0 3 2 1 5 2 0 4-3 2 0 3 3 2 0 1-3 0-4 2-4 3 0 6 4 1 2 0 6 2 6 3 2 3 1 6-3 2 1 1 3-4 7 1 3 2 2 2 0 2-1 2 5 10 13 8 4 5 6 0 2-2 3-2 2-11 1-2 3 1 7 7 6-2 2-3 0-1 2 2 7 6-3 6 0-4 4 1 3 6-2 0 2-4 3 1 4 3 0 2 0 2 3-3 3 0 3 3 2 0 2-6 1-2 2 1 3 2 1-1 5 6 3-4 3 1 2 3 1 5 4 1 7 0 4 2 12-2 10-7 3 4 8 2 7 4-1 3 7 8 1 7-3 1 2-1 10 6 6 1 5 0 5 14 8-2 6-5 2 4 5 7-2 3-8 6 3-4 9 0 14 8-7 4 3-3 4-3 1 3 6 7-3 2 6-2 3 3 5 4-1 0 4 5-2 3 5-2 6 1 3-3 7 6-1 5 1 1-9 4 0 4 6 1 8 7-1 1 5-10 2 3 6 5 4 14 0 6 4 5 8 1 8 3-1 5 3 3 8-4 3 4 3 2-3 7 4 5 5 6 1 3 5 7 2 0-6 4 0-1-3 3-3 3 1 4-3 3 2 3-2 5-2 3 1 2 6-1 1 0 2-1 4 4 3 3-4 5 2 0-4 3-3 0-3 4 2 3-1 3 0 2-1 5 1 2 3 4 0 0 3 3-5 4 5 5-4 2 0 5 3 0 3 6 3 4 8 12-1 1 3-5 3-2 4 3 3 11 3-1 2-5-1-4 1 5 6 7 0 6 4 1 6-4 7 1 4 2 1 2 4 5 3 3-1-1-3 5-4 1-3 2 3 5-1 3 2-1 4 10 2-4 2 3 6 1 3 2 0 1-3 3-3 5 1 2-5 5-2 5 0 4 4 11 6 4 7 5 5 10 4 3 8 3 5-2 4 1 7 2-2 4 1 2 3 5 5-1 5-2 0 2 1 1 7 3-1 2 2 1-3 4 1 2 1 4-1 1 2 5 1 0 2 2 3-2 2 2 1-1 4 3-2 1 1 4 0 0 3 4-1 3 3 0 1 0 3-2 1 2 2-2 0 1 2-4 2 3 3 0 3 2 0-2 4 2 5 2 1 2 3 0 5 5 9 2 3 3 1 2 3 3 0-1 16 1 1 3 0 3 4-2 4-1 5 4 3-1 4-4 5-8 1-2 4 1 3-1 7 1 1 18 8 7 8 3 0 6 6 2 0 1-2 3 2 2 5 4 2 5 2 2 0 6-6 5-2 9-2 5 0 1 1 7 1 5 6 3 1 3 0 3 0 2-4 2-2 3 2 4 4 4 3 6 0 9-8 4-2 7-1 8-4 4 3 7 1 6-4 3-3 5-1 13 2 13 0 4 2 3-1 8-4 1-7 9-6 4-1 8 1 2-1 1-1-1-2 0-2 2-2 7 2 1 0 2-4 2 0 6 2 7-2 8 1 4 4 12 0 6 2 2-1 0-2 2-2 6-1 6 1 2-4 4-1 0-2 3 0 2 0 2 2 2 0 1 4 9 3 3 3 1 3-4 7 0 4 1 2 3 0 6-3 2-5-2-4 2-2 3 2 17 3 8-5 4 2 5-1 44-90 23-102 440-229 38-99 19-67-2-1 0 1-2-1-1 1-1-2-1 1-2-2-1 0-1-3 1 1 0-1 1 0 1-1-2-1 0-2-1 0 0-1 2-2 1 1 3-5-2-1 1-2-2 0 0-3-1-2 2 0 1-3-1-1-2 0 0-2-2 0-4-4-3 0 0-3-1-1 0-3-2-1-1-2-2-1 1-2 0-3-1 0-1-2 2-6 2-2-1-5 2-2 0-2 5-5-1-4-3-6 1-5-1-3 1-2-1-3-1-1-1 1-1-1-5 0 0-1-1-1 1-1-1-1 1-3-1-2 2-1-1-3 1-3 0-2 1-1 2 1 3 0 1 2 1-2 2 0-1-1 1-3 1 0-2-3-1 0 3-1-1-2-2 0 0-1-1 0-3-3-1-2-2-1 0-5 1 0 1-2-1-1 1-1-2 0 0-2-1-1 1 0 0-2 2 0-1-2 2-2 1-4 1-1-1-1-3-1 0-1-1 1 1 2 0 2-3-1-1-3-2 1 0-3-1 0-2-3-1 0 0-1-3-1-1 1-2-2 0-3 0-3-1-1 1-2-3 2-1-2-2 1 0 2-2 0-1-3 2 0 0-2 3-1-3-1 0-1-2 1 0-3 2 1-1-2 2-2-1-6 2 0 0-4 2-2 0-3-1-1-5-2-2-2 3-2-1-1 2-1 1-1-4 1 0-3-1 1-1-1-1 2-1 0 1-4-1-1 3-1 1-2-3-2 1-1-1-2 2 0 0-1-2 0-1 2-1 1 1-3-1-1-2 0 1-3-3-1-3 1-3-3-3-1-4 2-1-1 4-4-1-1-3 0-2-3 4-5-3 0-2 2-1-1 0-2 0-5 2 2-1-2 1-6-2-1-2 3-3 0-2 0-3-3-1 2-3 0-1 1-3-2-3-1-3 3-1 2-5 0 0-1 1-4-1-1-1 2-3-3 0-3-1 1-2-2-1 0 0-3-5 3-1-6-3 0 2-3-3-2-1-1 1-2 3 0 0-2-2-2 0-3-3-1 0-2-2-1-2-1-2 3-6-1-1-1 2-1 0-2-1-1-2 1-4 1-1-5-2-2-4 2 2 3-1 5-6-3 0-2 1 0-1-3-1-1-1 2-3-3-1 0 0 2-2 0-4-1-1 2 1 1-1 1-3 0-1-1 2-11 2-1 1 1 0-1 0-3-2 1-1-2 1-3 3 1 1-2-1-15-3-4-6-2-1-2-2-1 0-4-4 2-3-1 1-4 0-3-3-4 0-4 1-1-3-3 0-2 1-8-1-1-8-1-7-8 0-1 2-1 0-2-3-2 3-1 2-4-3-1-2 3-4 0 0-6-4-2-4-1 0-2 2-4-1-1-2 1-1-1-1-2 2-2 0-2-1-2-2 1-2-1 1-1 0-3-1 0 0-2-1-1-1 2-1-1-1-4-3 0 0 2-3 1-2-5-3 0-1-2-3 0 2-3-3-1-1-3 3-5-2 0-2-2 1-4 2-2-4-5 6-6 2 4 1 0 2-2 2 0 1-3-1-2-5-2-4 2-3-1-1-3 2-7-1-2-5-1-2 3-1 0-4-2-1-2 0-3 4-2 1-5 4-3 0-3-1 1-1-1-1-4-5-4-4-2 2-2-1-1 1-1 2-1-1-2 2-2-1-1z' },
@@ -343,7 +461,6 @@ const SEATS=[
   { n:'Kgalagadi South',             win:'udc', ru:'bdp', m:16.60, wp:54.91, rp:38.31, op:6.78, sub:'UDC-Ind', d:'M5 6628l1 662 2 6 7 7 20 14 4 11 5 10 25 5 1 0 1 4 0 11 4 2 7 0 7-1 4 3 0 7-3 5 1 8 11 7 10 3 2 6 4 12 1 1 5 4 8-4 18-2 9 5 2 5 5 5 15 18 7-2 5-6 3-7 5-1 6 5 4 7 3 8 5 4 1 0 8-5 2-1 14 5 7 5 4 0 6 5 5 9 2 10 3 3 8 1 2 3 2 6-2 10 10 11 19 6 6 5 3 6 2 8 7 2 13 2 8 15 10 4 12 4 4 3 2 4-1 11-6 12 0 1 2 4 5 3 5 8 8 2 7 1 4 2 1 2 3 5-6 10 1 5 4 1 4 0 4 3 1 4 4 5 1 4-4 4-1 4 2 5 5 3 0 5-4 3 0 4 3 6 5 4 8 0 4-1 11-7 5 2 4 5 0 5 0 8-2 6-5 8-14 5-3 6 2 4 15 13 1 7 2 5 6 5 5-3 12-3 6 2 3 4-4 14-3 7-4 5 9 16 5 4 5 2 5-1 7 1 4 3 0 6 4 4 18-2-4 7-4 1-7 5-5 6-8 2-3 5 0 5 3 7 4 1 10-2 5-4 4 0 1 0 5 2 1 4 0 4-6 7-3 10 6 10 6 16 8 14 1 5 6 5 11 2 13-7 4 1 5 4 3 4 0 5-6 18 3 6 6 2 8-3 8-5 5 3 3 7-4 4-9 5-3 5 6 17 14 3 7-2 3-4 5-9 6-4 7-1 4 3 3 5 0 5-1 6-6 6-3 2-3 0-18-1-5 3-2 5 2 5 5 9 2 7-3 5-11 8-1 5 1 8 4 5 15 2 6 5 14 14 11 20 7 10 8 10 1 5-2 5-6 3-7 2-16-1-4 4-1 7-8 13-1 6 1 4 5 2 6-1 9-9 9 2 6 4 1 6-2 10-10 14-2 6 2 15 1 4 5 5 13 6 11 7 5 5 8 11 9 25-1 20 1 3 6 2 4 0 7-2 5 1 6 4 3 4 1 7-1 2-2 3-11 7-5 6-5 11 0 7 3 2 4 2 6 0 6-4 3-8 5-6 5-4 5-3 4-1 2 0 4 3 1 5-4 11 0 4 4 10-2 5-6 10 2 7 3 5 1 1 4 1 11 0 4 2 5 6 1 14-2 6-2 4-5 2-6 4 1 4 3 6 1 11 2 5 3 3 27 22 4 6-1 6-8 10 0 10-2 7-13 17 1 4 12 9 3 4 4 14 0 5-3 4-12 9-2 4 6 12 3 3 11 3 2 5-2 7-4 5-13 8-1 2 1 4 6 6 9 5 3 6 2 1 1 0 8-3 6 3 4 4 0 3 0 3-6 7-3 8-9 12-7 8-8 3-4 3-4 7-4 11-1 6 2 15-8 15-2 15-4 6-5 6-3 4-1 7-1 4-3 3-8 4-6 5-10 2-3 2-2 5-1 5-7 14-5 7-6 7-11 5-6 5-2 5-5 12-11 13-3 5 1 15-1 7-4 7-6 2-7-2-3 1-5 7-10 11-9 16-4 3-20 0-8 9-1 24-4 20 0 12-7 15 0 6 5 15-1 18 1 6 4 6 4 2 9 12 4 5 1 8-1 3 1 4-1 5 2 5 0 8-1 4-2 4-1 4-1 14 3 12 2 6 1 4-2 4-15 8-2 10 2 15 2 4 2 7 4 7 9 6-2 3 0 7-7 13 11 15 1 4-3 7-12 12 1 3 3 1 10 4 8 7 5 8-7 13 2 6 10 6 26 6 2 8-4 3-4 6 0 4 3 8 0 12 7 21-2 5 5-2 8-7 6-13 3-10 6-5 13-4 11 0 17 1 6-1 9-7 3-5 10-13 6-1 10 2 9 1 4-2 2-4-1-15 2-3 8-2 15 1 6-3 20-12 13-7 12-1 11 2 27 13 8 3 7-2 8-5 6-1 3 1 6 5 8 13 20 19 3 2 7 2 23-1 17 5 11-4 8 0 4 2 7 4 6 2 12 2 6 1 8 10 4 3 5 2 20-7 7 0 6 2 8-3 17-14 4-2 22-7 9 0 13 3 4-1 6-5 4-2 5-1 4 0 5 2 10 7 4 2 10 1 7-2 7-4 6-5 7-10 5-3 10 0 16 4 15 1 13-6 15-2 9 0 29 6 4 2 6 8 6 2 18 0 5 1 11 9 13 6 14 5 3-1 4-5 7-13 8 1 8 6 4 0 14-10 17 1 5 2 5 3 13 15 8 6 16-3 5 0 8 1 6 0 5-3 5-7 3-1 8 2 5 4 4 1 8-3 7-8 25-21 26-17 7-9 4-1 5 0 3-17 8-9 1-6-6-13-2-7 2-28-3-6-13-12-1-9 2-6 15-13 7-4 13-2 15-11 6 0 9 5 5-1 22 5 14 2 10-2 10 1 23-5 5 2 3 0 6 3 6 0 11-5 23-15 13-2 2 0 10-8 5-3 6-2 8-1 17 1 3-2 12-16 5-10 8-26 4-5 4-2 8-1 4-3 3-5 2-11 4-5 5-3 5 0 6 1 4-1 3-2 1-5-1-8 0-5 3-3 6-5 16-7 5-3 2-5 0-5-6-6-1-5 1-3 1-2 6-6 12-5 2-2 2-4 2-7-4-10 0-10 2-3 12-6 4-6 0-4-2-7-7-8-1-5 3-5 2-2 18-7 11-9 7-3 5-3 1-3-1-2-1-9 1-3 4-5 5-3 19-2 15-5 5 0 11 4 6 0 6-3 5-13 3-4 4-2 13-2 12 7 7 1 4-2 3-7 1-5-1-12-4-12 1-4 5-2 11 2 5-1 10-7 7-6 3-4-1-5-6-10 0-5 3-5 10-4 3-2 2-11 2-2 2-2 4 1 7 3 9 2 11-1 6-6 6-17 5-5 2 0 4 1 15 9 17 6 4 2 8 7 3 1 10 1 10-1 7-3 2-2 2-9 2-5 11-11 3-5 1-6 1-27-3-11 2-5 3-2 6 1 4 6 6 4 6-2 2-6-2-9 3-6 2-2 8-3 10-1 5-2 2-4 1-3-1-2-4-4-3-5 1-6 1-1 6-5 12-5 10-6 7-3 5-4 0-4-2-11 1-15-4-12-4-6 2-8 4-4 3-1 6 0 20 7 8 0 11-1 4-3 1-3-1-12 1-11 4-11 0-4-1-5-5-13 0-7 4-11 8-9 12-8 1-5-4-4-22-6-3-2-6-7-1-6 2-3 4-3 6-1 13-4 3-6-6-14 1-6 4-2 12-3 5-2 13-8 7-9 2-3 1-4-2-7-3-4-6-3-9-1-6-4-4-1-4-3-8-5-2-2-1-3 2-4 2-2 16 3 2 0 2-2 3-9 1-30 2-10 3-7 4-3 15-2 5-1 4-4 8-10 13-23 1-13 2-7 6-8 0-5-3-3-10 0-7-3-7-11-3-6 1-2 4-3 6-2 4-3 16-5 12 2 3-1 3-2 3-5 0-3-4-3-2-3-10-7-9-8-10-5-3-4 1-4 4-2 5-1 3-4 12-26 7-7 5-3 1-2 0-4-1-2-1-6 3-5 4-6 1-4-3-4-9-7-1-2 0-4 5-6 11-5 19 5 11 4 5-1 1-6-12-4-2-3-1-6 3-4 10-9 6-17 2-10 2-6 9-11 10-5 19-14 2 0 17-12 7-12-1-7-2-4 1-6-2-6 5-7 4-2 5 0 16 2 4-2 3-2 2-4 0-4-3-11-3-10-1-4 1-5 3-2 4 1 5 4 8 8 0 3 3 0 2-1 1-2 10-8 7-12 2-1 4 1 3 5 0 8-5 9-1 7 5 8 2 0 4 3 11 2 6-3 3-3 1-3-1-8 1-2 9-2 9-7 6-1 4 3 11 11 3 1 3-1 3-2 3-7 5-5 5-1 8 3 5-2 3-4 1-6 3-4 13-11 8-2 10 0 5-3 5 0 13 6 4 1 3 0 9-5 6 3 7 1 9-3 5-3 3 0 7 7 4 11 4 3 4-1 5-2 5-8 2-2 4 0 5 9 4 2 14-6 12-2 4 1 4 1 2 1 4 13 2 3 13 0 21 4 6 7 5 2 4-3 12-18 6-10 3-8 3-2 3-1 18 2 1 2-1 3-8 11-1 5 2 2 3 2 2 0 7-3 5 0 2 2 2 7 1 3 9 6 2 2 6 13-4 12-1 5 1 4 2 1 3-1 19-11 3-1 4 3 5 10 3 0 10-1 12 3 1 3-5 10 1 4 2 1 5-2 4 0 15 5 1 5-1 12 2 3 3 1 6 1 3-2 3-10 4-4 4 1 5 1 3 2 2 4-2 5-5 3-2 3 0 3 2 2 4 1 11 1 3 3 2 4-1 5 1 7 3 6 3 1 3 0 9-2 3-2 1-2 0-9 2-2 3-1 6 1 7 11-1 2-4 4-3 3-1 6 5 4 7 2 7-3 4-1 4 1 5 3 2 4-1 9 2 2 5-2 6-5 6-9 4-1 3 1 2 2 1 5 2 5 4 2 7 1 7 3 5 4 0 3-5 6-1 4 2 2 6 3 4 3 0 4-3 7 1 3 10 0 3 1 7 8 3 1 5 0 11-4 8 0 5 1 4 3 1 2-1 2-7 8-6 3-2 6 0 6 3 6 7 5 5 0 3-2 5-7 2-1 4 1 6 8 2 4-2 4-4 5 0 3 2 3 4 3 11 2 11-1 8 3 4 2 2 5-1 10 2 3 5 4 15 4 3 3-5 17 2 5 3 1 7 0 4 1 3 3 3 4 3 2 7-1 11 1 2-1 3-4-2-7 1-3 3-2 4 2 3 0 4-8 6-1 5 2 4 5 2 1 12-1 7-1 8 4 1 4-8 5-2 2 1 7 0 7 2 2 3 0 8-5 8-1 2-3-1-6 3-2 5 2 3 3 4 6 9 6 7 1 6-1 2-3 0-4-3-5 0-4 3-4 6-2 3 1 2 2 2 9 3 2 2 0 6-8 11-5 3 0 7 1 13-4 9 1 3-3 0-4-2-5 1-2 9-4 4-2 3 0 4 2 2 5-1 3-4 5-1 3 2 4 8 1 2 0 10-4 4-6 8-1 3 1 5 8 7 3 3 4 1 5 2 3 5 1 3-2 4 0 1 4-2 8 3 4 4 3 3 8 5 3 6-1 4 3-1 3-4 7 2 1 6 2 5 4 1 3-2 9 1 4 5 1 6-2 3-5 4-5 5-3 4 1 2 5 1 7-3 2-6 1-3 4-1 1 1 4 6 8 2 0 8-8 5-4 5-1 8 1 8-4 3 1 2 2-1 2-4 5-1 3 0 5 2 4 10 7 4 6 11 5 3 6 3 2 7 1 9 5 7 1 2-1 3-6 5-3 2 1 3 6 4 1 2-1 1-2 0-8 2-5 2-1 3 0 11 5 3 1 4-3 2-3 1-12 2 0 3 5 3 2 2-1 0-5 2-2 3 1 5 6 3 3 5 0 2-5 3-1 3 3 0 6 1 1 11 2 20 8-7-111-85-1-149-146 17-528-124-130-1032 0 0-13-80 0 0 16-119 96-668 0 0-117-157-3-193-6z' },
 ];
 
-// Full published candidate lists (party -> share) where available
 const CONFIRMED={
  'Lentsweletau-Lephephe':[['udc',42.88],['bdp',35.58],['bpf',11.25],['bcp',8.39],['ind',1.09],['brp',0.82]],
  'Takatokwane':[['udc',63.20],['bdp',30.88],['bpf',5.92]],
@@ -407,266 +524,263 @@ const CONFIRMED={
  'Selebi-Phikwe East':[['bcp',41.30],['bdp',27.23],['udc',15.68],['ind',9.74],['bpf',6.06]],
  'Mmadinare':[['udc',30.33],['bcp',29.98],['bdp',26.31],['bpf',12.31],['bmd',1.07]]};
 
-let SW={},TP={},SWT={};
-// Whatever the five main inputs leave out of 100% is shared among the minor parties,
-// in proportion to their 2024 strength, and each gets that as a swing (UNS).
-const MINOR=['brp','bmd','rap'],MINOR_W={brp:0.781,bmd:0.215,rap:0.004};
-const bySeats=seats=>[...PARTIES].sort((a,b)=>((seats&&seats[b.id])||0)-((seats&&seats[a.id])||0)||b.baseVote-a.baseVote);
-// Taper: once a party's national share falls below 20% of its 2024 baseline, the flat
-// swing stops and its share in every seat shrinks proportionally, reaching 0% at 0%.
-function adj(id,pct){const t=TP[id];
- if(t===undefined||t>=1)return Math.max(0.05,pct+(SW[id]||0));
- return Math.max(0,pct+SWT[id])*t}
+SEATS.forEach(s=>{s.base=new Array(8).fill(null);const conf=CONFIRMED[s.n];
+ if(conf){conf.forEach(([id,p])=>{s.base[PI[id]]=p});s.partial=false;s.resid=0}
+ else{s.base[PI[s.win]]=s.wp;s.base[PI[s.ru]]=s.rp;s.partial=true;s.resid=s.op}
+ s.winI=PI[s.win];s.subI=SUBI[s.sub]});
 
-// Seat-level UNS: apply the national swing to each party's actual 2024 share in
-// that constituency, renormalise, and the highest share wins the seat. This is
-// the single source of truth — map colour, seat bar, party cards and tooltips
-// all read from it, so they cannot disagree.
-function seatShares(s){
- const conf=CONFIRMED[s.n];
- let raw, resid;
- if(conf){
-   raw=conf.map(([id,pct])=>({id,pct:adj(id,pct)})); resid=0;
-   // a party that didn't stand here still picks up any national gain
-   PARTIES.map(p=>p.id).forEach(id=>{if(!conf.some(([i])=>i===id)&&(SW[id]||0)>0)raw.push({id,pct:SW[id]})});
- }else{
-   // only winner + runner-up are published for this seat; the rest is held flat
-   raw=[{id:s.win,pct:adj(s.win,s.wp)},
-        {id:s.ru ,pct:adj(s.ru ,s.rp)}];
-   resid=s.op;
- }
- const tot=(raw.reduce((a,r)=>a+r.pct,0)+resid)||1;
- return {rows:raw.map(r=>({id:r.id,pct:r.pct/tot*100})).sort((a,b)=>b.pct-a.pct),
-         resid:resid/tot*100, partial:!conf};
-}
-function resolveMap(){const h={};SEATS.forEach(s=>h[s.n]=seatShares(s).rows[0].id);return h;}
-function tallyFromMap(h){const t={};PARTIES.forEach(p=>t[p.id]=0);
- SEATS.forEach(s=>t[h[s.n]]=(t[h[s.n]]||0)+1);return t}
-function subFromMap(h){const c={BNF:0,AP:0,BPP:0,'UDC-Ind':0};
- SEATS.forEach(s=>{if(h[s.n]==='udc'&&c[s.sub]!==undefined)c[s.sub]++});return c}
+// National swing -> per-party additive swing (SW), taper factor (TP) and tapered offset (SWT).
+// Whatever the five main inputs leave out of 100% goes to the minor parties by their weights.
+const BT=100; // baselines are on a 100% scale: five main parties 99.5 + 0.5 minor parties
+function makeSwing(v,rem){const SW=new Float64Array(8),TP=new Float64Array(8).fill(1),SWT=new Float64Array(8);
+ MAIN.forEach((p,i)=>{const bn=p.baseVote/BT*100,sw=v[i]-bn,thr=0.2*bn;SW[i]=sw;
+  if(v[i]<thr){TP[i]=v[i]/thr;SWT[i]=thr-bn}});
+ for(let i=5;i<8;i++)SW[i]=rem*MINOR_W[i];
+ return {SW,TP,SWT}}
+function adjv(sw,i,pct){const t=sw.TP[i];if(t>=1)return Math.max(0.05,pct+sw.SW[i]);return Math.max(0,pct+sw.SWT[i])*t}
+// Seat-level share list after swing (single source of truth for the display)
+function seatRows(s,sw){const raw=[];
+ for(let i=0;i<8;i++){const b=s.base[i];
+  if(b!=null)raw.push({i,pct:adjv(sw,i,b)});else if(sw.SW[i]>0)raw.push({i,pct:sw.SW[i]})}
+ const tot=(raw.reduce((a,r)=>a+r.pct,0)+s.resid)||1;
+ const rows=raw.map(r=>({i:r.i,pct:r.pct/tot*100}));
+ rows.sort((a,b)=>(b.pct-a.pct)||((b.i===s.winI)-(a.i===s.winI))||(a.i-b.i));
+ return {rows,resid:s.resid/tot*100}}
+// Lean winner: same maths, optional Gaussian seat noise, no objects
+function gauss(r){return Math.sqrt(-2*Math.log(1-r()))*Math.cos(2*Math.PI*r())}
+function winnerLean(s,sw,r,serr){let best=-1,bi=-1;
+ for(let i=0;i<8;i++){const b=s.base[i];let x;
+  if(b!=null)x=adjv(sw,i,b);else if(sw.SW[i]>0)x=sw.SW[i];else continue;
+  if(r&&serr>0&&x>0){x=Math.max(0,x+serr*Math.sqrt(Math.max(b==null?0:b,0.5)/20)*gauss(r))}
+  if(x>best+1e-9||(Math.abs(x-best)<=1e-9&&i===s.winI)){best=x;bi=i}}
+ return bi}
+function resolve(sw){return SEATS.map(s=>winnerLean(s,sw,null,0))}
+function tallyIdx(h){const c=new Array(12).fill(0);SEATS.forEach((s,k)=>{c[h[k]]++;if(h[k]===0)c[8+s.subI]++});return c}
+function rngFor(i){let a=(i+0x5bd1e995)>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function runOnce(i,ctx){const r=rngFor(i);let v=ctx.v,rem=ctx.rem;
+ if(ctx.verr>0){const sg=ctx.verr/100,a=ctx.v.map(x=>x*Math.exp(sg*gauss(r)));
+  const ro=ctx.rem>0.05?ctx.rem*Math.exp(sg*gauss(r)):0,T=a.reduce((p,q)=>p+q,0)+ro;
+  v=a.map(x=>x/T*100);rem=ro/T*100}
+ const sw=makeSwing(v,rem),c=new Uint8Array(12);
+ for(let k=0;k<SEATS.length;k++){const s=SEATS[k],w=winnerLean(s,sw,r,ctx.serr);c[w]++;if(w===0)c[8+s.subI]++}
+ return c}
+//#ENGINE_END
 
-function seatDetail(s,holder){
- const was=s.win, proj=seatShares(s);
- let html='<span class="tip-name">'+s.n+'</span><br><span class="tip-sub">Projected vote share</span>';
- proj.rows.forEach(r=>{if(r.pct<0.05)return;const sw=r.id==='udc'?'#7f9ff2':PCOL[r.id];
-  const label=(r.id==='ind'?'Independent':PNAME[r.id])+(r.id==='udc'?' ('+s.sub+')':'');
-  html+='<br><span class="tip-row"><span style="color:'+sw+'">&#9679;</span> '+label+'<span class="tip-val">'+r.pct.toFixed(1)+'%</span></span>'});
- if(proj.partial&&proj.resid>0.3)
-   html+='<br><span class="tip-sub" style="font-size:10px">remaining '+proj.resid.toFixed(1)+'% \u2014 candidate split not published for this seat</span>';
- if(holder!==was)
-   html+='<br><span style="color:#ffd98a">'+PNAME[holder]+' gain from '+PNAME[was]+'</span>';
- return html;
-}
+/* ---------- UI ---------- */
+const $=id=>document.getElementById(id);
+const fmt1=x=>x.toFixed(1);
+function ink(hex){const h=hex.replace('#',''),c=[0,2,4].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return (0.2126*c[0]+0.7152*c[1]+0.0722*c[2])>0.4?'#141413':'#fff'}
+let VIEW='alliance',CUR=null,COAL=new Set(),MAPMODE='winner',MAPPARTY='udc';
+const order=()=>VIEW==='party'?ORDER_P:ORDER_A;
+function tallyMap(h,view){const t={};PARTIES.forEach(p=>t[p.id]=0);if(view==='party')SUBS.forEach(p=>t[p.id]=0);
+ SEATS.forEach((s,k)=>{const p=PARTIES[h[k]];if(view==='party'&&h[k]===0)t[SUBS[s.subI].id]++;else t[p.id]++});return t}
+const unitOf=(s,hi)=>(VIEW==='party'&&hi===0)?SUBS[s.subI].id:PARTIES[hi].id;
 
-function buildMapLegend(){['hemi-legend'].forEach(id=>{const l=document.getElementById(id);if(!l)return;
- PARTIES.forEach(p=>{const i=document.createElement('span');i.className='ml-item';i.id='hl-'+p.id;if(p.minor)i.style.display='none';
-  i.innerHTML='<span class="ml-sq" style="background:'+p.color+'"></span>'+(p.id==='ind'?'Independent':p.name);l.appendChild(i)});})}
-let SELECTED=null;
-function hideTip(){const t=document.getElementById('hex-tip');if(t)t.classList.remove('on');if(SELECTED){SELECTED.classList.remove('sel');SELECTED=null}}
-document.addEventListener('click',e=>{if(!e.target.closest('#tiles'))hideTip()});
-function buildCartogram(){
- const g=document.getElementById('tiles'),tip=document.getElementById('hex-tip'),wrap=document.querySelector('.cartogram-wrap');
- SEATS.forEach(s=>{
-  const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-  p.setAttribute('d',s.d); p.setAttribute('id','hex-'+s.n.replace(/[^a-zA-Z]/g,''));
-  const show=ev=>{const rect=wrap.getBoundingClientRect();
-   tip.innerHTML=seatDetail(s,p.dataset.holder);
-   const px=ev.clientX-rect.left,py=ev.clientY-rect.top;
-   tip.style.left=Math.min(Math.max(px,96),rect.width-96)+'px';
-   tip.style.top=(py-12)+'px';tip.classList.add('on')};
-  p.addEventListener('click',ev=>{ev.stopPropagation();
-   if(SELECTED===p){hideTip();return}
-   hideTip();SELECTED=p;p.classList.add('sel');g.appendChild(p);show(ev)});
-  // keyboard access: every constituency is a focusable button
-  p.setAttribute('tabindex','0');p.setAttribute('role','button');p.setAttribute('focusable','true');
-  const centre=()=>{const r=p.getBoundingClientRect();return {clientX:r.left+r.width/2,clientY:r.top+r.height/2}};
-  const toggle=ev=>{if(SELECTED===p){hideTip();return}hideTip();SELECTED=p;p.classList.add('sel');show(ev)};
-  p.addEventListener('keydown',e=>{
-   if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(centre())}
-   else if(e.key==='Escape'){hideTip()}
-   else if(e.key.startsWith('Arrow')){e.preventDefault();hideTip();moveFocus(s,e.key)}});
-  p.addEventListener('focus',()=>{hideTip();revealPath(p)});
-  p.addEventListener('blur',()=>{if(SELECTED===p)hideTip()});
-  g.appendChild(p)});
- tip.setAttribute('role','status');tip.setAttribute('aria-live','polite');
- document.getElementById('cartogram').addEventListener('keydown',e=>{if(e.key==='+'||e.key==='='){e.preventDefault();zoomTo('in')}else if(e.key==='-'||e.key==='_'){e.preventDefault();zoomTo('out')}else if(e.key==='0'){e.preventDefault();zoomTo('all')}})}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTip()});
-// pan the view so a keyboard-focused constituency is on screen
-function revealPath(p){if(typeof VB==='undefined'||!p.getBBox)return;const b=p.getBBox(),cx=b.x+b.width/2,cy=b.y+b.height/2,m=0.12;
- const inside=cx>VB.x+VB.w*m&&cx<VB.x+VB.w*(1-m)&&cy>VB.y+VB.h*m&&cy<VB.y+VB.h*(1-m);
- if(!inside)animVB({x:cx-VB.w/2,y:cy-VB.h/2,w:VB.w,h:VB.h})}
-// arrow keys jump to the nearest constituency in that direction
-let SEAT_CENTRES=null;
-function moveFocus(from,key){
- if(!SEAT_CENTRES){SEAT_CENTRES={};SEATS.forEach(s=>{const b=document.getElementById('hex-'+s.n.replace(/[^a-zA-Z]/g,'')).getBBox();SEAT_CENTRES[s.n]={x:b.x+b.width/2,y:b.y+b.height/2}})}
- const d={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[key],c=SEAT_CENTRES[from.n];if(!d)return;
- let best=null,bs=Infinity;
- SEATS.forEach(t=>{if(t===from)return;const q=SEAT_CENTRES[t.n],dx=q.x-c.x,dy=q.y-c.y,dist=Math.hypot(dx,dy)||1,cos=(dx*d[0]+dy*d[1])/dist;
-  if(cos<0.5)return;const sc=dist*(1+2*(1-cos));if(sc<bs){bs=sc;best=t}});
- if(best){const el=document.getElementById('hex-'+best.n.replace(/[^a-zA-Z]/g,''));if(el)el.focus({preventScroll:true})}}
+/* inputs */
+function room(id){const o=MAIN.filter(q=>q.id!==id).reduce((t,q)=>t+(parseFloat($('inp-'+q.id).value)||0),0);return Math.min(70,Math.max(0,Math.round((100-o)*10)/10))}
+function buildInputs(){const c=$('inputs');
+ [...MAIN].sort((a,b)=>b.baseVote-a.baseVote).forEach(p=>{const d=document.createElement('div');d.className='row';
+  d.innerHTML='<div class="nm"><span class="dot" style="background:'+p.color+'"></span>'+p.name+' ('+p.acr+')</div><div class="ctl"><input class="sl" id="sl-'+p.id+'" type="range" min="0" max="70" step="0.1" value="'+p.baseVote+'" style="--c:'+p.color+'" aria-label="'+p.name+' vote share"><div class="nbox"><input id="inp-'+p.id+'" type="number" inputmode="decimal" min="0" max="70" step="0.1" value="'+fmt1(p.baseVote)+'" aria-label="'+p.name+' vote share, percent"><span class="pc">%</span></div></div>';
+  c.appendChild(d);
+  const num=d.querySelector('#inp-'+p.id),sl=d.querySelector('#sl-'+p.id);
+  num.addEventListener('input',()=>{const v=parseFloat(num.value);if(!isNaN(v)&&v>room(p.id))num.value=fmt1(room(p.id));update()});
+  const fin=()=>{let v=parseFloat(num.value);if(isNaN(v))v=0;v=Math.min(Math.max(0,v),room(p.id));num.value=fmt1(v);update()};
+  num.addEventListener('change',fin);num.addEventListener('blur',fin);
+  sl.addEventListener('input',()=>{const v=Math.min(parseFloat(sl.value),room(p.id));sl.value=v;num.value=fmt1(v);update()})});
+ const o=document.createElement('div');o.className='row other';
+ o.innerHTML='<div class="nm"><span class="dot" style="background:#8a8984"></span>Other</div><div class="ctl"><input class="sl" id="sl-oth" type="range" min="0" max="70" step="0.1" value="0" disabled style="--c:#8a8984" aria-label="Other vote share (remainder, not editable)"><div class="nbox"><input id="inp-oth" type="text" value="0.0" readonly tabindex="-1" aria-label="Other vote share, percent (remainder)"><span class="pc">%</span></div></div>';
+ c.appendChild(o);
+ $('reset').onclick=()=>{MAIN.forEach(p=>{$('inp-'+p.id).value=fmt1(p.baseVote)});update()}}
+function getInputs(){const v=MAIN.map(p=>{const x=parseFloat($('inp-'+p.id).value);return isNaN(x)?0:Math.min(70,Math.max(0,x))});
+ const t=v.reduce((a,b)=>a+b,0),k=t>100?100/t:1;const vv=v.map(x=>x*k);return {v:vv,rem:Math.max(0,100-vv.reduce((a,b)=>a+b,0))}}
 
-let MAPMODE='winner',MAPPARTY='udc',LAST_HOLDER=null;
-const NEUTRAL='#e4e2dc';
-function mixHex(hex,t){const h=hex.replace('#',''),c=[0,2,4].map(i=>parseInt(h.substr(i,2),16)),b=[241,239,233];
- return 'rgb('+c.map((v,i)=>Math.round(b[i]+(v-b[i])*t)).join(',')+')'}
-function partyShare(s,id){const r=seatShares(s).rows.find(r=>r.id===id);return r?r.pct:0}
-function paint(holder){if(holder)LAST_HOLDER=holder;holder=LAST_HOLDER;if(!holder)return;
- let max=0,min=Infinity;
- if(MAPMODE==='strength')SEATS.forEach(s=>{const v=partyShare(s,MAPPARTY);max=Math.max(max,v);if(v>0.05)min=Math.min(min,v)});
- if(!isFinite(min)||min>=max)min=0;
- SEATS.forEach(s=>{
-  const p=document.getElementById('hex-'+s.n.replace(/[^a-zA-Z]/g,''));if(!p)return;
-  const hh=holder[s.n];p.dataset.holder=hh;let fill;p.setAttribute('aria-label',s.n+': projected winner '+(PNAME[hh]||hh)+'. Press Enter for details.');
-  if(MAPMODE==='strength')fill=max>0?mixHex(PCOL[MAPPARTY],Math.pow(Math.max(0,(partyShare(s,MAPPARTY)-min)/(max-min)),0.85)):NEUTRAL;
-  else if(MAPMODE==='flips')fill=hh!==s.win?PCOL[hh]:NEUTRAL;
-  else fill=PCOL[hh]||'#ccc';
-  p.setAttribute('fill',fill)});
- renderMapLegend(holder,max,min)}
-function renderMapLegend(holder,max,min){
- const l=document.getElementById('map-legend');if(!l)return;
- const item=(c,t)=>'<span class="ml-item"><span class="ml-sq" style="background:'+c+'"></span>'+t+'</span>';
- const nm=p=>p.id==='ind'?'Independent':p.name,held=Object.values(holder),shown=p=>!p.minor||held.includes(p.id);
- if(MAPMODE==='strength'){const P=PARTIES.find(p=>p.id===MAPPARTY);
-  l.innerHTML='<span class="ml-item">'+nm(P)+' projected vote share</span><span class="ml-item">'+(min<1?min.toFixed(1):min.toFixed(0))+'%<span class="ml-grad" style="background:linear-gradient(90deg,'+mixHex(P.color,0)+','+P.color+')"></span>'+max.toFixed(0)+'%</span>';
- }else if(MAPMODE==='flips'){
-  l.innerHTML=PARTIES.filter(shown).map(p=>item(p.color,nm(p)+' gain')).join('')+item(NEUTRAL,'No change');
- }else l.innerHTML=PARTIES.filter(shown).map(p=>item(p.color,nm(p))).join('');
-}
-function syncModes(){const seg=document.getElementById('mode-seg'),mp=document.getElementById('mode-parties');if(!seg||!mp)return;
- seg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.m===MAPMODE));
- mp.classList.toggle('show',MAPMODE==='strength');
- mp.querySelectorAll('.mp-chip').forEach(b=>{const on=b.dataset.p===MAPPARTY;b.classList.toggle('on',on);b.style.background=on?PCOL[b.dataset.p]:'#fff'})}
-function renderModeChips(seats){const mp=document.getElementById('mode-parties');if(!mp)return;
- mp.innerHTML=bySeats(seats).map(p=>'<button class="mp-chip" data-p="'+p.id+'"><span class="mp-dot" style="background:'+p.color+'"></span>'+(p.id==='ind'?'Independent':p.name)+'</button>').join('');syncModes()}
-function buildMapModes(){
- const seg=document.getElementById('mode-seg'),mp=document.getElementById('mode-parties');
- renderModeChips(LAST_SEATS);
- seg.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;MAPMODE=b.dataset.m;hideTip();syncModes();paint()});
- mp.addEventListener('click',e=>{const b=e.target.closest('.mp-chip');if(!b)return;MAPPARTY=b.dataset.p;hideTip();syncModes();paint()})}
-
-function getRaw(){const v={};MAIN.forEach(p=>{const e=document.getElementById('inp-'+p.id);
- const x=parseFloat(e?e.value:p.baseVote);v[p.id]=isNaN(x)?0:Math.max(0,x)});return v}
-function norm(raw){const t=Object.values(raw).reduce((a,b)=>a+b,0);const n={};
- const k=t>100?100/t:1;MAIN.forEach(p=>n[p.id]=raw[p.id]*k);return n}
-
-function buildInputs(){
- const c=document.getElementById('inputs');
- [...MAIN].sort((a,b)=>b.baseVote-a.baseVote).forEach(p=>{const cell=document.createElement('div');cell.className='input-cell';
-  cell.innerHTML='<div class="input-label"><span class="dot" style="background:'+p.color+'"></span><span style="color:'+p.color+'">'+p.name+'</span></div>'
-   +'<div class="vote-input-wrap"><input class="vote-input" id="inp-'+p.id+'" type="number" min="0" max="100" step="0.1" value="'+p.baseVote.toFixed(1)+'"><span class="pct-symbol">%</span></div>'
-   +'<input class="vote-slider" id="sl-'+p.id+'" type="range" min="0" max="80" step="0.1" value="'+p.baseVote.toFixed(1)+'" style="--c:'+p.color+'" aria-label="'+p.name+' vote share">';
-  c.appendChild(cell);
-  const num=cell.querySelector('.vote-input'),sl=cell.querySelector('.vote-slider');
-  // total can never exceed 100%: a party can only rise by whatever the others leave free
-  const room=()=>{const o=MAIN.filter(q=>q.id!==p.id).reduce((t,q)=>{const e=document.getElementById('inp-'+q.id);return t+(parseFloat(e&&e.value)||0)},0);return Math.max(0,Math.round((100-o)*10)/10)};
-  num.addEventListener('input',()=>{const v=parseFloat(num.value);if(!isNaN(v)&&v>room())num.value=room().toFixed(1);update()});
-  sl.addEventListener('input',()=>{const v=Math.min(parseFloat(sl.value),room());num.value=v.toFixed(1);sl.value=v;update()})});
-}
-
-function update(){
- const raw=getRaw(),tot=Object.values(raw).reduce((a,b)=>a+b,0),v=norm(raw);
- MAIN.forEach(p=>{const sl=document.getElementById('sl-'+p.id);if(!sl)return;if(document.activeElement!==sl)sl.value=raw[p.id];sl.style.setProperty('--p',Math.min(100,raw[p.id]/80*100)+'%')});
- const te=document.getElementById('total-display');
- const rem=Math.max(0,100-Math.min(100,tot));
- te.textContent=rem>0.05?tot.toFixed(1)+'%  \u00b7  Minor parties '+rem.toFixed(1)+'%':'100.0%';te.className='total-val'+(rem>0.05?'':' good');
- const bt=PARTIES.reduce((a,p)=>a+p.baseVote,0);
- MAIN.forEach(p=>{const bn=p.baseVote/bt*100,sw=v[p.id]-bn,thr=0.2*bn;SW[p.id]=sw;
-  if(v[p.id]<thr){TP[p.id]=v[p.id]/thr;SWT[p.id]=thr-bn}else{TP[p.id]=1;SWT[p.id]=0}
-  const b=document.getElementById('badge-'+p.id);if(!b)return;
-  if(Math.abs(sw)<0.05){b.textContent='';return}
-  b.textContent=(sw>0?'+':'')+sw.toFixed(1)+'pp';b.style.color=sw>0?'#1a7a4a':'#c8102e'});
- MINOR.forEach(id=>{SW[id]=rem*MINOR_W[id];TP[id]=1;SWT[id]=0});
- const holder=resolveMap(),seats=tallyFromMap(holder),sub=subFromMap(holder);
- paint(holder);
- paintHemicycle(seats);
- const res=document.getElementById('results');res.innerHTML='';
- const shownP=PARTIES.filter(p=>!p.minor||(seats[p.id]||0)>0);res.style.setProperty('--n',shownP.length);
- shownP.forEach(p=>{const s=seats[p.id]||0,d=s-p.baseSeats;
-  const ds=d===0?'\u00b10':(d>0?'+'+d:''+d),dc=d>0?'#1a7a4a':d<0?'#c8102e':'#898781';
-  const c=document.createElement('div');c.className='party-card';
-  let extra='';
-  if(p.id==='udc'){
-   const keys=['BNF','AP','BPP','UDC-Ind'];
-   const segs=keys.filter(k=>sub[k]).map(k=>'<div style="flex:'+sub[k]+';background:'+UDC_SUB_COLORS[k]+'"></div>').join('');
-   const chips=keys.map(k=>{const n=sub[k]||0,dd=n-UDC_SUB_BASE[k];
-    const t=dd===0?'±0':(dd>0?'+'+dd:''+dd),col=dd>0?'#1a7a4a':dd<0?'#c8102e':'#898781';
-    return '<div class="sub-chip"><span class="sub-name"><span class="sub-sq" style="background:'+UDC_SUB_COLORS[k]+'"></span>'+k+'</span><span class="sub-n">'+n+'</span><span class="sub-d" style="color:'+col+'">'+t+'</span></div>'}).join('');
-   extra='<div class="sub-bar">'+segs+'</div><div class="sub-chips">'+chips+'</div>';
-   c.className+=' udc-card';
-  }
-  c.innerHTML='<div class="card-party"><span class="card-dot" style="background:'+p.color+'"></span>'+p.name+'</div><div class="card-seats">'+s+'</div><div class="card-change" style="color:'+dc+'">'+ds+' from 2024</div>'+extra;
-  res.appendChild(c)});
- LAST_SEATS=seats; renderCoalition(seats); renderModeChips(seats);}
-
-
-// ---- Hemicycle: 61 seats in 4 concentric rows, filled left to right ----
-const HEMI=(()=>{const R=4,r0=44,r1=100,rad=[...Array(R)].map((_,i)=>r0+i*(r1-r0)/(R-1));
- const sum=rad.reduce((a,b)=>a+b,0);let n=rad.map(r=>Math.round(TOTAL_SEATS*r/sum));
- let diff=TOTAL_SEATS-n.reduce((a,b)=>a+b,0);n[R-1]+=diff;
+/* hemicycle */
+const HEMI=(()=>{const rad=[30,43.2,56.4,69.6,82.8],n=[7,10,12,15,17];
  const pts=[];rad.forEach((r,i)=>{for(let j=0;j<n[i];j++){const t=Math.PI-j*Math.PI/(n[i]-1);pts.push({t,r,x:r*Math.cos(t),y:-r*Math.sin(t)})}});
  pts.sort((a,b)=>b.t-a.t||a.r-b.r);return pts})();
-function buildHemicycle(){const svg=document.getElementById('hemicycle'),NS='http://www.w3.org/2000/svg';
- HEMI.forEach((p,i)=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx',p.x.toFixed(2));c.setAttribute('cy',p.y.toFixed(2));
-  c.setAttribute('r','7.4');c.setAttribute('id','hs-'+i);svg.appendChild(c)});}
-function paintHemicycle(seats){let k=0;
- PARTIES.forEach(p=>{for(let j=0;j<(seats[p.id]||0);j++){const c=document.getElementById('hs-'+k++);if(c)c.setAttribute('fill',p.color)}});
- PARTIES.forEach(p=>{const li=document.getElementById('hl-'+p.id);if(li)li.style.display=(!p.minor||(seats[p.id]||0)>0)?'inline-flex':'none'});
- for(;k<TOTAL_SEATS;k++){const c=document.getElementById('hs-'+k);if(c)c.setAttribute('fill','#e4e2dc')}}
+function buildHemi(){const svg=$('hemicycle'),NS='http://www.w3.org/2000/svg';
+ HEMI.forEach((p,i)=>{const c=document.createElementNS(NS,'circle');c.setAttribute('cx',p.x.toFixed(2));c.setAttribute('cy',p.y.toFixed(2));c.setAttribute('r','6.2');c.id='hs-'+i;svg.appendChild(c)})}
+function paintHemi(){const t=CUR.tally[VIEW];let k=0;const lg=[];
+ order().forEach(id=>{const n=t[id]||0;for(let j=0;j<n;j++)$('hs-'+(k++)).setAttribute('fill',UMETA[id].color);if(n>0)lg.push(id)});
+ $('hemi-legend').innerHTML=lg.map(id=>'<span class="it"><span class="sq" style="background:'+UMETA[id].color+'"></span>'+UMETA[id].acr+'</span>').join('')}
 
-// ---- Coalition builder ----
-// UDC is already a coalition, so it enters as a single bloc; the other parties
-// can be added to test which combinations reach the 31-seat majority.
-let COAL=new Set(['udc']);      // parties currently in the coalition
-let LAST_SEATS=null;
-function renderCoalition(seats){
- const wrap=document.getElementById('coalition');
- const built=wrap.dataset.built==='1';
- if(!built){
-  wrap.innerHTML='<div class="coalition-parties" id="coal-parties"></div>'
-   +'<div class="coal-meter"><div class="coal-fill" id="coal-fill"></div>'
-   +'<div class="coal-maj-line" id="coal-maj"></div><div class="coal-maj-flag" id="coal-majflag">31 = majority</div></div>'
-   +'<div class="coal-status" id="coal-status"></div>';
-  wrap.dataset.built='1';
- }
- const cp=document.getElementById('coal-parties');cp.innerHTML='';
- bySeats(seats).forEach(p=>{
-  const s=seats[p.id]||0, on=COAL.has(p.id);
-  if(p.minor&&!s&&!on)return;
-  const chip=document.createElement('div');
-  chip.className='coal-chip'+(on?' on':'');
-  if(on)chip.style.background=p.color;
-  chip.innerHTML='<span class="coal-dot" style="background:'+(on?'rgba(255,255,255,.9)':p.color)+'"></span>'
-   +'<span>'+(p.id==='udc'?'UDC bloc':p.name)+'</span><span class="cc-seats">'+s+'</span>';
-  chip.onclick=()=>{COAL.has(p.id)?COAL.delete(p.id):COAL.add(p.id);renderCoalition(LAST_SEATS)};
-  cp.appendChild(chip);
- });
- let total=0; const parts=[];
- PARTIES.forEach(p=>{if(COAL.has(p.id)){const s=seats[p.id]||0;total+=s;if(s>0)parts.push({c:p.color,s})}});
- const fill=document.getElementById('coal-fill');
- fill.style.width=Math.min(100,total/TOTAL_SEATS*100)+'%';
- // stripe the fill by member party
- if(parts.length){
-  const stops=[]; let acc=0;
-  parts.forEach(pt=>{const a=acc/total*100,b=(acc+pt.s)/total*100;stops.push(pt.c+' '+a+'%',pt.c+' '+b+'%');acc+=pt.s});
-  fill.style.background='linear-gradient(90deg,'+stops.join(',')+')';
- } else fill.style.background='transparent';
- fill.textContent='';
- document.getElementById('coal-maj').style.left=(MAJORITY/TOTAL_SEATS*100)+'%';
- document.getElementById('coal-majflag').style.left=(MAJORITY/TOTAL_SEATS*100)+'%';
- const st=document.getElementById('coal-status');
- const names=PARTIES.filter(p=>COAL.has(p.id)).map(p=>p.id==='udc'?'UDC':p.name);
- if(total>=MAJORITY){st.style.color='#0f5c30';
-  st.textContent=(names.join(' + ')||'\u2014')+': '+total+' seats \u2014 majority of '+(total-MAJORITY+1);}
- else if(total===0){st.style.color='#898781';st.textContent='Select parties to build a coalition';}
- else{st.style.color='#7a3e00';st.textContent=(names.join(' + '))+': '+total+' seats \u2014 '+(MAJORITY-total)+' short of a majority';}
-}
+/* results table */
+let EXP=false;
+function chg(d){return d===0?'<span class="zero">0</span>':d>0?'<span class="pos">+'+d+'</span>':'<span class="neg">&minus;'+(-d)+'</span>'}
+function paintTable(){const t=CUR.tally.party,ta=CUR.tally.alliance,{v,rem}=CUR.inp;
+ const share={};MAIN.forEach((p,i)=>share[p.id]=v[i]);PARTIES.forEach((p,i)=>{if(p.minor)share[p.id]=rem*MINOR_W[i]});
+ const rows=PARTIES.filter(p=>share[p.id]>=1||ta[p.id]>0).sort((a,b)=>(ta[b.id]-ta[a.id])||(share[b.id]-share[a.id]));
+ let h='';rows.forEach(p=>{const d=ta[p.id]-p.baseSeats;
+  const x=p.id==='udc'?'<button class="xp'+(EXP?' open':'')+'" id="xp" aria-label="Show member parties" aria-expanded="'+EXP+'"></button>':'';
+  h+='<tr'+(p.id==='udc'?' class="bloc" style="cursor:pointer"':'')+'><td><div class="nm">'+x+'<span class="dot" style="background:'+p.color+'"></span><span class="t">'+p.name+' ('+p.acr+')</span></div></td><td>'+fmt1(share[p.id])+'%</td><td class="seats">'+ta[p.id]+'</td><td>'+chg(d)+'</td></tr>';
+  if(p.id==='udc'&&EXP)[...SUBS].sort((a,b)=>t[b.id]-t[a.id]).forEach(sb=>{h+='<tr class="subr"><td><div class="nm"><span class="dot" style="background:'+sb.color+'"></span><span class="t">'+sb.name+' ('+sb.acr+')</span></div></td><td>&ndash;</td><td class="seats">'+t[sb.id]+'</td><td>'+chg(t[sb.id]-sb.baseSeats)+'</td></tr>'})});
+ document.querySelector('#restbl tbody').innerHTML=h;const r=document.querySelector('#restbl tr.bloc');if(r)r.onclick=()=>{EXP=!EXP;paintTable()}}
 
+/* coalition */
+function renderCoalition(){const t=CUR.tally.party,ids=ORDER_P.filter(id=>t[id]>0).sort((a,b)=>t[b]-t[a]||ORDER_P.indexOf(a)-ORDER_P.indexOf(b));
+ COAL.forEach(id=>{if(!ids.includes(id))COAL.delete(id)});
+ const mem=SUBS.map(s=>s.id).filter(id=>t[id]>0),top=$('coal-udc'),cc=$('coal-chips');top.innerHTML='';cc.innerHTML='';
+ const chip=(host,color,label,n,on,fn)=>{const b=document.createElement('button');b.className='chip'+(on?' on':'');b.style.setProperty('--c',color);b.style.setProperty('--ink',ink(color));
+  b.innerHTML='<span class="dot" style="background:'+(on?'var(--ink)':color)+'"></span>'+label+' <span class="n">'+n+'</span>';b.onclick=fn;host.appendChild(b)};
+ if(mem.length){const n=mem.reduce((a,id)=>a+t[id],0),on=mem.every(id=>COAL.has(id));
+  chip(top,UMETA.udc.color,'UDC',n,on,()=>{if(on)mem.forEach(id=>COAL.delete(id));else mem.forEach(id=>COAL.add(id));renderCoalition()})}
+ ids.forEach(id=>{const m=UMETA[id];chip(cc,m.color,m.acr,t[id],COAL.has(id),()=>{COAL.has(id)?COAL.delete(id):COAL.add(id);renderCoalition()})});
+ let tot=0;const parts=[];ids.forEach(id=>{if(COAL.has(id)){tot+=t[id];parts.push({c:UMETA[id].color,s:t[id]})}});
+ const f=$('coal-fill');f.style.width=(tot/TOTAL_SEATS*100)+'%';
+ if(parts.length){let acc=0;const st=[];parts.forEach(p=>{st.push(p.c+' '+acc/tot*100+'%',p.c+' '+(acc+p.s)/tot*100+'%');acc+=p.s});f.style.background='linear-gradient(90deg,'+st.join(',')+')'}else f.style.background='transparent';
+ const mp=MAJORITY/TOTAL_SEATS*100;$('coal-maj').style.left=mp+'%';$('coal-majlab').style.left=mp+'%';
+ const s=$('coal-stat');s.className='cstat'+(tot>=MAJORITY?' ok':'');
+ s.textContent=tot+' of '+TOTAL_SEATS+' seats'+(tot>=MAJORITY?' \u2014 majority':'')}
+
+/* view toggle (alliance / party) shared by hemicycle, coalition and map */
+function convertCoal(to){if(to==='party'){if(COAL.has('udc')){COAL.delete('udc');SUBS.forEach(s=>COAL.add(s.id))}}
+ else{if(SUBS.every(s=>COAL.has(s.id))){SUBS.forEach(s=>COAL.delete(s.id));COAL.add('udc')}else SUBS.forEach(s=>COAL.delete(s.id))}}
+function setView(v){if(v===VIEW)return;VIEW=v;hideTip();
+ document.querySelectorAll('[data-view] button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ paintHemi();renderCoalition();paintMap()}
+
+/* map */
+let SELECTED=null;
+function hideTip(){const t=$('tip');if(t)t.classList.remove('on');if(SELECTED){SELECTED.classList.remove('sel');SELECTED=null}}
+function seatTip(s,k){const pr=seatRows(s,CUR.sw),hi=CUR.holder[k];
+ let h='<div class="tt">'+s.n+'</div>';
+ pr.rows.forEach((r,j)=>{if(r.pct<1&&j>0)return;const m=PARTIES[r.i],lab=(r.i===0&&VIEW==='party'?'UDC ('+SUBS[s.subI].acr+')':m.acr),w=j===0;
+  h+='<div class="tr"><span class="dot" style="background:'+m.color+'"></span>'+(w?'<b>'+lab+'</b>':lab)+'<span class="v">'+(w?'<b>':'')+fmt1(r.pct)+'%'+(w?'</b>':'')+'</span></div>'});
+ return h}
+const pid=n=>'hex-'+n.replace(/[^a-zA-Z]/g,'');
+function buildMap(){const g=$('tiles'),tip=$('tip'),wrap=$('mapwrap');
+ SEATS.forEach((s,k)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',s.d);p.id=pid(s.n);p.dataset.k=k;
+  const show=ev=>{const rect=wrap.getBoundingClientRect();tip.innerHTML=seatTip(s,k);
+   const px=ev.clientX-rect.left,py=ev.clientY-rect.top;tip.style.left=Math.min(Math.max(px,70),rect.width-70)+'px';tip.style.top=(py-12)+'px';tip.classList.add('on')};
+  p.addEventListener('click',ev=>{ev.stopPropagation();if(SELECTED===p){hideTip();return}hideTip();SELECTED=p;p.classList.add('sel');g.appendChild(p);show(ev)});
+  p.setAttribute('tabindex','0');p.setAttribute('role','button');
+  const centre=()=>{const r=p.getBoundingClientRect();return{clientX:r.left+r.width/2,clientY:r.top+r.height/2}};
+  p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(SELECTED===p){hideTip();return}hideTip();SELECTED=p;p.classList.add('sel');show(centre())}else if(e.key==='Escape')hideTip();else if(e.key.startsWith('Arrow')){e.preventDefault();hideTip();moveFocus(s,e.key)}});
+  p.addEventListener('focus',()=>{hideTip();revealPath(p)});p.addEventListener('blur',()=>{if(SELECTED===p)hideTip()});
+  g.appendChild(p)});
+ $('cartogram').addEventListener('keydown',e=>{if(e.key==='+'||e.key==='='){e.preventDefault();zoomTo('in')}else if(e.key==='-'||e.key==='_'){e.preventDefault();zoomTo('out')}else if(e.key==='0'){e.preventDefault();zoomTo('all')}})}
+document.addEventListener('click',e=>{if(!e.target.closest('#tiles'))hideTip()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTip()});
+function revealPath(p){if(typeof VB==='undefined'||!p.getBBox)return;const b=p.getBBox(),cx=b.x+b.width/2,cy=b.y+b.height/2,m=0.12;
+ const inside=cx>VB.x+VB.w*m&&cx<VB.x+VB.w*(1-m)&&cy>VB.y+VB.h*m&&cy<VB.y+VB.h*(1-m);if(!inside)animVB({x:cx-VB.w/2,y:cy-VB.h/2,w:VB.w,h:VB.h})}
+let SEAT_C=null;
+function moveFocus(from,key){if(!SEAT_C){SEAT_C={};SEATS.forEach(s=>{const b=$(pid(s.n)).getBBox();SEAT_C[s.n]={x:b.x+b.width/2,y:b.y+b.height/2}})}
+ const d={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[key],c=SEAT_C[from.n];if(!d)return;let best=null,bs=Infinity;
+ SEATS.forEach(t=>{if(t===from)return;const q=SEAT_C[t.n],dx=q.x-c.x,dy=q.y-c.y,dist=Math.hypot(dx,dy)||1,cos=(dx*d[0]+dy*d[1])/dist;if(cos<0.5)return;const sc=dist*(1+2*(1-cos));if(sc<bs){bs=sc;best=t}});
+ if(best){const el=$(pid(best.n));if(el)el.focus({preventScroll:true})}}
+function mixHex(hex,t){const h=hex.replace('#',''),c=[0,2,4].map(i=>parseInt(h.substr(i,2),16));const dark=matchMedia('(prefers-color-scheme: dark)').matches,b=dark?[58,57,53]:[238,236,230];return 'rgb('+c.map((v,i)=>Math.round(b[i]+(v-b[i])*t)).join(',')+')'}
+function neutral(){return matchMedia('(prefers-color-scheme: dark)').matches?'#3a3935':'#e6e4de'}
+function partyShare(s,i){const r=seatRows(s,CUR.sw).rows.find(r=>r.i===i);return r?r.pct:0}
+function mapChips(){const ta=CUR.tally.alliance;
+ const ids=PARTIES.filter(p=>!p.minor||ta[p.id]>0).sort((a,b)=>ta[b.id]-ta[a.id]||b.baseVote-a.baseVote);
+ if(MAPMODE==='strength'&&!ids.some(p=>p.id===MAPPARTY))MAPMODE='winner';
+ const mc=$('map-chips');mc.innerHTML='';
+ const add=(key,label,mode,party,color)=>{const b=document.createElement('button'),on=(mode==='strength'?MAPMODE==='strength'&&MAPPARTY===party:MAPMODE===mode);b.className='chip'+(on?' on':'');
+  b.style.setProperty('--c',color||'var(--fg)');b.style.setProperty('--ink',color?ink(color):'var(--bg)');
+  b.innerHTML=(color?'<span class="dot" style="background:'+(on?'var(--ink)':color)+'"></span>':'')+label;
+  b.onclick=()=>{MAPMODE=mode;if(party)MAPPARTY=party;hideTip();paintMap()};mc.appendChild(b)};
+ add('w','Winner','winner');ids.forEach(p=>add(p.id,p.acr,'strength',p.id,p.color));add('g','Gains','gains')}
+function paintMap(){mapChips();const holder=CUR.holder;let max=0,min=Infinity;const pi=PI[MAPPARTY];
+ if(MAPMODE==='strength')SEATS.forEach(s=>{const v=partyShare(s,pi);max=Math.max(max,v);if(v>0.05)min=Math.min(min,v)});
+ if(!isFinite(min)||min>=max)min=0;const N=neutral(),used=new Set();
+ SEATS.forEach((s,k)=>{const p=$(pid(s.n)),hi=holder[k],u=unitOf(s,hi);let fill;
+  p.setAttribute('aria-label',s.n+': projected '+UMETA[u].acr+' win');
+  if(MAPMODE==='strength')fill=max>0?mixHex(PARTIES[pi].color,Math.pow(Math.max(0,(partyShare(s,pi)-min)/(max-min)),0.85)):N;
+  else if(MAPMODE==='gains'){fill=hi!==s.winI?UMETA[u].color:N;if(hi!==s.winI)used.add(u)}
+  else{fill=UMETA[u].color;used.add(u)}
+  p.setAttribute('fill',fill)});
+ const item=(c,t)=>'<span class="it"><span class="sq" style="background:'+c+'"></span>'+t+'</span>',l=$('map-legend');
+ if(MAPMODE==='strength'){const P=PARTIES[pi];l.innerHTML='<span class="it">'+P.acr+'</span><span class="it">'+(min<1?min.toFixed(1):min.toFixed(0))+'%<span class="grad" style="background:linear-gradient(90deg,'+mixHex(P.color,0)+','+P.color+')"></span>'+max.toFixed(0)+'%</span>'}
+ else{const arr=order().filter(id=>used.has(id));l.innerHTML=arr.map(id=>item(UMETA[id].color,UMETA[id].acr)).join('')+(MAPMODE==='gains'?item(N,'No change'):'')}}
+
+/* ---------- main update ---------- */
+function update(){const inp=getInputs(),{v,rem}=inp;
+ MAIN.forEach((p,i)=>{const sl=$('sl-'+p.id);if(document.activeElement!==sl)sl.value=v[i];sl.style.setProperty('--p',Math.min(100,v[i]/70*100)+'%')});
+ $('sl-oth').value=Math.min(70,rem);$('inp-oth').value=fmt1(rem);
+ const sw=makeSwing(v,rem),holder=resolve(sw),ti=tallyIdx(holder);
+ CUR={inp,sw,holder,tally:{alliance:tallyMap(holder,'alliance'),party:tallyMap(holder,'party')},ti};
+ hideTip();paintHemi();paintTable();renderCoalition();paintMap();mcSchedule()}
+
+/* ---------- Monte Carlo ---------- */
+const SEEDCONST=0x5bd1e995;
+const MC={runs:1000,verr:10,serr:3,hsel:null,csel:new Set(),timer:null,job:null,res:null};
+const TOPN=8;
+function mcSchedule(delay){clearTimeout(MC.timer);if(MC.job){MC.job.cancel=true;MC.job=null}
+ $('mc-out').classList.add('stale');MC.timer=setTimeout(mcStart,delay==null?500:delay)}
+function mcStart(){const ctx={v:CUR.inp.v.slice(),rem:CUR.inp.rem,verr:MC.verr,serr:MC.serr},R=MC.runs;
+ const job={cancel:false,i:0,R,ctx,counts:new Uint8Array(R*12),hist:new Uint32Array(12*62)};MC.job=job;
+ const prog=$('mc-prog'),bar=prog.firstElementChild;prog.classList.add('on');
+ if(ctx.verr===0&&ctx.serr===0){const c=runOnce(0,ctx);for(let i=0;i<R;i++){job.counts.set(c,i*12)}job.i=R}
+ const step=()=>{if(job.cancel)return;const t0=performance.now();
+  while(job.i<R&&performance.now()-t0<25){const c=runOnce(job.i,ctx);job.counts.set(c,job.i*12);job.i++}
+  bar.style.width=(job.i/R*100)+'%';
+  if(job.i<R)setTimeout(step,0);else{prog.classList.remove('on');MC.job=null;mcFinish(job)}};
+ setTimeout(step,0)}
+function mcFinish(job){const R=job.R,C=job.counts,H=job.hist;
+ for(let i=0;i<R;i++)for(let u=0;u<12;u++)H[u*62+C[i*12+u]]++;
+ const st=[];for(let u=0;u<12;u++){let cum=0,p5=-1,med=-1,p95=-1;
+  for(let k=0;k<62;k++){cum+=H[u*62+k];if(p5<0&&cum>=.05*R)p5=k;if(med<0&&cum>=.5*R)med=k;if(p95<0&&cum>=.95*R)p95=k}
+  st.push({p5,med,p95,pres:1-H[u*62]/R})}
+ const out={};for(let i=0;i<R;i++){let bu=0,bv=-1;for(let u=0;u<TOPN;u++){if(C[i*12+u]>bv){bv=C[i*12+u];bu=u}}const key=(bv>=MAJORITY?'m':'l')+bu;out[key]=(out[key]||0)+1}
+ MC.res={R,C,H,st,out,ctxv:job.ctx};$('mc-out').classList.remove('stale');mcRender()}
+const uid=['udc','bcp','bpf','bdp','ind','brp','bmd','rap','bnf','ap','bpp','udcind'];
+function mcRender(){const r=MC.res;if(!r)return;const R=r.R,st=r.st;
+ // outcomes
+ const cats=Object.keys(r.out).map(k=>({k,n:r.out[k],u:+k.slice(1),maj:k[0]==='m'})).sort((a,b)=>(b.maj-a.maj)||(b.n-a.n));
+ const hat=(c,maj)=>maj?'background:'+c:'background:repeating-linear-gradient(135deg,'+c+' 0 3px,color-mix(in srgb,'+c+' 25%,var(--card)) 3px 6px)';
+ $('mc-obar').innerHTML=cats.map(c=>'<div style="flex:'+c.n+';'+hat(UMETA[uid[c.u]].color,c.maj)+'"></div>').join('');
+ $('mc-oleg').innerHTML=cats.map(c=>'<span class="it"><span class="sw" style="'+hat(UMETA[uid[c.u]].color,c.maj)+'"></span>'+UMETA[uid[c.u]].acr+(c.maj?' majority ':' largest ')+(c.n/R*100).toFixed(1).replace(/\.0$/,'')+'%</span>').join('');
+ // range table
+ const top=[0,1,2,3,4,5,6,7].filter(u=>st[u].pres>=.05).sort((a,b)=>st[b].med-st[a].med||st[b].pres-st[a].pres);
+ const subs=[8,9,10,11].filter(u=>st[u].pres>=.05).sort((a,b)=>st[b].med-st[a].med);
+ let scale=MAJORITY;top.concat(subs).forEach(u=>scale=Math.max(scale,st[u].p95));
+ const row=(u,cls)=>{const s=st[u],m=UMETA[uid[u]],pct=x=>(x/scale*100)+'%';
+  const x=(u===0&&subs.length)?'<button class="xp'+(MC.exp?' open':'')+'" data-xp aria-label="Show member parties" aria-expanded="'+!!MC.exp+'"></button>':(subs.length&&cls===''?'<span style="width:18px;flex:none"></span>':'');
+  return '<div class="'+cls+' pn" style="display:flex">'+x+'<span class="dot" style="background:'+m.color+'"></span>'+m.acr+'</div><div class="'+cls+' c">'+s.med+'</div><div class="'+cls+' rng">'+(s.p5===s.p95?s.p5:s.p5+'–'+s.p95)+'<div class="rbar"><div class="f" style="left:'+pct(s.p5)+';width:'+(s.p95===s.p5?'3px':'calc('+pct(s.p95-s.p5)+')')+';background:'+m.color+'"></div><div class="m" style="left:'+pct(s.med)+'"></div></div></div>'};
+ let h='<div class="h">Party</div><div class="h c">Median</div><div class="h c">90% range</div>';
+ top.forEach(u=>{h+=row(u,'');if(u===0&&MC.exp)subs.forEach(s=>{h+=row(s,'sub')})});
+ const t=$('mc-tbl');t.innerHTML=h;const xb=t.querySelector('[data-xp]');if(xb){const cell=xb.closest('.pn');cell.style.cursor='pointer';cell.onclick=()=>{MC.exp=!MC.exp;mcRender()}}
+ // coalition chips
+ const present=top;MC.csel.forEach(u=>{if(!present.includes(u))MC.csel.delete(u)});
+ const cc=$('mc-cchips');cc.innerHTML='';present.forEach(u=>{const m=UMETA[uid[u]],on=MC.csel.has(u),b=document.createElement('button');b.className='chip'+(on?' on':'');b.style.setProperty('--c',m.color);b.style.setProperty('--ink',ink(m.color));
+  b.innerHTML='<span class="dot" style="background:'+(on?'var(--ink)':m.color)+'"></span>'+m.acr;b.onclick=()=>{MC.csel.has(u)?MC.csel.delete(u):MC.csel.add(u);mcRender()};cc.appendChild(b)});
+ const sums=new Uint8Array(R);let wins=0;const sel=[...MC.csel];
+ if(sel.length){for(let i=0;i<R;i++){let s=0;sel.forEach(u=>s+=r.C[i*12+u]);sums[i]=s;if(s>=MAJORITY)wins++}}
+ const pc=sel.length?wins/R*100:0;$('mc-cp').textContent=pc.toFixed(1);$('mc-cb').style.width=pc+'%';$('mc-cs').hidden=!sel.length;
+ if(sel.length){const a=Array.from(sums).sort((x,y)=>x-y);$('mc-cmed').textContent=a[Math.min(R-1,Math.floor(R*.5))];$('mc-crng').textContent=a[Math.floor(R*.05)]+'–'+a[Math.min(R-1,Math.ceil(R*.95)-1)]}
+ // histogram chips
+ const hc=top.concat(subs);if(MC.hsel==null||!hc.includes(MC.hsel))MC.hsel=hc[0];
+ const hh=$('mc-hchips');hh.innerHTML='';hc.forEach(u=>{const m=UMETA[uid[u]],on=MC.hsel===u,b=document.createElement('button');b.className='chip'+(on?' on':'');b.style.setProperty('--c',m.color);b.style.setProperty('--ink',ink(m.color));
+  b.innerHTML='<span class="dot" style="background:'+(on?'var(--ink)':m.color)+'"></span>'+m.acr;b.onclick=()=>{MC.hsel=u;mcRender()};hh.appendChild(b)});
+ drawHist()}
+function drawHist(){const r=MC.res,u=MC.hsel;if(!r||u==null)return;const R=r.R,H=r.H,svg=$('hist');$('mc-hstat').innerHTML='';
+ let lo=MAJORITY,hi=MAJORITY;for(let k=0;k<62;k++)if(H[u*62+k]){lo=Math.min(lo,k);hi=Math.max(hi,k)}
+ lo=Math.max(0,lo-1);hi=Math.min(61,hi+1);const n=hi-lo+1,W=600,pl=8,pr=8,pt=8,pb=26,cw=(W-pl-pr)/n,ph=190-pt-pb;
+ let mx=1;for(let k=lo;k<=hi;k++)mx=Math.max(mx,H[u*62+k]);
+ const col=UMETA[uid[u]].color;let s='';
+ for(let k=lo;k<=hi;k++){const c=H[u*62+k],bh=c/mx*ph,x=pl+(k-lo)*cw;s+='<rect class="bar" data-k="'+k+'" x="'+(x+1).toFixed(1)+'" y="'+(pt+ph-bh).toFixed(1)+'" width="'+Math.max(1,cw-2).toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="1.5" fill="'+col+'"/>'}
+ const mxp=pl+(MAJORITY-lo+.5)*cw;s+='<line x1="'+mxp.toFixed(1)+'" x2="'+mxp.toFixed(1)+'" y1="'+pt+'" y2="'+(pt+ph)+'" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="4 3" pointer-events="none"/>';
+ s+='<line x1="'+pl+'" x2="'+(W-pr)+'" y1="'+(pt+ph)+'" y2="'+(pt+ph)+'" stroke="var(--line)"/>';
+ const stepT=n>40?10:n>20?5:2;for(let k=lo;k<=hi;k++)if(k%stepT===0||k===MAJORITY)s+='<text x="'+(pl+(k-lo+.5)*cw).toFixed(1)+'" y="'+(pt+ph+16)+'">'+k+'</text>';
+ svg.innerHTML=s;svg.classList.remove('hv');
+ const stat=$('mc-hstat'),clear=()=>{stat.innerHTML='';svg.classList.remove('hv');svg.querySelectorAll('.bar.hi').forEach(b=>b.classList.remove('hi'))};
+ const pick=ev=>{const rc=svg.getBoundingClientRect(),x=(ev.clientX-rc.left)/rc.width*W,k=lo+Math.floor((x-pl)/cw);if(k<lo||k>hi){clear();return}
+  svg.classList.add('hv');svg.querySelectorAll('.bar').forEach(b=>b.classList.toggle('hi',+b.dataset.k===k));
+  let cum=0;for(let j=k;j<62;j++)cum+=H[u*62+j];const c=H[u*62+k];
+  stat.innerHTML='<b>'+k+' seats</b> / '+(c/R*100).toFixed(1)+'% of runs ('+c+')<br>'+(cum/R*100).toFixed(0)+'% of runs at '+k+'+'};
+ svg.onpointermove=pick;svg.onpointerdown=pick;svg.onpointerleave=ev=>{if(ev.pointerType!=='touch')clear()}}
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#hist')){const s=$('hist');if(s){s.classList.remove('hv');s.querySelectorAll('.bar.hi').forEach(b=>b.classList.remove('hi'));$('mc-hstat').innerHTML=''}}});
+function buildMC(){const rc=$('mc-runs');[500,1000,5000].forEach(n=>{const b=document.createElement('button');b.className='chip'+(MC.runs===n?' on':'');b.style.setProperty('--c','var(--fg)');b.style.setProperty('--ink','var(--bg)');b.textContent=n.toLocaleString('en-US')+' runs';
+  b.onclick=()=>{MC.runs=n;rc.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));mcSchedule()};rc.appendChild(b)});
+ const v=$('mc-verr'),s=$('mc-serr');
+ v.oninput=()=>{MC.verr=+v.value;$('mc-verr-v').textContent=v.value+'%';v.style.setProperty('--p',v.value/30*100+'%');mcSchedule()};
+ s.oninput=()=>{MC.serr=+s.value;$('mc-serr-v').textContent=(+s.value).toFixed(1);s.style.setProperty('--p',s.value/10*100+'%');mcSchedule()}}
 
 // ---- Map zoom & pan (viewBox-based, no insets) ----
 const MAPW=8962,MAPH=9457;
 let VB={x:0,y:0,w:MAPW,h:MAPH},vbAnim=null,ASP=MAPW/MAPH;
 function sizeMap(){const svg=document.getElementById('cartogram'),w=svg.getBoundingClientRect().width||600;
- const h=Math.round(Math.min(w*MAPH/MAPW,Math.max(320,Math.min(640,window.innerHeight*0.8))));
+ const h=Math.round(Math.min(w*MAPH/MAPW,Math.max(320,Math.min(620,window.innerHeight*0.85))));
  svg.style.height=h+'px';ASP=w/h}
 function fullVB(){return ASP>=MAPW/MAPH?{x:(MAPW-MAPH*ASP)/2,y:0,w:MAPH*ASP,h:MAPH}:{x:0,y:(MAPH-MAPW/ASP)/2,w:MAPW,h:MAPW/ASP}}
 function setVB(v){VB=v;syncZoomBtns();document.getElementById('cartogram').setAttribute('viewBox',v.x.toFixed(1)+' '+v.y.toFixed(1)+' '+v.w.toFixed(1)+' '+v.h.toFixed(1))}
@@ -747,8 +861,10 @@ function initZoom(){
  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
  svg.addEventListener('click',e=>{if(moved){e.stopPropagation();moved=false}},true);
 }
-function resetAll(){MAIN.forEach(p=>{const e=document.getElementById('inp-'+p.id);if(e)e.value=p.baseVote.toFixed(1)});update()}
-buildInputs();buildHemicycle();buildCartogram();buildMapLegend();buildMapModes();initZoom();update();
+
+
+document.querySelectorAll('[data-view]').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.v)}));
+buildInputs();buildHemi();buildMap();buildMC();initZoom();update();
 </script>
 </body>
 </html>
