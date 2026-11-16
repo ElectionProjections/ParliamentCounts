@@ -87,6 +87,11 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jersey Seat Projector</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap">
@@ -236,6 +241,55 @@ td.up{color:var(--good);font-weight:600} td.down{color:var(--bad);font-weight:60
 .cbar{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;width:min(320px,100%)}
 .cbar i{flex:1;height:10px;border-radius:5px;border:1px solid var(--line)}
 .src{text-align:center;font-size:11.5px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+
+/* probability model */
+.pm{position:relative;overflow:hidden}
+.pm-prog{position:absolute;left:0;right:0;top:0;height:3px}
+.pm-prog i{display:block;height:100%;width:0;background:var(--fill);border-radius:0 2px 2px 0;transition:width .1s}
+.pm h3{margin:0 0 14px;text-align:center;font-size:14px;font-weight:600}
+.pm-sec+.pm-sec{border-top:1px solid var(--line);margin-top:24px;padding-top:24px}
+.pm-lab{display:block;text-align:center;font-size:12.5px;font-weight:500;color:var(--muted);margin:0 0 8px}
+.pm-sl{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;margin-top:20px}
+@media(max-width:599px){.pm-sl{grid-template-columns:1fr}}
+.pm-slider input[type=range]{width:100%;display:block}
+.pm-val{text-align:center;margin-top:10px;font-weight:600;font-variant-numeric:tabular-nums}
+.pm-res{transition:opacity .2s}
+.pm.stale .pm-res{opacity:.4}
+.pm-bar{display:flex;height:26px;border-radius:7px;overflow:hidden;background:var(--track)}
+.pm-bar span{height:100%;min-width:0;box-shadow:inset -1px 0 0 var(--card)}
+.pm-hatch{background-image:repeating-linear-gradient(135deg,var(--card) 0 2px,transparent 2px 6px)}
+.pm-leg{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 24px;margin-top:16px;font-weight:500;font-size:13px}
+.pm-sw{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:7px;flex:none;vertical-align:-2px}
+.pm-row{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(164px,1.5fr);column-gap:8px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.pm-row.h{border-top:0;padding:0 0 8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.pm-row>:nth-child(2){text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.pm-row.h>:nth-child(2){font-weight:600}
+.pm-row>:nth-child(3){padding-right:14px;text-align:center}
+.pm-rn{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;margin-bottom:6px}
+.pm-trk{position:relative;height:6px;border-radius:3px;background:var(--track)}
+.pm-trk i{position:absolute;top:0;bottom:0;border-radius:3px;min-width:3px}
+.pm-trk b{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.pm-cc{margin-top:20px;border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:18px 16px;text-align:center}
+.pm-pct{font-size:40px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.pm-pct small{font-size:22px;font-weight:600;color:var(--muted);margin-left:2px}
+.pm-cap{margin-top:6px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.pm-meter{height:6px;border-radius:3px;background:var(--track);margin:12px auto 0;max-width:320px;overflow:hidden}
+.pm-meter i{display:block;height:100%;border-radius:3px;background:var(--good)}
+.pm-stats{display:grid;grid-template-columns:1fr 1fr;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.pm-stats>div{min-width:0;padding:0 6px}
+.pm-stats>div+div{border-left:1px solid var(--line)}
+.pm-stats b{display:block;font-size:18px;font-variant-numeric:tabular-nums}
+.pm-tip{height:38px;margin:14px 0 6px;text-align:center;font-size:12.5px;line-height:19px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.pm-tip b{color:var(--fg);font-weight:600}
+.pm-plot{position:relative;display:flex;height:150px;border-bottom:1px solid var(--line);touch-action:pan-y}
+.pm-col{flex:1 1 0;min-width:0;display:flex;align-items:flex-end;padding:0 .5px}
+.pm-col i{display:block;width:100%;border-radius:2px 2px 0 0;transition:opacity .08s}
+.pm-plot.hl .pm-col i{opacity:.3}
+.pm-plot.hl .pm-col.on i{opacity:1}
+.pm-maj{position:absolute;top:0;bottom:0;border-left:2px dashed var(--fg);opacity:.7;pointer-events:none}
+.pm-majl{position:absolute;top:0;font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;pointer-events:none}
+.pm-ax{position:relative;height:20px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pm-ax span{position:absolute;top:4px;transform:translateX(-50%)}
 </style>
 
 <main>
@@ -297,6 +351,28 @@ td.up{color:var(--good);font-weight:600} td.down{color:var(--bad);font-weight:60
   <div class="segs" id="mapModes"></div>
   <div id="mapWrap"><div id="mapSvg"></div><div id="tip" hidden></div></div>
   <div class="maplg" id="mapLegend"></div>
+</section>
+
+<section class="card pm" id="pm">
+  <div class="pm-prog" id="pmProg" hidden><i></i></div>
+  <h2>Probability model</h2>
+  <div class="pm-sec">
+    <h3>Settings</h3>
+    <span class="pm-lab" id="pmRunsLab">Runs</span>
+    <div class="segs" id="pmRuns" role="group" aria-labelledby="pmRunsLab" style="margin:0">
+      <button type="button" class="seg" data-r="500">500</button>
+      <button type="button" class="seg" data-r="1000">1,000</button>
+      <button type="button" class="seg" data-r="5000">5,000</button>
+    </div>
+    <div class="pm-sl">
+      <div class="pm-slider"><label class="pm-lab" for="pmV">Vote share error (% of each party’s own share)</label><input type="range" id="pmV" min="0" max="30" step="1"><div class="pm-val" id="pmVv"></div></div>
+      <div class="pm-slider"><label class="pm-lab" for="pmS">Seat-level error (extra random variation in each seat)</label><input type="range" id="pmS" min="0" max="10" step="0.5"><div class="pm-val" id="pmSv"></div></div>
+    </div>
+  </div>
+  <div class="pm-sec"><h3>Outcomes</h3><div class="pm-res" id="pmOut"></div></div>
+  <div class="pm-sec"><div class="pm-res" id="pmTbl"></div></div>
+  <div class="pm-sec"><h3>Coalition majority chance</h3><div class="pm-res" id="pmCoal"></div></div>
+  <div class="pm-sec"><h3>Seat distribution</h3><div class="pm-res" id="pmDist"></div></div>
 </section>
 
 <p class="src">Sources: 2026 results from flow.je Jersey Elections Archive and Wikipedia (citing BBC News, Jersey Evening Post and Vote.je); district composition from Government of Jersey Open Data (2021 Census electoral districts) and Vote.je; parish and vingtaine boundaries © OpenStreetMap contributors (ODbL) via Nominatim; population from Statistics Jersey; Freedom House, Freedom in the World 2026; world map from Natural Earth; flag from flag-icons (MIT).</p>
@@ -407,9 +483,13 @@ function swung(base, nat, input) {
   return Math.max(0, base + (input - nat) / 100);
 }
 
-function runUnit(u, S) {
+function runUnit(u, S, noise, lean) {
   var raw = {}, sum = 0;
-  PID.forEach(function (p) { raw[p] = swung(u.base[p], NAT[p], S[p]); sum += raw[p]; });
+  PID.forEach(function (p) {
+    raw[p] = swung(u.base[p], NAT[p], S[p]);
+    if (noise && raw[p] > 0) raw[p] = Math.max(0, raw[p] + noise(u, p));
+    sum += raw[p];
+  });
   var shares = {};
   PID.forEach(function (p) { shares[p] = sum > 0 ? raw[p] / sum : (p === 'IND' ? 1 : 0); });
   var cv = [];
@@ -453,16 +533,21 @@ function runUnit(u, S) {
   var seats = {};
   PID.forEach(function (p) { seats[p] = 0; });
   win.forEach(function (w) { seats[w.party]++; });
+  if (lean) return { seats: seats };
   var lead = PID.slice().sort(function (a, b) { return shares[b] - shares[a]; })[0];
   return { id: u.id, shares: shares, seats: seats, winners: win, lead: lead, winParty: win[0] ? win[0].party : lead };
 }
 
-function run(inp) {
+function run(inp, noise, lean) {
   var S = inputsToShares(inp);
   var out = { units: {}, seats: {}, total: {} };
   PID.forEach(function (p) { out.total[p] = 0; });
   CONTESTS.forEach(function (c) {
-    out.units[c] = DATA[c].map(function (u) { return runUnit(u, S); });
+    if (lean) {
+      DATA[c].forEach(function (u) { var r = runUnit(u, S, noise, true); PID.forEach(function (p) { out.total[p] += r.seats[p]; }); });
+      return;
+    }
+    out.units[c] = DATA[c].map(function (u) { return runUnit(u, S, noise); });
     out.seats[c] = {};
     PID.forEach(function (p) {
       var n = 0;
@@ -713,10 +798,184 @@ var GEO={"vb":[650.0,421.2],"island":"M49.1,319.8L49.8,318.8L52.7,318.2L59.4,318
   }
   function hideTip() { $('#tip').hidden = true; }
 
-  /* ---------- update ---------- */
+    /* ---------- probability model (Monte Carlo) ---------- */
+  var PM_SEED = 20260607, PM_MAX = 5000;
+  var PMS = { runs: 1000, vErr: 10, sErr: 3, key: '', done: 0, tot: null, timer: 0, job: 0, st: null, cp: {}, hp: null };
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function gauss(r) { var u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r()); }
+  function pmOne(i, inp) {
+    var r = mulberry32(PM_SEED + i), q = inp, sig = PMS.vErr / 100;
+    if (sig > 0) {
+      var keys = ['IND', 'RJ', 'VJ', 'PF', 'OTH'], f = {}, sum = 0;
+      keys.forEach(function (k) { f[k] = inp[k] * Math.exp(sig * gauss(r)); sum += f[k]; });
+      q = {}; keys.forEach(function (k) { q[k] = sum > 0 ? f[k] / sum * 100 : inp[k]; });
+    }
+    var amp = PMS.sErr / 100;
+    var noise = amp > 0 ? function (u, p) { return amp * Math.sqrt(Math.max(u.base[p] * 100, 0.5) / 20) * gauss(r); } : null;
+    return run(q, noise, true).total;
+  }
+  function pmPct(x) { return x > 0 && x < 1 ? '<1%' : Math.round(x) + '%'; }
+  function pmSchedule(now) {
+    clearTimeout(PMS.timer); PMS.job++;
+    $('#pmProg').hidden = true;
+    if (PMS.st) $('#pm').classList.add('stale');
+    PMS.timer = setTimeout(pmStart, now ? 0 : 500);
+  }
+  function pmStart() {
+    var inp = inputs(), key = JSON.stringify([inp, PMS.vErr, PMS.sErr]);
+    if (key !== PMS.key) {
+      PMS.key = key; PMS.done = 0; PMS.tot = {};
+      PID.forEach(function (p) { PMS.tot[p] = new Uint8Array(PM_MAX); });
+    }
+    var job = ++PMS.job, target = PMS.runs, zero = PMS.vErr === 0 && PMS.sErr === 0;
+    var central = zero ? run(inp, null, true).total : null;
+    var prog = $('#pmProg'), bar = $('i', prog);
+    if (PMS.done >= target) { pmFinish(); return; }
+    prog.hidden = false; bar.style.width = (PMS.done / target * 100) + '%';
+    (function step() {
+      if (job !== PMS.job) return;
+      var t0 = performance.now();
+      while (PMS.done < target && performance.now() - t0 < 25) {
+        var t = zero ? central : pmOne(PMS.done, inp);
+        PID.forEach(function (p) { PMS.tot[p][PMS.done] = t[p]; });
+        PMS.done++;
+      }
+      bar.style.width = (PMS.done / target * 100) + '%';
+      if (PMS.done < target) setTimeout(step, 0); else pmFinish();
+    })();
+  }
+  function pmQ(a, n, q) { return a[Math.min(n - 1, Math.max(0, Math.ceil(q * n) - 1))]; }
+  function pmStats() {
+    var n = PMS.runs, S = { n: n, p: {}, out: {}, list: [] };
+    PID.forEach(function (p) {
+      var a = PMS.tot[p].slice(0, n), cnt = [], i, pos = 0;
+      for (i = 0; i <= TOTAL_SEATS; i++) cnt.push(0);
+      for (i = 0; i < n; i++) { cnt[a[i]]++; if (a[i] > 0) pos++; }
+      a.sort();
+      S.p[p] = { med: a[Math.floor(n / 2)], lo: pmQ(a, n, 0.05), hi: pmQ(a, n, 0.95), min: a[0], max: a[n - 1], cnt: cnt, pres: pos / n };
+    });
+    S.order = PID.slice().sort(function (x, y) { return S.p[y].med - S.p[x].med || PID.indexOf(x) - PID.indexOf(y); });
+    S.list = S.order.filter(function (p) { return S.p[p].pres >= 0.05; });
+    for (var i = 0; i < n; i++) {
+      var best = -1, bp = null;
+      for (var k = 0; k < S.order.length; k++) { var v = PMS.tot[S.order[k]][i]; if (v > best) { best = v; bp = S.order[k]; } }
+      var key = (best >= MAJORITY ? 'maj:' : 'lar:') + bp;
+      S.out[key] = (S.out[key] || 0) + 1;
+    }
+    return S;
+  }
+  function pmFinish() {
+    $('#pmProg').hidden = true;
+    PMS.st = pmStats();
+    $('#pm').classList.remove('stale');
+    pmRenderOut(); pmRenderTbl(); pmRenderCoal(); pmRenderDist();
+  }
+  function pmRenderOut() {
+    var S = PMS.st, cats = [];
+    S.order.forEach(function (p) {
+      ['maj', 'lar'].forEach(function (t) { var c = S.out[t + ':' + p] || 0; if (c > 0) cats.push({ t: t, p: p, c: c }); });
+    });
+    var bar = cats.map(function (c) {
+      return '<span class="' + (c.t === 'lar' ? 'pm-hatch' : '') + '" style="flex:' + c.c + ' 0 0;background-color:' + PBY[c.p].color + '"></span>';
+    }).join('');
+    var lg = cats.map(function (c) {
+      return '<span class="lg"><i class="pm-sw' + (c.t === 'lar' ? ' pm-hatch' : '') + '" style="background-color:' + PBY[c.p].color + '"></i>' + PBY[c.p].abbr + (c.t === 'lar' ? ' largest ' : ' majority ') + pmPct(c.c / S.n * 100) + '</span>';
+    }).join('');
+    $('#pmOut').innerHTML = '<div class="pm-bar" role="img" aria-label="Share of runs ending in each outcome">' + bar + '</div><div class="pm-leg">' + lg + '</div>';
+  }
+  function pmRenderTbl() {
+    var S = PMS.st, scale = MAJORITY;
+    S.list.forEach(function (p) { scale = Math.max(scale, S.p[p].hi); });
+    var h = '<div role="table"><div class="pm-row h"><span>Party</span><span>Median</span><span>90% range</span></div>';
+    S.list.forEach(function (p) {
+      var s = S.p[p];
+      h += '<div class="pm-row"><span><i class="dot" style="background:' + PBY[p].color + '"></i><span class="full">' + PBY[p].name + ' (' + PBY[p].abbr + ')</span><span class="abbr">' + PBY[p].abbr + '</span></span>' +
+        '<span>' + s.med + '</span>' +
+        '<span><div class="pm-rn">' + s.lo + '–' + s.hi + '</div><div class="pm-trk"><i style="left:' + (s.lo / scale * 100) + '%;width:' + ((s.hi - s.lo) / scale * 100) + '%;background:' + PBY[p].color + '"></i><b style="left:' + (s.med / scale * 100) + '%"></b></div></span></div>';
+    });
+    $('#pmTbl').innerHTML = h + '</div>';
+  }
+  function pmRenderCoal() {
+    var S = PMS.st, n = S.n;
+    var chips = S.list.map(function (p) {
+      return '<button type="button" class="chip' + (PMS.cp[p] ? ' on' : '') + '" data-p="' + p + '" aria-pressed="' + (!!PMS.cp[p]) + '"><i class="dot" style="background:' + PBY[p].color + '"></i>' + PBY[p].abbr + '</button>';
+    }).join('');
+    var ch = S.list.filter(function (p) { return PMS.cp[p]; }), maj = 0, stats = '';
+    if (ch.length) {
+      var a = new Uint8Array(n), i;
+      for (i = 0; i < n; i++) { var t = 0; ch.forEach(function (p) { t += PMS.tot[p][i]; }); a[i] = t; if (t >= MAJORITY) maj++; }
+      a.sort();
+      stats = '<div class="pm-stats"><div><b>' + a[Math.floor(n / 2)] + '</b><span class="pm-cap">median seats</span></div><div><b>' + pmQ(a, n, 0.05) + '–' + pmQ(a, n, 0.95) + '</b><span class="pm-cap">90% range</span></div></div>';
+    }
+    var pct = maj / n * 100;
+    $('#pmCoal').innerHTML = '<div class="chips">' + chips + '</div><div class="pm-cc"><div class="pm-pct">' + pct.toFixed(1) + '<small>%</small></div><div class="pm-cap">chance of a majority</div><div class="pm-meter"><i style="width:' + pct + '%"></i></div>' + stats + '</div>';
+  }
+  function pmRenderDist() {
+    var S = PMS.st, n = S.n;
+    if (S.list.indexOf(PMS.hp) < 0) PMS.hp = S.list[0];
+    var p = PMS.hp, s = S.p[p];
+    var chips = S.list.map(function (q) {
+      return '<button type="button" class="chip' + (q === p ? ' on' : '') + '" data-p="' + q + '" aria-pressed="' + (q === p) + '"><i class="dot" style="background:' + PBY[q].color + '"></i>' + PBY[q].abbr + '</button>';
+    }).join('');
+    var lo = Math.min(s.min, MAJORITY), hi = Math.max(s.max, MAJORITY), nb = hi - lo + 1, mx = 0, v;
+    for (v = lo; v <= hi; v++) mx = Math.max(mx, s.cnt[v]);
+    var cols = '';
+    for (v = lo; v <= hi; v++) {
+      var c = s.cnt[v], ht = c > 0 ? Math.max(2, c / mx * 100) : 0;
+      cols += '<div class="pm-col"><i style="height:' + ht + '%;background:' + PBY[p].color + '"></i></div>';
+    }
+    var mx0 = (MAJORITY - lo) / nb * 100;
+    var lab = mx0 > 60 ? 'right:calc(' + (100 - mx0) + '% + 6px)' : 'left:calc(' + mx0 + '% + 6px)';
+    var step = nb <= 12 ? 1 : nb <= 26 ? 2 : 5, ax = '';
+    for (v = lo; v <= hi; v++) if (v % step === 0) ax += '<span style="left:' + ((v - lo + 0.5) / nb * 100) + '%">' + v + '</span>';
+    $('#pmDist').innerHTML = '<div class="chips" id="pmHc">' + chips + '</div><div class="pm-tip" id="pmTip"></div>' +
+      '<div class="pm-plot" id="pmPlot" role="img" aria-label="Seat distribution for ' + PBY[p].name + ', median ' + s.med + ' seats">' + cols +
+      '<span class="pm-maj" style="left:' + mx0 + '%"></span><span class="pm-majl" style="' + lab + '">Majority ' + MAJORITY + '</span></div><div class="pm-ax">' + ax + '</div>';
+    var plot = $('#pmPlot'), tip = $('#pmTip'), els = plot.querySelectorAll('.pm-col'), cur = -1;
+    function hl(i) {
+      if (i === cur) return;
+      cur = i;
+      plot.classList.toggle('hl', i >= 0);
+      for (var k = 0; k < els.length; k++) els[k].classList.toggle('on', k === i);
+      if (i < 0) { tip.innerHTML = ''; return; }
+      var val = lo + i, c = s.cnt[val], cum = 0, q;
+      for (q = val; q <= TOTAL_SEATS; q++) cum += s.cnt[q];
+      var cp = cum / n * 100;
+      tip.innerHTML = '<b>' + val + (val === 1 ? ' seat' : ' seats') + ' / ' + (c / n * 100).toFixed(1) + '% of runs (' + c + ')</b><br>' + (cp > 0 && cp < 1 ? '<1' : Math.round(cp)) + '% of runs at ' + val + '+';
+    }
+    function at(e) {
+      var r = plot.getBoundingClientRect();
+      return Math.min(nb - 1, Math.max(0, Math.floor((e.clientX - r.left) / r.width * nb)));
+    }
+    plot.addEventListener('pointermove', function (e) { hl(at(e)); });
+    plot.addEventListener('pointerdown', function (e) { hl(at(e)); });
+    plot.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hl(-1); });
+    plot.addEventListener('click', function (e) { e.stopPropagation(); });
+    plot._clear = function () { hl(-1); };
+  }
+  function pmSyncSettings() {
+    var v = $('#pmV'), s = $('#pmS');
+    v.value = PMS.vErr; s.value = PMS.sErr;
+    v.style.setProperty('--pct', (PMS.vErr / 30 * 100) + '%'); s.style.setProperty('--pct', (PMS.sErr / 10 * 100) + '%');
+    $('#pmVv').textContent = PMS.vErr + '%';
+    $('#pmSv').textContent = PMS.sErr + (PMS.sErr === 1 ? ' point' : ' points');
+    Array.prototype.forEach.call($('#pmRuns').children, function (b) {
+      var on = +b.getAttribute('data-r') === PMS.runs;
+      b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+    });
+  }
+
+/* ---------- update ---------- */
   function update() {
     res = run(inputs());
-    paintInputs(); renderHemi(); renderTable(); renderCoal(); renderMap();
+    paintInputs(); renderHemi(); renderTable(); renderCoal(); renderMap(); pmSchedule(!PMS.st);
   }
 
   /* ---------- wiring ---------- */
@@ -766,11 +1025,29 @@ var GEO={"vb":[650.0,421.2],"island":"M49.1,319.8L49.8,318.8L52.7,318.2L59.4,318
       if (kb) { var f = $('#mapSvg .area[data-id="' + id + '"]'); if (f) f.focus({ preventScroll: true }); }
     }
   });
+  $('#pmRuns').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-r]'); if (!b) return;
+    PMS.runs = +b.getAttribute('data-r'); pmSyncSettings(); pmSchedule();
+  });
+  $('#pmV').addEventListener('input', function () { PMS.vErr = +this.value; pmSyncSettings(); pmSchedule(); });
+  $('#pmS').addEventListener('input', function () { PMS.sErr = +this.value; pmSyncSettings(); pmSchedule(); });
+  $('#pmCoal').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    var p = b.getAttribute('data-p'); if (PMS.cp[p]) delete PMS.cp[p]; else PMS.cp[p] = 1;
+    pmRenderCoal();
+  });
+  $('#pmDist').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    PMS.hp = b.getAttribute('data-p'); pmRenderDist();
+  });
+  document.addEventListener('pointerdown', function (e) {
+    var pl = $('#pmPlot'); if (pl && pl._clear && !pl.contains(e.target)) pl._clear();
+  });
+  pmSyncSettings();
   update();
 })();
 
 </script>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
