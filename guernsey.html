@@ -245,6 +245,46 @@ td.seats{font-weight:700}
 .grad{display:flex;align-items:center;gap:8px;font-size:.78rem;font-variant-numeric:tabular-nums}
 .grad i{display:block;width:150px;max-width:40vw;height:10px;border-radius:5px;border:1px solid var(--line)}
 .src{font-size:.72rem;color:var(--muted);text-align:center;margin:14px 0 0;overflow-wrap:anywhere}
+/* probability model */
+.mc{position:relative;overflow:hidden}
+.mc h3{font-size:14px;font-weight:600;text-align:center;margin:0 0 14px}
+.mc section+section{border-top:1px solid var(--line);margin-top:24px;padding-top:24px}
+.mc.busy .mcres{opacity:.45;transition:opacity .15s}
+.mcprog{position:absolute;left:0;right:0;top:0;height:3px;background:var(--track)}
+.mcprog i{display:block;height:100%;width:0;background:var(--focus)}
+.mcruns{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 22px}
+.mcruns .lab{margin-right:4px}
+.mcset{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:520px){.mcset{grid-template-columns:1fr}}
+.mcs{text-align:center;min-width:0}
+.mcs label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:10px;text-wrap:balance}
+.mcs .rng{--c:var(--focus)}
+.mcs .mv{margin-top:8px;font-weight:700;font-variant-numeric:tabular-nums}
+.obar{display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--track)}
+.obar .oseg{height:100%;background:var(--c)}
+.hatch{background:repeating-linear-gradient(135deg,var(--c) 0 4px,color-mix(in srgb,var(--c) 30%,var(--card)) 4px 8px)!important}
+#olegend{gap:8px 20px;margin:16px 0 0}
+.rt-row{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(150px,1.3fr);column-gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.rt-row.rt-h{border-top:0;padding:0 0 8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+.rt-row .c{text-align:center}
+.rt-row .rcell{padding-right:14px;min-width:0}
+.rt-row .full{display:none}
+@media (min-width:480px){.rt-row .full{display:inline}.rt-row .short{display:none}}
+.rbar{position:relative;height:6px;border-radius:3px;background:var(--track);margin-top:7px}
+.rfill{position:absolute;top:0;bottom:0;background:var(--c);border-radius:3px;min-width:3px}
+.rtick{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);transform:translateX(-1px);border-radius:1px}
+.cc{background:var(--bg);border-radius:14px;padding:20px 16px;text-align:center;margin-top:20px}
+.cpct{font-size:2.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.cpct small{font-size:1.25rem;color:var(--muted);font-weight:500;margin-left:2px}
+.clab{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:6px}
+.cbar{height:6px;border-radius:3px;background:var(--track);margin:12px auto 0;max-width:320px;overflow:hidden}
+.cbar i{display:block;height:100%;background:var(--pos);border-radius:3px}
+.cstats{display:grid;grid-template-columns:1fr 1fr;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.cstats>div{min-width:0}.cstats>div+div{border-left:1px solid var(--line)}
+.cstats b{display:block;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.htip{height:38px;line-height:19px;text-align:center;font-size:.8rem;font-variant-numeric:tabular-nums;margin:0 0 6px;overflow:hidden}
+.htip .m{color:var(--muted)}
+#hplot svg{display:block;width:100%;touch-action:pan-y;user-select:none}
 </style>
 
 <div class="wrap">
@@ -328,6 +368,23 @@ td.seats{font-weight:700}
   <div class="mleg" id="mleg"></div>
 </div>
 
+<div class="card mc" id="mc">
+  <div class="mcprog" id="mcprog" hidden><i id="mcpf"></i></div>
+  <h2>Probability model</h2>
+  <section>
+    <h3>Settings</h3>
+    <div class="mcruns" id="mcruns" role="group" aria-label="Runs"></div>
+    <div class="mcset">
+      <div class="mcs"><label for="mc-v">Vote share error (% of each party’s own share)</label><input type="range" class="rng" id="mc-v" min="0" max="30" step="1"><div class="mv" id="mc-vv"></div></div>
+      <div class="mcs"><label for="mc-s">Seat-level error (extra random variation in each seat)</label><input type="range" class="rng" id="mc-s" min="0" max="10" step="0.5"><div class="mv" id="mc-sv"></div></div>
+    </div>
+  </section>
+  <section class="mcres"><h3>Outcomes</h3><div class="obar" id="obar"></div><div class="legend" id="olegend"></div></section>
+  <section class="mcres"><div id="mtab"></div></section>
+  <section class="mcres"><h3>Coalition majority chance</h3><div class="pbs" id="ccp"></div><div id="ccard"></div></section>
+  <section class="mcres"><h3>Seat distribution</h3><div class="pbs" id="hcp"></div><div class="htip" id="htip" aria-live="polite"></div><div id="hplot"></div></section>
+</div>
+
 <p class="src">Sources: Guernsey Election Office (election2025.gg); Wikipedia, 2025 Guernsey general election; Electoral Reform Society; geoBoundaries (Sentinel-2, CC BY 4.0); Natural Earth; country-flags (hampusborgos); UN World Population Prospects 2024 via database.earth; Freedom House, Freedom in the World 2026; Guernsey Press, 2 September 2026 (Rochester joins Forward Guernsey).</p>
 </div>
 
@@ -371,7 +428,7 @@ function nationalInputs(fg,ind){
 // it fields one more placeholder candidate (weight = average of the real slate) and the count is rerun, up to 38.
 // Replace CANDS with the real candidate list when the next election is called; placeholders then stop being needed.
 var REAL_FG=CANDS.filter(function(c){return c.p==="FG";});
-function elect(shares,nFG){
+function elect(shares,nFG,lean){
   var extra=nFG-REAL_FG.length, mw=1/REAL_FG.length, norm=1+extra*mw, vFG=shares.FG*TOTAL_VOTES, list=[];
   CANDS.forEach(function(c){
     if(c.p==="FG")list.push({c:c,v:vFG*(c.v/baseVotes.FG)/norm});
@@ -382,17 +439,17 @@ function elect(shares,nFG){
   // A candidate with no votes cannot be elected, so seats stay vacant if fewer than 38 candidates have any votes.
   var elected=list.filter(function(e){return e.v>0;}).slice(0,GSY_SEATS), seats={FG:0,IND:0,ALD:2};
   elected.forEach(function(e){seats[e.c.p]++;});
-  return {seats:seats,vac:GSY_SEATS-elected.length,elected:elected.map(function(e){return e.c.n;}),slate:nFG};
+  return {seats:seats,vac:GSY_SEATS-elected.length,elected:lean?null:elected.map(function(e){return e.c.n;}),slate:nFG};
 }
-function project(fg,ind){
+function project(fg,ind,noise,lean){
   if(ind===undefined)ind=1-fg;
   var inp=nationalInputs(fg,ind), shares={};
   PARTIES.filter(function(p){return p.contests;}).forEach(function(p){
-    shares[p.k]=constituencyShare(AREAS[0].base[p.k],p.base,inp[p.k]);
+    var s0=constituencyShare(AREAS[0].base[p.k],p.base,inp[p.k]);shares[p.k]=noise?noise(p.k,s0):s0;
   });
   // Real rule: every voter has up to 38 votes; the 38 candidates with most votes win.
-  var n=REAL_FG.length, r=elect(shares,n);
-  while(r.seats.FG===n&&n<GSY_SEATS){n++;r=elect(shares,n);}
+  var n=REAL_FG.length, r=elect(shares,n,lean);
+  while(r.seats.FG===n&&n<GSY_SEATS){n++;r=elect(shares,n,lean);}
   return {shares:shares,seats:r.seats,vac:r.vac,elected:r.elected,slate:r.slate};
 }
 window.__project=project;
@@ -584,16 +641,223 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")hideTip();})
 
 function update(src,key){
   R=project(state.fg,state.ind);
-  renderInputs(src,key);renderHemi();renderTable();renderBuilder();renderMap();
+  renderInputs(src,key);renderHemi();renderTable();renderBuilder();renderMap();mcSchedule(500);
 }
+
+// ---- Monte Carlo ----
+var MC={runs:1000,verr:10,serr:3,res:null,sel:{},hp:null,timer:null,job:0,hi:null};
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function mcSeed(i){var r=mulberry(i+20250618);r();r();return r;}
+function gauss(r){var u=1-r(),v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+// One run. Five normal draws are always taken, so a run's stream never depends on the settings.
+function mcRunOnce(i,fg,ind,verr,serr){
+  var r=mcSeed(i), z=[gauss(r),gauss(r),gauss(r),gauss(r),gauss(r)], f=fg, d=ind;
+  if(verr>0){
+    var s=verr/100, a=fg*Math.exp(s*z[0]), b=ind*Math.exp(s*z[1]), o=Math.max(0,1-fg-ind)*Math.exp(s*z[2]), t=a+b+o;
+    if(t>0){f=a/t;d=b/t;}
+  }
+  var noise=null;
+  if(serr>0){
+    var zs={FG:z[3],IND:z[4]};
+    noise=function(k,sh){
+      if(!(sh>0))return sh;
+      var base=AREAS[0].base[k]||0, sd=serr/100*Math.sqrt(Math.max(base,0.005)/0.2);
+      return Math.max(0,sh+sd*zs[k]);
+    };
+  }
+  return project(f,d,noise,true).seats;
+}
+var MCK=["FG","IND","ALD"];
+function setProg(v){
+  var p=$("mcprog");
+  if(v===null){p.hidden=true;return;}
+  p.hidden=false;$("mcpf").style.width=(v*100)+"%";
+}
+function mcStart(){
+  var my=++MC.job,N=MC.runs,verr=MC.verr,serr=MC.serr,fg=state.fg,ind=state.ind,A={};
+  MCK.forEach(function(k){A[k]=new Uint8Array(N);});
+  var i=0, zero=!(verr>0)&&!(serr>0), cen=zero?project(fg,ind,null,true).seats:null;
+  function step(){
+    if(my!==MC.job)return;
+    var t0=performance.now();
+    while(i<N&&performance.now()-t0<25){
+      var s=zero?cen:mcRunOnce(i,fg,ind,verr,serr);
+      for(var q=0;q<MCK.length;q++)A[MCK[q]][i]=s[MCK[q]];
+      i++;
+    }
+    if(i<N){setProg(i/N);setTimeout(step,0);}
+    else{setProg(null);MC.res=mcSummarise(A,N);$("mc").classList.remove("busy");mcRender();}
+  }
+  step();
+}
+function mcSchedule(d){
+  clearTimeout(MC.timer);MC.job++;
+  if(MC.res)$("mc").classList.add("busy");
+  MC.timer=setTimeout(mcStart,d);
+}
+function pctile(h,N,q){var c=0,t=q*N;for(var v=0;v<h.length;v++){c+=h[v];if(c>=t&&c>0)return v;}return h.length-1;}
+function mcSummarise(A,N){
+  var hist={},out={},rows=[];
+  MCK.forEach(function(k){var h=new Uint32Array(SEATS+1),a=A[k];for(var j=0;j<N;j++)h[a[j]]++;hist[k]=h;});
+  for(var j=0;j<N;j++){
+    var key=null,best=-1,tie=false;
+    MCK.forEach(function(k){
+      if(k==="ALD")return;
+      var s=A[k][j];
+      if(s>=MAJ&&key===null)key=k+":maj";
+      if(s>best){best=s;tie=false;}else if(s===best)tie=true;
+    });
+    if(key===null){
+      if(tie)key="tie";
+      else for(var q=0;q<MCK.length;q++)if(MCK[q]!=="ALD"&&A[MCK[q]][j]===best){key=MCK[q]+":lar";break;}
+    }
+    out[key]=(out[key]||0)+1;
+  }
+  PARTIES.forEach(function(p,pi){
+    var h=hist[p.k];
+    if(p.k!=="ALD"&&(N-h[0])/N>=0.05)rows.push({k:p.k,pi:pi,med:pctile(h,N,0.5),p5:pctile(h,N,0.05),p95:pctile(h,N,0.95)});
+  });
+  rows.sort(function(a,b){return b.med-a.med||a.pi-b.pi;});
+  return {N:N,A:A,hist:hist,out:out,rows:rows};
+}
+function fmtp(x){return x>0&&x<1?"<1%":Math.round(x)+"%";}
+
+function mcRender(){
+  if(!MC.res)return;
+  var R2=MC.res,N=R2.N,keys=R2.rows.map(function(r){return r.k;});
+  Object.keys(MC.sel).forEach(function(k){if(k!=="ALD"&&keys.indexOf(k)<0)delete MC.sel[k];});
+  if(keys.indexOf(MC.hp)<0)MC.hp=keys[0]||null;
+  renderOutcomes();renderRangeTable();renderCoalition();renderHistChips();renderHist();
+}
+function renderOutcomes(){
+  var R2=MC.res,N=R2.N,cats=[];
+  R2.rows.forEach(function(r){
+    if(r.k!=="ALD")cats.push({id:r.k+":maj",k:r.k,lab:r.k+" majority",hatch:false});
+    cats.push({id:r.k+":lar",k:r.k,lab:r.k+" largest",hatch:true});
+  });
+  cats.push({id:"tie",k:null,lab:"No largest party",hatch:true});
+  var bar="",leg="";
+  cats.forEach(function(c){
+    var n=R2.out[c.id]||0;if(!n)return;
+    var col=c.k?BY[c.k].col:"var(--c-oth)", pc2=n/N*100;
+    bar+='<div class="oseg'+(c.hatch?' hatch':'')+'" style="--c:'+col+';width:'+pc2+'%" title="'+c.lab+' '+fmtp(pc2)+'"></div>';
+    leg+='<span><i class="sw'+(c.hatch?' hatch':'')+'" style="--c:'+col+'"></i>'+c.lab+' '+fmtp(pc2)+'</span>';
+  });
+  $("obar").innerHTML=bar;$("olegend").innerHTML=leg;
+}
+function renderRangeTable(){
+  var R2=MC.res,scale=MAJ;
+  R2.rows.forEach(function(r){scale=Math.max(scale,r.p95);});
+  var h='<div class="rt-row rt-h"><span>Party</span><span class="c">Median</span><span class="c rcell">90% range</span></div>';
+  R2.rows.forEach(function(r){
+    var p=BY[r.k],txt=r.p5===r.p95?String(r.p5):r.p5+"–"+r.p95;
+    h+='<div class="rt-row"><span class="pn"><i class="sw" style="--c:'+p.col+'"></i><span class="full">'+p.name+' ('+p.acr+')</span><span class="short">'+p.acr+'</span></span>'+
+      '<span class="c tnum"><b>'+r.med+'</b></span>'+
+      '<span class="rcell c"><div class="tnum">'+txt+'</div><div class="rbar" style="--c:'+p.col+'"><i class="rfill" style="left:'+(r.p5/scale*100)+'%;width:'+((r.p95-r.p5)/scale*100)+'%"></i><i class="rtick" style="left:'+(r.med/scale*100)+'%"></i></div></span></div>';
+  });
+  $("mtab").innerHTML=h;
+}
+function chipRow(host,keys,isOn,onClick){
+  host.innerHTML="";
+  keys.forEach(function(k){
+    var p=BY[k],b=el("button","pb",p.acr);b.type="button";b.style.setProperty("--c",p.col);b.style.setProperty("--on",p.on);
+    b.setAttribute("aria-pressed",isOn(k)?"true":"false");
+    b.addEventListener("click",function(){onClick(k);});host.appendChild(b);
+  });
+}
+function renderCoalition(){
+  var R2=MC.res,N=R2.N,keys=R2.rows.map(function(r){return r.k;}).concat(["ALD"]);
+  chipRow($("ccp"),keys,function(k){return !!MC.sel[k];},function(k){if(MC.sel[k])delete MC.sel[k];else MC.sel[k]=true;renderCoalition();});
+  var sel=keys.filter(function(k){return MC.sel[k];}),cnt=0,h=new Uint32Array(SEATS+1);
+  if(sel.length){
+    for(var j=0;j<N;j++){var s=0;for(var q=0;q<sel.length;q++)s+=R2.A[sel[q]][j];if(s>=MAJ)cnt++;h[Math.min(s,SEATS)]++;}
+  }
+  var pc2=cnt/N*100,html='<div class="cc"><div class="cpct">'+fmt1(pc2)+'<small>%</small></div><div class="clab">chance of a majority</div><div class="cbar"><i style="width:'+pc2+'%"></i></div>';
+  if(sel.length){
+    var med=pctile(h,N,0.5),lo=pctile(h,N,0.05),hi=pctile(h,N,0.95);
+    html+='<div class="cstats"><div><b>'+med+'</b><span class="lab">median seats</span></div><div><b>'+(lo===hi?lo:lo+"–"+hi)+'</b><span class="lab">90% range</span></div></div>';
+  }
+  $("ccard").innerHTML=html+'</div>';
+}
+function renderHistChips(){
+  var keys=MC.res.rows.map(function(r){return r.k;});
+  chipRow($("hcp"),keys,function(k){return MC.hp===k;},function(k){MC.hp=k;MC.hi=null;renderHistChips();renderHist();});
+}
+var HL=null;
+function histTip(v){
+  var t=$("htip");
+  if(v===null||!HL){t.innerHTML='<span class="m">Hover or tap a bar</span>';return;}
+  var N=MC.res.N,c=HL.h[v],cum=0;
+  for(var s=v;s<=SEATS;s++)cum+=HL.h[s];
+  t.innerHTML=v+(v===1?" seat":" seats")+" / "+fmt1(c/N*100)+"% of runs ("+c+")<br><span class='m'>"+fmtp(cum/N*100)+" of runs at "+v+"+</span>";
+}
+function setHi(v){
+  MC.hi=v;
+  if(HL)HL.bars.forEach(function(b,i){b.style.opacity=(v===null||HL.lo+i===v)?1:0.3;});
+  histTip(v);
+}
+function renderHist(){
+  var R2=MC.res,host=$("hplot");
+  if(!MC.hp){host.innerHTML="";HL=null;histTip(null);return;}
+  var h=R2.hist[MC.hp],lo=MAJ,hi=MAJ,top=0,v;
+  for(v=0;v<=SEATS;v++)if(h[v]>0){lo=Math.min(lo,v);hi=Math.max(hi,v);top=Math.max(top,h[v]);}
+  lo=Math.max(0,lo-1);hi=Math.min(SEATS,hi+1);
+  var n=hi-lo+1,W=Math.max(260,host.clientWidth||300),H=190,L=6,Rr=6,T=18,B=24,bw=(W-L-Rr)/n,ph=H-T-B,col=BY[MC.hp].col;
+  var step=n<=14?1:n<=26?2:5,s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Seat distribution for '+BY[MC.hp].name+'">';
+  s+='<line x1="'+L+'" x2="'+(W-Rr)+'" y1="'+(T+ph)+'" y2="'+(T+ph)+'" stroke="var(--line)"/>';
+  for(v=lo;v<=hi;v++){
+    var bh=top?h[v]/top*ph:0,x=L+(v-lo)*bw;
+    s+='<rect class="hb" x="'+(x+1).toFixed(1)+'" y="'+(T+ph-bh).toFixed(1)+'" width="'+Math.max(1,bw-2).toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="1.5" style="fill:'+col+'"/>';
+    if(v%step===0)s+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" style="fill:var(--muted)">'+v+'</text>';
+  }
+  var mx=L+(MAJ-lo)*bw,end=mx>W*0.7;
+  s+='<line x1="'+mx+'" x2="'+mx+'" y1="'+(T-6)+'" y2="'+(T+ph)+'" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="4 3"/>';
+  s+='<text x="'+(mx+(end?-5:5))+'" y="'+(T-6)+'" text-anchor="'+(end?"end":"start")+'" font-size="11" style="fill:var(--fg)">majority ('+MAJ+')</text></svg>';
+  host.innerHTML=s;
+  var svg=host.firstChild;
+  HL={lo:lo,hi:hi,h:h,bars:Array.prototype.slice.call(svg.querySelectorAll("rect.hb"))};
+  // bars are in order lo..hi
+  function at(e){
+    var r=svg.getBoundingClientRect(),x=(e.clientX-r.left)*(W/r.width),i=Math.floor((x-L)/bw);
+    return (i>=0&&i<n)?lo+i:null;
+  }
+  svg.addEventListener("pointermove",function(e){var v2=at(e);if(v2!==null||e.pointerType==="mouse")setHi(v2);});
+  svg.addEventListener("pointerdown",function(e){var v2=at(e);if(v2!==null)setHi(v2);});
+  svg.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse")setHi(null);});
+  setHi(null);
+}
+window.addEventListener("resize",function(){if(MC.res)renderHist();});
+
+// controls
+(function(){
+  var runs=$("mcruns");runs.appendChild(el("span","lab","Runs"));
+  [500,1000,5000].forEach(function(n){
+    var b=el("button","pb",n.toLocaleString("en-GB"));b.type="button";b.style.setProperty("--c","var(--fg)");b.style.setProperty("--on","var(--card)");
+    b.setAttribute("aria-pressed",n===MC.runs?"true":"false");
+    b.addEventListener("click",function(){
+      MC.runs=n;Array.prototype.forEach.call(runs.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+      mcSchedule(0);
+    });
+    runs.appendChild(b);
+  });
+  function bind(id,vid,key,suffix,fmtv){
+    var r=$(id),v=$(vid);
+    function sync(){r.style.setProperty("--pct",(r.value/r.max*100)+"%");v.textContent=fmtv(MC[key])+suffix;}
+    r.value=MC[key];sync();
+    r.addEventListener("input",function(){MC[key]=parseFloat(r.value);sync();mcSchedule(500);});
+  }
+  bind("mc-v","mc-vv","verr"," %",function(x){return String(x);});
+  bind("mc-s","mc-sv","serr"," pts",function(x){return String(x);});
+})();
+
 renderLegend();
 update();
+mcSchedule(0);
 })();
 </script>
 
 </body>
 </html>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
