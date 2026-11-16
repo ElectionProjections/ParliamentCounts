@@ -239,6 +239,67 @@ td:first-child .dot{display:inline-block;margin-right:8px;vertical-align:middle}
 .sources{font-size:11.5px;color:var(--muted);text-align:center;margin:4px 0 0;line-height:1.5}
 .sources a{color:inherit}
 @media (max-width:420px){h1{font-size:21px}.card{padding:14px 12px}.big{font-size:24px}table{font-size:13px}th,td{padding-left:5px;padding-right:5px}}
+
+/* probability model */
+.mc{position:relative;overflow:hidden}
+.mcprog{position:absolute;left:0;top:0;height:3px;width:0;background:var(--focus);opacity:0;transition:opacity .2s;pointer-events:none}
+.mcsec+.mcsec{border-top:1px solid var(--line);margin-top:24px;padding-top:24px}
+.mcsec h3{font-size:14px;font-weight:600;text-align:center;margin:0 0 14px}
+.mcres{transition:opacity .2s}
+.mcres.stale{opacity:.4}
+.segrow{display:flex;justify-content:center;margin-bottom:22px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--chip)}
+.seg button{border:0;background:transparent;color:var(--fg);padding:7px 14px;font-size:13px;font-weight:500}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--card);font-weight:600}
+.mcsl{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:520px){.mcsl{grid-template-columns:1fr;gap:22px}}
+.mcs{text-align:center;min-width:0}
+.mcs label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+.mcs input[type=range]{width:100%;margin:0;--c:var(--focus)}
+.mcv{margin-top:8px;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+.obar{display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--track)}
+.obar i{display:block;height:100%;background:var(--c)}
+.pl{background:repeating-linear-gradient(135deg,var(--c) 0 3px,color-mix(in srgb,var(--c) 28%,var(--card)) 3px 7px)!important}
+.olegend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:16px}
+.olegend span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
+.olegend .sw{display:block;width:14px;height:14px;border-radius:3px;background:var(--c);flex:none}
+.mrow{display:grid;grid-template-columns:58px 56px minmax(150px,1fr);column-gap:6px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.mrow:last-child{border-bottom:0}
+.mrow.mh{padding:0 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.mrow .c{text-align:center}
+.mrow .pn{font-weight:600;white-space:nowrap}
+.mrow .pn .dot{display:inline-block;margin-right:6px;vertical-align:middle}
+.mrow .md{font-weight:700}
+.mrow .rg{padding:0 14px 0 8px;min-width:0;text-align:center}
+.mrow .rn{font-size:13px;font-weight:500}
+.rb{position:relative;height:6px;border-radius:3px;background:var(--track);margin-top:7px}
+.rf{position:absolute;top:0;height:100%;border-radius:3px;min-width:3px}
+.rt{position:absolute;top:-3px;width:2px;height:12px;background:var(--fg);transform:translateX(-1px);border-radius:1px}
+.ccard{margin-top:18px;background:var(--chip);border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center}
+.cbig{font-size:40px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.cbig span{font-size:22px;font-weight:500;color:var(--muted);margin-left:2px}
+.clab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:6px}
+.cbar2{height:6px;border-radius:3px;background:var(--track);max-width:260px;margin:12px auto 0;overflow:hidden}
+.cbar2 i{display:block;height:100%;border-radius:3px;background:var(--ok)}
+.cst{display:grid;grid-template-columns:1fr 1fr;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.cst>div{min-width:0;padding:0 6px}
+.cst>div+div{border-left:1px solid var(--line)}
+.cst b{display:block;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.cst span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.htip{height:38px;margin:14px 0 8px;text-align:center;font-size:13px;font-weight:600;line-height:19px;font-variant-numeric:tabular-nums;overflow:hidden}
+.htip .l2{font-weight:400;color:var(--muted)}
+.hplot{position:relative;display:flex;gap:2px;height:150px;touch-action:pan-y;border-bottom:1px solid var(--line);cursor:default}
+.hcol{flex:1;min-width:0;display:flex;align-items:flex-end}
+.hcol i{display:block;width:100%;background:var(--c);border-radius:2px 2px 0 0;transition:opacity .1s}
+.hplot.hl .hcol i{opacity:.3}
+.hplot.hl .hcol.on i{opacity:1}
+.hthr{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--fg);pointer-events:none;opacity:.8}
+.hthr b{position:absolute;top:0;left:6px;font-size:11px;font-weight:600;white-space:nowrap;color:var(--fg)}
+.hthr.r b{left:auto;right:6px}
+.haxis{position:relative;height:20px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.haxis span{position:absolute;top:4px;transform:translateX(-50%)}
+.mcsec .pick{margin-top:2px}
 </style>
 </head>
 <body>
@@ -324,6 +385,23 @@ td:first-child .dot{display:inline-block;margin-right:8px;vertical-align:middle}
 <div class="mbtns" id="mbtns"></div>
 <div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 817.2 1000.0" role="img" aria-label="Map of the 12 House of Keys constituencies"></svg><div class="tip" id="tip" hidden></div></div>
 <div id="mleg"></div>
+</section>
+
+<section class="card mc" id="mc" aria-label="Probability model">
+<div class="mcprog" id="mcprog" aria-hidden="true"></div>
+<h2>Probability model</h2>
+<div class="mcsec">
+<h3>Settings</h3>
+<div class="segrow"><div class="seg" id="mcruns" role="group" aria-label="Number of runs"><button type="button" data-n="500" aria-pressed="false">500 runs</button><button type="button" data-n="1000" aria-pressed="true">1,000 runs</button><button type="button" data-n="5000" aria-pressed="false">5,000 runs</button></div></div>
+<div class="mcsl">
+<div class="mcs"><label for="mc-ve">Vote share error (% of each party’s own share)</label><input type="range" id="mc-ve" min="0" max="30" step="1" value="10"><div class="mcv" id="mc-vev">10%</div></div>
+<div class="mcs"><label for="mc-se">Seat-level error (extra random variation in each seat)</label><input type="range" id="mc-se" min="0" max="10" step="0.5" value="3"><div class="mcv" id="mc-sev">3 pts</div></div>
+</div>
+</div>
+<div class="mcsec mcres" id="mc-out"><h3>Outcomes</h3><div class="obar" id="obar" role="img" aria-label="Share of runs by outcome"></div><div class="olegend" id="oleg"></div></div>
+<div class="mcsec mcres" id="mc-tab"><div id="mtab" role="table" aria-label="Seat range by party"></div></div>
+<div class="mcsec mcres" id="mc-coal"><h3>Coalition majority chance</h3><div class="pick" id="cpick"></div><div class="ccard" id="ccard"></div></div>
+<div class="mcsec mcres" id="mc-dist"><h3>Seat distribution</h3><div class="pick" id="hpick"></div><div class="htip" id="htip"></div><div class="hplot" id="hplot"></div><div class="haxis" id="haxis"></div></div>
 </section>
 
 <p class="sources">Sources: <a href="https://iomelections.com/2026/results/" target="_blank" rel="noopener">Vote 2026 IOM Elections</a> (results); <a href="https://en.wikipedia.org/wiki/2026_Manx_general_election" target="_blank" rel="noopener">Wikipedia, 2026 Manx general election</a> (party labels); Isle of Man Government GIS, Keys Constituencies layer (boundaries); <a href="https://tynwald.im/learn/House-of-Keys" target="_blank" rel="noopener">Tynwald</a> (system); <a href="https://www.iomtoday.co.im/news/estimated-population-of-the-isle-of-man-has-hit-a-record-high-857555" target="_blank" rel="noopener">Statistics Isle of Man via Isle of Man Today</a> (population); <a href="https://freedomhouse.org/reports/freedom-world/faq-freedom-world" target="_blank" rel="noopener">Freedom House</a> (coverage); <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> (world map); <a href="https://github.com/lipis/flag-icons" target="_blank" rel="noopener">flag-icons</a> (flag).</p>
@@ -414,12 +492,17 @@ var Engine = (function () {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   }
 
-  function run(input) {
+  function run(input, opts) {
+    opts = opts || {};
     var inp = inputsFor(input), I = inp.I;
     var seats = {}, vacant = 0; ORDER.forEach(function (p) { seats[p] = 0; });
-    var cons = CONS.map(function (c) {
+    var cons = CONS.map(function (c, ci) {
       var V = {}, tot = 0;
-      ORDER.forEach(function (p) { V[p] = swung(c.S[p], B[p], I[p]); tot += V[p]; });
+      ORDER.forEach(function (p) {
+        V[p] = swung(c.S[p], B[p], I[p]);
+        if (opts.noise && V[p] > 0) V[p] = opts.noise(ci, c, p, V[p]);
+        tot += V[p];
+      });
       if (tot > 0) ORDER.forEach(function (p) { V[p] = V[p] * 100 / tot; });
       var cands = [];
       c.cands.forEach(function (x) {
@@ -445,10 +528,12 @@ var Engine = (function () {
       vacant += SEATS_PER_CONS - winners.length;
       ORDER.forEach(function (p) { sb[p] = 0; });
       winners.forEach(function (w) { sb[w.party]++; seats[w.party]++; });
+      if (opts.lean) return null;
       var leader = ORDER.slice().sort(function (x, y) { return (V[y] - V[x]) || (ORDER.indexOf(x) - ORDER.indexOf(y)); })[0];
       if (!(V[leader] > 1e-9)) leader = null;
       return { id: c.id, code: c.code, name: c.name, seatCount: SEATS_PER_CONS, shares: V, seats: sb, winners: winners, leader: leader, cands: cands };
     });
+    if (opts.lean) return { seats: seats, vacant: vacant };
     return { input: inp, national: I, seats: seats, vacant: vacant, cons: cons };
   }
 
@@ -637,9 +722,179 @@ function drawMapButtons(res){
 
 function update(){
   var res=E.run(state.inp);lastRes=res;
-  drawHemi(res);drawTable(res);drawCoalition(res);drawMapButtons(res);paint(res);
+  drawHemi(res);drawTable(res);drawCoalition(res);drawMapButtons(res);paint(res);mcSchedule();
   if(tipOpen&&state.sel)fillTip(state.sel);
 }
+
+/* ---------- probability model (Monte Carlo) ---------- */
+var MC={runs:1000,ve:10,se:3,res:null,token:0,timer:null,pick:[],hp:null,ready:false,hl:null};
+var MC_SEED=20260924;
+function mcRng(seed){var a=seed>>>0;return function(){a=(a+0x6D2B79F5)>>>0;var t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function mcNorm(r){var u=1-r(),v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function mcOne(i,cfg){
+  var r=mcRng(i+MC_SEED),inp=cfg.inp,sigma=cfg.ve/100;
+  if(sigma>0){
+    var vals={},sum=0,s0=0;
+    ORDER.forEach(function(p){s0+=cfg.inp[p]});
+    var other=Math.max(0,100-s0);
+    ORDER.forEach(function(p){vals[p]=cfg.inp[p]*Math.exp(sigma*mcNorm(r));sum+=vals[p]});
+    sum+=other*Math.exp(sigma*mcNorm(r));
+    if(sum>0)ORDER.forEach(function(p){vals[p]=vals[p]*100/sum});
+    inp=vals;
+  }
+  var noise=null;
+  if(cfg.se>0){
+    var zt=[];for(var k=0;k<E.CONS.length*ORDER.length;k++)zt.push(mcNorm(r));
+    noise=function(ci,c,p,v){var sd=cfg.se*Math.sqrt(Math.max(c.S[p],0.5)/20);return Math.max(0,v+sd*zt[ci*ORDER.length+DEF[p]])};
+  }
+  return E.run(inp,{noise:noise,lean:true}).seats;
+}
+function mcSchedule(){
+  clearTimeout(MC.timer);MC.token++;
+  $('mcprog').style.opacity='0';$('mcprog').style.width='0';
+  Array.prototype.forEach.call(document.querySelectorAll('.mcres'),function(n){n.classList.add('stale')});
+  MC.timer=setTimeout(mcStart,MC.ready?500:0);
+  MC.ready=true;
+}
+function mcStart(){
+  var my=++MC.token,N=MC.runs;
+  var cfg={ve:MC.ve,se:MC.se,inp:Object.assign({},state.inp)};
+  var S={};ORDER.forEach(function(p){S[p]=new Uint8Array(N)});
+  var prog=$('mcprog'),i=0;
+  if(cfg.ve===0&&cfg.se===0){
+    var c=E.run(cfg.inp,{lean:true}).seats;
+    ORDER.forEach(function(p){S[p].fill(c[p])});
+    mcFinish(S,N);return;
+  }
+  prog.style.opacity='1';
+  (function step(){
+    if(my!==MC.token)return;
+    var t0=performance.now();
+    while(i<N&&performance.now()-t0<25){var s=mcOne(i,cfg);ORDER.forEach(function(p){S[p][i]=s[p]});i++}
+    if(i<N){prog.style.width=(100*i/N)+'%';setTimeout(step,0)}
+    else{prog.style.opacity='0';prog.style.width='0';mcFinish(S,N)}
+  })();
+}
+function mcQ(cnt,N,f){var cum=0,t=f*N;for(var s=0;s<cnt.length;s++){cum+=cnt[s];if(cum>=t&&cum>0)return s}return cnt.length-1}
+function mcFinish(S,N){
+  var st={N:N,S:S,cnt:{},med:{},lo:{},hi:{},any:{},out:{}};
+  ORDER.forEach(function(p){
+    var cnt=new Uint32Array(E.SEATS+1),a=S[p],nz=0;
+    for(var i=0;i<N;i++){cnt[a[i]]++;if(a[i]>0)nz++}
+    st.cnt[p]=cnt;st.med[p]=mcQ(cnt,N,0.5);st.lo[p]=mcQ(cnt,N,0.05);st.hi[p]=mcQ(cnt,N,0.95);st.any[p]=nz/N;
+  });
+  for(var i=0;i<N;i++){
+    var best=ORDER[0],bs=S[best][i];
+    for(var k=1;k<ORDER.length;k++){var q=ORDER[k];if(S[q][i]>bs){bs=S[q][i];best=q}}
+    var key=(bs>=E.MAJORITY?'M':'L')+best;st.out[key]=(st.out[key]||0)+1;
+  }
+  st.list=ORDER.filter(function(p){return st.any[p]>=0.05}).sort(function(a,b){return (st.med[b]-st.med[a])||(DEF[a]-DEF[b])});
+  MC.res=st;
+  MC.pick=MC.pick.filter(function(p){return st.list.indexOf(p)>=0});
+  if(st.list.indexOf(MC.hp)<0)MC.hp=st.list[0]||null;
+  Array.prototype.forEach.call(document.querySelectorAll('.mcres'),function(n){n.classList.remove('stale')});
+  mcRender();
+}
+function mcPct(n,N){var p=100*n/N;return p<0.5?'<1%':Math.round(p)+'%'}
+function mcRender(){mcOutcome();mcTable();mcCoal();mcDist()}
+function mcOutcome(){
+  var st=MC.res,N=st.N,bar='',leg='';
+  ORDER.forEach(function(p){
+    [['M','majority'],['L','largest']].forEach(function(t){
+      var n=st.out[t[0]+p]||0;if(!n)return;
+      var pl=t[0]==='L'?' pl':'';
+      bar+='<i class="'+pl.trim()+'" style="width:'+(100*n/N)+'%;--c:'+col(p)+'"></i>';
+      leg+='<span><i class="sw'+pl+'" style="--c:'+col(p)+'"></i>'+ACR[p]+' '+t[1]+' '+mcPct(n,N)+'</span>';
+    });
+  });
+  $('obar').innerHTML=bar;$('oleg').innerHTML=leg;
+}
+function mcTable(){
+  var st=MC.res,max=E.MAJORITY;
+  st.list.forEach(function(p){if(st.hi[p]>max)max=st.hi[p]});
+  var h='<div class="mrow mh" role="row"><div>Party</div><div class="c">Median</div><div class="c">90% range</div></div>';
+  st.list.forEach(function(p){
+    var lo=st.lo[p],hi=st.hi[p],m=st.med[p];
+    h+='<div class="mrow" role="row"><div class="pn"><i class="dot" style="--c:'+col(p)+'"></i>'+ACR[p]+'</div><div class="c md">'+m+'</div>'
+     +'<div class="rg"><div class="rn">'+lo+'–'+hi+'</div><div class="rb"><i class="rf" style="left:'+(100*lo/max)+'%;width:'+(100*(hi-lo)/max)+'%;background:'+col(p)+'"></i><i class="rt" style="left:'+(100*m/max)+'%"></i></div></div></div>';
+  });
+  $('mtab').innerHTML=h;
+}
+function mcChips(host,list,on,fn){
+  host.innerHTML='';
+  list.forEach(function(p){
+    var b=document.createElement('button');b.type='button';b.className='btn';b.style.setProperty('--c',col(p));
+    b.setAttribute('aria-pressed',on(p)?'true':'false');b.setAttribute('data-p',p);
+    b.innerHTML='<i class="dot" style="background:'+col(p)+'"></i>'+ACR[p];
+    b.addEventListener('click',function(){fn(p);var nb=host.querySelector('[data-p="'+p+'"]');if(nb)nb.focus()});
+    host.appendChild(b);
+  });
+}
+function mcCoal(){
+  var st=MC.res,N=st.N;
+  mcChips($('cpick'),st.list,function(p){return MC.pick.indexOf(p)>=0},function(p){var i=MC.pick.indexOf(p);if(i>=0)MC.pick.splice(i,1);else MC.pick.push(p);mcCoal()});
+  var chance=0,html='';
+  if(MC.pick.length){
+    var cnt=new Uint32Array(2*E.SEATS+1),hit=0;
+    for(var i=0;i<N;i++){var t=0;for(var k=0;k<MC.pick.length;k++)t+=st.S[MC.pick[k]][i];cnt[t]++;if(t>=E.MAJORITY)hit++}
+    chance=100*hit/N;
+    html='<div class="cst"><div><b>'+mcQ(cnt,N,0.5)+'</b><span>median seats</span></div><div><b>'+mcQ(cnt,N,0.05)+'–'+mcQ(cnt,N,0.95)+'</b><span>90% range</span></div></div>';
+  }
+  $('ccard').innerHTML='<div class="cbig">'+f1(chance)+'<span>%</span></div><div class="clab">chance of a majority</div><div class="cbar2"><i style="width:'+chance+'%"></i></div>'+html;
+}
+function mcTipClear(){$('htip').innerHTML='<span class="l2">Hover or tap a bar for details</span>';$('hplot').classList.remove('hl');Array.prototype.forEach.call($('hplot').children,function(n){n.classList.remove('on')})}
+function mcDist(){
+  var st=MC.res,N=st.N,p=MC.hp;
+  mcChips($('hpick'),st.list,function(q){return q===p},function(q){MC.hp=q;mcDist()});
+  var plot=$('hplot'),ax=$('haxis');
+  if(!p){plot.innerHTML='';ax.innerHTML='';MC.hl=null;mcTipClear();return}
+  var cnt=st.cnt[p],lo=E.MAJORITY,hi=E.MAJORITY;
+  for(var s=0;s<cnt.length;s++)if(cnt[s]>0){if(s<lo)lo=s;if(s>hi)hi=s}
+  var n=hi-lo+1,max=0;
+  for(var s2=lo;s2<=hi;s2++)if(cnt[s2]>max)max=cnt[s2];
+  var h='';
+  for(var s3=lo;s3<=hi;s3++)h+='<div class="hcol" style="--c:'+col(p)+'"><i style="height:'+(max?100*cnt[s3]/max:0)+'%"></i></div>';
+  var tl=100*(E.MAJORITY-lo)/n;
+  h+='<div class="hthr'+(tl>60?' r':'')+'" style="left:'+tl+'%"><b>Majority '+E.MAJORITY+'</b></div>';
+  plot.innerHTML=h;
+  var step=Math.max(1,Math.ceil(n/7)),a='';
+  for(var v=lo;v<=hi;v++)if((v-lo)%step===0||v===E.MAJORITY&&step===1)a+='<span style="left:'+(100*(v-lo+0.5)/n)+'%">'+v+'</span>';
+  ax.innerHTML=a;
+  MC.hl={lo:lo,n:n,cnt:cnt,N:N};
+  mcTipClear();
+}
+function mcHover(e){
+  var d=MC.hl;if(!d)return;
+  var plot=$('hplot'),r=plot.getBoundingClientRect();
+  var i=Math.floor((e.clientX-r.left)/r.width*d.n);i=Math.max(0,Math.min(d.n-1,i));
+  var s=d.lo+i,c=d.cnt[s],cum=0;
+  for(var k=s;k<d.cnt.length;k++)cum+=d.cnt[k];
+  plot.classList.add('hl');
+  for(var j=0;j<d.n;j++)plot.children[j].classList.toggle('on',j===i);
+  $('htip').innerHTML=s+' seat'+(s===1?'':'s')+' / '+f1(100*c/d.N)+'% of runs ('+c+')<div class="l2">'+Math.round(100*cum/d.N)+'% of runs at '+s+'+</div>';
+}
+(function mcInit(){
+  var plot=$('hplot');
+  plot.addEventListener('pointermove',mcHover);
+  plot.addEventListener('pointerdown',mcHover);
+  plot.addEventListener('pointerleave',function(e){if(e.pointerType!=='touch')mcTipClear()});
+  document.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'&&!e.target.closest('#hplot'))mcTipClear()});
+  Array.prototype.forEach.call($('mcruns').querySelectorAll('button'),function(b){
+    b.addEventListener('click',function(){
+      MC.runs=parseInt(b.getAttribute('data-n'),10);
+      Array.prototype.forEach.call($('mcruns').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      mcSchedule();
+    });
+  });
+  function bind(id,vid,key,fmt){
+    var r=$(id);
+    function sync(){r.style.setProperty('--p',(100*r.value/r.max)+'%');$(vid).textContent=fmt(parseFloat(r.value))}
+    r.addEventListener('input',function(){MC[key]=parseFloat(r.value);sync();mcSchedule()});
+    sync();
+  }
+  bind('mc-ve','mc-vev','ve',function(v){return v+'%'});
+  bind('mc-se','mc-sev','se',function(v){return (Math.round(v*10)/10)+' pts'});
+})();
 
 /* ---------- boot ---------- */
 build();buildMap();syncInputs();update();
@@ -657,7 +912,6 @@ window.__E=E;
 </script>
 </body>
 </html>
-
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
