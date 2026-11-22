@@ -87,7 +87,17 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.mc-tbl .c{text-align:center}
+.mc-card .mc-tbl td{padding:12px 8px}
+.mc-card .mc-tbl th{padding:0 8px 8px}
+.mc-card .mc-tbl th:last-child,.mc-card .mc-tbl td:last-child{min-width:190px;width:50%;padding-left:16px;padding-right:16px;text-align:center}
+.mc-card .mc-tbl thead th.c{text-align:center}
+.mc-card .mc-tbl .mc-rng{align-items:stretch;gap:10px}
+.mc-card .mc-tbl .mc-rngtxt{text-align:center}
+.mc-card .mc-tbl .mc-rbar{height:8px}
+.mc-card .mc-tbl .mc-rtick{top:-4px;height:16px}
+.mc-card .mc-tbl .mc-rmaj{top:-3px;height:14px}
+</style></head><body>
 <title>UK Seat Projector</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -1527,11 +1537,11 @@ function MonteCarlo({ shares, regionShares, nationEnabled }) {
         h("div", { className: "legend mc-legend" }, outcomes.map((o) => h("span", { key: o.key, className: "lg" }, h("span", { className: "swatch", style: { background: bg(o) } }), o.label, " ", h("b", { className: "num" }, fmt1(o.pct), "%"))))),
       h("div", { className: "mc-sec" },
         h("table", { className: "mc-tbl" },
-          h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "r" }, "Median"), h("th", { className: "r" }, "90% range"))),
+          h("thead", null, h("tr", null, h("th", null, "Party"), h("th", { className: "c" }, "Median"), h("th", { className: "c" }, "90% range"))),
           h("tbody", null, rows.slice(0, 10).map((p) => h("tr", { key: p },
             h("td", null, h("span", { className: "pcell" }, h("span", { className: "swatch", style: { background: partyMeta(p).color } }), h("span", { title: pLabel(p) }, p))),
-            h("td", { className: "r num seats" }, res.stats[p].median),
-            h("td", { className: "r" }, h(RangeBar, { lo: res.stats[p].lo, hi: res.stats[p].hi, med: res.stats[p].median, scale, color: partyMeta(p).color }))))))),
+            h("td", { className: "c num seats" }, res.stats[p].median),
+            h("td", { className: "c" }, h(RangeBar, { lo: res.stats[p].lo, hi: res.stats[p].hi, med: res.stats[p].median, scale, color: partyMeta(p).color }))))))),
       h("div", { className: "mc-sec" },
         h("h3", { className: "mc-h" }, "Coalition majority chance"),
         h("div", { className: "chips" }, rows.map((p) => chipBtn(p, coal.has(p), () => setCoal((prev) => { const n = new Set(prev); n.has(p) ? n.delete(p) : n.add(p); return n; })))),
@@ -1565,6 +1575,7 @@ ReactDOM.createRoot(rootEl).render(React.createElement(SeatProjector));
 </script>
 
 </body></html>
+        
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
