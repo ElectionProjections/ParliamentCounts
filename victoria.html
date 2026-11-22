@@ -91,13 +91,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>Victoria Seat Projector</title>
 <style>
 :root{--bg:#f3f4f7;--card:#fff;--ink:#1b2230;--muted:#6a7381;--line:#e0e4ea;--track:#d5dae2;--field:#fff;--soft:#f6f7fa;--ok:#1d8a3a;--bad:#c62828;--amber:#d99200;--land:#c9ced7;--map0:#e7e9ee;--hi:#1b2230;--tipbg:#fff;--shadow:0 6px 20px rgba(20,30,50,.18)}
 @media (prefers-color-scheme:dark){:root{--bg:#13161b;--card:#1c2027;--ink:#e9ecf1;--muted:#9aa4b2;--line:#2e3440;--track:#4b5362;--field:#252a33;--soft:#232831;--ok:#4cc46e;--bad:#ff7070;--amber:#f0b429;--land:#4a525f;--map0:#2c323c;--hi:#e9ecf1;--tipbg:#262b34;--shadow:0 6px 20px rgba(0,0,0,.5)}}
 *{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 #page{max-width:840px;margin:0 auto;padding:14px 8px 28px;overflow-x:hidden}
 h1{text-align:center;font-size:22px;margin:6px 0 10px;font-weight:700}
@@ -526,10 +528,10 @@ function trow(c,label,val,win,sq){
   return r;
 }
 function seatTip(r){
-  var rows=Object.keys(r.newP).map(function(k){ return [k,r.newP[k]]; }).filter(function(e){ return e[1]>=1||e[0]===r.winner; }).sort(function(a,b){ return b[1]-a[1]; });
+  var fa=r.fin[0],fb=r.fin[1],sa=r.fin[2],two=sa>=100?[fa]:[fa,fb];
+  var rows=Object.keys(r.newP).map(function(k){ return [k,r.newP[k]]; }).filter(function(e){ return e[1]>=1||e[0]===r.winner||two.indexOf(e[0])>=0; }).sort(function(a,b){ return b[1]-a[1]; });
   var h='<div class="th"><span style="color:var(--ink)">'+r.seat+'</span></div>';
-  rows.forEach(function(e,ix){ h+=trow(candCol(e[0]),candName(e[0]),f1(e[1])+'%',ix<2); });
-  var fa=r.fin[0],fb=r.fin[1],sa=r.fin[2];
+  rows.forEach(function(e){ h+=trow(candCol(e[0]),candName(e[0]),f1(e[1])+'%',two.indexOf(e[0])>=0); });
   h+='<div class="tsec">Final round</div>';
   [[fa,sa],[fb,100-sa]].sort(function(x,y){ return y[1]-x[1]; }).forEach(function(e){ h+=trow(candCol(e[0]),candName(e[0]),f1(e[1])+'%',e[0]===r.winner); });
   return h;
@@ -914,7 +916,7 @@ render();
 </script>
 </body>
 </html>
-
+        
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
         <!-- ============================================================= -->
