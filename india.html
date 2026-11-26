@@ -87,8 +87,12 @@
         <!-- START PASTING HERE -->
         <!-- ============================================================= -->
         
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>India Seat Projector</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -262,6 +266,64 @@
   .exp:focus-visible{ outline:2px solid var(--ring); }
   .up{ color:var(--pos); } .dn{ color:var(--neg); } .zero{ color:var(--muted); }
 
+
+  /* probability model */
+  .mc-sec + .mc-sec{ border-top:1px solid var(--line); margin-top:24px; padding-top:24px; }
+  .mc-sec h3{ margin:0 0 14px; text-align:center; font-size:14px; font-weight:600; }
+  .mc-sec .seg{ margin-bottom:18px; }
+  .mc-set{ display:grid; grid-template-columns:1fr 1fr; gap:20px 28px; }
+  @media (max-width:520px){ .mc-set{ grid-template-columns:1fr; } }
+  .mc-ctl{ text-align:center; min-width:0; }
+  .mc-ctl label{ display:block; font-size:12px; color:var(--muted); margin-bottom:10px; }
+  .mc-ctl .rng{ display:block; width:100%; --c:var(--muted); }
+  .mc-val{ margin-top:10px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .mc-prog{ height:3px; margin-top:18px; border-radius:99px; overflow:hidden; opacity:0; transition:opacity .2s; }
+  .mc-prog.on{ opacity:1; background:var(--track); }
+  .mc-prog i{ display:block; height:100%; width:0; background:var(--india); }
+  .mc-res{ transition:opacity .2s; }
+  .mc-res.stale{ opacity:.45; }
+  .mc-obar{ display:flex; height:26px; border-radius:6px; overflow:hidden; border:1px solid var(--line2); background:var(--hover); }
+  .mc-obar div{ height:100%; min-width:0; }
+  .mc-leg{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 18px; margin-top:14px; font-size:12px; }
+  .mc-leg span{ display:inline-flex; align-items:center; gap:6px; }
+  .mc-leg i{ width:12px; height:12px; border-radius:3px; flex:none; }
+  .mc-row{ display:grid; grid-template-columns:minmax(0,1fr) 44px minmax(150px,1.2fr); gap:0 10px; align-items:center; padding:13px 6px; border-bottom:1px solid var(--line); font-size:13px; }
+  .mc-row.h{ padding:6px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  .mc-row.g{ background:var(--hover); font-weight:600; cursor:pointer; }
+  .mc-row.s .nm{ padding-left:22px; }
+  .mc-row .nm{ display:flex; align-items:center; gap:8px; min-width:0; overflow-wrap:anywhere; }
+  .mc-row .md{ text-align:center; font-weight:700; font-variant-numeric:tabular-nums; }
+  .mc-row .rg{ text-align:center; font-variant-numeric:tabular-nums; min-width:0; }
+  .mc-row .rg b{ font-weight:600; font-size:12px; }
+  .mc-trk{ position:relative; height:8px; margin-top:6px; border-radius:99px; background:var(--track); opacity:1; }
+  .mc-trk .f{ position:absolute; top:0; bottom:0; border-radius:99px; }
+  .mc-trk .m{ position:absolute; top:-3px; bottom:-3px; width:2px; margin-left:-1px; border-radius:2px; background:var(--text); }
+  .mc-caret{ width:7px; height:7px; flex:none; border-right:2px solid var(--muted); border-bottom:2px solid var(--muted); transform:rotate(-45deg); transition:transform .15s; }
+  .mc-row.open .mc-caret{ transform:rotate(45deg); }
+  .mc-note{ text-align:center; font-size:12px; color:var(--muted); margin-top:10px; }
+  .mc-chips{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:24px; }
+  .chip.dis{ opacity:.4; cursor:default; }
+  .mc-cc{ background:var(--hover); border-radius:14px; padding:20px 16px; text-align:center; max-width:360px; margin:0 auto; }
+  .mc-big{ font-size:40px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums; }
+  .mc-big small{ font-size:.5em; font-weight:600; color:var(--muted); margin-left:2px; }
+  .mc-cl{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-top:6px; }
+  .mc-cb{ height:6px; border-radius:99px; background:var(--track); margin:12px auto 0; overflow:hidden; }
+  .mc-cb i{ display:block; height:100%; background:var(--pos); border-radius:99px; width:0; transition:width .25s; }
+  .mc-cs{ display:flex; justify-content:center; margin-top:16px; }
+  .mc-cs > div{ flex:1; padding:0 8px; min-width:0; }
+  .mc-cs > div + div{ border-left:1px solid var(--line2); }
+  .mc-cs b{ display:block; font-size:18px; font-variant-numeric:tabular-nums; }
+  .mc-cs span{ font-size:11px; color:var(--muted); }
+  .mc-tip{ height:38px; text-align:center; font-size:12px; line-height:1.5; font-variant-numeric:tabular-nums; margin-bottom:6px; }
+  .mc-tip b{ font-weight:600; font-size:13px; }
+  .mc-tip div + div{ color:var(--muted); }
+  .mc-hist{ display:block; width:100%; height:auto; touch-action:pan-y; user-select:none; }
+  .mc-hist text{ fill:var(--muted); font-size:11px; font-family:inherit; }
+  .mc-hist .ax{ stroke:var(--line2); }
+  .mc-hist .mj{ stroke:var(--text); stroke-dasharray:4 3; }
+  .mc-hist rect.b{ transition:opacity .1s; }
+  .mc-hist.hov rect.b{ opacity:.3; }
+  .mc-hist.hov rect.b.on{ opacity:1; }
   /* coalition */
   .chips{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:34px; }
   .chip{
@@ -340,7 +402,12 @@
   .cbarmap i{ flex:1; height:10px; border-radius:99px; border:1px solid var(--line2); }
 
   .sources{ margin:18px 0 0; text-align:center; font-size:11px; line-height:1.6; color:var(--muted); }
+
+  :root{ padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
 </style>
+</head>
+<body>
+
 
 <div class="page">
   <h1>India Seat Projection</h1>
@@ -458,6 +525,63 @@
     <div id="map-legend"></div>
   </section>
 
+  <section class="card" id="mc-card">
+    <h2>Probability model</h2>
+    <div class="mc-sec">
+      <h3>Settings</h3>
+      <div class="seg"><div class="in" id="mc-runs" role="group" aria-label="Runs">
+        <button type="button" data-r="500" aria-pressed="false">500 runs</button>
+        <button type="button" data-r="1000" aria-pressed="true">1,000 runs</button>
+        <button type="button" data-r="5000" aria-pressed="false">5,000 runs</button>
+      </div></div>
+      <div class="mc-set">
+        <div class="mc-ctl"><label for="mc-verr">Vote share error (% of each party&rsquo;s own share)</label>
+          <input type="range" class="rng" id="mc-verr" min="0" max="30" step="1" value="10"><div class="mc-val" id="mc-verr-v"></div></div>
+        <div class="mc-ctl"><label for="mc-serr">Seat-level error (extra random variation in each seat)</label>
+          <input type="range" class="rng" id="mc-serr" min="0" max="10" step="0.5" value="3"><div class="mc-val" id="mc-serr-v"></div></div>
+      </div>
+      <div class="mc-prog" id="mc-prog"><i></i></div>
+    </div>
+    <div class="mc-res" id="mc-res">
+      <div class="mc-sec">
+        <h3>Outcomes</h3>
+        <div class="mc-obar" id="mc-obar"></div>
+        <div class="mc-leg" id="mc-leg"></div>
+      </div>
+      <div class="mc-sec">
+        <div id="mc-tbl"></div>
+        <div class="mc-note">Median and 90% range of seats. Parties shown if they win seats in at least 5% of runs.</div>
+      </div>
+      <div class="mc-sec">
+        <h3>Coalition majority chance</h3>
+        <div class="seg"><div class="in" id="mc-cseg" role="group">
+          <button type="button" data-m="alliance" aria-pressed="true">Alliance</button>
+          <button type="button" data-m="party" aria-pressed="false">Party</button>
+        </div></div>
+        <div class="mc-chips" id="mc-cchips"></div>
+        <div class="mc-cc">
+          <div class="mc-big" id="mc-cpct"></div>
+          <div class="mc-cl">chance of a majority</div>
+          <div class="mc-cb"><i id="mc-cfill"></i></div>
+          <div class="mc-cs" id="mc-cstats" hidden>
+            <div><b id="mc-cmed"></b><span>median seats</span></div>
+            <div><b id="mc-crng"></b><span>90% range</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mc-sec">
+        <h3>Seat distribution</h3>
+        <div class="seg"><div class="in" id="mc-hseg" role="group">
+          <button type="button" data-m="alliance" aria-pressed="true">Alliance</button>
+          <button type="button" data-m="party" aria-pressed="false">Party</button>
+        </div></div>
+        <div class="mc-chips" id="mc-hchips" style="margin-bottom:14px"></div>
+        <div class="mc-tip" id="mc-tip" aria-live="polite"></div>
+        <svg class="mc-hist" id="mc-hist" viewBox="0 0 600 220" role="img" aria-label="Distribution of seats across simulation runs"></svg>
+      </div>
+    </div>
+  </section>
+
   <p class="sources">Sources: Election Commission of India, 2024 Lok Sabha results (candidate-level counts and constituency boundaries as supplied with this model); party colours as supplied with the model, with extra distinct colours assigned to minor parties; alliance lines (NDA, INDIA, Others) per Wikipedia's member lists as of November 2026, with 2024 votes re-assigned to match; Constitution of India, arts. 81, 83 and 326; Britannica (2024 election dates); Freedom House, Freedom in the World 2026; UN World Population Prospects 2024; Natural Earth via world-atlas (world map); Flag Code of India specification (flag).</p>
 </div>
 
@@ -521,7 +645,8 @@
     return winnerOf(100*x.n/x.t, 100*x.i/x.t, top, null);
   });
 
-  function tallyFromShares(nPct, iPct, oPct){
+  function tallyFromShares(nPct, iPct, oPct, opts){
+    var noise = opts && opts.noise, lean = opts && opts.lean;
     var seats = { NDA:0, INDIA:0, OTH:0 };
     var stateAgg = {}, stateBreak = {}, perSeatResult = [];
     var othParties = {}, ndaParties = {}, indiaParties = {};
@@ -548,7 +673,19 @@
       var obSum = (x.ob || []).reduce(function(a, pr){ return a + pr[1]; }, 0);
       var scaleFactor = obSum > 0 ? shO / obSum : 0; // candidates sum exactly to the Others total
       var shOTop = Math.max(0, topOtherLocal * scaleFactor);
+      if(noise){ // Monte Carlo only: seat-level noise on parties that already have a share here
+        if(shN > 0) shN = Math.max(0, shN + noise(localN));
+        if(shI > 0) shI = Math.max(0, shI + noise(localI));
+        if(shOTop > 0) shOTop = Math.max(0, shOTop + noise(topOtherLocal));
+      }
       var newWinner = winnerOf(shN, shI, shOTop, INCUMBENT[idx]);
+      if(lean){ // seat totals only, no per-seat detail objects
+        seats[newWinner]++;
+        var wp = newWinner === 'NDA' ? x.np : newWinner === 'INDIA' ? x.ip : champName;
+        var pm = newWinner === 'NDA' ? ndaParties : newWinner === 'INDIA' ? indiaParties : othParties;
+        pm[wp] = (pm[wp]||0) + 1;
+        return;
+      }
 
       seats[newWinner]++;
       if(!stateAgg[x.s]) stateAgg[x.s] = {NDA:0,INDIA:0,OTH:0,total:0};
@@ -1335,6 +1472,7 @@
     renderCoalition(t);
     renderShades();
     updateMaps();
+    mcSchedule();
   }
   function fmtBoxes(){ ndaInput.value = parseFloat(ndaSlider.value).toFixed(1); indiaInput.value = parseFloat(indiaSlider.value).toFixed(1); }
   ndaSlider.addEventListener('input', function(){ setValues(parseFloat(ndaSlider.value), parseFloat(indiaSlider.value), 'nda'); });
@@ -1348,9 +1486,252 @@
   });
   $('reset-btn').addEventListener('click', function(){ setValues(baseNDA, baseINDIA, 'nda'); });
 
+
+  // ---- Monte Carlo probability model ----
+  var MC = { runs:1000, verr:10, serr:3, timer:null, job:0, res:null, openG:{}, coal:{}, hist:'a:NDA', bins:null, cmode:'alliance', hmode:'alliance' };
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function mulberry(a){ return function(){ a = (a + 0x6D2B79F5)|0; var t = Math.imul(a ^ (a>>>15), 1|a); t = (t + Math.imul(t ^ (t>>>7), 61|t)) ^ t; return ((t ^ (t>>>14))>>>0)/4294967296; }; }
+  function gauss(r){ var u = 1 - r(), v = r(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+  function pctile(sorted, p){ var k = (sorted.length-1)*p, lo = Math.floor(k), hi = Math.ceil(k); return sorted[lo] + (sorted[hi]-sorted[lo])*(k-lo); }
+  function fmtPct(v){ return v >= 10 ? v.toFixed(0)+'%' : v >= 0.05 ? v.toFixed(1)+'%' : '0%'; }
+
+  function mcSchedule(){
+    clearTimeout(MC.timer); MC.job++;
+    $('mc-res').classList.add('stale');
+    MC.timer = setTimeout(mcStart, 500);
+  }
+  function mcStart(){
+    var job = ++MC.job, N = MC.runs, sigma = MC.verr/100, serr = MC.serr;
+    var raw = lastRaw, prog = $('mc-prog'), bar = prog.firstChild;
+    var res = { n:N, nda:new Int16Array(N), india:new Int16Array(N), oth:new Int16Array(N), parties:{} };
+    function store(r, t){
+      res.nda[r] = t.seats.NDA; res.india[r] = t.seats.INDIA; res.oth[r] = t.seats.OTH;
+      [['NDA',t.ndaParties],['INDIA',t.indiaParties],['OTH',t.othParties]].forEach(function(g){
+        Object.keys(g[1]).forEach(function(p){
+          var e = res.parties[p] || (res.parties[p] = { bloc:g[0], arr:new Int16Array(N) });
+          e.arr[r] = g[1][p];
+        });
+      });
+    }
+    if(sigma === 0 && serr === 0){ // identical runs: compute the projection once and reuse it
+      var t0 = tallyFromShares(raw.n, raw.i, raw.o, { lean:true });
+      for(var r0 = 0; r0 < N; r0++) store(r0, t0);
+      MC.res = res; mcRender(); return;
+    }
+    var r = 0;
+    prog.classList.add('on');
+    function chunk(){
+      if(job !== MC.job) return;
+      var start = performance.now();
+      while(r < N && performance.now() - start < 25){
+        var rnd = mulberry(r + 0x5EED1234);
+        var f = [raw.n, raw.i, raw.o].map(function(v){ return v * Math.exp(sigma * gauss(rnd)); });
+        var sum = f[0] + f[1] + f[2], k = sum > 0 ? 100/sum : 1;
+        var noise = serr > 0 ? function(base){ return serr * Math.sqrt(Math.max(base, 0.5)/20) * gauss(rnd); } : null;
+        store(r, tallyFromShares(f[0]*k, f[1]*k, f[2]*k, { lean:true, noise:noise }));
+        r++;
+      }
+      bar.style.width = (100*r/N)+'%';
+      if(r < N){ setTimeout(chunk, 0); return; }
+      prog.classList.remove('on'); bar.style.width = '0';
+      MC.res = res; mcRender();
+    }
+    chunk();
+  }
+
+  function mcEntities(){ // alliances first, then parties winning seats in >=5% of runs
+    var R = MC.res, N = R.n, out = [
+      { key:'a:NDA', label:'NDA', color:COLORS.NDA, arr:R.nda, bloc:'NDA', grp:true },
+      { key:'a:INDIA', label:'INDIA', color:COLORS.INDIA, arr:R.india, bloc:'INDIA', grp:true },
+      { key:'a:OTH', label:'Others', color:COLORS.OTH, arr:R.oth, bloc:'OTH', grp:true }
+    ];
+    out.forEach(function(e){ e.sorted = Array.prototype.slice.call(e.arr).sort(function(a,b){ return a-b; }); e.med = pctile(e.sorted, .5); e.lo = pctile(e.sorted, .05); e.hi = pctile(e.sorted, .95); e.parties = []; });
+    Object.keys(R.parties).forEach(function(p){
+      var e = R.parties[p], c = 0; for(var i = 0; i < N; i++) if(e.arr[i] > 0) c++;
+      if(c/N < 0.05) return;
+      var s = Array.prototype.slice.call(e.arr).sort(function(a,b){ return a-b; });
+      var pe = { key:'p:'+p, label:p, color:partyColor(p), arr:e.arr, bloc:e.bloc, med:pctile(s,.5), lo:pctile(s,.05), hi:pctile(s,.95) };
+      out.filter(function(g){ return g.bloc === e.bloc; })[0].parties.push(pe);
+    });
+    out.forEach(function(g){ g.parties.sort(function(a,b){ return b.med - a.med || b.hi - a.hi; }); });
+    out.sort(function(a,b){ return b.med - a.med || b.hi - a.hi; });
+    return out;
+  }
+  function entArr(key){
+    var R = MC.res;
+    if(key === 'a:NDA') return R.nda; if(key === 'a:INDIA') return R.india; if(key === 'a:OTH') return R.oth;
+    var e = R.parties[key.slice(2)]; return e ? e.arr : null;
+  }
+  function hatch(c){ return 'repeating-linear-gradient(135deg,'+c+' 0 4px,color-mix(in srgb,'+c+' 30%,var(--card)) 4px 8px)'; }
+
+  function mcRender(){
+    var R = MC.res; if(!R) return;
+    $('mc-res').classList.remove('stale');
+    var N = R.n, ents = mcEntities();
+    // outcomes: majority or largest, alliances as units, Others parties individually
+    var cand = [{ name:'NDA', color:COLORS.NDA, arr:R.nda }, { name:'INDIA', color:COLORS.INDIA, arr:R.india }];
+    Object.keys(R.parties).forEach(function(p){ if(R.parties[p].bloc === 'OTH') cand.push({ name:p, color:partyColor(p), arr:R.parties[p].arr }); });
+    var cnt = {};
+    for(var r = 0; r < N; r++){
+      var best = null, bv = -1;
+      cand.forEach(function(c){ var v = c.arr[r]; if(v > bv){ bv = v; best = c; } });
+      var key = best.name + (bv >= MAJ ? '|maj' : '|lar');
+      cnt[key] = (cnt[key]||0) + 1;
+    }
+    var segs = [];
+    cand.forEach(function(c){
+      [['maj','majority'],['lar','largest']].forEach(function(m){
+        var v = cnt[c.name+'|'+m[0]]; if(v) segs.push({ c:c, m:m[0], word:m[1], p:100*v/N });
+      });
+    });
+    segs.sort(function(a,b){ return (a.m === b.m ? 0 : a.m === 'maj' ? -1 : 1) || b.p - a.p; });
+    $('mc-obar').innerHTML = segs.map(function(s){
+      return '<div style="width:'+s.p+'%;background:'+(s.m === 'maj' ? s.c.color : hatch(s.c.color))+'" title="'+esc(s.c.name)+' '+s.word+' '+fmtPct(s.p)+'"></div>';
+    }).join('');
+    $('mc-leg').innerHTML = segs.map(function(s){
+      return '<span><i style="background:'+(s.m === 'maj' ? s.c.color : hatch(s.c.color))+'"></i>'+esc(s.c.name)+' '+s.word+' '+fmtPct(s.p)+'</span>';
+    }).join('');
+
+    // seat range table
+    var scale = MAJ, rows = [];
+    ents.forEach(function(g){ scale = Math.max(scale, g.hi); g.parties.forEach(function(p){ scale = Math.max(scale, p.hi); }); });
+    function rowHtml(e, cls, extra){
+      var L = 100*e.lo/scale, W = Math.max(100*(e.hi-e.lo)/scale, 1.5);
+      return '<div class="mc-row '+cls+'"'+extra+'><div class="nm">'+(cls.indexOf('g') > -1 ? '<i class="mc-caret"></i>' : '')+'<i class="sw" style="background:'+e.color+'"></i><span>'+esc(e.label === 'Others' || !e.grp ? e.label : e.label)+'</span></div>' +
+        '<div class="md">'+Math.round(e.med)+'</div><div class="rg"><b>'+Math.round(e.lo)+'\u2013'+Math.round(e.hi)+'</b><div class="mc-trk"><div class="f" style="left:'+L+'%;width:'+W+'%;background:'+e.color+'"></div><div class="m" style="left:'+(100*e.med/scale)+'%"></div></div></div></div>';
+    }
+    var h = '<div class="mc-row h"><div>Party</div><div style="text-align:center">Median</div><div style="text-align:center">90% range</div></div>';
+    ents.forEach(function(g){
+      var open = !!MC.openG[g.key];
+      h += rowHtml(g, 'g'+(open ? ' open' : ''), ' data-g="'+g.key+'" role="button" tabindex="0" aria-expanded="'+open+'"');
+      if(open) g.parties.forEach(function(p){ h += rowHtml(p, 's', ''); });
+    });
+    $('mc-tbl').innerHTML = h;
+
+    // coalition + histogram chips
+    var all = []; ents.forEach(function(g){ all.push(g); g.parties.forEach(function(p){ all.push(p); }); });
+    var pts = all.filter(function(e){ return !e.grp; }).sort(function(a,b){ return b.med - a.med || b.hi - a.hi; });
+    mcChips('mc-cchips', MC.cmode === 'alliance' ? ents : pts, true);
+    mcChips('mc-hchips', MC.hmode === 'alliance' ? ents : pts, false);
+    mcCoalition(); mcHist();
+  }
+  function mcChips(id, list, multi){
+    var box = $(id); box.innerHTML = '';
+    list.forEach(function(e){
+      var sel = multi ? !!MC.coal[e.key] : MC.hist === e.key;
+      var dis = multi && !e.grp && MC.coal['a:'+e.bloc];
+      var b = document.createElement('button'); b.type = 'button';
+      b.className = 'chip'+(sel ? ' sel' : '')+(dis ? ' dis' : ''); b.setAttribute('aria-pressed', sel);
+      b.innerHTML = '<i style="background:'+e.color+'"></i>'+esc(e.label);
+      if(sel){ b.style.borderColor = e.color; b.style.background = 'color-mix(in srgb, '+e.color+' 18%, var(--card))'; }
+      b.addEventListener('click', function(){
+        if(dis) return;
+        if(multi){ if(MC.coal[e.key]) delete MC.coal[e.key]; else MC.coal[e.key] = true; mcRender(); }
+        else { MC.hist = e.key; mcRender(); }
+      });
+      box.appendChild(b);
+    });
+  }
+  function mcCoalition(){
+    var R = MC.res, N = R.n, keys = Object.keys(MC.coal).filter(function(k){
+      return k.indexOf('a:') === 0 || !MC.coal['a:'+(R.parties[k.slice(2)] || {}).bloc]; // skip parties already inside a picked alliance
+    });
+    var arrs = keys.map(function(k){ return entArr(k); }).filter(Boolean);
+    var tot = new Int16Array(N), win = 0;
+    for(var r = 0; r < N; r++){ var s = 0; arrs.forEach(function(a){ s += a[r]; }); tot[r] = s; if(arrs.length && s >= MAJ) win++; }
+    var pct = 100*win/N;
+    $('mc-cpct').innerHTML = pct.toFixed(1)+'<small>%</small>';
+    $('mc-cfill').style.width = pct+'%';
+    $('mc-cstats').hidden = !arrs.length;
+    if(arrs.length){
+      var s = Array.prototype.slice.call(tot).sort(function(a,b){ return a-b; });
+      $('mc-cmed').textContent = Math.round(pctile(s,.5));
+      $('mc-crng').textContent = Math.round(pctile(s,.05))+'\u2013'+Math.round(pctile(s,.95));
+    }
+  }
+  function mcHist(){
+    var N = MC.res.n, arr = entArr(MC.hist);
+    if(!arr){ MC.hist = 'a:NDA'; arr = MC.res.nda; }
+    var lo = 1e9, hi = -1; for(var i = 0; i < N; i++){ if(arr[i] < lo) lo = arr[i]; if(arr[i] > hi) hi = arr[i]; }
+    var bw = Math.max(1, Math.ceil((hi - lo + 1)/40)), b0 = lo - lo % bw, nb = Math.floor((hi - b0)/bw) + 1, bins = [];
+    for(i = 0; i < nb; i++) bins.push(0);
+    for(i = 0; i < N; i++) bins[Math.floor((arr[i] - b0)/bw)]++;
+    var d0 = Math.min(b0, MAJ) - 2, d1 = Math.max(b0 + nb*bw, MAJ + 1) + 2;
+    var L = 10, Rr = 590, T = 22, B = 190, sx = (Rr - L)/(d1 - d0), mx = Math.max.apply(null, bins);
+    function X(v){ return L + (v - d0)*sx; }
+    var col = (MC.res && ents0(MC.hist)) || COLORS.OTH;
+    var svg = '<line class="ax" x1="'+L+'" x2="'+Rr+'" y1="'+B+'" y2="'+B+'"/>';
+    bins.forEach(function(c, j){
+      var bh = mx ? (B - T - 8)*c/mx : 0;
+      svg += '<rect class="b" data-j="'+j+'" x="'+X(b0 + j*bw)+'" y="'+(B-bh)+'" width="'+Math.max(bw*sx - (bw*sx > 3 ? 1 : 0), 1)+'" height="'+bh+'" fill="'+col+'"/>';
+    });
+    var step = [10,20,25,50,100].filter(function(s){ return (d1 - d0)/s <= 7; })[0] || 100;
+    for(var v = Math.ceil(d0/step)*step; v <= d1; v += step) svg += '<text x="'+X(v)+'" y="'+(B+16)+'" text-anchor="middle">'+v+'</text>';
+    var mj = X(MAJ), anc = mj > 450 ? 'end' : 'start';
+    svg += '<line class="mj" x1="'+mj+'" x2="'+mj+'" y1="'+(T-8)+'" y2="'+B+'"/><text x="'+(mj + (anc === 'end' ? -5 : 5))+'" y="'+(T-10)+'" text-anchor="'+anc+'">majority '+MAJ+'</text>';
+    var el = $('mc-hist'); el.innerHTML = svg; el.classList.remove('hov'); $('mc-tip').innerHTML = '';
+    MC.bins = { bins:bins, b0:b0, bw:bw, d0:d0, sx:sx, L:L, N:N };
+  }
+  function ents0(key){ var all = mcEntities(), c = null; all.forEach(function(g){ if(g.key === key) c = g.color; g.parties.forEach(function(p){ if(p.key === key) c = p.color; }); }); return c; }
+  (function(){
+    var el = $('mc-hist');
+    function hover(e){
+      var H = MC.bins; if(!H) return;
+      var bb = el.getBoundingClientRect(), x = (e.clientX - bb.left)*600/bb.width;
+      var j = Math.floor(((x - H.L)/H.sx + H.d0 - H.b0)/H.bw);
+      if(j < 0 || j >= H.bins.length){ clear(); return; }
+      [].forEach.call(el.querySelectorAll('rect.b'), function(r){ r.classList.toggle('on', +r.getAttribute('data-j') === j); });
+      el.classList.add('hov');
+      var a = H.b0 + j*H.bw, z = a + H.bw - 1, c = H.bins[j], cum = 0;
+      for(var q = j; q < H.bins.length; q++) cum += H.bins[q];
+      $('mc-tip').innerHTML = '<div><b>'+(H.bw === 1 ? a+' seats' : a+'\u2013'+z+' seats')+'</b> / '+(100*c/H.N).toFixed(1)+'% of runs ('+c+')</div><div>'+(100*cum/H.N).toFixed(0)+'% of runs at '+a+'+</div>';
+    }
+    function clear(){ el.classList.remove('hov'); $('mc-tip').innerHTML = ''; [].forEach.call(el.querySelectorAll('rect.b.on'), function(r){ r.classList.remove('on'); }); }
+    el.addEventListener('pointermove', hover); el.addEventListener('pointerdown', hover);
+    el.addEventListener('pointerleave', clear); el.addEventListener('pointercancel', clear);
+    $('mc-tbl').addEventListener('click', function(e){
+      var g = e.target.closest('[data-g]'); if(!g) return;
+      var k = g.getAttribute('data-g'); MC.openG[k] = !MC.openG[k]; mcRender();
+      var n = $('mc-tbl').querySelector('[data-g="'+k+'"]'); if(n && e.detail === 0) n.focus();
+    });
+    $('mc-tbl').addEventListener('keydown', function(e){ if((e.key === 'Enter' || e.key === ' ') && e.target.hasAttribute('data-g')){ e.preventDefault(); e.target.click(); e.target.focus(); } });
+    function modeSeg(id, key){
+      $(id).addEventListener('click', function(e){
+        var b = e.target.closest('button'); if(!b) return;
+        MC[key] = b.getAttribute('data-m');
+        [].forEach.call($(id).children, function(c){ c.setAttribute('aria-pressed', c === b); });
+        if(key === 'hmode'){
+          var first = mcEntities().filter(function(g){ return MC.hmode === 'alliance' ? true : false; });
+          var all = mcEntities(), pick = null;
+          if(MC.hmode === 'alliance') pick = all[0];
+          else all.forEach(function(g){ if(!pick && g.parties.length) pick = g.parties[0]; });
+          if(pick) MC.hist = pick.key;
+        }
+        mcRender();
+      });
+    }
+    modeSeg('mc-cseg', 'cmode'); modeSeg('mc-hseg', 'hmode');
+    $('mc-runs').addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      MC.runs = +b.getAttribute('data-r');
+      [].forEach.call($('mc-runs').children, function(c){ c.setAttribute('aria-pressed', c === b); });
+      mcSchedule();
+    });
+    function bindSlider(id, vid, key, fmt){
+      var s = $(id);
+      function upd(){ MC[key] = parseFloat(s.value); s.style.setProperty('--fill', (100*s.value/s.max)+'%'); $(vid).textContent = fmt(MC[key]); }
+      s.addEventListener('input', function(){ upd(); mcSchedule(); }); upd();
+    }
+    bindSlider('mc-verr', 'mc-verr-v', 'verr', function(v){ return v+'%'; });
+    bindSlider('mc-serr', 'mc-serr-v', 'serr', function(v){ return v+' points'; });
+  })();
+
   setValues(baseNDA, baseINDIA, 'nda');
 })();
 </script>
+
+</body>
+</html>
         
         <!-- ============================================================= -->
         <!-- END PASTING HERE -->
